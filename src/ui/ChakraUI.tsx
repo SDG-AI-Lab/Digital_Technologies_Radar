@@ -1,6 +1,6 @@
 import React from "react";
 import { createBreakpoints } from "@chakra-ui/theme-tools";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme, theme } from "@chakra-ui/react";
 
 // More info: https://chakra-ui.com/docs/getting-started
 export const ChakraUI: React.FC = ({ children }) => {
@@ -20,7 +20,9 @@ export const ChakraUI: React.FC = ({ children }) => {
     "2xl": "96em",
   });
 
-  const theme = extendTheme({ colors, breakpoints });
-
-  return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
+  return (
+    <ChakraProvider theme={extendTheme({ ...theme, colors, breakpoints })}>
+      {children}
+    </ChakraProvider>
+  );
 };
