@@ -1,29 +1,28 @@
+import { Box } from "@chakra-ui/layout";
 import React from "react";
-import { Link } from "react-router-dom";
 
-export const AppNavbar: React.FC = () => (
-  <>
-    <h2>Welcome to React Router Tutorial</h2>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <ul className="navbar-nav mr-auto">
-        <li>
-          <Link to={"/"} className="nav-link">
-            {" "}
-            Home{" "}
-          </Link>
-        </li>
-        <li>
-          <Link to={"/about"} className="nav-link">
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to={"/search"} className="nav-link">
-            Search
-          </Link>
-        </li>
-      </ul>
-    </nav>
-    <hr />
-  </>
-);
+import { MenuLinks } from "./navbar/MenuLinks";
+import { NavBarContainer } from "./navbar/NavBarContainer";
+import { MenuToggle } from "./navbar/MenuToggle";
+import { UNDPLogo } from "./navbar/components/UNDPLogo";
+import { UNLogo } from "./navbar/components/UNLogo";
+
+// taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
+export const AppNavbar: React.FC = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <NavBarContainer>
+      <UNDPLogo />
+
+      <MenuToggle toggle={toggle} isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} />
+
+      <Box display={["none", "none", "inherit", "inherit"]}>
+        <UNLogo />
+      </Box>
+    </NavBarContainer>
+  );
+};

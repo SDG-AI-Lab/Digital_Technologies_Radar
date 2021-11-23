@@ -1,7 +1,4 @@
 import React from "react";
+import { Heading } from "@chakra-ui/react";
 
-export const About: React.FC = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
+export const About: React.FC = () => <Heading as="h1">About</Heading>;
