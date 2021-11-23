@@ -15,26 +15,23 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 export const MainLayout: React.FC = ({ children }) => (
   <Container p={0}>
-    <Flex h="100vh" py={20} flexBasis={["auto", "45%"]}>
-      <VStack w="full" h="full" p={10} spacing={10} alignItems="flex-start">
-        {children}
-      </VStack>
-
-      <VStack
-        w="full"
-        h="full"
-        p={10}
-        spacing={10}
-        alignItems="flex-start"
-        bg="gray.50"
-      >
-        {children}
-      </VStack>
-    </Flex>
-
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
+
+        <Flex h="100vh" py={20} flexBasis={["auto", "45%"]}>
+          <VStack
+            w="full"
+            h="full"
+            p={10}
+            spacing={10}
+            alignItems="flex-start"
+            bg="gray.50"
+          >
+            {children}
+          </VStack>
+        </Flex>
+
         <VStack spacing={8}>
           <Logo h="40vmin" pointerEvents="none" />
           <Text>

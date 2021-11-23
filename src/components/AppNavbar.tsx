@@ -7,6 +7,7 @@ import { MenuToggle } from "./navbar/MenuToggle";
 import { UNDPLogo } from "./navbar/components/UNDPLogo";
 import { UNLogo } from "./navbar/components/UNLogo";
 
+// taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppNavbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
