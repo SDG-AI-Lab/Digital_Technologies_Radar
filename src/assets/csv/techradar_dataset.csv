@@ -1,0 +1,49 @@
+Title,Summary,Description,Level of implementation,Quadrant,Origin,Technology,Data,Use case,Source,SDG goal,Organization,Developer,Implementer,Partner
+Technology item 1,Summary 1,Description 1,prototype,preparedness,Turkey,Natural Language Processing,Data 1,Use case 1,Source 1,SDG 1,Organization name 1,Developer Name 1,Implementer 1,Partner 1
+Technology item 2,Summary 2,Description 2,validation,preparedness,United States,Natural Language Processing,Data 2,Use case 2,Source 2,SDG 2,Organization name 2,Developer Name 2,Implementer 2,Partner 2
+Technology item 3,Summary 3,Description 3,validation,recovery,Indonesia,Machine Learning,Data 3,Use case 3,Source 3,SDG 3,Organization name 3,Developer Name 3,Implementer 3,Partner 3
+Technology item 4,Summary 4,Description 4,idea,recovery,Germany,Drones,Data 4,Use case 4,Source 4,SDG 4,Organization name 4,Developer Name 4,Implementer 4,Partner 4
+Technology item 5,Summary 5,Description 5,production,response,Germany,Drones,Data 5,Use case 5,Source 5,SDG 5,Organization name 5,Developer Name 5,Implementer 5,Partner 5
+Technology item 6,Summary 6,Description 6,production,response,United States,Blockchain,Data 6,Use case 6,Source 6,SDG 6,Organization name 6,Developer Name 6,Implementer 6,Partner 6
+Technology item 7,Summary 7,Description 7,validation,response,Global,Artificial Intelligence,Data 7,Use case 7,Source 7,SDG 7,Organization name 7,Developer Name 7,Implementer 7,Partner 7
+Technology item 8,Summary 8,Description 8,idea,resilience,Egypt,Natural Language Processing,Data 8,Use case 8,Source 8,SDG 3,Organization name 8,Developer Name 8,Implementer 8,Partner 8
+Technology item 9,Summary 9,Description 9,validation,preparedness,Armenia,Blockchain,Data 9,Use case 9,Source 9,SDG 4,Organization name 9,Developer Name 9,Implementer 9,Partner 9
+Technology item 10,Summary 10,Description 10,production,response,Zambia,Artificial Intelligence,Data 10,Use case 10,Source 10,SDG 10,Organization name 10,Developer Name 10,Implementer 10,Partner 10
+Technology item 11,Summary 11,Description 11,idea,resilience,United States,Social Media,Data 11,Use case 11,Source 11,SDG 11,Organization name 11,Developer Name 11,Implementer 11,Partner 11
+Technology item 12,Summary 12,Description 12,prototype,recovery,Armenia,Social Media,Data 12,Use case 12,Source 12,SDG 12,Organization name 12,Developer Name 12,Implementer 12,Partner 12
+Technology item 13,Summary 13,Description 13,validation,resilience,Zambia,Natural Language Processing,Data 13,Use case 13,Source 13,SDG 13,Organization name 13,Developer Name 13,Implementer 13,Partner 13
+Technology item 14,Summary 14,Description 14,production,response,Germany,Social Media,Data 14,Use case 14,Source 14,SDG 14,Organization name 14,Developer Name 14,Implementer 14,Partner 14
+Technology item 15,Summary 15,Description 15,validation,recovery,Global,Machine Learning,Data 15,Use case 15,Source 15,SDG 15,Organization name 15,Developer Name 15,Implementer 15,Partner 15
+Technology item 16,Summary 16,Description 16,production,resilience,Zambia,Drones,Data 16,Use case 16,Source 16,SDG 15,Organization name 16,Developer Name 16,Implementer 16,Partner 16
+Technology item 17,Summary 17,Description 17,idea,resilience,Germany,Artificial Intelligence,Data 17,Use case 17,Source 17,SDG 2,Organization name 17,Developer Name 17,Implementer 17,Partner 17
+Technology item 18,Summary 18,Description 18,validation,recovery,Armenia,Machine Learning,Data 18,Use case 18,Source 18,SDG 3,Organization name 18,Developer Name 18,Implementer 18,Partner 18
+Technology item 19,Summary 19,Description 19,validation,preparedness,Zambia,Blockchain,Data 19,Use case 19,Source 19,SDG 4,Organization name 19,Developer Name 19,Implementer 19,Partner 19
+Technology item 20,Summary 20,Description 20,validation,preparedness,Global,Drones,Data 20,Use case 20,Source 20,SDG 15,Organization name 20,Developer Name 20,Implementer 20,Partner 20
+Technology item 21,Summary 21,Description 21,prototype,resilience,Armenia,Natural Language Processing,Data 21,Use case 21,Source 21,SDG 12,Organization name 21,Developer Name 21,Implementer 21,Partner 21
+Technology item 22,Summary 22,Description 22,prototype,response,,Social Media,Data 22,Use case 22,Source 22,SDG 13,Organization name 22,Developer Name 22,Implementer 22,Partner 22
+Technology item 23,Summary 23,Description 23,production,preparedness,Signapore,Drones,Data 23,Use case 23,Source 23,SDG 14,Organization name 23,Developer Name 23,Implementer 23,Partner 23
+Technology item 24,Summary 24,Description 24,idea,resilience,Indonesia,Blockchain,Data 24,Use case 24,Source 24,SDG 10,Organization name 24,Developer Name 24,Implementer 24,Partner 24
+Technology item 25,Summary 25,Description 25,production,response,Global,Machine Learning,Data 25,Use case 25,Source 25,SDG 11,Organization name 25,Developer Name 25,Implementer 25,Partner 25
+Technology item 26,Summary 26,Description 26,idea,resilience,Armenia,Blockchain,Data 26,Use case 26,Source 26,SDG 12,Organization name 26,Developer Name 26,Implementer 26,Partner 26
+Technology item 27,Summary 27,Description 27,prototype,preparedness,Egypt,Social Media,Data 27,Use case 27,Source 27,SDG 1,Organization name 27,Developer Name 27,Implementer 27,Partner 27
+Technology item 28,Summary 28,Description 28,production,resilience,Armenia,Artificial Intelligence,Data 28,Use case 28,Source 28,SDG 2,Organization name 28,Developer Name 28,Implementer 28,Partner 28
+Technology item 29,Summary 29,Description 29,idea,preparedness,Zambia,Social Media,Data 29,Use case 29,Source 29,SDG 3,Organization name 29,Developer Name 29,Implementer 29,Partner 29
+Technology item 30,Summary 30,Description 30,validation,resilience,Indonesia,Natural Language Processing,Data 30,Use case 30,Source 30,SDG 4,Organization name 30,Developer Name 30,Implementer 30,Partner 30
+Technology item 31,Summary 31,Description 31,validation,resilience,Global,Social Media,Data 31,Use case 31,Source 31,SDG 5,Organization name 31,Developer Name 31,Implementer 31,Partner 31
+Technology item 32,Summary 32,Description 32,idea,response,Signapore,Machine Learning,Data 32,Use case 32,Source 32,SDG 6,Organization name 32,Developer Name 32,Implementer 32,Partner 32
+Technology item 33,Summary 33,Description 33,production,recovery,Armenia,Drones,Data 33,Use case 33,Source 33,SDG 7,Organization name 33,Developer Name 33,Implementer 33,Partner 33
+Technology item 34,Summary 34,Description 34,prototype,response,Indonesia,Natural Language Processing,Data 34,Use case 34,Source 34,SDG 3,Organization name 34,Developer Name 34,Implementer 34,Partner 34
+Technology item 35,Summary 35,Description 35,validation,preparedness,Zambia,Social Media,Data 35,Use case 35,Source 35,SDG 4,Organization name 35,Developer Name 35,Implementer 35,Partner 35
+Technology item 36,Summary 36,Description 36,production,resilience,Signapore,Machine Learning,Data 36,Use case 36,Source 36,SDG 10,Organization name 36,Developer Name 36,Implementer 36,Partner 36
+Technology item 37,Summary 37,Description 37,idea,resilience,Signapore,Blockchain,Data 37,Use case 37,Source 37,SDG 11,Organization name 37,Developer Name 37,Implementer 37,Partner 37
+Technology item 38,Summary 38,Description 38,prototype,recovery,Indonesia,Drones,Data 38,Use case 38,Source 38,SDG 12,Organization name 38,Developer Name 38,Implementer 38,Partner 38
+Technology item 39,Summary 39,Description 39,production,response,Egypt,Natural Language Processing,Data 39,Use case 39,Source 39,SDG 13,Organization name 39,Developer Name 39,Implementer 39,Partner 39
+Technology item 40,Summary 40,Description 40,production,resilience,Armenia,Social Media,Data 40,Use case 40,Source 40,SDG 14,Organization name 40,Developer Name 40,Implementer 40,Partner 40
+Technology item 41,Summary 41,Description 41,validation,preparedness,Indonesia,Artificial Intelligence,Data 41,Use case 41,Source 41,SDG 15,Organization name 41,Developer Name 41,Implementer 41,Partner 41
+Technology item 42,Summary 42,Description 42,prototype,response,Signapore,Natural Language Processing,Data 42,Use case 42,Source 42,SDG 15,Organization name 42,Developer Name 42,Implementer 42,Partner 42
+Technology item 43,Summary 43,Description 43,production,recovery,Zambia,Drones,Data 43,Use case 43,Source 43,SDG 2,Organization name 43,Developer Name 43,Implementer 43,Partner 43
+Technology item 44,Summary 44,Description 44,production,resilience,Egypt,Machine Learning,Data 44,Use case 44,Source 44,SDG 3,Organization name 44,Developer Name 44,Implementer 44,Partner 44
+Technology item 45,Summary 45,Description 45,validation,preparedness,Indonesia,Natural Language Processing,Data 45,Use case 45,Source 45,SDG 4,Organization name 45,Developer Name 45,Implementer 45,Partner 45
+Technology item 46,Summary 46,Description 46,idea,resilience,Egypt,Artificial Intelligence,Data 46,Use case 46,Source 46,SDG 15,Organization name 46,Developer Name 46,Implementer 46,Partner 46
+Technology item 47,Summary 47,Description 47,prototype,response,Signapore,Blockchain,Data 47,Use case 47,Source 47,SDG 12,Organization name 47,Developer Name 47,Implementer 47,Partner 47
+Technology item 48,Summary 48,Description 48,validation,recovery,Turkey,Machine Learning,Data 48,Use case 48,Source 48,SDG 13,Organization name 48,Developer Name 48,Implementer 48,Partner 48
