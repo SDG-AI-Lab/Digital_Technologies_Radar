@@ -6,17 +6,18 @@ import {
   RadarProvider,
   SetData,
   Utilities,
-} from "@undp_sdg_ai_lab/undp-radar";
-import {
+  ColorsParamType,
   KeysObject,
   MappingType,
+  OrdersParamType,
   RawBlipType,
-} from "@undp_sdg_ai_lab/undp-radar/dist/types";
+} from "@undp_sdg_ai_lab/undp-radar";
+import "@undp_sdg_ai_lab/undp-radar/dist/index.css";
 
 import csvData from "../assets/csv/technology_radar_dataset_updated.csv";
 
 export const AppRadarProvider: React.FC = ({ children }) => {
-  const mapping: MappingType<RawBlipType> = (item) =>
+  const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
       "Country of Implementation": item["Country of Implementation"],
       Data: item.Data,
@@ -33,7 +34,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
       Technology: Utilities.cleanupStringArray(item.Technology.split(",")),
     } as unknown as RawBlipType);
 
-  const keys = {
+  const keys: KeysObject = {
     techKey: "Technology",
     titleKey: "Ideas/Concepts/Examples",
     horizonKey: "Status/Maturity",
@@ -42,15 +43,34 @@ export const AppRadarProvider: React.FC = ({ children }) => {
     disasterTypeKey: "",
   };
 
-  const orders = {
-    quadrant: ["Response", "Recovery", "Resilience", "Preparedness"],
-    horizon: ["Production", "Validation", "Prototype", "Idea"],
+  const orders: OrdersParamType = {
+    quadrants: ["Response", "Recovery", "Resilience", "Preparedness"],
+    horizons: ["Production", "Validation", "Prototype", "Idea"],
+  };
+
+  const colors: ColorsParamType = {
+    quadrants: {
+      // colors: null,
+      colors: [
+        { r: 235, g: 76, b: 66, opacity: 1 }, // Carmine Pink
+        { r: 228, g: 208, b: 10, opacity: 1 }, // Citrine
+        { r: 155, g: 221, b: 255, opacity: 1 }, // Columbia blue
+        { r: 0, g: 204, b: 153, opacity: 1 }, // Carabean green
+      ],
+      initialOpacity: 0.7, // [OPTIONAL default=0.7] opacity from the inner horizon
+      clumpingOpacity: 1.1, // [OPTIONAL default=1.0] compresses the opacity so it becomes much smoother
+    },
   };
 
   return (
     <RadarProvider>
       <DataProvider>
-        <SetData keys={keys} orders={orders} />
+        <SetData
+          radarConf={{ title: "" }}
+          keys={keys}
+          orders={orders}
+          colors={colors}
+        />
         <RadarDataGenerator />
         <AddCSV csvFile={csvData} mapping={mapping} />
         {children}
