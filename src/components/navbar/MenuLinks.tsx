@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack } from "@chakra-ui/react";
+import { Box, Button, DarkMode, Stack, LightMode } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 
 import { MenuItem } from "./components/MenuItem";
@@ -21,19 +21,23 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       pt={[4, 4, 0, 0]}
     >
       <MenuItem to="/">
-        <Button size="sm" rounded="md">
-          Radar
-        </Button>
+        <DarkMode>
+          <Button size="sm" rounded="md" colorScheme="blue">
+            Radar
+          </Button>
+        </DarkMode>
       </MenuItem>
 
       <MenuItem to="/about">
-        <Button size="sm" rounded="md">
-          About
-        </Button>
+        <LightMode>
+          <Button size="sm" rounded="md" colorScheme="blue">
+            About
+          </Button>
+        </LightMode>
       </MenuItem>
 
-      <MenuItem to="/search" isLast>
-        <Button size="sm" rounded="md">
+      <MenuItem to="/search">
+        <Button size="sm" rounded="md" colorScheme="blue">
           <FaSearch />
         </Button>
       </MenuItem>

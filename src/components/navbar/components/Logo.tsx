@@ -3,6 +3,7 @@ import { chakra, Box, ChakraProps, Text } from "@chakra-ui/react";
 
 interface Props {
   file?: string | undefined;
+  maxWidthOrHeight?: number;
 }
 
 export const Logo: React.FC<ChakraProps & Props> = (props) => (
@@ -13,7 +14,8 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => (
           // animation={animation}
           src={props.file}
           // ref={ref}
-          maxW={50}
+          maxW={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
+          maxH={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
         />
       ) : (
         <div>replace me</div>
