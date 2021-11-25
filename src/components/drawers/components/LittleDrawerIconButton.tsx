@@ -6,7 +6,7 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCaretLeft, FaCog, FaServer } from "react-icons/fa";
 
 enum IconType {
@@ -34,6 +34,11 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
   const close = () => {
     setIsPopupOpen(false);
   };
+
+  useEffect(() => {
+    if (!isOpen) close();
+  }, [isOpen]);
+
   return (
     <Popover
       returnFocusOnClose={false}
