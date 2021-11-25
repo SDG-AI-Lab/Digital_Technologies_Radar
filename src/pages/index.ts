@@ -1,5 +1,5 @@
-import { Home } from "./Home";
+import { Radar } from "./Radar";
 import { About } from "./About";
 import { Search } from "./Search";
 
-export { Home, About, Search };
+export { Radar, About, Search };

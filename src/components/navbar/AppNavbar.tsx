@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react";
 
-import { MenuLinks } from "./navbar/MenuLinks";
-import { NavBarContainer } from "./navbar/NavBarContainer";
-import { MenuToggle } from "./navbar/MenuToggle";
-import { UNDPLogo } from "./navbar/components/UNDPLogo";
-import { UNLogo } from "./navbar/components/UNLogo";
+import { MenuLinks } from "./MenuLinks";
+import { MenuToggle } from "./MenuToggle";
+import { UNLogo } from "./components/UNLogo";
+import { UNDPLogo } from "./components/UNDPLogo";
+import { NavBarContainer } from "./NavBarContainer";
 
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppNavbar: React.FC = () => {
