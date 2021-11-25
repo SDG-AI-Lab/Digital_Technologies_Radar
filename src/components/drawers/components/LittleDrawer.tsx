@@ -6,10 +6,10 @@ interface Props {
   label: string;
   height?: number;
   width?: number;
-  icon: React.FC<{ onToggle: () => void }>;
+  icon: React.FC<{ onToggle: () => void; isOpen: boolean }>;
 }
 
-export const Drawer: React.FC<Props> = ({
+export const LittleDrawer: React.FC<Props> = ({
   children,
   label = "Rename me please",
   height = 400,
@@ -23,7 +23,7 @@ export const Drawer: React.FC<Props> = ({
       style={{
         position: "relative",
         width: isOpen ? width : 42,
-        height: isOpen ? height : 70,
+        height: isOpen ? height : 40,
         transition: "all 0.5s",
         marginBottom: 10,
       }}
@@ -50,10 +50,10 @@ export const Drawer: React.FC<Props> = ({
           transform: "rotate(-90deg)",
           transformOrigin: "top left",
           position: "absolute",
-          top: 68,
+          top: 40,
         }}
       >
-        {<Icon onToggle={onToggle} />}
+        {<Icon onToggle={onToggle} isOpen={isOpen} />}
       </div>
     </div>
   );

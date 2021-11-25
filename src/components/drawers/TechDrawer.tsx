@@ -1,26 +1,25 @@
 import React from "react";
-import { Button, Heading } from "@chakra-ui/react";
-import { LoremIpsum } from "react-lorem-ipsum";
-import { FaServer } from "react-icons/fa";
+import { Heading } from "@chakra-ui/react";
 
-import { Drawer } from "./components/Drawer";
+import { LittleDrawer } from "./components/LittleDrawer";
+import { LittleDrawerIconButton } from "./components/LittleDrawerIconButton";
+import { TechList } from "@undp_sdg_ai_lab/undp-radar";
 
 export const TechDrawer: React.FC = () => (
-  <Drawer
+  <LittleDrawer
     label="Tech"
-    icon={({ onToggle }) => (
-      <Button
-        onClick={onToggle}
-        borderRadius={30}
-        style={{ height: 40, width: 40 }}
-      >
-        <FaServer style={{ marginRight: 5, transform: "rotate(90deg)" }} />
-      </Button>
+    icon={({ onToggle, isOpen }) => (
+      <LittleDrawerIconButton
+        isOpen={isOpen}
+        type="SERVER"
+        onToggle={onToggle}
+      />
     )}
   >
     <Heading as="h6" fontSize="20">
       Technologies
     </Heading>
-    <LoremIpsum p={2} />
-  </Drawer>
+    {/* TODO: make TechList come with full height, perhaps even think about supplying own tech butons */}
+    <TechList />{" "}
+  </LittleDrawer>
 );

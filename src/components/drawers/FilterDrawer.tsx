@@ -1,17 +1,22 @@
 import React from "react";
-import { Button, Heading } from "@chakra-ui/react";
-import { LoremIpsum } from "react-lorem-ipsum";
+import { Heading } from "@chakra-ui/react";
 
-import { Drawer } from "./components/Drawer";
+import { LittleDrawer } from "./components/LittleDrawer";
+import { LittleDrawerIconButton } from "./components/LittleDrawerIconButton";
+import { Filter } from "@undp_sdg_ai_lab/undp-radar";
 
 export const FilterDrawer: React.FC = () => (
-  <Drawer
+  <LittleDrawer
     label="Filter"
-    icon={({ onToggle }) => <Button onClick={onToggle}>Tech</Button>}
+    icon={({ onToggle, isOpen }) => (
+      <LittleDrawerIconButton isOpen={isOpen} type="COG" onToggle={onToggle} />
+    )}
   >
     <Heading as="h6" fontSize="20">
       Filter
     </Heading>
-    <LoremIpsum p={2} />
-  </Drawer>
+    {/* TODO: make Radar come without styles, perhaps even think about overriding */}
+    {/* it altogether with own filtering compoenet (just suplying methods to children) */}
+    <Filter />
+  </LittleDrawer>
 );
