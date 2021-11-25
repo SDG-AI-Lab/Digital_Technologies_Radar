@@ -7,9 +7,13 @@ import { Filter } from "@undp_sdg_ai_lab/undp-radar";
 
 export const FilterDrawer: React.FC = () => (
   <LittleDrawer
-    label="Filter"
     icon={({ onToggle, isOpen }) => (
-      <LittleDrawerIconButton isOpen={isOpen} type="COG" onToggle={onToggle} />
+      <LittleDrawerIconButton
+        isOpen={isOpen}
+        onToggle={onToggle}
+        type="COG"
+        label="Filter"
+      />
     )}
   >
     <Heading as="h6" fontSize="20">

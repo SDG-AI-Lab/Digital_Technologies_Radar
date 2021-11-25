@@ -7,12 +7,12 @@ import { TechList } from "@undp_sdg_ai_lab/undp-radar";
 
 export const TechDrawer: React.FC = () => (
   <LittleDrawer
-    label="Tech"
     icon={({ onToggle, isOpen }) => (
       <LittleDrawerIconButton
         isOpen={isOpen}
-        type="SERVER"
         onToggle={onToggle}
+        type="SERVER"
+        label="Technologies"
       />
     )}
   >

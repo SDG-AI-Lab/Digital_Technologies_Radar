@@ -3,15 +3,14 @@ import React from "react";
 import { Box, Collapse, useDisclosure } from "@chakra-ui/react";
 
 interface Props {
-  label: string;
   height?: number;
   width?: number;
-  icon: React.FC<{ onToggle: () => void; isOpen: boolean }>;
+  icon: React.FC<{ onToggle: () => void; isOpen: boolean; label?: string }>;
 }
 
 export const LittleDrawer: React.FC<Props> = ({
   children,
-  label = "Rename me please",
+
   height = 400,
   width = 350,
   icon: Icon,
@@ -45,14 +44,7 @@ export const LittleDrawer: React.FC<Props> = ({
         </Box>
       </Collapse>
 
-      <div
-        style={{
-          transform: "rotate(-90deg)",
-          transformOrigin: "top left",
-          position: "absolute",
-          top: 40,
-        }}
-      >
+      <div style={{ position: "absolute", top: 0 }}>
         {<Icon onToggle={onToggle} isOpen={isOpen} />}
       </div>
     </div>
