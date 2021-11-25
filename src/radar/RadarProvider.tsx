@@ -51,6 +51,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   const colors: ColorsParamType = {
     quadrants: {
       // colors: null,
+      // colors from https://www.colorhexa.com/color-names
       colors: [
         { r: 235, g: 76, b: 66, opacity: 1 }, // Carmine Pink
         { r: 228, g: 208, b: 10, opacity: 1 }, // Citrine

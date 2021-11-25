@@ -1,32 +1,65 @@
 import React from "react";
 
 import { LoremIpsum } from "react-lorem-ipsum";
-import { Box, Button, Collapse, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Collapse,
+  useDisclosure,
+  Heading,
+} from "@chakra-ui/react";
 
-export const FilterDrawer: React.FC = () => {
+interface Props {
+  height?: number;
+  width?: number;
+}
+
+export const FilterDrawer: React.FC<Props> = ({
+  height = 400,
+  width = 350,
+}) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <div style={{ position: 'relative', padding: 10 }}>
-      <div style={{ height: 60, width: 20 }} />
+    <div
+      style={{
+        position: "relative",
+        width: isOpen ? width : 42,
+        height: isOpen ? height : 70,
+        transition: "all 0.5s",
+        marginBottom: 10,
+      }}
+    >
+      <Collapse in={isOpen} animateOpacity>
+        <Box color="white" rounded="md" shadow="md" maxW={width} maxH={height}>
+          <div style={{ padding: 20, paddingLeft: 50, height }}>
+            <div
+              style={{
+                height: "100%",
+                overflow: "auto",
+                color: "black",
+                paddingRight: 5,
+              }}
+            >
+              <Heading as="h6" fontSize="20">
+                Filter
+              </Heading>
+              <LoremIpsum p={2} />
+            </div>
+          </div>
+        </Box>
+      </Collapse>
+
       <div
-        style={{ rotate: "-90deg", left: -5, top: 20, position: "absolute" }}
+        style={{
+          transform: "rotate(-90deg)",
+          transformOrigin: "top left",
+          position: "absolute",
+          top: 68,
+        }}
       >
         <Button onClick={onToggle}>Filter</Button>
       </div>
-      <Collapse in={isOpen} animateOpacity>
-        <Box
-          p="40px"
-          color="white"
-          mt="4"
-          bg="teal.500"
-          rounded="md"
-          shadow="md"
-          maxW={300}
-        >
-          <LoremIpsum p={1} />
-        </Box>
-      </Collapse>
     </div>
   );
 };
