@@ -1,27 +1,19 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-// import logo from "./logo.svg";
-import { AppNavbar } from "./components";
-import { About, Radar, Search } from "./pages";
-import "./App.css";
 import { ChakraUI } from "./ui/ChakraUI";
-import { MainLayout } from "./ui/MainLayout";
+import { NavApp } from "./navigation/AppNav";
 import { AppRadarProvider } from "./radar/RadarProvider";
+import "./App.css";
 
-export const App: React.FC = () => (
-  <AppRadarProvider>
-    <ChakraUI>
-      <BrowserRouter>
-        <AppNavbar />
-        <MainLayout>
-          <Routes>
-            <Route path="/" element={<Radar />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/search" element={<Search />} />
-          </Routes>
-        </MainLayout>
-      </BrowserRouter>
-    </ChakraUI>
-  </AppRadarProvider>
-);
+export const App: React.FC = () => {
+  return (
+    <AppRadarProvider>
+      <ChakraUI>
+        <BrowserRouter>
+          <NavApp />
+        </BrowserRouter>
+      </ChakraUI>
+    </AppRadarProvider>
+  );
+};
