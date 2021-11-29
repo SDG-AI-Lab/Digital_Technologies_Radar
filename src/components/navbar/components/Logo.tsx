@@ -9,7 +9,7 @@ import {
 
 interface Props {
   file?: string | undefined;
-  maxWidthOrHeight?: number;
+  maxwidthorheight?: number;
 }
 
 export const Logo: React.FC<ChakraProps & Props> = (props) => {
@@ -27,32 +27,32 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
   }, []);
   return (
     <Box {...props} m="auto">
-      <Text fontSize="lg" fontWeight="bold">
-        {props.file ? (
-          <>
-            {loading && (
-              <SkeletonCircle
-                size={(props.maxWidthOrHeight
-                  ? props.maxWidthOrHeight
-                  : 50
-                ).toString()}
-              />
-            )}
-            {!loading && (
-              <chakra.img
-                m="auto"
-                // animation={animation}
-                src={props.file}
-                // ref={ref}
-                maxW={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
-                maxH={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
-              />
-            )}
-          </>
-        ) : (
+      {props.file ? (
+        <>
+          {loading && (
+            <SkeletonCircle
+              size={(props.maxwidthorheight
+                ? props.maxwidthorheight
+                : 50
+              ).toString()}
+            />
+          )}
+          {!loading && (
+            <chakra.img
+              m="auto"
+              // animation={animation}
+              src={props.file}
+              // ref={ref}
+              maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
+              maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}
+            />
+          )}
+        </>
+      ) : (
+        <Text fontSize="lg" fontWeight="bold">
           <div>replace me</div>
-        )}
-      </Text>
+        </Text>
+      )}
     </Box>
   );
 };

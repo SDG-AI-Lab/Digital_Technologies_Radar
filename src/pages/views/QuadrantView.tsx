@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
+import { useParams } from "react-router";
 import { QuadrantRadar, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
 
-import { BackButton } from "../../radar/components/BackButton";
-import { useParams } from "react-router";
-import { WaitingForRadar } from "../../radar/components/WaitingForRadar";
+import { BackButton, WaitingForRadar } from "../../radar/components";
 
 export const QuadrantView: React.FC = () => {
   const [loading, setLoading] = useState(true);
