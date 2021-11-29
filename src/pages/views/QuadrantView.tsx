@@ -29,7 +29,7 @@ export const QuadrantView: React.FC = () => {
         setLoading(false);
       }
     }
-  }, [selectedQuadrant, quadrants, quadrantId, setSelectedQuadrant]);
+  }, [selectedQuadrant, quadrants, quadrantId]);
 
   return (
     <Box>
@@ -49,7 +49,10 @@ export const QuadrantView: React.FC = () => {
         </>
       )}
       {!loading && (
-        <QuadrantRadar selectedQuadrant={selectedQuadrant || undefined} />
+        <>
+          {/* TODO: change the undefined type to null in the lib */}
+          <QuadrantRadar selectedQuadrant={selectedQuadrant || undefined} />
+        </>
       )}
     </Box>
   );
