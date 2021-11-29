@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { QuadrantRadar, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
 
 import { BackButton } from "../../radar/components/BackButton";
 import { useParams } from "react-router";
+import { WaitingForRadar } from "../../radar/components/WaitingForRadar";
 
 export const QuadrantView: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -34,20 +35,7 @@ export const QuadrantView: React.FC = () => {
   return (
     <Box>
       <BackButton to="RADAR" />
-      {loading && (
-        <>
-          <Box
-            padding="6"
-            boxShadow="lg"
-            bg="white"
-            alignContent="center"
-            justifyContent="center"
-          >
-            <SkeletonCircle size="30vw" m="auto" />
-            <SkeletonText mt="4" noOfLines={4} spacing="4" />
-          </Box>
-        </>
-      )}
+      {loading && <WaitingForRadar />}
       {!loading && (
         <>
           {/* TODO: change the undefined type to null in the lib */}
