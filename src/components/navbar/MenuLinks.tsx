@@ -3,6 +3,7 @@ import { Box, Button, DarkMode, Stack, LightMode } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 
 import { MenuItem } from "./components/MenuItem";
+import { ROUTES } from "../../navigation/routes";
 
 interface Props {
   isOpen: boolean;
@@ -20,7 +21,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       direction={["column", "column", "row", "row"]}
       pt={[4, 4, 0, 0]}
     >
-      <MenuItem to="/">
+      <MenuItem to={ROUTES.RADAR}>
         <DarkMode>
           <Button size="sm" rounded="md" colorScheme="blue">
             Radar
@@ -28,7 +29,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
         </DarkMode>
       </MenuItem>
 
-      <MenuItem to="/about">
+      <MenuItem to={ROUTES.ABOUT}>
         <LightMode>
           <Button size="sm" rounded="md" colorScheme="blue">
             About
@@ -36,7 +37,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
         </LightMode>
       </MenuItem>
 
-      <MenuItem to="/search">
+      <MenuItem to={ROUTES.SEARCH}>
         <Button size="sm" rounded="md" colorScheme="blue">
           <FaSearch />
         </Button>

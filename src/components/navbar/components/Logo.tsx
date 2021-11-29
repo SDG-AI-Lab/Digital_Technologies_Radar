@@ -1,25 +1,58 @@
-import React from "react";
-import { chakra, Box, ChakraProps, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  chakra,
+  Box,
+  ChakraProps,
+  Text,
+  SkeletonCircle,
+} from "@chakra-ui/react";
 
 interface Props {
   file?: string | undefined;
-  maxWidthOrHeight?: number;
+  maxwidthorheight?: number;
 }
 
-export const Logo: React.FC<ChakraProps & Props> = (props) => (
-  <Box {...props}>
-    <Text fontSize="lg" fontWeight="bold">
+export const Logo: React.FC<ChakraProps & Props> = (props) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    // memory leaking cleanup
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+  return (
+    <Box {...props} m="auto">
       {props.file ? (
-        <chakra.img
-          // animation={animation}
-          src={props.file}
-          // ref={ref}
-          maxW={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
-          maxH={props.maxWidthOrHeight ? props.maxWidthOrHeight : 50}
-        />
+        <>
+          {loading && (
+            <SkeletonCircle
+              size={(props.maxwidthorheight
+                ? props.maxwidthorheight
+                : 50
+              ).toString()}
+            />
+          )}
+          {!loading && (
+            <chakra.img
+              m="auto"
+              // animation={animation}
+              src={props.file}
+              // ref={ref}
+              maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
+              maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}
+            />
+          )}
+        </>
       ) : (
-        <div>replace me</div>
+        <Text fontSize="lg" fontWeight="bold">
+          <div>replace me</div>
+        </Text>
       )}
-    </Text>
-  </Box>
-);
+    </Box>
+  );
+};

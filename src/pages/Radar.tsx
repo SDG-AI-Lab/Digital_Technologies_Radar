@@ -1,41 +1,59 @@
-import React from "react";
-import { Grid, Flex, useColorMode, Box } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { BlipType, SelectionState } from "@undp_sdg_ai_lab/undp-radar";
 
-import {
-  Radar as UNDPRadar,
-  SelectionState,
-} from "@undp_sdg_ai_lab/undp-radar";
+import { ROUTES } from "../navigation/routes";
+import { RadarView } from "./views";
+interface Props {
+  selectedItem: BlipType | null;
+  selectedQuadrant: string | null;
+  logic: {
+    setSelectedQuadrant: (payload: string | null) => void;
+    setSelectedItem: (payload: BlipType | null) => void;
+  };
+}
 
-import { TechDrawer, FilterDrawer } from "../components";
+const RadarRoutes: React.FC<Props> = ({
+  selectedItem,
+  selectedQuadrant,
+  logic,
+}) => {
+  const nav = useNavigate();
 
-export const Radar: React.FC = () => {
-  const { colorMode } = useColorMode();
-  return (
-    <SelectionState>
-      {({ selectedItem, selectedQuadrant }): JSX.Element => (
-        <Grid p={0}>
-          <Flex
-            py={0}
-            flexBasis={["auto", "45%"]}
-            w="full"
-            justifyContent="space-between"
-            bg={
-              colorMode === "light"
-                ? "rgba(250,250,250,1)"
-                : "rgba(250,250,250,.6)"
-            }
-          >
-            <Box>
-              <TechDrawer />
-              <FilterDrawer />
-            </Box>
-            <Box flex={1}>
-              <UNDPRadar />
-            </Box>
-            <Box />
-          </Flex>
-        </Grid>
-      )}
-    </SelectionState>
-  );
+  useEffect(() => {
+    // return () => {
+    //   logic.setSelectedItem(null);
+    //   logic.setSelectedQuadrant(null);
+    // };
+  }, [logic]);
+
+  useEffect(() => {
+    const goToQuadrant = (quadrant: string) =>
+      nav(`${ROUTES.QUADRANT}/${quadrant}`);
+    const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
+    if (selectedItem) {
+      // go to Blip view
+      goToBlip(selectedItem);
+    } else if (!selectedItem && selectedQuadrant) {
+      // go to quadrant view
+      goToQuadrant(selectedQuadrant);
+    } else {
+      // !selectedItem && !selectedQuadrant
+      // Pass through so we can see the radar
+    }
+  }, [selectedItem, selectedQuadrant, nav]);
+
+  return <RadarView />;
 };
+
+export const Radar: React.FC = () => (
+  <SelectionState>
+    {({ selectedItem, selectedQuadrant, logic }): JSX.Element => (
+      <RadarRoutes
+        selectedItem={selectedItem}
+        selectedQuadrant={selectedQuadrant}
+        logic={logic}
+      />
+    )}
+  </SelectionState>
+);

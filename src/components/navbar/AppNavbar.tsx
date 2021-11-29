@@ -15,12 +15,14 @@ export const AppNavbar: React.FC = () => {
 
   return (
     <NavBarContainer>
-      <UNDPLogo />
+      <Box w={100}>
+        <UNDPLogo />
+      </Box>
 
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
 
-      <Box display={["none", "none", "inherit", "inherit"]}>
+      <Box w={100} display={["none", "none", "inherit", "inherit"]}>
         <UNLogo />
       </Box>
     </NavBarContainer>

@@ -34,3 +34,11 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### React router
+
+You can learn more about the routing solution in the [React Router docs](https://reactrouter.com/docs/en/v6/getting-started/installation).
+
+### Chakra UI
+
+We use [Chakra UI](https://chakra-ui.com) as our UI toolkit. Have a look at its [documentation](https://chakra-ui.com/docs/getting-started).

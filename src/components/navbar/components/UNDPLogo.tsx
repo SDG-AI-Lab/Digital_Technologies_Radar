@@ -10,12 +10,13 @@ import logoWhite from "../../../assets/logos/SDG_WHITE_logo.png";
 
 export const UNDPLogo: React.FC<ChakraProps> = (props) => {
   const { colorMode } = useColorMode();
+
   return (
     <Logo
-      w="100px"
+      w="75px"
       // color={["white", "white", "primary.500", "primary.500"]}
       file={colorMode === "light" ? logoBlack : logoWhite}
-      maxWidthOrHeight={75}
+      maxwidthorheight={75}
       {...props}
     />
   );
