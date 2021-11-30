@@ -4,7 +4,7 @@ Welcome to our onboarding document.
 
 ## Design
 
-We are currently using Framer to setup this project. Check the following [link](https://framer.com/projects/UN-Radar-on-mobile--qrJuCdhqJOZbXUjm6Yf7-czGqg) to view it. In order to get access please request it to [Nuno Ribeiro](nmpribeiro@gmail.com).
+We are currently using Framer to setup this project. Check the following [link](https://framer.com/projects/UN-Radar-on-mobile--qrJuCdhqJOZbXUjm6Yf7-czGqg) to view it.
 
 ## Software development
 
