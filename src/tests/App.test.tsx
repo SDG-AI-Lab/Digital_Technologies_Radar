@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { App } from "./App";
+import { App } from "../App";
 import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
