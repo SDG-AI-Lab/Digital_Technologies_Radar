@@ -23,7 +23,6 @@ export const NavApp = () => {
 
           <Route path={ROUTES.QUADRANT_PARAM} element={<QuadrantView />} />
           <Route path={ROUTES.BLIP_PARAM} element={<BlipView />} />
-          <Route path={ROUTES.RADAR} element={<RadarView />} />
           {/* https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb#not-server-rendering -> should be server redirect */}
           <Route path="/" element={<Navigate replace to={ROUTES.RADAR} />} />
           <Route path="*" element={<NotFound404 />} />

@@ -1,31 +1,24 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BlipType, SelectionState } from "@undp_sdg_ai_lab/undp-radar";
+import { BlipType, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
 
 import { ROUTES } from "../navigation/routes";
 import { RadarView } from "./views";
-interface Props {
-  selectedItem: BlipType | null;
-  selectedQuadrant: string | null;
-  logic: {
-    setSelectedQuadrant: (payload: string | null) => void;
-    setSelectedItem: (payload: BlipType | null) => void;
-  };
-}
 
-const RadarRoutes: React.FC<Props> = ({
-  selectedItem,
-  selectedQuadrant,
-  logic,
-}) => {
+export const Radar: React.FC = () => {
   const nav = useNavigate();
+  const {
+    state: { selectedItem, selectedQuadrant },
+    setSelectedItem,
+    setSelectedQuadrant,
+  } = useRadarState();
 
   useEffect(() => {
     // return () => {
     //   logic.setSelectedItem(null);
     //   logic.setSelectedQuadrant(null);
     // };
-  }, [logic]);
+  }, [setSelectedItem, setSelectedQuadrant]);
 
   useEffect(() => {
     const goToQuadrant = (quadrant: string) =>
@@ -45,15 +38,3 @@ const RadarRoutes: React.FC<Props> = ({
 
   return <RadarView />;
 };
-
-export const Radar: React.FC = () => (
-  <SelectionState>
-    {({ selectedItem, selectedQuadrant, logic }): JSX.Element => (
-      <RadarRoutes
-        selectedItem={selectedItem}
-        selectedQuadrant={selectedQuadrant}
-        logic={logic}
-      />
-    )}
-  </SelectionState>
-);

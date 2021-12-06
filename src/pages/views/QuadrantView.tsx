@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { useParams } from "react-router";
-import { QuadrantRadar, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
+import {
+  BlipType,
+  QuadrantRadar,
+  useRadarState,
+} from "@undp_sdg_ai_lab/undp-radar";
 
 import { BackButton, WaitingForRadar } from "../../radar/components";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../navigation/routes";
 
 export const QuadrantView: React.FC = () => {
+  const nav = useNavigate();
   const [loading, setLoading] = useState(true);
   const {
     state: {
+      selectedItem,
       selectedQuadrant,
       radarData: { quadrants },
     },
@@ -22,14 +30,17 @@ export const QuadrantView: React.FC = () => {
     console.log("quadrants: ", quadrants);
     console.log("quadrantRouteParam: ", quadrantId);
 
-    if (quadrantId) {
+    const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
+    if (selectedItem) {
+      goToBlip(selectedItem);
+    } else if (quadrantId) {
       if (quadrants && quadrants.length > 0 && quadrants.includes(quadrantId)) {
         // we must show Quadrant view
         setSelectedQuadrant(quadrantId);
         setLoading(false);
       }
     }
-  }, [selectedQuadrant, quadrants, quadrantId]);
+  }, [selectedItem, selectedQuadrant, quadrants, quadrantId]);
 
   return (
     <Box>
