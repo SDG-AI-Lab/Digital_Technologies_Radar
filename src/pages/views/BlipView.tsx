@@ -1,5 +1,6 @@
-import { useRadarState } from "@undp_sdg_ai_lab/undp-radar";
 import React from "react";
+import { BlipPage, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
+
 import { BackButton } from "../../radar/components";
 
 export const BlipView: React.FC = () => {
@@ -14,7 +15,7 @@ export const BlipView: React.FC = () => {
   return (
     <>
       <BackButton to={selectRoute()} />
-      BLIP VIEW
+      <BlipPage />
     </>
   );
 };
