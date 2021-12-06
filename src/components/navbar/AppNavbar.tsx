@@ -1,11 +1,11 @@
-import { Box } from "@chakra-ui/layout";
-import React from "react";
+import { Box } from '@chakra-ui/layout';
+import React from 'react';
 
-import { MenuLinks } from "./MenuLinks";
-import { MenuToggle } from "./MenuToggle";
-import { UNLogo } from "./components/UNLogo";
-import { UNDPLogo } from "./components/UNDPLogo";
-import { NavBarContainer } from "./NavBarContainer";
+import { MenuLinks } from './MenuLinks';
+import { MenuToggle } from './MenuToggle';
+import { UNLogo } from './components/UNLogo';
+import { UNDPLogo } from './components/UNDPLogo';
+import { NavBarContainer } from './NavBarContainer';
 
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppNavbar: React.FC = () => {
@@ -22,7 +22,7 @@ export const AppNavbar: React.FC = () => {
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
 
-      <Box w={100} display={["none", "none", "inherit", "inherit"]}>
+      <Box w={100} display={['none', 'none', 'inherit', 'inherit']}>
         <UNLogo />
       </Box>
     </NavBarContainer>

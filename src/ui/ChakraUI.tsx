@@ -1,12 +1,12 @@
-import React from "react";
-import { createBreakpoints } from "@chakra-ui/theme-tools";
+import React from 'react';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
 import {
   ChakraProvider,
   ColorModeScript,
   extendTheme,
   theme,
-  ThemeConfig,
-} from "@chakra-ui/react";
+  ThemeConfig
+} from '@chakra-ui/react';
 
 // More info: https://chakra-ui.com/docs/getting-started
 export const ChakraUI: React.FC = ({ children }) => {
@@ -19,16 +19,16 @@ export const ChakraUI: React.FC = ({ children }) => {
   };
 
   const breakpoints = createBreakpoints({
-    sm: "30em",
-    md: "48em",
-    lg: "62em",
-    xl: "80em",
-    "2xl": "96em",
+    sm: '30em',
+    md: '48em',
+    lg: '62em',
+    xl: '80em',
+    '2xl': '96em'
   });
 
   const config: ThemeConfig = {
-    initialColorMode: "light",
-    useSystemColorMode: false,
+    initialColorMode: 'light',
+    useSystemColorMode: false
   };
 
   return (

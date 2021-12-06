@@ -4,14 +4,14 @@ import {
   Popover,
   PopoverContent,
   PopoverHeader,
-  PopoverTrigger,
-} from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { FaCaretLeft, FaCog, FaServer } from "react-icons/fa";
+  PopoverTrigger
+} from '@chakra-ui/react';
+import React, { useEffect } from 'react';
+import { FaCaretLeft, FaCog, FaServer } from 'react-icons/fa';
 
 enum IconType {
-  COG = "COG",
-  SERVER = "SERVER",
+  COG = 'COG',
+  SERVER = 'SERVER'
 }
 
 interface Props {
@@ -25,7 +25,7 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
   onToggle,
   isOpen,
   type,
-  label = null,
+  label = null
 }) => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const open = () => {
@@ -44,7 +44,7 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
       returnFocusOnClose={false}
       isOpen={isPopupOpen}
       onClose={close}
-      placement="right"
+      placement='right'
       closeOnBlur={false}
     >
       <PopoverTrigger>
@@ -66,8 +66,8 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
       </PopoverTrigger>
       {label !== null && (
         <Portal>
-          <PopoverContent maxW={"min-content"}>
-            <PopoverHeader fontWeight="semibold">{label}</PopoverHeader>
+          <PopoverContent maxW={'min-content'}>
+            <PopoverHeader fontWeight='semibold'>{label}</PopoverHeader>
           </PopoverContent>
         </Portal>
       )}

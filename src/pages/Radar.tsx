@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { BlipType, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
-import { ROUTES } from "../navigation/routes";
-import { RadarView } from "./views";
+import { ROUTES } from '../navigation/routes';
+import { RadarView } from './views';
 
 export const Radar: React.FC = () => {
   const nav = useNavigate();
   const {
     state: { selectedItem, selectedQuadrant },
     setSelectedItem,
-    setSelectedQuadrant,
+    setSelectedQuadrant
   } = useRadarState();
 
   useEffect(() => {
