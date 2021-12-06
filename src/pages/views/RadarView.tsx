@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Flex, Box, Heading, useColorMode } from "@chakra-ui/react";
 
-import { Radar as UNDPRadar, useRadarState } from "@undp_sdg_ai_lab/undp-radar";
+import {
+  DataLists,
+  Radar as UNDPRadar,
+  TechOrBlipDescription,
+  useRadarState,
+} from "@undp_sdg_ai_lab/undp-radar";
 
 import { WaitingForRadar } from "../../radar/components";
 import { TechDrawer, FilterDrawer } from "../../components";
@@ -40,8 +45,11 @@ export const RadarView: React.FC = () => {
           </Heading>
           {loading && <WaitingForRadar size="620px" />}
           {!loading && <UNDPRadar />}
+          <TechOrBlipDescription />
         </Box>
-        <Box />
+        <Box>
+          <DataLists />
+        </Box>
       </Flex>
     </Grid>
   );

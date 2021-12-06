@@ -18,7 +18,10 @@ export const BackButton: React.FC<Props> = ({ to }) => {
   const nav = useNavigate();
   return (
     <SelectionState>
-      {({ logic: { setSelectedQuadrant, setSelectedItem } }): JSX.Element => (
+      {({
+        selectedQuadrant,
+        logic: { setSelectedQuadrant, setSelectedItem },
+      }): JSX.Element => (
         <IconButton
           aria-label=""
           icon={<FaArrowLeft />}
@@ -26,7 +29,8 @@ export const BackButton: React.FC<Props> = ({ to }) => {
             switch (to) {
               case "QUADRANT":
                 setSelectedItem(null);
-                nav(ROUTES.QUADRANT);
+                if (selectedQuadrant)
+                  nav(`${ROUTES.QUADRANT}/${selectedQuadrant}`);
                 break;
               case "RADAR": // 'RADAR' is the same as default
               default:
