@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Box, Flex, useColorMode } from "@chakra-ui/react";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { Box, Flex, useColorMode } from '@chakra-ui/react';
+import { useParams } from 'react-router';
 import {
   BlipType,
   DataLists,
   Filter,
   QuadrantRadar,
   TechList,
-  useRadarState,
-} from "@undp_sdg_ai_lab/undp-radar";
+  useRadarState
+} from '@undp_sdg_ai_lab/undp-radar';
 
-import { BackButton, WaitingForRadar } from "../../radar/components";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../navigation/routes";
+import { BackButton, WaitingForRadar } from '../../radar/components';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../navigation/routes';
 
 export const QuadrantView: React.FC = () => {
   const nav = useNavigate();
@@ -22,18 +22,14 @@ export const QuadrantView: React.FC = () => {
     state: {
       selectedItem,
       selectedQuadrant,
-      radarData: { quadrants },
+      radarData: { quadrants }
     },
-    setSelectedQuadrant,
+    setSelectedQuadrant
   } = useRadarState();
 
   const { quadrantId } = useParams();
 
   useEffect(() => {
-    console.log("selectedQuadrant: ", selectedQuadrant);
-    console.log("quadrants: ", quadrants);
-    console.log("quadrantRouteParam: ", quadrantId);
-
     const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
     if (selectedItem) {
       goToBlip(selectedItem);
@@ -49,14 +45,14 @@ export const QuadrantView: React.FC = () => {
   return (
     <Flex
       py={0}
-      flexBasis={["auto", "45%"]}
-      w="full"
-      justifyContent="space-between"
+      flexBasis={['auto', '45%']}
+      w='full'
+      justifyContent='space-between'
       bg={
-        colorMode === "light" ? "rgba(250,250,250,1)" : "rgba(250,250,250,.3)"
+        colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
       }
     >
-      <BackButton to="RADAR" />
+      <BackButton to='RADAR' />
       <Box>
         <TechList showTitle={false} />
         <Filter />

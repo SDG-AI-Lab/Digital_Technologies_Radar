@@ -15,7 +15,7 @@
     width: 0px;
 
     // ascii code for ellipsis
-    content: "\2026";
+    content: '\2026';
 
     // run the animation, edit by changing steps and width
     animation: ellipsis steps(4, end) 900ms infinite;

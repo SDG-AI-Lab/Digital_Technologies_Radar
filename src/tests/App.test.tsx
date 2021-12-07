@@ -1,15 +1,15 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import { App } from "../App";
-import { unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+import React from 'react';
+import { render } from '@testing-library/react';
+import { App } from '../App';
+import { unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 // check https://reactjs.org/docs/testing-recipes.html for recipies
-describe("App tests", () => {
+describe('App tests', () => {
   let container: HTMLDivElement | null = null;
   beforeEach(() => {
     // setup a DOM element as a render target
-    container = document.createElement("div");
+    container = document.createElement('div');
     document.body.appendChild(container);
   });
 
@@ -22,7 +22,7 @@ describe("App tests", () => {
     }
   });
 
-  it("renders APP", () => {
+  it('renders APP', () => {
     act(() => {
       render(<App />, container as any);
     });
@@ -33,10 +33,10 @@ describe("App tests", () => {
     // expect(linkElement).toBeInTheDocument();
   });
 
-  it("has text", () => {
+  it('has text', () => {
     act(() => {
       render(<App />, container as any);
     });
-    expect((container as HTMLDivElement).textContent).toBe("");
+    expect((container as HTMLDivElement).textContent).toBe('');
   });
 });

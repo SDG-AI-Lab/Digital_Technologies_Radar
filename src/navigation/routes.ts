@@ -1,6 +1,6 @@
-const RADAR = "/radar";
-const ABOUT = "/about";
-const SEARCH = "/search";
+const RADAR = '/radar';
+const ABOUT = '/about';
+const SEARCH = '/search';
 
 const QUADRANT = `${RADAR}/quadrant`;
 const QUADRANT_PARAM = `${QUADRANT}/:quadrantId`;
@@ -15,5 +15,5 @@ export const ROUTES = {
   QUADRANT,
   QUADRANT_PARAM,
   BLIP,
-  BLIP_PARAM,
+  BLIP_PARAM
 };

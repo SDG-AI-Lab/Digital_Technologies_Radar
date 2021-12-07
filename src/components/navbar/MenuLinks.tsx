@@ -1,9 +1,9 @@
-import React from "react";
-import { Box, Button, DarkMode, Stack, LightMode } from "@chakra-ui/react";
-import { FaSearch } from "react-icons/fa";
+import React from 'react';
+import { Box, Button, DarkMode, Stack, LightMode } from '@chakra-ui/react';
+import { FaSearch } from 'react-icons/fa';
 
-import { MenuItem } from "./components/MenuItem";
-import { ROUTES } from "../../navigation/routes";
+import { MenuItem } from './components/MenuItem';
+import { ROUTES } from '../../navigation/routes';
 
 interface Props {
   isOpen: boolean;
@@ -11,19 +11,19 @@ interface Props {
 
 export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
   <Box
-    display={{ base: isOpen ? "block" : "none", md: "block" }}
-    flexBasis={{ base: "100%", md: "auto" }}
+    display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+    flexBasis={{ base: '100%', md: 'auto' }}
   >
     <Stack
       spacing={8}
-      align="center"
-      justify={["center", "space-between", "space-between", "space-between"]}
-      direction={["column", "column", "row", "row"]}
+      align='center'
+      justify={['center', 'space-between', 'space-between', 'space-between']}
+      direction={['column', 'column', 'row', 'row']}
       pt={[4, 4, 0, 0]}
     >
       <MenuItem to={ROUTES.RADAR}>
         <DarkMode>
-          <Button size="sm" rounded="md" colorScheme="blue">
+          <Button size='sm' rounded='md' colorScheme='blue'>
             Radar
           </Button>
         </DarkMode>
@@ -31,14 +31,14 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
 
       <MenuItem to={ROUTES.ABOUT}>
         <LightMode>
-          <Button size="sm" rounded="md" colorScheme="blue">
+          <Button size='sm' rounded='md' colorScheme='blue'>
             About
           </Button>
         </LightMode>
       </MenuItem>
 
       <MenuItem to={ROUTES.SEARCH}>
-        <Button size="sm" rounded="md" colorScheme="blue">
+        <Button size='sm' rounded='md' colorScheme='blue'>
           <FaSearch />
         </Button>
       </MenuItem>
