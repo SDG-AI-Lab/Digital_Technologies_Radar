@@ -3,7 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { AppNavbar } from "../components";
 import { MainLayout } from "../ui/MainLayout";
-import { About, NotFound404, Radar, Search } from "../pages";
+import { About } from "../pages/about/About";
+import { NotFound404, Radar, Search } from "../pages";
 import { ROUTES } from "./routes";
 import { BlipView, QuadrantView } from "../pages/views";
 

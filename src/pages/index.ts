@@ -1,5 +1,5 @@
 import { Radar } from "./Radar";
-import { About } from "./About";
+import { About } from "./about/About";
 import { Search } from "./Search";
 import { NotFound404 } from "./NotFound404";
 
