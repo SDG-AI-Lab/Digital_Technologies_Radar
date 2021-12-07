@@ -20,6 +20,6 @@ export const TechDrawer: React.FC = () => (
       Technologies
     </Heading>
     {/* TODO: make TechList come with full height, perhaps even think about supplying own tech butons */}
-    <TechList />{' '}
+    <TechList />
   </LittleDrawer>
 );

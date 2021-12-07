@@ -20,7 +20,7 @@ export const BackButton: React.FC<Props> = ({ to }) => {
     <SelectionState>
       {({
         selectedQuadrant,
-        logic: { setSelectedQuadrant, setSelectedItem },
+        logic: { setSelectedQuadrant, setSelectedItem }
       }): JSX.Element => (
         <IconButton
           aria-label=''
