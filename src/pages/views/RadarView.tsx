@@ -36,7 +36,7 @@ export const RadarView: React.FC = () => {
         }
       >
         <Box>
-          {/* <TechDrawer /> */}
+          <TechDrawer />
           <FilterDrawer />
         </Box>
         <Box flex={1}>
@@ -48,7 +48,7 @@ export const RadarView: React.FC = () => {
           <TechOrBlipDescription />
         </Box>
         <Box>
-          <DataLists />
+          {/* <DataLists /> */}
         </Box>
       </Flex>
     </Grid>
