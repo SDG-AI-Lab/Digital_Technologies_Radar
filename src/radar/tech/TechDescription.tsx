@@ -29,8 +29,13 @@ export const TechDescription: React.FC = () => {
     <React.Fragment>
       {selectedTech && techFilter && (
         <div>
-          <Text label={selectedTech[0]} type='h4' />
           <div>
+            <Text
+              as='h4'
+              style={{ textAlign: 'center', fontWeight: 600, fontSize: 20 }}
+            >
+              {selectedTech[0]}
+            </Text>
             {selectedTech[1].map((text) => (
               <div className={'paragraph'} key={v4()}>
                 {text}
