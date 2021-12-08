@@ -12,6 +12,57 @@ code {
     monospace;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  display: block;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+/* TODO: Delete these and improve styles */
+h1 {
+  font-size: 2em !important;
+  font-weight: 600 !important;
+}
+h2 {
+  font-size: 1.8em !important;
+  font-weight: 600 !important;
+}
+h3 {
+  font-size: 1.6em !important;
+  font-weight: 600 !important;
+}
+h4 {
+  font-size: 1.4em !important;
+  font-weight: 600 !important;
+}
+h5 {
+  font-size: 1.2em !important;
+  font-weight: 600 !important;
+}
+h6 {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+}
+
+svg text.quadrant-text,
+svg text.horizon-text,
+.horizon-text,
+.quadrant-text {
+  font-weight: 600 !important;
+  fill: rgba(0, 0, 0, 1) !important;
+}
+svg text.quadrant-text:hover {
+  fill: rgba(0, 0, 0, 0.7) !important;
+}
+/* End delete these */
+
 /* SCROLLBAR */
 *::-webkit-scrollbar {
   width: 6px;
