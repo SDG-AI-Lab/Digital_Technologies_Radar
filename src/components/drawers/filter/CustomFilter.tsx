@@ -1,17 +1,18 @@
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 import {
   SelectableItem,
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import { CountryKey, SDGKey } from './FilterConstants';
+
 import { FilterUtils } from './FilterUtilities';
+import { countryKey, sdgKey } from './FilterConstants';
 
 export const CustomFilter: React.FC = () => {
   const {
     state: { blips, disasterTypeFilter, useCaseFilter },
     setUseCaseFilter,
-    setDisasterTypeFilter,
+    // setDisasterTypeFilter,
     setFilteredBlips
   } = useRadarState();
 
@@ -23,7 +24,7 @@ export const CustomFilter: React.FC = () => {
 
   // FILTERS
   // sdg
-  const [SDGFilter, setSDGFilter] = useState<string>('all');
+  const [sdgFilter, setSdgFilter] = useState<string>('all');
   // countries
   const [countryFilter, setCountryFilter] = useState<string>('all');
 
@@ -33,9 +34,9 @@ export const CustomFilter: React.FC = () => {
   // disasters
   // const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
   // sdg
-  const [allSDGs, setAllSDGs] = useState<SelectableItem[]>([]);
+  const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
   // countries
-  const [allCountries, setAllCountries] = useState<SelectableItem[]>([]);
+  const [countries, setCountries] = useState<SelectableItem[]>([]);
 
   // EFFECT on Blips change, to get all options
   useEffect(() => {
@@ -47,11 +48,11 @@ export const CustomFilter: React.FC = () => {
       // const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
       // setDisasterTypes(newDisasterTyes);
       // sdg options
-      const newSDGs = FilterUtils.getSDGs(blips, SDGKey);
-      setAllSDGs(newSDGs);
+      const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
+      setSdgs(newSdgs);
       // country options
-      const newCountries = FilterUtils.getCountries(blips, CountryKey);
-      setAllCountries(newCountries);
+      const newCountries = FilterUtils.getCountries(blips, countryKey);
+      setCountries(newCountries);
     }
   }, [blips]);
 
@@ -64,8 +65,8 @@ export const CustomFilter: React.FC = () => {
   //   disasterTypeFilter === null ? 'all' : disasterTypeFilter
   // );
   // selectedSGD
-  const [selectedSDG, setSelectedSDG] = useState<string>(
-    SDGFilter === null ? 'all' : SDGFilter
+  const [selectedSdg, setSelectedSdg] = useState<string>(
+    sdgFilter === null ? 'all' : sdgFilter
   );
   // selectedCountry
   const [selectedCountry, setSelectedCountry] = useState<string>(
@@ -92,16 +93,16 @@ export const CustomFilter: React.FC = () => {
     // }
 
     // filter SDGs
-    if (SDGFilter !== 'all') {
+    if (sdgFilter !== 'all') {
       isFiltered = true;
       // a blip can have multiple SDGs
-      filtered = filtered.filter((i) => i[SDGKey].includes(SDGFilter));
+      filtered = filtered.filter((i) => i[sdgKey].includes(sdgFilter));
     }
 
     // filter countries
     if (countryFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[CountryKey] === countryFilter);
+      filtered = filtered.filter((i) => i[countryKey] === countryFilter);
     }
 
     // set filter
@@ -111,7 +112,7 @@ export const CustomFilter: React.FC = () => {
     disasterKey,
     useCaseFilter,
     disasterTypeFilter,
-    SDGFilter,
+    sdgFilter,
     countryFilter
   ]); // don't forget to add filters to dep array here
 
@@ -122,8 +123,8 @@ export const CustomFilter: React.FC = () => {
   // const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
   //   setSelectedDisasterType(e.target.value);
   // on SDG filter change
-  const onSDGChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedSDG(e.target.value);
+  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedSdg(e.target.value);
   // on country filter change
   const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedCountry(e.target.value);
@@ -132,7 +133,7 @@ export const CustomFilter: React.FC = () => {
     // selected?
     setUseCaseFilter(selectedUserCase);
     // setDisasterTypeFilter(selectedDisasterType);
-    setSDGFilter(selectedSDG);
+    setSdgFilter(selectedSdg);
     setCountryFilter(selectedCountry);
   };
 
@@ -159,11 +160,11 @@ export const CustomFilter: React.FC = () => {
         <select
           id='Select1'
           style={{ width: '100%' }}
-          onChange={onSDGChange}
-          value={selectedSDG}
+          onChange={onSdgChange}
+          value={selectedSdg}
         >
           <option value='all'>Show all SDG</option>
-          {allSDGs.map((item) => (
+          {sdgs.map((item) => (
             <option key={item.uuid} value={item.name}>
               {item.name}
             </option>
@@ -179,7 +180,7 @@ export const CustomFilter: React.FC = () => {
           value={selectedCountry}
         >
           <option value='all'>Show all Countries</option>
-          {allCountries.map((item) => (
+          {countries.map((item) => (
             <option key={item.uuid} value={item.name}>
               {item.name}
             </option>

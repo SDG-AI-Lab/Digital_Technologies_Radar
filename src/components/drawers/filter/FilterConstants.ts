@@ -1,2 +1,2 @@
-export const SDGKey = 'SDG';
-export const CountryKey = 'Country of Implementation';
+export const sdgKey = 'SDG';
+export const countryKey = 'Country of Implementation';
