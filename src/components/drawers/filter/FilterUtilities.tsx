@@ -17,7 +17,7 @@ const getUseCases = (
       newUseCases.set(val[useCaseKey], {
         uuid: uuidv4(),
         name: val[useCaseKey]
-      } as SelectableItem);
+      });
   });
   return Array.from(newUseCases.values());
 };
@@ -35,12 +35,27 @@ const getDisasterTypes = (
       newDisterTypes.set(val[disasterTypeKey], {
         uuid: uuidv4(),
         name: val[disasterTypeKey]
-      } as SelectableItem);
+      });
   });
   return Array.from(newDisterTypes.values());
 };
 
+const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
+  const newSDGs: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((blip) => {
+    // a blip can have multiple SDGs
+    const blipSDGs: string[] = blip[SDGKey];
+    blipSDGs.forEach((sdg) => {
+      if (sdg !== '' && !newSDGs.has(blip[SDGKey])) {
+        newSDGs.set(sdg, { uuid: uuidv4(), name: sdg });
+      }
+    });
+  });
+  return Array.from(newSDGs.values());
+};
+
 export const FilterUtils = {
   getUseCases,
-  getDisasterTypes
+  getDisasterTypes,
+  getSDGs
 };

@@ -4,6 +4,7 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import { SDGKey } from './FilterConstants';
 import { FilterUtils } from './FilterUtilities';
 
 export const CustomFilter: React.FC = () => {
@@ -20,6 +21,12 @@ export const CustomFilter: React.FC = () => {
     }
   } = useDataState();
 
+  /**
+   * SDGs
+   */
+  const [SDGFilter, setSDGFilter] = useState<string>('all');
+  const [allSDGs, setAllSDGs] = useState<SelectableItem[]>([]);
+
   const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
   const [useCases, setUseCases] = useState<SelectableItem[]>([]);
 
@@ -30,6 +37,10 @@ export const CustomFilter: React.FC = () => {
 
       const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
       setDisasterTypes(newDisasterTyes);
+
+      // SDGs setting:
+      const newSDGs = FilterUtils.getSDGs(blips, SDGKey);
+      setAllSDGs(newSDGs);
     }
   }, [blips]);
 
@@ -38,6 +49,10 @@ export const CustomFilter: React.FC = () => {
   );
   const [selectedUserCase, setSelectedUserCase] = useState<string>(
     useCaseFilter === null ? 'all' : useCaseFilter
+  );
+  // Selected SGD
+  const [selectedSDG, setSelectedSDG] = useState<string>(
+    SDGFilter === null ? 'all' : SDGFilter
   );
 
   /**
@@ -54,18 +69,28 @@ export const CustomFilter: React.FC = () => {
       isFiltered = true;
       filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
     }
+    // Add SDGs
+    if (SDGFilter !== 'all') {
+      isFiltered = true;
+      // a blip can have multiple SDGs
+      filtered = filtered.filter((i) => i[SDGKey].includes(SDGFilter));
+    }
     setFilteredBlips(isFiltered, filtered);
-  }, [useCaseKey, disasterKey, useCaseFilter, disasterTypeFilter]);
+  }, [useCaseKey, disasterKey, useCaseFilter, disasterTypeFilter, SDGFilter]); // don't forget to add SDGFilter to dep array here
 
   const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedDisasterType(e.target.value);
   const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedUserCase(e.target.value);
+  // on SDG filter change
+  const onSDGChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedSDG(e.target.value);
 
-  const onFilterHnalder = (): void => {
+  const onFilterHandler = (): void => {
     // selected?
     setUseCaseFilter(selectedUserCase);
     setDisasterTypeFilter(selectedDisasterType);
+    setSDGFilter(selectedSDG);
   };
 
   return (
@@ -86,6 +111,22 @@ export const CustomFilter: React.FC = () => {
       }}
     >
       <div>Customize Radar FROM APP</div>
+
+      <div style={{ paddingTop: 20 }}>
+        <select
+          id='Select1'
+          style={{ width: '100%' }}
+          onChange={onSDGChange}
+          value={selectedSDG}
+        >
+          <option value='all'>Show all SDG</option>
+          {allSDGs.map((item) => (
+            <option key={item.uuid} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div style={{ paddingTop: 20 }}>
         <select
@@ -143,7 +184,7 @@ export const CustomFilter: React.FC = () => {
             cursor: 'pointer',
             borderRadius: 5
           }}
-          onClick={onFilterHnalder}
+          onClick={onFilterHandler}
         >
           Filter
         </button>
