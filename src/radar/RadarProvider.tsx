@@ -45,7 +45,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
 
   const orders: OrdersParamType = {
     quadrants: ['Response', 'Recovery', 'Resilience', 'Preparedness'],
-    horizons: ['Production', 'Validation', 'Prototype', 'Idea']
+    horizons: ['Production', 'Prototype', 'Validation', 'Idea']
   };
 
   const colors: ColorsParamType = {
