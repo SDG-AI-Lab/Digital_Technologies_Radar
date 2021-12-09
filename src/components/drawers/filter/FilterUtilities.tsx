@@ -54,8 +54,24 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   return Array.from(newSDGs.values());
 };
 
+const getCountries = (
+  rawBlipData: BlipType[],
+  countryKey: string
+): SelectableItem[] => {
+  const newCountries: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    if (val[countryKey] !== '' && !newCountries.has(val[countryKey]))
+      newCountries.set(val[countryKey], {
+        uuid: uuidv4(),
+        name: val[countryKey]
+      });
+  });
+  return Array.from(newCountries.values());
+};
+
 export const FilterUtils = {
   getUseCases,
   getDisasterTypes,
-  getSDGs
+  getSDGs,
+  getCountries
 };
