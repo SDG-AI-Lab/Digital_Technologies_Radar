@@ -1,3 +1,5 @@
+import digitalTechRadarLogo from '../../assets/logos/Digital_Technology_Radar_Logo.png'
+
 export interface IAboutContentChild {
   title: string;
   description: string;
@@ -5,13 +7,12 @@ export interface IAboutContentChild {
 }
 
 class AboutContent {
-  // TODO: Digital Technologies Radar needs imageSrc, currently using SDG AI logo
 
   static readonly aboutDigitalTechnologiesRadarContent: IAboutContentChild = {
     title: 'About Digital Technologies Radar',
     description:
       'SDG AI Lab in partnership with UNDP DRT and CBi has developed an online tool – a DRM Digital Technologies Radar, which allows for the systematic tracking and understanding of frontier technologies as they are developed. This would categorize technological solutions according to their technology type, disaster/crisis type and maturity level. Moreover, it is expected that the tool developed would encourage knowledge and experience-sharing among development stakeholders on the use of frontier technologies in disaster and conflict contexts. The DRM Digital Technologies Radar aims to highlight the potential of technological solutions in disaster contexts to those working in the fields of risk reduction, response and recovery. It supports development stakeholders to navigate the variety of existing and emerging technologies and their possible use cases.',
-    imageSrc: 'https://avatars.githubusercontent.com/u/64203335?s=200&v=4'
+    imageSrc: digitalTechRadarLogo
   } as const;
 
   static readonly aboutDigitalResilienceTeamContent: IAboutContentChild = {
