@@ -1,11 +1,11 @@
 import { Box, Flex, Text, Image, Spacer } from '@chakra-ui/react';
-import { IAboutContentChild } from './AboutContent';
+import { AboutContentChild } from './AboutContent';
 
-interface IAboutOrganizationProps {
-  organizationContent: IAboutContentChild;
+interface AboutOrganizationProps {
+  organizationContent: AboutContentChild;
 }
 
-const AboutOrganization: React.FunctionComponent<IAboutOrganizationProps> = (
+const AboutOrganization: React.FunctionComponent<AboutOrganizationProps> = (
   props
 ) => {
   return (
@@ -17,7 +17,7 @@ const AboutOrganization: React.FunctionComponent<IAboutOrganizationProps> = (
           </Text>
           <Spacer />
           <Image
-            boxSize={20}
+            boxSize={16}
             objectFit='contain'
             src={props.organizationContent.imageSrc}
           />
