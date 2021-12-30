@@ -30,6 +30,7 @@ export const RadarView: React.FC = () => {
         bg={
           colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
         }
+        direction={{ base: 'column', xl: 'row' }}
       >
         <Box>
           <TechDrawer />
@@ -41,6 +42,8 @@ export const RadarView: React.FC = () => {
           </Heading>
           {loading && <WaitingForRadar size='620px' />}
           {!loading && <UNDPRadar />}
+        </Box>
+        <Box flex={'0.75'}>
           <TechDescription />
         </Box>
         <Box>{/* <DataLists /> */}</Box>
