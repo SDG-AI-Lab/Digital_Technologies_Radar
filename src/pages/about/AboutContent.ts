@@ -11,12 +11,12 @@ class AboutContent {
     title: 'Digital Technologies Radar',
     description:
       'SDG AI Lab in partnership with UNDP DRT and CBi has developed an online tool – a DRM Digital Technologies Radar, which allows for the systematic tracking and understanding of frontier technologies as they are developed. This would categorize technological solutions according to their technology type, disaster/crisis type and maturity level. Moreover, it is expected that the tool developed would encourage knowledge and experience-sharing among development stakeholders on the use of frontier technologies in disaster and conflict contexts. The DRM Digital Technologies Radar aims to highlight the potential of technological solutions in disaster contexts to those working in the fields of risk reduction, response and recovery. It supports development stakeholders to navigate the variety of existing and emerging technologies and their possible use cases.',
-    imageSrc: 
-    'https://cdn-icons-png.flaticon.com/512/1299/1299558.png'
+    imageSrc: 'https://cdn-icons-png.flaticon.com/512/1299/1299558.png'
   } as const;
 
   static readonly aboutDigitalResilienceTeamContent: AboutContentChild = {
-    title: 'UNDP Disaster Risk Reduction and Recovery for Building Resilience Team (DRT)',
+    title:
+      'UNDP Disaster Risk Reduction and Recovery for Building Resilience Team (DRT)',
     description:
       'The Crisis Bureau guides UNDP’s corporate crisis-related strategies and vision for crisis prevention, response and recovery. The Bureau has the responsibility for support to prevention, crisis response, resilience and recovery work under the auspices of UNDP’s Strategic Plan. The Disaster Risk Reduction and Recovery for Building Resilience Team (DRT) is situated within the Crisis Bureau of UNDP providing integrated policy and program support on disaster risk reduction and recovery in the context of UNDP’s broader approach to crisis prevention and increased resilience. The Team specifically fosters the mainstreaming of risk reduction as a key element in sustainable development and recovery at national, sub-national and sectoral level with a focus on integrated approaches with climate change adaptation.',
     imageSrc:
