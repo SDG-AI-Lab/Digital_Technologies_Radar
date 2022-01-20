@@ -246,7 +246,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '105px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onCountryChange}
             value={selectedCountry}
@@ -272,7 +272,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '140px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onDisasterTypeChange}
             value={selectedDisasterType}
@@ -298,7 +298,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '115px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onUseCaseChange}
             value={selectedUserCase}
@@ -324,7 +324,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '140px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onImplementerChange}
             value={selectedImplementer}
@@ -350,7 +350,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '100px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onSdgChange}
             value={selectedSdg}
@@ -377,7 +377,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '110px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onStartYearChange}
             value={selectedStartYear}
@@ -404,7 +404,7 @@ export const CustomFilter: React.FC = () => {
             style={{
               maxWidth: '110px',
               padding: '10px',
-              borderColor: 'lightgrey'
+              border: '1px solid lightgrey'
             }}
             onChange={onEndYearChange}
             value={selectedEndYear}

@@ -28,10 +28,9 @@ export const RadarView: React.FC = () => {
         flexBasis={['auto', '45%']}
         w='full'
         justifyContent='space-between'
-        bg={
-          colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
-        }
-        direction={{ base: 'column', xl: 'row' }}
+        // bg={
+        //   colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
+        // }
       >
         <Box
           style={{
