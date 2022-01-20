@@ -23,6 +23,7 @@ export const RadarView: React.FC = () => {
   return (
     <Grid p={0}>
       <Flex
+        flexDirection={'column'}
         py={0}
         flexBasis={['auto', '45%']}
         w='full'
@@ -32,9 +33,18 @@ export const RadarView: React.FC = () => {
         }
         direction={{ base: 'column', xl: 'row' }}
       >
-        <Box>
-          <TechDrawer />
+        <Box
+          style={{
+            position: 'relative',
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundColor: 'whitesmoke',
+            border: '1px solid lightgray'
+          }}
+        >
           <FilterDrawer />
+          <TechDrawer />
         </Box>
         <Box flex={1}>
           <Heading fontSize={30} textAlign='center' p={5}>

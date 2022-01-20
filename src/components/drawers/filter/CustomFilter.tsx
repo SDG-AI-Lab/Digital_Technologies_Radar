@@ -6,13 +6,19 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import { FilterUtils } from './FilterUtilities';
-import { countryKey, sdgKey } from './FilterConstants';
+import {
+  countryKey,
+  implementerKey,
+  sdgKey,
+  startYearKey,
+  endYearKey
+} from './FilterConstants';
 
 export const CustomFilter: React.FC = () => {
   const {
     state: { blips, disasterTypeFilter, useCaseFilter },
     setUseCaseFilter,
-    // setDisasterTypeFilter,
+    setDisasterTypeFilter,
     setFilteredBlips
   } = useRadarState();
 
@@ -23,54 +29,96 @@ export const CustomFilter: React.FC = () => {
   } = useDataState();
 
   // FILTERS
-  // sdg
-  const [sdgFilter, setSdgFilter] = useState<string>('all');
   // countries
   const [countryFilter, setCountryFilter] = useState<string>('all');
+  // implementer
+  const [implementerFilter, setImplementerFilter] = useState<string>('all');
+  // sdg
+  const [sdgFilter, setSdgFilter] = useState<string>('all');
+  // start year
+  const [startYearFilter, setStartYearFilter] = useState<string>('all');
+  // end year
+  const [endYearFilter, setEndYearFilter] = useState<string>('all');
 
   // ALL OPTIONS
-  // use cases
-  const [useCases, setUseCases] = useState<SelectableItem[]>([]);
-  // disasters
-  // const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
-  // sdg
-  const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
   // countries
   const [countries, setCountries] = useState<SelectableItem[]>([]);
+  // disasters
+  const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
+  // use cases
+  const [useCases, setUseCases] = useState<SelectableItem[]>([]);
+  // implementers
+  const [implementers, setImplementers] = useState<SelectableItem[]>([]);
+  // sdg
+  const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
+  // start year
+  const [startYears, setStartYears] = useState<SelectableItem[]>([]);
+  // end year
+  const [endYears, setEndYears] = useState<SelectableItem[]>([]);
 
   // EFFECT on Blips change, to get all options
   useEffect(() => {
     if (blips && blips?.length > 0) {
-      // usecase options
-      const newUseCases = FilterUtils.getUseCases(blips, useCaseKey);
-      setUseCases(newUseCases);
-      // disaster options
-      // const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
-      // setDisasterTypes(newDisasterTyes);
-      // sdg options
-      const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
-      setSdgs(newSdgs);
       // country options
       const newCountries = FilterUtils.getCountries(blips, countryKey);
       setCountries(newCountries);
+      // disaster options
+      const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
+      setDisasterTypes(newDisasterTyes);
+      // usecase options
+      const newUseCases = FilterUtils.getUseCases(blips, useCaseKey);
+      setUseCases(newUseCases);
+      // implementer options
+      const newImplementers = FilterUtils.getImplementers(
+        blips,
+        implementerKey
+      );
+      setImplementers(newImplementers);
+      // sdg options
+      const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
+      setSdgs(newSdgs);
+      // start year options
+      const newStartYears = FilterUtils.getStartYears(blips, startYearKey);
+      setStartYears(newStartYears);
+      // end year options
+      const newEndYears = FilterUtils.getEndYears(blips, endYearKey);
+      setEndYears(newEndYears);
     }
   }, [blips]);
+
+  // selectedCountry
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    countryFilter === null ? 'all' : countryFilter
+  );
+
+  // selectedDisasterType
+  const [selectedDisasterType, setSelectedDisasterType] = useState<string>(
+    disasterTypeFilter === null ? 'all' : disasterTypeFilter
+  );
 
   // selectedUserCase
   const [selectedUserCase, setSelectedUserCase] = useState<string>(
     useCaseFilter === null ? 'all' : useCaseFilter
   );
-  // selectedDisasterType
-  // const [selectedDisasterType, setSelectedDisasterType] = useState<string>(
-  //   disasterTypeFilter === null ? 'all' : disasterTypeFilter
-  // );
+
+  // selectedImplementer
+  const [selectedImplementer, setSelectedImplementer] = useState<string>(
+    implementerFilter === null ? 'all' : sdgFilter
+  );
+
   // selectedSGD
   const [selectedSdg, setSelectedSdg] = useState<string>(
     sdgFilter === null ? 'all' : sdgFilter
   );
-  // selectedCountry
-  const [selectedCountry, setSelectedCountry] = useState<string>(
-    countryFilter === null ? 'all' : countryFilter
+
+  // selectedStartYear
+  const [selectedStartYear, setSelectedStartYear] = useState<string>(
+    startYearFilter === null ? 'all' : startYearFilter
+  );
+
+  // selectedEndYear
+  const [selectedEndYear, setSelectedEndYear] = useState<string>(
+    endYearFilter === null ? 'all' : endYearFilter
   );
 
   /**
@@ -80,17 +128,31 @@ export const CustomFilter: React.FC = () => {
     let filtered = blips; // we start with all Blips
     let isFiltered = false;
 
+    // filter countries
+    if (countryFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter((i) => i[countryKey] === countryFilter);
+    }
+
+    // filter disaster types
+    if (disasterTypeFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
+    }
+
     // filter use cases
     if (useCaseFilter !== 'all') {
       isFiltered = true;
       filtered = filtered.filter((i) => i[useCaseKey] === useCaseFilter);
     }
 
-    // filter disaster types
-    // if (disasterTypeFilter !== 'all') {
-    //   isFiltered = true;
-    //   filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
-    // }
+    // filter implementers
+    if (implementerFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter(
+        (i) => i[implementerKey] === implementerFilter
+      );
+    }
 
     // filter SDGs
     if (sdgFilter !== 'all') {
@@ -99,10 +161,16 @@ export const CustomFilter: React.FC = () => {
       filtered = filtered.filter((i) => i[sdgKey].includes(sdgFilter));
     }
 
-    // filter countries
-    if (countryFilter !== 'all') {
+    // filter start years
+    if (startYearFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[countryKey] === countryFilter);
+      filtered = filtered.filter((i) => i[startYearKey] === startYearFilter);
+    }
+
+    // filter end years
+    if (endYearFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter((i) => i[endYearKey] === endYearFilter);
     }
 
     // set filter
@@ -110,129 +178,248 @@ export const CustomFilter: React.FC = () => {
   }, [
     useCaseKey,
     disasterKey,
-    useCaseFilter,
+    countryFilter,
     disasterTypeFilter,
+    useCaseFilter,
+    implementerFilter,
     sdgFilter,
-    countryFilter
+    startYearFilter,
+    endYearFilter
   ]); // don't forget to add filters to dep array here
 
-  // on use case filter change
-  const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedUserCase(e.target.value);
-  // on disaster type filter change
-  // const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-  //   setSelectedDisasterType(e.target.value);
-  // on SDG filter change
-  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedSdg(e.target.value);
   // on country filter change
   const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedCountry(e.target.value);
+  // on disaster type filter change
+  const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedDisasterType(e.target.value);
+  // on use case filter change
+  const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedUserCase(e.target.value);
+  // on implementer filter change
+  const onImplementerChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedImplementer(e.target.value);
+  // on SDG filter change
+  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedSdg(e.target.value);
+  // on start year filter change
+  const onStartYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedStartYear(e.target.value);
+  // on end year filter change
+  const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedEndYear(e.target.value);
 
   const onFilterHandler = (): void => {
     // selected?
-    setUseCaseFilter(selectedUserCase);
-    // setDisasterTypeFilter(selectedDisasterType);
-    setSdgFilter(selectedSdg);
     setCountryFilter(selectedCountry);
+    setDisasterTypeFilter(selectedDisasterType);
+    setUseCaseFilter(selectedUserCase);
+    setImplementerFilter(selectedImplementer);
+    setSdgFilter(selectedSdg);
+    setStartYearFilter(selectedStartYear);
+    setEndYearFilter(selectedEndYear);
   };
 
   return (
     <div
       style={{
-        borderStyle: 'solid',
-        borderTop: 'none',
-        borderColor: 'lightgrey',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderWidth: 1,
-        marginLeft: 2,
-        marginRight: 2,
-        padding: 20,
-        paddingTop: 20,
-        maxWidth: 300,
-        backgroundColor: 'whitesmoke'
+        borderBottomStyle: 'solid',
+        borderBottomColor: 'lightgrey',
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+        display: 'flex',
+        // flexWrap: 'wrap',
+        alignItems: 'center'
       }}
     >
-      <div>Customize Radar FROM APP</div>
-
-      <div style={{ paddingTop: 20 }}>
-        <select
-          id='Select1'
-          style={{ width: '100%' }}
-          onChange={onSdgChange}
-          value={selectedSdg}
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
         >
-          <option value='all'>Show all SDG</option>
-          {sdgs.map((item) => (
-            <option key={item.uuid} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
+          <select
+            id='Select1'
+            style={{
+              maxWidth: '105px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onCountryChange}
+            value={selectedCountry}
+          >
+            <option value='all'>Country</option>
+            {countries.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <select
+            id='Select2'
+            style={{
+              maxWidth: '140px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onDisasterTypeChange}
+            value={selectedDisasterType}
+          >
+            <option value='all'>Disaster Type</option>
+            {disasterTypes.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <select
+            id='Select3'
+            style={{
+              maxWidth: '115px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onUseCaseChange}
+            value={selectedUserCase}
+          >
+            <option value='all'>Use Case</option>
+            {useCases.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <select
+            id='Select4'
+            style={{
+              maxWidth: '140px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onImplementerChange}
+            value={selectedImplementer}
+          >
+            <option value='all'>Implementer</option>
+            {implementers.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <select
+            id='Select5'
+            style={{
+              maxWidth: '100px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onSdgChange}
+            value={selectedSdg}
+          >
+            <option value='all'>SDG</option>
+            {sdgs.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
+          <select
+            id='Select6'
+            style={{
+              maxWidth: '110px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onStartYearChange}
+            value={selectedStartYear}
+          >
+            <option value='all'>Start Year</option>
+            {startYears.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
+          <select
+            id='Select7'
+            style={{
+              maxWidth: '110px',
+              padding: '10px',
+              borderColor: 'lightgrey'
+            }}
+            onChange={onEndYearChange}
+            value={selectedEndYear}
+          >
+            <option value='all'>End Year</option>
+            {endYears.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div style={{ paddingTop: 20 }}>
-        <select
-          id='Select2'
-          style={{ width: '100%' }}
-          onChange={onCountryChange}
-          value={selectedCountry}
-        >
-          <option value='all'>Show all Countries</option>
-          {countries.map((item) => (
-            <option key={item.uuid} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* <div style={{ paddingTop: 20 }}>
-        <select
-          id='Select1'
-          style={{ width: '100%' }}
-          onChange={onDisasterTypeChange}
-          value={selectedDisasterType}
-        >
-          <option value='all'>Show all countries</option>
-          {disasterTypes.map((item) => (
-            <option key={item.uuid} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div> */}
-
-      <div style={{ paddingTop: 20 }}>
-        <select
-          id='Select2'
-          style={{ width: '100%' }}
-          onChange={onUseCaseChange}
-          value={selectedUserCase}
-        >
-          <option value='all'>Show all Use Cases</option>
-          {useCases.map((item) => (
-            <option key={item.uuid} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <small
-        style={{
-          padding: 10,
-          fontSize: 10,
-          textAlign: 'left',
-          float: 'left',
-          width: '100%'
-        }}
-      >
-        todo: create filter generalization
-      </small>
-
-      <div style={{ paddingTop: 20 }}>
+      <div>
         <button
           type='button'
           style={{
@@ -240,9 +427,11 @@ export const CustomFilter: React.FC = () => {
             borderWidth: 1,
             borderStyle: 'solid',
             padding: '10px 20px',
-            backgroundColor: 'whitesmoke',
+            backgroundColor: 'white',
             cursor: 'pointer',
-            borderRadius: 5
+            borderRadius: 5,
+            color: '#0a58ca',
+            marginBottom: 10
           }}
           onClick={onFilterHandler}
         >

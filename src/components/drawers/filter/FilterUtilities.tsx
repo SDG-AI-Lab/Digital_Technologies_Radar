@@ -7,19 +7,19 @@ import {
   UseCaseKey
 } from '@undp_sdg_ai_lab/undp-radar';
 
-const getUseCases = (
+const getCountries = (
   rawBlipData: BlipType[],
-  useCaseKey: UseCaseKey
+  countryKey: string
 ): SelectableItem[] => {
-  const newUseCases: Map<string, SelectableItem> = new Map();
+  const newCountries: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[useCaseKey] !== '' && !newUseCases.has(val[useCaseKey]))
-      newUseCases.set(val[useCaseKey], {
+    if (val[countryKey] !== '' && !newCountries.has(val[countryKey]))
+      newCountries.set(val[countryKey], {
         uuid: uuidv4(),
-        name: val[useCaseKey]
+        name: val[countryKey]
       });
   });
-  return Array.from(newUseCases.values());
+  return Array.from(newCountries.values());
 };
 
 const getDisasterTypes = (
@@ -40,6 +40,36 @@ const getDisasterTypes = (
   return Array.from(newDisterTypes.values());
 };
 
+const getUseCases = (
+  rawBlipData: BlipType[],
+  useCaseKey: UseCaseKey
+): SelectableItem[] => {
+  const newUseCases: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    if (val[useCaseKey] !== '' && !newUseCases.has(val[useCaseKey]))
+      newUseCases.set(val[useCaseKey], {
+        uuid: uuidv4(),
+        name: val[useCaseKey]
+      });
+  });
+  return Array.from(newUseCases.values());
+};
+
+const getImplementers = (
+  rawBlipData: BlipType[],
+  implementerKey: string
+): SelectableItem[] => {
+  const newImplementers: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    if (val[implementerKey] !== '' && !newImplementers.has(val[implementerKey]))
+      newImplementers.set(val[implementerKey], {
+        uuid: uuidv4(),
+        name: val[implementerKey]
+      });
+  });
+  return Array.from(newImplementers.values());
+};
+
 const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   const newSDGs: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((blip) => {
@@ -54,24 +84,42 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   return Array.from(newSDGs.values());
 };
 
-const getCountries = (
+const getStartYears = (
   rawBlipData: BlipType[],
-  countryKey: string
+  startYearKey: string
 ): SelectableItem[] => {
-  const newCountries: Map<string, SelectableItem> = new Map();
+  const newStartYears: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[countryKey] !== '' && !newCountries.has(val[countryKey]))
-      newCountries.set(val[countryKey], {
+    if (val[startYearKey] !== '' && !newStartYears.has(val[startYearKey]))
+      newStartYears.set(val[startYearKey], {
         uuid: uuidv4(),
-        name: val[countryKey]
+        name: val[startYearKey]
       });
   });
-  return Array.from(newCountries.values());
+  return Array.from(newStartYears.values());
+};
+
+const getEndYears = (
+  rawBlipData: BlipType[],
+  endYearKey: string
+): SelectableItem[] => {
+  const newEndYears: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    if (val[endYearKey] !== '' && !newEndYears.has(val[endYearKey]))
+      newEndYears.set(val[endYearKey], {
+        uuid: uuidv4(),
+        name: val[endYearKey]
+      });
+  });
+  return Array.from(newEndYears.values());
 };
 
 export const FilterUtils = {
-  getUseCases,
+  getCountries,
   getDisasterTypes,
+  getUseCases,
+  getImplementers,
   getSDGs,
-  getCountries
+  getStartYears,
+  getEndYears
 };
