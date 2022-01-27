@@ -2741,10 +2741,10 @@
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
 
-"@undp_sdg_ai_lab/undp-radar@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-0.1.2.tgz#0c9b014fd7d389b4b2811d40996cf8b091010c31"
-  integrity sha512-GZmqcNofhxcroi5R9+m7oFxWVr7PNZUkYi0daELg7+stUs/pPnezf53fZd8buMqr5ERf3GPUlWIAQs57jVetUQ==
+"@undp_sdg_ai_lab/undp-radar@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-0.1.4.tgz#336c609652e73292402e7612651313df847d2550"
+  integrity sha512-avNSOuC3ns1OgaHa2yInKWi4AcD63Oy4tAOjwZNB8VK6DHtwN5cd2oTSqQ+sXdJGPHxpJUMS1sUXVU+hcPkiDQ==
   dependencies:
     d3 "^7.1.1"
     kiss-react-state "^0.0.4"
