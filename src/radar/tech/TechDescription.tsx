@@ -7,27 +7,31 @@ import { AppConst, TechDescriptionType } from '../../components/constants/app';
 
 export const TechDescription: React.FC = () => {
   const {
-    state: { radarData, techFilter }
+    state: { radarData, techFilters }
   } = useRadarState();
 
-  const [selectedTech, setSelectedTech] =
-    useState<[TechKey, TechDescriptionType]>();
+  const [selectedTechs, setSelectedTechs] =
+    useState<Map<TechKey, TechDescriptionType>>();
 
   useEffect(() => {
-    if (techFilter) {
-      const newSelectedTech = radarData.tech.find((t) => techFilter === t.slug);
-      if (newSelectedTech) {
-        const selectedSlug = AppConst.technologyDescriptions.get(
-          newSelectedTech.slug
-        );
-        if (selectedSlug) setSelectedTech([newSelectedTech.type, selectedSlug]);
-      }
+    const newSelectedTechs: Map<TechKey, TechDescriptionType> = new Map();
+    if (techFilters && techFilters.length > 0) {
+      radarData.tech.forEach((radarDataTechItem) => {
+        if (techFilters.includes(radarDataTechItem.slug)) {
+          const selectedSlug = AppConst.technologyDescriptions.get(
+            radarDataTechItem.slug
+          );
+          if (selectedSlug)
+            newSelectedTechs.set(radarDataTechItem.type, selectedSlug);
+        }
+      });
     }
-  }, [radarData, techFilter]);
+    setSelectedTechs(newSelectedTechs);
+  }, [radarData, techFilters]);
 
   return (
     <React.Fragment>
-      {selectedTech && techFilter && (
+      {selectedTechs && techFilters && (
         <div>
           <Box {...TechDescriptionOuterBoxProps}>
             <Text
@@ -40,19 +44,33 @@ export const TechDescription: React.FC = () => {
             >
               Technologies
             </Text>
-            <Box {...TechDescriptionInnerBoxProps}>
-              <Text
-                as='h4'
-                style={{ textAlign: 'left', fontWeight: 600, fontSize: 20 }}
-              >
-                {selectedTech[0]}
-              </Text>
-              <Text pt={5} style={{ textAlign: 'left' }}>
-                {selectedTech[1].map((text) => (
-                  <div key={v4()}>{text}</div>
-                ))}
-              </Text>
-            </Box>
+
+            {Array.from(selectedTechs.keys()).map((selectedTechKey) => {
+              const selectedTech = selectedTechs.get(selectedTechKey);
+              return (
+                <>
+                  {selectedTech && (
+                    <Box {...TechDescriptionInnerBoxProps}>
+                      <Text
+                        as='h4'
+                        style={{
+                          textAlign: 'left',
+                          fontWeight: 600,
+                          fontSize: 20
+                        }}
+                      >
+                        {selectedTechKey}
+                      </Text>
+                      <Text pt={5} style={{ textAlign: 'left' }}>
+                        {selectedTech.map((text) => (
+                          <div key={v4()}>{text}</div>
+                        ))}
+                      </Text>
+                    </Box>
+                  )}
+                </>
+              );
+            })}
           </Box>
         </div>
       )}
