@@ -210,95 +210,69 @@ export const DataLists: React.FC = () => {
               </div>
             ))}
           </header>
-          <div className='row'>
-            {headers.map((header) => (
-              <div key={`${header.uuid}-${horizons[0].uuid}`} className='col'>
-                <Title
-                  label={Utilities.capitalize(horizons[0].name)}
-                  type='h5'
-                />
 
-                <ItemList
+          {horizons.map((horizon) => {
+              return (
+                <DataListsNoSelectedTechs 
                   radarData={radarData}
                   hoveredTech={hoveredTech}
                   setHoveredItem={setHoveredItem}
                   hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
-                  blips={myBlips}
-                  quadrant={header}
-                  horizon={horizons[0]}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className='row'>
-            {headers.map((header) => (
-              <div key={`${header.uuid}-${horizons[1].uuid}`} className='col'>
-                <Title
-                  label={Utilities.capitalize(horizons[1].name)}
-                  type='h5'
-                />
-
-                <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
-                  blips={myBlips}
-                  quadrant={header}
-                  horizon={horizons[1]}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className='row'>
-            {headers.map((header) => (
-              <div key={`${header.uuid}-${horizons[2].uuid}`} className='col'>
-                <Title
-                  label={Utilities.capitalize(horizons[2].name)}
-                  type='h5'
-                />
-
-                <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
-                  blips={myBlips}
-                  quadrant={header}
-                  horizon={horizons[2]}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className='row'>
-            {headers.map((header) => (
-              <div key={`${header.uuid}-${horizons[3].uuid}`} className='col'>
-                <Title
-                  label={Utilities.capitalize(horizons[3].name)}
-                  type='h5'
-                />
-
-                <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
-                  blips={myBlips}
-                  quadrant={header}
-                  horizon={horizons[3]}
-                />
-              </div>
-            ))}
-          </div>
+                  setSelectedItem={setSelectedItem}
+                  blips={blips}
+                  headers={headers}
+                  horizon={horizon}
+                />)
+            })
+          }
         </React.Fragment>
       )}
     </section>
   );
 };
+
+interface DataListsNoSelectedTechsProps {
+  radarData: RadarOptionsType;
+  horizon: ListMatrixItem;
+  blips: BlipType[];
+  hoveredItem: BlipType | null;
+  hoveredTech: string | null;
+  setHoveredItem: (payload: BlipType | null) => void;
+  setSelectedItem: (item: BlipType) => void;
+  headers: ListMatrixItem[];
+}
+
+const DataListsNoSelectedTechs: React.FC<DataListsNoSelectedTechsProps> = ({
+  radarData,
+  horizon,
+  blips,
+  hoveredItem,
+  hoveredTech,
+  setHoveredItem,
+  setSelectedItem,
+  headers
+}) => {
+  return (
+    <div className='row'>
+            {headers.map((header) => (
+              <div key={`${header.uuid}-${horizon.uuid}`} className='col'>
+                <Title
+                  label={Utilities.capitalize(horizon.name)}
+                  type='h5'
+                />
+
+                <ItemList
+                  radarData={radarData}
+                  hoveredTech={hoveredTech}
+                  setHoveredItem={setHoveredItem}
+                  hoveredItem={hoveredItem}
+                  setSelectedItem={setSelectedItem}
+                  blips={blips}
+                  quadrant={header}
+                  horizon={horizon}
+                />
+              </div>
+            ))}
+          </div>
+  )
+}
