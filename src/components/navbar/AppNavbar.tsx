@@ -15,15 +15,15 @@ export const AppNavbar: React.FC = () => {
 
   return (
     <NavBarContainer>
-      <Box w={100}>
+      <Box w={75} h={'25%'} background={''} display={'inline-block'} position={'relative'}>
         <UNDPLogo />
+        <UNLogo />
       </Box>
 
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
-
-      <Box w={100} display={['none', 'none', 'inherit', 'inherit']}>
-        <UNLogo />
+    
+      <Box w={100} h={''} display={['none', 'none', 'inherit', 'inherit']}>
       </Box>
     </NavBarContainer>
   );

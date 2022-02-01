@@ -26,7 +26,7 @@ export const RadarView: React.FC = () => {
         flexDirection={'column'}
         py={0}
         flexBasis={['auto', '45%']}
-        w='full'
+        w='100%'
         justifyContent='space-between'
         // bg={
         //   colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
@@ -35,8 +35,9 @@ export const RadarView: React.FC = () => {
         <Box
           style={{
             position: 'relative',
-            padding: 20,
             display: 'flex',
+            padding: 10,
+            left:'2.5%',
             flexDirection: 'column',
             backgroundColor: 'whitesmoke',
             border: '1px solid lightgray'

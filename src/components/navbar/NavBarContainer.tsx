@@ -8,12 +8,16 @@ export const NavBarContainer: React.FC = ({ children, ...props }) => {
       align='center'
       justify='space-between'
       wrap='wrap'
-      w='100%'
+      display='block'
+      position='absolute'
+      w='6%'
+      height='100%'
+      background='whitesmoke'
       // mb={8}
       pt={2}
       pb={2}
-      pr={5}
-      pl={5}
+      pr={2}
+      pl={2}
       // bg={["primary.500", "primary.500", "transparent", "transparent"]}
       // color={["white", "white", "primary.700", "primary.700"]}
       {...props}

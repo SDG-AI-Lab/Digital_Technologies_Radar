@@ -18,7 +18,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       spacing={8}
       align='center'
       justify={['center', 'space-between', 'space-between', 'space-between']}
-      direction={['column', 'column', 'row', 'row']}
+      direction={['column', 'column', 'column', 'column']}
       pt={[4, 4, 0, 0]}
     >
       <MenuItem to={ROUTES.RADAR}>
