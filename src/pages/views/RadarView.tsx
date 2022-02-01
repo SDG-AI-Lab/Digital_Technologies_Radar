@@ -21,7 +21,7 @@ export const RadarView: React.FC = () => {
   }, [blips]);
 
   return (
-    <Grid p={0}>
+    <Grid p={0} pl={1} alignItems={'stretch'}>
       <Flex
         flexDirection={'column'}
         py={0}
@@ -35,9 +35,6 @@ export const RadarView: React.FC = () => {
         <Box
           style={{
             position: 'relative',
-            display: 'flex',
-            padding: 10,
-            left: '2.5%',
             flexDirection: 'column',
             backgroundColor: 'whitesmoke',
             border: '1px solid lightgray'
@@ -46,7 +43,13 @@ export const RadarView: React.FC = () => {
           <FilterDrawer />
           <TechDrawer />
         </Box>
-        <Box flex={1}>
+        <Box flex={1}
+        style={{
+        position: 'relative',
+        border: '1px solid lightgray',
+        borderBottom:'none',
+        }}
+        >
           <Heading fontSize={30} textAlign='center' p={5}>
             Technology Radar
           </Heading>
