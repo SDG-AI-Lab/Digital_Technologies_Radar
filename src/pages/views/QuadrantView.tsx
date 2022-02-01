@@ -67,7 +67,7 @@ export const QuadrantView: React.FC = () => {
           </>
         )}
       </Box>
-      <Box>
+      <Box flex={'0.75'}>
         <DataLists />
       </Box>
     </Flex>

@@ -14,6 +14,7 @@ import { ScrollableDiv } from './components/ScrollableDiv';
 import { Title } from './components/Title';
 
 import './DataLists.scss';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, BoxProps, Text } from '@chakra-ui/react';
 
 type ListMatrixItem = { uuid: string; name: string };
 
@@ -202,29 +203,53 @@ export const DataLists: React.FC = () => {
         </React.Fragment>
       )}
       {techFilters.length === 0 && (
-        <React.Fragment>
-          <header>
-            {headers.map((header) => (
-              <div key={header.uuid} className='col'>
-                <Title label={Utilities.capitalize(header.name)} type='h4' />
-              </div>
-            ))}
-          </header>
 
-          {horizons.map((horizon) => {
-              return (
-                <DataListsNoSelectedTechs 
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItem}
-                  blips={blips}
-                  headers={headers}
-                  horizon={horizon}
-                />)
-            })
-          }
+        <React.Fragment>
+          <Box {...OuterBoxProps}>
+            <Text
+              width={'fit-content'}
+              color={'blue.500'}
+              borderBottom={'3px solid'}
+              my={5}
+              ml={5}
+              as='h5'
+            >
+              Stages
+            </Text>
+
+            <Box {...InnerBoxProps}>
+              {/* <header>
+                {headers.map((header) => (
+                  <div key={header.uuid} className='col'>
+                    <Title label={Utilities.capitalize(header.name)} type='h4' />
+                  </div>
+                ))}
+              </header> */}
+
+              <Accordion allowToggle>
+                {horizons.map((horizon, index) => {
+                    return (
+                      <div key={index}>
+                        {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+                        <AccordionItem>
+                          <DataListsNoSelectedTechs 
+                            radarData={radarData}
+                            hoveredTech={hoveredTech}
+                            setHoveredItem={setHoveredItem}
+                            hoveredItem={hoveredItem}
+                            setSelectedItem={setSelectedItem}
+                            blips={blips}
+                            headers={headers}
+                            horizon={horizon}
+                          />
+                        </AccordionItem>
+                      </div>
+                    )
+                  })
+                }
+              </Accordion>
+            </Box>
+          </Box>
         </React.Fragment>
       )}
     </section>
@@ -253,26 +278,50 @@ const DataListsNoSelectedTechs: React.FC<DataListsNoSelectedTechsProps> = ({
   headers
 }) => {
   return (
-    <div className='row'>
-            {headers.map((header) => (
-              <div key={`${header.uuid}-${horizon.uuid}`} className='col'>
-                <Title
-                  label={Utilities.capitalize(horizon.name)}
-                  type='h5'
-                />
-
-                <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItem}
-                  blips={blips}
-                  quadrant={header}
-                  horizon={horizon}
-                />
-              </div>
-            ))}
-          </div>
+    <div>
+      {headers.map((header, index) => (
+        <div key={index}> {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+          <h5>
+            <AccordionButton>
+              <Box key={`${header.uuid}-${horizon.uuid}`} flex='1' textAlign='left'>
+                {Utilities.capitalize(horizon.name)}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h5>
+          
+          <AccordionPanel>
+            <ItemList
+              radarData={radarData}
+              hoveredTech={hoveredTech}
+              setHoveredItem={setHoveredItem}
+              hoveredItem={hoveredItem}
+              setSelectedItem={setSelectedItem}
+              blips={blips}
+              quadrant={header}
+              horizon={horizon}
+            />
+          </AccordionPanel>
+        </div>   
+      ))}
+    </div>
   )
 }
+
+const OuterBoxProps: BoxProps = {
+  borderColor: 'gray.200',
+  borderWidth: '2px',
+  borderRadius: 'md',
+  m: '5',
+  my: '10',
+  p: '1'
+
+};
+
+const InnerBoxProps: BoxProps = {
+  borderColor: 'gray.200',
+  borderWidth: '2px',
+  borderRadius: 'md',
+  m: '1',
+  p: '2'
+};
