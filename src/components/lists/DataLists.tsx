@@ -14,7 +14,7 @@ import { ScrollableDiv } from './components/ScrollableDiv';
 import { Title } from './components/Title';
 
 import './DataLists.scss';
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, BoxProps, Text } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, BoxProps, Icon, Text } from '@chakra-ui/react';
 
 type ListMatrixItem = { uuid: string; name: string };
 
@@ -204,7 +204,7 @@ export const DataLists: React.FC = () => {
                     if(filteredBlipsAndHorizons.filteredHorizonNames.size === 0) {
                       return (
                         <Text color='gray.500' as='i'>
-                          No technologies to display for this technology type...
+                          No technologies to display for selected technology types...
                         </Text>
                       )
                     }
