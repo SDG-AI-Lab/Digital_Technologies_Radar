@@ -158,100 +158,122 @@ export const DataLists: React.FC = () => {
     setHoveredItem(null);
   };
 
+  interface FilteredBlipsAndHorizons {
+    filteredBlips: BlipType[];
+    filteredHorizonNames: Set<String>;
+  } 
+
+  const getFilteredBlipsAndHorizons = (header: ListMatrixItem): FilteredBlipsAndHorizons => {
+    const filteredBlipsAndHorizons: FilteredBlipsAndHorizons = {} as FilteredBlipsAndHorizons ;
+    filteredBlipsAndHorizons.filteredBlips = new Array<BlipType>();
+    filteredBlipsAndHorizons.filteredHorizonNames = new Set<String>();
+
+    myBlips.forEach(
+      (blip) => {
+        if(Utilities.checkItemHasTechFromMultiple(
+          blip,
+          techFilters,
+          keys.techKey
+        ) && blip[keys.quadrantKey] === header.name) {
+          
+          filteredBlipsAndHorizons.filteredBlips.push(blip);
+          filteredBlipsAndHorizons.filteredHorizonNames.add(blip[keys.horizonKey]);
+        }
+      }
+    );
+
+    return filteredBlipsAndHorizons;
+    
+  };
+  
   return (
     <section>
-      {techFilters.length > 0 && (
-        <React.Fragment>
-          <header
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}
-          >
-            {headers.map((header) => (
-              <div
-                key={header.uuid}
-                className='column'
-                style={{
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  maxWidth: 200
-                }}
-              >
-                <Title label={Utilities.capitalize(header.name)} type='h4' />
-                <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
-                  blips={myBlips.filter(
-                    (b) =>
-                      Utilities.checkItemHasTechFromMultiple(
-                        b,
-                        techFilters,
-                        keys.techKey
-                      ) && b[keys.quadrantKey] === header.name
-                  )}
-                  quadrant={header}
-                />
-              </div>
-            ))}
-          </header>
-        </React.Fragment>
-      )}
-      {techFilters.length === 0 && (
+      <Box {...OuterBoxProps}>
+        <Text width={'fit-content'} color={'blue.500'} borderBottom={'3px solid'} my={5} ml={5} as='h5'>
+          Stages
+        </Text>
+        <Box {...InnerBoxProps}>
+        
+          {techFilters.length > 0 && (
+            
+            <React.Fragment>
+                {headers.map((header) => {
+                    const filteredBlipsAndHorizons: FilteredBlipsAndHorizons 
+                    = getFilteredBlipsAndHorizons(header);
 
-        <React.Fragment>
-          <Box {...OuterBoxProps}>
-            <Text
-              width={'fit-content'}
-              color={'blue.500'}
-              borderBottom={'3px solid'}
-              my={5}
-              ml={5}
-              as='h5'
-            >
-              Stages
-            </Text>
+                    if(filteredBlipsAndHorizons.filteredHorizonNames.size === 0) {
+                      return (
+                        <Text color='gray.500' as='i'>
+                          No technologies to display for this technology type...
+                        </Text>
+                      )
+                    }
+                    else {
+                      const filteredHorizons: ListMatrixItem[] = horizons.filter(
+                        horizon => filteredBlipsAndHorizons.filteredHorizonNames.has(horizon.name)
+                      );
 
-            <Box {...InnerBoxProps}>
-              {/* <header>
-                {headers.map((header) => (
-                  <div key={header.uuid} className='col'>
-                    <Title label={Utilities.capitalize(header.name)} type='h4' />
-                  </div>
-                ))}
-              </header> */}
+                      return (
+                        <div key={header.uuid}>
+                          <Accordion allowToggle>
+                            {filteredHorizons.map((horizon, index) => {
+                              
+                                return (
+                                  <div key={index}>
+                                    {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+                                    <AccordionItem>
+                                      <DataListsNoSelectedTechs 
+                                        radarData={radarData}
+                                        hoveredTech={hoveredTech}
+                                        setHoveredItem={setHoveredItem}
+                                        hoveredItem={hoveredItem}
+                                        setSelectedItem={setSelectedItem}
+                                        blips={filteredBlipsAndHorizons.filteredBlips}
+                                        headers={headers}
+                                        horizon={horizon}
+                                      />
+                                    </AccordionItem>
+                                  </div>
+                                )
+                              })
+                            }
+                          </Accordion>
+                        </div>
+                      )
+                    }
+                  }
+                )}
+            </React.Fragment>
+          )}
 
-              <Accordion allowToggle>
-                {horizons.map((horizon, index) => {
-                    return (
-                      <div key={index}>
-                        {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
-                        <AccordionItem>
-                          <DataListsNoSelectedTechs 
-                            radarData={radarData}
-                            hoveredTech={hoveredTech}
-                            setHoveredItem={setHoveredItem}
-                            hoveredItem={hoveredItem}
-                            setSelectedItem={setSelectedItem}
-                            blips={blips}
-                            headers={headers}
-                            horizon={horizon}
-                          />
-                        </AccordionItem>
-                      </div>
-                    )
-                  })
-                }
-              </Accordion>
-            </Box>
-          </Box>
-        </React.Fragment>
-      )}
+          {techFilters.length === 0 && (
+            <React.Fragment>
+                  <Accordion allowToggle>
+                    {horizons.map((horizon, index) => {
+                        return (
+                          <div key={index}>
+                            {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+                            <AccordionItem>
+                              <DataListsNoSelectedTechs 
+                                radarData={radarData}
+                                hoveredTech={hoveredTech}
+                                setHoveredItem={setHoveredItem}
+                                hoveredItem={hoveredItem}
+                                setSelectedItem={setSelectedItem}
+                                blips={blips}
+                                headers={headers}
+                                horizon={horizon}
+                              />
+                            </AccordionItem>
+                          </div>
+                        )
+                      })
+                    }
+                  </Accordion>
+            </React.Fragment>
+          )}
+        </Box>
+      </Box> 
     </section>
   );
 };
