@@ -37,7 +37,7 @@ export const RadarView: React.FC = () => {
             position: 'relative',
             display: 'flex',
             padding: 10,
-            left:'2.5%',
+            left: '2.5%',
             flexDirection: 'column',
             backgroundColor: 'whitesmoke',
             border: '1px solid lightgray'
