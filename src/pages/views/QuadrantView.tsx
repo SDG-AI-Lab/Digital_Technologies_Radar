@@ -94,7 +94,8 @@ const OuterBoxProps: BoxProps = {
   borderRadius: 'md',
   m: '5',
   my: '10',
-  p: '1'
+  p: '1',
+  maxWidth: '500px'
 };
 
 const InnerBoxProps: BoxProps = {
@@ -102,5 +103,6 @@ const InnerBoxProps: BoxProps = {
   borderWidth: '2px',
   borderRadius: 'md',
   m: '1',
-  p: '2'
+  p: '2',
+
 };

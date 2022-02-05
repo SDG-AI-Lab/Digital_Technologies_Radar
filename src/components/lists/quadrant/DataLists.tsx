@@ -20,9 +20,10 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Badge,
   Box,
-  BoxProps,
-  Icon,
+  Button,
+  Flex,
   Text
 } from '@chakra-ui/react';
 
@@ -51,23 +52,15 @@ const QuadrantItemList: React.FC<Props> = ({
 }) => {
   const {
     state: {
-      keys: { techKey, titleKey, quadrantKey, horizonKey }
+      keys: { techKey, titleKey, quadrantKey, horizonKey, disasterTypeKey }
     }
   } = useDataState();
   return (
-    <ScrollableDiv maxHeight={200}>
-      <ul
-        style={{
-          listStyle: 'none',
-          margin: 0,
-          padding: 0,
-          textAlign: 'left',
-          fontSize: 14
-        }}
-      >
+    <ScrollableDiv maxHeight={400}>
+      <Accordion allowToggle>
         {blips.map((blip) => {
           const onMouseEnter = () => setHoveredItem(blip);
-          const onMouseLeave = () => setHoveredItem(null);
+          const onMouseLeave = () => setHoveredItem(null);   
           const getHoveredStyle = () => {
             const tech = radarData.tech.find((t) => t.type === blip[techKey]);
             if (hoveredItem?.id === blip.id) {
@@ -81,24 +74,64 @@ const QuadrantItemList: React.FC<Props> = ({
             (horizon === null || blip[horizonKey] === horizon.name)
           )
             return (
-              <li
-                key={`${blip.id}-${quadrant.uuid}-${horizon && horizon.uuid}`}
-                className={'blipItemWrapper'}
+              <AccordionItem
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
               >
-                <button
-                  className={`${'blipItem'} ${getHoveredStyle()}`}
-                  onClick={() => setSelectedItem(blip)}
-                  type='button'
-                  onMouseEnter={onMouseEnter}
-                  onMouseLeave={onMouseLeave}
-                >
-                  {blip[titleKey]}
-                </button>
-              </li>
+                <h5>
+                  <AccordionButton>
+                    <Box flex='1' textAlign='left'>
+                      {blip[titleKey]}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+
+                  <AccordionPanel pb={4}>
+                    <Box bg= {'#EDF2F7'}>
+                        <Flex
+                          direction={'column'}
+                          minHeight={'200px'}
+                          p='5'
+                        >
+                          <Box>
+                            <Text>
+                              Description
+                            </Text>
+                            <Text fontWeight={'400'} fontSize={'md'}>
+                              {blip.Description}
+                            </Text>
+                          </Box>
+                          <Flex flexWrap={'wrap'} my='5'>
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='orange'>
+                              {blip['Disaster Cycle']}
+                            </Badge>
+                            <Badge isTruncated my='1' mx='1' variant='subtle' colorScheme='green'>
+                              {blip['Un Host Organisation']}
+                            </Badge>  
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='purple'>
+                              {blip['Country of Implementation']}
+                            </Badge>  
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='cyan'>
+                              {blip['SDG']}
+                            </Badge>  
+                          </Flex>
+                          <Button 
+                            onClick={() => setSelectedItem(blip)}
+                            colorScheme='blue'
+                            borderRadius={'0'}
+                          >
+                              More
+                          </Button>
+                        </Flex>
+                      </Box>
+                  </AccordionPanel>
+
+                </h5>
+              </AccordionItem>
             );
           return null;
         })}
-      </ul>
+      </Accordion>
     </ScrollableDiv>
   );
 };
@@ -307,7 +340,6 @@ const QuadrantDataListItem: React.FC<QuadrantDataListItemProps> = ({
     <div>
       {headers.map((header, index) => (
         <div key={index}>
-          {' '}
           {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
           <h5>
             <AccordionButton>
