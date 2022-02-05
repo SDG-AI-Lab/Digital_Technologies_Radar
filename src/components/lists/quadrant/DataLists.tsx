@@ -10,8 +10,8 @@ import {
   BlipType,
   RadarOptionsType
 } from '@undp_sdg_ai_lab/undp-radar';
-import { ScrollableDiv } from './components/ScrollableDiv';
-import { Title } from './components/Title';
+import { ScrollableDiv } from '../components/ScrollableDiv';
+import { Title } from '../components/Title';
 
 import './DataLists.scss';
 import {
@@ -39,7 +39,7 @@ interface Props {
   setSelectedItem: (item: BlipType) => void;
 }
 
-const ItemList: React.FC<Props> = ({
+const QuadrantItemList: React.FC<Props> = ({
   radarData,
   quadrant,
   horizon = null,
@@ -103,7 +103,7 @@ const ItemList: React.FC<Props> = ({
   );
 };
 
-export const DataLists: React.FC = () => {
+export const QuadrantDataLists: React.FC = () => {
   const {
     state: { keys }
   } = useDataState();
@@ -202,18 +202,6 @@ export const DataLists: React.FC = () => {
 
   return (
     <section>
-      <Box {...OuterBoxProps}>
-        <Text
-          width={'fit-content'}
-          color={'blue.500'}
-          borderBottom={'3px solid'}
-          my={5}
-          ml={5}
-          as='h5'
-        >
-          Stages
-        </Text>
-        <Box {...InnerBoxProps}>
           {techFilters.length > 0 && (
             <React.Fragment>
               {headers.map((header) => {
@@ -243,7 +231,7 @@ export const DataLists: React.FC = () => {
                             <div key={index}>
                               {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
                               <AccordionItem>
-                                <DataListsNoSelectedTechs
+                                <QuadrantDataListItem
                                   radarData={radarData}
                                   hoveredTech={hoveredTech}
                                   setHoveredItem={setHoveredItem}
@@ -273,7 +261,7 @@ export const DataLists: React.FC = () => {
                     <div key={index}>
                       {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
                       <AccordionItem>
-                        <DataListsNoSelectedTechs
+                        <QuadrantDataListItem
                           radarData={radarData}
                           hoveredTech={hoveredTech}
                           setHoveredItem={setHoveredItem}
@@ -290,13 +278,11 @@ export const DataLists: React.FC = () => {
               </Accordion>
             </React.Fragment>
           )}
-        </Box>
-      </Box>
     </section>
   );
 };
 
-interface DataListsNoSelectedTechsProps {
+interface QuadrantDataListItemProps {
   radarData: RadarOptionsType;
   horizon: ListMatrixItem;
   blips: BlipType[];
@@ -307,7 +293,7 @@ interface DataListsNoSelectedTechsProps {
   headers: ListMatrixItem[];
 }
 
-const DataListsNoSelectedTechs: React.FC<DataListsNoSelectedTechsProps> = ({
+const QuadrantDataListItem: React.FC<QuadrantDataListItemProps> = ({
   radarData,
   horizon,
   blips,
@@ -336,7 +322,7 @@ const DataListsNoSelectedTechs: React.FC<DataListsNoSelectedTechsProps> = ({
             </AccordionButton>
           </h5>
           <AccordionPanel>
-            <ItemList
+            <QuadrantItemList
               radarData={radarData}
               hoveredTech={hoveredTech}
               setHoveredItem={setHoveredItem}
@@ -351,21 +337,4 @@ const DataListsNoSelectedTechs: React.FC<DataListsNoSelectedTechsProps> = ({
       ))}
     </div>
   );
-};
-
-const OuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '5',
-  my: '10',
-  p: '1'
-};
-
-const InnerBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '1',
-  p: '2'
 };

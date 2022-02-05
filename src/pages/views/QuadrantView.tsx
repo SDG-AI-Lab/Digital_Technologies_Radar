@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, useColorMode, Text, BoxProps } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 import {
   BlipType,
@@ -9,7 +9,7 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { DataLists } from '../../components/lists/DataLists';
+import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
 
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { useNavigate } from 'react-router-dom';
@@ -68,8 +68,39 @@ export const QuadrantView: React.FC = () => {
         )}
       </Box>
       <Box flex={'0.75'}>
-        <DataLists />
+        <Box {...OuterBoxProps}>
+          <Text
+            width={'fit-content'}
+            color={'blue.500'}
+            borderBottom={'3px solid'}
+            my={5}
+            ml={5}
+            as='h5'
+          >
+            Stages
+          </Text>
+          <Box {...InnerBoxProps}>
+            <QuadrantDataLists />
+          </Box>
+        </Box>
       </Box>
     </Flex>
   );
+};
+
+const OuterBoxProps: BoxProps = {
+  borderColor: 'gray.200',
+  borderWidth: '2px',
+  borderRadius: 'md',
+  m: '5',
+  my: '10',
+  p: '1'
+};
+
+const InnerBoxProps: BoxProps = {
+  borderColor: 'gray.200',
+  borderWidth: '2px',
+  borderRadius: 'md',
+  m: '1',
+  p: '2'
 };
