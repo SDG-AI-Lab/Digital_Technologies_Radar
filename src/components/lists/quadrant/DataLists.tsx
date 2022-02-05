@@ -94,7 +94,7 @@ const QuadrantItemList: React.FC<Props> = ({
                           p='5'
                         >
                           <Box>
-                            <Text>
+                            <Text mb='2'>
                               Description
                             </Text>
                             <Text fontWeight={'400'} fontSize={'md'}>
