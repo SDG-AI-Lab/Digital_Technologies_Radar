@@ -91,20 +91,34 @@ const QuadrantItemList: React.FC<Props> = ({
                         <Flex
                           direction={'column'}
                           minHeight={'200px'}
+                          p='5'
                         >
-                          <Box m='5'>
-                            <Text mb='2'>
+                          <Box>
+                            <Text>
                               Description
                             </Text>
                             <Text fontWeight={'400'} fontSize={'md'}>
                               {blip.Description}
                             </Text>
                           </Box>
+                          <Flex flexWrap={'wrap'} my='5'>
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='orange'>
+                              {blip['Disaster Cycle']}
+                            </Badge>
+                            <Badge isTruncated my='1' mx='1' variant='subtle' colorScheme='green'>
+                              {blip['Un Host Organisation']}
+                            </Badge>  
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='purple'>
+                              {blip['Country of Implementation']}
+                            </Badge>  
+                            <Badge my='1' mx='1' variant='subtle' colorScheme='cyan'>
+                              {blip['SDG']}
+                            </Badge>  
+                          </Flex>
                           <Button 
                             onClick={() => setSelectedItem(blip)}
                             colorScheme='blue'
                             borderRadius={'0'}
-                            m='4'
                           >
                               More
                           </Button>

@@ -41,20 +41,6 @@ export const RadarView: React.FC = () => {
         justifyContent='space-between'
         direction={{ base: 'column', xl: 'row' }}
       >
-        {/* <Box
-          style={{
-            position: 'relative',
-            display: 'flex',
-            padding: 10,
-            left: '2.5%',
-            flexDirection: 'column',
-            backgroundColor: 'whitesmoke',
-            border: '1px solid lightgray'
-          }}
-        >
-          <FilterDrawer />
-          <TechDrawer />
-        </Box> */}
         <Box flex={1}>
           <Heading fontSize={30} textAlign='center' p={5}>
             Technology Radar
