@@ -103,6 +103,5 @@ const InnerBoxProps: BoxProps = {
   borderWidth: '2px',
   borderRadius: 'md',
   m: '1',
-  p: '2',
-
+  p: '2'
 };
