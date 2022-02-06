@@ -11,7 +11,6 @@ import {
   RadarOptionsType
 } from '@undp_sdg_ai_lab/undp-radar';
 import { ScrollableDiv } from '../components/ScrollableDiv';
-import { Title } from '../components/Title';
 
 import './DataLists.scss';
 import {
@@ -52,7 +51,7 @@ const QuadrantItemList: React.FC<Props> = ({
 }) => {
   const {
     state: {
-      keys: { techKey, titleKey, quadrantKey, horizonKey, disasterTypeKey }
+      keys: { titleKey, quadrantKey, horizonKey }
     }
   } = useDataState();
   return (
@@ -61,14 +60,6 @@ const QuadrantItemList: React.FC<Props> = ({
         {blips.map((blip) => {
           const onMouseEnter = () => setHoveredItem(blip);
           const onMouseLeave = () => setHoveredItem(null);   
-          const getHoveredStyle = () => {
-            const tech = radarData.tech.find((t) => t.type === blip[techKey]);
-            if (hoveredItem?.id === blip.id) {
-              if (hoveredTech === null || hoveredTech === tech?.slug)
-                return 'blipItemHovered';
-            }
-            return '';
-          };
           if (
             blip[quadrantKey] === quadrant.name &&
             (horizon === null || blip[horizonKey] === horizon.name)
@@ -103,16 +94,16 @@ const QuadrantItemList: React.FC<Props> = ({
                           </Box>
                           <Flex flexWrap={'wrap'} my='5'>
                             <Badge my='1' mx='1' variant='subtle' colorScheme='orange'>
-                              {blip['Disaster Cycle']}
+                              🌋{' ' + blip['Disaster Cycle']}
                             </Badge>
                             <Badge isTruncated my='1' mx='1' variant='subtle' colorScheme='green'>
-                              {blip['Un Host Organisation']}
+                              🏠{' ' + blip['Un Host Organisation']}
                             </Badge>  
                             <Badge my='1' mx='1' variant='subtle' colorScheme='purple'>
-                              {blip['Country of Implementation']}
+                              📍{' ' + blip['Country of Implementation']}
                             </Badge>  
                             <Badge my='1' mx='1' variant='subtle' colorScheme='cyan'>
-                              {blip['SDG']}
+                              🎯{' ' + blip['SDG']}
                             </Badge>  
                           </Flex>
                           <Button 
