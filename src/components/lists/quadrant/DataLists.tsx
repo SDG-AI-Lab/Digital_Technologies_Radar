@@ -88,6 +88,7 @@ const QuadrantItemList: React.FC<Props> = ({
                         </Box>
                         <Flex flexWrap={'wrap'} my='5'>
                           <Badge
+                            isTruncated
                             my='1'
                             mx='1'
                             variant='subtle'
@@ -105,6 +106,7 @@ const QuadrantItemList: React.FC<Props> = ({
                             🏠{' ' + blip['Un Host Organisation']}
                           </Badge>
                           <Badge
+                            isTruncated
                             my='1'
                             mx='1'
                             variant='subtle'
@@ -113,6 +115,7 @@ const QuadrantItemList: React.FC<Props> = ({
                             📍{' ' + blip['Country of Implementation']}
                           </Badge>
                           <Badge
+                            isTruncated
                             my='1'
                             mx='1'
                             variant='subtle'
