@@ -62,13 +62,12 @@ export const TechDescription: React.FC = () => {
                       >
                         {selectedTechKey}
                       </Text>
-                      
+
                       {selectedTech.map((text) => (
                         <Text key={v4()} pt={5} style={{ textAlign: 'left' }}>
                           {text}
                         </Text>
                       ))}
-                      
                     </Box>
                   )}
                 </div>

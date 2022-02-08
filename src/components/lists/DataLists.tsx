@@ -2,19 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { 
+import {
   Utilities,
   RadarUtilities,
   useRadarState,
   useDataState,
   BlipType,
   RadarOptionsType
- } from '@undp_sdg_ai_lab/undp-radar';
+} from '@undp_sdg_ai_lab/undp-radar';
 import { ScrollableDiv } from './components/ScrollableDiv';
 import { Title } from './components/Title';
 
 import './DataLists.scss';
-
 
 type ListMatrixItem = { uuid: string; name: string };
 
