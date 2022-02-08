@@ -3,12 +3,13 @@ import { Box, Flex, useColorMode } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 import {
   BlipType,
-  DataLists,
   Filter,
   QuadrantRadar,
   TechList,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
+
+import { DataLists } from '../../components/lists/DataLists';
 
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { useNavigate } from 'react-router-dom';
