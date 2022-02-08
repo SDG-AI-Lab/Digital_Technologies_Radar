@@ -1,5 +1,3 @@
-import digitalTechRadarLogo from '../../assets/logos/Digital_Technology_Radar_Logo.png';
-
 export interface AboutContentChild {
   title: string;
   description: string;

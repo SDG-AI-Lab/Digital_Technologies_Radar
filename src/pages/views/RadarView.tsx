@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Flex, Box, Heading, useColorMode } from '@chakra-ui/react';
+import { Grid, Flex, Box, Heading } from '@chakra-ui/react';
 
 import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -8,7 +8,6 @@ import { TechDrawer, FilterDrawer } from '../../components';
 import { TechDescription } from '../../radar/tech/TechDescription';
 
 export const RadarView: React.FC = () => {
-  const { colorMode } = useColorMode();
   const [loading, setLoading] = useState(true);
 
   const {
