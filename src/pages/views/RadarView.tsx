@@ -43,12 +43,13 @@ export const RadarView: React.FC = () => {
           <FilterDrawer />
           <TechDrawer />
         </Box>
-        <Box flex={1}
-        style={{
-        position: 'relative',
-        border: '1px solid lightgray',
-        borderBottom:'none',
-        }}
+        <Box
+          flex={1}
+          style={{
+            position: 'relative',
+            border: '1px solid lightgray',
+            borderBottom: 'none'
+          }}
         >
           <Heading fontSize={30} textAlign='center' p={5}>
             Technology Radar
