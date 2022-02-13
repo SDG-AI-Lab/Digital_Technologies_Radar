@@ -21,7 +21,8 @@ import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 export const BlipView: FC = () => {
   const {
-    state: { selectedItem }
+    state: { selectedItem },
+    setSelectedItem
   } = useRadarState();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -34,7 +35,10 @@ export const BlipView: FC = () => {
       {selectedItem && (
         <Modal
           isOpen={isOpen}
-          onClose={onClose}
+          onClose={() => {
+            onClose();
+            setSelectedItem(null);
+          }}
           size='xl'
           scrollBehavior='inside'
         >
@@ -43,7 +47,11 @@ export const BlipView: FC = () => {
             <ModalHeader
               pb={0}
               mr={6}
-              style={{ justifyContent: 'center', textAlign: 'center' }}
+              style={{
+                justifyContent: 'center',
+                textAlign: 'center',
+                textTransform: 'capitalize'
+              }}
             >
               {selectedItem['Ideas/Concepts/Examples']}
             </ModalHeader>
