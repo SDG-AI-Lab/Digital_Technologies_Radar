@@ -33,7 +33,7 @@ export const QuadrantView: React.FC = () => {
   useEffect(() => {
     const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
     if (selectedItem) {
-      goToBlip(selectedItem);
+      // goToBlip(selectedItem);
     } else if (quadrantId) {
       if (quadrants && quadrants.length > 0 && quadrants.includes(quadrantId)) {
         // we must show Quadrant view
