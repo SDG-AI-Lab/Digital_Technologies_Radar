@@ -71,7 +71,7 @@ const QuadrantItemList: React.FC<Props> = ({
               >
                 <h5>
                   <AccordionButton>
-                    <Box flex='1' textAlign='left'>
+                    <Box as='h6' flex='1' textAlign='left'>
                       {blip[titleKey]}
                     </Box>
                     <AccordionIcon />
@@ -354,6 +354,7 @@ const QuadrantDataListItem: React.FC<QuadrantDataListItemProps> = ({
                 key={`${header.uuid}-${horizon.uuid}`}
                 flex='1'
                 textAlign='left'
+                as='h5'
               >
                 {Utilities.capitalize(horizon.name)}
               </Box>
