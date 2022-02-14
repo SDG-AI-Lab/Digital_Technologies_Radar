@@ -20,12 +20,14 @@ export const RadarView: React.FC = () => {
   }, [blips]);
 
   return (
-    <Grid p={0}>
+    <Grid p={0} pl={1} alignItems={'flex-start'}>
       <Box
         style={{
-          position: 'relative',
-          padding: 20,
-          display: 'flex',
+          position: 'fixed',
+          width:'100%',
+          height:'18%',
+          zIndex:'1',
+          display:'inline-block',
           flexDirection: 'column',
           backgroundColor: 'whitesmoke',
           border: '1px solid lightgray'
@@ -36,6 +38,9 @@ export const RadarView: React.FC = () => {
       </Box>
       <Flex
         py={0}
+        position='relative'
+        top='18%'
+        display='flex'
         flexBasis={['auto', '45%']}
         w='100%'
         justifyContent='space-between'

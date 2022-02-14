@@ -22,8 +22,8 @@ export const AppNavbar: React.FC = () => {
         display={'inline-block'}
         position={'relative'}
       >
+        <UNLogo p={1}/>
         <UNDPLogo />
-        <UNLogo />
       </Box>
 
       <MenuToggle toggle={toggle} isOpen={isOpen} />
