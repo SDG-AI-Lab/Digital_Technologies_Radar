@@ -42,15 +42,15 @@ export class AppConst {
       [
         Utilities.createSlug('Computer Vision'),
         [
-          '!!Creating computer systems and machines that imitate or simulate intelligent human behaviour and cognitive processes.',
-          'An example use case of Artifical Intelligence is predicting the likelihood that a disastrous event will occur.'
+          'Computer vision is an interdisciplinary scientific field that deals with how computers can gain high-level understanding from digital images or videos. he image data can take many forms, such as video sequences, views from multiple cameras, multi-dimensional data from a 3D scanner, or medical scanning device. The technological discipline of computer vision seeks to apply its theories and models to the construction of computer vision systems.',
+          'An example use case of Computer Vision is measuring the damage after a disaster scenario by using collected images'
         ]
       ],
       [
         Utilities.createSlug('Natural Language Processing'),
         [
-          '!!Creating computer systems and machines that imitate or simulate intelligent human behaviour and cognitive processes.',
-          'An example use case of Artifical Intelligence is predicting the likelihood that a disastrous event will occur.'
+          'Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence concerned with the interactions between computers and human language, in particular how to program computers to process and analyze large amounts of natural language data. The goal is a computer capable of "understanding" the contents of documents, including the contextual nuances of the language within them. The technology can then accurately extract information and insights contained in the documents as well as categorize and organize the documents themselves.',
+          'An example use case of NLP is analyzing the existing articles, project document etc. to gather meaningful information in disaster management'
         ]
       ],
       [
