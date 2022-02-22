@@ -13,10 +13,12 @@ export const UNDPLogo: React.FC<ChakraProps> = (props) => {
 
   return (
     <Logo
-      w='75px'
+      w='65px'
       // color={["white", "white", "primary.500", "primary.500"]}
       file={colorMode === 'light' ? logoBlack : logoWhite}
-      maxwidthorheight={75}
+      maxwidthorheight={65}
+      paddingTop={910}
+      paddingLeft={3}
       {...props}
     />
   );
