@@ -33,7 +33,7 @@ export const TechDescription: React.FC = () => {
   return (
     <React.Fragment>
       {selectedTechs && techFilters && techFilters.length > 0 && (
-        <div>
+        <div style={{ paddingTop: 75 }}>
           <Box {...TechDescriptionOuterBoxProps}>
             <Text
               width={'fit-content'}
@@ -86,7 +86,7 @@ const TechDescriptionOuterBoxProps: BoxProps = {
   borderRadius: 'md',
   m: '10',
   p: '1',
-  maxHeight: '500px',
+  maxHeight: '750px',
   overflow: 'scroll'
 };
 
