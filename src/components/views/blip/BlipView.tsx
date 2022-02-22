@@ -14,7 +14,8 @@ import {
   Tr,
   Td,
   Stack,
-  Badge
+  Badge,
+  Link
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
@@ -74,7 +75,7 @@ export const BlipView: FC = () => {
                           bg='purple.50'
                           textTransform='capitalize'
                         >
-                          🏁 {selectedItem['Country of Implementation']}
+                          📍 {selectedItem['Country of Implementation']}
                         </Badge>
                         <Badge
                           px={2}
@@ -93,7 +94,7 @@ export const BlipView: FC = () => {
                           color='white'
                           textTransform='capitalize'
                         >
-                          🌋 {selectedItem['Status/Maturity']}
+                          🏠 {selectedItem['Status/Maturity']}
                         </Badge>
                         <Badge
                           px={2}
@@ -103,7 +104,7 @@ export const BlipView: FC = () => {
                           color='#fff'
                           textTransform='capitalize'
                         >
-                          🏷️ {selectedItem['Disaster Cycle']}
+                          🌋 {selectedItem['Disaster Cycle']}
                         </Badge>
                       </Stack>
                     </Td>
@@ -127,7 +128,7 @@ export const BlipView: FC = () => {
                   </Tr>
                   <Tr>
                     <Td style={{ verticalAlign: 'top' }}>Disaster Type</Td>
-                    <Td>{selectedItem['disaster type']}</Td>
+                    <Td>{selectedItem['Disaster Type']}</Td>
                   </Tr>
                   <Tr>
                     <Td style={{ verticalAlign: 'top' }}>Use Case</Td>
@@ -154,14 +155,18 @@ export const BlipView: FC = () => {
                   <Tr>
                     <Td style={{ verticalAlign: 'top' }}>Source</Td>
                     <Td>
-                      <a href={`${selectedItem['Source']}`} target='blank'>
+                      <Link
+                        href={`${selectedItem['Source']}`}
+                        isExternal
+                        color='blue.600'
+                      >
                         Click Here
-                      </a>
+                      </Link>
                     </Td>
                   </Tr>
                   <Tr>
                     <Td style={{ verticalAlign: 'top' }}>Publication Date</Td>
-                    <Td>{selectedItem['publication date']}</Td>
+                    <Td>{selectedItem['Date of Implementation']}</Td>
                   </Tr>
                 </Tbody>
               </Table>
