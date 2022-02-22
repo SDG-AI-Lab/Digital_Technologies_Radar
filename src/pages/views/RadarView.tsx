@@ -24,10 +24,10 @@ export const RadarView: React.FC = () => {
       <Box
         style={{
           position: 'fixed',
-          width:'100%',
-          height:'18%',
-          zIndex:'1',
-          display:'inline-block',
+          width: '100%',
+          height: '18%',
+          zIndex: '1',
+          display: 'inline-block',
           flexDirection: 'column',
           backgroundColor: 'whitesmoke',
           border: '1px solid lightgray'

@@ -27,7 +27,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       <MenuItem to={ROUTES.RADAR}>
         <DarkMode>
           <Button size='sm' rounded='md' colorScheme='none'>
-            <FiTarget color='3a87dd' size='md'/>
+            <FiTarget color='3a87dd' size='md' />
           </Button>
         </DarkMode>
       </MenuItem>
@@ -35,7 +35,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       <MenuItem to={ROUTES.ABOUT}>
         <LightMode>
           <Button size='sm' rounded='md' colorScheme='none'>
-            <FcAbout size='md'/>
+            <FcAbout size='md' />
           </Button>
         </LightMode>
       </MenuItem>

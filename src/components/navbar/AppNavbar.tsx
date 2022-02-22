@@ -22,7 +22,7 @@ export const AppNavbar: React.FC = () => {
         display={'inline-block'}
         position={'relative'}
       >
-        <UNLogo p={1}/>
+        <UNLogo p={1} />
         <UNDPLogo />
       </Box>
 
