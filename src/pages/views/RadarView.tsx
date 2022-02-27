@@ -25,7 +25,7 @@ export const RadarView: React.FC = () => {
         style={{
           position: 'fixed',
           width: '100%',
-          height: '18%',
+          // height: '18%',
           zIndex: '1',
           display: 'inline-block',
           flexDirection: 'column',
