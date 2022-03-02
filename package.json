@@ -2,6 +2,7 @@
   "name": "undp-radar-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sdg-ai-lab.github.io/Digital_Technologies_Radar",
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11",
@@ -34,7 +35,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint",
     "prettify": "prettier -c src/",
-    "pretest": "yarn lint && yarn prettify"
+    "pretest": "yarn lint && yarn prettify",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +67,7 @@
   },
   "devDependencies": {
     "@types/uuid": "^8.3.3",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.5.1"
   }
 }
