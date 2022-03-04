@@ -11,7 +11,9 @@ export const App: React.FC = () => {
   return (
     <AppRadarProvider>
       <ChakraUI>
-        <BrowserRouter>
+        {/*Note : this line is a quickfix to have the radar display
+        on the homepage with the first iteration of deployment through gh-pages. */}
+        <BrowserRouter basename='/Digital_Technologies_Radar'>
           <NavApp />
           <BlipView />
         </BrowserRouter>
