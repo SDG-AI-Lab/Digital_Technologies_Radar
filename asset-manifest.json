@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Digital_Technologies_Radar/static/css/main.a4a71d0a.chunk.css",
-    "main.js": "/Digital_Technologies_Radar/static/js/main.fc076df0.chunk.js",
-    "main.js.map": "/Digital_Technologies_Radar/static/js/main.fc076df0.chunk.js.map",
+    "main.js": "/Digital_Technologies_Radar/static/js/main.fca10409.chunk.js",
+    "main.js.map": "/Digital_Technologies_Radar/static/js/main.fca10409.chunk.js.map",
     "runtime-main.js": "/Digital_Technologies_Radar/static/js/runtime-main.1d72f025.js",
     "runtime-main.js.map": "/Digital_Technologies_Radar/static/js/runtime-main.1d72f025.js.map",
     "static/css/2.ec7a56cd.chunk.css": "/Digital_Technologies_Radar/static/css/2.ec7a56cd.chunk.css",
@@ -24,6 +24,6 @@
     "static/css/2.ec7a56cd.chunk.css",
     "static/js/2.40beab5c.chunk.js",
     "static/css/main.a4a71d0a.chunk.css",
-    "static/js/main.fc076df0.chunk.js"
+    "static/js/main.fca10409.chunk.js"
   ]
 }
