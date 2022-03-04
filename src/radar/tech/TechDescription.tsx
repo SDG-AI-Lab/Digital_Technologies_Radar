@@ -4,7 +4,6 @@ import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 
 import { AppConst, TechDescriptionType } from '../../components/constants/app';
-import { FaFontAwesomeLogoFull } from 'react-icons/fa';
 
 export const TechDescription: React.FC = () => {
   const {
