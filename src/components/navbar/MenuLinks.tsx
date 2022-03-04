@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Button, DarkMode, Stack, LightMode } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
+import { FcAbout } from 'react-icons/fc';
+import { FiTarget } from 'react-icons/fi';
 
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from '../../navigation/routes';
@@ -13,6 +15,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
   <Box
     display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
     flexBasis={{ base: '100%', md: 'auto' }}
+    paddingTop={200}
   >
     <Stack
       spacing={8}
@@ -23,16 +26,16 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
     >
       <MenuItem to={ROUTES.RADAR}>
         <DarkMode>
-          <Button size='sm' rounded='md' colorScheme='blue'>
-            Radar
+          <Button size='sm' rounded='md' colorScheme='none'>
+            <FiTarget color='3a87dd' size='md' />
           </Button>
         </DarkMode>
       </MenuItem>
 
       <MenuItem to={ROUTES.ABOUT}>
         <LightMode>
-          <Button size='sm' rounded='md' colorScheme='blue'>
-            About
+          <Button size='sm' rounded='md' colorScheme='none'>
+            <FcAbout size='md' />
           </Button>
         </LightMode>
       </MenuItem>

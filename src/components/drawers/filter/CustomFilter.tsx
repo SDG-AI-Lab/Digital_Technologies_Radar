@@ -329,7 +329,7 @@ export const CustomFilter: React.FC = () => {
             onChange={onImplementerChange}
             value={selectedImplementer}
           >
-            <option value='all'>Implementer</option>
+            <option value='all'>UN Host</option>
             {implementers.map((item) => (
               <option key={item.uuid} value={item.name}>
                 {item.name}

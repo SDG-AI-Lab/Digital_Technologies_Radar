@@ -4,6 +4,7 @@ import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 
 import { AppConst, TechDescriptionType } from '../../components/constants/app';
+import { FaFontAwesomeLogoFull } from 'react-icons/fa';
 
 export const TechDescription: React.FC = () => {
   const {
@@ -31,8 +32,8 @@ export const TechDescription: React.FC = () => {
 
   return (
     <React.Fragment>
-      {selectedTechs && techFilters && (
-        <div>
+      {selectedTechs && techFilters && techFilters.length > 0 && (
+        <div style={{ paddingTop: 75 }}>
           <Box {...TechDescriptionOuterBoxProps}>
             <Text
               width={'fit-content'}
@@ -48,7 +49,7 @@ export const TechDescription: React.FC = () => {
             {Array.from(selectedTechs.keys()).map((selectedTechKey) => {
               const selectedTech = selectedTechs.get(selectedTechKey);
               return (
-                <>
+                <div key={v4()}>
                   {selectedTech && (
                     <Box {...TechDescriptionInnerBoxProps}>
                       <Text
@@ -61,14 +62,15 @@ export const TechDescription: React.FC = () => {
                       >
                         {selectedTechKey}
                       </Text>
-                      <Text pt={5} style={{ textAlign: 'left' }}>
-                        {selectedTech.map((text) => (
-                          <div key={v4()}>{text}</div>
-                        ))}
-                      </Text>
+
+                      {selectedTech.map((text) => (
+                        <Text key={v4()} pt={5} style={{ textAlign: 'left' }}>
+                          {text}
+                        </Text>
+                      ))}
                     </Box>
                   )}
-                </>
+                </div>
               );
             })}
           </Box>
@@ -84,6 +86,7 @@ const TechDescriptionOuterBoxProps: BoxProps = {
   borderRadius: 'md',
   m: '10',
   p: '1',
+  maxHeight: '750px',
   overflow: 'scroll'
 };
 
@@ -92,7 +95,5 @@ const TechDescriptionInnerBoxProps: BoxProps = {
   borderWidth: '2px',
   borderRadius: 'md',
   m: '1',
-  p: '10',
-  maxHeight: '500px',
-  overflow: 'scroll'
+  p: '10'
 };

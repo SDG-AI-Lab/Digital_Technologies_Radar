@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Flex, Box, Heading, useColorMode } from '@chakra-ui/react';
+import { Grid, Flex, Box, Heading } from '@chakra-ui/react';
 
 import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -8,7 +8,6 @@ import { TechDrawer, FilterDrawer } from '../../components';
 import { TechDescription } from '../../radar/tech/TechDescription';
 
 export const RadarView: React.FC = () => {
-  const { colorMode } = useColorMode();
   const [loading, setLoading] = useState(true);
 
   const {
@@ -21,33 +20,34 @@ export const RadarView: React.FC = () => {
   }, [blips]);
 
   return (
-    <Grid p={0}>
+    <Grid p={0} pl={1} alignItems={'flex-start'}>
+      <Box
+        style={{
+          position: 'fixed',
+          width: '100%',
+          // height: '18%',
+          zIndex: '1',
+          display: 'inline-block',
+          flexDirection: 'column',
+          backgroundColor: 'whitesmoke',
+          border: '1px solid lightgray'
+        }}
+      >
+        <FilterDrawer />
+        <TechDrawer />
+      </Box>
       <Flex
-        flexDirection={'column'}
         py={0}
+        position='relative'
+        top='18%'
+        display='flex'
         flexBasis={['auto', '45%']}
         w='100%'
         justifyContent='space-between'
-        // bg={
-        //   colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
-        // }
+        direction={{ base: 'column', xl: 'row' }}
       >
-        <Box
-          style={{
-            position: 'relative',
-            display: 'flex',
-            padding: 10,
-            left: '2.5%',
-            flexDirection: 'column',
-            backgroundColor: 'whitesmoke',
-            border: '1px solid lightgray'
-          }}
-        >
-          <FilterDrawer />
-          <TechDrawer />
-        </Box>
         <Box flex={1}>
-          <Heading fontSize={30} textAlign='center' p={5}>
+          <Heading fontSize={30} textAlign='center' p={5} paddingTop={75}>
             Technology Radar
           </Heading>
           {loading && <WaitingForRadar size='620px' />}
