@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/Digital_Technologies_Radar/static/css/main.a4a71d0a.chunk.css",
-    "main.js": "/Digital_Technologies_Radar/static/js/main.1e184003.chunk.js",
-    "main.js.map": "/Digital_Technologies_Radar/static/js/main.1e184003.chunk.js.map",
+    "main.js": "/Digital_Technologies_Radar/static/js/main.fc076df0.chunk.js",
+    "main.js.map": "/Digital_Technologies_Radar/static/js/main.fc076df0.chunk.js.map",
     "runtime-main.js": "/Digital_Technologies_Radar/static/js/runtime-main.1d72f025.js",
     "runtime-main.js.map": "/Digital_Technologies_Radar/static/js/runtime-main.1d72f025.js.map",
     "static/css/2.ec7a56cd.chunk.css": "/Digital_Technologies_Radar/static/css/2.ec7a56cd.chunk.css",
-    "static/js/2.0bbe64f9.chunk.js": "/Digital_Technologies_Radar/static/js/2.0bbe64f9.chunk.js",
-    "static/js/2.0bbe64f9.chunk.js.map": "/Digital_Technologies_Radar/static/js/2.0bbe64f9.chunk.js.map",
+    "static/js/2.40beab5c.chunk.js": "/Digital_Technologies_Radar/static/js/2.40beab5c.chunk.js",
+    "static/js/2.40beab5c.chunk.js.map": "/Digital_Technologies_Radar/static/js/2.40beab5c.chunk.js.map",
     "static/js/3.1c18c90b.chunk.js": "/Digital_Technologies_Radar/static/js/3.1c18c90b.chunk.js",
     "static/js/3.1c18c90b.chunk.js.map": "/Digital_Technologies_Radar/static/js/3.1c18c90b.chunk.js.map",
     "index.html": "/Digital_Technologies_Radar/index.html",
     "static/css/2.ec7a56cd.chunk.css.map": "/Digital_Technologies_Radar/static/css/2.ec7a56cd.chunk.css.map",
     "static/css/main.a4a71d0a.chunk.css.map": "/Digital_Technologies_Radar/static/css/main.a4a71d0a.chunk.css.map",
-    "static/js/2.0bbe64f9.chunk.js.LICENSE.txt": "/Digital_Technologies_Radar/static/js/2.0bbe64f9.chunk.js.LICENSE.txt",
+    "static/js/2.40beab5c.chunk.js.LICENSE.txt": "/Digital_Technologies_Radar/static/js/2.40beab5c.chunk.js.LICENSE.txt",
     "static/media/SDG_BLACK_logo.cff21889.png": "/Digital_Technologies_Radar/static/media/SDG_BLACK_logo.cff21889.png",
     "static/media/SDG_WHITE_logo.e32f6cd2.png": "/Digital_Technologies_Radar/static/media/SDG_WHITE_logo.e32f6cd2.png",
     "static/media/UNDP_logo.811464c8.png": "/Digital_Technologies_Radar/static/media/UNDP_logo.811464c8.png",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.1d72f025.js",
     "static/css/2.ec7a56cd.chunk.css",
-    "static/js/2.0bbe64f9.chunk.js",
+    "static/js/2.40beab5c.chunk.js",
     "static/css/main.a4a71d0a.chunk.css",
-    "static/js/main.1e184003.chunk.js"
+    "static/js/main.fc076df0.chunk.js"
   ]
 }
