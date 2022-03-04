@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a4a71d0a.chunk.css",
+    "main.js": "/static/js/main.aa23f7dd.chunk.js",
+    "main.js.map": "/static/js/main.aa23f7dd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e3036cd2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e3036cd2.js.map",
+    "static/css/2.ec7a56cd.chunk.css": "/static/css/2.ec7a56cd.chunk.css",
+    "static/js/2.4e9b105f.chunk.js": "/static/js/2.4e9b105f.chunk.js",
+    "static/js/2.4e9b105f.chunk.js.map": "/static/js/2.4e9b105f.chunk.js.map",
+    "static/js/3.1c18c90b.chunk.js": "/static/js/3.1c18c90b.chunk.js",
+    "static/js/3.1c18c90b.chunk.js.map": "/static/js/3.1c18c90b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.ec7a56cd.chunk.css.map": "/static/css/2.ec7a56cd.chunk.css.map",
+    "static/css/main.a4a71d0a.chunk.css.map": "/static/css/main.a4a71d0a.chunk.css.map",
+    "static/js/2.4e9b105f.chunk.js.LICENSE.txt": "/static/js/2.4e9b105f.chunk.js.LICENSE.txt",
+    "static/media/SDG_BLACK_logo.cff21889.png": "/static/media/SDG_BLACK_logo.cff21889.png",
+    "static/media/SDG_WHITE_logo.e32f6cd2.png": "/static/media/SDG_WHITE_logo.e32f6cd2.png",
+    "static/media/UNDP_logo.811464c8.png": "/static/media/UNDP_logo.811464c8.png",
+    "static/media/technology_radar_dataset_updated_v3.583075de.csv": "/static/media/technology_radar_dataset_updated_v3.583075de.csv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e3036cd2.js",
+    "static/css/2.ec7a56cd.chunk.css",
+    "static/js/2.4e9b105f.chunk.js",
+    "static/css/main.a4a71d0a.chunk.css",
+    "static/js/main.aa23f7dd.chunk.js"
+  ]
+}
