@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { ChakraUI } from './ui/ChakraUI';
 import { NavApp } from './navigation/AppNav';
@@ -11,12 +11,16 @@ export const App: React.FC = () => {
   return (
     <AppRadarProvider>
       <ChakraUI>
-        {/*Note : this line is a quickfix to have the radar display
-        on the homepage with the first iteration of deployment through gh-pages. */}
-        <BrowserRouter basename='/Digital_Technologies_Radar'>
+        {/* While we are in GH Pages we will need to use this HashRouter
+         * source: https://www.freecodecamp.org/news/deploy-a-react-app-to-github-pages/
+         *
+         * When we move to a better solution, bring back the <BrowserRouter />
+         * and replace HashRouter
+         **/}
+        <HashRouter>
           <NavApp />
           <BlipView />
-        </BrowserRouter>
+        </HashRouter>
       </ChakraUI>
     </AppRadarProvider>
   );
