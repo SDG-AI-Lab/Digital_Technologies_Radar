@@ -2,7 +2,7 @@
   "name": "undp-radar-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sdg-ai-lab.github.io/",
+  "homepage": "https://sdg-ai-lab.github.io/Digital_Technologies_Radar",
   "dependencies": {
     "@chakra-ui/react": "^1.7.2",
     "@emotion/react": "^11",

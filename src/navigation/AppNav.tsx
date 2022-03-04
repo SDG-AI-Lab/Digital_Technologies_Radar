@@ -19,7 +19,13 @@ export const NavApp = () => (
 
         <Route path={ROUTES.QUADRANT_PARAM} element={<QuadrantView />} />
         {/* https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb#not-server-rendering -> should be server redirect */}
+
+        <Route path='/Digital_Technologies_Radar' element={<Radar />} />
+        { /*Note : the previous line is a quickfix to have the radar display
+        on the homepage with the first iteration of deployment through gh-pages. */ }
+
         <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
+
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </MainLayout>
