@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  chakra,
-  Box,
-  ChakraProps,
-  Text,
-  SkeletonCircle
-} from '@chakra-ui/react';
+import { chakra, ChakraProps, Text, SkeletonCircle } from '@chakra-ui/react';
 
 interface Props {
   file?: string | undefined;
@@ -26,13 +20,13 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
     };
   }, []);
   return (
-    <Box {...props} m='auto'>
+    <>
       {props.file ? (
         <>
           {loading && (
             <SkeletonCircle
               size={(props.maxwidthorheight
-                ? props.maxwidthorheight
+                ? props.maxwidthorheight - props.maxwidthorheight / 2
                 : 50
               ).toString()}
             />
@@ -42,7 +36,6 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
               m='auto'
               // animation={animation}
               src={props.file}
-              // ref={ref}
               maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
               maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}
             />
@@ -53,6 +46,6 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
           <div>replace me</div>
         </Text>
       )}
-    </Box>
+    </>
   );
 };

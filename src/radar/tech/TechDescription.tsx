@@ -4,7 +4,6 @@ import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 
 import { AppConst, TechDescriptionType } from '../../components/constants/app';
-import { FaFontAwesomeLogoFull } from 'react-icons/fa';
 
 export const TechDescription: React.FC = () => {
   const {
@@ -33,7 +32,7 @@ export const TechDescription: React.FC = () => {
   return (
     <React.Fragment>
       {selectedTechs && techFilters && techFilters.length > 0 && (
-        <div style={{ paddingTop: 75 }}>
+        <Box flex={'0.75'} pt={75}>
           <Box {...TechDescriptionOuterBoxProps}>
             <Text
               width={'fit-content'}
@@ -74,7 +73,7 @@ export const TechDescription: React.FC = () => {
               );
             })}
           </Box>
-        </div>
+        </Box>
       )}
     </React.Fragment>
   );

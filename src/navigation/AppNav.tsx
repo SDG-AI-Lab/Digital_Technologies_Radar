@@ -1,15 +1,15 @@
-import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Flex } from '@chakra-ui/react';
 
-import { AppNavbar } from '../components';
-import { MainLayout } from '../ui/MainLayout';
-import { About } from '../pages/about/About';
-import { NotFound404, Radar, Search } from '../pages';
 import { ROUTES } from './routes';
+import { AppNavbar } from '../components';
+import { About } from '../pages/about/About';
+import { MainLayout } from '../ui/MainLayout';
 import { QuadrantView } from '../pages/views';
+import { NotFound404, Radar, Search } from '../pages';
 
 export const NavApp = () => (
-  <>
+  <Flex style={{ height: '100vh', width: '100vw' }}>
     <AppNavbar />
     <MainLayout>
       <Routes>
@@ -23,5 +23,5 @@ export const NavApp = () => (
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </MainLayout>
-  </>
+  </Flex>
 );

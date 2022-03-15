@@ -204,11 +204,6 @@ export const QuadrantDataLists: React.FC = () => {
     }
   }, [blips, selectedQuadrant]);
 
-  const setSelectedItemLogic = (item: BlipType) => {
-    setSelectedItem(item);
-    setHoveredItem(null);
-  };
-
   interface FilteredBlipsAndHorizons {
     filteredBlips: BlipType[];
     filteredHorizonNames: Set<String>;
