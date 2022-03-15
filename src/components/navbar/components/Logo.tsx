@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  chakra,
-  Box,
-  ChakraProps,
-  Text,
-  SkeletonCircle
-} from '@chakra-ui/react';
+import { chakra, ChakraProps, Text, SkeletonCircle } from '@chakra-ui/react';
 
 interface Props {
   file?: string | undefined;

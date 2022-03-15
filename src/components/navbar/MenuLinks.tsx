@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, DarkMode, Stack, LightMode } from '@chakra-ui/react';
+import { Box, Button, Stack } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { FcAbout } from 'react-icons/fc';
 import { FiTarget } from 'react-icons/fi';
@@ -16,8 +16,6 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
     <Box />
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-      // flexBasis={{ base: '100%', md: 'auto' }}
-      // paddingTop={200}
       alignSelf={'center'}
     >
       <Stack spacing={3}>

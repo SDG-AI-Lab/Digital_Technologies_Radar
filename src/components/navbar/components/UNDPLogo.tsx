@@ -4,7 +4,6 @@ import { ChakraProps, useColorMode } from '@chakra-ui/react';
 
 import { Logo } from './Logo';
 
-// import logo from "../../../assets/logo.svg";
 import logoBlack from '../../../assets/logos/SDG_BLACK_logo.png';
 import logoWhite from '../../../assets/logos/SDG_WHITE_logo.png';
 
