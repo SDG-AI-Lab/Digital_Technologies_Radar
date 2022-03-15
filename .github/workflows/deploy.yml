@@ -32,4 +32,6 @@ jobs:
           yarn install
       - name: deploy
         run: |
+          git config --global user.email "nmpribeiro@gmail.com"
+          git config --global user.name "Nuno Ribeiro"
           yarn deploy
