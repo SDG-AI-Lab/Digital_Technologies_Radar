@@ -32,7 +32,7 @@ export const TechDescription: React.FC = () => {
   return (
     <React.Fragment>
       {selectedTechs && techFilters && techFilters.length > 0 && (
-        <div style={{ paddingTop: 75 }}>
+        <Box flex={'0.75'} pt={75}>
           <Box {...TechDescriptionOuterBoxProps}>
             <Text
               width={'fit-content'}
@@ -73,7 +73,7 @@ export const TechDescription: React.FC = () => {
               );
             })}
           </Box>
-        </div>
+        </Box>
       )}
     </React.Fragment>
   );

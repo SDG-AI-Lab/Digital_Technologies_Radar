@@ -11,6 +11,8 @@ import {
 import { FilterDrawer, TechDrawer } from '../../components';
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
+import { FilterTechNavView } from '../../components/views/FilterTechNavView';
+import { ContentView } from '../../components/views/ContentView';
 
 export const QuadrantView: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -41,62 +43,41 @@ export const QuadrantView: React.FC = () => {
 
   return (
     <>
-      <Box
-        style={{
-          position: 'fixed',
-          width: '100%',
-          // height: '18%',
-          zIndex: '1',
-          display: 'inline-block',
-          flexDirection: 'column',
-          backgroundColor: 'whitesmoke',
-          border: '1px solid lightgray'
-        }}
-      >
-        <FilterDrawer />
-        <TechDrawer />
-      </Box>
-      <Flex
-        py={0}
-        flexBasis={['auto', '45%']}
-        w='full'
-        justifyContent='space-between'
-        bg={
-          colorMode === 'light' ? 'rgba(250,250,250,1)' : 'rgba(250,250,250,.3)'
-        }
-      >
-        <BackButton to='RADAR' />
-        <Box>
-          <TechList showTitle={false} />
-          <Filter />
-        </Box>
-        <Box flex={1}>
-          {loading && <WaitingForRadar />}
-          {!loading && (
-            <>
-              {/* TODO: change the undefined type to null in the lib */}
-              <QuadrantRadar selectedQuadrant={selectedQuadrant || undefined} />
-            </>
-          )}
-        </Box>
-        <Box flex={'0.75'}>
-          <Box {...OuterBoxProps}>
-            <Text
-              width={'fit-content'}
-              color={'blue.500'}
-              borderBottom={'3px solid'}
-              my={5}
-              ml={5}
-              as='h5'
-            >
-              Stages
-            </Text>
-            <Box {...InnerBoxProps}>
-              <QuadrantDataLists />
+      <FilterTechNavView />
+      <ContentView>
+        <Flex flex={1} p={1}>
+          <BackButton to='RADAR' />
+
+          <Box flex={1}>
+            {loading && <WaitingForRadar />}
+            {!loading && (
+              <>
+                {/* TODO: change the undefined type to null in the lib */}
+                <QuadrantRadar
+                  selectedQuadrant={selectedQuadrant || undefined}
+                />
+              </>
+            )}
+          </Box>
+          <Box flex={'0.75'}>
+            <Box {...OuterBoxProps}>
+              <Text
+                width={'fit-content'}
+                color={'blue.500'}
+                borderBottom={'3px solid'}
+                my={5}
+                ml={5}
+                as='h5'
+              >
+                Stages
+              </Text>
+              <Box {...InnerBoxProps}>
+                <QuadrantDataLists />
+              </Box>
             </Box>
           </Box>
-        </Box>
-      </Flex>
+        </Flex>
+      </ContentView>
     </>
   );
 };

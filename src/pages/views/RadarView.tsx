@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Flex, Box, Heading } from '@chakra-ui/react';
-
+import { Box, Heading } from '@chakra-ui/react';
 import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from '../../radar/components';
-import { TechDrawer, FilterDrawer } from '../../components';
+import { ContentView } from '../../components/views/ContentView';
 import { TechDescription } from '../../radar/tech/TechDescription';
+import { FilterTechNavView } from '../../components/views/FilterTechNavView';
 
 export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -20,32 +20,9 @@ export const RadarView: React.FC = () => {
   }, [blips]);
 
   return (
-    <Grid p={0} pl={1} alignItems={'flex-start'}>
-      <Box
-        style={{
-          position: 'fixed',
-          width: '100%',
-          // height: '18%',
-          zIndex: '1',
-          display: 'inline-block',
-          flexDirection: 'column',
-          backgroundColor: 'whitesmoke',
-          border: '1px solid lightgray'
-        }}
-      >
-        <FilterDrawer />
-        <TechDrawer />
-      </Box>
-      <Flex
-        py={0}
-        position='relative'
-        top='18%'
-        display='flex'
-        flexBasis={['auto', '45%']}
-        w='100%'
-        justifyContent='space-between'
-        direction={{ base: 'column', xl: 'row' }}
-      >
+    <>
+      <FilterTechNavView />
+      <ContentView>
         <Box flex={1}>
           <Heading fontSize={30} textAlign='center' p={5} paddingTop={75}>
             Technology Radar
@@ -53,11 +30,11 @@ export const RadarView: React.FC = () => {
           {loading && <WaitingForRadar size='620px' />}
           {!loading && <UNDPRadar />}
         </Box>
-        <Box flex={'0.75'}>
-          <TechDescription />
-        </Box>
+
+        <TechDescription />
+
         <Box>{/* <DataLists /> */}</Box>
-      </Flex>
-    </Grid>
+      </ContentView>
+    </>
   );
 };

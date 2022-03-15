@@ -14,7 +14,13 @@ export const AppNavbar: React.FC = () => {
   // const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Flex w={75} direction={'column'} alignItems={'center'} py={5}>
+    <Flex
+      w={75}
+      direction={'column'}
+      alignItems={'center'}
+      py={5}
+      style={{ borderRight: '1px solid lightgray' }}
+    >
       <Box>
         <UNLogo p={1} />
       </Box>
