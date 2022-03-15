@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, useColorMode, Text, BoxProps } from '@chakra-ui/react';
 import { useParams } from 'react-router';
+import { Box, Flex, useColorMode, Text, BoxProps } from '@chakra-ui/react';
 import {
-  BlipType,
   Filter,
   QuadrantRadar,
   TechList,
@@ -12,11 +11,8 @@ import {
 import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
 
 import { BackButton, WaitingForRadar } from '../../radar/components';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../navigation/routes';
 
 export const QuadrantView: React.FC = () => {
-  const nav = useNavigate();
   const { colorMode } = useColorMode();
   const [loading, setLoading] = useState(true);
   const {
@@ -31,7 +27,7 @@ export const QuadrantView: React.FC = () => {
   const { quadrantId } = useParams();
 
   useEffect(() => {
-    const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
+    // const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
     if (selectedItem) {
       // goToBlip(selectedItem);
     } else if (quadrantId) {
