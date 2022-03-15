@@ -2,12 +2,18 @@ name: CI Tests
 
 on:
   push:
+    branches:
+      - main
   pull_request:
-    branches: [master]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  deployment:
     runs-on: ubuntu-latest
+    environment: production
+    concurrency: production
 
     # strategy:
     #   matrix:
@@ -21,15 +27,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: yarn install
+      - name: install
         run: |
           yarn install
-      - name: yarn test
+      - name: test
         run: |
           yarn test
         env:
           NODE_ENV: development
           CI: true
-      - name: yarn deploy
+      - name: deploy
         run: |
           yarn deploy

@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Box, Flex, useColorMode, Text, BoxProps } from '@chakra-ui/react';
-import {
-  Filter,
-  QuadrantRadar,
-  TechList,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { Box, Flex, Text, BoxProps } from '@chakra-ui/react';
+import { QuadrantRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
-import { FilterDrawer, TechDrawer } from '../../components';
+import { ContentView } from '../../components/views/ContentView';
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
 import { FilterTechNavView } from '../../components/views/FilterTechNavView';
-import { ContentView } from '../../components/views/ContentView';
 
 export const QuadrantView: React.FC = () => {
-  const { colorMode } = useColorMode();
   const [loading, setLoading] = useState(true);
   const {
     state: {
