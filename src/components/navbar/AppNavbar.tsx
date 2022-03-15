@@ -2,38 +2,37 @@ import { Box } from '@chakra-ui/layout';
 import React from 'react';
 
 import { MenuLinks } from './MenuLinks';
-import { MenuToggle } from './MenuToggle';
+// import { MenuToggle } from './MenuToggle';
 import { UNLogo } from './components/UNLogo';
 import { UNDPLogo } from './components/UNDPLogo';
-import { NavBarContainer } from './NavBarContainer';
+import { Flex } from '@chakra-ui/react';
 
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppNavbar: React.FC = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
+  // TODO: mobile menu opening
+  // const [isOpen, setIsOpen] = React.useState(true);
+  // const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer>
-      <Box
-        w={75}
-        h={'25%'}
-        background={''}
-        display={'inline-block'}
-        position={'relative'}
-      >
+    <Flex
+      w={75}
+      direction={'column'}
+      alignItems={'center'}
+      py={5}
+      style={{ borderRight: '1px solid lightgray' }}
+    >
+      <Box>
         <UNLogo p={1} />
-        <UNDPLogo />
       </Box>
 
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <Box flex={1} display={'flex'}>
+        {/* <MenuToggle toggle={toggle} isOpen={isOpen} /> */}
+        <MenuLinks isOpen />
+      </Box>
 
-      <Box
-        w={100}
-        h={''}
-        display={['none', 'none', 'inherit', 'inherit']}
-      ></Box>
-    </NavBarContainer>
+      <Box>
+        <UNDPLogo />
+      </Box>
+    </Flex>
   );
 };

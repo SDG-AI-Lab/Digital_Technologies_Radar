@@ -4,7 +4,6 @@ import { ChakraProps, useColorMode } from '@chakra-ui/react';
 
 import { Logo } from './Logo';
 
-// import logo from "../../../assets/logo.svg";
 import logoBlack from '../../../assets/logos/SDG_BLACK_logo.png';
 import logoWhite from '../../../assets/logos/SDG_WHITE_logo.png';
 
@@ -17,8 +16,6 @@ export const UNDPLogo: React.FC<ChakraProps> = (props) => {
       // color={["white", "white", "primary.500", "primary.500"]}
       file={colorMode === 'light' ? logoBlack : logoWhite}
       maxwidthorheight={65}
-      paddingTop={910}
-      paddingLeft={3}
       {...props}
     />
   );
