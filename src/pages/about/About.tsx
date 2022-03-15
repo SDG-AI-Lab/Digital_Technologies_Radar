@@ -5,7 +5,7 @@ import { aboutContentList } from './AboutContent';
 
 export const About: React.VFC = () => {
   return (
-    <Container mt={5} mb={90} centerContent maxW='container.xl'>
+    <Container my={7} centerContent maxW='container.xl' overflowY={'auto'}>
       <VStack>
         {aboutContentList.map((aboutContentChild, index) => (
           <div className='about-content' key={index}>
