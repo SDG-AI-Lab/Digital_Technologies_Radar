@@ -9,7 +9,7 @@ import { QuadrantView } from '../pages/views';
 import { NotFound404, Radar, Search } from '../pages';
 
 export const NavApp = () => (
-  <Flex style={{ height: '100vh', width: '100vw' }}>
+  <Flex style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
     <AppNavbar />
     <MainLayout>
       <Routes>

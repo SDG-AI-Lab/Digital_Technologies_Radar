@@ -9,6 +9,7 @@ export const FilterTechNavView = () => (
       backgroundColor: 'whitesmoke',
       borderBottom: '1px solid lightgray'
     }}
+    px={2}
   >
     <FilterDrawer />
     <TechDrawer />
