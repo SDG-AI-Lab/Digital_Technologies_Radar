@@ -33,7 +33,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Please follow the steps for making changes in the project:
 
-![gitflow-Page-2 drawio](https://user-images.githubusercontent.com/28465079/160427325-0f6ec1af-e909-4ed1-bf0a-9ecf5133ff97.png)
+![gitflow-Page-2 drawio (1)](https://user-images.githubusercontent.com/28465079/160427617-cfa45839-69c2-4bc5-872c-1a8ba4685d85.png)
 
 
 ## Learn More
