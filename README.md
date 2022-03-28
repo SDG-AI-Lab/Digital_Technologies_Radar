@@ -29,6 +29,13 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Git workflow
+
+Please follow the steps for making changes in the project:
+
+![gitflow-Page-2 drawio](https://user-images.githubusercontent.com/28465079/160427325-0f6ec1af-e909-4ed1-bf0a-9ecf5133ff97.png)
+
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
