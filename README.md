@@ -54,29 +54,30 @@ We use [Chakra UI](https://chakra-ui.com) as our UI toolkit. Have a look at its 
 
 UNVs are actively make contributions to the Digital Technologies Radar project. Many thanks to all of the UNVs who contributed with their expertises:
 
-### Cohort #1 (1 online volunteer)
+### Cohort 1 (1 online volunteer)
 
 **Nuno Ribeiro**
 He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.
 [@nmpribeiro](https://github.com/nmpribeiro)
 
-### Cohort #2 (4 online volunteers)
+### Cohort 2 (4 online volunteers)
 
-**Blessing Ojediran**
+**Blessing Ojediran** [@uxfoodie](https://github.com/uxfoodie)
+
 She has develop the mockups for the website. The website has modelled by using these mockups.
-[@uxfoodie](https://github.com/uxfoodie)
 
-**Eyoab Tesfaye**
+**Eyoab Tesfaye** [@Eyu-Tes](https://github.com/Eyu-Tes)
+
 He has actively developed both backend and frontend components for the radar. 
-[@Eyu-Tes](https://github.com/Eyu-Tes)
 
-**Yashkumar Shiroya**
+**Yashkumar Shiroya** [@YashShiroya](https://github.com/YashShiroya)
+
 He has actively developed both backend and frontend components for the radar. Provided inputs on the design decisions.
-[@YashShiroya](https://github.com/YashShiroya)
 
-**Karshil Desai**
+**Karshil Desai** [@karshil](https://github.com/karshil)
+
 He has actively developed frontend components for the radar.
-[@karshil](https://github.com/karshil)
+
 
 ### Cohort #3 (6 online volunteers)
 
