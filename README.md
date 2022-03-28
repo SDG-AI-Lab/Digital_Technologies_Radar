@@ -56,9 +56,10 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 
 ### Cohort 1 (1 online volunteer)
 
-**Nuno Ribeiro**
+**Nuno Ribeiro** [@nmpribeiro](https://github.com/nmpribeiro)
+
 He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.
-[@nmpribeiro](https://github.com/nmpribeiro)
+
 
 ### Cohort 2 (4 online volunteers)
 
