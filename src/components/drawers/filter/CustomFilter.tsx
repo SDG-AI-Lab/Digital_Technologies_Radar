@@ -231,17 +231,6 @@ export const CustomFilter: React.FC = () => {
   const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedEndYear(e.target.value);
 
-  const onFilterHandler = (): void => {
-    // selected?
-    setCountryFilter(selectedCountry);
-    setDisasterTypeFilter(selectedDisasterType);
-    setUseCaseFilter(selectedUserCase);
-    setImplementerFilter(selectedImplementer);
-    setSdgFilter(selectedSdg);
-    setStartYearFilter(selectedStartYear);
-    setEndYearFilter(selectedEndYear);
-  };
-
   return (
     <div
       style={{
@@ -439,26 +428,6 @@ export const CustomFilter: React.FC = () => {
             ))}
           </select>
         </div>
-      </div>
-
-      <div>
-        <button
-          type='button'
-          style={{
-            borderColor: 'lightgrey',
-            borderWidth: 1,
-            borderStyle: 'solid',
-            padding: '10px 20px',
-            backgroundColor: 'white',
-            cursor: 'pointer',
-            borderRadius: 5,
-            color: '#0a58ca',
-            marginBottom: 10
-          }}
-          onClick={onFilterHandler}
-        >
-          Filter
-        </button>
       </div>
     </div>
   );
