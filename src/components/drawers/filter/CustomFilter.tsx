@@ -188,6 +188,27 @@ export const CustomFilter: React.FC = () => {
     endYearFilter
   ]); // don't forget to add filters to dep array here
 
+    /**
+     * Update hook for updating filters after select useState values change
+     */
+  useEffect(() => {
+      setCountryFilter(selectedCountry);
+      setDisasterTypeFilter(selectedDisasterType);
+      setUseCaseFilter(selectedUserCase);
+      setImplementerFilter(selectedImplementer);
+      setSdgFilter(selectedSdg);
+      setStartYearFilter(selectedStartYear);
+      setEndYearFilter(selectedEndYear);
+  }, [
+      selectedCountry,
+      selectedDisasterType,
+      selectedUserCase,
+      selectedImplementer,
+      selectedSdg,
+      selectedStartYear,
+      selectedEndYear
+  ]);
+
   // on country filter change
   const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedCountry(e.target.value);
