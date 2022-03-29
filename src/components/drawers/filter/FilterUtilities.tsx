@@ -20,7 +20,9 @@ const getCountries = (
         newCountries.set(country, { uuid: uuidv4(), name: country });
     });
   });
-  return Array.from(newCountries.values());
+
+  return Array.from(newCountries.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getDisasterTypes = (
@@ -38,7 +40,8 @@ const getDisasterTypes = (
         name: val[disasterTypeKey]
       });
   });
-  return Array.from(newDisterTypes.values());
+  return Array.from(newDisterTypes.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getUseCases = (
@@ -53,7 +56,8 @@ const getUseCases = (
         name: val[useCaseKey]
       });
   });
-  return Array.from(newUseCases.values());
+  return Array.from(newUseCases.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getImplementers = (
@@ -68,7 +72,15 @@ const getImplementers = (
         name: val[implementerKey]
       });
   });
-  return Array.from(newImplementers.values());
+
+  let arr = Array.from(newImplementers.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr.map(function(e) { return e.name; }).indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
 };
 
 const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
@@ -82,7 +94,18 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
       }
     });
   });
-  return Array.from(newSDGs.values());
+
+  // Order the resulting array
+  let arr = Array.from(newSDGs.values())
+      .sort(function(a, b) { // we use natural instead of lexicographical order
+        return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+      });
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr.map(function(e) { return e.name; }).indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
 };
 
 const getStartYears = (
@@ -97,7 +120,8 @@ const getStartYears = (
         name: val[startYearKey]
       });
   });
-  return Array.from(newStartYears.values());
+  return Array.from(newStartYears.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const getEndYears = (
@@ -112,7 +136,8 @@ const getEndYears = (
         name: val[endYearKey]
       });
   });
-  return Array.from(newEndYears.values());
+  return Array.from(newEndYears.values())
+      .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 export const FilterUtils = {
