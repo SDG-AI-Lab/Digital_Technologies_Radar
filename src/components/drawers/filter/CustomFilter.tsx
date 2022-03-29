@@ -131,7 +131,8 @@ export const CustomFilter: React.FC = () => {
     // filter countries
     if (countryFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[countryKey] === countryFilter);
+      // We need to check if we have an exact match or the blip is an array containing the country
+      filtered = filtered.filter((i) => i[countryKey] === countryFilter || i[countryKey].includes(countryFilter));
     }
 
     // filter disaster types
