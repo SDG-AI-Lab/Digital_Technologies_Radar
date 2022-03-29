@@ -13,16 +13,19 @@ const getCountries = (
 ): SelectableItem[] => {
   const newCountries: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipCountries: Set<string> = new Set (val[countryKey].split(',').map(item => item.trim()));
-    blipCountries.delete('')
+    const blipCountries: Set<string> = new Set(
+      val[countryKey].split(',').map((item) => item.trim())
+    );
+    blipCountries.delete('');
 
     blipCountries.forEach((country) => {
-        newCountries.set(country, { uuid: uuidv4(), name: country });
+      newCountries.set(country, { uuid: uuidv4(), name: country });
     });
   });
 
-  return Array.from(newCountries.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(newCountries.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getDisasterTypes = (
@@ -40,8 +43,9 @@ const getDisasterTypes = (
         name: val[disasterTypeKey]
       });
   });
-  return Array.from(newDisterTypes.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(newDisterTypes.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getUseCases = (
@@ -56,8 +60,9 @@ const getUseCases = (
         name: val[useCaseKey]
       });
   });
-  return Array.from(newUseCases.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(newUseCases.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getImplementers = (
@@ -73,11 +78,16 @@ const getImplementers = (
       });
   });
 
-  let arr = Array.from(newImplementers.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  let arr = Array.from(newImplementers.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 
   // Move 'No Information' to the back of the ordered array
-  const index = arr.map(function(e) { return e.name; }).indexOf('No Information');
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
   arr.push(arr.splice(index, 1)[0]);
 
   return arr;
@@ -96,13 +106,20 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   });
 
   // Order the resulting array
-  let arr = Array.from(newSDGs.values())
-      .sort(function(a, b) { // we use natural instead of lexicographical order
-        return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
-      });
+  let arr = Array.from(newSDGs.values()).sort(function (a, b) {
+    // we use natural instead of lexicographical order
+    return a.name.localeCompare(b.name, undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+  });
 
   // Move 'No Information' to the back of the ordered array
-  const index = arr.map(function(e) { return e.name; }).indexOf('No Information');
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
   arr.push(arr.splice(index, 1)[0]);
 
   return arr;
@@ -120,8 +137,9 @@ const getStartYears = (
         name: val[startYearKey]
       });
   });
-  return Array.from(newStartYears.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(newStartYears.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getEndYears = (
@@ -136,8 +154,9 @@ const getEndYears = (
         name: val[endYearKey]
       });
   });
-  return Array.from(newEndYears.values())
-      .sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(newEndYears.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 export const FilterUtils = {
