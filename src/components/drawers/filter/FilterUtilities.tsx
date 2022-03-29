@@ -13,11 +13,12 @@ const getCountries = (
 ): SelectableItem[] => {
   const newCountries: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[countryKey] !== '' && !newCountries.has(val[countryKey]))
-      newCountries.set(val[countryKey], {
-        uuid: uuidv4(),
-        name: val[countryKey]
-      });
+    const blipCountries: Set<string> = new Set (val[countryKey].split(',').map(item => item.trim()));
+    blipCountries.delete('')
+
+    blipCountries.forEach((country) => {
+        newCountries.set(country, { uuid: uuidv4(), name: country });
+    });
   });
   return Array.from(newCountries.values());
 };
