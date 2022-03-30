@@ -22,8 +22,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       useCaseFilter,
       disasterTypeFilter
     },
-    setTechFilter,
-    setHoveredTech
+    actions: { setTechFilter, setHoveredTech }
   } = useRadarState();
 
   const {

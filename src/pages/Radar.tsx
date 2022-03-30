@@ -12,8 +12,7 @@ export const Radar: React.FC = () => {
   const nav = useNavigate();
   const {
     state: { selectedItem, selectedQuadrant },
-    setSelectedItem,
-    setSelectedQuadrant
+    actions: { setSelectedItem, setSelectedQuadrant }
   } = useRadarState();
 
   useEffect(() => {

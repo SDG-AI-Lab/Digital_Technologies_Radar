@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
-import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  Radar as UNDPRadar,
+  useRadarState,
+  useRadarUiState
+} from '@undp_sdg_ai_lab/undp-radar';
 
+import { PopOver } from '../../components/PopOver';
 import { WaitingForRadar } from '../../radar/components';
 import { ContentView } from '../../components/views/ContentView';
 import { TechDescription } from '../../radar/tech/TechDescription';
@@ -11,8 +16,12 @@ export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const {
-    state: { blips }
+    state: { blips, hoveredItem }
   } = useRadarState();
+
+  const {
+    state: { top, left }
+  } = useRadarUiState();
 
   useEffect(() => {
     // TODO: this could be driven by some Library state, specifying 'it is ready for display'
@@ -28,12 +37,14 @@ export const RadarView: React.FC = () => {
             Technology Radar
           </Heading>
           {loading && <WaitingForRadar size='620px' />}
-          {!loading && <UNDPRadar />}
+          {!loading && (
+            <UNDPRadar>
+              <PopOver top={top} left={left} hoveredItem={hoveredItem} />
+            </UNDPRadar>
+          )}
         </Box>
 
         <TechDescription />
-
-        <Box>{/* <DataLists /> */}</Box>
       </ContentView>
     </>
   );

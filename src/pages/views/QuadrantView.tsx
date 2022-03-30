@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Box, Flex, Text, BoxProps } from '@chakra-ui/react';
-import { QuadrantRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  QuadrantRadar,
+  useRadarState,
+  useRadarUiState
+} from '@undp_sdg_ai_lab/undp-radar';
 
 import { ContentView } from '../../components/views/ContentView';
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
 import { FilterTechNavView } from '../../components/views/FilterTechNavView';
+import { PopOver } from '../../components/PopOver';
 
 export const QuadrantView: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const {
     state: {
+      hoveredItem,
       selectedItem,
       selectedQuadrant,
       radarData: { quadrants }
     },
-    setSelectedQuadrant
+    actions: { setSelectedQuadrant }
   } = useRadarState();
+
+  const {
+    state: { top, left }
+  } = useRadarUiState();
 
   const { quadrantId } = useParams();
 
@@ -44,12 +54,9 @@ export const QuadrantView: React.FC = () => {
           <Box flex={1}>
             {loading && <WaitingForRadar />}
             {!loading && (
-              <>
-                {/* TODO: change the undefined type to null in the lib */}
-                <QuadrantRadar
-                  selectedQuadrant={selectedQuadrant || undefined}
-                />
-              </>
+              <QuadrantRadar selectedQuadrant={selectedQuadrant || undefined}>
+                <PopOver top={top} left={left} hoveredItem={hoveredItem} />
+              </QuadrantRadar>
             )}
           </Box>
           <Box flex={'0.75'}>

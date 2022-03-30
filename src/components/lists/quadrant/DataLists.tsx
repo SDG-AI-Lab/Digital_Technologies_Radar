@@ -160,8 +160,7 @@ export const QuadrantDataLists: React.FC = () => {
       hoveredTech,
       selectedQuadrant
     },
-    setHoveredItem,
-    setSelectedItem
+    actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
   const [headers, setHeaders] = useState<ListMatrixItem[]>([]);
