@@ -285,29 +285,27 @@ export const QuadrantDataLists: React.FC = () => {
       )}
 
       {techFilters.length === 0 && (
-        <React.Fragment>
-          <Accordion allowToggle>
-            {horizons.map((horizon, index) => {
-              return (
-                <div key={index}>
-                  {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
-                  <AccordionItem>
-                    <QuadrantDataListItem
-                      radarData={radarData}
-                      hoveredTech={hoveredTech}
-                      setHoveredItem={setHoveredItem}
-                      hoveredItem={hoveredItem}
-                      setSelectedItem={setSelectedItem}
-                      blips={blips}
-                      headers={headers}
-                      horizon={horizon}
-                    />
-                  </AccordionItem>
-                </div>
-              );
-            })}
-          </Accordion>
-        </React.Fragment>
+        <Accordion allowToggle>
+          {horizons.map((horizon, index) => {
+            return (
+              <div key={index}>
+                {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+                <AccordionItem>
+                  <QuadrantDataListItem
+                    radarData={radarData}
+                    hoveredTech={hoveredTech}
+                    setHoveredItem={setHoveredItem}
+                    hoveredItem={hoveredItem}
+                    setSelectedItem={setSelectedItem}
+                    blips={blips}
+                    headers={headers}
+                    horizon={horizon}
+                  />
+                </AccordionItem>
+              </div>
+            );
+          })}
+        </Accordion>
       )}
     </section>
   );

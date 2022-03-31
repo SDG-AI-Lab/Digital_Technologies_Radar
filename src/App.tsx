@@ -14,11 +14,11 @@ import './App.css';
  * and replace HashRouter
  **/
 export const App: React.FC = () => (
-  <HashRouter>
-    <ChakraUI>
-      <AppRadarProvider>
+  <ChakraUI>
+    <AppRadarProvider>
+      <HashRouter>
         <NavApp />
-      </AppRadarProvider>
-    </ChakraUI>
-  </HashRouter>
+      </HashRouter>
+    </AppRadarProvider>
+  </ChakraUI>
 );

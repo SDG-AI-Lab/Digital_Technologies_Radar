@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ROUTES } from '../navigation/routes';
@@ -7,13 +7,11 @@ import { RadarView } from './views';
 
 export const Radar: React.FC = () => {
   const nav = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+
   const {
-    state: {
-      selectedItem,
-      selectedQuadrant,
-      radarData: { quadrants }
-    },
-    actions: { setSelectedQuadrant }
+    state: { blips, selectedItem, selectedQuadrant }
   } = useRadarState();
 
   const goToQuadrant = (quadrant: string) =>
@@ -23,18 +21,10 @@ export const Radar: React.FC = () => {
     if (!selectedItem && selectedQuadrant) goToQuadrant(selectedQuadrant);
   }, [selectedItem, selectedQuadrant]);
 
-  const { quadrantId } = useParams();
-
   useEffect(() => {
-    if (
-      !selectedItem &&
-      quadrantId &&
-      quadrants &&
-      quadrants.length > 0 &&
-      quadrants.includes(quadrantId)
-    )
-      setSelectedQuadrant(quadrantId);
-  }, [selectedItem, selectedQuadrant, quadrants, quadrantId]);
+    // TODO: this could be driven by some Library state, specifying 'it is ready for display'
+    if (blips.length > 0) setLoading(false);
+  }, [blips]);
 
-  return <RadarView />;
+  return <RadarView loading={loading} />;
 };

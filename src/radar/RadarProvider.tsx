@@ -68,12 +68,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   return (
     <RadarProvider>
       <DataProvider>
-        <SetData
-          radarConf={{ title: '' }}
-          keys={keys}
-          orders={orders}
-          colors={colors}
-        />
+        <SetData keys={keys} orders={orders} colors={colors} />
         <RadarDataGenerator />
         <AddCSV csvFile={csvData} mapping={mapping} />
         {children}
