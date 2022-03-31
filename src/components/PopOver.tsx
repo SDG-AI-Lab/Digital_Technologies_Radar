@@ -1,9 +1,12 @@
-import { PopOverType, useDataState } from '@undp_sdg_ai_lab/undp-radar';
+import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 /**
  * @impl example of PopOver
  */
-export const PopOver: PopOverType = ({ hoveredItem }) => {
+export const PopOver: React.FC = () => {
+  const {
+    state: { hoveredItem }
+  } = useRadarState();
   const {
     state: {
       keys: { titleKey }

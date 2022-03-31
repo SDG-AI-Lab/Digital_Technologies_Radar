@@ -1,17 +1,16 @@
 import React from 'react';
 import {
   AddCSV,
-  DataProvider,
-  RadarDataGenerator,
-  RadarProvider,
   SetData,
   Utilities,
-  ColorsParamType,
   KeysObject,
-  MappingType,
-  OrdersParamType,
   RawBlipType,
-  RadarUiProvider
+  MappingType,
+  DataProvider,
+  RadarProvider,
+  ColorsParamType,
+  OrdersParamType,
+  RadarDataGenerator
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
@@ -69,17 +68,15 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   return (
     <RadarProvider>
       <DataProvider>
-        <RadarUiProvider>
-          <SetData
-            radarConf={{ title: '' }}
-            keys={keys}
-            orders={orders}
-            colors={colors}
-          />
-          <RadarDataGenerator />
-          <AddCSV csvFile={csvData} mapping={mapping} />
-          {children}
-        </RadarUiProvider>
+        <SetData
+          radarConf={{ title: '' }}
+          keys={keys}
+          orders={orders}
+          colors={colors}
+        />
+        <RadarDataGenerator />
+        <AddCSV csvFile={csvData} mapping={mapping} />
+        {children}
       </DataProvider>
     </RadarProvider>
   );

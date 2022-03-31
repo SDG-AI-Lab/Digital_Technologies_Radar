@@ -29,23 +29,17 @@ import {
 type ListMatrixItem = { uuid: string; name: string };
 
 interface Props {
-  radarData: RadarOptionsType;
   quadrant: ListMatrixItem;
   horizon?: ListMatrixItem | null;
   blips: BlipType[];
-  hoveredItem: BlipType | null;
-  hoveredTech: string | null;
   setHoveredItem: (payload: BlipType | null) => void;
   setSelectedItem: (item: BlipType) => void;
 }
 
 const QuadrantItemList: React.FC<Props> = ({
-  radarData,
   quadrant,
   horizon = null,
   blips,
-  hoveredItem,
-  hoveredTech,
   setHoveredItem,
   setSelectedItem
 }) => {
@@ -54,12 +48,14 @@ const QuadrantItemList: React.FC<Props> = ({
       keys: { titleKey, quadrantKey, horizonKey }
     }
   } = useDataState();
+
+  const onMouseLeave = () => setHoveredItem(null); // equal for all
+
   return (
     <ScrollableDiv maxHeight={400}>
       <Accordion allowToggle>
         {blips.map((blip) => {
           const onMouseEnter = () => setHoveredItem(blip);
-          const onMouseLeave = () => setHoveredItem(null);
           if (
             blip[quadrantKey] === quadrant.name &&
             (horizon === null || blip[horizonKey] === horizon.name)
@@ -68,6 +64,7 @@ const QuadrantItemList: React.FC<Props> = ({
               <AccordionItem
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
+                key={blip.id}
               >
                 <h5>
                   <AccordionButton>
@@ -357,14 +354,11 @@ const QuadrantDataListItem: React.FC<QuadrantDataListItemProps> = ({
           </h5>
           <AccordionPanel>
             <QuadrantItemList
-              radarData={radarData}
-              hoveredTech={hoveredTech}
-              setHoveredItem={setHoveredItem}
-              hoveredItem={hoveredItem}
-              setSelectedItem={setSelectedItem}
               blips={blips}
               quadrant={header}
               horizon={horizon}
+              setHoveredItem={setHoveredItem}
+              setSelectedItem={setSelectedItem}
             />
           </AccordionPanel>
         </div>
