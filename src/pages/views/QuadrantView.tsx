@@ -56,7 +56,10 @@ export const QuadrantView: React.FC = () => {
           >
             Stages
           </Text>
-          <Box {...InnerBoxProps}>{/* <QuadrantDataLists /> */}</Box>
+          <Box {...InnerBoxProps}>
+            {/* TODO: improve QuadrantDataLists performance (it is dragging everything!) */}
+            {/* <QuadrantDataLists /> */}
+          </Box>
         </Box>
       </Box>
     </>
