@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Button } from '@chakra-ui/react';
 import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from '../../radar/components';
 import { ContentView } from '../../components/views/ContentView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { FilterTechNavView } from '../../components/views/FilterTechNavView';
+import { AiOutlineAim } from 'react-icons/ai';
 
 export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const {
-    state: { blips }
+    state: { blips },
+    setHoveredItem
   } = useRadarState();
 
   useEffect(() => {
@@ -24,7 +26,10 @@ export const RadarView: React.FC = () => {
       <FilterTechNavView />
       <ContentView>
         <Box flex={1}>
-          <Heading fontSize={30} textAlign='center' p={5} paddingTop={75}>
+          <Button float={'right'} display={'flex'} m={7} px={25} colorScheme='gray' rightIcon={<AiOutlineAim />} borderRadius={'0'}>
+            How to use
+          </Button>
+          <Heading fontSize={30} textAlign='center' p={5} paddingTop={100}>
             Technology Radar
           </Heading>
           {loading && <WaitingForRadar size='620px' />}
