@@ -26,7 +26,15 @@ export const RadarView: React.FC = () => {
       <FilterTechNavView />
       <ContentView>
         <Box flex={1}>
-          <Button float={'right'} display={'flex'} m={7} px={25} colorScheme='gray' rightIcon={<AiOutlineAim />} borderRadius={'0'}>
+          <Button
+            float={'right'}
+            display={'flex'}
+            m={7}
+            px={25}
+            colorScheme='gray'
+            rightIcon={<AiOutlineAim />}
+            borderRadius={'0'}
+          >
             How to use
           </Button>
           <Heading fontSize={30} textAlign='center' p={5} paddingTop={100}>
