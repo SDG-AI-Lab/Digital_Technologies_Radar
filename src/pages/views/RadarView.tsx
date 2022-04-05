@@ -6,6 +6,7 @@ import { WaitingForRadar } from '../../radar/components';
 import { ContentView } from '../../components/views/ContentView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { FilterTechNavView } from '../../components/views/FilterTechNavView';
+import { BlipList } from '../../components/lists/components/BlipList';
 
 export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,9 @@ export const RadarView: React.FC = () => {
 
         <TechDescription />
 
-        <Box>{/* <DataLists /> */}</Box>
+        <Box width={'30%'}>
+          <BlipList/>
+        </Box>
       </ContentView>
     </>
   );
