@@ -35,7 +35,7 @@ export const RadarView: React.FC = () => {
         <TechDescription />
 
         <Box width={'30%'}>
-          <BlipList/>
+          <BlipList />
         </Box>
       </ContentView>
     </>

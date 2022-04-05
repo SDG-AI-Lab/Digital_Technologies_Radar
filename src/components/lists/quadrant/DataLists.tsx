@@ -11,11 +11,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import './DataLists.scss';
-import {
-  Accordion,
-  AccordionItem,
-  Text
-} from '@chakra-ui/react';
+import { Accordion, AccordionItem, Text } from '@chakra-ui/react';
 import { QuadrantDataListItem, ListMatrixItem } from './QuadrantDataListItem';
 
 export const QuadrantDataLists: React.FC = () => {
@@ -190,4 +186,3 @@ export const QuadrantDataLists: React.FC = () => {
     </section>
   );
 };
-

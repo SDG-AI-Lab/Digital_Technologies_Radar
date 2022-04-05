@@ -21,7 +21,10 @@ import {
   Text
 } from '@chakra-ui/react';
 
-import { QuadrantDataListItem, ListMatrixItem } from '../quadrant/QuadrantDataListItem';
+import {
+  QuadrantDataListItem,
+  ListMatrixItem
+} from '../quadrant/QuadrantDataListItem';
 
 export const BlipList: React.FC = () => {
   const {
@@ -115,20 +118,19 @@ export const BlipList: React.FC = () => {
     return filteredBlipsAndHorizons;
   };
 
-  const renderFilteredHorizon: any = (quadrant: ListMatrixItem, filteredBlipsAndHorizons: FilteredBlipsAndHorizons) => {
+  const renderFilteredHorizon: any = (
+    quadrant: ListMatrixItem,
+    filteredBlipsAndHorizons: FilteredBlipsAndHorizons
+  ) => {
     if (filteredBlipsAndHorizons.filteredHorizonNames.size === 0) {
       return (
         <Text color='gray.500' as='i'>
           No technologies to display for selected technology types...
         </Text>
       );
-    }
-    else {
-      const filteredHorizons: ListMatrixItem[] = horizons.filter(
-        (horizon) =>
-          filteredBlipsAndHorizons.filteredHorizonNames.has(
-            horizon.name
-          )
+    } else {
+      const filteredHorizons: ListMatrixItem[] = horizons.filter((horizon) =>
+        filteredBlipsAndHorizons.filteredHorizonNames.has(horizon.name)
       );
       return (
         <div key={quadrant.uuid}>
@@ -150,84 +152,81 @@ export const BlipList: React.FC = () => {
                     />
                   </AccordionItem>
                 </div>
-              )
+              );
             })}
           </Accordion>
         </div>
-      )
+      );
     }
   };
 
   return (
     <section>
       <Accordion allowToggle>
-        {
-          headers.map(quadrant => {
-            const filteredBlipsAndHorizons: FilteredBlipsAndHorizons =
-              getFilteredBlipsAndHorizons(quadrant);
+        {headers.map((quadrant) => {
+          const filteredBlipsAndHorizons: FilteredBlipsAndHorizons =
+            getFilteredBlipsAndHorizons(quadrant);
 
-            return (
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box
-                      key={`${quadrant.uuid}`}
-                      flex='1'
-                      textAlign='left'
-                      as='h2'
-                    >
-                      {Utilities.capitalize(quadrant.name)}
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
+          return (
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box
+                    key={`${quadrant.uuid}`}
+                    flex='1'
+                    textAlign='left'
+                    as='h2'
+                  >
+                    {Utilities.capitalize(quadrant.name)}
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
 
-                <AccordionPanel>
-                  <Accordion>
-                    <AccordionItem>
-                      {techFilters.length > 0 && (
-                        <React.Fragment>
-                          {
-                            renderFilteredHorizon(quadrant, filteredBlipsAndHorizons)
-                          }
-                        </React.Fragment>
-                      )}
+              <AccordionPanel>
+                <Accordion>
+                  <AccordionItem>
+                    {techFilters.length > 0 && (
+                      <React.Fragment>
+                        {renderFilteredHorizon(
+                          quadrant,
+                          filteredBlipsAndHorizons
+                        )}
+                      </React.Fragment>
+                    )}
 
-                      {techFilters.length === 0 && (
-                        <React.Fragment>
-                          <Accordion allowToggle>
-                            {horizons.map((horizon, index) => {
-                              return (
-                                <div key={index}>
-                                  {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
-                                  <AccordionItem>
-                                    <QuadrantDataListItem
-                                      radarData={radarData}
-                                      hoveredTech={hoveredTech}
-                                      setHoveredItem={setHoveredItem}
-                                      hoveredItem={hoveredItem}
-                                      setSelectedItem={setSelectedItem}
-                                      blips={blips}
-                                      headers={[quadrant]}
-                                      horizon={horizon}
-                                    />
-                                  </AccordionItem>
-                                </div>
-                              );
-                            })}
-                          </Accordion>
-                        </React.Fragment>
-                      )}
-
-                    </AccordionItem>
-                  </Accordion>
-                </AccordionPanel>
-              </AccordionItem>
-            );
-          })
-        }
+                    {techFilters.length === 0 && (
+                      <React.Fragment>
+                        <Accordion allowToggle>
+                          {horizons.map((horizon, index) => {
+                            return (
+                              <div key={index}>
+                                {/*TODO: Usage of uuidv4() causes bug where accordian glitches in height*/}
+                                <AccordionItem>
+                                  <QuadrantDataListItem
+                                    radarData={radarData}
+                                    hoveredTech={hoveredTech}
+                                    setHoveredItem={setHoveredItem}
+                                    hoveredItem={hoveredItem}
+                                    setSelectedItem={setSelectedItem}
+                                    blips={blips}
+                                    headers={[quadrant]}
+                                    horizon={horizon}
+                                  />
+                                </AccordionItem>
+                              </div>
+                            );
+                          })}
+                        </Accordion>
+                      </React.Fragment>
+                    )}
+                  </AccordionItem>
+                </Accordion>
+              </AccordionPanel>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
     </section>
   );
 };
-
