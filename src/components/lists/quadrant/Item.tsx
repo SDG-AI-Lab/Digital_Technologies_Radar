@@ -9,9 +9,16 @@ import {
 import { Text, Badge, Button } from '@chakra-ui/react';
 import { ShowIcon } from './ShowIcon';
 
-export const Item: React.FC<{ blip: BlipType; close?: boolean }> = ({
+interface Props {
+  blip: BlipType;
+  close?: boolean;
+  triggerSiblings: (horizon: string) => void;
+}
+
+export const Item: React.FC<Props> = ({
   blip,
-  close = false
+  close = false,
+  triggerSiblings
 }) => {
   const {
     state: {
@@ -28,7 +35,18 @@ export const Item: React.FC<{ blip: BlipType; close?: boolean }> = ({
   const onMouseEnter = () => setHoveredItem(blip);
 
   const [show, setShow] = useState(false);
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => {
+    if (!show) {
+      triggerSiblings(blip.id);
+      setTimeout(() => {
+        setShow(true);
+      });
+    } else setShow(false);
+  };
+
+  useEffect(() => {
+    if (show) triggerSiblings(blip.id);
+  }, [show]);
 
   useEffect(() => {
     if (close) setShow(false);

@@ -30,14 +30,16 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
   };
 
   useEffect(() => {
-    console.log('show triggered', show);
     if (show) triggerSiblings(horizonName);
   }, [show]);
 
   useEffect(() => {
-    console.log('close changed', close);
     if (close) setShow(false);
   }, [close]);
+
+  const [sourceBlipId, setSourceBlipId] = useState<string>();
+
+  const triggerItemSiblings = (blipId: string) => setSourceBlipId(blipId);
 
   return (
     <>
@@ -53,7 +55,12 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
 
           <ScrollableDiv show={show} maxHeight={400}>
             {quadrantBlips.map((blip) => (
-              <Item key={blip.id} blip={blip} />
+              <Item
+                key={blip.id}
+                blip={blip}
+                triggerSiblings={triggerItemSiblings}
+                close={!(sourceBlipId === blip.id)}
+              />
             ))}
           </ScrollableDiv>
         </div>

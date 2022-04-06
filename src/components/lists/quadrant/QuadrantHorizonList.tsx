@@ -5,30 +5,12 @@ import {
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import { Box, BoxProps, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
 import './DataLists.scss';
 
 type BlipsPerQuadType = Record<string, BlipType[]>;
-
-// const OuterBoxProps: BoxProps = {
-//   borderColor: 'gray.200',
-//   borderWidth: '2px',
-//   borderRadius: 'md',
-//   m: '5',
-//   my: '10',
-//   p: '1',
-//   maxWidth: '500px'
-// };
-
-// const InnerBoxProps: BoxProps = {
-//   borderColor: 'gray.200',
-//   borderWidth: '2px',
-//   borderRadius: 'md',
-//   m: '1',
-//   p: '2'
-// };
 
 interface Props {
   blips: BlipType[];
