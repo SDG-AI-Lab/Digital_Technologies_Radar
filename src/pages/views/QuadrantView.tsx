@@ -58,42 +58,10 @@ export const QuadrantView: React.FC = () => {
         quadIndex === 1 ||
         quadIndex === 2 ||
         quadIndex === 3) && (
-        <Box flex={'0.75'}>
-          <Box {...OuterBoxProps}>
-            <Text
-              width={'fit-content'}
-              color={'blue.500'}
-              borderBottom={'3px solid'}
-              my={5}
-              ml={5}
-              as='h5'
-            >
-              Stages
-            </Text>
-            <Box {...InnerBoxProps}>
-              <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
-            </Box>
-          </Box>
-        </Box>
+        <div style={{ flex: '0.75' }}>
+          <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
+        </div>
       )}
     </Flex>
   );
-};
-
-const OuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '5',
-  my: '10',
-  p: '1',
-  maxWidth: '500px'
-};
-
-const InnerBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '1',
-  p: '2'
 };

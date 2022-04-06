@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ScrollableDiv } from '../components/ScrollableDiv';
@@ -9,14 +9,28 @@ import { ShowIcon } from './ShowIcon';
 interface QuadrantDataListItemProps {
   horizonName: string;
   quadrantBlips: BlipType[];
+  triggerSiblings: (horizon: string) => void;
+  close: boolean;
 }
 
 export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
   horizonName,
-  quadrantBlips = []
+  quadrantBlips = [],
+  triggerSiblings,
+  close
 }) => {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
+
+  useEffect(() => {
+    console.log('show triggered', show);
+    if (show) triggerSiblings(horizonName);
+  }, [show]);
+
+  useEffect(() => {
+    console.log('close changed', close);
+    if (close) setShow(false);
+  }, [close]);
 
   return (
     <>
