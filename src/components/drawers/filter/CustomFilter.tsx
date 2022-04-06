@@ -7,6 +7,7 @@ import {
 
 import { FilterUtils } from './FilterUtilities';
 import {
+  regionKey,
   countryKey,
   implementerKey,
   sdgKey,
@@ -29,6 +30,8 @@ export const CustomFilter: React.FC = () => {
   } = useDataState();
 
   // FILTERS
+  // regions
+  const [regionFilter, setRegionFilter] = useState<string>('all');
   // countries
   const [countryFilter, setCountryFilter] = useState<string>('all');
   // implementer
@@ -41,6 +44,8 @@ export const CustomFilter: React.FC = () => {
   const [endYearFilter, setEndYearFilter] = useState<string>('all');
 
   // ALL OPTIONS
+  // regions
+  const [regions, setRegions] = useState<SelectableItem[]>([]);
   // countries
   const [countries, setCountries] = useState<SelectableItem[]>([]);
   // disasters
@@ -59,6 +64,9 @@ export const CustomFilter: React.FC = () => {
   // EFFECT on Blips change, to get all options
   useEffect(() => {
     if (blips && blips?.length > 0) {
+      // region options
+      const newRegions = FilterUtils.getRegions(blips, regionKey);
+      setRegions(newRegions);
       // country options
       const newCountries = FilterUtils.getCountries(blips, countryKey);
       setCountries(newCountries);
@@ -85,6 +93,11 @@ export const CustomFilter: React.FC = () => {
       setEndYears(newEndYears);
     }
   }, [blips]);
+
+  // selectedRegion
+  const [selectedRegion, setSelectedRegion] = useState<string>(
+    regionFilter === null ? 'all' : regionFilter
+  );
 
   // selectedCountry
   const [selectedCountry, setSelectedCountry] = useState<string>(
@@ -127,6 +140,16 @@ export const CustomFilter: React.FC = () => {
   useEffect(() => {
     let filtered = blips; // we start with all Blips
     let isFiltered = false;
+
+    // filter regions
+    if (regionFilter !== 'all') {
+      isFiltered = true;
+      // We need to check if we have an exact match or the blip is an array containing the region
+      filtered = filtered.filter(
+        (i) =>
+          i[regionKey] === regionFilter || i[regionKey].includes(regionFilter)
+      );
+    }
 
     // filter countries
     if (countryFilter !== 'all') {
@@ -183,6 +206,7 @@ export const CustomFilter: React.FC = () => {
   }, [
     useCaseKey,
     disasterKey,
+    regionFilter,
     countryFilter,
     disasterTypeFilter,
     useCaseFilter,
@@ -196,6 +220,7 @@ export const CustomFilter: React.FC = () => {
    * Update hook for updating filters after select useState values change
    */
   useEffect(() => {
+    setRegionFilter(selectedRegion);
     setCountryFilter(selectedCountry);
     setDisasterTypeFilter(selectedDisasterType);
     setUseCaseFilter(selectedUserCase);
@@ -204,6 +229,7 @@ export const CustomFilter: React.FC = () => {
     setStartYearFilter(selectedStartYear);
     setEndYearFilter(selectedEndYear);
   }, [
+    selectedRegion,
     selectedCountry,
     selectedDisasterType,
     selectedUserCase,
@@ -213,6 +239,9 @@ export const CustomFilter: React.FC = () => {
     selectedEndYear
   ]);
 
+  // on country filter change
+  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedRegion(e.target.value);
   // on country filter change
   const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedCountry(e.target.value);
@@ -236,6 +265,7 @@ export const CustomFilter: React.FC = () => {
     setSelectedEndYear(e.target.value);
 
   const onResetFilter = (): void => {
+    setSelectedRegion('all');
     setSelectedCountry('all');
     setSelectedDisasterType('all');
     setSelectedUserCase('all');
@@ -258,6 +288,33 @@ export const CustomFilter: React.FC = () => {
       }}
     >
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div
+          style={{
+            marginTop: 0,
+            marginBottom: 10,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <select
+            id='Select0'
+            style={{
+              maxWidth: '105px',
+              padding: '10px',
+              border: '1px solid lightgrey'
+            }}
+            onChange={onRegionChange}
+            value={selectedRegion}
+          >
+            <option value='all'>Region</option>
+            {regions.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div
           style={{
             marginTop: 0,
