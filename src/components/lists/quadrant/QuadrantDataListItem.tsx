@@ -1,14 +1,8 @@
-import React from 'react';
-import {
-  Box,
-  AccordionIcon,
-  AccordionPanel,
-  AccordionButton
-} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box } from '@chakra-ui/react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 
 import { QuadrantItemList } from './QuadrantItemList';
-import './DataLists.scss';
 
 interface QuadrantDataListItemProps {
   horizonName: string;
@@ -19,19 +13,33 @@ export const QuadrantDataListItem: React.FC<QuadrantDataListItemProps> = ({
   horizonName,
   quadrantBlips
 }) => {
+  const [show, setShow] = useState(false);
+  const toggleShow = () => setShow(!show);
   return (
-    <div>
-      <h5>
-        <AccordionButton>
-          <Box flex='1' textAlign='left' as='h5'>
-            {horizonName}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-      </h5>
-      <AccordionPanel>
+    <>
+      <Box flex='1' textAlign='left' as='h5' onClick={toggleShow}>
+        {horizonName}
+      </Box>
+
+      <Box display={show ? 'block' : 'none'}>
         <QuadrantItemList blips={quadrantBlips} />
-      </AccordionPanel>
-    </div>
+      </Box>
+    </>
   );
+
+  // return (
+  //   <>
+  //     <Box>
+  //       <AccordionButton>
+  //         <Box flex='1' textAlign='left' as='h5'>
+  //           {horizonName}
+  //         </Box>
+  //         <AccordionIcon />
+  //       </AccordionButton>
+  //     </Box>
+  //     <AccordionPanel>
+  //       <QuadrantItemList blips={quadrantBlips} />
+  //     </AccordionPanel>
+  //   </>
+  // );
 };
