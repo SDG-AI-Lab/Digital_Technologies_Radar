@@ -2891,13 +2891,13 @@
     "@typescript-eslint/types" "5.15.0"
     eslint-visitor-keys "^3.0.0"
 
-"@undp_sdg_ai_lab/undp-radar@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-0.1.6.tgz#5bbaaa93e71f28bec616003891fa64e9f1156d04"
-  integrity sha512-dpP25Zy2ievHT3XBIXsji9xHj182b+VC22fpWqDG7BS7sHqnzmw5l195xpf9Kb7Tp5ZfugzkN51tl++8AdrntQ==
+"@undp_sdg_ai_lab/undp-radar@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-1.0.6.tgz#3e21daafb8bcc3ffd2ca88fd5224d7fac144ea50"
+  integrity sha512-mYdCpWIGtX8W4j40NRN10EuOu0CE3gwHQ+0WNuLkchxn50kgmObXsr8+pB1HQxzLVu1xxFajc/6ukFgqmoHLeA==
   dependencies:
     d3 "^7.1.1"
-    kiss-react-state "^0.0.4"
+    kiss-react-state "^1.1.1"
     ts-request-builder "^0.0.1"
     uuid "^8.3.2"
 
@@ -7304,10 +7304,10 @@ kind-of@^6.0.2, kind-of@^6.0.3:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kiss-react-state@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/kiss-react-state/-/kiss-react-state-0.0.4.tgz#be1227aa484ffab8caec67b75d366c7f4ea39f75"
-  integrity sha512-fmxig6DHhoqyfMY6rTVp3OqUVSyJFay2GHyWlEnGNLtVhJVfHQN3h/zbeUM6sUGUduTkLoSjrm30xgxMt4K3GQ==
+kiss-react-state@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/kiss-react-state/-/kiss-react-state-1.1.1.tgz#a365bf1e28c524ada020ff4caa80fc5a2a717934"
+  integrity sha512-Snv2FsCZ3ETp6LynfiNzQ9w1F3N/ewvBjfvUmQmI0v1hT+/8TIxlMms3qgU5zKUFrxK2MtNL94Wsi0gTItvheg==
 
 kleur@^3.0.3:
   version "3.0.3"

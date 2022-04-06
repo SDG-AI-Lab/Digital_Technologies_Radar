@@ -1,76 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { Box, Flex, Text, BoxProps } from '@chakra-ui/react';
+import { useParams } from 'react-router-dom';
+import { Box, Text, BoxProps } from '@chakra-ui/react';
 import { QuadrantRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
-import { ContentView } from '../../components/views/ContentView';
 import { BackButton, WaitingForRadar } from '../../radar/components';
 import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
-import { FilterTechNavView } from '../../components/views/FilterTechNavView';
 
 export const QuadrantView: React.FC = () => {
+  const { quadrantId } = useParams();
+
   const [loading, setLoading] = useState(true);
+
   const {
     state: {
+      blips,
       selectedItem,
       selectedQuadrant,
       radarData: { quadrants }
     },
-    setSelectedQuadrant
+    actions: { setSelectedQuadrant }
   } = useRadarState();
-
-  const { quadrantId } = useParams();
+  useEffect(() => {
+    if (blips.length > 0) setLoading(false);
+  }, [blips]);
 
   useEffect(() => {
-    // const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
-    if (selectedItem) {
-      // goToBlip(selectedItem);
-    } else if (quadrantId) {
-      if (quadrants && quadrants.length > 0 && quadrants.includes(quadrantId)) {
-        // we must show Quadrant view
-        setSelectedQuadrant(quadrantId);
-        setLoading(false);
-      }
+    if (
+      !selectedItem &&
+      quadrantId &&
+      quadrants &&
+      quadrants.length > 0 &&
+      quadrants.includes(quadrantId)
+    ) {
+      setSelectedQuadrant(quadrantId);
     }
   }, [selectedItem, selectedQuadrant, quadrants, quadrantId]);
 
   return (
     <>
-      <FilterTechNavView />
-      <ContentView>
-        <Flex flex={1} p={1}>
-          <BackButton to='RADAR' />
+      <BackButton to='RADAR' />
 
-          <Box flex={1}>
-            {loading && <WaitingForRadar />}
-            {!loading && (
-              <>
-                {/* TODO: change the undefined type to null in the lib */}
-                <QuadrantRadar
-                  selectedQuadrant={selectedQuadrant || undefined}
-                />
-              </>
-            )}
+      <Box flex={1}>
+        {loading && <WaitingForRadar />}
+        {!loading && <QuadrantRadar />}
+      </Box>
+      <Box flex={'0.75'}>
+        <Box {...OuterBoxProps}>
+          <Text
+            width={'fit-content'}
+            color={'blue.500'}
+            borderBottom={'3px solid'}
+            my={5}
+            ml={5}
+            as='h5'
+          >
+            Stages
+          </Text>
+          <Box {...InnerBoxProps}>
+            {/* TODO: improve QuadrantDataLists performance (it is dragging everything!) */}
+            <QuadrantDataLists />
           </Box>
-          <Box flex={'0.75'}>
-            <Box {...OuterBoxProps}>
-              <Text
-                width={'fit-content'}
-                color={'blue.500'}
-                borderBottom={'3px solid'}
-                my={5}
-                ml={5}
-                as='h5'
-              >
-                Stages
-              </Text>
-              <Box {...InnerBoxProps}>
-                <QuadrantDataLists />
-              </Box>
-            </Box>
-          </Box>
-        </Flex>
-      </ContentView>
+        </Box>
+      </Box>
     </>
   );
 };
