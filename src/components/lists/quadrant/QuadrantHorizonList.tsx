@@ -5,7 +5,6 @@ import {
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import { Box } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
 import './DataLists.scss';
