@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   useDataState,
@@ -7,8 +7,12 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import { Box, Text, Flex, Badge, Button } from '@chakra-ui/react';
+import { ShowIcon } from './ShowIcon';
 
-export const DataItem: React.FC<{ blip: BlipType }> = ({ blip }) => {
+export const Item: React.FC<{ blip: BlipType; close?: boolean }> = ({
+  blip,
+  close = false
+}) => {
   const {
     state: {
       keys: { titleKey }
@@ -16,7 +20,7 @@ export const DataItem: React.FC<{ blip: BlipType }> = ({ blip }) => {
   } = useDataState();
 
   const {
-    state: { hoveredItem, hoveredTech },
+    state: { hoveredItem },
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
@@ -26,29 +30,63 @@ export const DataItem: React.FC<{ blip: BlipType }> = ({ blip }) => {
   const [show, setShow] = useState(false);
   const toggleShow = () => setShow(!show);
 
+  useEffect(() => {
+    if (close) setShow(false);
+  }, [close]);
+
   return (
-    <Box onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <Box
-        onClick={toggleShow}
-        backgroundColor={hoveredItem?.id === blip.id ? 'gray.200' : ''}
-        cursor={'pointer'}
-        as='h6'
-        flex='1'
-        textAlign='left'
-        p={2}
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <div
+        style={{
+          backgroundColor:
+            hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '',
+          alignItems: 'center',
+          padding: 5,
+          display: 'flex'
+        }}
       >
-        {blip[titleKey]}
-      </Box>
-      <Box display={show ? 'block' : 'none'}>
-        <Box bg={'#EDF2F7'}>
-          <Flex direction={'column'} minHeight={'200px'} p='5'>
-            <Box>
+        <div
+          onClick={toggleShow}
+          style={{
+            cursor: 'pointer',
+            flex: 1,
+            textAlign: 'left',
+            fontWeight: 500,
+            padding: 3
+          }}
+        >
+          {blip[titleKey]}
+        </div>
+        <ShowIcon isOpen={show} />
+      </div>
+      <div
+        style={{
+          display: show ? 'block' : 'none',
+          padding: 5
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: '#EDF2F7'
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '200px',
+              padding: 10
+            }}
+          >
+            <div>
               <Text mb='2'>Description</Text>
               <Text fontWeight={'400'} fontSize={'md'}>
                 {blip.Description}
               </Text>
-            </Box>
-            <Flex flexWrap={'wrap'} my='5'>
+            </div>
+            <div
+              style={{ display: 'flex', flexWrap: 'wrap', padding: '10px 0px' }}
+            >
               <Badge
                 isTruncated
                 my='1'
@@ -85,7 +123,7 @@ export const DataItem: React.FC<{ blip: BlipType }> = ({ blip }) => {
               >
                 🎯{' ' + blip['SDG']}
               </Badge>
-            </Flex>
+            </div>
             <Button
               onClick={() => setSelectedItem(blip)}
               colorScheme='blue'
@@ -93,10 +131,10 @@ export const DataItem: React.FC<{ blip: BlipType }> = ({ blip }) => {
             >
               More
             </Button>
-          </Flex>
-        </Box>
-      </Box>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 
   // return (

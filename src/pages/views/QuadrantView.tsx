@@ -7,7 +7,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import { BackButton } from '../../radar/components';
-import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
+import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
 
 export const QuadrantView: React.FC = () => {
   const {
@@ -71,7 +71,7 @@ export const QuadrantView: React.FC = () => {
               Stages
             </Text>
             <Box {...InnerBoxProps}>
-              <QuadrantDataLists blips={bufferBlips} quadIndex={quadIndex} />
+              <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
             </Box>
           </Box>
         </Box>
