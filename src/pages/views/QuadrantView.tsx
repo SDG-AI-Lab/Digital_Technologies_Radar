@@ -4,7 +4,7 @@ import { Box, Text, BoxProps } from '@chakra-ui/react';
 import { QuadrantRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { BackButton, WaitingForRadar } from '../../radar/components';
-// import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
+import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
 
 export const QuadrantView: React.FC = () => {
   const { quadrantId } = useParams();
@@ -58,7 +58,7 @@ export const QuadrantView: React.FC = () => {
           </Text>
           <Box {...InnerBoxProps}>
             {/* TODO: improve QuadrantDataLists performance (it is dragging everything!) */}
-            {/* <QuadrantDataLists /> */}
+            <QuadrantDataLists />
           </Box>
         </Box>
       </Box>
