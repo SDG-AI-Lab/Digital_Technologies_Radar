@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Flex, Text, BoxProps } from '@chakra-ui/react';
 import {
   BlipType,
   QuadrantRadar,
@@ -27,33 +26,22 @@ export const QuadrantView: React.FC = () => {
     const newBufferBlips = (isFiltered ? filteredBlips : blips).filter(
       (b) => b.quadrantIndex === quadIndex
     );
-    console.log(
-      'changing filteredBlips, blips, isFiltered',
-      quadIndex,
-      newBufferBlips.length
-    );
+    // TODO: filter by tech
     setBufferBlips(newBufferBlips);
   }, [filteredBlips, blips, isFiltered, quadIndex]);
 
   useEffect(() => {
     if (selectedQuadrant) {
-      console.log(
-        'Selected quadrant changed: ',
-        selectedQuadrant,
-        quadrants,
-        quadrants.indexOf(selectedQuadrant)
-      );
       setQuadIndex(quadrants.indexOf(selectedQuadrant));
     } else setQuadIndex(false);
   }, [selectedQuadrant]);
 
   return (
-    <Flex flex={1} p={1}>
+    <div style={{ display: 'flex', flex: 1, padding: 2 }}>
       <BackButton to='RADAR' />
-
-      <Box flex={1}>
+      <div style={{ flex: 1 }}>
         <QuadrantRadar />
-      </Box>
+      </div>
       {(quadIndex === 0 ||
         quadIndex === 1 ||
         quadIndex === 2 ||
@@ -62,6 +50,6 @@ export const QuadrantView: React.FC = () => {
           <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
         </div>
       )}
-    </Flex>
+    </div>
   );
 };

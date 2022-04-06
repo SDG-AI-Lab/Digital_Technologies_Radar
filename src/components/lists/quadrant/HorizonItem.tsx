@@ -20,7 +20,14 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
   close
 }) => {
   const [show, setShow] = useState(false);
-  const toggleShow = () => setShow(!show);
+  const toggleShow = () => {
+    if (!show) {
+      triggerSiblings(horizonName);
+      setTimeout(() => {
+        setShow(true);
+      });
+    } else setShow(false);
+  };
 
   useEffect(() => {
     console.log('show triggered', show);

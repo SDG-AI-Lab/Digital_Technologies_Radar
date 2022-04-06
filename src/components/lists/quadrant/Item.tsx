@@ -51,8 +51,9 @@ export const Item: React.FC<{ blip: BlipType; close?: boolean }> = ({
           onClick={toggleShow}
           style={{
             flex: 1,
-            padding: 3,
-            fontWeight: 500,
+            padding: 2,
+            fontSize: 12,
+            fontWeight: 600,
             cursor: 'pointer',
             textAlign: 'left'
           }}

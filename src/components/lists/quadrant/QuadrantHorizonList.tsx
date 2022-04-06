@@ -12,23 +12,23 @@ import './DataLists.scss';
 
 type BlipsPerQuadType = Record<string, BlipType[]>;
 
-const OuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '5',
-  my: '10',
-  p: '1',
-  maxWidth: '500px'
-};
+// const OuterBoxProps: BoxProps = {
+//   borderColor: 'gray.200',
+//   borderWidth: '2px',
+//   borderRadius: 'md',
+//   m: '5',
+//   my: '10',
+//   p: '1',
+//   maxWidth: '500px'
+// };
 
-const InnerBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '1',
-  p: '2'
-};
+// const InnerBoxProps: BoxProps = {
+//   borderColor: 'gray.200',
+//   borderWidth: '2px',
+//   borderRadius: 'md',
+//   m: '1',
+//   p: '2'
+// };
 
 interface Props {
   blips: BlipType[];
@@ -61,17 +61,33 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   }, [blips, horizonKey, quadIndex]);
 
   const [sourceHorizon, setSourceHorizon] = useState<string>();
-  // const [closeAll, setCloseAll] = useState(false);
 
-  // const onCloseAll = () => setCloseAll(true);
-  // const afterClose = () => setCloseAll(false);
   const triggerSiblings = (horizon: string) => {
     console.log('setting source horizon to ', horizon);
     setSourceHorizon(horizon);
   };
 
+  /**
+   * @ImplNote
+   * Unfortunately we need to use Chakra-ui as least as possible. If we come up with
+   * a deep enough DOM structure using Box, Flex and Accordions, the radar will start
+   * to suffer performance. Not because the radar is impacting, but because Chakra
+   * constructs Components that need to allow for all sorts of use cases, therefore they
+   * need to implement too much.
+   * We do not.
+   * So we use simple divs whenever - also, consider removing these 2 Boxes here.
+   */
   return (
-    <Box {...OuterBoxProps}>
+    <div
+      style={{
+        borderColor: 'rgba(0,0,0,0.1)',
+        borderWidth: 2,
+        borderRadius: 10,
+        margin: 20,
+        padding: 15,
+        maxWidth: 500
+      }}
+    >
       <Text
         width={'fit-content'}
         color={'blue.500'}
@@ -82,7 +98,16 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
       >
         Stages
       </Text>
-      <Box {...InnerBoxProps}>
+
+      <div
+        style={{
+          borderColor: 'rgba(0,0,0,0.1)',
+          borderWidth: 2,
+          borderRadius: 10,
+          margin: 5,
+          padding: 10
+        }}
+      >
         {horizons.map((horizon) => (
           <HorizonItem
             key={horizon}
@@ -92,7 +117,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
             close={!(sourceHorizon === Utilities.capitalize(horizon))}
           />
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
