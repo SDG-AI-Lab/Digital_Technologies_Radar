@@ -13,7 +13,8 @@ import {
   implementerKey,
   sdgKey,
   startYearKey,
-  endYearKey
+  endYearKey,
+  dataKey
 } from './FilterConstants';
 
 export const CustomFilter: React.FC = () => {
@@ -43,6 +44,8 @@ export const CustomFilter: React.FC = () => {
   const [startYearFilter, setStartYearFilter] = useState<string>('all');
   // end year
   const [endYearFilter, setEndYearFilter] = useState<string>('all');
+  // data
+  const [dataFilter, setDataFilter] = useState<string>('all');
 
   // ALL OPTIONS
   // regions
@@ -61,6 +64,8 @@ export const CustomFilter: React.FC = () => {
   const [startYears, setStartYears] = useState<SelectableItem[]>([]);
   // end year
   const [endYears, setEndYears] = useState<SelectableItem[]>([]);
+  // data
+  const [data, setData] = useState<SelectableItem[]>([]);
 
   // EFFECT on Blips change, to get all options
   useEffect(() => {
@@ -92,6 +97,9 @@ export const CustomFilter: React.FC = () => {
       // end year options
       const newEndYears = FilterUtils.getEndYears(blips, endYearKey);
       setEndYears(newEndYears);
+      // data options
+      const newData = FilterUtils.getData(blips, dataKey);
+      setData(newData);
     }
   }, [blips]);
 
@@ -133,6 +141,11 @@ export const CustomFilter: React.FC = () => {
   // selectedEndYear
   const [selectedEndYear, setSelectedEndYear] = useState<string>(
     endYearFilter === null ? 'all' : endYearFilter
+  );
+
+  // selectedData
+  const [selectedData, setSelectedData] = useState<string>(
+    dataFilter === null ? 'all' : dataFilter
   );
 
   /**
@@ -202,6 +215,16 @@ export const CustomFilter: React.FC = () => {
       filtered = filtered.filter((i) => i[endYearKey] === endYearFilter);
     }
 
+    // filter data
+    console.log(dataFilter);
+    if (dataFilter !== 'all') {
+      isFiltered = true;
+      // We need to check if we have an exact match or the blip is an array containing the data
+      filtered = filtered.filter(
+        (i) => i[dataKey] === dataFilter || i[dataKey].includes(dataFilter)
+      );
+    }
+
     // set filter
     setFilteredBlips(isFiltered, filtered);
   }, [
@@ -214,7 +237,8 @@ export const CustomFilter: React.FC = () => {
     implementerFilter,
     sdgFilter,
     startYearFilter,
-    endYearFilter
+    endYearFilter,
+    dataFilter
   ]); // don't forget to add filters to dep array here
 
   /**
@@ -229,6 +253,7 @@ export const CustomFilter: React.FC = () => {
     setSdgFilter(selectedSdg);
     setStartYearFilter(selectedStartYear);
     setEndYearFilter(selectedEndYear);
+    setDataFilter(selectedData);
   }, [
     selectedRegion,
     selectedCountry,
@@ -237,7 +262,8 @@ export const CustomFilter: React.FC = () => {
     selectedImplementer,
     selectedSdg,
     selectedStartYear,
-    selectedEndYear
+    selectedEndYear,
+    selectedData
   ]);
 
   // on country filter change
@@ -264,6 +290,9 @@ export const CustomFilter: React.FC = () => {
   // on end year filter change
   const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedEndYear(e.target.value);
+  // on data filter change
+  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedData(e.target.value);
 
   const onResetFilter = (): void => {
     setSelectedRegion('all');
@@ -274,6 +303,7 @@ export const CustomFilter: React.FC = () => {
     setSelectedSdg('all');
     setSelectedStartYear('all');
     setSelectedEndYear('all');
+    setSelectedData('all');
   };
 
   return (
@@ -502,6 +532,35 @@ export const CustomFilter: React.FC = () => {
           >
             <option value='all'>End Year</option>
             {endYears.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <div
+          style={{
+            marginTop: 7,
+            marginBottom: 3,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
+          <Select
+            id='Select8'
+            size='lg'
+            style={{
+              maxWidth: '150px',
+              padding: '10px',
+              border: '1px solid lightgrey'
+            }}
+            onChange={onDataChange}
+            value={selectedData}
+          >
+            <option value='all'>Data</option>
+            {data.map((item) => (
               <option key={item.uuid} value={item.name}>
                 {item.name}
               </option>

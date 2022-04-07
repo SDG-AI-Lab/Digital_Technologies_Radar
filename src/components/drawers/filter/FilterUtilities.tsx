@@ -180,6 +180,37 @@ const getEndYears = (
   );
 };
 
+const getData = (
+  rawBlipData: BlipType[],
+  regionKey: string
+): SelectableItem[] => {
+  const newData: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    const blipRegions: Set<string> = new Set(
+      val[regionKey].split(',').map((item) => item.trim())
+    );
+    blipRegions.delete('');
+
+    blipRegions.forEach((region) => {
+      newData.set(region, { uuid: uuidv4(), name: region });
+    });
+  });
+
+  let arr = Array.from(newData.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
+};
+
 export const FilterUtils = {
   getRegions,
   getCountries,
@@ -188,5 +219,6 @@ export const FilterUtils = {
   getImplementers,
   getSDGs,
   getStartYears,
-  getEndYears
+  getEndYears,
+  getData
 };
