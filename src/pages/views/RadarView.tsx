@@ -9,8 +9,14 @@ import { PopOverView } from './PopOverView';
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
   <>
     <Box flex={1}>
-      <Heading fontSize={30} textAlign='center' p={5} paddingTop={75}>
-        Technology Radar
+      <Heading
+        fontSize={30}
+        color='DarkSlateGray'
+        textAlign='center'
+        p={10}
+        paddingTop={15}
+      >
+        Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
       </Heading>
       {loading && <WaitingForRadar size='620px' />}
       {!loading && <Radar />}

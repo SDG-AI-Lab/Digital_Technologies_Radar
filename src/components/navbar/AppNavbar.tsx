@@ -19,7 +19,7 @@ export const AppNavbar: React.FC = () => {
       direction={'column'}
       alignItems={'center'}
       py={5}
-      style={{ borderRight: '1px solid lightgray' }}
+      style={{ borderRight: '1px solid Snow', backgroundColor: 'Snow' }}
     >
       <Box>
         <UNLogo p={1} />

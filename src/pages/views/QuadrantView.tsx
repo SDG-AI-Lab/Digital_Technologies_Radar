@@ -40,11 +40,11 @@ export const QuadrantView: React.FC = () => {
     <>
       <BackButton to='RADAR' />
 
-      <Box flex={1}>
+      <Box flex={1} paddingTop={25}>
         {loading && <WaitingForRadar />}
         {!loading && <QuadrantRadar />}
       </Box>
-      <Box flex={'0.75'}>
+      <Box flex={'0.75'} paddingTop={4}>
         <Box {...OuterBoxProps}>
           <Text
             width={'fit-content'}
