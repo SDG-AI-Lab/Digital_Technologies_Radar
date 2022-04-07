@@ -1,4 +1,5 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
   useDataState,
@@ -290,16 +291,17 @@ export const CustomFilter: React.FC = () => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select0'
+            size='lg'
             style={{
-              maxWidth: '105px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -312,21 +314,22 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
 
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select1'
+            size='lg'
             style={{
-              maxWidth: '105px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -339,20 +342,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select2'
+            size='lg'
             style={{
-              maxWidth: '140px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -365,20 +369,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select3'
+            size='lg'
             style={{
-              maxWidth: '115px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -391,20 +396,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select4'
+            size='lg'
             style={{
-              maxWidth: '140px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -417,20 +423,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select5'
+            size='lg'
             style={{
-              maxWidth: '100px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -443,21 +450,22 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
-          <select
+          <Select
             id='Select6'
+            size='lg'
             style={{
-              maxWidth: '110px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -470,21 +478,22 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <select
+          <Select
             id='Select7'
+            size='lg'
             style={{
-              maxWidth: '110px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -497,7 +506,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
       </div>
 
