@@ -86,7 +86,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
         paddingTop: 15,
         display: 'flex',
         alignItems: 'center',
-        background: "Snow",
+        background: 'Snow'
         // flexWrap: 'wrap'
       }}
     >
