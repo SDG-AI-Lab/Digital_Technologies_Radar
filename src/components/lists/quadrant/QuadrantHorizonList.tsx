@@ -19,35 +19,50 @@ interface Props {
 export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   const {
     state: {
+      techFilters,
       radarData: { horizons }
     }
   } = useRadarState();
   const {
     state: {
-      keys: { horizonKey }
+      keys: { horizonKey, techKey }
     }
   } = useDataState();
 
+  const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const [displayHBlips, setDisplayHBlips] = useState<BlipsPerQuadType>({});
 
   useEffect(() => {
+    if (techFilters.length > 0) {
+      setDisplayBlips(
+        blips.filter((b) => {
+          let hasTech = false;
+          (b[techKey] || []).forEach((blipTech) => {
+            if (techFilters.includes(Utilities.createSlug(blipTech)))
+              hasTech = true;
+          });
+          return hasTech;
+        })
+      );
+    } else {
+      setDisplayBlips(blips);
+    }
+  }, [blips, techFilters]);
+
+  useEffect(() => {
     const newDisplayBlipsByHorizon: BlipsPerQuadType = {};
-    blips.forEach(
-      (blip) =>
-        (newDisplayBlipsByHorizon[blip[horizonKey]] = [
-          ...(newDisplayBlipsByHorizon[blip[horizonKey]] || []),
-          blip
-        ])
-    );
+    displayBlips.forEach((blip) => {
+      newDisplayBlipsByHorizon[blip[horizonKey]] = [
+        ...(newDisplayBlipsByHorizon[blip[horizonKey]] || []),
+        blip
+      ];
+    });
     setDisplayHBlips(newDisplayBlipsByHorizon);
-  }, [blips, horizonKey, quadIndex]);
+  }, [displayBlips, horizonKey, quadIndex]);
 
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
-  const triggerSiblings = (horizon: string) => {
-    console.log('setting source horizon to ', horizon);
-    setSourceHorizon(horizon);
-  };
+  const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
 
   /**
    * @ImplNote
