@@ -518,11 +518,12 @@ export const CustomFilter: React.FC = () => {
             borderWidth: 1,
             borderStyle: 'solid',
             padding: '10px 20px',
-            backgroundColor: 'white',
+            backgroundColor: '#3182ce',
             cursor: 'pointer',
             borderRadius: 5,
-            color: '#0a58ca',
-            marginBottom: 10
+            color: 'white',
+            marginTop: 5,
+            marginBottom: 3
           }}
           onClick={onResetFilter}
         >
