@@ -222,6 +222,7 @@ export const CustomFilter: React.FC = () => {
   return (
     <div
       style={{
+        backgroundColor: "Snow",
         borderBottomStyle: 'solid',
         borderBottomColor: 'lightgrey',
         borderBottomWidth: 1,
