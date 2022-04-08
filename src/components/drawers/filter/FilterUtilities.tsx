@@ -150,34 +150,56 @@ const getStartYears = (
   rawBlipData: BlipType[],
   startYearKey: string
 ): SelectableItem[] => {
-  const newStartYears: Map<string, SelectableItem> = new Map();
+  const yearSet = new Set<number>();
   rawBlipData.forEach((val) => {
-    if (val[startYearKey] !== '' && !newStartYears.has(val[startYearKey]))
-      newStartYears.set(val[startYearKey], {
-        uuid: uuidv4(),
-        name: val[startYearKey]
-      });
+    if (!isNaN(Number(val[startYearKey]))) {
+      yearSet.add(Number(val[startYearKey]));
+    }
   });
-  return Array.from(newStartYears.values()).sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+
+  const yearMap: Map<string, SelectableItem> = new Map();
+  const min = Math.min.apply(this, Array.from(yearSet));
+  const max = new Date().getFullYear();
+
+  Array(max - min + 1)
+    .fill(0)
+    .map((_, idx) => String(min + idx))
+    .forEach((num) => {
+      yearMap.set(num, {
+        uuid: uuidv4(),
+        name: num
+      });
+    });
+
+  return Array.from(yearMap.values());
 };
 
 const getEndYears = (
   rawBlipData: BlipType[],
   endYearKey: string
 ): SelectableItem[] => {
-  const newEndYears: Map<string, SelectableItem> = new Map();
+  const yearSet = new Set<number>();
   rawBlipData.forEach((val) => {
-    if (val[endYearKey] !== '' && !newEndYears.has(val[endYearKey]))
-      newEndYears.set(val[endYearKey], {
-        uuid: uuidv4(),
-        name: val[endYearKey]
-      });
+    if (!isNaN(Number(val[endYearKey]))) {
+      yearSet.add(Number(val[endYearKey]));
+    }
   });
-  return Array.from(newEndYears.values()).sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+
+  const yearMap: Map<string, SelectableItem> = new Map();
+  const min = Math.min.apply(this, Array.from(yearSet));
+  const max = new Date().getFullYear();
+
+  Array(max - min + 1)
+      .fill(0)
+      .map((_, idx) => String(min + idx))
+      .forEach((num) => {
+        yearMap.set(num, {
+          uuid: uuidv4(),
+          name: num
+        });
+      });
+
+  return Array.from(yearMap.values());
 };
 
 const getData = (
