@@ -234,13 +234,13 @@ const getData = (
 };
 
 export const FilterUtils = {
-    getRegions,
-    getCountries,
-    getDisasterTypes,
-    getUseCases,
-    getImplementers,
-    getSDGs,
-    getStartYears,
-    getEndYears,
-    getData
+  getRegions,
+  getCountries,
+  getDisasterTypes,
+  getUseCases,
+  getImplementers,
+  getSDGs,
+  getStartYears,
+  getEndYears,
+  getData
 };
