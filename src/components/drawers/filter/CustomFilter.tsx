@@ -215,7 +215,6 @@ export const CustomFilter: React.FC = () => {
     }
 
     // filter data
-    console.log(dataFilter);
     if (dataFilter !== 'all') {
       isFiltered = true;
       // We need to check if we have an exact match or the blip is an array containing the data
