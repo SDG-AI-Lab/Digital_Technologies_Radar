@@ -2,11 +2,14 @@ import { Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
+// Comps
 import { AppNavbar } from '../components';
-import { About } from '../pages/about/About';
+// Layouts
 import { MainLayout } from '../ui/MainLayout';
-import { NotFound404, Radar, Search } from '../pages';
 import { RadarLayout } from '../layouts/RadarLayout';
+// Pages
+import { NotFound404, Radar, Search, About } from '../pages';
+// Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
 export const NavApp = () => (
