@@ -20,9 +20,8 @@ import {
 export const CustomFilter: React.FC = () => {
   const {
     state: { blips, disasterTypeFilter, useCaseFilter },
-    setUseCaseFilter,
-    setDisasterTypeFilter,
-    setFilteredBlips
+    actions: { setUseCaseFilter, setDisasterTypeFilter },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const {
@@ -309,6 +308,7 @@ export const CustomFilter: React.FC = () => {
   return (
     <div
       style={{
+        backgroundColor: 'Snow',
         borderBottomStyle: 'solid',
         borderBottomColor: 'lightgrey',
         borderBottomWidth: 1,

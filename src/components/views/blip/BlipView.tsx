@@ -23,7 +23,7 @@ import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 export const BlipView: FC = () => {
   const {
     state: { selectedItem },
-    setSelectedItem
+    actions: { setSelectedItem }
   } = useRadarState();
   const { isOpen, onOpen, onClose } = useDisclosure();
 

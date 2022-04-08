@@ -1,94 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { Box, Flex, Text, BoxProps } from '@chakra-ui/react';
-import { QuadrantRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  BlipType,
+  QuadrantRadar,
+  useRadarState
+} from '@undp_sdg_ai_lab/undp-radar';
 
-import { ContentView } from '../../components/views/ContentView';
-import { BackButton, WaitingForRadar } from '../../radar/components';
-import { QuadrantDataLists } from '../../components/lists/quadrant/DataLists';
-import { FilterTechNavView } from '../../components/views/FilterTechNavView';
+import { BackButton } from '../../radar/components';
+import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
 
 export const QuadrantView: React.FC = () => {
-  const [loading, setLoading] = useState(true);
   const {
     state: {
-      selectedItem,
+      blips,
+      isFiltered,
+      filteredBlips,
       selectedQuadrant,
       radarData: { quadrants }
-    },
-    setSelectedQuadrant
+    }
   } = useRadarState();
 
-  const { quadrantId } = useParams();
+  const [bufferBlips, setBufferBlips] = useState<BlipType[]>([]);
+  const [quadIndex, setQuadIndex] = useState<number | false>(false);
 
   useEffect(() => {
-    // const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
-    if (selectedItem) {
-      // goToBlip(selectedItem);
-    } else if (quadrantId) {
-      if (quadrants && quadrants.length > 0 && quadrants.includes(quadrantId)) {
-        // we must show Quadrant view
-        setSelectedQuadrant(quadrantId);
-        setLoading(false);
-      }
-    }
-  }, [selectedItem, selectedQuadrant, quadrants, quadrantId]);
+    const newBufferBlips = (isFiltered ? filteredBlips : blips).filter(
+      (b) => b.quadrantIndex === quadIndex
+    );
+    // TODO: filter by tech
+    setBufferBlips(newBufferBlips);
+  }, [filteredBlips, blips, isFiltered, quadIndex]);
+
+  useEffect(() => {
+    if (selectedQuadrant) {
+      setQuadIndex(quadrants.indexOf(selectedQuadrant));
+    } else setQuadIndex(false);
+  }, [selectedQuadrant]);
 
   return (
-    <>
-      <FilterTechNavView />
-      <ContentView>
-        <Flex flex={1} p={1}>
-          <BackButton to='RADAR' />
-
-          <Box flex={1}>
-            {loading && <WaitingForRadar />}
-            {!loading && (
-              <>
-                {/* TODO: change the undefined type to null in the lib */}
-                <QuadrantRadar
-                  selectedQuadrant={selectedQuadrant || undefined}
-                />
-              </>
-            )}
-          </Box>
-          <Box flex={'0.75'}>
-            <Box {...OuterBoxProps}>
-              <Text
-                width={'fit-content'}
-                color={'blue.500'}
-                borderBottom={'3px solid'}
-                my={5}
-                ml={5}
-                as='h5'
-              >
-                Stages
-              </Text>
-              <Box {...InnerBoxProps}>
-                <QuadrantDataLists />
-              </Box>
-            </Box>
-          </Box>
-        </Flex>
-      </ContentView>
-    </>
+    <div style={{ display: 'flex', flex: 1, padding: 2 }}>
+      <BackButton to='RADAR' />
+      <div style={{ flex: 1 }}>
+        <QuadrantRadar />
+      </div>
+      {(quadIndex === 0 ||
+        quadIndex === 1 ||
+        quadIndex === 2 ||
+        quadIndex === 3) && (
+        <div style={{ flex: '0.75' }}>
+          <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
+        </div>
+      )}
+    </div>
   );
-};
-
-const OuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '5',
-  my: '10',
-  p: '1',
-  maxWidth: '500px'
-};
-
-const InnerBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '1',
-  p: '2'
 };
