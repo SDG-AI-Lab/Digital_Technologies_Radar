@@ -190,14 +190,14 @@ const getEndYears = (
   const max = new Date().getFullYear();
 
   Array(max - min + 1)
-      .fill(0)
-      .map((_, idx) => String(min + idx))
-      .forEach((num) => {
-        yearMap.set(num, {
-          uuid: uuidv4(),
-          name: num
-        });
+    .fill(0)
+    .map((_, idx) => String(min + idx))
+    .forEach((num) => {
+      yearMap.set(num, {
+        uuid: uuidv4(),
+        name: num
       });
+    });
 
   return Array.from(yearMap.values());
 };
@@ -234,13 +234,13 @@ const getData = (
 };
 
 export const FilterUtils = {
-  getRegions,
-  getCountries,
-  getDisasterTypes,
-  getUseCases,
-  getImplementers,
-  getSDGs,
-  getStartYears,
-  getEndYears,
-  getData
+    getRegions,
+    getCountries,
+    getDisasterTypes,
+    getUseCases,
+    getImplementers,
+    getSDGs,
+    getStartYears,
+    getEndYears,
+    getData
 };
