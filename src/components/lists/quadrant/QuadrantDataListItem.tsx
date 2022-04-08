@@ -73,8 +73,9 @@ const QuadrantItemList: React.FC<Props> = ({
           )
             return (
               <AccordionItem
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
+                // onMouseEnter={onMouseEnter}
+                // onMouseLeave={onMouseLeave}
+                onClick={() => setHoveredItem(blip)}
               >
                 <h5>
                   <AccordionButton>
@@ -132,7 +133,10 @@ const QuadrantItemList: React.FC<Props> = ({
                           </Badge>
                         </Flex>
                         <Button
-                          onClick={() => setSelectedItem(blip)}
+                          onClick={() => { 
+                            setHoveredItem(blip);
+                            setSelectedItem(blip);
+                          }}
                           colorScheme='blue'
                           borderRadius={'0'}
                         >
