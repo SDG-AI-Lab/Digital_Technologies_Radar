@@ -205,13 +205,25 @@ export const CustomFilter: React.FC = () => {
     // filter start years
     if (startYearFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[startYearKey] === startYearFilter);
+      let start = Number(startYearFilter);
+      let end = isNaN(Number(endYearFilter))
+        ? new Date().getFullYear()
+        : Number(endYearFilter);
+      let range = Array.from({ length: end - start }, (v, k) => k + start);
+      filtered = filtered.filter((i) =>
+        range.includes(Number(i[startYearKey]))
+      );
     }
 
     // filter end years
     if (endYearFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[endYearKey] === endYearFilter);
+      let start = isNaN(Number(startYearFilter))
+        ? 2000 // This assumes the earliest project year
+        : Number(startYearFilter);
+      let end = Number(endYearFilter);
+      let range = Array.from({ length: end - start }, (v, k) => k + start);
+      filtered = filtered.filter((i) => range.includes(Number(i[endYearKey])));
     }
 
     // filter data
