@@ -92,11 +92,14 @@ const getImplementers = (
 ): SelectableItem[] => {
   const newImplementers: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[implementerKey] !== '' && !newImplementers.has(val[implementerKey]))
-      newImplementers.set(val[implementerKey], {
-        uuid: uuidv4(),
-        name: val[implementerKey]
-      });
+    const blipImplementers: Set<string> = new Set(
+      val[implementerKey].split(',').map((item) => item.trim())
+    );
+    blipImplementers.delete('');
+
+    blipImplementers.forEach((implementer) => {
+      newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
+    });
   });
 
   let arr = Array.from(newImplementers.values()).sort((a, b) =>

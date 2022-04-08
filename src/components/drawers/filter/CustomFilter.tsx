@@ -191,7 +191,9 @@ export const CustomFilter: React.FC = () => {
     if (implementerFilter !== 'all') {
       isFiltered = true;
       filtered = filtered.filter(
-        (i) => i[implementerKey] === implementerFilter
+        (i) =>
+          i[implementerKey] === implementerFilter ||
+          i[implementerKey].includes(implementerFilter)
       );
     }
 
