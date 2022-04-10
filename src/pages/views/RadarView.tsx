@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel, BoxProps} from '@chakra-ui/react';
 import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 
-import { TechDescription } from '../../radar/tech/TechDescription';
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
 
