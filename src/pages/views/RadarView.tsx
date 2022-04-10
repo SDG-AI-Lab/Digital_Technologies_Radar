@@ -1,5 +1,14 @@
 import React from 'react';
-import { Box, Heading, Tabs, TabList, TabPanels, Tab, TabPanel, BoxProps} from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  BoxProps
+} from '@chakra-ui/react';
 import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from '../../radar/components';
@@ -53,5 +62,5 @@ const TabOuterBoxProps: BoxProps = {
   mb: '5',
   mr: '5',
   p: '5',
-  maxWidth: '500px',
+  maxWidth: '500px'
 };
