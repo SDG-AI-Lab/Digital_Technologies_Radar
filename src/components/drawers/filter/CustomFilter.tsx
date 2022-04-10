@@ -1,5 +1,11 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import { Select } from '@chakra-ui/react';
+import {
+  Select,
+  RangeSlider,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb
+} from '@chakra-ui/react';
 import {
   SelectableItem,
   useDataState,
@@ -12,8 +18,7 @@ import {
   countryKey,
   implementerKey,
   sdgKey,
-  startYearKey,
-  endYearKey,
+  yearKey,
   dataKey
 } from './FilterConstants';
 
@@ -59,10 +64,8 @@ export const CustomFilter: React.FC = () => {
   const [implementers, setImplementers] = useState<SelectableItem[]>([]);
   // sdg
   const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
-  // start year
-  const [startYears, setStartYears] = useState<SelectableItem[]>([]);
-  // end year
-  const [endYears, setEndYears] = useState<SelectableItem[]>([]);
+  // year
+  const [years, setYears] = useState<SelectableItem[]>([]);
   // data
   const [data, setData] = useState<SelectableItem[]>([]);
 
@@ -91,11 +94,8 @@ export const CustomFilter: React.FC = () => {
       const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
       setSdgs(newSdgs);
       // start year options
-      const newStartYears = FilterUtils.getStartYears(blips, startYearKey);
-      setStartYears(newStartYears);
-      // end year options
-      const newEndYears = FilterUtils.getEndYears(blips, endYearKey);
-      setEndYears(newEndYears);
+      const newYears = FilterUtils.getYears(blips, yearKey);
+      setYears(newYears);
       // data options
       const newData = FilterUtils.getData(blips, dataKey);
       setData(newData);
@@ -212,9 +212,7 @@ export const CustomFilter: React.FC = () => {
         ? new Date().getFullYear()
         : Number(endYearFilter);
       let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
-      filtered = filtered.filter((i) =>
-        range.includes(Number(i[startYearKey]))
-      );
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
@@ -225,7 +223,7 @@ export const CustomFilter: React.FC = () => {
         : Number(startYearFilter);
       let end = Number(endYearFilter);
       let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
-      filtered = filtered.filter((i) => range.includes(Number(i[endYearKey])));
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter data
@@ -296,12 +294,11 @@ export const CustomFilter: React.FC = () => {
   // on SDG filter change
   const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedSdg(e.target.value);
-  // on start year filter change
-  const onStartYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedStartYear(e.target.value);
-  // on end year filter change
-  const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedEndYear(e.target.value);
+  // on year range change
+  const onYearRangeChange = (e: Number[]) => {
+    setSelectedStartYear(String(e[0]));
+    setSelectedEndYear(String(e[1]));
+  };
   // on data filter change
   const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedData(e.target.value);
@@ -497,59 +494,82 @@ export const CustomFilter: React.FC = () => {
         </div>
         <div
           style={{
-            marginTop: 7,
+            marginTop: 15,
             marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
+            marginLeft: 20,
+            marginRight: 40,
+            width: 200
           }}
         >
-          {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
-          <Select
-            id='Select6'
+          <RangeSlider
+            aria-label={['min', 'max']}
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onStartYearChange}
-            value={selectedStartYear}
+            defaultValue={[
+              Math.max.apply(
+                Math,
+                years.map(function (o) {
+                  return Number(o.name);
+                })
+              ),
+              Math.min.apply(
+                Math,
+                years.map(function (o) {
+                  return Number(o.name);
+                })
+              )
+            ]}
+            min={Math.min.apply(
+              Math,
+              years.map(function (o) {
+                return Number(o.name);
+              })
+            )}
+            max={Math.max.apply(
+              Math,
+              years.map(function (o) {
+                return Number(o.name);
+              })
+            )}
+            onChangeEnd={(val) => onYearRangeChange(val)}
           >
-            <option value='all'>Start Year</option>
-            {startYears.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
-        </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <Select
-            id='Select7'
-            size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onEndYearChange}
-            value={selectedEndYear}
-          >
-            <option value='all'>End Year</option>
-            {endYears.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
+            <RangeSliderTrack>
+              <RangeSliderFilledTrack backgroundColor={'#adcdec'} />
+            </RangeSliderTrack>
+
+            <RangeSliderThumb index={0} boxSize={3} backgroundColor={'#3182ce'}>
+              <div
+                style={{
+                  marginBottom: -40
+                }}
+              >
+                {selectedStartYear == 'all'
+                  ? Math.min.apply(
+                      Math,
+                      years.map(function (o) {
+                        return Number(o.name);
+                      })
+                    )
+                  : selectedStartYear}
+              </div>
+            </RangeSliderThumb>
+
+            <RangeSliderThumb index={1} boxSize={3} backgroundColor={'#3182ce'}>
+              <div
+                style={{
+                  marginBottom: -40
+                }}
+              >
+                {selectedEndYear == 'all'
+                  ? Math.max.apply(
+                      Math,
+                      years.map(function (o) {
+                        return Number(o.name);
+                      })
+                    )
+                  : selectedEndYear}
+              </div>
+            </RangeSliderThumb>
+          </RangeSlider>
         </div>
 
         <div
