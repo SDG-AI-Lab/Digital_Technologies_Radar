@@ -31,20 +31,9 @@ export const TechDescription: React.FC = () => {
 
   return (
     <React.Fragment>
-      {selectedTechs && techFilters && techFilters.length > 0 && (
-        <Box flex={'0.75'} pt={75}>
+      {selectedTechs && techFilters && techFilters.length > 0 ? (
+        <Box>
           <Box {...TechDescriptionOuterBoxProps}>
-            <Text
-              width={'fit-content'}
-              color={'blue.500'}
-              borderBottom={'3px solid'}
-              my={5}
-              ml={10}
-              as='h5'
-            >
-              Technologies
-            </Text>
-
             {Array.from(selectedTechs.keys()).map((selectedTechKey) => {
               const selectedTech = selectedTechs.get(selectedTechKey);
               return (
@@ -74,18 +63,16 @@ export const TechDescription: React.FC = () => {
             })}
           </Box>
         </Box>
+      ) : (
+        <Text>Please choose a technology</Text>
       )}
     </React.Fragment>
   );
 };
 
 const TechDescriptionOuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  m: '10',
   p: '1',
-  maxHeight: '750px',
+  maxHeight: '460px',
   overflow: 'scroll'
 };
 
@@ -94,5 +81,5 @@ const TechDescriptionInnerBoxProps: BoxProps = {
   borderWidth: '2px',
   borderRadius: 'md',
   m: '1',
-  p: '10'
+  p: '5'
 };
