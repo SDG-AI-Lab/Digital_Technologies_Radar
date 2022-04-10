@@ -12,7 +12,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
         fontSize={30}
         color='DarkSlateGray'
         textAlign='center'
-        p={10}
+        p={15}
         paddingTop={15}
       >
         Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
@@ -25,8 +25,8 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
     <Box flex={'0.75'} {...TabOuterBoxProps}>
       <Tabs variant='enclosed'>
         <TabList>
-          <Tab as='h5'>Technologies</Tab>
           <Tab as='h5'>Stages</Tab>
+          <Tab as='h5'>Technologies</Tab>
           <Tab as='h5'>Project</Tab>
         </TabList>
         <TabPanels>
