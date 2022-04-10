@@ -5,9 +5,10 @@ import {
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import { Text } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
+import { BlipView } from '../../views/blip/BlipView'
 import './DataLists.scss';
 
 type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -85,36 +86,40 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         maxWidth: 500
       }}
     >
-      <Text
-        width={'fit-content'}
-        color={'blue.500'}
-        borderBottom={'3px solid'}
-        my={5}
-        ml={5}
-        as='h5'
-      >
-        Stages
-      </Text>
-
-      <div
-        style={{
-          borderColor: 'rgba(0,0,0,0.1)',
-          borderWidth: 2,
-          borderRadius: 10,
-          margin: 5,
-          padding: 10
-        }}
-      >
-        {horizons.map((horizon) => (
-          <HorizonItem
-            key={horizon}
-            horizonName={Utilities.capitalize(horizon)}
-            quadrantBlips={displayHBlips[horizon]}
-            triggerSiblings={triggerSiblings}
-            close={!(sourceHorizon === Utilities.capitalize(horizon))}
-          />
-        ))}
-      </div>
+      <Tabs variant='enclosed'>
+        <TabList>
+          <Tab as='h5'>Stages</Tab>
+          <Tab as='h5'>Project</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <div
+              style={{
+                borderColor: 'rgba(0,0,0,0.1)',
+                borderWidth: 2,
+                borderRadius: 10,
+                margin: 5,
+                marginLeft: 0,
+                marginRight: 0,
+                padding: 10
+              }}
+            >
+              {horizons.map((horizon) => (
+                <HorizonItem
+                  key={horizon}
+                  horizonName={Utilities.capitalize(horizon)}
+                  quadrantBlips={displayHBlips[horizon]}
+                  triggerSiblings={triggerSiblings}
+                  close={!(sourceHorizon === Utilities.capitalize(horizon))}
+                />
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <BlipView />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   );
 };
