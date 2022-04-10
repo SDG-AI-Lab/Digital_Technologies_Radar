@@ -2,8 +2,8 @@ const RADAR = '/radar';
 const ABOUT = '/about';
 const SEARCH = '/search';
 
-const QUADRANT = `${RADAR}/quadrant`;
-const QUADRANT_PARAM = `${QUADRANT}/:quadrantId`;
+const QUADRANT = `quadrant`;
+const QUADRANT_PARAM = `:quadrantId`;
 
 const BLIP = `${RADAR}/technology-item`;
 const BLIP_PARAM = `${BLIP}/:techItemId`;

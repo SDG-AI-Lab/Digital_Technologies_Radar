@@ -8,6 +8,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import { TechItem } from './components/TechItem';
 import './TechList.scss';
+import { background } from '@chakra-ui/react';
 
 export const TechList: React.FC<{ showTitle?: boolean }> = ({
   showTitle = true
@@ -22,8 +23,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       useCaseFilter,
       disasterTypeFilter
     },
-    setTechFilter,
-    setHoveredTech
+    actions: { setTechFilter, setHoveredTech }
   } = useRadarState();
 
   const {
@@ -85,7 +85,8 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       style={{
         paddingTop: 15,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        background: 'Snow'
         // flexWrap: 'wrap'
       }}
     >
