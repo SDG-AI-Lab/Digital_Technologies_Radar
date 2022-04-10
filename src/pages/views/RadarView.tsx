@@ -54,7 +54,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Box>    
+    </Box>
   </>
 );
 
@@ -68,4 +68,3 @@ const TabOuterBoxProps: BoxProps = {
   p: '5',
   maxWidth: '500px'
 };
-
