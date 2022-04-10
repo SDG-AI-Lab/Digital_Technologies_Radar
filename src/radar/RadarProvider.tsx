@@ -14,11 +14,12 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/technology_radar_dataset_updated_v3.csv';
+import csvData from '../assets/csv/technology_radar_dataset_updated_v4.csv';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
   const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
+      Region: item['Region'],
       'Country of Implementation': item['Country of Implementation'],
       Data: item.Data,
       'Date of Implementation': item['Date of Implementation'],
