@@ -7,19 +7,46 @@ import {
   UseCaseKey
 } from '@undp_sdg_ai_lab/undp-radar';
 
+const getRegions = (
+  rawBlipData: BlipType[],
+  regionKey: string
+): SelectableItem[] => {
+  const newRegions: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    const blipRegions: Set<string> = new Set(
+      val[regionKey].split(',').map((item) => item.trim())
+    );
+    blipRegions.delete('');
+
+    blipRegions.forEach((region) => {
+      newRegions.set(region, { uuid: uuidv4(), name: region });
+    });
+  });
+
+  return Array.from(newRegions.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+};
+
 const getCountries = (
   rawBlipData: BlipType[],
   countryKey: string
 ): SelectableItem[] => {
   const newCountries: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[countryKey] !== '' && !newCountries.has(val[countryKey]))
-      newCountries.set(val[countryKey], {
-        uuid: uuidv4(),
-        name: val[countryKey]
-      });
+    const blipCountries: Set<string> = new Set(
+      val[countryKey].split(',').map((item) => item.trim())
+    );
+    blipCountries.delete('');
+
+    blipCountries.forEach((country) => {
+      newCountries.set(country, { uuid: uuidv4(), name: country });
+    });
   });
-  return Array.from(newCountries.values());
+
+  return Array.from(newCountries.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getDisasterTypes = (
@@ -37,7 +64,9 @@ const getDisasterTypes = (
         name: val[disasterTypeKey]
       });
   });
-  return Array.from(newDisterTypes.values());
+  return Array.from(newDisterTypes.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getUseCases = (
@@ -52,7 +81,9 @@ const getUseCases = (
         name: val[useCaseKey]
       });
   });
-  return Array.from(newUseCases.values());
+  return Array.from(newUseCases.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 const getImplementers = (
@@ -61,13 +92,29 @@ const getImplementers = (
 ): SelectableItem[] => {
   const newImplementers: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (val[implementerKey] !== '' && !newImplementers.has(val[implementerKey]))
-      newImplementers.set(val[implementerKey], {
-        uuid: uuidv4(),
-        name: val[implementerKey]
-      });
+    const blipImplementers: Set<string> = new Set(
+      val[implementerKey].split(',').map((item) => item.trim())
+    );
+    blipImplementers.delete('');
+
+    blipImplementers.forEach((implementer) => {
+      newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
+    });
   });
-  return Array.from(newImplementers.values());
+
+  let arr = Array.from(newImplementers.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
 };
 
 const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
@@ -81,45 +128,122 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
       }
     });
   });
-  return Array.from(newSDGs.values());
+
+  // Order the resulting array
+  let arr = Array.from(newSDGs.values()).sort(function (a, b) {
+    // we use natural instead of lexicographical order
+    return a.name.localeCompare(b.name, undefined, {
+      numeric: true,
+      sensitivity: 'base'
+    });
+  });
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
 };
 
 const getStartYears = (
   rawBlipData: BlipType[],
   startYearKey: string
 ): SelectableItem[] => {
-  const newStartYears: Map<string, SelectableItem> = new Map();
+  const yearSet = new Set<number>();
   rawBlipData.forEach((val) => {
-    if (val[startYearKey] !== '' && !newStartYears.has(val[startYearKey]))
-      newStartYears.set(val[startYearKey], {
-        uuid: uuidv4(),
-        name: val[startYearKey]
-      });
+    if (!isNaN(Number(val[startYearKey]))) {
+      yearSet.add(Number(val[startYearKey]));
+    }
   });
-  return Array.from(newStartYears.values());
+
+  const yearMap: Map<string, SelectableItem> = new Map();
+  const min = Math.min.apply(this, Array.from(yearSet));
+  const max = new Date().getFullYear();
+
+  Array(max - min + 1)
+    .fill(0)
+    .map((_, idx) => String(min + idx))
+    .forEach((num) => {
+      yearMap.set(num, {
+        uuid: uuidv4(),
+        name: num
+      });
+    });
+
+  return Array.from(yearMap.values());
 };
 
 const getEndYears = (
   rawBlipData: BlipType[],
   endYearKey: string
 ): SelectableItem[] => {
-  const newEndYears: Map<string, SelectableItem> = new Map();
+  const yearSet = new Set<number>();
   rawBlipData.forEach((val) => {
-    if (val[endYearKey] !== '' && !newEndYears.has(val[endYearKey]))
-      newEndYears.set(val[endYearKey], {
-        uuid: uuidv4(),
-        name: val[endYearKey]
-      });
+    if (!isNaN(Number(val[endYearKey]))) {
+      yearSet.add(Number(val[endYearKey]));
+    }
   });
-  return Array.from(newEndYears.values());
+
+  const yearMap: Map<string, SelectableItem> = new Map();
+  const min = Math.min.apply(this, Array.from(yearSet));
+  const max = new Date().getFullYear();
+
+  Array(max - min + 1)
+    .fill(0)
+    .map((_, idx) => String(min + idx))
+    .forEach((num) => {
+      yearMap.set(num, {
+        uuid: uuidv4(),
+        name: num
+      });
+    });
+
+  return Array.from(yearMap.values());
+};
+
+const getData = (
+  rawBlipData: BlipType[],
+  regionKey: string
+): SelectableItem[] => {
+  const newData: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    const blipRegions: Set<string> = new Set(
+      val[regionKey].split(',').map((item) => item.trim())
+    );
+    blipRegions.delete('');
+
+    blipRegions.forEach((region) => {
+      newData.set(region, { uuid: uuidv4(), name: region });
+    });
+  });
+
+  let arr = Array.from(newData.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  // Move 'No Information' to the back of the ordered array
+  const index = arr
+    .map(function (e) {
+      return e.name;
+    })
+    .indexOf('No Information');
+  arr.push(arr.splice(index, 1)[0]);
+
+  return arr;
 };
 
 export const FilterUtils = {
+  getRegions,
   getCountries,
   getDisasterTypes,
   getUseCases,
   getImplementers,
   getSDGs,
   getStartYears,
-  getEndYears
+  getEndYears,
+  getData
 };
