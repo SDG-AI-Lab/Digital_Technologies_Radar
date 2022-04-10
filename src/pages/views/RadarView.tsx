@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, Heading, Flex } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  BoxProps
+} from '@chakra-ui/react';
+
 import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 
 import { TechDescription } from '../../radar/tech/TechDescription';
@@ -25,10 +35,37 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
       {!loading && <Radar />}
       <PopOverView />
     </Box>
-    <BlipList />
-    {/* </div> */}
-    <Flex>
-      <TechDescription />
-    </Flex>
+    <Box flex={'0.75'} {...TabOuterBoxProps}>
+      <Tabs variant='enclosed'>
+        <TabList>
+          <Tab as='h5'>Stages</Tab>
+          <Tab as='h5'>Technologies</Tab>
+          <Tab as='h5'>Project</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <BlipList />
+          </TabPanel>
+          <TabPanel>
+            <TechDescription />
+          </TabPanel>
+          <TabPanel>
+            <p>three!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Box>    
   </>
 );
+
+const TabOuterBoxProps: BoxProps = {
+  borderColor: 'gray.200',
+  borderWidth: '2px',
+  borderRadius: 'md',
+  mt: '20',
+  mb: '5',
+  mr: '5',
+  p: '5',
+  maxWidth: '500px'
+};
+
