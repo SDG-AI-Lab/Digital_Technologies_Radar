@@ -8,6 +8,7 @@ import {
   Badge,
   Box,
   Text,
+  Image,
   Link
 } from '@chakra-ui/react';
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
@@ -34,6 +35,13 @@ export const BlipView: FC = () => {
             >
               {selectedItem['Ideas/Concepts/Examples']}
             </Box>
+            <Stack>
+              <Image
+                objectFit='cover'
+                src={`${selectedItem['Image Url']}`}
+                alt='Default Image'
+              />
+            </Stack>
             <Stack
               direction='row'
               mt={5}
