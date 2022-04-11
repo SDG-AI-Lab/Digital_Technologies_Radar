@@ -492,6 +492,36 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
+
+        <div
+          style={{
+            marginTop: 7,
+            marginBottom: 3,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
+          <Select
+            id='Select8'
+            size='lg'
+            style={{
+              maxWidth: '150px',
+              padding: '10px',
+              border: '1px solid lightgrey'
+            }}
+            onChange={onDataChange}
+            value={selectedData}
+          >
+            <option value='all'>Data</option>
+            {data.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+
         <div
           style={{
             marginTop: 15,
@@ -570,35 +600,6 @@ export const CustomFilter: React.FC = () => {
               </div>
             </RangeSliderThumb>
           </RangeSlider>
-        </div>
-
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <Select
-            id='Select8'
-            size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onDataChange}
-            value={selectedData}
-          >
-            <option value='all'>Data</option>
-            {data.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
         </div>
       </div>
 
