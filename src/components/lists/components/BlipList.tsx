@@ -130,10 +130,8 @@ export const BlipList: React.FC = () => {
   };
 
   return (
-    <div>
-      <div style={{ width: 400 }}>
+      <div style={{ width: 400}}>
         <Accordion allowToggle>{renderQuadrants()}</Accordion>
       </div>
-    </div>
   );
 };

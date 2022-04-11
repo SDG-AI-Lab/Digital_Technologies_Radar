@@ -44,7 +44,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
         </TabList>
         <TabPanels>
           <TabPanel>
-            <BlipList />
+            <BlipList/>
           </TabPanel>
           <TabPanel>
             <TechDescription />
