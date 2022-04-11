@@ -36,7 +36,12 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
       <PopOverView />
     </Box>
     <Box flex={'0.75'} {...TabOuterBoxProps}>
-      <Tabs variant='enclosed'>
+      <Tabs
+        variant='enclosed'
+        maxH={'100%'}
+        overflow='hidden'
+        overflowY={'auto'}
+      >
         <TabList>
           <Tab as='h5'>Stages</Tab>
           <Tab as='h5'>Technologies</Tab>
@@ -66,5 +71,6 @@ const TabOuterBoxProps: BoxProps = {
   mb: '5',
   mr: '5',
   p: '5',
-  maxWidth: '500px'
+  maxWidth: '500px',
+  overflow: 'hidden'
 };
