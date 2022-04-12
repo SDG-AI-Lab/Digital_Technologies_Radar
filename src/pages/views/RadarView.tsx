@@ -17,6 +17,9 @@ import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
 import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
 import { BlipList } from '../../components/lists/components/BlipList';
+import { StyledEngineProvider } from '@mui/material/styles';
+
+import { BlipListMui } from '../../components/lists/components/BlipListMui';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
   <>
@@ -49,7 +52,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
         </TabList>
         <TabPanels>
           <TabPanel>
-            <BlipList />
+            <BlipListMui />
           </TabPanel>
           <TabPanel>
             <TechDescription />

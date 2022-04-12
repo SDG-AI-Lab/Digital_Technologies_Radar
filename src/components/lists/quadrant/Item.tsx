@@ -54,14 +54,14 @@ export const Item: React.FC<Props> = ({
   }, [close]);
 
   const onSelect = () => {
-    setHoveredItem(blip);
+    // setHoveredItem(blip);
     setSelectedItem(blip);
   };
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
 
   return (
-    // <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-    <div>
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {/* <div> */}
       <div
         style={{
           padding: 5,

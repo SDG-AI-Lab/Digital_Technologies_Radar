@@ -12,15 +12,17 @@ import {
 } from '../quadrant/QuadrantHorizonList';
 import { HorizonItem } from '../quadrant/HorizonItem';
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
+  // Accordion,
+  // AccordionButton,
+  // AccordionIcon,
+  // AccordionItem,
+  // AccordionPanel,
   Box
 } from '@chakra-ui/react';
+import { ShowIcon } from '../quadrant/ShowIcon';
+import { ScrollableDiv } from './ScrollableDiv';
 
-export const BlipList: React.FC = () => {
+export const BlipList: React.FC = React.memo(() => {
   const {
     state: {
       blips,
@@ -35,6 +37,16 @@ export const BlipList: React.FC = () => {
       keys: { horizonKey, techKey }
     }
   } = useDataState();
+
+  const [show, setShow] = useState(false);
+  const toggleShow = () => {
+    if (!show) {
+      // triggerSiblings(quadrantName);
+      setTimeout(() => {
+        setShow(true);
+      });
+    } else setShow(false);
+  };
 
   type QuadType = {
     qIndex: number;
@@ -109,9 +121,26 @@ export const BlipList: React.FC = () => {
 
   const renderQuadrants = (): ReactNode => {
     return quadrants.map((quadrant: string) => {
+      // test only one
+      // const quadrant = quadrants[0];
+      // end test only one
       return (
         <div key={quadrant}>
-          <AccordionItem>
+          <div
+            onClick={toggleShow}
+            style={{ display: 'flex', padding: 5, cursor: 'pointer' }}
+          >
+            <h4 style={{ flex: 1, textAlign: 'left' }}>
+              {Utilities.capitalize(quadrant)}
+            </h4>
+            <ShowIcon isOpen={show} />
+          </div>
+
+          <ScrollableDiv show={show} maxHeight={400}>
+            {renderHorizons(quadrant)}
+          </ScrollableDiv>
+
+          {/* <AccordionItem>
             <h2>
               <AccordionButton>
                 <Box flex='1' textAlign='left' fontWeight='bold'>
@@ -123,7 +152,7 @@ export const BlipList: React.FC = () => {
             <AccordionPanel pb={4}>
               <div>{renderHorizons(quadrant)}</div>
             </AccordionPanel>
-          </AccordionItem>
+          </AccordionItem> */}
         </div>
       );
     });
@@ -131,7 +160,8 @@ export const BlipList: React.FC = () => {
 
   return (
     <div style={{ width: 400 }}>
-      <Accordion allowToggle>{renderQuadrants()}</Accordion>
+      {/* <Accordion allowToggle>{renderQuadrants()}</Accordion> */}
+      {renderQuadrants()}
     </div>
   );
-};
+});
