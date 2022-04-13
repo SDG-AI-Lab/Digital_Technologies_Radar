@@ -1,14 +1,4 @@
 import React from 'react';
-import {
-  Box,
-  Heading,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  BoxProps
-} from '@chakra-ui/react';
 
 import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -17,60 +7,94 @@ import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
 
 import { BlipListMui } from '../../components/lists/components/BlipListMui';
+import { Box, Tab, Tabs, Typography } from '@mui/material';
 
-export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
-  <>
-    <Box flex={1}>
-      {/* <div> */}
-      <Heading
-        fontSize={30}
-        color='DarkSlateGray'
-        textAlign='center'
-        p={10}
-        paddingTop={15}
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  };
+}
+
+export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  // <div style={{ backgroundColor: 'red', flex: 0.6, height: 1200 }}></div>
+  //     <div style={{ backgroundColor: 'green' }}></div>
+
+  return (
+    <>
+      <div style={{ padding: 10 }}>
+        {/* <div> */}
+        <Typography fontSize={30} color='DarkSlateGray' textAlign='center'>
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+        </Typography>
+        {loading && <WaitingForRadar size='620px' />}
+        {!loading && <Radar />}
+        <PopOverView />
+      </div>
+      <div
+        style={{
+          flex: 0.75,
+          borderColor: 'gray.200',
+          borderWidth: 2,
+          padding: 10,
+          maxWidth: '500px'
+        }}
       >
-        Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-      </Heading>
-      {loading && <WaitingForRadar size='620px' />}
-      {!loading && <Radar />}
-      <PopOverView />
-    </Box>
-    <Box flex={'0.75'} {...TabOuterBoxProps}>
-      <Tabs
-        variant='enclosed'
-        maxH={'100%'}
-        overflow='hidden'
-        overflowY={'auto'}
-      >
-        <TabList>
-          <Tab as='h5'>Stages</Tab>
-          <Tab as='h5'>Technologies</Tab>
-          <Tab as='h5'>Project</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
+        <Box sx={{ width: '100%' }}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label='basic tabs example'
+            >
+              <Tab label='Stages' {...a11yProps(0)} />
+              <Tab label='Technologies' {...a11yProps(1)} />
+              <Tab label='Project' {...a11yProps(2)} />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
             <BlipListMui />
           </TabPanel>
-          <TabPanel>
+          <TabPanel value={value} index={1}>
             <TechDescription />
           </TabPanel>
-          <TabPanel>
+          <TabPanel value={value} index={2}>
             <p>three!</p>
           </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Box>
-  </>
-);
-
-const TabOuterBoxProps: BoxProps = {
-  borderColor: 'gray.200',
-  borderWidth: '2px',
-  borderRadius: 'md',
-  mt: '20',
-  mb: '5',
-  mr: '5',
-  p: '5',
-  maxWidth: '500px',
-  overflow: 'hidden'
+        </Box>
+      </div>
+    </>
+  );
 };

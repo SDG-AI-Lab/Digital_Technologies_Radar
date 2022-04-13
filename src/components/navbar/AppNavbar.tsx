@@ -1,38 +1,34 @@
-import { Box } from '@chakra-ui/layout';
 import React from 'react';
 
 import { MenuLinks } from './MenuLinks';
-// import { MenuToggle } from './MenuToggle';
 import { UNLogo } from './components/UNLogo';
 import { UNDPLogo } from './components/UNDPLogo';
-import { Flex } from '@chakra-ui/react';
 
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
-export const AppNavbar: React.FC = () => {
-  // TODO: mobile menu opening
-  // const [isOpen, setIsOpen] = React.useState(true);
-  // const toggle = () => setIsOpen(!isOpen);
+export const AppNavbar: React.FC = () => (
+  <div
+    style={{
+      display: 'flex',
+      width: 75,
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingTop: 5,
+      paddingBottom: 5,
+      borderRight: '1px solid Snow',
+      backgroundColor: 'Snow'
+    }}
+  >
+    <div>
+      <UNLogo p={1} />
+    </div>
 
-  return (
-    <Flex
-      w={75}
-      direction={'column'}
-      alignItems={'center'}
-      py={5}
-      style={{ borderRight: '1px solid Snow', backgroundColor: 'Snow' }}
-    >
-      <Box>
-        <UNLogo p={1} />
-      </Box>
+    <div style={{ display: 'flex', flex: 1 }}>
+      {/* <MenuToggle toggle={toggle} isOpen={isOpen} /> */}
+      <MenuLinks isOpen />
+    </div>
 
-      <Box flex={1} display={'flex'}>
-        {/* <MenuToggle toggle={toggle} isOpen={isOpen} /> */}
-        <MenuLinks isOpen />
-      </Box>
-
-      <Box>
-        <UNDPLogo />
-      </Box>
-    </Flex>
-  );
-};
+    <div>
+      <UNDPLogo />
+    </div>
+  </div>
+);

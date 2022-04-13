@@ -1,9 +1,10 @@
 import React from 'react';
 import { SelectionState } from '@undp_sdg_ai_lab/undp-radar';
-import { IconButton } from '@chakra-ui/button';
 import { FaArrowLeft } from 'react-icons/fa';
+
 import { useNavigate } from 'react-router';
 import { ROUTES } from '../../navigation/routes';
+import IconButton from '@mui/material/IconButton/IconButton';
 
 enum BackTo {
   RADAR = 'RADAR',
@@ -23,11 +24,9 @@ export const BackButton: React.FC<Props> = ({ to }) => {
         logic: { setSelectedQuadrant, setSelectedItem }
       }): JSX.Element => (
         <IconButton
-          aria-label=''
-          marginLeft={1}
-          background='white'
-          color='DodgerBlue'
-          icon={<FaArrowLeft />}
+          color='secondary'
+          aria-label='add an alarm'
+          style={{ marginLeft: 1, background: 'white', color: 'DodgerBlue' }}
           onClick={() => {
             switch (to) {
               case 'QUADRANT':
@@ -44,7 +43,7 @@ export const BackButton: React.FC<Props> = ({ to }) => {
             }
           }}
         >
-          Back
+          <FaArrowLeft /> Back
         </IconButton>
       )}
     </SelectionState>

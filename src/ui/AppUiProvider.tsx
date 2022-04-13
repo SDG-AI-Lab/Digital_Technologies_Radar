@@ -1,13 +1,5 @@
 import React from 'react';
-// import { createBreakpoints } from '@chakra-ui/theme-tools';
-// import {
-//   ChakraProvider,
-//   ColorModeScript,
-//   extendTheme,
-//   theme,
-//   ThemeConfig
-// } from '@chakra-ui/react';
-// import { StyledEngineProvider } from '@mui/material';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const muiTheme = createTheme();

@@ -1,7 +1,16 @@
-import { Flex } from '@chakra-ui/react';
-
 export const ContentView: React.FC = ({ children }) => (
-  <Flex py={0} w='100%' justifyContent='space-between' overflowY={'auto'}>
-    {children}
-  </Flex>
+  <div
+    style={{
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+      overflow: 'hidden'
+    }}
+  >
+    <div
+      style={{ overflowY: 'auto', flex: 1, maxHeight: '100%', display: 'flex' }}
+    >
+      {children}
+    </div>
+  </div>
 );

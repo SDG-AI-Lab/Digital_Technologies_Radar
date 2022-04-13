@@ -7,7 +7,14 @@ import { ContentView } from '../components/views/ContentView';
 import { FilterTechNavView } from '../components/views/FilterTechNavView';
 
 export const RadarLayout: React.FC = ({ children }) => (
-  <>
+  <div
+    style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      maxHeight: '100%'
+    }}
+  >
     <FilterTechNavView />
     <ContentView>
       {children || <Outlet />}
@@ -15,5 +22,5 @@ export const RadarLayout: React.FC = ({ children }) => (
       <BlipView />
       <PopOverView />
     </ContentView>
-  </>
+  </div>
 );

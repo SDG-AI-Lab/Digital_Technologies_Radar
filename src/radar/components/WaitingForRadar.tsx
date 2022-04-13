@@ -1,5 +1,5 @@
+import { Skeleton, Typography } from '@mui/material';
 import React from 'react';
-import { Box, SkeletonCircle, SkeletonText, Text } from '@chakra-ui/react';
 
 import styles from './WaitingForRadar.module.scss';
 
@@ -8,17 +8,27 @@ interface Props {
 }
 
 export const WaitingForRadar: React.FC<Props> = ({ size = '30vw' }) => (
-  <Box
-    padding='6'
-    boxShadow='lg'
-    bg='white'
-    alignContent='center'
-    justifyContent='center'
+  <div
+    style={{
+      padding: 6,
+      boxShadow: '',
+      backgroundColor: 'white',
+      alignContent: 'center',
+      justifyContent: 'center'
+    }}
   >
-    <SkeletonCircle size={size} m='auto' />
-    <Text display='none' m='auto' className={styles.loadingEllipsis}>
+    <Skeleton
+      variant='circular'
+      width={size}
+      height={size}
+      style={{ margin: 'auto' }}
+    />
+    <Typography display='none' m='auto' className={styles.loadingEllipsis}>
       Loading
-    </Text>
-    <SkeletonText mt='4' noOfLines={4} spacing='4' />
-  </Box>
+    </Typography>
+    <Skeleton variant='text' style={{ marginTop: 4 }} />
+    <Skeleton variant='text' style={{ marginTop: 4 }} />
+    <Skeleton variant='text' style={{ marginTop: 4 }} />
+    <Skeleton variant='text' style={{ marginTop: 4 }} />
+  </div>
 );

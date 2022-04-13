@@ -1,8 +1,7 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
 
 export const MainLayout: React.FC = ({ children }) => (
-  <Flex flex={1} direction={'column'}>
+  <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
     {children}
-  </Flex>
+  </div>
 );
