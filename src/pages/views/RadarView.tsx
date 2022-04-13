@@ -15,9 +15,6 @@ import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
-import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
-import { BlipList } from '../../components/lists/components/BlipList';
-import { StyledEngineProvider } from '@mui/material/styles';
 
 import { BlipListMui } from '../../components/lists/components/BlipListMui';
 
