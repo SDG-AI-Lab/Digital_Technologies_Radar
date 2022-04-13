@@ -23,7 +23,6 @@ export const AppNavbar: React.FC = () => (
     </div>
 
     <div style={{ display: 'flex', flex: 1 }}>
-      {/* <MenuToggle toggle={toggle} isOpen={isOpen} /> */}
       <MenuLinks isOpen />
     </div>
 

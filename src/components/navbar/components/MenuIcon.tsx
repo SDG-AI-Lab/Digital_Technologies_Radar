@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { useColorMode } from '@chakra-ui/react';
-
 export const MenuIcon: React.FC = () => {
-  const { colorMode } = useColorMode();
+  const colorMode = 'light';
   return (
     <svg
       width='24px'

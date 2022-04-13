@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollableDiv } from './components/ScrollableDiv';
 import {
   useDataState,
   useRadarState,
   TechItemType,
   RadarUtilities
 } from '@undp_sdg_ai_lab/undp-radar';
+
 import { TechItem } from './components/TechItem';
+import { ScrollableDiv } from './components/ScrollableDiv';
 import './TechList.scss';
-import { background } from '@chakra-ui/react';
+import Button from '@mui/material/Button/Button';
 
 export const TechList: React.FC<{ showTitle?: boolean }> = ({
   showTitle = true
@@ -121,13 +122,16 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
           })}
         </ScrollableDiv>
       </div>
-      <button
+      {/* <button
         onClick={resetTech}
         type='button'
         className={'resetTechFilterButton'}
       >
         Reset
-      </button>
+      </button> */}
+      <Button variant='contained' onClick={resetTech} type='button'>
+        Reset
+      </Button>
     </div>
   );
 };

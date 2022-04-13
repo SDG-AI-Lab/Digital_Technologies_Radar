@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { chakra, ChakraProps, Text, SkeletonCircle } from '@chakra-ui/react';
+import { Skeleton, Typography } from '@mui/material';
 
 interface Props {
   file?: string | undefined;
   maxwidthorheight?: number;
 }
 
-export const Logo: React.FC<ChakraProps & Props> = (props) => {
+export const Logo: React.FC<{ [key: string]: unknown } & Props> = (props) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,32 +19,40 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  const circleSize = (
+    props.maxwidthorheight
+      ? props.maxwidthorheight - props.maxwidthorheight / 2
+      : 50
+  ).toString();
   return (
     <>
       {props.file ? (
         <>
           {loading && (
-            <SkeletonCircle
-              size={(props.maxwidthorheight
-                ? props.maxwidthorheight - props.maxwidthorheight / 2
-                : 50
-              ).toString()}
+            <Skeleton
+              variant='circular'
+              width={circleSize}
+              height={circleSize}
             />
           )}
           {!loading && (
-            <chakra.img
-              m='auto'
+            <img
+              style={{
+                margin: 'auto',
+                maxWidth: props.maxwidthorheight ? props.maxwidthorheight : 50,
+                maxHeight: props.maxwidthorheight ? props.maxwidthorheight : 50
+              }}
               // animation={animation}
               src={props.file}
-              maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
-              maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}
+              alt={props.file}
             />
           )}
         </>
       ) : (
-        <Text fontSize='lg' fontWeight='bold'>
+        <Typography fontSize='lg' fontWeight='bold'>
           <div>replace me</div>
-        </Text>
+        </Typography>
       )}
     </>
   );

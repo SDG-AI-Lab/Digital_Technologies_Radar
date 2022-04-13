@@ -1,12 +1,10 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { FilterUtils } from './FilterUtilities';
 import {
   regionKey,
   countryKey,
@@ -16,6 +14,8 @@ import {
   endYearKey,
   dataKey
 } from './FilterConstants';
+import { FilterUtils } from './FilterUtilities';
+import Button from '@mui/material/Button/Button';
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -340,9 +340,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select0'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -357,7 +357,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
 
         <div
@@ -368,9 +368,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select1'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -385,7 +385,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -395,9 +395,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select2'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -412,7 +412,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -422,9 +422,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select3'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -439,7 +439,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -449,9 +449,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select4'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -466,7 +466,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -476,9 +476,9 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          <Select
+          <select
             id='Select5'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -493,7 +493,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -504,9 +504,9 @@ export const CustomFilter: React.FC = () => {
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
-          <Select
+          <select
             id='Select6'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -521,7 +521,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
         <div
           style={{
@@ -532,9 +532,9 @@ export const CustomFilter: React.FC = () => {
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <Select
+          <select
             id='Select7'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -549,7 +549,7 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
 
         <div
@@ -561,9 +561,9 @@ export const CustomFilter: React.FC = () => {
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <Select
+          <select
             id='Select8'
-            size='lg'
+            // size='lg'
             style={{
               maxWidth: '150px',
               padding: '10px',
@@ -578,18 +578,19 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </Select>
+          </select>
         </div>
       </div>
 
       <div>
-        <button
-          type='button'
+        {/* <Button
+          // type='button'
+          size='small'
           style={{
             borderColor: 'lightgrey',
             borderWidth: 1,
             borderStyle: 'solid',
-            padding: '10px 20px',
+            // padding: '10px 20px',
             backgroundColor: '#3182ce',
             cursor: 'pointer',
             borderRadius: 5,
@@ -600,7 +601,10 @@ export const CustomFilter: React.FC = () => {
           onClick={onResetFilter}
         >
           Reset
-        </button>
+        </Button> */}
+        <Button variant='contained' onClick={onResetFilter} type='button'>
+          Reset
+        </Button>
       </div>
     </div>
   );

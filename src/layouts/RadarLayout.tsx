@@ -18,7 +18,6 @@ export const RadarLayout: React.FC = ({ children }) => (
     <FilterTechNavView />
     <ContentView>
       {children || <Outlet />}
-
       <BlipView />
       <PopOverView />
     </ContentView>

@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { useColorMode } from '@chakra-ui/react';
-
 export const CloseIcon: React.FC = () => {
-  const { colorMode } = useColorMode();
+  const colorMode = 'light';
   return (
     <svg width='24' viewBox='0 0 18 18' xmlns='http://www.w3.org/2000/svg'>
       <title>Close</title>

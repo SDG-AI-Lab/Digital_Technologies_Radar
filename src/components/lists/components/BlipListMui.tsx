@@ -7,20 +7,19 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import Accordion from '@mui/material/Accordion';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 import { HorizonItem } from '../quadrant/HorizonItem';
+import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 
 type QuadType = {
   qIndex: number;
   horizons: BlipsPerQuadType;
 };
 
-export const BlipListMui: React.FC = React.memo(() => {
+export const BlipListMui: React.FC<{}> = React.memo(() => {
   const {
     state: {
       blips,
@@ -33,6 +32,12 @@ export const BlipListMui: React.FC = React.memo(() => {
       keys: { horizonKey, techKey }
     }
   } = useDataState();
+
+  useEffect(() => {
+    console.log('Radar context changed');
+  }, [blips, techFilters, quadrants, horizonKey, techKey]);
+
+  console.log('RadarTabs executed');
 
   const [expanded, setExpanded] = React.useState<string>('');
 
@@ -70,7 +75,6 @@ export const BlipListMui: React.FC = React.memo(() => {
       };
       quads.push(q);
     }
-    console.log('Categorizing blips for quadrants');
     // Two pass, one for quadrant blips and second to
     displayBlips.forEach((blip) => {
       // get quad
@@ -99,12 +103,16 @@ export const BlipListMui: React.FC = React.memo(() => {
               aria-controls='panel1bh-content'
               id={quad + '-header'}
             >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+              <span style={{ width: '33%', flexShrink: 0 }}>
                 {Utilities.capitalize(quad)}
-              </Typography>
+              </span>
             </AccordionSummary>
             <AccordionDetails>
-              <Horizons quadrant={quad} blips={quadBlips} />
+              <Horizons
+                quadrants={quadrants}
+                quadrant={quad}
+                blips={quadBlips}
+              />
             </AccordionDetails>
           </Accordion>
         </div>
@@ -115,14 +123,9 @@ export const BlipListMui: React.FC = React.memo(() => {
 
 const Horizons: React.FC<{
   quadrant: string;
+  quadrants: string[];
   blips: QuadType[];
-}> = ({ quadrant, blips }) => {
-  const {
-    state: {
-      radarData: { quadrants }
-    }
-  } = useRadarState();
-
+}> = ({ quadrant, quadrants, blips }) => {
   const [sourceHorizon, setSourceHorizon] = useState<string>();
   const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
 

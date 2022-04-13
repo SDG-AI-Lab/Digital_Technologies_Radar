@@ -1,17 +1,18 @@
-import { Flex } from '@chakra-ui/react';
 import { FilterDrawer } from '../drawers/FilterDrawer';
 import { TechDrawer } from '../drawers/TechDrawer';
 
 export const FilterTechNavView = () => (
-  <Flex
+  <div
     style={{
+      display: 'flex',
       flexDirection: 'column',
       backgroundColor: 'Snow',
-      borderBottom: '1px solid Snow'
+      borderBottom: '1px solid Snow',
+      paddingRight: 2,
+      paddingLeft: 2
     }}
-    px={2}
   >
     <FilterDrawer />
     <TechDrawer />
-  </Flex>
+  </div>
 );

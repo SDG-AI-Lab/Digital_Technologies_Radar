@@ -5,7 +5,7 @@ import {
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import { Text } from '@chakra-ui/react';
+import { Typography } from '@mui/material';
 
 import { HorizonItem } from './HorizonItem';
 import './DataLists.scss';
@@ -85,16 +85,19 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         maxWidth: 500
       }}
     >
-      <Text
-        width={'fit-content'}
-        color={'blue.500'}
-        borderBottom={'3px solid'}
-        my={5}
-        ml={5}
-        as='h5'
+      <Typography
+        // color={'blue.500'}
+        style={{
+          width: 'fit-content',
+          marginTop: 5,
+          marginLeft: 5,
+          marginBottom: 5,
+          borderBottom: '3px solid'
+        }}
+        variant='h5'
       >
         Stages
-      </Text>
+      </Typography>
 
       <div
         style={{

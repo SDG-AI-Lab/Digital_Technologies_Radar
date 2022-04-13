@@ -1,14 +1,30 @@
-import { Badge, Box, Heading, HStack, VStack, Text } from '@chakra-ui/react';
-
+import Badge from '@mui/material/Badge/Badge';
+import Box from '@mui/material/Box/Box';
+import Paper from '@mui/material/Paper/Paper';
+import Typography from '@mui/material/Typography/Typography';
 import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { StackMui } from '../ui/components/VStackMui';
+
 import './PopOver.scss';
+
+const badgeStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  color: 'white',
+  margin: 1,
+  padding: '5px 4px',
+  borderRadius: 50,
+  textTransform: 'capitalize',
+  fontWeight: 'bold',
+  fontSize: 15
+};
 
 /**
  * @impl example of PopOver
  */
 export const PopOver: React.FC = () => {
   const {
-    state: { hoveredItem: item }
+    state: { blips }
   } = useRadarState();
   const {
     state: {
@@ -16,75 +32,69 @@ export const PopOver: React.FC = () => {
     }
   } = useDataState();
 
+  const item = blips[0];
   return (
     <>
       {item && (
-        <Box
-          boxShadow={'5px 5px 15px 0px rgba(0,0,0,0.25)'}
-          borderRadius={10}
-          padding={5}
-          backgroundColor={'white'}
-          maxW={300}
+        <Paper
+          style={{
+            boxShadow: '5px 5px 15px 0px rgba(0,0,0,0.25)',
+            borderRadius: 10,
+            padding: 5,
+            maxWidth: 300
+          }}
         >
-          <Heading>
-            <Text fontSize={18} className={'popOverTitle'}>
+          <Box>
+            <Typography fontSize={18} className={'popOverTitle'}>
               {item[titleKey]}
-            </Text>
-          </Heading>
+            </Typography>
+          </Box>
 
-          <Text fontSize={15} className={'popOverDescription'}>
+          <Typography fontSize={15} className={'popOverDescription'}>
             {item['Description']}
-          </Text>
+          </Typography>
 
-          <VStack>
-            <HStack>
+          <StackMui style={{ margin: 0, padding: 0, paddingTop: 2 }}>
+            <StackMui
+              direction='column'
+              style={{ alignItems: 'stretch', flex: 1, margin: 0, padding: 0 }}
+            >
               <Badge
-                px={2}
-                py={1}
-                borderRadius='md'
-                bg='purple.50'
-                textTransform='capitalize'
+                style={{ ...badgeStyle, backgroundColor: 'purple' }}
                 className={'popBadge'}
               >
-                📍 {item['Country of Implementation']}
+                <div>📍</div>
+                <div>{item['Country of Implementation']}</div>
               </Badge>
               <Badge
-                px={2}
-                py={1}
-                borderRadius='md'
-                bg='green.50'
-                textTransform='capitalize'
+                style={{ ...badgeStyle, backgroundColor: 'green' }}
                 className={'popBadge'}
               >
-                🎯 {item['SDG']?.join(', ')}
+                <div>🎯</div>
+                <div>{item['SDG']?.join(', ')}</div>
               </Badge>
-            </HStack>
-            <HStack>
+            </StackMui>
+            <StackMui
+              direction='column'
+              style={{ alignItems: 'stretch', flex: 1, margin: 0, padding: 0 }}
+            >
               <Badge
-                px={2}
-                py={1}
-                borderRadius='md'
-                bg='black'
-                color='white'
-                textTransform='capitalize'
+                style={{ ...badgeStyle, backgroundColor: 'black' }}
                 className={'popBadge'}
               >
-                🏠 {item['Status/Maturity']}
+                <div>🏠</div>
+                <div>{item['Status/Maturity']}</div>
               </Badge>
               <Badge
-                px={2}
-                py={1}
-                borderRadius='md'
-                bg='#2B6CB0'
-                color='#fff'
-                textTransform='capitalize'
+                style={{ ...badgeStyle, backgroundColor: '#2B6CB0' }}
                 className={'popBadge'}
               >
-                🌋 {item['Disaster Cycle']}
+                <div>🌋</div>
+                <div>{item['Disaster Cycle']}</div>
               </Badge>
-            </HStack>
-          </VStack>
-        </Box>
+            </StackMui>
+          </StackMui>
+        </Paper>
       )}
     </>
   );

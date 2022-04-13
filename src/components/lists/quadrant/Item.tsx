@@ -6,8 +6,8 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { Text, Badge, Button } from '@chakra-ui/react';
 import { ShowIcon } from './ShowIcon';
+import { Badge, Button, Typography } from '@mui/material';
 
 interface Props {
   blip: BlipType;
@@ -96,52 +96,61 @@ export const Item: React.FC<Props> = ({
             }}
           >
             <div>
-              <Text mb='2'>Description</Text>
-              <Text fontWeight={'400'} fontSize={'md'}>
+              <Typography mb='2'>Description</Typography>
+              <Typography fontWeight={'400'} fontSize={'md'}>
                 {blip.Description}
-              </Text>
+              </Typography>
             </div>
             <div
               style={{ display: 'flex', flexWrap: 'wrap', padding: '10px 0px' }}
             >
               <Badge
-                isTruncated
-                my='1'
-                mx='1'
-                variant='subtle'
-                colorScheme='orange'
+                // isTruncated
+                // my='1'
+                // mx='1'
+                style={{ margin: 1 }}
+                // variant='subtle'
+                // colorScheme='orange'
               >
                 🌋{' ' + blip['Disaster Cycle']}
               </Badge>
               <Badge
-                isTruncated
-                my='1'
-                mx='1'
-                variant='subtle'
-                colorScheme='green'
+                // isTruncated
+                // my='1'
+                // mx='1'
+                style={{ margin: 1 }}
+                // variant='subtle'
+                // colorScheme='green'
               >
                 🏠{' ' + blip['Un Host Organisation']}
               </Badge>
               <Badge
-                isTruncated
-                my='1'
-                mx='1'
-                variant='subtle'
-                colorScheme='purple'
+                // isTruncated
+                // my='1'
+                // mx='1'
+                style={{ margin: 1 }}
+                // variant='subtle'
+                // colorScheme='purple'
               >
                 📍{' ' + blip['Country of Implementation']}
               </Badge>
               <Badge
-                isTruncated
-                my='1'
-                mx='1'
-                variant='subtle'
-                colorScheme='cyan'
+                // isTruncated
+                // my='1'
+                // mx='1'
+                style={{ margin: 1 }}
+                // variant='subtle'
+                // colorScheme='cyan'
               >
                 🎯{' ' + blip['SDG']}
               </Badge>
             </div>
-            <Button onClick={onSelect} colorScheme='blue' borderRadius={0}>
+            <Button
+              onClick={onSelect}
+              // colorScheme='blue'
+              // borderRadius={0}
+              style={{ borderRadius: 0 }}
+            >
               More
             </Button>
           </div>

@@ -10,17 +10,9 @@ import {
   BlipsPerQuadType,
   QuadrantHorizonList
 } from '../quadrant/QuadrantHorizonList';
-import { HorizonItem } from '../quadrant/HorizonItem';
-import {
-  // Accordion,
-  // AccordionButton,
-  // AccordionIcon,
-  // AccordionItem,
-  // AccordionPanel,
-  Box
-} from '@chakra-ui/react';
 import { ShowIcon } from '../quadrant/ShowIcon';
 import { ScrollableDiv } from './ScrollableDiv';
+import { HorizonItem } from '../quadrant/HorizonItem';
 
 export const BlipList: React.FC = React.memo(() => {
   const {
