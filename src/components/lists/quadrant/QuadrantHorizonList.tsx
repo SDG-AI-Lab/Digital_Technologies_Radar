@@ -9,6 +9,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
 import { BlipView } from '../../views/blip/BlipView'
+import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
 import './DataLists.scss';
 
 type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -81,7 +82,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         borderColor: 'rgba(0,0,0,0.1)',
         borderWidth: 2,
         borderRadius: 10,
-        margin: 20,
+        marginTop: 40,
         padding: 15,
         maxWidth: 500
       }}
@@ -91,7 +92,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
           <Tab as='h5'>Stages</Tab>
           <Tab as='h5'>Project</Tab>
         </TabList>
-        <TabPanels>
+        <TabPanels minHeight={445}>
           <TabPanel>
             <div
               style={{
@@ -116,7 +117,9 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
             </div>
           </TabPanel>
           <TabPanel>
-            <BlipView />
+            <ScrollableDiv maxHeight={413}>
+              <BlipView />
+            </ScrollableDiv>
           </TabPanel>
         </TabPanels>
       </Tabs>

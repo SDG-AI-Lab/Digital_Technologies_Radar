@@ -15,6 +15,7 @@ import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { BlipView } from '../../components/views/blip/BlipView';
+import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
   <>
@@ -48,7 +49,9 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
             <TechDescription />
           </TabPanel>
           <TabPanel>
-            <BlipView />
+            <ScrollableDiv maxHeight={460}>
+              <BlipView />
+            </ScrollableDiv>
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -60,9 +63,10 @@ const TabOuterBoxProps: BoxProps = {
   borderColor: 'gray.200',
   borderWidth: '2px',
   borderRadius: 'md',
-  mt: '20',
+  mt: '110',
   mb: '5',
-  mr: '5',
+  mr: '10',
   p: '5',
-  maxWidth: '500px'
+  maxWidth: '500px',
+  height: '575px'
 };
