@@ -7,9 +7,13 @@ import {
   theme,
   ThemeConfig
 } from '@chakra-ui/react';
+// import { StyledEngineProvider } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const muiTheme = createTheme();
 
 // More info: https://chakra-ui.com/docs/getting-started
-export const ChakraUI: React.FC = ({ children }) => {
+export const AppUiProvider: React.FC = ({ children }) => {
   const colors = {
     // brand: {
     //   900: "#1a365d",
@@ -32,13 +36,13 @@ export const ChakraUI: React.FC = ({ children }) => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={muiTheme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <ChakraProvider
         theme={extendTheme({ ...theme, colors, breakpoints, config })}
       >
         {children}
       </ChakraProvider>
-    </>
+    </ThemeProvider>
   );
 };
