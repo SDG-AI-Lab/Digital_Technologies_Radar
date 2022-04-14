@@ -1,23 +1,17 @@
+import { useAtom } from 'jotai';
 import React from 'react';
 
 // state
-import { useDataState } from '../../stores/data.state';
-import { useRadarState } from '../../stores/radar.state';
+import { RadarAtoms } from '../../stores/atom.state';
 
 export const ToolTip: React.FC = ({ children }) => {
-  const {
-    state: {
-      ui: {
-        popup: { isShown, left, top },
-        popupDisabled
-      }
-    }
-  } = useDataState();
+  const [isDisabled] = useAtom(RadarAtoms.ui.popover.isDisabled);
+  const [isShown] = useAtom(RadarAtoms.ui.popover.isShown);
+  const [position] = useAtom(RadarAtoms.ui.popover.position);
 
   const display = isShown ? 'initial' : 'none';
-
-  return popupDisabled ? null : (
-    <div style={{ display, position: 'absolute', top, left }}>
+  return isDisabled ? null : (
+    <div style={{ display, position: 'absolute', ...position }}>
       {children && children}
       {!children && <DefaultToolTip />}
     </div>
@@ -25,15 +19,8 @@ export const ToolTip: React.FC = ({ children }) => {
 };
 
 const DefaultToolTip: React.FC = () => {
-  const {
-    state: { hoveredItem }
-  } = useRadarState();
-
-  const {
-    state: {
-      keys: { titleKey }
-    }
-  } = useDataState();
+  const [hoveredItem] = useAtom(RadarAtoms.hoveredItem);
+  const [titleKey] = useAtom(RadarAtoms.key.titleKey);
   return (
     <div
       style={{

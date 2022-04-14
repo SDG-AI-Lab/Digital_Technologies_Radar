@@ -1,9 +1,6 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import {
-  SelectableItem,
-  useDataState,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { RadarAtoms, SelectableItem } from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
 import {
   regionKey,
@@ -16,19 +13,19 @@ import {
 } from './FilterConstants';
 import { FilterUtils } from './FilterUtilities';
 import Button from '@mui/material/Button/Button';
+import { useAtom } from 'jotai';
 
 export const CustomFilter: React.FC = () => {
-  const {
-    state: { blips, disasterTypeFilter, useCaseFilter },
-    actions: { setUseCaseFilter, setDisasterTypeFilter },
-    processes: { setFilteredBlips }
-  } = useRadarState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [, setIsFiltered] = useAtom(RadarAtoms.isFiltered);
+  const [, setFilteredBlips] = useAtom(RadarAtoms.filteredBlips);
+  const [disasterTypeFilter, setDisasterTypeFilter] = useAtom(
+    RadarAtoms.disasterTypeFilter
+  );
+  const [useCaseFilter, setUseCaseFilter] = useAtom(RadarAtoms.useCaseFilter);
 
-  const {
-    state: {
-      keys: { useCaseKey, disasterTypeKey: disasterKey }
-    }
-  } = useDataState();
+  const [useCaseKey] = useAtom(RadarAtoms.key.useCaseKey);
+  const [disasterKey] = useAtom(RadarAtoms.key.disasterKey);
 
   // FILTERS
   // regions
@@ -238,7 +235,8 @@ export const CustomFilter: React.FC = () => {
     }
 
     // set filter
-    setFilteredBlips(isFiltered, filtered);
+    setIsFiltered(isFiltered);
+    setFilteredBlips(filtered);
   }, [
     useCaseKey,
     disasterKey,

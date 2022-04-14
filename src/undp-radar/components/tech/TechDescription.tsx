@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import { v4 } from 'uuid';
+import React, { useEffect, useState } from 'react';
 
 import { Title } from '../shared/Title';
 import { TechItemType } from '../../types';
-import { useRadarState } from '../../stores/radar.state';
+import { RadarAtoms } from '../../stores/atom.state';
 
 import './TechDescription.scss';
 
 export const TechOrBlipDescription: React.FC = () => {
-  const {
-    state: { radarData, techFilters }
-  } = useRadarState();
+  const [techs] = useAtom(RadarAtoms.data.techs);
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
 
   const [selectedTechs, setSelectedTechs] = useState<TechItemType[]>([]);
 
   useEffect(() => {
     const newSelectedTechs: TechItemType[] = [];
     if (techFilters && techFilters.length > 0) {
-      radarData.tech.forEach((radarDataTechItem) => {
+      techs.forEach((radarDataTechItem) => {
         if (techFilters.includes(radarDataTechItem.slug)) {
           newSelectedTechs.push(radarDataTechItem);
         }
       });
     }
     setSelectedTechs(newSelectedTechs);
-  }, [radarData, techFilters]);
+  }, [techs, techFilters]);
 
   return (
     <React.Fragment>

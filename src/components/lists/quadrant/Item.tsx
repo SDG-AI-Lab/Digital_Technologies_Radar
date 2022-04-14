@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import {
-  useDataState,
-  BlipType,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, RadarAtoms } from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ShowIcon } from './ShowIcon';
 import { Badge, Button, Typography } from '@mui/material';
+import { useAtom } from 'jotai';
 
 interface Props {
   blip: BlipType;
@@ -20,16 +18,10 @@ export const Item: React.FC<Props> = ({
   close = false,
   triggerSiblings
 }) => {
-  const {
-    state: {
-      keys: { titleKey }
-    }
-  } = useDataState();
+  const [titleKey] = useAtom(RadarAtoms.key.titleKey);
 
-  const {
-    state: { hoveredItem },
-    actions: { setHoveredItem, setSelectedItem }
-  } = useRadarState();
+  const [hoveredItem, setHoveredItem] = useAtom(RadarAtoms.hoveredItem);
+  const [, setSelectedItem] = useAtom(RadarAtoms.selectedItem);
 
   const onMouseLeave = () => setHoveredItem(null); // equal for all
   const onMouseEnter = () => setHoveredItem(blip);

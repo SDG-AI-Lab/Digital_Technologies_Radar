@@ -31,7 +31,7 @@ export type KeysObject = {
   horizonKey: HorizonKey;
   quadrantKey: QuadrantKey;
   useCaseKey: UseCaseKey;
-  disasterTypeKey: DisasterTypeKey;
+  disasterKey: DisasterTypeKey;
 };
 
 export type RgbOut = string | number | boolean | null;
@@ -84,28 +84,33 @@ export interface TechItemType {
   description: string[];
 }
 
+export interface RadarOptionsOptionsType {
+  horizonShiftRadius: number;
+  radiusPadding: number;
+  circlePadding: number;
+}
+
 export interface RadarOptionsType {
   width: number;
   height: number;
-  quadrants: QuadrantKey[];
-  horizons: HorizonKey[];
-  radarOptions: {
-    horizonShiftRadius: number;
-    radiusPadding: number;
-    circlePadding: number;
-  };
-  tech: TechItemType[];
+  // quadrants: QuadrantKey[];
+  // horizons: HorizonKey[];
+  radarOptions: RadarOptionsOptionsType;
+  // tech: TechItemType[];
 }
 
 export type D3SvgEl = d3.Selection<SVGSVGElement, unknown, null, undefined>;
 export type D3SvgGEL = d3.Selection<SVGGElement, unknown, null, undefined>;
 
 export type RadarDataBlipsAndLogic = {
-  radarData: RadarOptionsType;
+  // radarData: RadarOptionsType;
   blips: BlipType[];
   logic: {
     setSelectedItem: (itemId: BlipType | null) => void;
     setHoveredItem: (itemId: BlipType | null) => void;
     setSelectedQuadrant: (quadrantKey: QuadrantKey | null) => void;
   };
+  quadrants: QuadrantKey[];
+  horizons: HorizonKey[];
+  techs: TechItemType[];
 };

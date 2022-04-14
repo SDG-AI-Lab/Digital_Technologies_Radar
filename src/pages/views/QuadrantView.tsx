@@ -1,20 +1,23 @@
+import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import {
   BlipType,
   QuadrantRadar,
+  RadarAtoms,
   useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+} from '../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
 import { BackButton } from '../../radar/components';
 import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
 
 export const QuadrantView: React.FC = () => {
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [isFiltered] = useAtom(RadarAtoms.isFiltered);
+  const [filteredBlips] = useAtom(RadarAtoms.filteredBlips);
+  const [selectedQuadrant] = useAtom(RadarAtoms.selectedQuadrant);
   const {
     state: {
-      blips,
-      isFiltered,
-      filteredBlips,
-      selectedQuadrant,
       radarData: { quadrants }
     }
   } = useRadarState();

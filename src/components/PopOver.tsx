@@ -2,11 +2,13 @@ import Badge from '@mui/material/Badge/Badge';
 import Box from '@mui/material/Box/Box';
 import Paper from '@mui/material/Paper/Paper';
 import Typography from '@mui/material/Typography/Typography';
-import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { RadarAtoms } from '../undp-radar';
+// import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import React from 'react';
 import { StackMui } from '../ui/components/VStackMui';
 
 import './PopOver.scss';
+import { useAtom } from 'jotai';
 
 const badgeStyle: React.CSSProperties = {
   display: 'flex',
@@ -24,14 +26,8 @@ const badgeStyle: React.CSSProperties = {
  * @impl example of PopOver
  */
 export const PopOver: React.FC = () => {
-  const {
-    state: { hoveredItem: item }
-  } = useRadarState();
-  const {
-    state: {
-      keys: { titleKey }
-    }
-  } = useDataState();
+  const [item] = useAtom(RadarAtoms.hoveredItem);
+  const [titleKey] = useAtom(RadarAtoms.key.titleKey);
 
   return React.useMemo(
     () => (

@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-import { BlipType, TechItemType, TechKey } from '../../types';
+import { TechItemType, TechKey } from '../../types';
 import { Utilities } from '../../helpers/Utilities';
 
 import './TechItem.scss';
+import { RadarAtoms } from '../../stores/atom.state';
+import { useAtom } from 'jotai';
 
 export const TechItem: React.FC<{
   tech: TechItemType;
   techKey: TechKey;
-  hoveredTech: string | null;
-  selected: boolean;
-  techFilter: string[];
+  techFilters: string[];
   setTechFilter: (techSlug: string[]) => void;
-  setHoveredTech: (techSlug: string | null) => void;
-  hoveredItem: BlipType | null;
-}> = ({
-  tech,
-  techKey,
-  hoveredTech,
-  selected,
-  techFilter,
-  setTechFilter,
-  setHoveredTech,
-  hoveredItem
-}) => {
-  const selectTech = (): void => setTechFilter([...techFilter, tech.slug]);
+}> = ({ tech, techKey, techFilters, setTechFilter }) => {
+  const [hoveredItem] = useAtom(RadarAtoms.hoveredItem);
+  const [hoveredTech, setHoveredTech] = useAtom(RadarAtoms.hoveredTech);
+
+  const selectTech = (): void => setTechFilter([...techFilters, tech.slug]);
 
   const [backgroundColor, setBackgroundColor] = useState<string | undefined>(
     undefined
   );
   const [isItemHovered, setIsItemHovered] = useState(false);
+
+  const selected = (): boolean => {
+    if (techFilters && techFilters.length > 0) {
+      return !!techFilters.find((t) => t === tech.slug);
+    }
+    return false;
+  };
 
   useEffect(() => {
     setBackgroundColor(
@@ -55,11 +54,11 @@ export const TechItem: React.FC<{
 
   const changeBackgroundEnter = (): void => {
     setHoveredTech(tech.slug);
-    setBackgroundColor(selected ? tech.color : tech.color);
+    setBackgroundColor(selected() ? tech.color : tech.color);
   };
   const changeBackgroundLeave = (): void => {
     setHoveredTech(null);
-    setBackgroundColor(selected ? tech.color : undefined);
+    setBackgroundColor(selected() ? tech.color : undefined);
   };
 
   return (

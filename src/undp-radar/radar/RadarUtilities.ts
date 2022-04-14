@@ -67,7 +67,9 @@ const randomFromInterval = (min: number, max: number): number =>
 const processBlips = (
   data: RadarOptionsType,
   rawBlips: RawBlipType[],
-  keys: { quadrantKey: QuadrantKey; horizonKey: HorizonKey }
+  keys: { quadrantKey: QuadrantKey; horizonKey: HorizonKey },
+  quadrants: QuadrantKey[],
+  horizons: HorizonKey[]
 ): BlipType[] => {
   // go through the data
   const results: BlipType[] = [];
@@ -76,8 +78,7 @@ const processBlips = (
   const height = data.height || 600;
   const horizonWidth = (0.95 * (width > height ? height : width)) / 2;
   const horizonUnit =
-    (horizonWidth - data.radarOptions.horizonShiftRadius) /
-    data.horizons.length;
+    (horizonWidth - data.radarOptions.horizonShiftRadius) / horizons.length;
 
   // we need multiple poissonDists
   const t0 = Date.now();
@@ -94,7 +95,7 @@ const processBlips = (
 
   rawBlips.forEach((blip) => {
     // get angle
-    const quadrantIndex = data.quadrants.indexOf(blip[keys.quadrantKey]);
+    const quadrantIndex = quadrants.indexOf(blip[keys.quadrantKey]);
     const minAngle =
       (quadrantIndex - 1) * (Math.PI / 2) + data.radarOptions.circlePadding;
     const maxAngle =
@@ -104,7 +105,7 @@ const processBlips = (
     let angle = randomFromInterval(minAngle, maxAngle);
 
     // get radius
-    const horizonIndex = data.horizons.indexOf(blip[keys.horizonKey]) + 1;
+    const horizonIndex = horizons.indexOf(blip[keys.horizonKey]) + 1;
 
     const outerRadius =
       horizonIndex * horizonUnit +
@@ -197,17 +198,14 @@ const getUseCases = (
 
 const getDisasterTypes = (
   rawBlipData: BlipType[],
-  disasterTypeKey: DisasterTypeKey
+  disasterKey: DisasterTypeKey
 ): SelectableItem[] => {
   const newDisterTypes: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    if (
-      val[disasterTypeKey] !== '' &&
-      !newDisterTypes.has(val[disasterTypeKey])
-    )
-      newDisterTypes.set(val[disasterTypeKey], {
+    if (val[disasterKey] !== '' && !newDisterTypes.has(val[disasterKey]))
+      newDisterTypes.set(val[disasterKey], {
         uuid: uuidv4(),
-        name: val[disasterTypeKey]
+        name: val[disasterKey]
       } as SelectableItem);
   });
   return Array.from(newDisterTypes.values());
@@ -227,7 +225,7 @@ const getRadarData = (
     quadrantKey: QuadrantKey;
     horizonKey: HorizonKey;
     useCaseKey: UseCaseKey;
-    disasterTypeKey: DisasterTypeKey;
+    disasterKey: DisasterTypeKey;
     techKey: TechKey;
   },
   priorityOrders: { horizon: string[]; quadrant: string[] }
@@ -235,35 +233,35 @@ const getRadarData = (
   const { horizon, quadrant } = priorityOrders;
   const sortHorizon = (a: string, b: string) => order(a, b, horizon);
   const sortQuadrant = (a: string, b: string) => order(a, b, quadrant);
-  const radarData: RadarOptionsType = {
-    ...passedRadarData,
-    horizons: getHorizons(rawBlips, keys.horizonKey).sort(sortHorizon),
-    quadrants: getQuadrants(rawBlips, keys.quadrantKey).sort(sortQuadrant),
-    tech: getTechnologies(rawBlips, keys.techKey)
-  };
+  const horizons = getHorizons(rawBlips, keys.horizonKey).sort(sortHorizon);
+  const quadrants = getQuadrants(rawBlips, keys.quadrantKey).sort(sortQuadrant);
   return {
-    radarData,
-    blips: processBlips(radarData, rawBlips, keys),
+    blips: processBlips(passedRadarData, rawBlips, keys, quadrants, horizons),
     logic: {
       setHoveredItem: () => {},
       setSelectedItem: () => {},
       setSelectedQuadrant: () => {}
-    }
+    },
+    horizons,
+    quadrants,
+    techs: getTechnologies(rawBlips, keys.techKey)
   };
 };
 
 const filterBlips = (
   blips: BlipType[],
-  keys: { useCaseKey: UseCaseKey; disasterTypeKey: DisasterTypeKey },
+  useCaseDisasterKey: { useCaseKey: UseCaseKey; disasterKey: DisasterTypeKey },
   useCaseFilter = 'all',
   disasterTypeFilter = 'all'
 ): BlipType[] => {
   let filtered = blips;
   if (useCaseFilter !== 'all')
-    filtered = filtered.filter((i) => i[keys.useCaseKey] === useCaseFilter);
+    filtered = filtered.filter(
+      (i) => i[useCaseDisasterKey.useCaseKey] === useCaseFilter
+    );
   if (disasterTypeFilter !== 'all')
     filtered = filtered.filter(
-      (i) => i[keys.disasterTypeKey] === disasterTypeFilter
+      (i) => i[useCaseDisasterKey.disasterKey] === disasterTypeFilter
     );
   return filtered;
 };

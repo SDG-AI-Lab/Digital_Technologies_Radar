@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType } from '../../../undp-radar';
+// import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ScrollableDiv } from '../components/ScrollableDiv';
 

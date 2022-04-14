@@ -1,6 +1,7 @@
 // Lorem Ipsum from https://fatihtelis.github.io/react-lorem-ipsum/
 import { loremIpsum } from 'react-lorem-ipsum';
-import { Utilities } from '@undp_sdg_ai_lab/undp-radar';
+import { Utilities } from '../../undp-radar';
+// import { Utilities } from '@undp_sdg_ai_lab/undp-radar';
 
 export type TechDescriptionType = string[];
 

@@ -1,34 +1,20 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  BlipType,
-  useDataState,
-  useRadarState,
-  Utilities
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, RadarAtoms, Utilities } from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
-import {
-  BlipsPerQuadType,
-  QuadrantHorizonList
-} from '../quadrant/QuadrantHorizonList';
+import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 import { ShowIcon } from '../quadrant/ShowIcon';
 import { ScrollableDiv } from './ScrollableDiv';
 import { HorizonItem } from '../quadrant/HorizonItem';
+import { useAtom } from 'jotai';
 
 export const BlipList: React.FC = React.memo(() => {
-  const {
-    state: {
-      blips,
-      isFiltered,
-      techFilters,
-      filteredBlips,
-      radarData: { quadrants, horizons }
-    }
-  } = useRadarState();
-  const {
-    state: {
-      keys: { horizonKey, techKey }
-    }
-  } = useDataState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
+
+  const [quadrants] = useAtom(RadarAtoms.data.quadrants);
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
 
   const [show, setShow] = useState(false);
   const toggleShow = () => {

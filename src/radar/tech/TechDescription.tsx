@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useRadarState, TechKey } from '@undp_sdg_ai_lab/undp-radar';
+import { useRadarState, TechKey, RadarAtoms } from '../../undp-radar';
+// import { useRadarState, TechKey } from '@undp_sdg_ai_lab/undp-radar';
 import { v4 } from 'uuid';
 
 import { AppConst, TechDescriptionType } from '../../components/constants/app';
 import { Typography } from '@mui/material';
+import { useAtom } from 'jotai';
 
 export const TechDescription: React.FC = () => {
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
   const {
-    state: { radarData, techFilters }
+    state: { radarData }
   } = useRadarState();
 
   const [selectedTechs, setSelectedTechs] =

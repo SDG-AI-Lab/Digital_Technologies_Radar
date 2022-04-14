@@ -1,3 +1,4 @@
+import { useAtom } from 'jotai';
 /* eslint-disable no-plusplus */
 import React from 'react';
 
@@ -5,25 +6,27 @@ import { RadarUtilities } from '../RadarUtilities';
 import { Utilities } from '../../helpers/Utilities';
 import { QuadsType } from '../../types';
 // state
-import { useDataState } from '../../stores/data.state';
+import { RadarAtoms } from '../../stores/atom.state';
 
 import { Blips } from './Blips';
-import { useRadarState } from '../../stores/radar.state';
 
 const SCALE_FAC = 1.75;
 
 export const Horizons: React.FC = () => {
-  const {
-    state: { radarColors }
-  } = useDataState();
+  const [quadrant, setSelectedQuadrant] = useAtom(RadarAtoms.selectedQuadrant);
 
-  const {
-    state: { radarData, selectedQuadrant: quadrant },
-    actions: { setSelectedQuadrant }
-  } = useRadarState();
+  const [width] = useAtom(RadarAtoms.ui.width);
+  const [height] = useAtom(RadarAtoms.ui.height);
+  const [horizonShiftRadius] = useAtom(RadarAtoms.ui.horizonShiftRadius);
+  const [quadrants] = useAtom(RadarAtoms.data.quadrants);
+  const [horizons] = useAtom(RadarAtoms.data.horizons);
 
-  const { width, height, radarOptions, horizons, quadrants } = radarData;
-  const { horizonShiftRadius } = radarOptions;
+  const [quadrantColors] = useAtom(RadarAtoms.ui.quadrantColors);
+  const [clumpingOpacity] = useAtom(RadarAtoms.ui.clumpingOpacity);
+  const [initialOpacity] = useAtom(RadarAtoms.ui.initialOpacity);
+
+  // const { width, height, radarOptions, horizons, quadrants } = radarData;
+  // const { horizonShiftRadius } = radarOptions;
   const horizonWidth = (0.95 * (width > height ? height : width)) / 2;
   const horizonUnit = (horizonWidth - horizonShiftRadius) / horizons.length;
 
@@ -40,18 +43,18 @@ export const Horizons: React.FC = () => {
     }
   }
 
-  const quadrantIndex = quadrant && radarData.quadrants.indexOf(quadrant);
+  const quadrantIndex = quadrant && quadrants.indexOf(quadrant);
 
   const getX = (): number => {
     switch (quadrantIndex) {
       case 0:
-        return -radarData.width / 3.25;
+        return -width / 3.25;
       case 1:
-        return -radarData.width / 3.25;
+        return -width / 3.25;
       case 2:
-        return radarData.width / 3.25;
+        return width / 3.25;
       case 3:
-        return radarData.width / 3.25;
+        return width / 3.25;
       default:
         return 0;
     }
@@ -60,13 +63,13 @@ export const Horizons: React.FC = () => {
   const getY = (): number => {
     switch (quadrantIndex) {
       case 0:
-        return radarData.height / 2.5;
+        return height / 2.5;
       case 1:
-        return -radarData.height / 2.5;
+        return -height / 2.5;
       case 2:
-        return -radarData.height / 2.5;
+        return -height / 2.5;
       case 3:
-        return radarData.height / 2.5;
+        return height / 2.5;
       default:
         return 0;
     }
@@ -142,9 +145,9 @@ export const Horizons: React.FC = () => {
                 fill={RadarUtilities.quadrants
                   .fillArcs(h, quadrants, {
                     color:
-                      radarColors?.quadrants.colors &&
-                      radarColors.quadrants.colors[quadrantIndex as number],
-                    ...radarColors.quadrants
+                      quadrantColors && quadrantColors[quadrantIndex as number],
+                    clumpingOpacity,
+                    initialOpacity
                   })
                   ?.toString()}
                 stroke='grey'
@@ -212,10 +215,9 @@ export const Horizons: React.FC = () => {
             }
             fill={RadarUtilities.quadrants
               .fillArcs(q, horizons, {
-                color:
-                  radarColors?.quadrants.colors &&
-                  radarColors.quadrants.colors[q.quadrant],
-                ...radarColors.quadrants
+                color: quadrantColors && quadrantColors[q.quadrant],
+                initialOpacity,
+                clumpingOpacity
               })
               ?.toString()}
             strokeWidth={0.2}

@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import {
-  Radar,
-  useDataState,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import React from 'react';
+// import { Radar } from '@undp_sdg_ai_lab/undp-radar';
+import { Radar } from '../../undp-radar';
 import { Box, Tab, Tabs, Typography } from '@mui/material';
 
 import { WaitingForRadar } from '../../radar/components';

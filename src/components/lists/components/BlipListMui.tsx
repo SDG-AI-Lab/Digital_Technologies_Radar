@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BlipType,
-  useDataState,
-  useRadarState,
-  Utilities
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, RadarAtoms, Utilities } from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
 import Accordion from '@mui/material/Accordion';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -13,6 +9,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 
 import { HorizonItem } from '../quadrant/HorizonItem';
 import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
+import { useCommitCount } from '../../../utils/useCommitCount';
+import { useAtom } from 'jotai';
 
 type QuadType = {
   qIndex: number;
@@ -20,18 +18,12 @@ type QuadType = {
 };
 
 export const BlipListMui: React.FC<{}> = React.memo(() => {
-  const {
-    state: {
-      blips,
-      techFilters,
-      radarData: { quadrants }
-    }
-  } = useRadarState();
-  const {
-    state: {
-      keys: { horizonKey, techKey }
-    }
-  } = useDataState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
+  const [quadrants] = useAtom(RadarAtoms.data.quadrants);
+
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
 
   useEffect(() => {
     console.log('Radar context changed');
@@ -78,49 +70,49 @@ export const BlipListMui: React.FC<{}> = React.memo(() => {
     // Two pass, one for quadrant blips and second to
     displayBlips.forEach((blip) => {
       // get quad
-      let q = quads[blip.quadrantIndex];
-      let h = q.horizons;
-      let hName: string = blip[horizonKey];
-      if (h[hName] === undefined) {
-        h[hName] = new Array<BlipType>();
+      const q = quads[blip.quadrantIndex];
+      if (q.horizons) {
+        const h = q.horizons;
+        const hName: string = blip[horizonKey];
+        if (h[hName] === undefined) {
+          h[hName] = new Array<BlipType>();
+        }
+        h[hName].push(blip);
+        setQuadBlips(quads);
       }
-      h[hName].push(blip);
-      setQuadBlips(quads);
     });
   }, [displayBlips]);
 
-  return React.useMemo(
-    () => (
-      <div style={{ width: 400 }}>
-        {quadrants.map((quad) => (
-          <div key={quad}>
-            <Accordion
-              TransitionProps={{ unmountOnExit: true }}
-              expanded={expanded === quad}
-              onChange={handleChange(quad)}
+  return (
+    <div style={{ width: 400 }}>
+      <p>Commits: {useCommitCount()}</p>
+      {quadrants.map((quad) => (
+        <div key={quad}>
+          <Accordion
+            TransitionProps={{ unmountOnExit: true }}
+            expanded={expanded === quad}
+            onChange={handleChange(quad)}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls='panel1bh-content'
+              id={quad + '-header'}
             >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls='panel1bh-content'
-                id={quad + '-header'}
-              >
-                <span style={{ width: '33%', flexShrink: 0 }}>
-                  {Utilities.capitalize(quad)}
-                </span>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Horizons
-                  quadrants={quadrants}
-                  quadrant={quad}
-                  blips={quadBlips}
-                />
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        ))}
-      </div>
-    ),
-    [quadrants, expanded, quadBlips]
+              <span style={{ width: '33%', flexShrink: 0 }}>
+                {Utilities.capitalize(quad)}
+              </span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Horizons
+                quadrants={quadrants}
+                quadrant={quad}
+                blips={quadBlips}
+              />
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      ))}
+    </div>
   );
 });
 
@@ -133,6 +125,7 @@ const Horizons: React.FC<{
   const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
 
   const quadB = blips[quadrants.indexOf(quadrant)];
+  console.log('quadB', quadB);
   return (
     <>
       {quadB &&

@@ -42,8 +42,8 @@ import { DataLists } from './components/lists/DataLists';
 import { SelectionState } from './components/shared/SelectionState';
 import { TechList, TechOrBlipDescription } from './components/tech';
 // Stores
-import { DataProvider, useDataState } from './stores/data.state';
-import { RadarProvider, useRadarState } from './stores/radar.state';
+import { RadarAtoms } from './stores/atom.state';
+import { StoreUtils } from './stores/utils';
 
 // TYPES
 export type { RadarConfParamType };
@@ -74,10 +74,8 @@ export type { D3ColorType };
 
 export {
   // state
-  DataProvider,
-  useDataState,
-  RadarProvider,
-  useRadarState,
+  RadarAtoms,
+  StoreUtils,
   // radar and quadrant
   Radar,
   QuadrantRadar,

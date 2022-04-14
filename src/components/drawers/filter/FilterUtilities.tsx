@@ -5,7 +5,8 @@ import {
   DisasterTypeKey,
   SelectableItem,
   UseCaseKey
-} from '@undp_sdg_ai_lab/undp-radar';
+} from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 
 const getRegions = (
   rawBlipData: BlipType[],
@@ -51,17 +52,17 @@ const getCountries = (
 
 const getDisasterTypes = (
   rawBlipData: BlipType[],
-  disasterTypeKey: DisasterTypeKey
+  disasterKey: DisasterTypeKey
 ): SelectableItem[] => {
   const newDisterTypes: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
     if (
-      val[disasterTypeKey] !== '' &&
-      !newDisterTypes.has(val[disasterTypeKey])
+      val[disasterKey] !== '' &&
+      !newDisterTypes.has(val[disasterKey])
     )
-      newDisterTypes.set(val[disasterTypeKey], {
+      newDisterTypes.set(val[disasterKey], {
         uuid: uuidv4(),
-        name: val[disasterTypeKey]
+        name: val[disasterKey]
       });
   });
   return Array.from(newDisterTypes.values()).sort((a, b) =>

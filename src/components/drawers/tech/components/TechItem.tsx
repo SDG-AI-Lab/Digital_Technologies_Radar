@@ -4,7 +4,8 @@ import {
   TechItemType,
   TechKey,
   Utilities
-} from '@undp_sdg_ai_lab/undp-radar';
+} from '../../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 import './TechItem.scss';
 
 export const TechItem: React.FC<{

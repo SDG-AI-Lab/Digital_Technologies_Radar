@@ -10,11 +10,13 @@ import Button from '@mui/material/Button/Button';
 import TableRow from '@mui/material/TableRow/TableRow';
 import TableHead from '@mui/material/TableHead/TableHead';
 import TableCell from '@mui/material/TableCell/TableCell';
-import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+// import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { RadarAtoms } from '../../../undp-radar';
 
 import { StackMui } from '../../../ui/components/VStackMui';
 import Link from '@mui/material/Link/Link';
 import { Typography } from '@mui/material';
+import { useAtom } from 'jotai';
 
 const style: React.CSSProperties = {
   position: 'absolute' as 'absolute',
@@ -27,10 +29,7 @@ const style: React.CSSProperties = {
 };
 
 export const BlipView: FC = () => {
-  const {
-    state: { selectedItem },
-    actions: { setSelectedItem }
-  } = useRadarState();
+  const [selectedItem, setSelectedItem] = useAtom(RadarAtoms.selectedItem);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

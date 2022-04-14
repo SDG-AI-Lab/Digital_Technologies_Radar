@@ -6,12 +6,11 @@ import {
   KeysObject,
   RawBlipType,
   MappingType,
-  DataProvider,
-  RadarProvider,
   ColorsParamType,
   OrdersParamType,
   RadarDataGenerator
-} from '@undp_sdg_ai_lab/undp-radar';
+} from '../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
 import csvData from '../assets/csv/technology_radar_dataset_updated_v4.csv';
@@ -43,7 +42,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
     horizonKey: 'Status/Maturity',
     quadrantKey: 'Disaster Cycle',
     useCaseKey: 'Use Case',
-    disasterTypeKey: 'Disaster Type'
+    disasterKey: 'Disaster Type'
   };
 
   const orders: OrdersParamType = {
@@ -67,13 +66,11 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <RadarProvider>
-      <DataProvider>
-        <SetData keys={keys} orders={orders} colors={colors} />
-        <RadarDataGenerator />
-        <AddCSV csvFile={csvData} mapping={mapping} />
-        {children}
-      </DataProvider>
-    </RadarProvider>
+    <>
+      <SetData keys={keys} orders={orders} colors={colors} />
+      <RadarDataGenerator />
+      <AddCSV csvFile={csvData} mapping={mapping} />
+      {children}
+    </>
   );
 };

@@ -1,7 +1,9 @@
+import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
 
 import { MappingType, RawBlipType } from '../types';
-import { useRadarState } from '../stores/radar.state';
+import { RadarAtoms } from '../stores/atom.state';
+import { StoreUtils } from '../stores/utils';
 
 interface Props {
   csvFile: string;
@@ -9,12 +11,13 @@ interface Props {
 }
 
 export const AddCSV: React.FC<Props> = ({ csvFile, mapping }) => {
-  const {
-    processes: { fetchRadarBlips }
-  } = useRadarState();
+  const [, setRawBlips] = useAtom(RadarAtoms.rawBlips);
 
+  const fetchAndSaveBlips = async () => {
+    setRawBlips(await StoreUtils.fetchRadarBlips(csvFile, mapping));
+  };
   useEffect(() => {
-    fetchRadarBlips(csvFile, mapping);
+    fetchAndSaveBlips();
   }, [csvFile]);
 
   return <React.Fragment />;

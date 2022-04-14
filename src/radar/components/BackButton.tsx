@@ -1,5 +1,6 @@
 import React from 'react';
-import { SelectionState } from '@undp_sdg_ai_lab/undp-radar';
+import { SelectionState } from '../../undp-radar';
+// import { SelectionState } from '@undp_sdg_ai_lab/undp-radar';
 import { FaArrowLeft } from 'react-icons/fa';
 
 import { useNavigate } from 'react-router';

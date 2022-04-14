@@ -1,10 +1,10 @@
+import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 
 import { Title } from '../shared/Title';
-import { TechItemType } from '../../types';
 import { ScrollableDiv } from '../shared/ScrollableDiv';
-import { useDataState } from '../../stores/data.state';
-import { useRadarState } from '../../stores/radar.state';
+import { KeysObject, TechItemType } from '../../types';
+import { RadarAtoms } from '../../stores/atom.state';
 import { RadarUtilities } from '../../radar/RadarUtilities';
 
 import { TechItem } from './TechItem';
@@ -13,29 +13,38 @@ import './TechList.scss';
 export const TechList: React.FC<{ showTitle?: boolean }> = ({
   showTitle = true
 }) => {
-  const {
-    state: {
-      blips,
-      radarData,
-      techFilters,
-      hoveredTech,
-      hoveredItem,
-      useCaseFilter,
-      disasterTypeFilter,
-      selectedQuadrant
-    },
-    actions: { setTechFilter, setHoveredTech }
-  } = useRadarState();
+  const [blips] = useAtom(RadarAtoms.blips);
 
-  const {
-    state: { keys }
-  } = useDataState();
+  const [useCaseFilter] = useAtom(RadarAtoms.useCaseFilter);
+  const [disasterTypeFilter] = useAtom(RadarAtoms.disasterTypeFilter);
+  const [techFilters, setTechFilter] = useAtom(RadarAtoms.techFilters);
 
-  const [tech, setTech] = useState<TechItemType[]>([]);
+  const [selectedQuadrant] = useAtom(RadarAtoms.selectedQuadrant);
+
+  const [quadrants] = useAtom(RadarAtoms.data.quadrants);
+  const [techs] = useAtom(RadarAtoms.data.techs);
+
+  const [quadrantKey] = useAtom(RadarAtoms.key.quadrantKey);
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [useCaseKey] = useAtom(RadarAtoms.key.useCaseKey);
+  const [disasterKey] = useAtom(RadarAtoms.key.disasterKey);
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
+  const [titleKey] = useAtom(RadarAtoms.key.titleKey);
+
+  const [myTechs, setMyTechs] = useState<TechItemType[]>([]);
 
   const resetTech = (): void => {
     setTechFilter([]);
   };
+
+  const [keys] = useState<KeysObject>({
+    techKey,
+    titleKey,
+    horizonKey,
+    quadrantKey,
+    useCaseKey,
+    disasterKey
+  });
 
   useEffect(() => {
     if (blips.length > 0) {
@@ -43,8 +52,9 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       const filteredBlips = blips.filter(
         (blip) =>
           !selectedQuadrant ||
-          blip.quadrantIndex === radarData.quadrants.indexOf(selectedQuadrant)
+          blip.quadrantIndex === quadrants.indexOf(selectedQuadrant)
       );
+
       RadarUtilities.filterBlips(
         filteredBlips,
         keys,
@@ -52,7 +62,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
         disasterTypeFilter
       ).forEach((b) => {
         (b[keys.techKey] as string[]).forEach((techy) => {
-          const foundTech = radarData.tech.find((t) => t.type === techy);
+          const foundTech = techs.find((t) => t.type === techy);
 
           if (foundTech && !newTechMap.has(foundTech.slug)) {
             // could be added
@@ -75,22 +85,15 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
           }
         });
       });
-      setTech(Array.from(newTechMap.values()));
+      setMyTechs(Array.from(newTechMap.values()));
     }
-  }, [blips, radarData, useCaseFilter, disasterTypeFilter]);
-
-  const selected = (techItem: TechItemType): boolean => {
-    if (techFilters && techFilters.length > 0) {
-      return !!techFilters.find((tech) => tech === techItem.slug);
-    }
-    return false;
-  };
+  }, [blips, keys, useCaseFilter, disasterTypeFilter]);
 
   return (
     <div style={{ textAlign: 'end' }}>
       {showTitle && <Title label='Technologies' />}
       <ScrollableDiv>
-        {tech.map((t) => {
+        {myTechs.map((t) => {
           const toggleTechFilter = (): void => {
             if (techFilters && techFilters.length > 0) {
               const item = techFilters.find((tech) => tech === t.slug);
@@ -104,13 +107,9 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
           return (
             <TechItem
               key={t.uuid}
-              hoveredTech={hoveredTech}
-              setHoveredTech={setHoveredTech}
-              hoveredItem={hoveredItem}
               tech={t}
               techKey={keys.techKey}
-              selected={selected(t)}
-              techFilter={techFilters}
+              techFilters={techFilters}
               setTechFilter={toggleTechFilter}
             />
           );

@@ -1,6 +1,8 @@
+import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { RadarAtoms } from '../undp-radar';
+// import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ROUTES } from '../navigation/routes';
 import { RadarView } from './views';
@@ -10,9 +12,9 @@ export const Radar: React.FC = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const {
-    state: { blips, selectedItem, selectedQuadrant }
-  } = useRadarState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [selectedItem] = useAtom(RadarAtoms.selectedItem);
+  const [selectedQuadrant] = useAtom(RadarAtoms.selectedQuadrant);
 
   const goToQuadrant = (quadrant: string) =>
     nav(`${ROUTES.QUADRANT}/${quadrant}`);

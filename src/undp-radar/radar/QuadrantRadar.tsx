@@ -1,21 +1,19 @@
+import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
 
-import { useDataState } from '../stores/data.state';
-import { useRadarState } from '../stores/radar.state';
+import { RadarAtoms } from '../stores/atom.state';
 
 import { RadarSVG } from './svg_comps/RadarSVG';
 
 export const QuadrantRadar: React.FC = () => {
-  const {
-    state: { blips, useCaseFilter, disasterTypeFilter },
-    processes: { setFilteredBlips }
-  } = useRadarState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [useCaseFilter] = useAtom(RadarAtoms.useCaseFilter);
+  const [disasterTypeFilter] = useAtom(RadarAtoms.disasterTypeFilter);
+  const [, setIsFilteredAtom] = useAtom(RadarAtoms.isFiltered);
+  const [, setFilteredBlips] = useAtom(RadarAtoms.filteredBlips);
 
-  const {
-    state: {
-      keys: { useCaseKey, disasterTypeKey }
-    }
-  } = useDataState();
+  const [useCaseKey] = useAtom(RadarAtoms.key.useCaseKey);
+  const [disasterKey] = useAtom(RadarAtoms.key.disasterKey);
 
   useEffect(() => {
     let isFiltered = false;
@@ -27,11 +25,12 @@ export const QuadrantRadar: React.FC = () => {
     if (disasterTypeFilter !== 'all') {
       isFiltered = true;
       newFiltered = newFiltered.filter(
-        (i) => i[disasterTypeKey] === disasterTypeFilter
+        (i) => i[disasterKey] === disasterTypeFilter
       );
     }
-    setFilteredBlips(isFiltered, newFiltered);
-  }, [blips]);
+    setIsFilteredAtom(isFiltered);
+    setFilteredBlips(newFiltered);
+  }, [blips, useCaseKey, disasterKey]);
 
   return <RadarSVG />;
 };

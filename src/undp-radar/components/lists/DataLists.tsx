@@ -8,39 +8,30 @@ import { ScrollableDiv } from '../shared/ScrollableDiv';
 import { BlipType, RadarOptionsType } from '../../types';
 import { RadarUtilities } from '../../radar/RadarUtilities';
 // states
-import { useDataState } from '../../stores/data.state';
-import { useRadarState } from '../../stores/radar.state';
+import { RadarAtoms } from '../../stores/atom.state';
 
 import './DataLists.scss';
+import { useAtom } from 'jotai';
 
 type ListMatrixItem = { uuid: string; name: string };
 
 interface Props {
-  radarData: RadarOptionsType;
   quadrant: ListMatrixItem;
   horizon?: ListMatrixItem | null;
   blips: BlipType[];
-  hoveredItem: BlipType | null;
-  hoveredTech: string | null;
-  setHoveredItem: (payload: BlipType | null) => void;
-  setSelectedItem: (item: BlipType) => void;
 }
 
-const ItemList: React.FC<Props> = ({
-  radarData,
-  quadrant,
-  horizon = null,
-  blips,
-  hoveredItem,
-  hoveredTech,
-  setHoveredItem,
-  setSelectedItem
-}) => {
-  const {
-    state: {
-      keys: { techKey, titleKey, quadrantKey, horizonKey }
-    }
-  } = useDataState();
+const ItemList: React.FC<Props> = ({ quadrant, horizon = null, blips }) => {
+  const [techs] = useAtom(RadarAtoms.data.techs);
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
+  const [quadrantKey] = useAtom(RadarAtoms.key.quadrantKey);
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [titleKey] = useAtom(RadarAtoms.key.titleKey);
+
+  const [hoveredItem, setHoveredItem] = useAtom(RadarAtoms.hoveredItem);
+  const [hoveredTech] = useAtom(RadarAtoms.hoveredTech);
+  const [, setSelectedItem] = useAtom(RadarAtoms.selectedItem);
+
   return (
     <ScrollableDiv maxHeight={200}>
       <ul
@@ -56,7 +47,7 @@ const ItemList: React.FC<Props> = ({
           const onMouseEnter = () => setHoveredItem(blip);
           const onMouseLeave = () => setHoveredItem(null);
           const getHoveredStyle = () => {
-            const tech = radarData.tech.find((t) => t.type === blip[techKey]);
+            const tech = techs.find((t) => t.type === blip[techKey]);
             if (hoveredItem?.id === blip.id) {
               if (hoveredTech === null || hoveredTech === tech?.slug)
                 return 'blipItemHovered';
@@ -91,23 +82,16 @@ const ItemList: React.FC<Props> = ({
 };
 
 export const DataLists: React.FC = () => {
-  const {
-    state: { keys }
-  } = useDataState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [selectedQuadrant] = useAtom(RadarAtoms.selectedQuadrant);
 
-  const {
-    state: {
-      blips,
-      radarData,
-      useCaseFilter,
-      disasterTypeFilter,
-      techFilters,
-      hoveredItem,
-      hoveredTech,
-      selectedQuadrant
-    },
-    actions: { setHoveredItem, setSelectedItem }
-  } = useRadarState();
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
+
+  const [quadrantKey] = useAtom(RadarAtoms.key.quadrantKey);
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
+  const [isFiltered] = useAtom(RadarAtoms.isFiltered);
+  const [filteredBlips] = useAtom(RadarAtoms.filteredBlips);
 
   const [headers, setHeaders] = useState<ListMatrixItem[]>([]);
   const [horizons, setHorizons] = useState<ListMatrixItem[]>([]);
@@ -115,24 +99,20 @@ export const DataLists: React.FC = () => {
   const [myBlips, setMyBlips] = useState<BlipType[]>([]);
 
   useEffect(() => {
-    let newBlips = RadarUtilities.filterBlips(
-      blips,
-      keys,
-      useCaseFilter,
-      disasterTypeFilter
-    );
+    let newBlips = isFiltered ? filteredBlips : blips;
+
     if (selectedQuadrant) {
       newBlips = newBlips.filter(
-        (blip) => blip[keys.quadrantKey] === selectedQuadrant
+        (blip) => blip[quadrantKey] === selectedQuadrant
       );
     }
     setMyBlips(newBlips);
-  }, [blips, selectedQuadrant, useCaseFilter, disasterTypeFilter]);
+  }, [blips, selectedQuadrant]);
 
   useEffect(() => {
     if (blips && blips.length > 0) {
       const newHeaders: ListMatrixItem[] = [];
-      RadarUtilities.getQuadrants(blips, keys.quadrantKey).forEach((header) => {
+      RadarUtilities.getQuadrants(blips, quadrantKey).forEach((header) => {
         if (
           !selectedQuadrant ||
           (selectedQuadrant && selectedQuadrant === header)
@@ -141,7 +121,7 @@ export const DataLists: React.FC = () => {
         }
       });
       const newHorizons: ListMatrixItem[] = [];
-      RadarUtilities.getHorizons(blips, keys.horizonKey).forEach((horizon) =>
+      RadarUtilities.getHorizons(blips, horizonKey).forEach((horizon) =>
         newHorizons.push({ uuid: uuidv4(), name: horizon })
       );
       setHeaders(newHeaders);
@@ -149,10 +129,10 @@ export const DataLists: React.FC = () => {
     }
   }, [blips, selectedQuadrant]);
 
-  const setSelectedItemLogic = (item: BlipType) => {
-    setSelectedItem(item);
-    setHoveredItem(null);
-  };
+  // const setSelectedItemLogic = (item: BlipType) => {
+  //   setSelectedItem(item);
+  //   setHoveredItem(null);
+  // };
 
   return (
     <section>
@@ -178,18 +158,13 @@ export const DataLists: React.FC = () => {
               >
                 <Title label={Utilities.capitalize(header.name)} type='h4' />
                 <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
                   blips={myBlips.filter(
                     (b) =>
                       Utilities.checkItemHasTechFromMultiple(
                         b,
                         techFilters,
-                        keys.techKey
-                      ) && b[keys.quadrantKey] === header.name
+                        techKey
+                      ) && b[quadrantKey] === header.name
                   )}
                   quadrant={header}
                 />
@@ -216,11 +191,6 @@ export const DataLists: React.FC = () => {
                 />
 
                 <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
                   blips={myBlips}
                   quadrant={header}
                   horizon={horizons[0]}
@@ -238,11 +208,6 @@ export const DataLists: React.FC = () => {
                 />
 
                 <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
                   blips={myBlips}
                   quadrant={header}
                   horizon={horizons[1]}
@@ -260,11 +225,6 @@ export const DataLists: React.FC = () => {
                 />
 
                 <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
                   blips={myBlips}
                   quadrant={header}
                   horizon={horizons[2]}
@@ -282,11 +242,6 @@ export const DataLists: React.FC = () => {
                 />
 
                 <ItemList
-                  radarData={radarData}
-                  hoveredTech={hoveredTech}
-                  setHoveredItem={setHoveredItem}
-                  hoveredItem={hoveredItem}
-                  setSelectedItem={setSelectedItemLogic}
                   blips={myBlips}
                   quadrant={header}
                   horizon={horizons[3]}

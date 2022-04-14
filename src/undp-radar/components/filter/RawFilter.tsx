@@ -1,23 +1,22 @@
+import { useAtom } from 'jotai';
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
 
 import { SelectableItem } from '../../types';
 import { RadarUtilities } from '../../radar/RadarUtilities';
 // state
-import { useDataState } from '../../stores/data.state';
-import { useRadarState } from '../../stores/radar.state';
+import { RadarAtoms } from '../../stores/atom.state';
 
 export const RawFilter: React.FC = () => {
-  const {
-    state: { blips, disasterTypeFilter, useCaseFilter },
-    actions: { setUseCaseFilter, setDisasterTypeFilter },
-    processes: { setFilteredBlips }
-  } = useRadarState();
+  const [blips] = useAtom(RadarAtoms.blips);
+  const [useCaseFilter, setUseCaseFilter] = useAtom(RadarAtoms.useCaseFilter);
+  const [disasterTypeFilter, setDisasterTypeFilter] = useAtom(
+    RadarAtoms.disasterTypeFilter
+  );
+  const [, setIsFiltered] = useAtom(RadarAtoms.isFiltered);
+  const [, setFilteredBlips] = useAtom(RadarAtoms.filteredBlips);
 
-  const {
-    state: {
-      keys: { useCaseKey, disasterTypeKey: disasterKey }
-    }
-  } = useDataState();
+  const [useCaseKey] = useAtom(RadarAtoms.key.useCaseKey);
+  const [disasterKey] = useAtom(RadarAtoms.key.disasterKey);
 
   const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
   const [useCases, setUseCases] = useState<SelectableItem[]>([]);
@@ -56,7 +55,8 @@ export const RawFilter: React.FC = () => {
       isFiltered = true;
       filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
     }
-    setFilteredBlips(isFiltered, filtered);
+    setIsFiltered(isFiltered);
+    setFilteredBlips(filtered);
   }, [useCaseKey, disasterKey, useCaseFilter, disasterTypeFilter]);
 
   const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>

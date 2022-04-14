@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BlipType,
-  Utilities,
-  useDataState,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, Utilities, RadarAtoms } from '../../../undp-radar';
+// } from '@undp_sdg_ai_lab/undp-radar';
 import { Typography } from '@mui/material';
 
 import { HorizonItem } from './HorizonItem';
 import './DataLists.scss';
+import { useAtom } from 'jotai';
 
 export type BlipsPerQuadType = Record<string, BlipType[]>;
 
@@ -17,17 +14,11 @@ interface Props {
   quadIndex: number | false;
 }
 export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
-  const {
-    state: {
-      techFilters,
-      radarData: { horizons }
-    }
-  } = useRadarState();
-  const {
-    state: {
-      keys: { horizonKey, techKey }
-    }
-  } = useDataState();
+  const [techFilters] = useAtom(RadarAtoms.techFilters);
+
+  const [techKey] = useAtom(RadarAtoms.key.techKey);
+  const [horizonKey] = useAtom(RadarAtoms.key.horizonKey);
+  const [horizons] = useAtom(RadarAtoms.data.horizons);
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const [displayHBlips, setDisplayHBlips] = useState<BlipsPerQuadType>({});
