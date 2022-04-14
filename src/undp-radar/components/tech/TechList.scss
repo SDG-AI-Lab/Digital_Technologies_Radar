@@ -1,0 +1,15 @@
+.resetTechButton {
+  margin-top: 10px;
+  margin-right: 16px;
+  border: none;
+  background-color: grey;
+  padding: 5px 20px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

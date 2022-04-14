@@ -10002,6 +10002,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-context-selector@^1.3.10:
+  version "1.3.10"
+  resolved "https://registry.yarnpkg.com/use-context-selector/-/use-context-selector-1.3.10.tgz#8cda435e2ebd352518fbccdcf05b9787cbbd6773"
+  integrity sha512-xprS9YQ0F56IPTOjev+Lm+TWZD7Pa20+slBeaClt4YtOOoHKFOF3A9Cfr7LDcX2QIZ9VTyxXCnA6/WhL4Cm47g==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"

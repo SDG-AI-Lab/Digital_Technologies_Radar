@@ -1,0 +1,87 @@
+svg {
+  text.name {
+    font-family: Arial, Sans-serif;
+    font-size: 12px;
+    // opacity: 0.1;
+  }
+  line.quadrant {
+    stroke-width: 1px;
+  }
+
+  circle.horizon {
+    stroke: #000;
+    // stroke: white;
+    stroke-width: 0.1px;
+    // stroke-opacity: 0.2;
+    fill: none;
+  }
+
+  text.horizon-text {
+    font-size: 10px;
+    fill: rgba(0, 0, 0, 0.6);
+  }
+
+  line.direction {
+    stroke: black;
+    stroke-width: 5px;
+    marker-end: url(#arrow);
+    // opacity: 0.2;
+  }
+  #arrow {
+    fill: black;
+  }
+
+  path.quadrant {
+    // fill-opacity: 0.5;
+  }
+
+  line.quadrant {
+    stroke-width: 0.5;
+  }
+
+  text.quadrant-text {
+    font-family: Arial, Sans-serif;
+    // font-weight: bold;
+    fill: rgba(0, 0, 0, 0.5);
+    // opacity: 0.3;
+    // font-size: 40px;
+    text-align: right;
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      /* TODO: Doesn't work? */
+      fill: rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+svg:not(:root),
+symbol,
+image,
+marker,
+pattern,
+foreignObject {
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+div#radar-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 5px;
+  font: 12px sans-serif;
+  // background: lightsteelblue;
+  background: whitesmoke;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+
+  h4 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}

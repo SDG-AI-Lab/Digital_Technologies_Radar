@@ -1,0 +1,26 @@
+.wrapper {
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+  padding: 10px;
+  user-select: none;
+  transition: all 0.4s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.filterBox {
+  overflow: hidden;
+  margin: 0px;
+}

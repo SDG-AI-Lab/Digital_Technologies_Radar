@@ -1,0 +1,54 @@
+.paragraph {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-left: 1.5em;
+  margin-right: 2em;
+
+  text-align: justify;
+  text-indent: 2em;
+}
+
+.blipPageButton {
+  color: black;
+  border: none;
+  // background-color: white;
+  cursor: pointer;
+  border-radius: 45px;
+  width: 45px;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+  padding-right: 6px;
+  padding-bottom: 6px;
+
+  &:hover {
+    background-color: whitesmoke;
+  }
+}
+
+.title {
+  margin-left: 3em;
+  margin-right: 3em;
+  background-color: darkgrey;
+  color: white;
+  padding: 10px;
+}
+
+.wrapper {
+  padding: 10;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-left: calc(2em - 10px);
+    margin-right: 2em;
+    text-align: left;
+
+    background-color: darkgrey;
+    color: white;
+    padding: 10px;
+  }
+}

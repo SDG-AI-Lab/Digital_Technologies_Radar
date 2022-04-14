@@ -5,8 +5,9 @@ import { PopOverView } from '../pages/views/PopOverView';
 import { BlipView } from '../components/views/blip/BlipView';
 import { ContentView } from '../components/views/ContentView';
 import { FilterTechNavView } from '../components/views/FilterTechNavView';
+import React from 'react';
 
-export const RadarLayout: React.FC = ({ children }) => (
+export const RadarLayout: React.FC = React.memo(({ children }) => (
   <div
     style={{
       flex: 1,
@@ -22,4 +23,4 @@ export const RadarLayout: React.FC = ({ children }) => (
       <PopOverView />
     </ContentView>
   </div>
-);
+));

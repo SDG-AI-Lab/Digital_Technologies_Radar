@@ -89,35 +89,38 @@ export const BlipListMui: React.FC<{}> = React.memo(() => {
     });
   }, [displayBlips]);
 
-  return (
-    <div style={{ width: 400 }}>
-      {quadrants.map((quad) => (
-        <div key={quad}>
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            expanded={expanded === quad}
-            onChange={handleChange(quad)}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1bh-content'
-              id={quad + '-header'}
+  return React.useMemo(
+    () => (
+      <div style={{ width: 400 }}>
+        {quadrants.map((quad) => (
+          <div key={quad}>
+            <Accordion
+              TransitionProps={{ unmountOnExit: true }}
+              expanded={expanded === quad}
+              onChange={handleChange(quad)}
             >
-              <span style={{ width: '33%', flexShrink: 0 }}>
-                {Utilities.capitalize(quad)}
-              </span>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Horizons
-                quadrants={quadrants}
-                quadrant={quad}
-                blips={quadBlips}
-              />
-            </AccordionDetails>
-          </Accordion>
-        </div>
-      ))}
-    </div>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls='panel1bh-content'
+                id={quad + '-header'}
+              >
+                <span style={{ width: '33%', flexShrink: 0 }}>
+                  {Utilities.capitalize(quad)}
+                </span>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Horizons
+                  quadrants={quadrants}
+                  quadrant={quad}
+                  blips={quadBlips}
+                />
+              </AccordionDetails>
+            </Accordion>
+          </div>
+        ))}
+      </div>
+    ),
+    [quadrants, expanded, quadBlips]
   );
 });
 

@@ -1,0 +1,35 @@
+.circle {
+  transition: all;
+}
+
+.circle-pulse {
+  // animation-delay: 100ms;
+  animation-duration: 0.4s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.circle-pulse1 {
+  // animation-delay: 100ms;
+  animation-duration: 0.4s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.circle-pulse2 {
+  animation-duration: 0.4s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes pulse {
+  from {
+    stroke-opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    stroke-opacity: 0.4;
+    transform: scale(1.75);
+  }
+}

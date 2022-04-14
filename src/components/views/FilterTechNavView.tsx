@@ -1,7 +1,9 @@
+import React from 'react';
+
 import { FilterDrawer } from '../drawers/FilterDrawer';
 import { TechDrawer } from '../drawers/TechDrawer';
 
-export const FilterTechNavView = () => (
+export const FilterTechNavView = React.memo(() => (
   <div
     style={{
       display: 'flex',
@@ -15,4 +17,4 @@ export const FilterTechNavView = () => (
     <FilterDrawer />
     <TechDrawer />
   </div>
-);
+));

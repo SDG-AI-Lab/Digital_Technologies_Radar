@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useMemo } from 'react';
 
 import Box from '@mui/material/Box/Box';
 import Modal from '@mui/material/Modal/Modal';
@@ -43,188 +43,195 @@ export const BlipView: FC = () => {
     if (selectedItem != null) handleOpen();
   }, [selectedItem]);
 
-  return (
-    <>
-      {selectedItem && (
-        // <Mo
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby='modal-modal-title'
-          aria-describedby='modal-modal-description'
-        >
-          <Paper
-            style={{
-              ...style,
-              maxHeight: '90%',
-              maxWidth: '90%',
-              overflow: 'auto',
-              position: 'relative',
-              padding: 10
-            }}
+  return useMemo(() => {
+    // The rest of your rendering logic
+    return (
+      <>
+        {selectedItem && (
+          // <Mo
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
           >
-            <Typography
-              p={2}
+            <Paper
               style={{
-                justifyContent: 'center',
-                textAlign: 'center',
-                textTransform: 'capitalize'
+                ...style,
+                maxHeight: '90%',
+                maxWidth: '90%',
+                overflow: 'auto',
+                position: 'relative',
+                padding: 10
               }}
-              variant='h5'
             >
-              {selectedItem['Ideas/Concepts/Examples']}
-            </Typography>
-            <Button
-              style={{ top: 5, right: 5, position: 'absolute' }}
-              onClick={handleClose}
-            >
-              Close
-            </Button>
-
-            <Box>
-              <Table
-              //  variant='unstyled'
+              <Typography
+                p={2}
+                style={{
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  textTransform: 'capitalize'
+                }}
+                variant='h5'
               >
-                <TableHead>
-                  <TableRow>
-                    <TableCell colSpan={2}>
-                      <StackMui
-                        direction='row'
+                {selectedItem['Ideas/Concepts/Examples']}
+              </Typography>
+              <Button
+                style={{ top: 5, right: 5, position: 'absolute' }}
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+
+              <Box>
+                <Table
+                //  variant='unstyled'
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell colSpan={2}>
+                        <StackMui
+                          direction='row'
+                          style={{
+                            justifyContent: 'center'
+                          }}
+                        >
+                          <Badge
+                          // px={2}
+                          // py={1}
+                          // borderRadius='md'
+                          // bg='purple.50'
+                          // textTransform='capitalize'
+                          >
+                            📍 {selectedItem['Country of Implementation']}
+                          </Badge>
+                          <Badge
+                          // px={2}
+                          // py={1}
+                          // borderRadius='md'
+                          // bg='green.50'
+                          // textTransform='capitalize'
+                          >
+                            🎯 {selectedItem['SDG']?.join(', ')}
+                          </Badge>
+                          <Badge
+                          // px={2}
+                          // py={1}
+                          // borderRadius='md'
+                          // bg='black'
+                          // // color='white'
+                          // textTransform='capitalize'
+                          >
+                            🏠 {selectedItem['Status/Maturity']}
+                          </Badge>
+                          <Badge
+                          // px={2}
+                          // py={1}
+                          // borderRadius='md'
+                          // bg='#2B6CB0'
+                          // color='#fff'
+                          // textTransform='capitalize'
+                          >
+                            🌋 {selectedItem['Disaster Cycle']}
+                          </Badge>
+                        </StackMui>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Description
+                      </TableCell>
+                      <TableCell
                         style={{
-                          justifyContent: 'center'
+                          textAlign: 'justify',
+                          textJustify: 'inter-word'
                         }}
                       >
-                        <Badge
-                        // px={2}
-                        // py={1}
-                        // borderRadius='md'
-                        // bg='purple.50'
-                        // textTransform='capitalize'
+                        {selectedItem['Description']}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Technology
+                      </TableCell>
+                      <TableCell>
+                        {selectedItem['Technology']?.join(', ')}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Disaster Type
+                      </TableCell>
+                      <TableCell>{selectedItem['Disaster Type']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Use Case
+                      </TableCell>
+                      <TableCell>{selectedItem['Use Case']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        UN Host Organization
+                      </TableCell>
+                      <TableCell>
+                        {selectedItem['Un Host Organisation']}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Partner
+                      </TableCell>
+                      <TableCell>
+                        {selectedItem['Supporting Partners']}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Data
+                      </TableCell>
+                      <TableCell>{selectedItem['Data']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Theme
+                      </TableCell>
+                      <TableCell>{selectedItem['Theme']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Source
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          href={`${selectedItem['Source']}`}
+                          // isExternal
+                          // color='blue.600'
+                          target='_blank'
+                          rel='noopener'
                         >
-                          📍 {selectedItem['Country of Implementation']}
-                        </Badge>
-                        <Badge
-                        // px={2}
-                        // py={1}
-                        // borderRadius='md'
-                        // bg='green.50'
-                        // textTransform='capitalize'
-                        >
-                          🎯 {selectedItem['SDG']?.join(', ')}
-                        </Badge>
-                        <Badge
-                        // px={2}
-                        // py={1}
-                        // borderRadius='md'
-                        // bg='black'
-                        // // color='white'
-                        // textTransform='capitalize'
-                        >
-                          🏠 {selectedItem['Status/Maturity']}
-                        </Badge>
-                        <Badge
-                        // px={2}
-                        // py={1}
-                        // borderRadius='md'
-                        // bg='#2B6CB0'
-                        // color='#fff'
-                        // textTransform='capitalize'
-                        >
-                          🌋 {selectedItem['Disaster Cycle']}
-                        </Badge>
-                      </StackMui>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Description
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        textAlign: 'justify',
-                        textJustify: 'inter-word'
-                      }}
-                    >
-                      {selectedItem['Description']}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Technology
-                    </TableCell>
-                    <TableCell>
-                      {selectedItem['Technology']?.join(', ')}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Disaster Type
-                    </TableCell>
-                    <TableCell>{selectedItem['Disaster Type']}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Use Case
-                    </TableCell>
-                    <TableCell>{selectedItem['Use Case']}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      UN Host Organization
-                    </TableCell>
-                    <TableCell>
-                      {selectedItem['Un Host Organisation']}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Partner
-                    </TableCell>
-                    <TableCell>{selectedItem['Supporting Partners']}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>Data</TableCell>
-                    <TableCell>{selectedItem['Data']}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Theme
-                    </TableCell>
-                    <TableCell>{selectedItem['Theme']}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Source
-                    </TableCell>
-                    <TableCell>
-                      <Link
-                        href={`${selectedItem['Source']}`}
-                        // isExternal
-                        // color='blue.600'
-                        target='_blank'
-                        rel='noopener'
-                      >
-                        Click Here
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell style={{ verticalAlign: 'top' }}>
-                      Publication Date
-                    </TableCell>
-                    <TableCell>
-                      {selectedItem['Date of Implementation']}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </Box>
-            {/* <ModalFooter></ModalFooter> */}
-          </Paper>
-        </Modal>
-      )}
-    </>
-  );
+                          Click Here
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell style={{ verticalAlign: 'top' }}>
+                        Publication Date
+                      </TableCell>
+                      <TableCell>
+                        {selectedItem['Date of Implementation']}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </Box>
+              {/* <ModalFooter></ModalFooter> */}
+            </Paper>
+          </Modal>
+        )}
+      </>
+    );
+  }, [selectedItem, open, handleClose]);
 };
