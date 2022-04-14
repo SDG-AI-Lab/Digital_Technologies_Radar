@@ -1,11 +1,5 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import {
-  Select,
-  RangeSlider,
-  RangeSliderTrack,
-  RangeSliderFilledTrack,
-  RangeSliderThumb
-} from '@chakra-ui/react';
+import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
   useDataState,
@@ -21,6 +15,7 @@ import {
   yearKey,
   dataKey
 } from './FilterConstants';
+import { AppRangerSlider } from './AppRanderSlider';
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -303,6 +298,7 @@ export const CustomFilter: React.FC = () => {
   const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedData(e.target.value);
 
+  const [sliderReset, setSliderReset] = useState(false);
   const onResetFilter = (): void => {
     setSelectedRegion('all');
     setSelectedCountry('all');
@@ -313,6 +309,24 @@ export const CustomFilter: React.FC = () => {
     setSelectedStartYear('all');
     setSelectedEndYear('all');
     setSelectedData('all');
+
+    setSliderReset(true);
+  };
+
+  const [min, setMin] = useState<number>();
+  const [max, setMax] = useState<number>();
+  const forceNumber = (o: { name: string }) => Number(o.name);
+  useEffect(() => {
+    const maxApply = Math.max(...years.map(forceNumber));
+    const minApply = Math.min(...years.map(forceNumber));
+    setMin(minApply);
+    setMax(maxApply);
+  }, [years]);
+
+  const onSliderChange: (value: number | number[]) => void = (val) => {
+    console.log('parent onRangerSelectionChange cchange', val);
+    if (typeof val === 'object') onYearRangeChange(val);
+    setSliderReset(false);
   };
 
   return (
@@ -531,75 +545,14 @@ export const CustomFilter: React.FC = () => {
             width: 200
           }}
         >
-          <RangeSlider
-            aria-label={['min', 'max']}
-            size='lg'
-            defaultValue={[
-              Math.max.apply(
-                Math,
-                years.map(function (o) {
-                  return Number(o.name);
-                })
-              ),
-              Math.min.apply(
-                Math,
-                years.map(function (o) {
-                  return Number(o.name);
-                })
-              )
-            ]}
-            min={Math.min.apply(
-              Math,
-              years.map(function (o) {
-                return Number(o.name);
-              })
-            )}
-            max={Math.max.apply(
-              Math,
-              years.map(function (o) {
-                return Number(o.name);
-              })
-            )}
-            onChangeEnd={(val) => onYearRangeChange(val)}
-          >
-            <RangeSliderTrack>
-              <RangeSliderFilledTrack backgroundColor={'#adcdec'} />
-            </RangeSliderTrack>
-
-            <RangeSliderThumb index={0} boxSize={3} backgroundColor={'#3182ce'}>
-              <div
-                style={{
-                  marginBottom: -40
-                }}
-              >
-                {selectedStartYear == 'all'
-                  ? Math.min.apply(
-                      Math,
-                      years.map(function (o) {
-                        return Number(o.name);
-                      })
-                    )
-                  : selectedStartYear}
-              </div>
-            </RangeSliderThumb>
-
-            <RangeSliderThumb index={1} boxSize={3} backgroundColor={'#3182ce'}>
-              <div
-                style={{
-                  marginBottom: -40
-                }}
-              >
-                {selectedEndYear == 'all'
-                  ? Math.max.apply(
-                      Math,
-                      years.map(function (o) {
-                        return Number(o.name);
-                      })
-                    )
-                  : selectedEndYear}
-              </div>
-            </RangeSliderThumb>
-          </RangeSlider>
+          {min && max && (
+            <AppRangerSlider
+              max={max}
+              min={min}
+              onChange={onSliderChange}
+              reset={sliderReset}
+            />
+          )}
         </div>
       </div>
 
