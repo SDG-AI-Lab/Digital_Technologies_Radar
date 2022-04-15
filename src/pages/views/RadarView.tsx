@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Heading,
@@ -9,7 +9,7 @@ import {
   TabPanel,
   BoxProps
 } from '@chakra-ui/react';
-import { Radar } from '@undp_sdg_ai_lab/undp-radar';
+import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
@@ -17,47 +17,70 @@ import { TechDescription } from '../../radar/tech/TechDescription';
 import { BlipView } from '../../components/views/blip/BlipView';
 import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
 
-export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
-  <>
-    <Box flex={1}>
-      <Heading
-        fontSize={30}
-        color='DarkSlateGray'
-        textAlign='center'
-        p={15}
-        paddingTop={15}
-      >
-        Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-      </Heading>
-      {loading && <WaitingForRadar size='620px' />}
-      {!loading && <Radar />}
-      <PopOverView />
-    </Box>
+export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
+  const {
+    state: { techFilters, selectedItem }
+  } = useRadarState();
+  const [tabIndex, setTabIndex] = React.useState(0);
 
-    <Box flex={'0.75'} {...TabOuterBoxProps}>
-      <Tabs variant='enclosed'>
-        <TabList>
-          <Tab as='h5'>Stages</Tab>
-          <Tab as='h5'>Technologies</Tab>
-          <Tab as='h5'>Project</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <p>one!</p>
-          </TabPanel>
-          <TabPanel>
-            <TechDescription />
-          </TabPanel>
-          <TabPanel>
-            <ScrollableDiv maxHeight={460}>
-              <BlipView />
-            </ScrollableDiv>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Box>
-  </>
-);
+  useEffect(() => {
+    if (techFilters && techFilters.length > 0) {
+      setTabIndex(1);
+    }
+  }, [techFilters]);
+
+  useEffect(() => {
+    if (selectedItem) {
+      setTabIndex(2);
+    }
+  }, [selectedItem]);
+
+  const tabsChangeHandler = (ind: number) => {
+    setTabIndex(ind);
+  };
+
+  return (
+    <>
+      <Box flex={1}>
+        <Heading
+          fontSize={30}
+          color='DarkSlateGray'
+          textAlign='center'
+          p={15}
+          paddingTop={15}
+        >
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+        </Heading>
+        {loading && <WaitingForRadar size='620px' />}
+        {!loading && <Radar />}
+        <PopOverView />
+      </Box>
+
+      <Box flex={'0.75'} {...TabOuterBoxProps}>
+        <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
+          <TabList>
+            <Tab as='h5'>Stages</Tab>
+            <Tab as='h5'>Technologies</Tab>
+            <Tab as='h5'>Project</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <p>one!</p>
+            </TabPanel>
+            <TabPanel>
+              <TechDescription />
+            </TabPanel>
+            <TabPanel>
+              <ScrollableDiv maxHeight={460}>
+                <BlipView />
+              </ScrollableDiv>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
+    </>
+  );
+};
 
 const TabOuterBoxProps: BoxProps = {
   borderColor: 'gray.200',

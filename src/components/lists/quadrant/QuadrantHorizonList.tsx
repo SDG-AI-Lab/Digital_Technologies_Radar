@@ -22,7 +22,8 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   const {
     state: {
       techFilters,
-      radarData: { horizons }
+      radarData: { horizons },
+      selectedItem
     }
   } = useRadarState();
   const {
@@ -30,6 +31,8 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
       keys: { horizonKey, techKey }
     }
   } = useDataState();
+
+  const [tabIndex, setTabIndex] = React.useState(0);
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const [displayHBlips, setDisplayHBlips] = useState<BlipsPerQuadType>({});
@@ -62,6 +65,16 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
     setDisplayHBlips(newDisplayBlipsByHorizon);
   }, [displayBlips, horizonKey, quadIndex]);
 
+  useEffect(() => {
+    if (selectedItem) {
+      setTabIndex(1);
+    }
+  }, [selectedItem]);
+
+  const tabsChangeHandler = (ind: number) => {
+    setTabIndex(ind);
+  };
+
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
   const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
@@ -87,7 +100,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         maxWidth: 500
       }}
     >
-      <Tabs variant='enclosed'>
+      <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
         <TabList>
           <Tab as='h5'>Stages</Tab>
           <Tab as='h5'>Project</Tab>
