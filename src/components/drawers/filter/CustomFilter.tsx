@@ -538,7 +538,7 @@ export const CustomFilter: React.FC = () => {
 
         <div
           style={{
-            marginTop: 15,
+            marginTop: 18,
             marginBottom: 3,
             marginLeft: 20,
             marginRight: 40,

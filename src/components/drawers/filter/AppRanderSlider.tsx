@@ -63,6 +63,10 @@ export const AppRangerSlider: React.FC<Props> = ({
         // marks={{ min: min.toString(), max: max.toString() }}
         step={1}
         handleRender={handleRender}
+        handleStyle={{
+          opacity: 1.0
+        }}
+        trackStyle={{ backgroundColor: '#3182ce' }}
       />
     </>
   );

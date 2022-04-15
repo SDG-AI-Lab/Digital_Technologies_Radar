@@ -8,7 +8,7 @@ export const handleRender: SliderProps['handleRender'] = (node, props) => (
       style={{
         display: 'block',
         width: 50,
-        marginTop: 15,
+        marginTop: 12,
         marginLeft: -10
       }}
     >
