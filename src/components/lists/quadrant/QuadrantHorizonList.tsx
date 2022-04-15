@@ -8,7 +8,7 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
-import { BlipView } from '../../views/blip/BlipView'
+import { BlipView } from '../../views/blip/BlipView';
 import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
 import './DataLists.scss';
 

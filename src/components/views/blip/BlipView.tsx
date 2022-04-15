@@ -15,7 +15,7 @@ import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 export const BlipView: FC = () => {
   const {
-    state: { selectedItem },
+    state: { selectedItem }
   } = useRadarState();
 
   return (
@@ -51,18 +51,20 @@ export const BlipView: FC = () => {
               justifyContent: 'center'
             }}
           >
-            {selectedItem['Country of Implementation'].split(',').map((item, ind) => (
-              <Badge
-                key={ind}
-                px={2}
-                py={1}
-                borderRadius='md'
-                bg='purple.50'
-                textTransform='capitalize'
-              >
-                📍 {item.trim()}
-              </Badge>
-            ))}
+            {selectedItem['Country of Implementation']
+              .split(',')
+              .map((item, ind) => (
+                <Badge
+                  key={ind}
+                  px={2}
+                  py={1}
+                  borderRadius='md'
+                  bg='purple.50'
+                  textTransform='capitalize'
+                >
+                  📍 {item.trim()}
+                </Badge>
+              ))}
             {selectedItem['SDG'].map((item, ind) => (
               <Badge
                 key={ind}
@@ -123,9 +125,7 @@ export const BlipView: FC = () => {
                 <Td>{selectedItem['Use Case']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
-                  UN Host Organization
-                </Td>
+                <Td style={{ verticalAlign: 'top' }}>UN Host Organization</Td>
                 <Td>{selectedItem['Un Host Organisation']}</Td>
               </Tr>
               <Tr>
