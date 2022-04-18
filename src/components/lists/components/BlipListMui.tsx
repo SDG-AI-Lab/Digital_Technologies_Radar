@@ -122,8 +122,14 @@ const Horizons: React.FC<{
     }
   } = useRadarState();
 
-  const [sourceHorizon, setSourceHorizon] = useState<string>();
-  const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
+  const [expandedHorizon, setExpandedHorizon] = React.useState<string>('');
+
+  const handleChangeHorizon =
+    (horizon: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      console.log('expanded = ' + horizon);
+
+      setExpandedHorizon(isExpanded ? horizon : '');
+    };
 
   const quadB = blips[quadrants.indexOf(quadrant)];
   return (
@@ -133,9 +139,9 @@ const Horizons: React.FC<{
           <HorizonItemMui
             key={quadrant + '-' + hName}
             horizonName={Utilities.capitalize(hName)}
+            handleChange={handleChangeHorizon}
             quadrantBlips={quadB.horizons[hName]}
-            triggerSiblings={triggerSiblings}
-            close={!(sourceHorizon === Utilities.capitalize(hName))}
+            expandedHorizon={expandedHorizon}
           />
         ))}
     </>

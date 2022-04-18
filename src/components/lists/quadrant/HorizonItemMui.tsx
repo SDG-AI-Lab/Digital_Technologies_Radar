@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   BlipType,
   useDataState,
@@ -18,21 +18,16 @@ import { orange, purple, green, blue } from '@mui/material/colors';
 interface QuadrantDataListItemProps {
   horizonName: string;
   quadrantBlips: BlipType[];
-  triggerSiblings: (horizon: string) => void;
-  close: boolean;
+  expandedHorizon: string;
+  handleChange: Function;
 }
 
 export const HorizonItemMui: React.FC<QuadrantDataListItemProps> = ({
   horizonName,
-  quadrantBlips = []
+  quadrantBlips = [],
+  expandedHorizon,
+  handleChange
 }) => {
-  const [expanded, setExpanded] = React.useState<string>('');
-
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : '');
-    };
-
   const [expandedItem, setExpandedItem] = React.useState<string>('');
 
   const handleItemChange =
@@ -45,7 +40,7 @@ export const HorizonItemMui: React.FC<QuadrantDataListItemProps> = ({
       {quadrantBlips.length > 0 && (
         <Accordion
           TransitionProps={{ unmountOnExit: true }}
-          expanded={expanded === horizonName}
+          expanded={expandedHorizon === horizonName}
           onChange={handleChange(horizonName)}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -92,7 +87,6 @@ const ItemMui: React.FC<{
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
   const borderSelected = selectedItem?.id === blip.id ? '1px solid blue' : '';
 
-  console.log('expanded = ' + expanded);
   return (
     <Accordion
       TransitionProps={{ unmountOnExit: true }}
