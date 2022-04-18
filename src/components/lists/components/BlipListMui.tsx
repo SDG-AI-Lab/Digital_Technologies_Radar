@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
-import { HorizonItem } from '../quadrant/HorizonItem';
+import { HorizonItemMui } from '../quadrant/HorizonItemMui';
 
 type QuadType = {
   qIndex: number;
@@ -86,30 +86,29 @@ export const BlipListMui: React.FC = React.memo(() => {
   }, [displayBlips]);
 
   return (
-    <div style={{ width: 400 }}>
+    <>
       {quadrants.map((quad) => (
-        <div key={quad}>
-          <Accordion
-            TransitionProps={{ unmountOnExit: true }}
-            expanded={expanded === quad}
-            onChange={handleChange(quad)}
+        <Accordion
+          key={quad}
+          TransitionProps={{ unmountOnExit: true }}
+          expanded={expanded === quad}
+          onChange={handleChange(quad)}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls='panel1bh-content'
+            id={quad + '-header'}
           >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls='panel1bh-content'
-              id={quad + '-header'}
-            >
-              <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                {Utilities.capitalize(quad)}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Horizons quadrant={quad} blips={quadBlips} />
-            </AccordionDetails>
-          </Accordion>
-        </div>
+            <Typography sx={{ width: '33%', flexShrink: 0 }}>
+              {Utilities.capitalize(quad)}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Horizons quadrant={quad} blips={quadBlips} />
+          </AccordionDetails>
+        </Accordion>
       ))}
-    </div>
+    </>
   );
 });
 
@@ -131,7 +130,7 @@ const Horizons: React.FC<{
     <>
       {quadB &&
         Object.keys(quadB.horizons).map((hName: string) => (
-          <HorizonItem
+          <HorizonItemMui
             key={quadrant + '-' + hName}
             horizonName={Utilities.capitalize(hName)}
             quadrantBlips={quadB.horizons[hName]}
