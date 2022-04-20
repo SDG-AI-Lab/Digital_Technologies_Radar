@@ -1,17 +1,14 @@
-name: CI Tests
+name: CI Development
 
 on:
-  push:
   pull_request:
-    branches: [master, develop]
+    branches:
+    - master
+    - develop
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # strategy:
-    #   matrix:
-    #     node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -19,11 +16,16 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14'
 
       - name: install
         run: |
           yarn install
+
+      - name: build
+        run: |
+          yarn build
+
       - name: test
         run: |
           yarn test
