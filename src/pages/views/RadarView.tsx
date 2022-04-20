@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Button } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 import { Radar as UNDPRadar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from '../../radar/components';
@@ -12,8 +12,7 @@ export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const {
-    state: { blips },
-    setHoveredItem
+    state: { blips }
   } = useRadarState();
 
   useEffect(() => {
@@ -32,9 +31,10 @@ export const RadarView: React.FC = () => {
           {loading && <WaitingForRadar size='620px' />}
           {!loading && <UNDPRadar />}
         </Box>
-        <Box overflowY='auto'><HowToPopup></HowToPopup></Box>
+        <Box overflowY='auto'>
+          <HowToPopup />
+        </Box>
         <TechDescription />
-        <Box>{/* <DataLists /> */}</Box>
       </ContentView>
     </>
   );
