@@ -17,10 +17,7 @@ import QuadrantTitle from '../../../src/assets/components/Quadrant.png';
 
 export const HowToPopup: React.FC = () => {
   return (
-    <Popover
-      trigger={'hover'}
-      variant={'max70PercentHeight'}
-    >
+    <Popover trigger={'hover'} variant={'max70PercentHeight'}>
       <PopoverTrigger>
         <Button
           position={'absolute'}
@@ -84,7 +81,7 @@ export const HowToPopup: React.FC = () => {
               </div>
               <div className='container'>
                 <div className='content'>
-                 <div className='timeline-boundary'></div>
+                  <div className='timeline-boundary'></div>
                 </div>
               </div>
             </div>
