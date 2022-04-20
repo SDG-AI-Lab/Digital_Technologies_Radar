@@ -24,7 +24,7 @@ export const HowToPopup: React.FC = () => {
           right={30}
           m={7}
           px={25}
-          colorScheme='gray'
+          colorScheme='blue'
           rightIcon={<AiOutlineAim />}
           borderRadius={'0'}
         >
@@ -32,7 +32,7 @@ export const HowToPopup: React.FC = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className='popoverContent' overflow={'auto'}>
-        <PopoverHeader>
+        <PopoverHeader color={"DarkSlateGray"}>
           <h1>How to use the DRR Technology Radar</h1>
         </PopoverHeader>
         <PopoverBody overflow={'auto'}>

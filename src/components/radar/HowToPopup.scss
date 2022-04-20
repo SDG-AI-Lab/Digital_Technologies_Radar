@@ -10,8 +10,8 @@
 }
 
 .timeline {
-  border-left: 2px solid rgb(255, 196, 0);
-  max-height: 600px;
+  border-left: 2px solid rgb(46, 133, 133);
+  max-height: 650px;
 }
 
 .container {
@@ -23,11 +23,11 @@
 }
 
 h1 {
-  font-size: 15px !important;
+  font-size: 17px !important;
 }
 
 .container .content h2 {
-  font-size: 15px !important;
+  font-size: 18px !important;
   color: #000000;
   font-weight: 500;
   margin-top: -20px;
@@ -42,16 +42,16 @@ h1 {
   background: white;
   border-radius: 100px;
   left: -31px;
-  border: 3px solid rgb(255, 196, 0);
+  border: 3px solid rgb(46, 133, 133);
 }
 
 .container .content .timeline-boundary::before {
-  background: rgb(255, 233, 160);
-  border: 3px solid rgb(255, 196, 0);
+  background: rgb(46, 133, 133);
+  border: 3px solid rgb(46, 133, 133);
 }
 
 .container .content p {
-  font-size: 13px !important;
+  font-size: 15px !important;
   color: #000000;
   margin: 10px 0 0px 20px;
 }
