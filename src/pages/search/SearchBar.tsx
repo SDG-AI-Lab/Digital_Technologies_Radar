@@ -6,12 +6,12 @@ import {
 
 import csvData from '../../assets/csv/technology_radar_dataset_updated_v3.csv';
 
-import {CSVManager} from './CSVManager'
 import SearchResult from './SearchResult';
 
 import {
-  Utilities, BaseCSVType
+  Utilities, BaseCSVType, CSVManager
 } from '@undp_sdg_ai_lab/undp-radar';
+
 
 
 
@@ -73,14 +73,14 @@ export const SearchBar: React.FC = () => {
       </Center>
      
       {
-        filteredTech.length !==0 &&  (
+        filteredTech.length !== 0 &&  (
           <SearchResult filteredContent={filteredTech}/>
        )
       }
 
 
       {
-        filteredTech.length == 0 &&  (
+        filteredTech.length === 0 &&  (
           <SearchResult filteredContent={csvDataForSearch}/>
         )
       }

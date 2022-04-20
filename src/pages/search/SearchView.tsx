@@ -18,15 +18,15 @@ import {
   Link,Button
 } from '@chakra-ui/react';
 
-interface SearchViewProps {
-  techContent:  BaseCSVType;
-}
 
 import {
   BaseCSVType
 } from '@undp_sdg_ai_lab/undp-radar';
 
-//const SearchView = ({ techContent}) => {
+
+interface SearchViewProps {
+  techContent:  BaseCSVType;
+}
 
 export const SearchView: React.FC<SearchViewProps> = ({techContent}) => {
 
