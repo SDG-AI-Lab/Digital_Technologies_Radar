@@ -24,7 +24,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
       <PopOverView />
     </Box>
     <Box overflowY='auto'>
-          <HowToPopup />
+      <HowToPopup />
     </Box>
     <TechDescription />
   </>
