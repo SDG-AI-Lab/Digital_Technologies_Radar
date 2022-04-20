@@ -6,7 +6,7 @@ import { WaitingForRadar } from '../../radar/components';
 import { ContentView } from '../../components/views/ContentView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { FilterTechNavView } from '../../components/views/FilterTechNavView';
-import { AiOutlineAim } from 'react-icons/ai';
+import { HowToPopup } from '../../components/radar/HowToPopup';
 
 export const RadarView: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -26,26 +26,14 @@ export const RadarView: React.FC = () => {
       <FilterTechNavView />
       <ContentView>
         <Box flex={1}>
-          <Button
-            float={'right'}
-            display={'flex'}
-            m={7}
-            px={25}
-            colorScheme='gray'
-            rightIcon={<AiOutlineAim />}
-            borderRadius={'0'}
-          >
-            How to use
-          </Button>
           <Heading fontSize={30} textAlign='center' p={5} paddingTop={100}>
             Technology Radar
           </Heading>
           {loading && <WaitingForRadar size='620px' />}
           {!loading && <UNDPRadar />}
         </Box>
-
+        <Box overflowY='auto'><HowToPopup></HowToPopup></Box>
         <TechDescription />
-
         <Box>{/* <DataLists /> */}</Box>
       </ContentView>
     </>
