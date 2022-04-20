@@ -1,43 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  // BlipType,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { ROUTES } from '../navigation/routes';
 import { RadarView } from './views';
 
 export const Radar: React.FC = () => {
   const nav = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+
   const {
-    state: { selectedItem, selectedQuadrant },
-    setSelectedItem,
-    setSelectedQuadrant
+    state: { blips, selectedItem, selectedQuadrant }
   } = useRadarState();
 
-  useEffect(() => {
-    // return () => {
-    //   logic.setSelectedItem(null);
-    //   logic.setSelectedQuadrant(null);
-    // };
-  }, [setSelectedItem, setSelectedQuadrant]);
+  const goToQuadrant = (quadrant: string) =>
+    nav(`${ROUTES.QUADRANT}/${quadrant}`);
 
   useEffect(() => {
-    const goToQuadrant = (quadrant: string) =>
-      nav(`${ROUTES.QUADRANT}/${quadrant}`);
-    // const goToBlip = (blip: BlipType) => nav(`${ROUTES.BLIP}/${blip.id}`);
-    if (selectedItem) {
-      // go to Blip view
-      // goToBlip(selectedItem);
-    } else if (!selectedItem && selectedQuadrant) {
-      // go to quadrant view
-      goToQuadrant(selectedQuadrant);
-    } else {
-      // !selectedItem && !selectedQuadrant
-      // Pass through so we can see the radar
-    }
-  }, [selectedItem, selectedQuadrant, nav]);
+    if (!selectedItem && selectedQuadrant) goToQuadrant(selectedQuadrant);
+  }, [selectedItem, selectedQuadrant]);
 
-  return <RadarView />;
+  useEffect(() => {
+    // TODO: this could be driven by some Library state, specifying 'it is ready for display'
+    if (blips.length > 0) setLoading(false);
+  }, [blips]);
+
+  return <RadarView loading={loading} />;
 };

@@ -4,12 +4,14 @@ interface Props {
   maxHeight?: number;
   overflowY?: boolean;
   overflowX?: boolean;
+  show?: boolean;
 }
 export const ScrollableDiv: React.FC<Props> = ({
   children,
   maxHeight = 400,
   overflowY = true,
-  overflowX = false
+  overflowX = false,
+  show = true
 }) => (
   <div
     style={{
@@ -17,7 +19,8 @@ export const ScrollableDiv: React.FC<Props> = ({
       overflow: 'hidden',
       scrollBehavior: 'smooth',
       overflowY: overflowY ? 'auto' : undefined,
-      overflowX: overflowX ? 'auto' : undefined
+      overflowX: overflowX ? 'auto' : undefined,
+      display: show ? 'block' : 'none'
     }}
   >
     {children}

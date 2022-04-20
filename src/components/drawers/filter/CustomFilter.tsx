@@ -1,4 +1,5 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
   useDataState,
@@ -7,19 +8,20 @@ import {
 
 import { FilterUtils } from './FilterUtilities';
 import {
+  regionKey,
   countryKey,
   implementerKey,
   sdgKey,
-  startYearKey,
-  endYearKey
+  yearKey,
+  dataKey
 } from './FilterConstants';
+import { AppRangerSlider } from './AppRanderSlider';
 
 export const CustomFilter: React.FC = () => {
   const {
     state: { blips, disasterTypeFilter, useCaseFilter },
-    setUseCaseFilter,
-    setDisasterTypeFilter,
-    setFilteredBlips
+    actions: { setUseCaseFilter, setDisasterTypeFilter },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const {
@@ -29,6 +31,8 @@ export const CustomFilter: React.FC = () => {
   } = useDataState();
 
   // FILTERS
+  // regions
+  const [regionFilter, setRegionFilter] = useState<string>('all');
   // countries
   const [countryFilter, setCountryFilter] = useState<string>('all');
   // implementer
@@ -39,8 +43,12 @@ export const CustomFilter: React.FC = () => {
   const [startYearFilter, setStartYearFilter] = useState<string>('all');
   // end year
   const [endYearFilter, setEndYearFilter] = useState<string>('all');
+  // data
+  const [dataFilter, setDataFilter] = useState<string>('all');
 
   // ALL OPTIONS
+  // regions
+  const [regions, setRegions] = useState<SelectableItem[]>([]);
   // countries
   const [countries, setCountries] = useState<SelectableItem[]>([]);
   // disasters
@@ -51,14 +59,17 @@ export const CustomFilter: React.FC = () => {
   const [implementers, setImplementers] = useState<SelectableItem[]>([]);
   // sdg
   const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
-  // start year
-  const [startYears, setStartYears] = useState<SelectableItem[]>([]);
-  // end year
-  const [endYears, setEndYears] = useState<SelectableItem[]>([]);
+  // year
+  const [years, setYears] = useState<SelectableItem[]>([]);
+  // data
+  const [data, setData] = useState<SelectableItem[]>([]);
 
   // EFFECT on Blips change, to get all options
   useEffect(() => {
     if (blips && blips?.length > 0) {
+      // region options
+      const newRegions = FilterUtils.getRegions(blips, regionKey);
+      setRegions(newRegions);
       // country options
       const newCountries = FilterUtils.getCountries(blips, countryKey);
       setCountries(newCountries);
@@ -78,13 +89,18 @@ export const CustomFilter: React.FC = () => {
       const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
       setSdgs(newSdgs);
       // start year options
-      const newStartYears = FilterUtils.getStartYears(blips, startYearKey);
-      setStartYears(newStartYears);
-      // end year options
-      const newEndYears = FilterUtils.getEndYears(blips, endYearKey);
-      setEndYears(newEndYears);
+      const newYears = FilterUtils.getYears(blips, yearKey);
+      setYears(newYears);
+      // data options
+      const newData = FilterUtils.getData(blips, dataKey);
+      setData(newData);
     }
   }, [blips]);
+
+  // selectedRegion
+  const [selectedRegion, setSelectedRegion] = useState<string>(
+    regionFilter === null ? 'all' : regionFilter
+  );
 
   // selectedCountry
   const [selectedCountry, setSelectedCountry] = useState<string>(
@@ -121,6 +137,11 @@ export const CustomFilter: React.FC = () => {
     endYearFilter === null ? 'all' : endYearFilter
   );
 
+  // selectedData
+  const [selectedData, setSelectedData] = useState<string>(
+    dataFilter === null ? 'all' : dataFilter
+  );
+
   /**
    * This is our filtering logic
    */
@@ -128,10 +149,25 @@ export const CustomFilter: React.FC = () => {
     let filtered = blips; // we start with all Blips
     let isFiltered = false;
 
+    // filter regions
+    if (regionFilter !== 'all') {
+      isFiltered = true;
+      // We need to check if we have an exact match or the blip is an array containing the region
+      filtered = filtered.filter(
+        (i) =>
+          i[regionKey] === regionFilter || i[regionKey].includes(regionFilter)
+      );
+    }
+
     // filter countries
     if (countryFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[countryKey] === countryFilter);
+      // We need to check if we have an exact match or the blip is an array containing the country
+      filtered = filtered.filter(
+        (i) =>
+          i[countryKey] === countryFilter ||
+          i[countryKey].includes(countryFilter)
+      );
     }
 
     // filter disaster types
@@ -150,7 +186,9 @@ export const CustomFilter: React.FC = () => {
     if (implementerFilter !== 'all') {
       isFiltered = true;
       filtered = filtered.filter(
-        (i) => i[implementerKey] === implementerFilter
+        (i) =>
+          i[implementerKey] === implementerFilter ||
+          i[implementerKey].includes(implementerFilter)
       );
     }
 
@@ -164,13 +202,32 @@ export const CustomFilter: React.FC = () => {
     // filter start years
     if (startYearFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[startYearKey] === startYearFilter);
+      let start = Number(startYearFilter);
+      let end = isNaN(Number(endYearFilter))
+        ? new Date().getFullYear()
+        : Number(endYearFilter);
+      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
     if (endYearFilter !== 'all') {
       isFiltered = true;
-      filtered = filtered.filter((i) => i[endYearKey] === endYearFilter);
+      let start = isNaN(Number(startYearFilter))
+        ? 2000 // This assumes the earliest project year
+        : Number(startYearFilter);
+      let end = Number(endYearFilter);
+      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
+    }
+
+    // filter data
+    if (dataFilter !== 'all') {
+      isFiltered = true;
+      // We need to check if we have an exact match or the blip is an array containing the data
+      filtered = filtered.filter(
+        (i) => i[dataKey] === dataFilter || i[dataKey].includes(dataFilter)
+      );
     }
 
     // set filter
@@ -178,15 +235,45 @@ export const CustomFilter: React.FC = () => {
   }, [
     useCaseKey,
     disasterKey,
+    regionFilter,
     countryFilter,
     disasterTypeFilter,
     useCaseFilter,
     implementerFilter,
     sdgFilter,
     startYearFilter,
-    endYearFilter
+    endYearFilter,
+    dataFilter
   ]); // don't forget to add filters to dep array here
 
+  /**
+   * Update hook for updating filters after select useState values change
+   */
+  useEffect(() => {
+    setRegionFilter(selectedRegion);
+    setCountryFilter(selectedCountry);
+    setDisasterTypeFilter(selectedDisasterType);
+    setUseCaseFilter(selectedUserCase);
+    setImplementerFilter(selectedImplementer);
+    setSdgFilter(selectedSdg);
+    setStartYearFilter(selectedStartYear);
+    setEndYearFilter(selectedEndYear);
+    setDataFilter(selectedData);
+  }, [
+    selectedRegion,
+    selectedCountry,
+    selectedDisasterType,
+    selectedUserCase,
+    selectedImplementer,
+    selectedSdg,
+    selectedStartYear,
+    selectedEndYear,
+    selectedData
+  ]);
+
+  // on country filter change
+  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedRegion(e.target.value);
   // on country filter change
   const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedCountry(e.target.value);
@@ -202,27 +289,50 @@ export const CustomFilter: React.FC = () => {
   // on SDG filter change
   const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedSdg(e.target.value);
-  // on start year filter change
-  const onStartYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedStartYear(e.target.value);
-  // on end year filter change
-  const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedEndYear(e.target.value);
+  // on year range change
+  const onYearRangeChange = (e: Number[]) => {
+    setSelectedStartYear(String(e[0]));
+    setSelectedEndYear(String(e[1]));
+  };
+  // on data filter change
+  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedData(e.target.value);
 
-  const onFilterHandler = (): void => {
-    // selected?
-    setCountryFilter(selectedCountry);
-    setDisasterTypeFilter(selectedDisasterType);
-    setUseCaseFilter(selectedUserCase);
-    setImplementerFilter(selectedImplementer);
-    setSdgFilter(selectedSdg);
-    setStartYearFilter(selectedStartYear);
-    setEndYearFilter(selectedEndYear);
+  const [sliderReset, setSliderReset] = useState(false);
+  const onResetFilter = (): void => {
+    setSelectedRegion('all');
+    setSelectedCountry('all');
+    setSelectedDisasterType('all');
+    setSelectedUserCase('all');
+    setSelectedImplementer('all');
+    setSelectedSdg('all');
+    setSelectedStartYear('all');
+    setSelectedEndYear('all');
+    setSelectedData('all');
+
+    setSliderReset(true);
+  };
+
+  const [min, setMin] = useState<number>();
+  const [max, setMax] = useState<number>();
+  const forceNumber = (o: { name: string }) => Number(o.name);
+  useEffect(() => {
+    const maxApply = Math.max(...years.map(forceNumber));
+    const minApply = Math.min(...years.map(forceNumber));
+    setMin(minApply);
+    setMax(maxApply);
+  }, [years]);
+
+  const onSliderChange: (value: number | number[]) => void = (val) => {
+    // console.log('parent onRangerSelectionChange cchange', val);
+    if (typeof val === 'object') onYearRangeChange(val);
+    setSliderReset(false);
   };
 
   return (
     <div
       style={{
+        backgroundColor: 'Snow',
         borderBottomStyle: 'solid',
         borderBottomColor: 'lightgrey',
         borderBottomWidth: 1,
@@ -235,16 +345,45 @@ export const CustomFilter: React.FC = () => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
-            id='Select1'
+          <Select
+            id='Select0'
+            size='lg'
             style={{
-              maxWidth: '105px',
+              maxWidth: '150px',
+              padding: '10px',
+              border: '1px solid lightgrey'
+            }}
+            onChange={onRegionChange}
+            value={selectedRegion}
+          >
+            <option value='all'>Region</option>
+            {regions.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <div
+          style={{
+            marginTop: 7,
+            marginBottom: 3,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <Select
+            id='Select1'
+            size='lg'
+            style={{
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -257,20 +396,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select2'
+            size='lg'
             style={{
-              maxWidth: '140px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -283,20 +423,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select3'
+            size='lg'
             style={{
-              maxWidth: '115px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -309,20 +450,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select4'
+            size='lg'
             style={{
-              maxWidth: '140px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -335,20 +477,21 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
-          <select
+          <Select
             id='Select5'
+            size='lg'
             style={{
-              maxWidth: '100px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
@@ -361,61 +504,55 @@ export const CustomFilter: React.FC = () => {
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
+
         <div
           style={{
-            marginTop: 0,
-            marginBottom: 10,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
-          <select
-            id='Select6'
-            style={{
-              maxWidth: '110px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onStartYearChange}
-            value={selectedStartYear}
-          >
-            <option value='all'>Start Year</option>
-            {startYears.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div
-          style={{
-            marginTop: 0,
-            marginBottom: 10,
+            marginTop: 7,
+            marginBottom: 3,
             marginLeft: 0,
             marginRight: 20
           }}
         >
           {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <select
-            id='Select7'
+          <Select
+            id='Select8'
+            size='lg'
             style={{
-              maxWidth: '110px',
+              maxWidth: '150px',
               padding: '10px',
               border: '1px solid lightgrey'
             }}
-            onChange={onEndYearChange}
-            value={selectedEndYear}
+            onChange={onDataChange}
+            value={selectedData}
           >
-            <option value='all'>End Year</option>
-            {endYears.map((item) => (
+            <option value='all'>Data</option>
+            {data.map((item) => (
               <option key={item.uuid} value={item.name}>
                 {item.name}
               </option>
             ))}
-          </select>
+          </Select>
+        </div>
+
+        <div
+          style={{
+            marginTop: 18,
+            marginBottom: 3,
+            marginLeft: 20,
+            marginRight: 40,
+            width: 200
+          }}
+        >
+          {min && max && (
+            <AppRangerSlider
+              max={max}
+              min={min}
+              onChange={onSliderChange}
+              reset={sliderReset}
+            />
+          )}
         </div>
       </div>
 
@@ -427,15 +564,16 @@ export const CustomFilter: React.FC = () => {
             borderWidth: 1,
             borderStyle: 'solid',
             padding: '10px 20px',
-            backgroundColor: 'white',
+            backgroundColor: '#3182ce',
             cursor: 'pointer',
             borderRadius: 5,
-            color: '#0a58ca',
-            marginBottom: 10
+            color: 'white',
+            marginTop: 5,
+            marginBottom: 3
           }}
-          onClick={onFilterHandler}
+          onClick={onResetFilter}
         >
-          Filter
+          Reset
         </button>
       </div>
     </div>
