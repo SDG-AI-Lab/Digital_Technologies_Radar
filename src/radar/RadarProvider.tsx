@@ -1,24 +1,25 @@
 import React from 'react';
 import {
   AddCSV,
-  DataProvider,
-  RadarDataGenerator,
-  RadarProvider,
   SetData,
   Utilities,
-  ColorsParamType,
   KeysObject,
+  RawBlipType,
   MappingType,
+  DataProvider,
+  RadarProvider,
+  ColorsParamType,
   OrdersParamType,
-  RawBlipType
+  RadarDataGenerator
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/technology_radar_dataset_updated_v3.csv';
+import csvData from '../assets/csv/technology_radar_dataset_updated_v4.csv';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
   const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
+      Region: item['Region'],
       'Country of Implementation': item['Country of Implementation'],
       Data: item.Data,
       'Date of Implementation': item['Date of Implementation'],
@@ -60,20 +61,15 @@ export const AppRadarProvider: React.FC = ({ children }) => {
         { r: 155, g: 221, b: 255, opacity: 1 }, // Columbia blue
         { r: 0, g: 204, b: 153, opacity: 1 } // Carabean green
       ],
-      initialOpacity: 0.7, // [OPTIONAL default=0.7] opacity from the inner horizon
-      clumpingOpacity: 1.1 // [OPTIONAL default=1.0] compresses the opacity so it becomes much smoother
+      initialOpacity: 0.9, // [OPTIONAL default=0.7] opacity from the inner horizon
+      clumpingOpacity: 1.3 // [OPTIONAL default=1.0] compresses the opacity so it becomes much smoother
     }
   };
 
   return (
     <RadarProvider>
       <DataProvider>
-        <SetData
-          radarConf={{ title: '' }}
-          keys={keys}
-          orders={orders}
-          colors={colors}
-        />
+        <SetData keys={keys} orders={orders} colors={colors} />
         <RadarDataGenerator />
         <AddCSV csvFile={csvData} mapping={mapping} />
         {children}

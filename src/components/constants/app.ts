@@ -40,10 +40,18 @@ export class AppConst {
         ]
       ],
       [
+        Utilities.createSlug('Data Collection'),
+        [
+          'Data collection is the process of gathering and measuring information on targeted variables in an established system, which then enables one to answer relevant questions and evaluate outcomes. Data collection is a research component in all study fields, including physical and social sciences, humanities, and business.',
+          ''
+        ]
+      ],
+      [
         Utilities.createSlug('Computer Vision'),
         [
           'Computer vision is an interdisciplinary scientific field that deals with how computers can gain high-level understanding from digital images or videos. he image data can take many forms, such as video sequences, views from multiple cameras, multi-dimensional data from a 3D scanner, or medical scanning device. The technological discipline of computer vision seeks to apply its theories and models to the construction of computer vision systems.',
-          'An example use case of Computer Vision is measuring the damage after a disaster scenario by using collected images'
+          'The goal for all data collection is to capture quality evidence that allows analysis to lead to the formulation of convincing and credible answers to the questions that have been posed.',
+          'Data can be collected with different approaches such as interviews, questionnaires, surveys. Furthermore, data can be collected with methods without relying on human feedback by using APIs, programmes and tools.'
         ]
       ],
       [
