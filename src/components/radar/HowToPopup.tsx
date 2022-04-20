@@ -32,7 +32,7 @@ export const HowToPopup: React.FC = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className='popoverContent' overflow={'auto'}>
-        <PopoverHeader color={"DarkSlateGray"}>
+        <PopoverHeader color={'DarkSlateGray'}>
           <h1>How to use the DRR Technology Radar</h1>
         </PopoverHeader>
         <PopoverBody overflow={'auto'}>
