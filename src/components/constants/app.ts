@@ -12,12 +12,6 @@ export class AppConst {
       avgWordsPerSentence: 8
     });
 
-  static readonly howToDescriptions: Array<string> = [
-    'Click (or hover) on the rounded blips on the radar to view the summary of each technology item.',
-    'Click on each of the phases on each corner of the radar to view specific information about it.',
-    'Got any further questions or comments? Contact support.'
-  ];
-
   static readonly technologyDescriptions: Map<string, TechDescriptionType> =
     new Map([
       [
