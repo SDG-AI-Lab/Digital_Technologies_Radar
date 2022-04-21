@@ -15,6 +15,7 @@ import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
+import { HowToPopup } from '../../components/radar/HowToPopup';
 
 import { BlipListMui } from '../../components/lists/components/BlipListMui';
 
@@ -59,6 +60,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <HowToPopup />
     </Box>
   </>
 );

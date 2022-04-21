@@ -149,42 +149,14 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   return arr;
 };
 
-const getStartYears = (
+const getYears = (
   rawBlipData: BlipType[],
-  startYearKey: string
+  yearKey: string
 ): SelectableItem[] => {
   const yearSet = new Set<number>();
   rawBlipData.forEach((val) => {
-    if (!isNaN(Number(val[startYearKey]))) {
-      yearSet.add(Number(val[startYearKey]));
-    }
-  });
-
-  const yearMap: Map<string, SelectableItem> = new Map();
-  const min = Math.min.apply(this, Array.from(yearSet));
-  const max = new Date().getFullYear();
-
-  Array(max - min + 1)
-    .fill(0)
-    .map((_, idx) => String(min + idx))
-    .forEach((num) => {
-      yearMap.set(num, {
-        uuid: uuidv4(),
-        name: num
-      });
-    });
-
-  return Array.from(yearMap.values());
-};
-
-const getEndYears = (
-  rawBlipData: BlipType[],
-  endYearKey: string
-): SelectableItem[] => {
-  const yearSet = new Set<number>();
-  rawBlipData.forEach((val) => {
-    if (!isNaN(Number(val[endYearKey]))) {
-      yearSet.add(Number(val[endYearKey]));
+    if (!isNaN(Number(val[yearKey]))) {
+      yearSet.add(Number(val[yearKey]));
     }
   });
 
@@ -243,7 +215,6 @@ export const FilterUtils = {
   getUseCases,
   getImplementers,
   getSDGs,
-  getStartYears,
-  getEndYears,
+  getYears,
   getData
 };
