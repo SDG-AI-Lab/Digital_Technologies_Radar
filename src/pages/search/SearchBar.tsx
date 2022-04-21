@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Center, Input } from '@chakra-ui/react';
+import { Center, Input, Stack, Text } from '@chakra-ui/react';
 
 import csvData from '../../assets/csv/technology_radar_dataset_updated_v3.csv';
 
@@ -8,30 +8,24 @@ import SearchResult from './SearchResult';
 import {
   Utilities,
   BaseCSVType,
-  CSVManager
+  CSVManager,
+  useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
 export const SearchBar: React.FC = () => {
-  const [csvDataForSearch, setCsvDataForSearch] = useState<BaseCSVType[]>([]);
+  const [newFilter, setNewFilter] = useState<BaseCSVType[]>([]);
   const [filteredTech, setFilteredTech] = useState<BaseCSVType[]>([]);
   const [techSearch, setTechSearch] = useState('');
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const searchCSV = await Utilities.getCSVFileFromUrl(csvData);
-    const csvDataResult = new CSVManager(searchCSV).processCSV<BaseCSVType>();
-    setCsvDataForSearch(csvDataResult);
-  };
+  const {
+    state: { blips }
+  } = useRadarState();
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchword = event.target.value.toLowerCase();
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
 
-    const newFilter: BaseCSVType[] = csvDataForSearch.filter((value) => {
+    const newFilter: BaseCSVType[] = blips.filter((value) => {
       return (
         value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
         value.Description.toLowerCase().includes(query) ||
@@ -39,9 +33,11 @@ export const SearchBar: React.FC = () => {
         value['Disaster Cycle'].toLowerCase().includes(query) ||
         value['Un Host Organisation'].toLowerCase().includes(query) ||
         value['Country of Implementation'].toLowerCase().includes(query) ||
-        value['SDG'].toLowerCase().includes(query)
+        value['SDG'].toString().toLowerCase().includes(query)
       );
     });
+
+    setNewFilter(newFilter);
 
     if (query === '') {
       setFilteredTech([]);
@@ -53,21 +49,32 @@ export const SearchBar: React.FC = () => {
   return (
     <div>
       <Center py={6}>
-        <Input
-          width='40.5rem'
-          placeholder='Search ....'
-          value={techSearch}
-          onChange={handleFilter}
-        />
+        <Stack>
+          <Input
+            width='40.5rem'
+            placeholder='Search ....'
+            value={techSearch}
+            onChange={handleFilter}
+          />
+
+          <Text
+            isTruncated
+            color={'red.500'}
+            textTransform={'uppercase'}
+            fontWeight={800}
+            fontSize={'sm'}
+            letterSpacing={1.1}
+          >
+            Found {newFilter.length} out of {blips.length}
+          </Text>
+        </Stack>
       </Center>
 
       {filteredTech.length !== 0 && (
         <SearchResult filteredContent={filteredTech} />
       )}
 
-      {filteredTech.length === 0 && (
-        <SearchResult filteredContent={csvDataForSearch} />
-      )}
+      {filteredTech.length === 0 && <SearchResult filteredContent={blips} />}
     </div>
   );
 };
