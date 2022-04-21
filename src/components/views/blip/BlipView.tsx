@@ -39,7 +39,7 @@ export const BlipView: FC = () => {
             <Image
               objectFit='cover'
               src={`${selectedItem['Image Url']}`}
-              fallbackSrc='https://ec.europa.eu/international-partnerships/sites/default/files/styles/1140x760/public/media/body/sdg_-_wheel_-_smaller_2.png?itok=Zqt6Si2b'
+              fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
               alt='Default Image'
             />
           </Stack>
