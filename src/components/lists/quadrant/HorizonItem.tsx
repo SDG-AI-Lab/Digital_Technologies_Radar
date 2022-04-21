@@ -53,7 +53,7 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
             <ShowIcon isOpen={show} />
           </div>
 
-          <ScrollableDiv show={show} maxHeight={400}>
+          <ScrollableDiv show={show} maxHeight={220}>
             {quadrantBlips.map((blip) => (
               <Item
                 key={blip.id}

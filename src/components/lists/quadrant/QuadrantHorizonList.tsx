@@ -5,9 +5,11 @@ import {
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import { Text } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
+import { BlipView } from '../../views/blip/BlipView';
+import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
 import './DataLists.scss';
 
 export type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -20,7 +22,8 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   const {
     state: {
       techFilters,
-      radarData: { horizons }
+      radarData: { horizons },
+      selectedItem
     }
   } = useRadarState();
   const {
@@ -28,6 +31,8 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
       keys: { horizonKey, techKey }
     }
   } = useDataState();
+
+  const [tabIndex, setTabIndex] = React.useState(0);
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const [displayHBlips, setDisplayHBlips] = useState<BlipsPerQuadType>({});
@@ -60,6 +65,16 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
     setDisplayHBlips(newDisplayBlipsByHorizon);
   }, [displayBlips, horizonKey, quadIndex]);
 
+  useEffect(() => {
+    if (selectedItem) {
+      setTabIndex(1);
+    }
+  }, [selectedItem]);
+
+  const tabsChangeHandler = (ind: number) => {
+    setTabIndex(ind);
+  };
+
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
   const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
@@ -80,41 +95,47 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         borderColor: 'rgba(0,0,0,0.1)',
         borderWidth: 2,
         borderRadius: 10,
-        margin: 20,
+        marginTop: 40,
         padding: 15,
         maxWidth: 500
       }}
     >
-      <Text
-        width={'fit-content'}
-        color={'blue.500'}
-        borderBottom={'3px solid'}
-        my={5}
-        ml={5}
-        as='h5'
-      >
-        Stages
-      </Text>
-
-      <div
-        style={{
-          borderColor: 'rgba(0,0,0,0.1)',
-          borderWidth: 2,
-          borderRadius: 10,
-          margin: 5,
-          padding: 10
-        }}
-      >
-        {horizons.map((horizon) => (
-          <HorizonItem
-            key={horizon}
-            horizonName={Utilities.capitalize(horizon)}
-            quadrantBlips={displayHBlips[horizon]}
-            triggerSiblings={triggerSiblings}
-            close={!(sourceHorizon === Utilities.capitalize(horizon))}
-          />
-        ))}
-      </div>
+      <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
+        <TabList>
+          <Tab as='h5'>Stages</Tab>
+          <Tab as='h5'>Project</Tab>
+        </TabList>
+        <TabPanels minHeight={445}>
+          <TabPanel>
+            <div
+              style={{
+                borderColor: 'rgba(0,0,0,0.1)',
+                borderWidth: 2,
+                borderRadius: 10,
+                margin: 5,
+                marginLeft: 0,
+                marginRight: 0,
+                padding: 10
+              }}
+            >
+              {horizons.map((horizon) => (
+                <HorizonItem
+                  key={horizon}
+                  horizonName={Utilities.capitalize(horizon)}
+                  quadrantBlips={displayHBlips[horizon]}
+                  triggerSiblings={triggerSiblings}
+                  close={!(sourceHorizon === Utilities.capitalize(horizon))}
+                />
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <ScrollableDiv maxHeight={413}>
+              <BlipView />
+            </ScrollableDiv>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   );
 };

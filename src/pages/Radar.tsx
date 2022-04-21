@@ -11,15 +11,19 @@ export const Radar: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const {
-    state: { blips, selectedItem, selectedQuadrant }
+    state: { blips, selectedQuadrant },
+    actions: { setSelectedItem }
   } = useRadarState();
 
   const goToQuadrant = (quadrant: string) =>
     nav(`${ROUTES.QUADRANT}/${quadrant}`);
 
   useEffect(() => {
-    if (!selectedItem && selectedQuadrant) goToQuadrant(selectedQuadrant);
-  }, [selectedItem, selectedQuadrant]);
+    if (selectedQuadrant) {
+      setSelectedItem(null);
+      goToQuadrant(selectedQuadrant);
+    }
+  }, [selectedQuadrant]);
 
   useEffect(() => {
     // TODO: this could be driven by some Library state, specifying 'it is ready for display'
