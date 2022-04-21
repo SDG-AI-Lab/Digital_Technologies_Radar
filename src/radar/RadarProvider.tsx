@@ -34,7 +34,8 @@ export const AppRadarProvider: React.FC = ({ children }) => {
       SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
       Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
       'Disaster Type': item['Disaster Type'],
-      Theme: item['Theme']
+      Theme: item['Theme'],
+      'Image Url': item['imgurl']
     } as unknown as RawBlipType);
 
   const keys: KeysObject = {
