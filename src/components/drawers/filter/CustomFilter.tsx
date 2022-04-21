@@ -12,10 +12,10 @@ import {
   countryKey,
   implementerKey,
   sdgKey,
-  startYearKey,
-  endYearKey,
+  yearKey,
   dataKey
 } from './FilterConstants';
+import { AppRangerSlider } from './AppRanderSlider';
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -59,10 +59,8 @@ export const CustomFilter: React.FC = () => {
   const [implementers, setImplementers] = useState<SelectableItem[]>([]);
   // sdg
   const [sdgs, setSdgs] = useState<SelectableItem[]>([]);
-  // start year
-  const [startYears, setStartYears] = useState<SelectableItem[]>([]);
-  // end year
-  const [endYears, setEndYears] = useState<SelectableItem[]>([]);
+  // year
+  const [years, setYears] = useState<SelectableItem[]>([]);
   // data
   const [data, setData] = useState<SelectableItem[]>([]);
 
@@ -91,11 +89,8 @@ export const CustomFilter: React.FC = () => {
       const newSdgs = FilterUtils.getSDGs(blips, sdgKey);
       setSdgs(newSdgs);
       // start year options
-      const newStartYears = FilterUtils.getStartYears(blips, startYearKey);
-      setStartYears(newStartYears);
-      // end year options
-      const newEndYears = FilterUtils.getEndYears(blips, endYearKey);
-      setEndYears(newEndYears);
+      const newYears = FilterUtils.getYears(blips, yearKey);
+      setYears(newYears);
       // data options
       const newData = FilterUtils.getData(blips, dataKey);
       setData(newData);
@@ -212,9 +207,7 @@ export const CustomFilter: React.FC = () => {
         ? new Date().getFullYear()
         : Number(endYearFilter);
       let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
-      filtered = filtered.filter((i) =>
-        range.includes(Number(i[startYearKey]))
-      );
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
@@ -225,7 +218,7 @@ export const CustomFilter: React.FC = () => {
         : Number(startYearFilter);
       let end = Number(endYearFilter);
       let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
-      filtered = filtered.filter((i) => range.includes(Number(i[endYearKey])));
+      filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter data
@@ -296,16 +289,16 @@ export const CustomFilter: React.FC = () => {
   // on SDG filter change
   const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedSdg(e.target.value);
-  // on start year filter change
-  const onStartYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedStartYear(e.target.value);
-  // on end year filter change
-  const onEndYearChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
-    setSelectedEndYear(e.target.value);
+  // on year range change
+  const onYearRangeChange = (e: Number[]) => {
+    setSelectedStartYear(String(e[0]));
+    setSelectedEndYear(String(e[1]));
+  };
   // on data filter change
   const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedData(e.target.value);
 
+  const [sliderReset, setSliderReset] = useState(false);
   const onResetFilter = (): void => {
     setSelectedRegion('all');
     setSelectedCountry('all');
@@ -316,6 +309,24 @@ export const CustomFilter: React.FC = () => {
     setSelectedStartYear('all');
     setSelectedEndYear('all');
     setSelectedData('all');
+
+    setSliderReset(true);
+  };
+
+  const [min, setMin] = useState<number>();
+  const [max, setMax] = useState<number>();
+  const forceNumber = (o: { name: string }) => Number(o.name);
+  useEffect(() => {
+    const maxApply = Math.max(...years.map(forceNumber));
+    const minApply = Math.min(...years.map(forceNumber));
+    setMin(minApply);
+    setMax(maxApply);
+  }, [years]);
+
+  const onSliderChange: (value: number | number[]) => void = (val) => {
+    // console.log('parent onRangerSelectionChange cchange', val);
+    if (typeof val === 'object') onYearRangeChange(val);
+    setSliderReset(false);
   };
 
   return (
@@ -495,62 +506,6 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>Start Year</span> */}
-          <Select
-            id='Select6'
-            size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onStartYearChange}
-            value={selectedStartYear}
-          >
-            <option value='all'>Start Year</option>
-            {startYears.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
-        </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
-          <Select
-            id='Select7'
-            size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
-            onChange={onEndYearChange}
-            value={selectedEndYear}
-          >
-            <option value='all'>End Year</option>
-            {endYears.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </Select>
-        </div>
 
         <div
           style={{
@@ -579,6 +534,25 @@ export const CustomFilter: React.FC = () => {
               </option>
             ))}
           </Select>
+        </div>
+
+        <div
+          style={{
+            marginTop: 18,
+            marginBottom: 3,
+            marginLeft: 20,
+            marginRight: 40,
+            width: 200
+          }}
+        >
+          {min && max && (
+            <AppRangerSlider
+              max={max}
+              min={min}
+              onChange={onSliderChange}
+              reset={sliderReset}
+            />
+          )}
         </div>
       </div>
 

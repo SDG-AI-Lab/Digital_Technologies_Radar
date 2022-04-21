@@ -16,6 +16,7 @@ import { PopOverView } from './PopOverView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { BlipView } from '../../components/views/blip/BlipView';
 import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
+import { HowToPopup } from '../../components/radar/HowToPopup';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
   const {
@@ -56,6 +57,10 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         <PopOverView />
       </Box>
 
+      <Box overflowY='auto'>
+        <HowToPopup />
+      </Box>
+      
       <Box flex={'0.75'} {...TabOuterBoxProps}>
         <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
           <TabList>

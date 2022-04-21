@@ -5,6 +5,7 @@ import {
   ColorModeScript,
   extendTheme,
   theme,
+  ThemeComponents,
   ThemeConfig
 } from '@chakra-ui/react';
 
@@ -31,11 +32,31 @@ export const ChakraUI: React.FC = ({ children }) => {
     useSystemColorMode: false
   };
 
+  const components: ThemeComponents = {
+    Popover: {
+      variants: {
+        max70PercentHeight: {
+          popper: {
+            maxHeight: '70%',
+            overflow: 'hidden',
+            display: 'flex'
+          }
+        }
+      }
+    }
+  };
+
   return (
     <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <ChakraProvider
-        theme={extendTheme({ ...theme, colors, breakpoints, config })}
+        theme={extendTheme({
+          ...theme,
+          colors,
+          breakpoints,
+          config,
+          components
+        })}
       >
         {children}
       </ChakraProvider>
