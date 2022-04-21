@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Center, Input, Stack, Text } from '@chakra-ui/react';
-
-import csvData from '../../assets/csv/technology_radar_dataset_updated_v3.csv';
 
 import SearchResult from './SearchResult';
 
-import {
-  Utilities,
-  BaseCSVType,
-  CSVManager,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BaseCSVType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 export const SearchBar: React.FC = () => {
   const [newFilter, setNewFilter] = useState<BaseCSVType[]>([]);
