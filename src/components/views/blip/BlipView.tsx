@@ -24,12 +24,13 @@ export const BlipView: FC = () => {
         <Box>
           <Box
             pb={0}
-            as='h6'
             style={{
               justifyContent: 'center',
               textAlign: 'center',
               textTransform: 'capitalize',
-              marginBottom: '5px'
+              marginBottom: '5px',
+              fontSize: '1.3em',
+              fontWeight: 600
             }}
           >
             {selectedItem['Ideas/Concepts/Examples']}
@@ -38,7 +39,7 @@ export const BlipView: FC = () => {
             <Image
               objectFit='cover'
               src={`${selectedItem['Image Url']}`}
-              fallbackSrc='https://upload.wikimedia.org/wikipedia/commons/a/a7/Sustainable_Development_Goals.svg'
+              fallbackSrc='https://ec.europa.eu/international-partnerships/sites/default/files/styles/1140x760/public/media/body/sdg_-_wheel_-_smaller_2.png?itok=Zqt6Si2b'
               alt='Default Image'
             />
           </Stack>
