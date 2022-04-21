@@ -2,7 +2,7 @@
   "name": "undp-radar-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/Digital_Technologies_Radar",
+  "homepage": "https://drrtechradar.org",
   "dependencies": {
     "@chakra-ui/react": "^1.8.7",
     "@emotion/react": "^11",
