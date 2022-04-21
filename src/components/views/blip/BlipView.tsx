@@ -38,7 +38,7 @@ export const BlipView: FC = () => {
             <Image
               objectFit='cover'
               src={`${selectedItem['Image Url']}`}
-              fallbackSrc='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_the_United_Nations.svg/800px-Flag_of_the_United_Nations.svg.png'
+              fallbackSrc='https://upload.wikimedia.org/wikipedia/commons/a/a7/Sustainable_Development_Goals.svg'
               alt='Default Image'
             />
           </Stack>
