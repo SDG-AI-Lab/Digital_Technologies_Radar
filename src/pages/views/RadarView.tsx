@@ -72,11 +72,11 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
           <TabPanels>
             <TabPanel>
               <ScrollableDiv maxHeight={460}>
-                <BlipListMui/>
+                <BlipListMui />
               </ScrollableDiv>
             </TabPanel>
             <TabPanel>
-               <TechDescription/>
+              <TechDescription />
             </TabPanel>
             <TabPanel>
               <ScrollableDiv maxHeight={460}>
