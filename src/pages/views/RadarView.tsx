@@ -60,7 +60,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
       <Box overflowY='auto'>
         <HowToPopup />
       </Box>
-      
+
       <Box flex={'0.75'} {...TabOuterBoxProps}>
         <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
           <TabList>
