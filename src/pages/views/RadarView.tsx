@@ -5,6 +5,7 @@ import { Radar } from '@undp_sdg_ai_lab/undp-radar';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
+import { HowToPopup } from '../../components/radar/HowToPopup';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
   <>
@@ -21,6 +22,9 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => (
       {loading && <WaitingForRadar size='620px' />}
       {!loading && <Radar />}
       <PopOverView />
+    </Box>
+    <Box overflowY='auto'>
+      <HowToPopup />
     </Box>
     <TechDescription />
   </>
