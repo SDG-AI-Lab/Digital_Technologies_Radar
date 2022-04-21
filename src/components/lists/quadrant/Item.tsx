@@ -39,6 +39,7 @@ export const Item: React.FC<Props> = ({
     if (!show) {
       triggerSiblings(blip.id);
       setTimeout(() => {
+        setHoveredItem(blip);
         setShow(true);
       });
     } else setShow(false);
@@ -52,11 +53,15 @@ export const Item: React.FC<Props> = ({
     if (close) setShow(false);
   }, [close]);
 
-  const onSelect = () => setSelectedItem(blip);
+  const onSelect = () => {
+    // setHoveredItem(blip);
+    setSelectedItem(blip);
+  };
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
 
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {/* <div> */}
       <div
         style={{
           padding: 5,

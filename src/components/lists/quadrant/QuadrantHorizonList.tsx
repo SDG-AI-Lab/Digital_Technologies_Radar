@@ -10,7 +10,7 @@ import { Text } from '@chakra-ui/react';
 import { HorizonItem } from './HorizonItem';
 import './DataLists.scss';
 
-type BlipsPerQuadType = Record<string, BlipType[]>;
+export type BlipsPerQuadType = Record<string, BlipType[]>;
 
 interface Props {
   blips: BlipType[];
