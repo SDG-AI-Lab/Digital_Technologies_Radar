@@ -12,7 +12,7 @@ import { BlipView } from '../../views/blip/BlipView';
 import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
 import './DataLists.scss';
 
-type BlipsPerQuadType = Record<string, BlipType[]>;
+export type BlipsPerQuadType = Record<string, BlipType[]>;
 
 interface Props {
   blips: BlipType[];
