@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 
-import { ChakraUI } from './ui/ChakraUI';
+import { AppUiProvider } from './ui/AppUiProvider';
 import { NavApp } from './navigation/AppNav';
 import { AppRadarProvider } from './radar/RadarProvider';
 
@@ -14,11 +14,11 @@ import './App.css';
  * and replace HashRouter
  **/
 export const App: React.FC = () => (
-  <ChakraUI>
+  <AppUiProvider>
     <AppRadarProvider>
       <HashRouter>
         <NavApp />
       </HashRouter>
     </AppRadarProvider>
-  </ChakraUI>
+  </AppUiProvider>
 );
