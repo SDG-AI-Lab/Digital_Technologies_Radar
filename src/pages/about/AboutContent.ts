@@ -35,11 +35,20 @@ class AboutContent {
         'Connecting Business initiative (CBi) engages the private sector strategically before, during and after emergencies, increasing the scale and effectiveness of the response and recovery in a coordinated manner. To do so the Connecting Business initiative strengthens and supports 17 private sector networks around the world. These networks reached a combined membership of 4,100 companies and they have access to more than 40,000 micro-, small- and medium-sized enterprises (MSMEs). CBi also actively disseminates innovative methods to private-sector networks and other partners to inform what is possible through recent breakthroughs also in technologies.',
       imageSrc: 'https://sdgailab.org/assets/img/logos/Picture5.png'
     } as const;
+
+    static readonly aboutVolunteers: AboutContentChild =
+    {
+      title: 'United Nations Volunteers',
+      description:
+        'The United Nations Volunteers (UNV) programme contributes to peace and development through volunteerism worldwide. We work with partners to integrate qualified, highly motivated and well supported UN Volunteers into development programming and promote the value and global recognition of volunteerism. ',
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/1200px-UN_Volunteers_logo.svg.png'
+    } as const;
 }
 
 export const aboutContentList: ReadonlyArray<AboutContentChild> = [
   AboutContent.aboutDigitalTechnologiesRadarContent,
   AboutContent.aboutDigitalResilienceTeamContent,
   AboutContent.aboutSDGAiLabContent,
-  AboutContent.aboutConnectingBusinessInitiativeContent
+  AboutContent.aboutConnectingBusinessInitiativeContent,
+  AboutContent.aboutVolunteers
 ];
