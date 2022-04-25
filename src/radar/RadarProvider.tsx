@@ -20,6 +20,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
       Region: item['Region'],
+      Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
       'Country of Implementation': item['Country of Implementation'],
       Data: item.Data,
       'Date of Implementation': item['Date of Implementation'],
