@@ -18,6 +18,7 @@ export const SearchBar: React.FC = () => {
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
 
+    console.log('blips ', blips);
     const newFilter: BaseCSVType[] = blips.filter((value) => {
       return (
         value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
