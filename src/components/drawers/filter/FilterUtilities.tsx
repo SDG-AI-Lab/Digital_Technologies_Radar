@@ -7,7 +7,6 @@ import {
   UseCaseKey
 } from '@undp_sdg_ai_lab/undp-radar';
 
-
 const getSubregions = (
   rawBlipData: BlipType[],
   regionKey: string
@@ -128,7 +127,7 @@ const getImplementers = (
 
   // Move 'No Information' to the back of the ordered array
   const index = arr
-    .map(function(e) {
+    .map(function (e) {
       return e.name;
     })
     .indexOf('No Information');
@@ -150,7 +149,7 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   });
 
   // Order the resulting array
-  let arr = Array.from(newSDGs.values()).sort(function(a, b) {
+  let arr = Array.from(newSDGs.values()).sort(function (a, b) {
     // we use natural instead of lexicographical order
     return a.name.localeCompare(b.name, undefined, {
       numeric: true,
@@ -160,7 +159,7 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
 
   // Move 'No Information' to the back of the ordered array
   const index = arr
-    .map(function(e) {
+    .map(function (e) {
       return e.name;
     })
     .indexOf('No Information');
@@ -219,7 +218,7 @@ const getData = (
 
   // Move 'No Information' to the back of the ordered array
   const index = arr
-    .map(function(e) {
+    .map(function (e) {
       return e.name;
     })
     .indexOf('No Information');

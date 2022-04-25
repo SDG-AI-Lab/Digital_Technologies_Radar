@@ -162,14 +162,14 @@ export const CustomFilter: React.FC = () => {
     let filtered = blips; // we start with all Blips
     let isFiltered = false;
 
-
     // filter subregions
     if (subregionFilter !== 'all') {
       isFiltered = true;
       // We need to check if we have an exact match or the blip is an array containing the subregion
       filtered = filtered.filter(
         (i) =>
-          i[subregionKey] === subregionFilter || i[subregionKey].includes(subregionFilter)
+          i[subregionKey] === subregionFilter ||
+          i[subregionKey].includes(subregionFilter)
       );
     }
 
