@@ -52,20 +52,18 @@ export const BlipView: FC = () => {
               justifyContent: 'center'
             }}
           >
-            {selectedItem['Country of Implementation']
-              .split(',')
-              .map((item, ind) => (
-                <Badge
-                  key={ind}
-                  px={2}
-                  py={1}
-                  borderRadius='md'
-                  bg='purple.50'
-                  textTransform='capitalize'
-                >
-                  📍 {item.trim()}
-                </Badge>
-              ))}
+            {selectedItem['Country of Implementation'].map((item, ind) => (
+              <Badge
+                key={ind}
+                px={2}
+                py={1}
+                borderRadius='md'
+                bg='purple.50'
+                textTransform='capitalize'
+              >
+                📍 {item.trim()}
+              </Badge>
+            ))}
             {selectedItem['SDG'].map((item, ind) => (
               <Badge
                 key={ind}

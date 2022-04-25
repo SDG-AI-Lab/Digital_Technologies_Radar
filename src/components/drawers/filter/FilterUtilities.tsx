@@ -32,9 +32,7 @@ const getRegions = (
 ): SelectableItem[] => {
   const newRegions: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipRegions: Set<string> = new Set(
-      val[regionKey].split(',').map((item) => item.trim())
-    );
+    const blipRegions: Set<string> = new Set(val[regionKey]);
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {
@@ -53,9 +51,7 @@ const getCountries = (
 ): SelectableItem[] => {
   const newCountries: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipCountries: Set<string> = new Set(
-      val[countryKey].split(',').map((item) => item.trim())
-    );
+    const blipCountries: Set<string> = new Set(val[countryKey]);
     blipCountries.delete('');
 
     blipCountries.forEach((country) => {
@@ -111,9 +107,7 @@ const getImplementers = (
 ): SelectableItem[] => {
   const newImplementers: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipImplementers: Set<string> = new Set(
-      val[implementerKey].split(',').map((item) => item.trim())
-    );
+    const blipImplementers: Set<string> = new Set(val[implementerKey]);
     blipImplementers.delete('');
 
     blipImplementers.forEach((implementer) => {
@@ -202,9 +196,7 @@ const getData = (
 ): SelectableItem[] => {
   const newData: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipRegions: Set<string> = new Set(
-      val[regionKey].split(',').map((item) => item.trim())
-    );
+    const blipRegions: Set<string> = new Set(val[regionKey]);
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {

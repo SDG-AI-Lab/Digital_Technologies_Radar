@@ -19,10 +19,12 @@ import csvData from '../assets/csv/technology_radar_dataset_updated_v5.csv';
 export const AppRadarProvider: React.FC = ({ children }) => {
   const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
-      Region: item['Region'],
+      Region: Utilities.cleanupStringArray(item.Region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
-      'Country of Implementation': item['Country of Implementation'],
-      Data: item.Data,
+      'Country of Implementation': Utilities.cleanupStringArray(
+        item['Country of Implementation'].split(',')
+      ),
+      Data: Utilities.cleanupStringArray(item.Data.split(',')),
       'Date of Implementation': item['Date of Implementation'],
       Description: item.Description,
       'Disaster Cycle': item['Disaster Cycle'],
@@ -30,7 +32,9 @@ export const AppRadarProvider: React.FC = ({ children }) => {
       Source: item.Source,
       'Status/Maturity': item['Status/Maturity'],
       'Supporting Partners': item['Supporting Partners'],
-      'Un Host Organisation': item['Un Host Organisation'],
+      'Un Host Organisation': Utilities.cleanupStringArray(
+        item['Un Host Organisation'].split(',')
+      ),
       'Use Case': item['Use Case'],
       SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
       Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
