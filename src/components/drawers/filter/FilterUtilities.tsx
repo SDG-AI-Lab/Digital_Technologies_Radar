@@ -7,6 +7,25 @@ import {
   UseCaseKey
 } from '@undp_sdg_ai_lab/undp-radar';
 
+const getSubregions = (
+  rawBlipData: BlipType[],
+  regionKey: string
+): SelectableItem[] => {
+  const newSubregions: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    const blipRegions: Set<string> = new Set(val[regionKey]);
+    blipRegions.delete('');
+
+    blipRegions.forEach((region) => {
+      newSubregions.set(region, { uuid: uuidv4(), name: region });
+    });
+  });
+
+  return Array.from(newSubregions.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+};
+
 const getRegions = (
   rawBlipData: BlipType[],
   regionKey: string
@@ -209,6 +228,7 @@ const getData = (
 };
 
 export const FilterUtils = {
+  getSubregions,
   getRegions,
   getCountries,
   getDisasterTypes,
