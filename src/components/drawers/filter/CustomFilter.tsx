@@ -8,6 +8,7 @@ import {
 
 import { FilterUtils } from './FilterUtilities';
 import {
+  subregionKey,
   regionKey,
   countryKey,
   implementerKey,
@@ -31,6 +32,8 @@ export const CustomFilter: React.FC = () => {
   } = useDataState();
 
   // FILTERS
+  // subregions
+  const [subregionFilter, setSubregionFilter] = useState<string>('all');
   // regions
   const [regionFilter, setRegionFilter] = useState<string>('all');
   // countries
@@ -47,6 +50,8 @@ export const CustomFilter: React.FC = () => {
   const [dataFilter, setDataFilter] = useState<string>('all');
 
   // ALL OPTIONS
+  // subregions
+  const [subregions, setSubregions] = useState<SelectableItem[]>([]);
   // regions
   const [regions, setRegions] = useState<SelectableItem[]>([]);
   // countries
@@ -67,6 +72,9 @@ export const CustomFilter: React.FC = () => {
   // EFFECT on Blips change, to get all options
   useEffect(() => {
     if (blips && blips?.length > 0) {
+      // subregion options
+      const newSubregions = FilterUtils.getSubregions(blips, subregionKey);
+      setSubregions(newSubregions);
       // region options
       const newRegions = FilterUtils.getRegions(blips, regionKey);
       setRegions(newRegions);
@@ -96,6 +104,11 @@ export const CustomFilter: React.FC = () => {
       setData(newData);
     }
   }, [blips]);
+
+  // selectedSubregion
+  const [selectedSubregion, setSelectedSubregion] = useState<string>(
+    subregionFilter === null ? 'all' : subregionFilter
+  );
 
   // selectedRegion
   const [selectedRegion, setSelectedRegion] = useState<string>(
@@ -148,6 +161,17 @@ export const CustomFilter: React.FC = () => {
   useEffect(() => {
     let filtered = blips; // we start with all Blips
     let isFiltered = false;
+
+
+    // filter subregions
+    if (subregionFilter !== 'all') {
+      isFiltered = true;
+      // We need to check if we have an exact match or the blip is an array containing the subregion
+      filtered = filtered.filter(
+        (i) =>
+          i[subregionKey] === subregionFilter || i[subregionKey].includes(subregionFilter)
+      );
+    }
 
     // filter regions
     if (regionFilter !== 'all') {
@@ -236,6 +260,7 @@ export const CustomFilter: React.FC = () => {
     useCaseKey,
     disasterKey,
     regionFilter,
+    subregionFilter,
     countryFilter,
     disasterTypeFilter,
     useCaseFilter,
@@ -250,6 +275,7 @@ export const CustomFilter: React.FC = () => {
    * Update hook for updating filters after select useState values change
    */
   useEffect(() => {
+    setSubregionFilter(selectedSubregion);
     setRegionFilter(selectedRegion);
     setCountryFilter(selectedCountry);
     setDisasterTypeFilter(selectedDisasterType);
@@ -260,6 +286,7 @@ export const CustomFilter: React.FC = () => {
     setEndYearFilter(selectedEndYear);
     setDataFilter(selectedData);
   }, [
+    selectedSubregion,
     selectedRegion,
     selectedCountry,
     selectedDisasterType,
@@ -270,8 +297,10 @@ export const CustomFilter: React.FC = () => {
     selectedEndYear,
     selectedData
   ]);
-
-  // on country filter change
+  // on subregion filter change
+  const onSubregionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+    setSelectedSubregion(e.target.value);
+  // on region filter change
   const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedRegion(e.target.value);
   // on country filter change
@@ -300,6 +329,7 @@ export const CustomFilter: React.FC = () => {
 
   const [sliderReset, setSliderReset] = useState(false);
   const onResetFilter = (): void => {
+    setSelectedSubregion('all');
     setSelectedRegion('all');
     setSelectedCountry('all');
     setSelectedDisasterType('all');
@@ -364,6 +394,34 @@ export const CustomFilter: React.FC = () => {
           >
             <option value='all'>Region</option>
             {regions.map((item) => (
+              <option key={item.uuid} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+        </div>
+
+        <div
+          style={{
+            marginTop: 7,
+            marginBottom: 3,
+            marginLeft: 0,
+            marginRight: 20
+          }}
+        >
+          <Select
+            id='Select_Subregion'
+            size='lg'
+            style={{
+              maxWidth: '150px',
+              padding: '10px',
+              border: '1px solid lightgrey'
+            }}
+            onChange={onSubregionChange}
+            value={selectedSubregion}
+          >
+            <option value='all'>Subregion</option>
+            {subregions.map((item) => (
               <option key={item.uuid} value={item.name}>
                 {item.name}
               </option>
