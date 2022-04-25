@@ -23,18 +23,18 @@ export const QuadrantView: React.FC = () => {
   const [quadIndex, setQuadIndex] = useState<number | false>(false);
 
   useEffect(() => {
-    const newBufferBlips = (isFiltered ? filteredBlips : blips).filter(
-      (b) => b.quadrantIndex === quadIndex
-    );
-    // TODO: filter by tech
-    setBufferBlips(newBufferBlips);
-  }, [filteredBlips, blips, isFiltered, quadIndex]);
-
-  useEffect(() => {
     if (selectedQuadrant) {
       setQuadIndex(quadrants.indexOf(selectedQuadrant));
     } else setQuadIndex(false);
   }, [selectedQuadrant]);
+
+  useEffect(() => {
+    // console.log("is filtered: " + isFiltered);
+    const newBufferBlips = (isFiltered ? filteredBlips : blips).filter(
+      (b) => b.quadrantIndex === quadIndex
+    );
+    setBufferBlips(newBufferBlips);
+  }, [filteredBlips, blips, isFiltered, quadIndex]);
 
   return (
     <div style={{ display: 'flex', flex: 1, padding: 2 }}>
