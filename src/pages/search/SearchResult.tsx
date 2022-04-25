@@ -6,7 +6,8 @@ import {
   Stack,
   SimpleGrid,
   Badge,
-  Flex
+  Flex,
+  Image
 } from '@chakra-ui/react';
 
 import SearchView from './SearchView';
@@ -46,6 +47,14 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
                       >
                         {value['Ideas/Concepts/Examples']}
                       </Text>
+                      <Stack>
+                        <Image
+                          objectFit='cover'
+                          src={`${value['Image Url']}`}
+                          fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                          alt='Default Image'
+                        />
+                      </Stack>
                       <Heading fontSize={'2xl'} fontFamily={'body'}>
                         {/*{value[Ideas]}*/}
                       </Heading>
