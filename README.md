@@ -79,9 +79,7 @@ He has developed the baseline for both the project and website. Provided consult
     <p align="center""><b><a href="https://github.com/Eyu-Tes">Eyoab Tesfaye</a></b></p>
     <p align="center">He has actively developed both backend and frontend components for the radar.</p>
     </td>
-  </tr>
-
-  <tr>
+    
     <td>
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
@@ -103,6 +101,6 @@ He has developed the baseline for both the project and website. Provided consult
 </table>
 
 
-### Cohort #3 (6 online volunteers)
+### Cohort #3 (5 online volunteers)
 
 
