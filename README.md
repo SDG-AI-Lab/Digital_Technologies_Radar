@@ -57,7 +57,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 ### Cohort 1 (1 online volunteer)
 
 
-<table border="1" width="100%">
+<table border="1" width="50%">
   <tr>
     <td>
     <p align="center">
