@@ -77,15 +77,12 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
     </p>
     <p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
     <p><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
-    
     </td>
     <td>
     </td>
     <td>
     </td>
-
   </tr>
-
 </table>
 
 
