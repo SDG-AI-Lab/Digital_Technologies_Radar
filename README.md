@@ -237,5 +237,59 @@ In the end, with the help of many incredible volunteers from around the world, w
 
 </table>
 
+
+### Data Collection Stream(5 online volunteers)
+
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165512870-f5588a6f-99ee-4520-aef6-07b58fe769f0.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/beniam-shewaye-b65a7018a/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Beniam Shewaye</b>
+      </a> 
+    </p>
+    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Ahmed Akbar</b>
+      </a> 
+    </p>
+    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Cezmi Onat</b>
+      </a> 
+    </p>
+    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Mansur Mohammad Dambuwa</b>
+      </a> 
+    </p>
+    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    </td>
+   
+  </tr>
+</table>
+
+
 ## SDG AI Lab
 
