@@ -58,7 +58,19 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 
 **Nuno Ribeiro** [@nmpribeiro](https://github.com/nmpribeiro)
 
-He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/nmpribeiro">Blessing Ojediran</a></b></p>
+    <p align="center">He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.</p>
+    </td>
+  </tr>
+
+</table>
+
 
 
 ### Cohort 2 (4 online volunteers)
@@ -84,7 +96,7 @@ He has developed the baseline for both the project and website. Provided consult
       <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
     </p>
     <p align="center""><b><a href="https://www.linkedin.com/in/shiroya/">Yashkumar Shiroya</a></b></p>
-        <p>•	CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
+        <p>CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
     <p><i>"Writing code for the DRM Radar Project was a unique opportunity to work with super-talented designers, developers and technologists from around the world while creating something that can enrich, empower and save lives."</i></p>
     </td>
     <td>
