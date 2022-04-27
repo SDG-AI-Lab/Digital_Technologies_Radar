@@ -333,3 +333,70 @@ In the end, with the help of many incredible volunteers from around the world, w
 
 ## SDG AI Lab
 
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165516821-c2a65971-79e8-4f02-a107-d1c934ad40c7.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/dina-akylbekova/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Dina Akylbekova</b>
+      </a> 
+    </p>
+    <p align="center">Outreach and Partnerships Analyst at UNDP</p>
+    </td>
+    
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165516832-e058eb70-c0ef-493a-a244-7e3786bdcacb.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/gui-mei-797694196/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Gui Mei</b>
+      </a> 
+    </p>
+    <p align="center">Junior Partnerships Officer at UNDP</p>
+    </td>
+    
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165516837-95599393-c011-4217-a216-7e204262fffd.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/martin-szigeti-73b3a8198/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Martin Szigeti</b>
+      </a> 
+    </p>
+    <p align="center">GIS Specialist</p>
+    </td>
+    
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165517811-2a408c81-464c-4b21-8a79-d1f56f029605.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/ozgeozzkaya/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Ozge Ozkaya</b>
+      </a> 
+    </p>
+    <p align="center">Junior Data Scientist Officer at UNDP</p>
+    </td>
+    
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165516842-145977e1-e163-4aac-8d23-b16bd5d3ccc6.jpg" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/in/yuting-wang-0273a01b0/" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Yuting Wang</b>
+      </a> 
+    </p>
+    <p align="center">Junior Community Engagement Officer at UNDP</p>
+    </td>
+   
+    
+  </tr>
+
+</table>
+
