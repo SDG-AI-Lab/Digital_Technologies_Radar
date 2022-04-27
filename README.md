@@ -138,7 +138,7 @@ He has developed the baseline for both the project and website. Provided consult
     </p>
     <p align="center""><b><a href="https://www.linkedin.com/in/zekariasteshome/">Zekarias Teshome</a></b></p>
     <p align="center">Completed M.Sc in 2014 and have been working on Technology(ICT, ICT4D, Web, App) and Data for more than 7 years.</p>
-    <p align="center"></i>An excellent project to visualize vast amount of data in a single screen; it is a great addition to track progress in SDGs.</i></p>
+    <p align="center"><i>An excellent project to visualize vast amount of data in a single screen; it is a great addition to track progress in SDGs.</i></p>
     </td>
   </tr>
 
