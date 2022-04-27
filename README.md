@@ -324,8 +324,6 @@ In the end, with the help of many incredible volunteers from around the world, w
       </a>
     </p>
     <p align="center">He has actively developed both backend and frontend components for the radar.</p>
-   
-    
   </tr>
 
 </table>
@@ -346,7 +344,6 @@ In the end, with the help of many incredible volunteers from around the world, w
     </p>
     <p align="center">Outreach and Partnerships Analyst at UNDP</p>
     </td>
-    
     <td>
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165516832-e058eb70-c0ef-493a-a244-7e3786bdcacb.jpg" />
@@ -358,7 +355,6 @@ In the end, with the help of many incredible volunteers from around the world, w
     </p>
     <p align="center">Junior Partnerships Officer at UNDP</p>
     </td>
-    
     <td>
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165516837-95599393-c011-4217-a216-7e204262fffd.jpg" />
@@ -369,8 +365,7 @@ In the end, with the help of many incredible volunteers from around the world, w
       </a> 
     </p>
     <p align="center">GIS Specialist</p>
-    </td>
-    
+    </td>   
     <td>
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165517811-2a408c81-464c-4b21-8a79-d1f56f029605.jpg" />
@@ -382,7 +377,6 @@ In the end, with the help of many incredible volunteers from around the world, w
     </p>
     <p align="center">Junior Data Scientist Officer at UNDP</p>
     </td>
-    
     <td>
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165516842-145977e1-e163-4aac-8d23-b16bd5d3ccc6.jpg" />
@@ -394,8 +388,6 @@ In the end, with the help of many incredible volunteers from around the world, w
     </p>
     <p align="center">Junior Community Engagement Officer at UNDP</p>
     </td>
-   
-    
   </tr>
 
 </table>
