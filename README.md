@@ -84,7 +84,7 @@ He has developed the baseline for both the project and website. Provided consult
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
     </p>
     <p align="center""><b><a href="https://github.com/YashShiroya">Yashkumar Shiroya</a></b></p>
         <p>•	CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
@@ -92,7 +92,7 @@ He has developed the baseline for both the project and website. Provided consult
     </td>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://user-images.githubusercontent.com/28465079/165501428-f409eb1e-6028-4135-b1d9-7dcebc7dac27.jpg" />
     </p>
     <p align="center""><b><a href="https://github.com/karshil">Karshil Desai</a></b></p>
     <p>Cornell MBA, Management Consultant, Automation and Control Systems Specialist</p>
