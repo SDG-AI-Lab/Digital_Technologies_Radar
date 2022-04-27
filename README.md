@@ -67,6 +67,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
       </a> 
+      </br>
       <a href="https://github.com/nmpribeiro" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -91,6 +92,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Blessing Ojediran</b>
       </a> 
+      </br>
       <a href="https://github.com/uxfoodie" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -105,6 +107,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Eyoab Tesfaye</b>
       </a> 
+      </br>
       <a href="https://github.com/Eyu-Tes" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -119,6 +122,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/in/shiroya/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Yashkumar Shiroya</b>
       </a> 
+      </br>
       <a href="https://github.com/YashShiroya" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -134,6 +138,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/in/karshil/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Karshil Desai</b>
       </a> 
+      </br>
       <a href="https://github.com/karshil" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -158,6 +163,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Francisco José Peñarrubia</b>
       </a> 
+      </br>
       <a href="https://github.com/fpenarru" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -172,6 +178,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nicola Shen</b>
       </a> 
+      </br>
       <a href="https://github.com/xmz0601" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -186,6 +193,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Sven Simikin</b>
       </a> 
+      </br>
       <a href="https://github.com/UnlikeMars" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
@@ -200,6 +208,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Vladyslava Diachenko</b>
       </a> 
+      </br>
       <a href="https://github.com/vladislawa" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
