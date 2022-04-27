@@ -83,7 +83,7 @@ He has developed the baseline for both the project and website. Provided consult
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
     </p>
-    <p align="center""><b><a href="https://github.com/YashShiroya">Yashkumar Shiroya</a></b></p>
+    <p align="center""><b><a href="https://www.linkedin.com/in/shiroya/">Yashkumar Shiroya</a></b></p>
         <p>•	CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
     <p><i>"Writing code for the DRM Radar Project was a unique opportunity to work with super-talented designers, developers and technologists from around the world while creating something that can enrich, empower and save lives."</i></p>
     </td>
@@ -91,7 +91,7 @@ He has developed the baseline for both the project and website. Provided consult
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165501428-f409eb1e-6028-4135-b1d9-7dcebc7dac27.jpg" />
     </p>
-    <p align="center""><b><a href="https://github.com/karshil">Karshil Desai</a></b></p>
+    <p align="center""><b><a href="https://www.linkedin.com/in/karshil/">Karshil Desai</a></b></p>
     <p>Cornell MBA, Management Consultant, Automation and Control Systems Specialist</p>
     <p><i>"To get involved with United Nations initiatives and contribute to UNDP Global Goals."</i></p>
     </td>
@@ -136,8 +136,9 @@ He has developed the baseline for both the project and website. Provided consult
     <p align="center">
       <img src="https://user-images.githubusercontent.com/28465079/165503859-2abf042e-f9df-4794-833e-1934c6b0d074.jpg" />
     </p>
-    <p align="center""><b><a href="https://github.com/lordakarias">Zekarias Teshome</a></b></p>
-    <p align="center">He has actively developed frontend components for the radar.</p>
+    <p align="center""><b><a href="https://www.linkedin.com/in/zekariasteshome/">Zekarias Teshome</a></b></p>
+    <p align="center">Completed M.Sc in 2014 and have been working on Technology(ICT, ICT4D, Web, App) and Data for more than 7 years.</p>
+    <p align="center"></i>An excellent project to visualize vast amount of data in a single screen; it is a great addition to track progress in SDGs.</i></p>
     </td>
   </tr>
 
