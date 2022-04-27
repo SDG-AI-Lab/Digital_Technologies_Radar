@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
-import { FcAbout } from 'react-icons/fc';
+import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 
 import { MenuItem } from './components/MenuItem';
@@ -27,7 +27,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
 
         <MenuItem to={ROUTES.ABOUT}>
           <Button rounded='md' colorScheme='blue' py={7} px={1} width={'100%'}>
-            <FcAbout size={40} />
+            <BsFillInfoSquareFill size={25} color='white' />
           </Button>
         </MenuItem>
 
