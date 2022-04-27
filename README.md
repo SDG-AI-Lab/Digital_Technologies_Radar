@@ -291,6 +291,45 @@ In the end, with the help of many incredible volunteers from around the world, w
   </tr>
 </table>
 
+### Software Deployment Stream
+
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Violette Heron</b>
+      </a> 
+      </br>
+      <a href="https://github.com/ViolettaHeron" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
+      </a>
+    </p>
+    <p align="center">She has develop the mockups for the website. The website has modelled by using these mockups.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p>
+      <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Naji Alhusami</b>
+      </a> 
+      </br>
+      <a href="https://github.com/naji-alhusami" rel="nofollow noreferrer">
+        <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
+      </a>
+    </p>
+    <p align="center">He has actively developed both backend and frontend components for the radar.</p>
+   
+    
+  </tr>
+
+</table>
+
 
 ## SDG AI Lab
 
