@@ -61,7 +61,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" width="500" height="600" />
     </p>
     <p>
       <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
