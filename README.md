@@ -100,7 +100,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
     </td>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://user-images.githubusercontent.com/28465079/165528220-4456c4da-7d4c-4589-be19-f8cdcc04862f.jpg" />
     </p>
     <p>
       <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
@@ -111,7 +111,8 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">He has actively developed both backend and frontend components for the radar.</p>
+    <p align="center">Completed bachelor's degree in Software Engineering in 2021 and have been a Full-Stack engineer for 1 year.</p>
+    <p><i>"I am grateful for the opportunity to collaborate with the individuals on my team to contribute to the area of disaster management on behalf of the UNDP."</i></p>
     </td>
     <td>
     <p align="center">
