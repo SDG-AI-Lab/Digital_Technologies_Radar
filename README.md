@@ -56,15 +56,14 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 
 ### Cohort 1 (1 online volunteer)
 
-
 <table border="1" width="50%">
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" width="50%" height="50%" />
+      <img src="https://user-images.githubusercontent.com/28465079/165523780-f3414b24-7895-4178-a212-72875c92baae.jpg" width="50%" height="50%" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/nmpribeiro/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
       </a> 
       </br>
@@ -72,9 +71,8 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.</p>
-    <p><i>"Volunteering for me was something to do in the far future, when my life got more stable... and then Covid happened. That was a great opportunity to apply for a volunteering project. I was looking for a visualisation challenge, and that's how I picked up the 'Radar' project. The goal was to do a radar like visualisation and improve how data could be displayed and organised. It was an incredible challenge, where a new react lib was set up to create a generic radar like component that could be expanded. To create that lib we needed some state manipulation that could also be tapped from outside the lib, and a new simple react state manipulator library was also developed for the only purpose of the radar lib. We also had to learn how to generate a fairly homogeneous distribution of items over some bounded area, and for that, we implemented Poisson distribution straight from an academic paper.
-In the end, with the help of many incredible volunteers from around the world, we were able to get into a very clean and final state that I am proud of and that I hear the users love. The whole team is very proud of what was achieved here and we hope to have positively impacted our wellbeing on this planet a little bit."</i></p>
+    <p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
+    <p><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
 
   </tr>
 
