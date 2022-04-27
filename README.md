@@ -214,6 +214,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <a href="https://www.linkedin.com/in/zekariasteshome/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Zekarias Teshome</b>
       </a> 
+  </br>
       <a href="https://github.com/lordakarias" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
