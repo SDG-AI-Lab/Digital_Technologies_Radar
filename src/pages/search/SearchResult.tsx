@@ -62,7 +62,6 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
                         {value.Description.length < 200
                           ? `${value.Description}`
                           : `${value.Description.substring(0, 200)}...`}
-                          
                       </Text>
                     </Stack>
                     <Flex flexWrap={'wrap'} my='5'>

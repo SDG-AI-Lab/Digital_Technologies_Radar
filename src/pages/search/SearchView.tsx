@@ -109,7 +109,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td  colSpan={2}>
+                  <Td colSpan={2}>
                     <Image
                       objectFit='cover'
                       src={`${techContent['Image Url']}`}

@@ -3,7 +3,7 @@ import { Center, Input, Stack, Text } from '@chakra-ui/react';
 
 import SearchResult from './SearchResult';
 
-import { BaseCSVType, useRadarState} from '@undp_sdg_ai_lab/undp-radar';
+import { BaseCSVType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 export const SearchBar: React.FC = () => {
   const [mergedTechs, setMergedTechs] = useState<BaseCSVType[]>([]);
@@ -15,45 +15,39 @@ export const SearchBar: React.FC = () => {
     state: { blips }
   } = useRadarState();
 
-    useEffect(() => {
-       
-        mergeDiasterCycle();
+  useEffect(() => {
+    mergeDiasterCycle();
+  }, [blips]);
 
-    }, [blips]);
+  let merge: BaseCSVType[] = [];
 
+  /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
+  const mergeDiasterCycle = () => {
+    blips.forEach(function (item) {
+      var existingBips = merge.filter(function (v, i) {
+        return v['Ideas/Concepts/Examples'] == item['Ideas/Concepts/Examples'];
+      });
 
-    let merge: BaseCSVType[] = [];
+      if (existingBips.length) {
+        var existingIndex = merge.indexOf(existingBips[0]);
+        merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
+          'Disaster Cycle'
+        ]
+          .concat(',')
+          .concat(item['Disaster Cycle']);
+      } else {
+        //if (typeof item['Disaster Cycle'] == 'string')
+        //  item['Disaster Cycle'] = [item['Disaster Cycle']];
+        merge.push(item);
+      }
+    });
 
-
-    /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
-    const mergeDiasterCycle = () => {
-
-        blips.forEach(function(item) {
-          var existingBips = merge.filter(function(v, i) {
-            return v["Ideas/Concepts/Examples"] == item["Ideas/Concepts/Examples"];
-          });
-          
-          
-          if (existingBips.length) {
-            var existingIndex = merge.indexOf(existingBips[0]);
-            merge[existingIndex]['Disaster Cycle'] = merge[existingIndex]['Disaster Cycle'].concat(item['Disaster Cycle']);
-
-          } else {
-            if (typeof item['Disaster Cycle'] == 'string')
-              item['Disaster Cycle'] = [item['Disaster Cycle']];
-            merge.push(item);
-          }
-          
-        });
-
-        setMergedTechs(merge);
-    }
-
+    setMergedTechs(merge);
+  };
 
   /* Handle input change events, filter(search) based on this change events */
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-
     const searchword = event.target.value.toLowerCase();
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
@@ -64,15 +58,16 @@ export const SearchBar: React.FC = () => {
         value.Description.toLowerCase().includes(query) ||
         value['Use Case'].toLowerCase().includes(query) ||
         value['Disaster Cycle'].toString().toLowerCase().includes(query) ||
-        value['Un Host Organisation'].toString().toLowerCase().includes(query) ||
+        value['Un Host Organisation']
+          .toString()
+          .toLowerCase()
+          .includes(query) ||
         value['Country of Implementation'].toLowerCase().includes(query) ||
         value['SDG'].toString().toLowerCase().includes(query)
       );
     });
 
-
     setNewFilter(newFilter);
-
 
     if (query === '') {
       setFilteredTech([]);
@@ -80,9 +75,6 @@ export const SearchBar: React.FC = () => {
       setFilteredTech(newFilter);
     }
   };
-
-
-
 
   return (
     <div>
@@ -102,9 +94,7 @@ export const SearchBar: React.FC = () => {
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
-          >
-           
-          </Text>
+          ></Text>
         </Stack>
       </Center>
 
@@ -112,7 +102,9 @@ export const SearchBar: React.FC = () => {
         <SearchResult filteredContent={filteredTech} />
       )}
 
-      {filteredTech.length === 0 && <SearchResult filteredContent={mergedTechs} />}
+      {filteredTech.length === 0 && (
+        <SearchResult filteredContent={mergedTechs} />
+      )}
     </div>
   );
 };
