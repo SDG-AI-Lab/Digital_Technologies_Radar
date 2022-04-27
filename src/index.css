@@ -65,7 +65,7 @@ svg text.quadrant-text,
 svg text.horizon-text,
 .horizon-text,
 .quadrant-text {
-  font-weight: 600 !important;
+  /* font-weight: 600 !important; */
   fill: rgba(0, 0, 0, 1) !important;
 }
 svg text.quadrant-text:hover {
