@@ -251,7 +251,8 @@ In the end, with the help of many incredible volunteers from around the world, w
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Beniam Shewaye</b>
       </a> 
     </p>
-    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    <p align="center">Completed my BSc on Computer Science and Information Technology in 2016. Have been in ICT sector since 2017.</p>
+      <p align="center"><i>I believe volunteering service provides knowledge, skill and satisfaction in faith and professional development. Also radar development projects like in SDG AI Lab will benefit us from the wisdom and contributions of people everywhere on earth.</i></p>
     </td>
     <td>
     <p align="center">
