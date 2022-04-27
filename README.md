@@ -102,4 +102,45 @@ He has developed the baseline for both the project and website. Provided consult
 
 ### Cohort #3 (5 online volunteers)
 
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/fpenarru">Francisco José Peñarrubia</a></b></p>
+    <p align="center">He has actively developed frontend components for the radar.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/xmz0601">Nicola Shen</a></b></p>
+    <p align="center">She has actively developed frontend components for the radar.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/UnlikeMars">Sven Simikin</a></b></p>
+    <p align="center">He has actively developed frontend components for the radar.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
+    </p>
+    <p align="center""><b><a href="https://github.com/vladislawa">Vladyslava Diachenko</a></b></p>
+        <p>She has actively developed frontend components for the radar.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://user-images.githubusercontent.com/28465079/165503859-2abf042e-f9df-4794-833e-1934c6b0d074.jpg" />
+    </p>
+    <p align="center""><b><a href="https://github.com/lordakarias">Zekarias Teshome</a></b></p>
+    <p align="center">He has actively developed frontend components for the radar.</p>
+    </td>
+  </tr>
+
+</table>
+
 
