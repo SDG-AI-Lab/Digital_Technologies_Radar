@@ -25,7 +25,7 @@ export const SearchBar: React.FC = () => {
   const mergeDiasterCycle = () => {
     blips.forEach(function (item) {
       var existingBips = merge.filter(function (v, i) {
-        return v['Ideas/Concepts/Examples'] == item['Ideas/Concepts/Examples'];
+        return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
       });
 
       if (existingBips.length) {
@@ -44,6 +44,8 @@ export const SearchBar: React.FC = () => {
 
     setMergedTechs(merge);
   };
+
+  console.log('new Filter ', newFilter);
 
   /* Handle input change events, filter(search) based on this change events */
 
