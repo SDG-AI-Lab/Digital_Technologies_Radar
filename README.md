@@ -63,21 +63,44 @@ He has developed the baseline for both the project and website. Provided consult
 
 ### Cohort 2 (4 online volunteers)
 
-**Blessing Ojediran** [@uxfoodie](https://github.com/uxfoodie)
+<table border="1" width="100%">
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/uxfoodie">Blessing Ojediran</a></b></p>
+    <p align="center">She has develop the mockups for the website. The website has modelled by using these mockups.</p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/Eyu-Tes">Eyoab Tesfaye</a></b></p>
+    <p align="center">He has actively developed both backend and frontend components for the radar.</p>
+    </td>
+  </tr>
 
-She has develop the mockups for the website. The website has modelled by using these mockups.
+  <tr>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/YashShiroya">Yashkumar Shiroya</a></b></p>
+        <p>•	CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
+    <p><i>"Writing code for the DRM Radar Project was a unique opportunity to work with super-talented designers, developers and technologists from around the world while creating something that can enrich, empower and save lives."</i></p>
+    </td>
+    <td>
+    <p align="center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+    </p>
+    <p align="center""><b><a href="https://github.com/karshil">Karshil Desai</a></b></p>
+    <p>Cornell MBA, Management Consultant, Automation and Control Systems Specialist</p>
+    <p><i>"To get involved with United Nations initiatives and contribute to UNDP Global Goals."</i></p>
+    </td>
+  </tr>
 
-**Eyoab Tesfaye** [@Eyu-Tes](https://github.com/Eyu-Tes)
-
-He has actively developed both backend and frontend components for the radar. 
-
-**Yashkumar Shiroya** [@YashShiroya](https://github.com/YashShiroya)
-
-He has actively developed both backend and frontend components for the radar. Provided inputs on the design decisions.
-
-**Karshil Desai** [@karshil](https://github.com/karshil)
-
-He has actively developed frontend components for the radar.
+</table>
 
 
 ### Cohort #3 (6 online volunteers)
