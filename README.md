@@ -278,14 +278,15 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
     </td>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://user-images.githubusercontent.com/28465079/165645425-5d67ccb7-f96e-4d89-8141-b5a14e5c8079.jpg" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/mansur-muhammad-dambuwa-65a913113/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Mansur Mohammad Dambuwa</b>
       </a> 
     </p>
-    <p align="center">He has actively collected projects that are ongoing or done in disaster context.</p>
+    <p align="center">Completed degree in Chemistry, PGD in Development Economics, and masters in view. Have been in the field of data science and M&E management for +12 years</p>
+    <p align="center"><i>"It has been a  valuable journey, working and learning from each other and same time contributing to impacting the vulnerable lives. I hope my contribution contributes to the execution of the right programmatic decisions."</i></p>
     </td>
    
   </tr>
