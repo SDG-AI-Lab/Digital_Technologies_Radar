@@ -190,7 +190,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/sven-simikin-559031223/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Sven Simikin</b>
       </a> 
       </br>
@@ -198,14 +198,15 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">He has actively developed frontend components for the radar.</p>
+    <p>Completed Master's degree in Computer Science in 2022 and is currently working as a Research Assistant on Big Data Platforms for the Fraunhofer Society</p>
+    <p><i>"It has been a great experience to network with new faces and a pleasure to see my contributions in productive use to achieve sustainable development goals."</i></p>
     </td>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://user-images.githubusercontent.com/28465079/165644578-80fd40aa-cbe9-4644-8191-ed26534b9846.png" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/vladyslava-diachenko" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Vladyslava Diachenko</b>
       </a> 
       </br>
@@ -213,7 +214,8 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-        <p>She has actively developed frontend components for the radar.</p>
+        <p>Completed BSc in Computer Science at the University of Toronto in 2020, and have been working as a Software Developer for 2 years</p>
+        <p><i>"I am grateful for the opportunity to be a part of this amazing and meaningful project and to work with the incredible people from all around the world "</i></p>
     </td>
     <td>
     <p align="center">
