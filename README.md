@@ -87,7 +87,7 @@ He has developed the baseline for both the project and website. Provided consult
       <img src="https://user-images.githubusercontent.com/28465079/165501346-29d084a9-6ef4-476f-858b-91aa5fdc725f.jpg" />
     </p>
     <p align="center""><b><a href="https://github.com/YashShiroya">Yashkumar Shiroya</a></b></p>
-        <p>•	CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
+        <p>CS Graduate, Class of '18, Purdue University. Ex-Developer at Amazon.com. MBA Grad, Class of '24, University Of British Columbia.</p>
     <p><i>"Writing code for the DRM Radar Project was a unique opportunity to work with super-talented designers, developers and technologists from around the world while creating something that can enrich, empower and save lives."</i></p>
     </td>
     <td>
