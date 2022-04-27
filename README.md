@@ -112,7 +112,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       </a>
     </p>
     <p align="center">Completed bachelor's degree in Software Engineering in 2021 and have been a Full-Stack engineer for 1 year.</p>
-    <p><i>"I am grateful for the opportunity to collaborate with the individuals on my team to contribute to the area of disaster management on behalf of the UNDP."</i></p>
+    <p><i>"I am grateful for the opportunity to collaborate with the individuals on my team to contribute to the area of disaster context on behalf of the UNDP."</i></p>
     </td>
     <td>
     <p align="center">
