@@ -15,7 +15,8 @@ import {
   Stack,
   Badge,
   Link,
-  Button
+  Button,
+  Image
 } from '@chakra-ui/react';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
@@ -100,13 +101,23 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                         color='#fff'
                         textTransform='capitalize'
                       >
-                        🌋 {techContent['Disaster Cycle']}
+                        🌋 {' ' + techContent['Disaster Cycle']}
                       </Badge>
                     </Stack>
                   </Td>
                 </Tr>
               </Thead>
               <Tbody>
+                <Tr>
+                  <Td colSpan={2}>
+                    <Image
+                      objectFit='cover'
+                      src={`${techContent['Image Url']}`}
+                      fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                      alt='Default Image'
+                    />
+                  </Td>
+                </Tr>
                 <Tr>
                   <Td style={{ verticalAlign: 'top' }}>Description</Td>
                   <Td

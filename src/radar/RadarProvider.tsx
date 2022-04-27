@@ -15,14 +15,39 @@ import {
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
 import csvData from '../assets/csv/technology_radar_dataset_updated_v5.csv';
+import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
+import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
+  const quadrantsDescription = {
+    preparedness:
+      'The knowledge and capacities developed by governments, response and recovery organizations, communities, and individuals to effectively anticipate, respond to and recover from the impacts of likely, imminent or current disasters.',
+    response:
+      'Actions taken directly before, during or immediately after a disaster to save lives, reduce health impacts, ensure public safety, and meet the basic subsistence needs of the people affected.',
+    recovery:
+      'The restoring or improving of livelihoods and health, as well as economic, physical, social, cultural, and environmental assets, systems, and activities, of a disaster-affected community or society, aligning with the principles of sustainable development and “build back better”, to avoid or reduce future disaster risk.',
+    mitigation:
+      'The lessening or minimizing of the adverse impacts of a hazardous event.'
+  };
+
+  const horizonsDescription = {
+    production:
+      'Digital Solutions is fully functional and readily available on the market for implementation.  ',
+    validation:
+      'Digital Solution has been identified and tested with a minimum functionality. Not available on the market for implementation. ',
+    prototype:
+      'Digital Solutions is fully functional. Not available on the market for implementation.  ',
+    idea: 'Digital Solution has been identified and explained in the project document. Not available on the market for implementation.  '
+  };
+
   const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
     ({
-      Region: item['Region'],
+      Region: Utilities.cleanupStringArray(item.Region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
-      'Country of Implementation': item['Country of Implementation'],
-      Data: item.Data,
+      'Country of Implementation': Utilities.cleanupStringArray(
+        item['Country of Implementation'].split(',')
+      ),
+      Data: Utilities.cleanupStringArray(item.Data.split(',')),
       'Date of Implementation': item['Date of Implementation'],
       Description: item.Description,
       'Disaster Cycle': item['Disaster Cycle'],
@@ -30,7 +55,9 @@ export const AppRadarProvider: React.FC = ({ children }) => {
       Source: item.Source,
       'Status/Maturity': item['Status/Maturity'],
       'Supporting Partners': item['Supporting Partners'],
-      'Un Host Organisation': item['Un Host Organisation'],
+      'Un Host Organisation': Utilities.cleanupStringArray(
+        item['Un Host Organisation'].split(',')
+      ),
       'Use Case': item['Use Case'],
       SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
       Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
@@ -71,7 +98,15 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   return (
     <RadarProvider>
       <DataProvider>
-        <SetData keys={keys} orders={orders} colors={colors} />
+        <SetData
+          keys={keys}
+          orders={orders}
+          colors={colors}
+          quadrantsDescription={quadrantsDescription}
+          horizonsDescription={horizonsDescription}
+          QuadrantNameComponent={QuadrantNameComp}
+          HorizonsNameComponent={HorizonsNameComp}
+        />
         <RadarDataGenerator />
         <AddCSV csvFile={csvData} mapping={mapping} />
         {children}
