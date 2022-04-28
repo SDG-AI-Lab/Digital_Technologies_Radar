@@ -7,7 +7,8 @@ import { ROUTES } from '../../navigation/routes';
 
 enum BackTo {
   RADAR = 'RADAR',
-  QUADRANT = 'QUADRANT'
+  QUADRANT = 'QUADRANT',
+  ABOUT = 'ABOUT'
 }
 
 interface Props {
@@ -34,6 +35,9 @@ export const BackButton: React.FC<Props> = ({ to }) => {
                 setSelectedItem(null);
                 if (selectedQuadrant)
                   nav(`${ROUTES.QUADRANT}/${selectedQuadrant}`);
+                break;
+              case 'ABOUT':
+                nav(ROUTES.ABOUT);
                 break;
               case 'RADAR': // 'RADAR' is the same as default
               default:

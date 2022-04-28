@@ -1,12 +1,9 @@
 import React from 'react';
-import { Container, VStack, Button } from '@chakra-ui/react';
+import { Container, VStack, Button, Spacer, Image } from '@chakra-ui/react';
 import { Box, Text, SimpleGrid, Flex } from '@chakra-ui/react';
 
 import AboutOrganization from './AboutOrganization';
 import { aboutContentList } from './AboutContent';
-
-import { volunteerContentList } from './VolunteerContent';
-import VolunteerOrganization from './VolunteerOrganization';
 
 export const About: React.VFC = () => {
   const onFeedbackClick = () =>
@@ -40,71 +37,39 @@ export const About: React.VFC = () => {
               <AboutOrganization organizationContent={aboutContentChild} />
             </div>
           ))}
-
-          <Box mt='5' p='10'>
-            <Text as='b' fontSize='2xl'>
-              FTR4DRR Volunteer Developer Team
-            </Text>
-            <br />
-            <Text fontSize='sm' my={2}>
-              Online UN Volunteers are actively contributing to Frontier
-              Technology Radar for Disaster Risk Reduction (FTR4DRR) Project.
-              Many thanks to all our volunteers for their contribution:
-            </Text>
-            <Flex direction={'column'} minHeight={'100px'} p='2'>
-              <Text as='b' fontSize='1xl' my={2}>
-                Software Development
+          <div className='about-content'>
+            <Box borderWidth='5px' borderRadius='lg' mt='2' p='10'>
+              <Flex>
+                <Text as='b' fontSize='2xl'>
+                  FTR4DRR Volunteer Developer Team
+                </Text>
+                <Spacer />
+                <Image
+                  boxSize={16}
+                  objectFit='contain'
+                  src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/1200px-UN_Volunteers_logo.svg.png'
+                />
+              </Flex>
+              <br />
+              <Text fontSize='sm'>
+                Online UN Volunteers are actively contributing to Frontier
+                Technology Radar for Disaster Risk Reduction (FTR4DRR) Project.
+                Many thanks to all our volunteers for their contribution and
+                dedicated time:
               </Text>
-
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
-                {volunteerContentList
-                  .slice(0, 10)
-                  .map((volunteerContentChild, index) => (
-                    <div className='volunteer-content' key={index}>
-                      <VolunteerOrganization
-                        volunteerContent={volunteerContentChild}
-                      />
-                    </div>
-                  ))}
-              </SimpleGrid>
-            </Flex>
-
-            <Flex direction={'column'} minHeight={'100px'} p='2'>
-              <Text as='b' fontSize='1xl' my={2}>
-                Data Collection
-              </Text>
-
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
-                {volunteerContentList
-                  .slice(10, 14)
-                  .map((volunteerContentChild, index) => (
-                    <div className='volunteer-content' key={index}>
-                      <VolunteerOrganization
-                        volunteerContent={volunteerContentChild}
-                      />
-                    </div>
-                  ))}
-              </SimpleGrid>
-            </Flex>
-
-            <Flex direction={'column'} minHeight={'100px'} p='2'>
-              <Text as='b' fontSize='1xl' my={2}>
-                Software Deployment
-              </Text>
-
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
-                {volunteerContentList
-                  .slice(14, 16)
-                  .map((volunteerContentChild, index) => (
-                    <div className='volunteer-content' key={index}>
-                      <VolunteerOrganization
-                        volunteerContent={volunteerContentChild}
-                      />
-                    </div>
-                  ))}
-              </SimpleGrid>
-            </Flex>
-          </Box>
+              <Button
+                as='a'
+                href='#/volunteers'
+                style={{ cursor: 'pointer' }}
+                colorScheme='orange'
+                right={30}
+                top={5}
+                m={8}
+              >
+                More information on FTR4DRR Online Volunteers
+              </Button>
+            </Box>
+          </div>
         </VStack>
       </Container>
     </>
