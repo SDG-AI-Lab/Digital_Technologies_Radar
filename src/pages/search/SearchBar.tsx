@@ -64,7 +64,10 @@ export const SearchBar: React.FC = () => {
           .toString()
           .toLowerCase()
           .includes(query) ||
-        value['Country of Implementation'].toLowerCase().includes(query) ||
+        value['Country of Implementation']
+          .toString()
+          .toLowerCase()
+          .includes(query) ||
         value['SDG'].toString().toLowerCase().includes(query)
       );
     });
