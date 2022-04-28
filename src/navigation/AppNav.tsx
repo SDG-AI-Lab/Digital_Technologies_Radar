@@ -8,7 +8,7 @@ import { AppNavbar } from '../components';
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
 // Pages
-import { NotFound404, Radar, Search, About } from '../pages';
+import { NotFound404, Radar, Search, About, Volunteers } from '../pages';
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
@@ -25,6 +25,7 @@ export const NavApp = () => (
         </Route>
         <Route path={ROUTES.ABOUT} element={<About />} />
         <Route path={ROUTES.SEARCH} element={<Search />} />
+        <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
 
         {/* https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb#not-server-rendering -> should be server redirect */}
         <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />

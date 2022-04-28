@@ -1,5 +1,6 @@
 const RADAR = '/radar';
 const ABOUT = '/about';
+const VOLUNTEERS = '/volunteers';
 const SEARCH = '/search';
 
 const QUADRANT = `quadrant`;
@@ -15,5 +16,6 @@ export const ROUTES = {
   QUADRANT,
   QUADRANT_PARAM,
   BLIP,
-  BLIP_PARAM
+  BLIP_PARAM,
+  VOLUNTEERS
 };
