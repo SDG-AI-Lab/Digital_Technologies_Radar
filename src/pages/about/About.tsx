@@ -43,12 +43,13 @@ export const About: React.VFC = () => {
 
           <Box mt='5' p='10'>
             <Text as='b' fontSize='2xl'>
-              United Nations Volunteers (UNVs)
+              FTR4DRR Volunteer Developer Team
             </Text>
             <br />
             <Text fontSize='sm' my={2}>
-              UNVs are actively making contributions to the Digital Technologies
-              Radar project. Many thanks to all the UNVs for their contribution:
+              Online UN Volunteers are actively contributing to Digital
+              Technologies Radar Project. Many thanks to all our volunteers for
+              their contribution:
             </Text>
             <Flex direction={'column'} minHeight={'100px'} p='2'>
               <Text as='b' fontSize='1xl' my={2}>
