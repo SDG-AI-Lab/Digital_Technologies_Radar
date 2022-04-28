@@ -45,7 +45,7 @@ export const SearchBar: React.FC = () => {
     setMergedTechs(merge);
   };
 
-  console.log('new Filter ', newFilter);
+  //console.log('new Filter ', newFilter);
 
   /* Handle input change events, filter(search) based on this change events */
 
@@ -55,17 +55,29 @@ export const SearchBar: React.FC = () => {
     const query = searchword.toLowerCase();
 
 
-    const _newFilter: BaseCSVType[] = blips.filter((value) => {
+    const _newFilter: BaseCSVType[] = mergedTechs.filter((value) => {
       return (
-        value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
-        value.Description.toLowerCase().includes(query) ||
-        value['Use Case'].toLowerCase().includes(query) ||
-        value['Disaster Cycle'].toString().toLowerCase().includes(query) ||
+        value['Ideas/Concepts/Examples']
+          .toLowerCase()
+          .includes(query) ||
+        value.Description
+          .toLowerCase()
+          .includes(query) ||
+        value['Use Case']
+          .toLowerCase()
+          .includes(query) ||
+        value['Disaster Cycle']
+          .toString()
+          .toLowerCase()
+          .includes(query) ||
         value['Un Host Organisation']
           .toString()
           .toLowerCase()
           .includes(query) ||
-        value['Country of Implementation'].toLowerCase().includes(query) ||
+        value['Country of Implementation']
+          .toString()
+          .toLowerCase()
+          .includes(query) ||
         value['SDG'].toString().toLowerCase().includes(query)
       );
     });
@@ -97,7 +109,9 @@ export const SearchBar: React.FC = () => {
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
-          ></Text>
+          >
+            Found {newFilter.length} out of {mergedTechs.length}
+          </Text>
         </Stack>
       </Center>
 
