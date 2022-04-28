@@ -47,9 +47,9 @@ export const About: React.VFC = () => {
             </Text>
             <br />
             <Text fontSize='sm' my={2}>
-              Online UN Volunteers are actively contributing to Digital
-              Technologies Radar Project. Many thanks to all our volunteers for
-              their contribution:
+              Online UN Volunteers are actively contributing to Frontier
+              Technology Radar for Disaster Risk Reduction (FTR4DRR) Project.
+              Many thanks to all our volunteers for their contribution:
             </Text>
             <Flex direction={'column'} minHeight={'100px'} p='2'>
               <Text as='b' fontSize='1xl' my={2}>
