@@ -11,7 +11,7 @@ class VolunteerContent {
   static readonly NunoR: VolunteerContentChild = {
     name: 'Nuno Ribeiro',
     background:
-      'He has developed the baseline for both the project and website. Provided consultancy on how to build such project with React.',
+      'Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years',
     quote:
       '"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."',
     imageSrc:
