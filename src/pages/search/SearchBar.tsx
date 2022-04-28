@@ -18,7 +18,7 @@ export const SearchBar: React.FC = () => {
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
 
-    const newFilter: BaseCSVType[] = blips.filter((value) => {
+    const _newFilter: BaseCSVType[] = blips.filter((value) => {
       return (
         value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
         value.Description.toLowerCase().includes(query) ||
@@ -30,12 +30,12 @@ export const SearchBar: React.FC = () => {
       );
     });
 
-    setNewFilter(newFilter);
+    setNewFilter(_newFilter);
 
     if (query === '') {
       setFilteredTech([]);
     } else {
-      setFilteredTech(newFilter);
+      setFilteredTech(_newFilter);
     }
   };
 
