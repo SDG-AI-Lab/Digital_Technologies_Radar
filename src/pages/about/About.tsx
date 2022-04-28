@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, VStack, Button, Spacer, Image } from '@chakra-ui/react';
-import { Box, Text, SimpleGrid, Flex } from '@chakra-ui/react';
+import { Box, Text, Flex } from '@chakra-ui/react';
 
 import AboutOrganization from './AboutOrganization';
 import { aboutContentList } from './AboutContent';
