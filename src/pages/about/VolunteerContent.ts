@@ -33,10 +33,10 @@ class VolunteerContent {
   static readonly EyoabT: VolunteerContentChild = {
     name: 'Eyoab Tesfaye',
     background:
-      'He has actively developed both backend and frontend components for the radar.',
-    quote: ' ',
-    imageSrc: '',
-    linkedinLink: '',
+      "Completed bachelor's degree in Software Engineering in 2021 and have been a Full-Stack engineer for 1 year.",
+    quote: '"I am grateful for the opportunity to collaborate with the individuals on my team to contribute to the area of disaster context on behalf of the UNDP."',
+    imageSrc: 'https://user-images.githubusercontent.com/28465079/165528220-4456c4da-7d4c-4589-be19-f8cdcc04862f.jpg',
+    linkedinLink: 'https://www.linkedin.com/in/eyoabtaregay/',
     githubLink: 'https://github.com/Eyu-Tes'
   } as const;
 
