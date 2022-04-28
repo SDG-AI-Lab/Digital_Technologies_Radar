@@ -84,8 +84,10 @@ class VolunteerContent {
 
   static readonly SvenS: VolunteerContentChild = {
     name: 'Sven Simikin',
-    background: "Completed Master's degree in Computer Science in 2022 and is currently working as a Research Assistant on Big Data Platforms for the Fraunhofer Society",
-    quote: '"It has been a great experience to network with new faces and a pleasure to see my contributions in productive use to achieve sustainable development goals."',
+    background:
+      "Completed Master's degree in Computer Science in 2022 and is currently working as a Research Assistant on Big Data Platforms for the Fraunhofer Society",
+    quote:
+      '"It has been a great experience to network with new faces and a pleasure to see my contributions in productive use to achieve sustainable development goals."',
     imageSrc: '',
     linkedinLink: 'https://www.linkedin.com/in/sven-simikin-559031223/',
     githubLink: 'https://github.com/UnlikeMars'
@@ -93,9 +95,12 @@ class VolunteerContent {
 
   static readonly VladyslavaD: VolunteerContentChild = {
     name: 'Vladyslava Diachenko',
-    background: 'Completed BSc in Computer Science at the University of Toronto in 2020, and have been working as a Software Developer for 2 years',
-    quote: '"I am grateful for the opportunity to be a part of this amazing and meaningful project and to work with the incredible people from all around the world "',
-    imageSrc: 'https://user-images.githubusercontent.com/28465079/165644578-80fd40aa-cbe9-4644-8191-ed26534b9846.png',
+    background:
+      'Completed BSc in Computer Science at the University of Toronto in 2020, and have been working as a Software Developer for 2 years',
+    quote:
+      '"I am grateful for the opportunity to be a part of this amazing and meaningful project and to work with the incredible people from all around the world "',
+    imageSrc:
+      'https://user-images.githubusercontent.com/28465079/165644578-80fd40aa-cbe9-4644-8191-ed26534b9846.png',
     linkedinLink: 'https://www.linkedin.com/in/vladyslava-diachenko/',
     githubLink: 'https://github.com/vladislawa'
   } as const;
@@ -148,9 +153,12 @@ class VolunteerContent {
     name: 'Mansur Mohammad Dambuwa',
     background:
       'Completed degree in Chemistry, PGD in Development Economics, and masters in view. Have been in the field of data science and M&E management for +12 years',
-    quote: '"It has been a  valuable journey, working and learning from each other and same time contributing to impacting the vulnerable lives. I hope my contribution contributes to the execution of the right programmatic decisions."',
-    imageSrc: 'https://user-images.githubusercontent.com/28465079/165645425-5d67ccb7-f96e-4d89-8141-b5a14e5c8079.jpg',
-    linkedinLink: 'https://www.linkedin.com/in/mansur-muhammad-dambuwa-65a913113/',
+    quote:
+      '"It has been a  valuable journey, working and learning from each other and same time contributing to impacting the vulnerable lives. I hope my contribution contributes to the execution of the right programmatic decisions."',
+    imageSrc:
+      'https://user-images.githubusercontent.com/28465079/165645425-5d67ccb7-f96e-4d89-8141-b5a14e5c8079.jpg',
+    linkedinLink:
+      'https://www.linkedin.com/in/mansur-muhammad-dambuwa-65a913113/',
     githubLink: ''
   } as const;
 
