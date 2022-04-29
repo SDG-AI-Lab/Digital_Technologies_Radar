@@ -5,6 +5,7 @@ import { ROUTES } from './routes';
 // Comps
 import { AppLeftNav } from '../components';
 import { AppBottomNav } from '../components';
+import { AppMobileHeader } from '../components';
 // Layouts
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
@@ -17,6 +18,7 @@ export const NavApp = () => (
   <Flex style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
     <AppLeftNav />
     <AppBottomNav />
+    <AppMobileHeader />
     <MainLayout>
       <Routes>
         <Route path={ROUTES.RADAR} element={<RadarLayout />}>
