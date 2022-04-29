@@ -1,5 +1,6 @@
-import { AppNavbar } from './navbar/AppNavbar';
+import { AppLeftNav } from './navbar/AppLeftNav';
+import { AppBottomNav } from './navbar/AppBottomNav';
 import { FilterDrawer } from './drawers/FilterDrawer';
 import { TechDrawer } from './drawers/TechDrawer';
 
-export { AppNavbar, TechDrawer, FilterDrawer };
+export { AppLeftNav, AppBottomNav, TechDrawer, FilterDrawer };
