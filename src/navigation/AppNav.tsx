@@ -3,7 +3,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
 // Comps
-import { AppNavbar } from '../components';
+import { AppLeftNav } from '../components';
+import { AppBottomNav } from '../components';
+import { AppMobileHeader } from '../components';
 // Layouts
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
@@ -14,7 +16,9 @@ import { QuadrantView } from '../pages/views/QuadrantView';
 
 export const NavApp = () => (
   <Flex style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
-    <AppNavbar />
+    <AppLeftNav />
+    <AppBottomNav />
+    <AppMobileHeader />
     <MainLayout>
       <Routes>
         <Route path={ROUTES.RADAR} element={<RadarLayout />}>
