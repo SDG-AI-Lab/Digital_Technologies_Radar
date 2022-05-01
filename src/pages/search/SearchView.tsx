@@ -29,7 +29,12 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button colorScheme='blue' borderRadius={'0'} onClick={onOpen}>
+      <Button
+        colorScheme='blue'
+        borderRadius={'0'}
+        onClick={onOpen}
+        position='static'
+      >
         More
       </Button>
       <Modal
