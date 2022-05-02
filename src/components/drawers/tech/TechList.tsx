@@ -22,7 +22,8 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       useCaseFilter,
       disasterTypeFilter
     },
-    actions: { setTechFilter, setHoveredTech }
+    actions: { setTechFilter, setHoveredTech },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const {
@@ -32,6 +33,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
   const [tech, setTech] = useState<TechItemType[]>([]);
 
   const resetTech = (): void => {
+    setFilteredBlips(false, blips);
     setTechFilter([]);
   };
 
