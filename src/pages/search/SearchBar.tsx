@@ -54,22 +54,12 @@ export const SearchBar: React.FC = () => {
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
 
-
     const _newFilter: BaseCSVType[] = mergedTechs.filter((value) => {
       return (
-        value['Ideas/Concepts/Examples']
-          .toLowerCase()
-          .includes(query) ||
-        value.Description
-          .toLowerCase()
-          .includes(query) ||
-        value['Use Case']
-          .toLowerCase()
-          .includes(query) ||
-        value['Disaster Cycle']
-          .toString()
-          .toLowerCase()
-          .includes(query) ||
+        value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
+        value.Description.toLowerCase().includes(query) ||
+        value['Use Case'].toLowerCase().includes(query) ||
+        value['Disaster Cycle'].toString().toLowerCase().includes(query) ||
         value['Un Host Organisation']
           .toString()
           .toLowerCase()
