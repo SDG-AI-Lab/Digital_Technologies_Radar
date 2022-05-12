@@ -84,12 +84,8 @@ export const SearchBar: React.FC = () => {
   return (
     <>
       <Center py={6} width={'100%'}>
-        <Stack width={'100%'}>
+        <Stack width={{ base: '80%', lg: '70%' }}>
           <Input
-            width={{
-              base: '80%',
-              lg: '70%'
-            }}
             position='static'
             placeholder='Search ....'
             value={techSearch}
