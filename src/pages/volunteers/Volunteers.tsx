@@ -10,18 +10,24 @@ export const Volunteers: React.VFC = () => {
   return (
     <>
       {/* <div style={{ display: 'flex', flex: 1, overflowY: 'scroll' }}> */}
-      <div style={{ float: 'left', margin: 20 }}>
+      <Box float='left' ml={{ base: 0, md: 5 }} mt={{ base: 20, md: 5 }} mb={5}>
         <BackButton to='ABOUT' />
-      </div>
+      </Box>
       <Container
-        mt={-10}
-        mb={7}
+        mt={{ base: -16, md: -10 }}
+        mb={{ base: 16, md: 7 }}
         centerContent
-        maxW='container.xl'
+        maxW={{
+          base: 'full',
+          md: '656px',
+          lg: '886px',
+          xl: '1136px',
+          '2xl': '1386px'
+        }}
         overflowY={'auto'}
       >
         <VStack>
-          <Box mt='5' p='10'>
+          <Box mt={5} p={10} pb={{ base: 2, md: 10 }}>
             <Text as='b' fontSize='2xl'>
               FTR4DRR Volunteer Developer Team
             </Text>
@@ -36,7 +42,7 @@ export const Volunteers: React.VFC = () => {
                 Software Development
               </Text>
 
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
+              <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }} py={6} ml={0}>
                 {volunteerContentList
                   .slice(0, 10)
                   .map((volunteerContentChild, index) => (
@@ -54,7 +60,7 @@ export const Volunteers: React.VFC = () => {
                 Data Collection
               </Text>
 
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
+              <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }} py={6} ml={0}>
                 {volunteerContentList
                   .slice(10, 14)
                   .map((volunteerContentChild, index) => (
