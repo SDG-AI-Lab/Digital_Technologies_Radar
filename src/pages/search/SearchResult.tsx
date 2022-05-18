@@ -23,7 +23,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
     <div className='dataResults'>
       <Box bg={'#fdfdfd'} mb={{ base: 0, md: 50 }}>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
-          <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }}>
+          <SimpleGrid columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}>
             {props.filteredContent.slice(0, 15).map((value, key) => {
               return (
                 <Center py={6} key={key}>

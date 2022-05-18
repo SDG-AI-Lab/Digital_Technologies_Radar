@@ -27,7 +27,7 @@ export const Volunteers: React.VFC = () => {
         overflowY={'auto'}
       >
         <VStack>
-          <Box mt={5} p={10} pb={{ base: 2, md: 10 }}>
+          <Box mt={5} p={10} pb={{ base: 2, md: 10 }} pr={{ base: 0, sm: 10 }}>
             <Text as='b' fontSize='2xl'>
               FTR4DRR Volunteer Developer Team
             </Text>
@@ -42,7 +42,11 @@ export const Volunteers: React.VFC = () => {
                 Software Development
               </Text>
 
-              <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }} py={6} ml={0}>
+              <SimpleGrid
+                columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+                py={6}
+                ml={0}
+              >
                 {volunteerContentList
                   .slice(0, 10)
                   .map((volunteerContentChild, index) => (
@@ -60,7 +64,11 @@ export const Volunteers: React.VFC = () => {
                 Data Collection
               </Text>
 
-              <SimpleGrid columns={{ base: 2, lg: 3, xl: 4 }} py={6} ml={0}>
+              <SimpleGrid
+                columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+                py={6}
+                ml={0}
+              >
                 {volunteerContentList
                   .slice(10, 14)
                   .map((volunteerContentChild, index) => (
@@ -78,7 +86,7 @@ export const Volunteers: React.VFC = () => {
                 Software Deployment
               </Text>
 
-              <SimpleGrid columns={4} minChildWidth='25%' py={6} ml={0}>
+              <SimpleGrid columns={{ base: 1, sm: 2 }} py={6} ml={0}>
                 {volunteerContentList
                   .slice(14, 16)
                   .map((volunteerContentChild, index) => (
