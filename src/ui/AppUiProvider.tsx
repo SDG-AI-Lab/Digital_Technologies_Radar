@@ -24,7 +24,7 @@ export const AppUiProvider: React.FC = ({ children }) => {
   };
 
   const breakpoints = createBreakpoints({
-    sm: '30em',
+    sm: '36em',
     md: '48em',
     lg: '62em',
     xl: '80em',

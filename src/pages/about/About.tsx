@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, VStack, Button, Spacer, Image } from '@chakra-ui/react';
 import { Box, Text, Flex } from '@chakra-ui/react';
 
@@ -6,11 +7,16 @@ import AboutOrganization from './AboutOrganization';
 import { aboutContentList } from './AboutContent';
 
 export const About: React.VFC = () => {
+  const navigate = useNavigate();
   const onFeedbackClick = () =>
     window.open(
       'https://forms.office.com/pages/responsepage.aspx?id=Xtvls0QpN0iZ9XSIrOVDGUdlGNAMNehOnzuv5w8XXdVUMVVIVUlVWFVQWEU1TVRHODBURVc2SE1YOC4u',
       '_newtab'
     );
+  const onVolunteerInfoClick = () => {
+    navigate('/volunteers');
+  };
+
   return (
     <>
       <Button
@@ -19,14 +25,14 @@ export const About: React.VFC = () => {
         position={'absolute'}
         colorScheme='orange'
         right={30}
-        top={5}
+        top={{ base: 24, md: 5 }}
       >
         Send us your feedback
       </Button>
 
       <Container
-        mt={20}
-        mb={7}
+        mt={{ base: 36, md: 20 }}
+        mb={{ base: 24, md: 7 }}
         centerContent
         maxW='container.xl'
         overflowY={'auto'}
@@ -57,17 +63,22 @@ export const About: React.VFC = () => {
                 Many thanks to all our volunteers for their contribution and
                 dedicated time:
               </Text>
-              <Button
-                as='a'
-                href='#/volunteers'
-                style={{ cursor: 'pointer' }}
-                colorScheme='orange'
-                right={30}
-                top={5}
-                m={8}
+              <Box
+                as='button'
+                onClick={onVolunteerInfoClick}
+                fontWeight='semibold'
+                bgColor='orange.500'
+                color='#fff'
+                borderRadius='md'
+                mt={8}
+                px={3}
+                py={2}
+                _hover={{
+                  bgColor: 'orange.600'
+                }}
               >
                 More information on FTR4DRR Online Volunteers
-              </Button>
+              </Box>
             </Box>
           </div>
         </VStack>

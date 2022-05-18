@@ -23,7 +23,7 @@ const VolunteerOrganization: React.FunctionComponent<
         <Box
           maxW={'1045px'}
           w={'full'}
-          h={'700px'}
+          h={{ sm: '890px', md: '760px', lg: '820px' }}
           boxShadow={'2xl'}
           rounded={'md'}
           p={6}
@@ -33,8 +33,9 @@ const VolunteerOrganization: React.FunctionComponent<
           <Stack>
             <Stack>
               <Image
-                h={'200px'}
+                h={{ base: '250px', sm: '200px' }}
                 objectFit='cover'
+                align={{ base: '50% 30%', sm: '50% 50%' }}
                 src={`${props.volunteerContent.imageSrc}`}
                 fallbackSrc='https://media.giphy.com/avatars/UNVolunteers/YzsbglVnLF0Y.jpg'
                 alt='Default Image'
