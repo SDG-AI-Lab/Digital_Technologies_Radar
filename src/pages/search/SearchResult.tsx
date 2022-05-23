@@ -35,19 +35,6 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
   return (
     <div className='dataResults'>
       <Box bg={'#fdfdfd'}>
-        <Center>
-          <Pagination
-            count={count}
-            size='large'
-            page={page}
-            variant='outlined'
-            shape='rounded'
-            onChange={handlePaginationChange}
-            style={{
-              marginLeft: 50
-            }}
-          />
-        </Center>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
           <SimpleGrid columns={3} minChildWidth='30%' py={6} ml={50}>
             {paginatedData.currentData().map((value, key) => {
