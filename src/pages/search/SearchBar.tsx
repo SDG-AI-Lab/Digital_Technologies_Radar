@@ -45,7 +45,7 @@ export const SearchBar: React.FC = () => {
     setMergedTechs(merge);
   };
 
-  console.log('new Filter ', newFilter);
+  //console.log('new Filter ', newFilter);
 
   /* Handle input change events, filter(search) based on this change events */
 
@@ -54,7 +54,7 @@ export const SearchBar: React.FC = () => {
     setTechSearch(searchword);
     const query = searchword.toLowerCase();
 
-    const newFilter: BaseCSVType[] = mergedTechs.filter((value) => {
+    const _newFilter: BaseCSVType[] = mergedTechs.filter((value) => {
       return (
         value['Ideas/Concepts/Examples'].toLowerCase().includes(query) ||
         value.Description.toLowerCase().includes(query) ||
@@ -72,24 +72,25 @@ export const SearchBar: React.FC = () => {
       );
     });
 
-    setNewFilter(newFilter);
+    setNewFilter(_newFilter);
 
     if (query === '') {
       setFilteredTech([]);
     } else {
-      setFilteredTech(newFilter);
+      setFilteredTech(_newFilter);
     }
   };
 
   return (
-    <div>
-      <Center py={6}>
-        <Stack>
+    <>
+      <Center py={6} width={'100%'}>
+        <Stack width={{ base: '80%', lg: '70%' }}>
           <Input
-            width='40.5rem'
+            position='static'
             placeholder='Search ....'
             value={techSearch}
             onChange={handleFilter}
+            m={'auto'}
           />
 
           <Text
@@ -99,7 +100,9 @@ export const SearchBar: React.FC = () => {
             fontWeight={800}
             fontSize={'sm'}
             letterSpacing={1.1}
-          ></Text>
+          >
+            Found {newFilter.length} out of {mergedTechs.length}
+          </Text>
         </Stack>
       </Center>
 
@@ -110,7 +113,7 @@ export const SearchBar: React.FC = () => {
       {filteredTech.length === 0 && (
         <SearchResult filteredContent={mergedTechs} />
       )}
-    </div>
+    </>
   );
 };
 
