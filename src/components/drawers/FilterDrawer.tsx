@@ -7,8 +7,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
-  DrawerBody,
-  DrawerFooter,
   useDisclosure
 } from '@chakra-ui/react';
 import { CustomFilter } from './filter/CustomFilter';
