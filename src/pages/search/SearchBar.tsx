@@ -82,14 +82,15 @@ export const SearchBar: React.FC = () => {
   };
 
   return (
-    <div>
-      <Center py={6}>
-        <Stack>
+    <>
+      <Center py={6} width={'100%'}>
+        <Stack width={{ base: '80%', lg: '70%' }}>
           <Input
-            width='40.5rem'
+            position='static'
             placeholder='Search ....'
             value={techSearch}
             onChange={handleFilter}
+            m={'auto'}
           />
 
           <Text
@@ -112,7 +113,7 @@ export const SearchBar: React.FC = () => {
       {filteredTech.length === 0 && (
         <SearchResult filteredContent={mergedTechs} />
       )}
-    </div>
+    </>
   );
 };
 

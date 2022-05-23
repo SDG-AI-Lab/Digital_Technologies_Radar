@@ -98,7 +98,7 @@ export const TechItem: React.FC<{
             borderStyle: 'solid',
             borderRadius: 5,
             fontSize: 14,
-            fontWeight: 500
+            fontWeight: 600
           }}
         >
           {tech.type}

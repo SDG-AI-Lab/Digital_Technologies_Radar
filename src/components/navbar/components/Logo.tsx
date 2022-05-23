@@ -4,6 +4,7 @@ import { chakra, ChakraProps, Text, SkeletonCircle } from '@chakra-ui/react';
 interface Props {
   file?: string | undefined;
   maxwidthorheight?: number;
+  onClick?: () => void;
 }
 
 export const Logo: React.FC<ChakraProps & Props> = (props) => {
@@ -19,8 +20,16 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  const innerOnClick = () => {
+    if (props.onClick) props.onClick();
+  };
+
   return (
-    <>
+    <div
+      onClick={innerOnClick}
+      style={{ cursor: props.onClick ? 'pointer' : undefined }}
+    >
       {props.file ? (
         <>
           {loading && (
@@ -46,6 +55,6 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
           <div>replace me</div>
         </Text>
       )}
-    </>
+    </div>
   );
 };
