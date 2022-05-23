@@ -16,10 +16,13 @@ export const PopOver: React.FC = () => {
       keys: { titleKey }
     }
   } = useDataState();
-  
+
   const isMobile = () => {
-    return ('ontouchstart' in document.documentElement && window.matchMedia("only screen and (max-width: 760px)").matches); 
-  }
+    return (
+      'ontouchstart' in document.documentElement &&
+      window.matchMedia('only screen and (max-width: 760px)').matches
+    );
+  };
 
   return (
     <>

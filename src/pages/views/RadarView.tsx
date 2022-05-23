@@ -46,50 +46,54 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-     <SimpleGrid columns={{sm: 1, md: 2, lg: 2}}>
-      <Box flex={1}> 
-        <Heading
-          fontSize={30}
-          color='DarkSlateGray'
-          textAlign='center'
-          p={15}
-          paddingTop={15}
-        >
-          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-        </Heading>
-        <Box className='radarComponents'>
-          {loading && <WaitingForRadar size='620px' />}
-          {!loading && <Radar />}
-          <PopOverView />
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 2 }}>
+        <Box flex={1}>
+          <Heading
+            fontSize={30}
+            color='DarkSlateGray'
+            textAlign='center'
+            p={15}
+            paddingTop={15}
+          >
+            Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+          </Heading>
+          <Box className='radarComponents'>
+            {loading && <WaitingForRadar size='620px' />}
+            {!loading && <Radar />}
+            <PopOverView />
+          </Box>
         </Box>
-      </Box>
 
-      <Box className='tabsComponents' flex={'0.75'} {...TabOuterBoxProps}> 
-        <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}> 
-          <TabList>
-            <Tab as='h5'>Stages</Tab>
-            <Tab as='h5'>Technologies</Tab>
-            <Tab as='h5'>Project</Tab>
-          </TabList>
-          <TabPanels overflowY='auto'>
-            <TabPanel overflowY='auto'>
-              <ScrollableDiv maxHeight={460}>
-                <BlipListMui />
-              </ScrollableDiv>
-            </TabPanel>
-            <TabPanel overflowY='auto'>
-              <TechDescription />
-            </TabPanel>
-            <TabPanel overflowY='auto'>
-              <ScrollableDiv maxHeight={460}>
-                <BlipView />
-              </ScrollableDiv>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Box>
-   </SimpleGrid>
-   <Box overflowY='auto' width='0px'>
+        <Box className='tabsComponents' flex={'0.75'} {...TabOuterBoxProps}>
+          <Tabs
+            variant='enclosed'
+            index={tabIndex}
+            onChange={tabsChangeHandler}
+          >
+            <TabList>
+              <Tab as='h5'>Stages</Tab>
+              <Tab as='h5'>Technologies</Tab>
+              <Tab as='h5'>Project</Tab>
+            </TabList>
+            <TabPanels overflowY='auto'>
+              <TabPanel overflowY='auto'>
+                <ScrollableDiv maxHeight={460}>
+                  <BlipListMui />
+                </ScrollableDiv>
+              </TabPanel>
+              <TabPanel overflowY='auto'>
+                <TechDescription />
+              </TabPanel>
+              <TabPanel overflowY='auto'>
+                <ScrollableDiv maxHeight={460}>
+                  <BlipView />
+                </ScrollableDiv>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
+      </SimpleGrid>
+      <Box overflowY='auto' width='0px'>
         <HowToPopup />
       </Box>
     </>

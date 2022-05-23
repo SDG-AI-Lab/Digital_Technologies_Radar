@@ -60,8 +60,8 @@ export const HowToPopup: React.FC = () => {
                     </p>
                     <Image m={5} src={DisasterDropdown} />
                     <p>
-                      Click on the dropdown lists in different specifications and
-                      select options to filter the radar further.
+                      Click on the dropdown lists in different specifications
+                      and select options to filter the radar further.
                     </p>
                   </div>
                 </div>
@@ -78,7 +78,9 @@ export const HowToPopup: React.FC = () => {
                 <div className='container'>
                   <div className='content'>
                     <h2 className='timeline-boundary'>Feedback</h2>
-                    <p>Got any further questions or comments? Contact support.</p>
+                    <p>
+                      Got any further questions or comments? Contact support.
+                    </p>
                   </div>
                 </div>
                 <div className='container'>
