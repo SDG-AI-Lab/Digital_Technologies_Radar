@@ -1,0 +1,114 @@
+@media only screen and (max-width: 600px) {
+    .radarComponents {
+        zoom: 50%;
+        margin: 0 auto;
+        width: 90%;
+    }
+    h2.chakra-heading {
+        font-size: 16px !important;
+        margin: 160px 20px 20px 20px;
+    }
+    .tabsComponents {
+        margin: 20px auto!important;
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        min-width: 370px;
+        overflow-x: auto;
+    }
+    .how-to-button {
+        top: 80px !important;
+        right: 0 !important;
+    }
+    .tabsComponents p {
+        width: auto;
+        font-weight: 600;
+    }
+    .tabsComponents h5 {
+        font-size: 15px !important;
+        font-weight: 500 !important;
+    }
+    .tabsComponents h6 {
+        font-size: 15px !important;
+        font-weight: 500 !important;
+    }
+
+} 
+
+@media only screen and (max-width: 768px) {
+    .radarComponents {
+        zoom: 60%;
+        margin: 0 auto;
+        width: 90%;
+    }
+    h2.chakra-heading {
+        font-size: 23px !important;
+        margin: 160px 20px 20px 20px;
+    }
+    .tabsComponents {
+        margin: 20px auto!important;
+        display: flex;
+        justify-content: center;
+        width: 90%;
+        min-width: 370px;
+        overflow-x: auto;
+        
+    }
+    .how-to-button {
+        top: 80px !important;
+        right: 0 !important;
+    }
+    .tabsComponents p {
+        width: auto;
+    }
+
+    .tabsComponents h5 {
+        font-size: 15px !important;
+        font-weight: thin !important;
+    }
+
+} 
+
+@media only screen and (min-width: 768px) {
+    .radarComponents {
+        zoom: 50%;
+        margin: 0 auto;
+        width: 90%;
+    }
+    h2.chakra-heading {
+        font-size: 23px !important;
+        margin: 20px;
+    }
+    .tabsComponents {
+        margin-right: 10px!important;
+        min-width: 370px;
+    }
+} 
+
+@media only screen and (min-width: 992px) {
+    .radarComponents {
+        zoom: 50%;
+        margin: 0 auto;
+        width: 90%;
+    }
+    h2.chakra-heading {
+        font-size: 23px !important;
+        margin: 20px;
+    }
+    .tabsComponents {
+        margin-left: 50px!important;
+        min-width: 400px;
+    }
+} 
+
+@media only screen and (min-width: 1200px) {
+    .radarComponents {
+        zoom: 80%;
+        margin: 0 auto;
+        width: 90%;
+    }
+    .tabsComponents {
+        margin-left: 100px!important;
+        min-width: 400px;
+    }
+}

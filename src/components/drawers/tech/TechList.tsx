@@ -83,6 +83,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
 
   return (
     <div
+      className={'techListContainer'}
       style={{
         paddingTop: 15,
         display: 'flex',

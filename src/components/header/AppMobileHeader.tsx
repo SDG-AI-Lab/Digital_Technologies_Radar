@@ -13,6 +13,7 @@ export const AppMobileHeader: React.FC = () => {
         position='fixed'
         top={0}
         borderBottom='1px solid #E2E8F0'
+        backgroundColor='#FFFFFF'
       >
         <Box my={3} ml={5}>
           <UNLogo />

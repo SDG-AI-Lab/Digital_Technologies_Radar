@@ -7,7 +7,8 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  BoxProps
+  BoxProps,
+  SimpleGrid
 } from '@chakra-ui/react';
 import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -18,6 +19,8 @@ import { BlipView } from '../../components/views/blip/BlipView';
 import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
 import { HowToPopup } from '../../components/radar/HowToPopup';
 import { BlipListMui } from '../../components/lists/components/BlipListMui';
+
+import './RadarView.scss';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
   const {
@@ -43,7 +46,8 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-      <Box flex={1}>
+     <SimpleGrid columns={{sm: 1, md: 2, lg: 2}}>
+      <Box flex={1}> 
         <Heading
           fontSize={30}
           color='DarkSlateGray'
@@ -53,38 +57,40 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         >
           Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
         </Heading>
-        {loading && <WaitingForRadar size='620px' />}
-        {!loading && <Radar />}
-        <PopOverView />
+        <Box className='radarComponents'>
+          {loading && <WaitingForRadar size='620px' />}
+          {!loading && <Radar />}
+          <PopOverView />
+        </Box>
       </Box>
 
-      <Box overflowY='auto'>
-        <HowToPopup />
-      </Box>
-
-      <Box flex={'0.75'} {...TabOuterBoxProps}>
-        <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
+      <Box className='tabsComponents' flex={'0.75'} {...TabOuterBoxProps}> 
+        <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}> 
           <TabList>
             <Tab as='h5'>Stages</Tab>
             <Tab as='h5'>Technologies</Tab>
             <Tab as='h5'>Project</Tab>
           </TabList>
-          <TabPanels>
-            <TabPanel>
+          <TabPanels overflowY='auto'>
+            <TabPanel overflowY='auto'>
               <ScrollableDiv maxHeight={460}>
                 <BlipListMui />
               </ScrollableDiv>
             </TabPanel>
-            <TabPanel>
+            <TabPanel overflowY='auto'>
               <TechDescription />
             </TabPanel>
-            <TabPanel>
+            <TabPanel overflowY='auto'>
               <ScrollableDiv maxHeight={460}>
                 <BlipView />
               </ScrollableDiv>
             </TabPanel>
           </TabPanels>
         </Tabs>
+      </Box>
+   </SimpleGrid>
+   <Box overflowY='auto' width='0px'>
+        <HowToPopup />
       </Box>
     </>
   );
