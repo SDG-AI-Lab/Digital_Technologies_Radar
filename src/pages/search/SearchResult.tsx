@@ -14,6 +14,7 @@ import { useState } from 'react';
 import SearchView from './SearchView';
 import usePagination from './Pagination';
 import Pagination from '@mui/material/Pagination';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -32,11 +33,13 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
     paginatedData.jump(p);
   };
 
+  const matchSmScreen = useMediaQuery('(min-width:576px)');
+
   return (
     <div className='dataResults'>
       <Box bg={'#fdfdfd'} mb={{ base: 0, md: 50 }}>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
-          <SimpleGrid columns={3} minChildWidth='30%' py={6} ml={50}>
+          <SimpleGrid columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}>
             {paginatedData.currentData().map((value, key) => {
               return (
                 <Center py={6} key={key}>
@@ -122,17 +125,14 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
               );
             })}
           </SimpleGrid>
-          <Center>
+          <Center ml={5}>
             <Pagination
               count={count}
-              size='large'
+              size={matchSmScreen ? 'large' : 'small'}
               page={page}
               variant='outlined'
               shape='rounded'
               onChange={handlePaginationChange}
-              style={{
-                marginLeft: 50
-              }}
             />
           </Center>
         </Flex>
