@@ -60,8 +60,8 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
           <Box className='radarComponents'>
             {loading && <WaitingForRadar size='620px' />}
             {!loading && <Radar />}
-            <PopOverView />
           </Box>
+          <PopOverView />
         </Box>
 
         <Box className='tabsComponents' flex={'0.75'} {...TabOuterBoxProps}>
