@@ -9,8 +9,12 @@ import {
   Flex,
   Image
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import SearchView from './SearchView';
+import usePagination from './Pagination';
+import Pagination from '@mui/material/Pagination';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -19,12 +23,24 @@ interface SearchResultProps {
 }
 
 export const SearchResult: React.FC<SearchResultProps> = (props) => {
+  const [page, setPage] = useState(1);
+  const PER_PAGE = 15;
+  const count = Math.ceil(props.filteredContent.length / PER_PAGE);
+  const paginatedData = usePagination(props.filteredContent, PER_PAGE);
+
+  const handlePaginationChange = (e: React.ChangeEvent<any>, p: number) => {
+    setPage(p);
+    paginatedData.jump(p);
+  };
+
+  const matchSmScreen = useMediaQuery('(min-width:576px)');
+
   return (
     <div className='dataResults'>
       <Box bg={'#fdfdfd'} mb={{ base: 0, md: 50 }}>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
           <SimpleGrid columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}>
-            {props.filteredContent.slice(0, 15).map((value, key) => {
+            {paginatedData.currentData().map((value, key) => {
               return (
                 <Center py={6} key={key}>
                   <Box
@@ -109,6 +125,16 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
               );
             })}
           </SimpleGrid>
+          <Center ml={5}>
+            <Pagination
+              count={count}
+              size={matchSmScreen ? 'large' : 'small'}
+              page={page}
+              variant='outlined'
+              shape='rounded'
+              onChange={handlePaginationChange}
+            />
+          </Center>
         </Flex>
       </Box>
     </div>
