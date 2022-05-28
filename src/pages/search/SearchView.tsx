@@ -7,12 +7,8 @@ import {
   ModalFooter,
   ModalCloseButton,
   useDisclosure,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Td,
   Stack,
+  Box,
   Badge,
   Link,
   Button,
@@ -24,6 +20,27 @@ import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 interface SearchViewProps {
   techContent: BaseCSVType;
 }
+
+const tdTitleStyle = {
+  color: '#1a202c',
+  fontWeight: 400,
+  verticalAlign: 'top',
+  width: {
+    base: '35%',
+    sm: '35%',
+    md: '35%',
+    lg: '28%',
+    xl: '20%',
+    '2xl': '18%'
+  },
+  paddingTop: '25px',
+  paddingRight: { base: '25px', md: '40px', lg: '55px' }
+};
+const tdContentStyle = {
+  color: '#1a202c',
+  fontWeight: 400,
+  paddingTop: '25px'
+};
 
 export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -46,10 +63,19 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
         scrollBehavior='inside'
       >
         <ModalOverlay />
-        <ModalContent maxW={['28rem', '32rem', '36rem', '56rem']}>
+        <ModalContent
+          maxW={{
+            base: 'full',
+            sm: '28rem',
+            md: '32rem',
+            lg: '42rem',
+            xl: '56rem',
+            '2xl': '62rem'
+          }}
+        >
           <ModalHeader
             pb={0}
-            mr={6}
+            mr={10}
             style={{
               justifyContent: 'center',
               textAlign: 'center',
@@ -60,111 +86,141 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Table variant='unstyled'>
-              <Thead>
-                <Tr>
-                  <Td colSpan={2}>
-                    <Stack
-                      direction='row'
-                      style={{
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <Badge
-                        px={2}
-                        py={1}
-                        borderRadius='md'
-                        bg='purple.50'
-                        textTransform='capitalize'
-                      >
-                        📍 {techContent['Country of Implementation']}
-                      </Badge>
-                      <Badge
-                        px={2}
-                        py={1}
-                        borderRadius='md'
-                        bg='green.50'
-                        textTransform='capitalize'
-                      >
-                        🎯 {' ' + techContent['SDG']}
-                      </Badge>
-                      <Badge
-                        px={2}
-                        py={1}
-                        borderRadius='md'
-                        bg='black'
-                        color='white'
-                        textTransform='capitalize'
-                      >
-                        🏠 {techContent['Status/Maturity']}
-                      </Badge>
-                      <Badge
-                        px={2}
-                        py={1}
-                        borderRadius='md'
-                        bg='#2B6CB0'
-                        color='#fff'
-                        textTransform='capitalize'
-                      >
-                        🌋 {' ' + techContent['Disaster Cycle']}
-                      </Badge>
-                    </Stack>
-                  </Td>
-                </Tr>
-              </Thead>
-              <Tbody>
-                <Tr>
-                  <Td colSpan={2}>
-                    <Image
-                      objectFit='cover'
-                      src={`${techContent['Image Url']}`}
-                      fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
-                      alt='Default Image'
-                    />
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Description</Td>
-                  <Td
+            <Stack
+              direction='row'
+              mt={3}
+              mb={4}
+              style={{
+                justifyContent: 'center',
+                flexWrap: 'wrap'
+              }}
+            >
+              <Badge
+                px={2}
+                py={1}
+                borderRadius='md'
+                bg='purple.50'
+                textTransform='capitalize'
+              >
+                📍 {techContent['Country of Implementation']}
+              </Badge>
+              <Badge
+                px={2}
+                py={1}
+                borderRadius='md'
+                bg='green.50'
+                textTransform='capitalize'
+              >
+                🎯 {' ' + techContent['SDG']}
+              </Badge>
+              <Badge
+                px={2}
+                py={1}
+                borderRadius='md'
+                bg='black'
+                color='white'
+                textTransform='capitalize'
+              >
+                🏠 {techContent['Status/Maturity']}
+              </Badge>
+              <Badge
+                px={2}
+                py={1}
+                borderRadius='md'
+                bg='#2B6CB0'
+                color='#fff'
+                textTransform='capitalize'
+              >
+                🌋 {' ' + techContent['Disaster Cycle']}
+              </Badge>
+            </Stack>
+            <Stack>
+              <Image
+                objectFit='cover'
+                src={`${techContent['Image Url']}`}
+                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                alt='Default Image'
+              />
+            </Stack>
+
+            <Box as='table'>
+              <Box as='tbody'>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Description
+                  </Box>
+                  <Box
+                    as='td'
                     style={{
                       textAlign: 'justify',
                       textJustify: 'inter-word'
                     }}
+                    {...tdContentStyle}
                   >
                     {techContent['Description']}
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Technology</Td>
-                  <Td>{techContent['Technology']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Disaster Type</Td>
-                  <Td>{techContent['Disaster Type']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Use Case</Td>
-                  <Td>{techContent['Use Case']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>UN Host Organization</Td>
-                  <Td>{techContent['Un Host Organisation']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Partner</Td>
-                  <Td>{techContent['Supporting Partners']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Data</Td>
-                  <Td>{techContent['Data']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Theme</Td>
-                  <Td>{techContent['Theme']}</Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Source</Td>
-                  <Td>
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Technology
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Technology']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Disaster Type
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Disaster Type']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Use Case
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Use Case']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    UN Host Organization
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Un Host Organisation']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Partner
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Supporting Partners']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Data
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Data']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Theme
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Theme']}
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Source
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
                     <Link
                       href={`${techContent['Source']}`}
                       isExternal
@@ -172,14 +228,18 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     >
                       Click Here
                     </Link>
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td style={{ verticalAlign: 'top' }}>Publication Date</Td>
-                  <Td>{techContent['Date of Implementation']}</Td>
-                </Tr>
-              </Tbody>
-            </Table>
+                  </Box>
+                </Box>
+                <Box as='tr'>
+                  <Box as='td' {...tdTitleStyle}>
+                    Publication Date
+                  </Box>
+                  <Box as='td' {...tdContentStyle}>
+                    {techContent['Date of Implementation']}
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
           </ModalBody>
           <ModalFooter></ModalFooter>
         </ModalContent>
