@@ -1,6 +1,7 @@
 .popoverContent {
   margin-right: 20px;
   min-width: 400px;
+  min-height: 400px;
   overflow-y: hidden;
 }
 
@@ -61,11 +62,3 @@ h1 {
   height: auto;
 }
 
-@media only screen and (max-width: 768px) {
-  .popoverContent {
-    min-width: 200px;
-  }
-  .timeline {
-    max-height: 760px;
-  }
-}

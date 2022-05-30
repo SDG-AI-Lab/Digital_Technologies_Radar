@@ -52,19 +52,16 @@
 
 @media only screen and (max-width: 921px) {
   .option-button {
-    top: 0px;
     width: 60%;
-    height: 80px;
+    margin-top: 0px !important;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .option-button {
-    top: 80px;
     width: 100%;
     margin: 0px;
-    height: 80px;
-    position: absolute;
+    margin-top: 80px !important;
     left: 0;
   }
 }
