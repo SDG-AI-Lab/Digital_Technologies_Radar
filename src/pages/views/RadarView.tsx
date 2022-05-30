@@ -17,7 +17,6 @@ import { PopOverView } from './PopOverView';
 import { TechDescription } from '../../radar/tech/TechDescription';
 import { BlipView } from '../../components/views/blip/BlipView';
 import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
-import { HowToPopup } from '../../components/radar/HowToPopup';
 import { BlipListMui } from '../../components/lists/components/BlipListMui';
 
 import './RadarView.scss';
