@@ -46,8 +46,8 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 2 }}>
-        <Box flex={1}>
+      <SimpleGrid alignItems="center" columns={{ sm: 1, md: 1, lg: 2 }}>
+        <Box>
           <Heading
             fontSize={30}
             color='DarkSlateGray'
@@ -64,7 +64,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
           <PopOverView />
         </Box>
 
-        <Box className='tabsComponents' flex={'0.75'} {...TabOuterBoxProps}>
+        <Box className='tabsComponents' {...TabOuterBoxProps}>
           <Tabs
             variant='enclosed'
             index={tabIndex}
@@ -93,9 +93,6 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
           </Tabs>
         </Box>
       </SimpleGrid>
-      <Box overflowY='auto' width='0px'>
-        <HowToPopup />
-      </Box>
     </>
   );
 };
@@ -104,11 +101,6 @@ const TabOuterBoxProps: BoxProps = {
   borderColor: 'gray.200',
   borderWidth: '2px',
   borderRadius: 'md',
-  // mt: '20',
-  // mb: '5',
-  // mr: '5',
-  // p: '5',
-  // maxWidth: '500px',
   overflow: 'hidden',
   mt: '110',
   mb: '5',

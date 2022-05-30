@@ -12,19 +12,18 @@ import {
 import { CustomFilter } from './filter/CustomFilter';
 import { TechList } from './tech/TechList';
 import { AiOutlineSetting } from 'react-icons/ai';
+import { HowToPopup } from '../../components/radar/HowToPopup';
+
 import './FilterDrawer.scss';
 
 export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      {window.screen.width > 728 ? (
-        <>
-          <CustomFilter /> <TechList />
-        </>
-      ) : (
-        <>
           <Box className='option-button'>
+            <Box overflowY='auto' width='0px'>
+             <HowToPopup />
+            </Box>
             <Button
               m={7}
               px={25}
@@ -36,6 +35,7 @@ export const FilterDrawer: React.FC = () => {
               Options
             </Button>
           </Box>
+          
           <Box className='responsive-filters'>
             <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
               <DrawerOverlay />
@@ -48,8 +48,6 @@ export const FilterDrawer: React.FC = () => {
               </DrawerContent>
             </Drawer>
           </Box>
-        </>
-      )}
-    </>
+  </>
   );
 };

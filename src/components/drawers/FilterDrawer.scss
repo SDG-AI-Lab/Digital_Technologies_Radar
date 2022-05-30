@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+
   .techListContainer div {
     max-height: 193px !important;
     margin-left: 4px;
@@ -7,15 +7,7 @@
   .techListContainer {
     height: 193px !important;
   }
-  .option-button {
-    background-color: #ffffff;
-    width: 100%;
-    margin: 0px;
-    height: 80px;
-    position: absolute;
-    left: 0;
-    top: 80px;
-  }
+
   header {
     margin-bottom: 7px;
     color: rgb(27, 77, 124);
@@ -30,9 +22,10 @@
     border-bottom: 0px !important;
     overflow-y: auto;
     overflow-x: hidden;
+    margin: 30px 0;
   }
   .customFilterContainer div {
-    max-height: 300px !important;
+    max-height: 230px !important;
     margin-left: 10px;
     width: 100%;
   }
@@ -55,5 +48,23 @@
   .rc-slider {
     width: 220px !important;
     margin-left: -5px !important;
+  }
+
+@media only screen and (max-width: 921px) {
+  .option-button {
+    top: 0px;
+    width: 60%;
+    height: 80px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .option-button {
+    top: 80px;
+    width: 100%;
+    margin: 0px;
+    height: 80px;
+    position: absolute;
+    left: 0;
   }
 }
