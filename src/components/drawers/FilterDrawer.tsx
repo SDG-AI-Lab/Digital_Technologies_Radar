@@ -20,34 +20,34 @@ export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-          <Box className='option-button'>
-            <Box overflowY='auto' width='0px'>
-             <HowToPopup />
-            </Box>
-            <Button
-              m={7}
-              px={25}
-              colorScheme='blue'
-              rightIcon={<AiOutlineSetting />}
-              borderRadius={'0'}
-              onClick={onOpen}
-            >
-              Options
-            </Button>
-          </Box>
-          
-          <Box className='responsive-filters'>
-            <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-              <DrawerOverlay />
-              <DrawerContent backgroundColor='#fffafa'>
-                <DrawerCloseButton />
-                <DrawerHeader mt={10}>Technologies</DrawerHeader>
-                <TechList />
-                <DrawerHeader mt={10}>Parameters</DrawerHeader>
-                <CustomFilter />
-              </DrawerContent>
-            </Drawer>
-          </Box>
-  </>
+      <Box className='option-button'>
+        <Box overflowY='auto' width='0px'>
+          <HowToPopup />
+        </Box>
+        <Button
+          m={7}
+          px={25}
+          colorScheme='blue'
+          rightIcon={<AiOutlineSetting />}
+          borderRadius={'0'}
+          onClick={onOpen}
+        >
+          Options
+        </Button>
+      </Box>
+
+      <Box className='responsive-filters'>
+        <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
+          <DrawerOverlay />
+          <DrawerContent backgroundColor='#fffafa'>
+            <DrawerCloseButton />
+            <DrawerHeader mt={10}>Technologies</DrawerHeader>
+            <TechList />
+            <DrawerHeader mt={10}>Parameters</DrawerHeader>
+            <CustomFilter />
+          </DrawerContent>
+        </Drawer>
+      </Box>
+    </>
   );
 };

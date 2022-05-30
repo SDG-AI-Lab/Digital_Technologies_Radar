@@ -46,7 +46,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-      <SimpleGrid alignItems="center" columns={{ sm: 1, md: 1, lg: 2 }}>
+      <SimpleGrid alignItems='center' columns={{ sm: 1, md: 1, lg: 2 }}>
         <Box>
           <Heading
             fontSize={30}
