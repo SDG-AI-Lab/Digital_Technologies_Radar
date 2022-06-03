@@ -34,7 +34,7 @@
     margin: 0 auto;
     width: 90%;
   }
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin-top: 160px !important;
   }
@@ -65,7 +65,7 @@
     margin: 0 auto;
     width: 100%;
   }
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin: 160px 20px 20px 20px !important;
   }
@@ -95,7 +95,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin: 160px 20px 20px 20px !important;
   }
@@ -106,7 +106,7 @@
     zoom: 80%;
     margin: 0 auto;
   }
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin-top: 20px !important;
   }
@@ -126,7 +126,7 @@
     width: 100%;
   }
 
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin: 0 0 0 35px !important;
     width: 80%;
@@ -143,7 +143,7 @@
     margin: 0 auto;
     width: 90%;
   }
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 30px !important;
     margin: 0 0 0 35px !important;
     width: 100%;
@@ -155,7 +155,7 @@
 }
 
 @media only screen and (max-width: 767px) {
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
   }
 }
@@ -164,7 +164,7 @@
   .radarComponents {
     zoom: 80%;
   }
-  h2.chakra-heading {
+  .radarTitle {
     font-size: 23px !important;
     margin: 0 0 0 35px !important;
     width: 90%;

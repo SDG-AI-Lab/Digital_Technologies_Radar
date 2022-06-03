@@ -53,6 +53,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
             textAlign='center'
             p={15}
             paddingTop={15}
+            className='radarTitle'
           >
             Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
           </Heading>
