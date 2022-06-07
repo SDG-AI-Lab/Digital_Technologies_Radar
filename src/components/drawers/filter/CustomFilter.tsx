@@ -361,6 +361,7 @@ export const CustomFilter: React.FC = () => {
 
   return (
     <div
+      className={'customFilterContainer'}
       style={{
         backgroundColor: 'Snow',
         borderBottomStyle: 'solid',

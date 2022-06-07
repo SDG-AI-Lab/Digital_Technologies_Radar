@@ -17,9 +17,16 @@ export const PopOver: React.FC = () => {
     }
   } = useDataState();
 
+  const isMobile = () => {
+    return (
+      'ontouchstart' in document.documentElement &&
+      window.matchMedia('only screen and (max-width: 760px)').matches
+    );
+  };
+
   return (
     <>
-      {item && (
+      {item && !isMobile() && (
         <Box
           boxShadow={'5px 5px 15px 0px rgba(0,0,0,0.25)'}
           borderRadius={10}

@@ -1,6 +1,6 @@
 # UNDP Radar Application
 
-Code base seated on repo  [UNDP Radar](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar).
+Code base seated on repo [UNDP Radar](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar).
 
 ## Available Scripts
 
@@ -34,7 +34,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Please follow the steps for making changes in the project:
 
 ![gitflow-Page-2 drawio (1)](https://user-images.githubusercontent.com/28465079/160427617-cfa45839-69c2-4bc5-872c-1a8ba4685d85.png)
-
 
 ## Learn More
 
@@ -76,8 +75,6 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
     </td>
   </tr>
 </table>
-
-
 
 ### Cohort 2 (4 online volunteers)
 
@@ -149,7 +146,6 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   </tr>
 
 </table>
-
 
 ### Cohort #3 (5 online volunteers)
 
@@ -236,7 +232,6 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   </tr>
 
 </table>
-
 
 ### Data Collection Stream(5 online volunteers)
 
@@ -329,7 +324,6 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 
 </table>
 
-
 ## SDG AI Lab
 
 <table border="1" width="100%">
@@ -392,4 +386,3 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   </tr>
 
 </table>
-

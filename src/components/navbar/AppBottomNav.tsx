@@ -10,7 +10,7 @@ import { ROUTES } from '../../navigation/routes';
 
 export const AppBottomNav: React.FC = () => {
   return (
-    <Box display={{ base: 'block', md: 'none' }}>
+    <Box display={{ base: 'block', md: 'none' }} zIndex='1'>
       <Flex w={'100%'} position='fixed' bottom={0}>
         <Box flex={1}>
           <MenuItem to={ROUTES.RADAR}>
