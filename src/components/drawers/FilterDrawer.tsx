@@ -32,7 +32,7 @@ export const FilterDrawer: React.FC = () => {
           borderRadius={'0'}
           onClick={onOpen}
         >
-          Options
+          Filter
         </Button>
       </Box>
 
