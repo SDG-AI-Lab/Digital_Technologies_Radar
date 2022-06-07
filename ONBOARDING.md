@@ -10,32 +10,32 @@ We are currently using Framer to setup this project. Check the following [link](
 
 Our project uses modern (as of 2021) [React](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/).
 
-* We aim to use React in its Functional form, by leveraging `FunctionalComponents` and hooks
+- We aim to use React in its Functional form, by leveraging `FunctionalComponents` and hooks
 
-* Our project is tailored for UNDP AI Labs [UNDP Radar Application](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar)
+- Our project is tailored for UNDP AI Labs [UNDP Radar Application](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar)
 
-* There is a library which is responsible for all Radar logic [here](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar_Lib)
+- There is a library which is responsible for all Radar logic [here](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar_Lib)
 
 ### Learning resources
 
 #### Learn React
 
-* [Full Modern React Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d) (courtesy of Yashkumar Shiroya)
+- [Full Modern React Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d) (courtesy of Yashkumar Shiroya)
 
 #### Learn TypeScript
 
-* [React TypeScript tutorial](https://youtu.be/Z5iWr6Srsj8) (courtesy of Yashkumar Shiroya)
+- [React TypeScript tutorial](https://youtu.be/Z5iWr6Srsj8) (courtesy of Yashkumar Shiroya)
 
 #### Learn our UI framework
 
-* [Build a Modern User Interface with Chakra UI](https://egghead.io/courses/build-a-modern-user-interface-with-chakra-ui-fac68106) - don't forget to look through their [docs](https://chakra-ui.com/docs/getting-started) as well.
+- [Build a Modern User Interface with Chakra UI](https://egghead.io/courses/build-a-modern-user-interface-with-chakra-ui-fac68106) - don't forget to look through their [docs](https://chakra-ui.com/docs/getting-started) as well.
 
 ## Development process
 
 1. We delegate time for a good discovery and design phase
 2. With the design agreed upon we then create tasks in the relevant project
 3. You are then expected to grab your task and move it along from 'todo' to 'in progress'
-4. You should alwads branch off from `develop` branch and do a new `feature/x` ((`reafctor/x`, `improvment/x`,  `fix/x` are good suggestions) branch, being `x` your new feature
+4. You should alwads branch off from `develop` branch and do a new `feature/x` ((`reafctor/x`, `improvment/x`, `fix/x` are good suggestions) branch, being `x` your new feature
 5. After you are finished with your development, you must issue a PR to merge your `feature/x` branch into `develop`
 
 We follow `gitlab` [git version control best practices](https://about.gitlab.com/topics/version-control/version-control-best-practices/). It is very simple really. Always branch from `develop` , merge your `feature/x` into `develop` . Merge `develop` into `master` once a clear Milestone is met.

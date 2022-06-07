@@ -1,0 +1,176 @@
+@media only screen and (max-width: 825px) {
+  .radarComponents {
+    zoom: 80%;
+    margin: 0 auto;
+    width: 90%;
+  }
+  h2.chakra-heading {
+    font-size: 23px !important;
+    margin-top: 20px !important;
+  }
+  .tabsComponents {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    min-width: 370px;
+    overflow-x: auto;
+  }
+  .how-to-button {
+    right: 0 !important;
+  }
+  .tabsComponents p {
+    width: auto;
+  }
+  .tabsComponents h5 {
+    font-size: 15px !important;
+    font-weight: thin !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .radarComponents {
+    zoom: 80%;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .radarTitle {
+    font-size: 23px !important;
+    margin-top: 160px !important;
+  }
+  .tabsComponents {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    min-width: 370px;
+    overflow-x: auto;
+  }
+  .how-to-button {
+    right: 0 !important;
+  }
+  .tabsComponents p {
+    width: auto;
+  }
+
+  .tabsComponents h5 {
+    font-size: 15px !important;
+    font-weight: thin !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .radarComponents {
+    zoom: 80%;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .radarTitle {
+    font-size: 23px !important;
+    margin: 160px 20px 20px 20px !important;
+  }
+  .tabsComponents {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 370px;
+    overflow-x: auto;
+  }
+  .how-to-button {
+    right: 0 !important;
+  }
+  .tabsComponents p {
+    width: auto;
+    font-weight: 600;
+  }
+  .tabsComponents h5 {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+  }
+  .tabsComponents h6 {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .radarTitle {
+    font-size: 23px !important;
+    margin: 160px 20px 20px 20px !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .radarComponents {
+    zoom: 80%;
+    margin: 0 auto;
+  }
+  .radarTitle {
+    font-size: 23px !important;
+    margin-top: 20px !important;
+  }
+  .tabsComponents {
+    margin: 20px auto !important;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    min-width: 370px;
+    overflow-x: auto;
+  }
+}
+
+@media only screen and (min-width: 1149px) {
+  .radarComponents {
+    zoom: 90%;
+    width: 100%;
+  }
+
+  .radarTitle {
+    font-size: 23px !important;
+    margin: 0 0 0 35px !important;
+    width: 80%;
+  }
+  .tabsComponents {
+    margin: 80px 0 0 80px !important;
+    min-width: 400px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .radarComponents {
+    zoom: 100%;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .radarTitle {
+    font-size: 30px !important;
+    margin: 0 0 0 35px !important;
+    width: 100%;
+  }
+  .tabsComponents {
+    margin: 80px 0 0 80px !important;
+    min-width: 500px !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .radarTitle {
+    font-size: 23px !important;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .radarComponents {
+    zoom: 80%;
+  }
+  .radarTitle {
+    font-size: 23px !important;
+    margin: 0 0 0 35px !important;
+    width: 90%;
+  }
+  .tabsComponents {
+    margin: 80px 0 0 80px !important;
+    max-width: 290px !important;
+  }
+}
