@@ -14,7 +14,6 @@ import { ROUTES } from '../navigation/routes';
 import { MenuItem } from '../components/navbar/components/MenuItem';
 
 import background from '../assets/landing/background.jpg';
-import radar from '../assets/landing/radar.png';
 import cbi2 from '../assets/landing/cbi2.png';
 import SDGAI from '../assets/landing/sdg_ai_lab.png';
 import UNDP from '../assets/landing/UNDP_logo.png';
@@ -38,17 +37,7 @@ export const Home: React.FC = () => (
           }}
           gap={4}
         >
-          <GridItem colSpan={1}>
-            <Image
-              src={radar}
-              alt='radar'
-              ml='5'
-              mt='5'
-              w={150}
-              h={150}
-              borderRadius='full'
-            />
-          </GridItem>
+          <GridItem colSpan={1} />
 
           <GridItem
             colSpan={3}
@@ -90,7 +79,7 @@ export const Home: React.FC = () => (
           <GridItem rowSpan={2} colSpan={1} />
         </Grid>
       </Stack>
-      <Stack>
+      <Stack mb='10' top='50%' margin='0' position='absolute'>
         <MenuItem to={ROUTES.RADAR}>
           <Button
             colorScheme='blue'
@@ -109,8 +98,11 @@ export const Home: React.FC = () => (
         borderRadius='0'
         mt='2'
         color='white'
-        p='10'
         backgroundColor='#00000075'
+        bottom={0}
+        position='fixed'
+        display={{ base: 'none', md: 'block', sm: 'block' }}
+        zIndex='1'
       >
         <Grid
           templateRows='repeat(1, 1fr)'
