@@ -22,8 +22,11 @@ export const Home: React.FC = () => (
   <Flex
     w={'full'}
     h={'100vh'}
+    mt={{ base: 20, md: 0 }}
+    mb={{ base: 19, md: 0 }}
     backgroundImage={background}
     backgroundSize={'cover'}
+    backgroundPosition={'center'}
     overflowY={'auto'}
   >
     <VStack>
@@ -33,7 +36,7 @@ export const Home: React.FC = () => (
           templateColumns={{
             base: 'repeat(1, 1fr)',
             sm: 'repeat(3, 1fr)',
-            md: 'repeat(5, 1fr)'
+            lg: 'repeat(5, 1fr)'
           }}
           gap={4}
         >
@@ -43,12 +46,15 @@ export const Home: React.FC = () => (
             colSpan={3}
             borderWidth='5px'
             borderRadius='lg'
-            mt='2'
+            mt={{ base: 0, md: 2, lg: 4, xl: 10 }}
             color='white'
-            p='10'
+            p={{ base: 3, md: 10 }}
             backgroundColor='#00000075'
           >
-            <VStack alignItems='flex-start' spacing='20px'>
+            <VStack
+              alignItems='flex-start'
+              spacing={{ base: '10px', md: '20px' }}
+            >
               <chakra.h2
                 fontWeight='400'
                 color='primary.800'
@@ -79,7 +85,7 @@ export const Home: React.FC = () => (
           <GridItem rowSpan={2} colSpan={1} />
         </Grid>
       </Stack>
-      <Stack mb='10' top='50%' margin='0' position='absolute'>
+      <Stack top={{ base: '75%', sm: '55%', md: '56%' }} position='absolute'>
         <MenuItem to={ROUTES.RADAR}>
           <Button
             colorScheme='blue'
@@ -92,23 +98,23 @@ export const Home: React.FC = () => (
           </Button>
         </MenuItem>
       </Stack>
+
       <Stack
         w={'full'}
+        h={{ sm: '23%', md: '35%' }}
         borderTopWidth='5px'
         borderRadius='0'
-        mt='2'
-        color='white'
         backgroundColor='#00000075'
-        bottom={0}
+        bottom={{ sm: 63, md: 0 }}
         position='fixed'
-        display={{ base: 'none', md: 'block', sm: 'block' }}
+        display={{ base: 'none', sm: 'block' }}
         zIndex='1'
       >
         <Grid
           templateRows='repeat(1, 1fr)'
           templateColumns={{
             base: 'repeat(1, 1fr)',
-            sm: 'repeat(2, 1fr)',
+            sm: 'repeat(3, 1fr)',
             md: 'repeat(5, 1fr)'
           }}
           gap={4}
@@ -117,26 +123,34 @@ export const Home: React.FC = () => (
 
           <GridItem colSpan={3}>
             <Grid
-              mt='20'
+              mt={{ base: '5', md: '20' }}
+              mx={{ base: '10', md: '0' }}
               templateColumns={{
                 base: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(4, 1fr)'
+                sm: 'repeat(4, 1fr)'
               }}
               gap={{ base: '8', sm: '12', md: '16' }}
             >
               <GridItem colSpan={2}>
-                <Image src={cbi2} w={300} h={100} />
+                <Image src={cbi2} w={{ base: '40%', md: '60%', lg: '40%' }} />
               </GridItem>
               <GridItem colSpan={1}>
-                <Image src={UNDP} alt='undp logo' w={100} h={150} />
+                <Image
+                  src={UNDP}
+                  alt='undp logo'
+                  w={{ base: '40%', md: '60%', lg: '40%' }}
+                />
               </GridItem>
               <GridItem colSpan={1}>
-                <Image src={SDGAI} alt='sdg_ai_lab_logo' w={150} h={150} />
+                <Image
+                  src={SDGAI}
+                  alt='sdg_ai_lab_logo'
+                  w={{ base: '40%', md: '60%', lg: '40%' }}
+                />
               </GridItem>
             </Grid>
           </GridItem>
-          <GridItem rowSpan={2} colSpan={1} />
+          <GridItem colSpan={1} />
         </Grid>
       </Stack>
     </VStack>
