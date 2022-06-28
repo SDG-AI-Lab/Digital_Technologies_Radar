@@ -13,7 +13,7 @@ import {
 import { ROUTES } from '../navigation/routes';
 import { MenuItem } from '../components/navbar/components/MenuItem';
 
-import background from '../assets/landing/background.jpg';
+import background from '../assets/landing/background2.jpg';
 import cbi2 from '../assets/landing/cbi2.png';
 import SDGAI from '../assets/landing/sdg_ai_lab.png';
 import UNDP from '../assets/landing/UNDP_logo.png';
@@ -63,7 +63,7 @@ export const Home: React.FC = () => (
                 fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
                 textAlign={['center', 'center', 'left', 'left']}
               >
-                Digital Technologies Radar for Disaster Risk Reduction (FTR4DD)
+                Digital Technologies Radar for Disaster Risk Reduction (FTR4DRR)
               </chakra.h2>
 
               <chakra.p
