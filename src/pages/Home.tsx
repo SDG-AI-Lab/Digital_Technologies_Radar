@@ -14,9 +14,9 @@ import { ROUTES } from '../navigation/routes';
 import { MenuItem } from '../components/navbar/components/MenuItem';
 
 import background from '../assets/landing/background2.jpg';
-import cbi2 from '../assets/landing/cbi2.png';
-import SDGAI from '../assets/landing/sdg_ai_lab.png';
-import UNDP from '../assets/landing/UNDP_logo.png';
+import cbi2 from '../assets/landing/cbi_logo.png';
+import SDGAI from '../assets/landing/sdgailab_white.png';
+import UNDP from '../assets/landing/UNDP-Logo-Blue-Small.png';
 
 export const Home: React.FC = () => (
   <Flex
