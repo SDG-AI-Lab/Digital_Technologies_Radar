@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
+import { FaHome } from 'react-icons/fa';
 import { FaSearch } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
@@ -19,6 +20,12 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       alignSelf={'center'}
     >
       <Stack spacing={3}>
+        <MenuItem to={ROUTES.HOME}>
+          <Button rounded='md' colorScheme='blue' py={7} px={1} width={'100%'}>
+            <FaHome size={30} />
+          </Button>
+        </MenuItem>
+
         <MenuItem to={ROUTES.RADAR}>
           <Button rounded='md' colorScheme='blue' py={7} px={1} width={'100%'}>
             <FiTarget size={30} />

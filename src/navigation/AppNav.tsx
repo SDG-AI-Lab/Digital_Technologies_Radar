@@ -10,7 +10,7 @@ import { AppMobileHeader } from '../components';
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
 // Pages
-import { NotFound404, Radar, Search, About, Volunteers } from '../pages';
+import { NotFound404, Radar, Search, About, Volunteers, Home } from '../pages';
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
@@ -21,6 +21,7 @@ export const NavApp = () => (
     <AppMobileHeader />
     <MainLayout>
       <Routes>
+        <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.RADAR} element={<RadarLayout />}>
           <Route path={''} element={<Radar />}></Route>
           <Route path={ROUTES.QUADRANT}>

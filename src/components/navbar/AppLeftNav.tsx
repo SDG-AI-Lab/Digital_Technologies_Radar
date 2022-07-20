@@ -14,7 +14,7 @@ export const AppLeftNav: React.FC = () => {
   // const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Box display={{ base: 'none', md: 'block' }}>
+    <Box display={{ base: 'none', md: 'block' }} zIndex='10'>
       <Flex
         w={75}
         h={'100%'}

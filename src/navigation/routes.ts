@@ -1,3 +1,4 @@
+const HOME = '/';
 const RADAR = '/radar';
 const ABOUT = '/about';
 const VOLUNTEERS = '/volunteers';
@@ -10,6 +11,7 @@ const BLIP = `${RADAR}/technology-item`;
 const BLIP_PARAM = `${BLIP}/:techItemId`;
 
 export const ROUTES = {
+  HOME,
   RADAR,
   ABOUT,
   SEARCH,
