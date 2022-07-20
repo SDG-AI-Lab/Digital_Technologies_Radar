@@ -13,8 +13,8 @@ import {
 import { ROUTES } from '../navigation/routes';
 import { MenuItem } from '../components/navbar/components/MenuItem';
 
-import background from '../assets/landing/background2.jpg';
-import cbi2 from '../assets/landing/cbi_logo.png';
+import background from '../assets/landing/background_blur.png';
+import cbi2 from '../assets/landing/cbi_logo_2.png';
 import SDGAI from '../assets/landing/sdgailab_white.png';
 import UNDP from '../assets/landing/UNDP-Logo-Blue-Small.png';
 
@@ -44,12 +44,14 @@ export const Home: React.FC = () => (
 
           <GridItem
             colSpan={3}
+            ml={{ base:'7px', sm:'5px', md: '15px' }}
+            mr={{ md: '5px' }}
+            mt={5}
             borderWidth='5px'
-            borderRadius='lg'
-            mt={{ base: 0, md: 2, lg: 4, xl: 10 }}
+            borderRadius='xl'
             color='white'
             p={{ base: 3, md: 10 }}
-            backgroundColor='#00000075'
+            backgroundColor='rgb(0,0,0, 0.6)'
           >
             <VStack
               alignItems='flex-start'
@@ -58,10 +60,10 @@ export const Home: React.FC = () => (
               <chakra.h2
                 fontWeight='400'
                 color='primary.800'
-                opacity='0.8'
                 lineHeight={1.5}
                 fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
                 textAlign={['center', 'center', 'left', 'left']}
+                sx={{}}
               >
                 Digital Technologies Radar for Disaster Risk Reduction (FTR4DRR)
               </chakra.h2>
@@ -69,8 +71,8 @@ export const Home: React.FC = () => (
               <chakra.p
                 fontWeight='400'
                 color='primary.800'
-                opacity='0.8'
                 lineHeight={1.5}
+                fontSize={'md'}
                 textAlign={['center', 'center', 'left', 'left']}
               >
                 The Frontier Technology Radar for Disaster Risk Reduction
@@ -88,11 +90,12 @@ export const Home: React.FC = () => (
       <Stack top={{ base: '75%', sm: '55%', md: '56%' }} position='absolute'>
         <MenuItem to={ROUTES.RADAR}>
           <Button
-            colorScheme='blue'
-            size='md'
-            borderRadius='0'
-            borderColor='black'
-            borderWidth='1px'
+            mt={{base: '-20px', lg: '20px', xl: '0px'}}
+            colorScheme='whiteAlpha'
+            size='lg'
+            borderRadius='8px'
+            borderColor='blue.800'
+            borderWidth='2px'
           >
             Launch Radar
           </Button>
@@ -101,7 +104,7 @@ export const Home: React.FC = () => (
 
       <Stack
         w={'full'}
-        h={{ sm: '23%', md: '35%' }}
+        h={'20%'}
         borderTopWidth='5px'
         borderRadius='0'
         backgroundColor='#00000075'
@@ -121,34 +124,24 @@ export const Home: React.FC = () => (
         >
           <GridItem colSpan={1} />
 
-          <GridItem colSpan={3}>
-            <Grid
-              mt={{ base: '5', md: '20' }}
-              mx={{ base: '10', md: '0' }}
-              templateColumns={{
-                base: 'repeat(1, 1fr)',
-                sm: 'repeat(4, 1fr)'
-              }}
-              gap={{ base: '8', sm: '12', md: '16' }}
-            >
-              <GridItem colSpan={2}>
-                <Image src={cbi2} w={{ base: '40%', md: '60%', lg: '40%' }} />
-              </GridItem>
-              <GridItem colSpan={1}>
+          <GridItem style={{display:'flex', justifyContent: 'center'}} marginTop={{sm: '50px', md: '60px'}} colSpan={3}>
+                <Image 
+                  src={cbi2} 
+                  alt='CBI Logo'
+                  style={{height:'40px', marginRight:'32px', marginTop:'2px'}} 
+                 />
+
                 <Image
                   src={UNDP}
-                  alt='undp logo'
-                  w={{ base: '40%', md: '60%', lg: '40%' }}
+                  alt='UNDP Logo'
+                  style={{height:'100px', marginTop:'-30px', marginRight:'30px'}} 
                 />
-              </GridItem>
-              <GridItem colSpan={1}>
+             
                 <Image
                   src={SDGAI}
-                  alt='sdg_ai_lab_logo'
-                  w={{ base: '40%', md: '60%', lg: '40%' }}
+                  alt='SDG AI Lab Logo'
+                  style={{height:'40px'}} 
                 />
-              </GridItem>
-            </Grid>
           </GridItem>
           <GridItem colSpan={1} />
         </Grid>
