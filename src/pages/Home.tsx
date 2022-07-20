@@ -44,7 +44,7 @@ export const Home: React.FC = () => (
 
           <GridItem
             colSpan={3}
-            ml={{ base:'7px', sm:'5px', md: '15px' }}
+            ml={{ base: '7px', sm: '5px', md: '15px' }}
             mr={{ md: '5px' }}
             mt={5}
             borderWidth='5px'
@@ -90,7 +90,7 @@ export const Home: React.FC = () => (
       <Stack top={{ base: '75%', sm: '55%', md: '56%' }} position='absolute'>
         <MenuItem to={ROUTES.RADAR}>
           <Button
-            mt={{base: '-20px', lg: '20px', xl: '0px'}}
+            mt={{ base: '-20px', lg: '20px', xl: '0px' }}
             colorScheme='whiteAlpha'
             size='lg'
             borderRadius='8px'
@@ -124,24 +124,32 @@ export const Home: React.FC = () => (
         >
           <GridItem colSpan={1} />
 
-          <GridItem style={{display:'flex', justifyContent: 'center'}} marginTop={{sm: '50px', md: '60px'}} colSpan={3}>
-                <Image 
-                  src={cbi2} 
-                  alt='CBI Logo'
-                  style={{height:'40px', marginRight:'32px', marginTop:'2px'}} 
-                 />
+          <GridItem
+            style={{ display: 'flex', justifyContent: 'center' }}
+            marginTop={{ sm: '50px', md: '60px' }}
+            colSpan={3}
+          >
+            <Image
+              src={cbi2}
+              alt='CBI Logo'
+              style={{ height: '40px', marginRight: '32px', marginTop: '2px' }}
+            />
 
-                <Image
-                  src={UNDP}
-                  alt='UNDP Logo'
-                  style={{height:'100px', marginTop:'-30px', marginRight:'30px'}} 
-                />
-             
-                <Image
-                  src={SDGAI}
-                  alt='SDG AI Lab Logo'
-                  style={{height:'40px'}} 
-                />
+            <Image
+              src={UNDP}
+              alt='UNDP Logo'
+              style={{
+                height: '100px',
+                marginTop: '-30px',
+                marginRight: '30px'
+              }}
+            />
+
+            <Image
+              src={SDGAI}
+              alt='SDG AI Lab Logo'
+              style={{ height: '40px' }}
+            />
           </GridItem>
           <GridItem colSpan={1} />
         </Grid>
