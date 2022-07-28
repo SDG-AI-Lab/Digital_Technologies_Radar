@@ -10,7 +10,7 @@ describe('App tests', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: (query:any) => ({
+      value: (query: any) => ({
         matches: false,
         media: query,
         onchange: null,
@@ -18,9 +18,9 @@ describe('App tests', () => {
         removeListener: jest.fn(), // Deprecated
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      }),
-    })
+        dispatchEvent: jest.fn()
+      })
+    });
   });
 
   beforeEach(() => {
