@@ -3019,14 +3019,15 @@
     "@typescript-eslint/types" "5.15.0"
     eslint-visitor-keys "^3.0.0"
 
-"@undp_sdg_ai_lab/undp-radar@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-1.0.10.tgz#df824824d5f4b4fa36f0061d4cce23b6bccce118"
-  integrity sha512-Sa0mUSf5bn6yH0aN/bR0v2q1Cxppw2CK3zs/ksmBd/885UeSja3ACxb8M3qXeqek1y5KqS0tsg1fE9/zEqkZAg==
+"@undp_sdg_ai_lab/undp-radar@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-1.1.0.tgz#d1fd82e68cc7dfbf5823679273c24fe0d6b8a052"
+  integrity sha512-Lvk26poFu3axxa2K+dMZcL2llZ9FVisoRSZ2bF1QBPL6PA9ciJM56XJi8KE6gscd/2yqbuCzuSbDwky5Kh2aBw==
   dependencies:
     d3 "^7.1.1"
     kiss-react-state "^1.1.1"
     ts-request-builder "^0.0.1"
+    use-debounce "^8.0.2"
     uuid "^8.3.2"
 
 "@webassemblyjs/ast@1.11.1":
@@ -10872,6 +10873,11 @@ use-callback-ref@^1.2.3, use-callback-ref@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/use-callback-ref/-/use-callback-ref-1.2.5.tgz#6115ed242cfbaed5915499c0a9842ca2912f38a5"
   integrity sha512-gN3vgMISAgacF7sqsLPByqoePooY3n2emTH59Ur5d/M8eg4WTWu1xp8i8DHjohftIyEx0S08RiYxbffr4j8Peg==
+
+use-debounce@^8.0.2:
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-8.0.3.tgz#2b4d7d7307a9397acb6520b7a1dea14c2c3d108c"
+  integrity sha512-BV7xuVy4LS0HtzHb23sDwAjfNjdBWlc4oyjJLcdCoVAjPv1+hroZYsCXX4VfRJT+8sLaqCftBOO8l7CMQtn9Gw==
 
 use-sidecar@^1.0.1, use-sidecar@^1.0.5:
   version "1.0.5"
