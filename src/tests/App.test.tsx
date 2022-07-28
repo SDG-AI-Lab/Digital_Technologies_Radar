@@ -7,6 +7,7 @@ import { act } from 'react-dom/test-utils';
 describe('App tests', () => {
   let container: HTMLDivElement | null = null;
 
+  // check https://jestjs.io/docs/26.x/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
   beforeAll(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
