@@ -91,10 +91,10 @@ export const Home: React.FC = () => (
         <MenuItem to={ROUTES.RADAR}>
           <Button
             mt={{ base: '-20px', lg: '20px', xl: '0px' }}
-            colorScheme='whiteAlpha'
+            backgroundColor='rgb(255,255,255, 0.6)'
             size='lg'
             borderRadius='8px'
-            borderColor='blue.800'
+            borderColor='rgb(255,255,255, 0.6)'
             borderWidth='2px'
           >
             Launch Radar
