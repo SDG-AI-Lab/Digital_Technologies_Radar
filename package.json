@@ -7,9 +7,9 @@
     "@chakra-ui/react": "^1.8.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@undp_sdg_ai_lab/undp-radar": "^1.1.0",
     "@mui/icons-material": "^5.6.1",
     "@mui/material": "^5.6.1",
+    "@undp_sdg_ai_lab/undp-radar": "^1.1.0",
     "framer-motion": "^4",
     "node-sass": "^7.0.1",
     "rc-slider": "^10.0.0",
@@ -20,6 +20,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "5.0.0",
     "sass": "^1.49.9",
+    "spinners-react": "^1.0.7",
     "typescript": "^4.1.2",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"

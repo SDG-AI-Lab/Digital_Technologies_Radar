@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {
   BlipType,
   QuadrantRadar,
+  RadarResponsive,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import { BackButton } from '../../radar/components';
 import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
+import { SpinnerRoundFilled } from 'spinners-react/lib/esm/SpinnerRoundFilled';
 
 export const QuadrantView: React.FC = () => {
   const {
@@ -40,7 +42,18 @@ export const QuadrantView: React.FC = () => {
     <div style={{ display: 'flex', flex: 1, padding: 2 }}>
       <BackButton to='RADAR' />
       <div style={{ flex: 1 }}>
-        <QuadrantRadar />
+        {/* <QuadrantRadar /> */}
+        <RadarResponsive
+          Spinner={
+            <SpinnerRoundFilled
+              size={'25%'}
+              thickness={100}
+              speed={100}
+              color='rgba(175, 175, 175, 1)'
+            />
+          }
+          Component={QuadrantRadar}
+        />
       </div>
       {(quadIndex === 0 ||
         quadIndex === 1 ||

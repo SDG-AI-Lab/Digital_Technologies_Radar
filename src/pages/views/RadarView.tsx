@@ -10,7 +10,12 @@ import {
   BoxProps,
   SimpleGrid
 } from '@chakra-ui/react';
-import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  Radar,
+  RadarResponsive,
+  useRadarState
+} from '@undp_sdg_ai_lab/undp-radar';
+import { SpinnerRoundFilled } from 'spinners-react/lib/esm/SpinnerRoundFilled';
 
 import { WaitingForRadar } from '../../radar/components';
 import { PopOverView } from './PopOverView';
@@ -59,7 +64,19 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
           </Heading>
           <Box className='radarComponents'>
             {loading && <WaitingForRadar size='620px' />}
-            {!loading && <Radar />}
+            {!loading && (
+              <RadarResponsive
+                Spinner={
+                  <SpinnerRoundFilled
+                    size={'25%'}
+                    thickness={100}
+                    speed={100}
+                    color='rgba(175, 175, 175, 1)'
+                  />
+                }
+                Component={Radar}
+              />
+            )}
           </Box>
           <PopOverView />
         </Box>
