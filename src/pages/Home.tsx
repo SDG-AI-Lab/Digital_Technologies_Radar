@@ -156,7 +156,7 @@ export const Home: React.FC = () => (
               src={SDGAI}
               alt='SDG AI Lab Logo'
               style={{ height: '40px',
-                       cursor: 'pointer' 
+                       cursor: 'pointer'        
               }}
               onClick={() => window.open('https://sdgailab.org', '_newtab')}
             />
