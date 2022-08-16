@@ -132,7 +132,12 @@ export const Home: React.FC = () => (
             <Image
               src={cbi2}
               alt='CBI Logo'
-              style={{ height: '40px', marginRight: '32px', marginTop: '2px' }}
+              style={{ height: '40px',
+                       marginRight: '32px', 
+                       marginTop: '2px',
+                       cursor: 'pointer'
+                       }}
+              onClick={() => window.open('https://www.connectingbusiness.org/', '_newtab')}
             />
 
             <Image
@@ -141,14 +146,19 @@ export const Home: React.FC = () => (
               style={{
                 height: '100px',
                 marginTop: '-30px',
-                marginRight: '30px'
+                marginRight: '30px',
+                cursor: 'pointer'
               }}
+              onClick={() => window.open('https://www.undp.org/', '_newtab')}
             />
 
             <Image
               src={SDGAI}
               alt='SDG AI Lab Logo'
-              style={{ height: '40px' }}
+              style={{ height: '40px',
+                       cursor: 'pointer' 
+              }}
+              onClick={() => window.open('https://sdgailab.org', '_newtab')}
             />
           </GridItem>
           <GridItem colSpan={1} />
