@@ -132,12 +132,15 @@ export const Home: React.FC = () => (
             <Image
               src={cbi2}
               alt='CBI Logo'
-              style={{ height: '40px',
-                       marginRight: '32px', 
-                       marginTop: '2px',
-                       cursor: 'pointer'
-                       }}
-              onClick={() => window.open('https://www.connectingbusiness.org/', '_newtab')}
+              style={{
+                height: '40px',
+                marginRight: '32px',
+                marginTop: '2px',
+                cursor: 'pointer'
+              }}
+              onClick={() =>
+                window.open('https://www.connectingbusiness.org/', '_newtab')
+              }
             />
 
             <Image
@@ -155,9 +158,7 @@ export const Home: React.FC = () => (
             <Image
               src={SDGAI}
               alt='SDG AI Lab Logo'
-              style={{ height: '40px',
-                       cursor: 'pointer'        
-              }}
+              style={{ height: '40px', cursor: 'pointer' }}
               onClick={() => window.open('https://sdgailab.org', '_newtab')}
             />
           </GridItem>
