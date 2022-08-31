@@ -48,9 +48,14 @@ header {
   margin-left: -5px !important;
 }
 
+.option-button {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 @media only screen and (max-width: 921px) {
   .option-button {
-    width: 60%;
+    width: 100%;
     margin-top: 0px !important;
   }
 }

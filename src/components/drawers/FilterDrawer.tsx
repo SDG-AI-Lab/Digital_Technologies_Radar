@@ -39,7 +39,7 @@ export const FilterDrawer: React.FC = () => {
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
           <DrawerOverlay />
-          <DrawerContent backgroundColor='#fffafa'>
+          <DrawerContent className='filter-modal' backgroundColor='#fffafa'>
             <DrawerCloseButton />
             <DrawerHeader mt={10}>Technologies</DrawerHeader>
             <TechList />
