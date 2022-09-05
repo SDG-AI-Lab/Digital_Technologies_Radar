@@ -45,18 +45,21 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
+      <div className='radarTitleContainer'>
+        <Heading
+          fontSize={30}
+          color='DarkSlateGray'
+          textAlign='center'
+          p={15}
+          paddingTop={15}
+          className='radarTitle'
+        >
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+        </Heading>
+        <div className='titleFiller' />
+      </div>
       <SimpleGrid alignItems='center' columns={{ sm: 1, md: 1, lg: 2 }}>
         <Box>
-          <Heading
-            fontSize={30}
-            color='DarkSlateGray'
-            textAlign='center'
-            p={15}
-            paddingTop={15}
-            className='radarTitle'
-          >
-            Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-          </Heading>
           <Box className='radarComponents'>
             {loading && <WaitingForRadar size='620px' />}
             {!loading && <Radar />}
