@@ -155,6 +155,10 @@ export const CustomFilter: React.FC = () => {
     dataFilter === null ? 'all' : dataFilter
   );
 
+  // track active filters
+  const [customfilterSelected, setCustomFilterSelected] =
+    useState<boolean>(false);
+
   /**
    * This is our filtering logic
    */
@@ -256,6 +260,7 @@ export const CustomFilter: React.FC = () => {
 
     // set filter
     setFilteredBlips(isFiltered, filtered);
+    setCustomFilterSelected(isFiltered);
   }, [
     useCaseKey,
     disasterKey,
@@ -615,26 +620,22 @@ export const CustomFilter: React.FC = () => {
         </div>
       </div>
 
-      <div>
-        <button
-          type='button'
-          style={{
-            borderColor: 'lightgrey',
-            borderWidth: 1,
-            borderStyle: 'solid',
-            padding: '10px 20px',
-            backgroundColor: '#3182ce',
-            cursor: 'pointer',
-            borderRadius: 5,
-            color: 'white',
-            marginTop: 5,
-            marginBottom: 3
-          }}
-          onClick={onResetFilter}
-        >
-          Reset
-        </button>
-      </div>
+      {customfilterSelected && (
+        <div>
+          <button
+            type='button'
+            style={{
+              padding: '10px 20px',
+              cursor: 'pointer',
+              color: 'blue',
+              margin: '5px 0 3px'
+            }}
+            onClick={onResetFilter}
+          >
+            Reset
+          </button>
+        </div>
+      )}
     </div>
   );
 };
