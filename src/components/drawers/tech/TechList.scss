@@ -1,18 +1,8 @@
 .resetTechFilterButton {
-  margin-top: 10px;
-  margin-right: 16px;
-  // border: none;
-  border: 1px solid lightgrey;
-  background-color: #3182ce;
+  margin: 10px 16px 0 10px;
+  border: none;
   padding: 10px 20px;
-  color: snow;
+  color: blue;
   font-size: 15px;
   cursor: pointer;
-  transition: all 0.4s;
-  border-radius: 5px;
-  margin-left: 10px;
-
-  &:hover {
-    opacity: 0.6;
-  }
 }
