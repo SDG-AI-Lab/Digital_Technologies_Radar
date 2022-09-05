@@ -374,6 +374,7 @@ export const CustomFilter: React.FC = () => {
         borderBottomWidth: 1,
         paddingBottom: 5,
         display: 'flex',
+        flexDirection: 'column',
         // flexWrap: 'wrap',
         alignItems: 'center'
       }}

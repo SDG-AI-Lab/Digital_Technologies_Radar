@@ -123,7 +123,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
           })}
         </ScrollableDiv>
       </div>
-      {techFilters.length && (
+      {Boolean(techFilters.length) && (
         <button
           onClick={resetTech}
           type='button'
