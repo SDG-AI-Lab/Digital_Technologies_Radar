@@ -19,7 +19,8 @@ export const AppMobileHeader: React.FC = () => {
           <UNLogo />
         </Box>
         <Text fontSize='1.2em' fontWeight={500} lineHeight='79px'>
-          Technology Radar
+          {/* Technology Radar */}
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
         </Text>
         <Box my={5} mr={5}>
           <UNDPLogo />

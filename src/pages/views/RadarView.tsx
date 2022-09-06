@@ -58,7 +58,11 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         </Heading>
         <div className='titleFiller' />
       </div>
-      <SimpleGrid alignItems='center' columns={{ sm: 1, md: 1, lg: 2 }}>
+      <SimpleGrid
+        alignItems='center'
+        columns={{ sm: 1, md: 1, lg: 2 }}
+        className='radarContainer'
+      >
         <Box>
           <Box className='radarComponents'>
             {loading && <WaitingForRadar size='620px' />}
