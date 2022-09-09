@@ -1,3 +1,21 @@
+.radarContainer {
+  display: flex !important;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 28px 30px 0;
+  height: max-content;
+
+  .tabsComponents {
+    margin: 0 !important;
+    min-width: 370px !important;
+  }
+
+  .radarComponentsContainer {
+    flex-basis: 75%;
+  }
+}
+
 .radarTitleContainer {
   display: flex;
   position: absolute;
@@ -10,9 +28,24 @@
   }
 }
 
+@media only screen and (max-width: 1080px) {
+  .radarContainer {
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0;
+
+    .tabsComponents {
+      min-width: 80vw !important;
+
+      .chakra-tabs {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 825px) {
   .radarComponents {
-    zoom: 80%;
     margin: 0 auto;
     width: 90%;
   }
@@ -39,7 +72,6 @@
 
 @media only screen and (min-width: 768px) {
   .radarComponents {
-    zoom: 80%;
     margin: 0 auto;
     width: 90%;
   }
@@ -67,7 +99,6 @@
 
 @media only screen and (min-width: 600px) {
   .radarComponents {
-    zoom: 80%;
     margin: 0 auto;
     width: 100%;
   }
@@ -82,9 +113,6 @@
     width: 100%;
     min-width: 370px;
     overflow-x: auto;
-  }
-  .how-to-button {
-    // right: 150px !important;
   }
   .tabsComponents p {
     width: auto;
@@ -109,7 +137,6 @@
 
 @media only screen and (max-width: 991px) {
   .radarComponents {
-    zoom: 80%;
     margin: 0 auto;
   }
   .radarTitle {
@@ -131,7 +158,6 @@
 
 @media only screen and (min-width: 1149px) {
   .radarComponents {
-    zoom: 90%;
     width: 100%;
   }
 
@@ -148,7 +174,6 @@
 
 @media only screen and (min-width: 1200px) {
   .radarComponents {
-    zoom: 100%;
     margin: 0 auto;
     width: 90%;
   }
@@ -170,9 +195,6 @@
 }
 
 @media only screen and (min-width: 992px) {
-  .radarComponents {
-    zoom: 80%;
-  }
   .radarTitle {
     font-size: 23px !important;
     margin: 0 0 0 35px !important;

@@ -63,7 +63,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         columns={{ sm: 1, md: 1, lg: 2 }}
         className='radarContainer'
       >
-        <Box>
+        <Box className='radarComponentsContainer'>
           <Box className='radarComponents'>
             {loading && <WaitingForRadar size='620px' />}
             {!loading && <Radar />}
