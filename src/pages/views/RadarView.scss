@@ -201,8 +201,8 @@
   .radarTitleContainer {
     flex-direction: column;
     top: 50px;
-    width: 100%;
-    justify-content: center;
+    width: 90%;
+    align-items: center;
   }
   .radarTitle {
     width: fit-content;
@@ -210,5 +210,11 @@
   .radarComponents {
     z-index: 1;
     margin-top: 80px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .radarTitleContainer {
+    display: none;
   }
 }
