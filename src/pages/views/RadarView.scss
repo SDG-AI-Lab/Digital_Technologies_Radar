@@ -2,11 +2,11 @@
   display: flex;
   position: absolute;
   justify-content: space-between;
-  top: 15px;
+  top: 20px;
 
   .titleFiller {
     width: 550px;
-    z-index: -9;
+    z-index: -1;
   }
 }
 
