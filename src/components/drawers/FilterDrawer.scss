@@ -51,6 +51,7 @@ header {
 .option-button {
   display: flex;
   flex-direction: row-reverse;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 921px) {

@@ -1,3 +1,15 @@
+.radarTitleContainer {
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+  top: 20px;
+
+  .titleFiller {
+    width: 550px;
+    z-index: -1;
+  }
+}
+
 @media only screen and (max-width: 825px) {
   .radarComponents {
     zoom: 80%;
@@ -15,9 +27,6 @@
     width: 90%;
     min-width: 370px;
     overflow-x: auto;
-  }
-  .how-to-button {
-    right: 150px !important;
   }
   .tabsComponents p {
     width: auto;
@@ -45,9 +54,6 @@
     width: 90%;
     min-width: 370px;
     overflow-x: auto;
-  }
-  .how-to-button {
-    right: 150px !important;
   }
   .tabsComponents p {
     width: auto;
@@ -78,7 +84,7 @@
     overflow-x: auto;
   }
   .how-to-button {
-    right: 150px !important;
+    // right: 150px !important;
   }
   .tabsComponents p {
     width: auto;
@@ -117,6 +123,9 @@
     width: 90%;
     min-width: 370px;
     overflow-x: auto;
+  }
+  .radarContainer {
+    margin: 0 auto;
   }
 }
 
@@ -173,10 +182,39 @@
     margin: 80px 0 0 80px !important;
     max-width: 290px !important;
   }
+  .how-to-button {
+    right: 150px !important;
+  }
 }
 #chakra-modal-3.filter-modal {
   top: 75px !important;
   @media only screen and (max-width: 767px) {
     top: 155px !important;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .how-to-button {
+    left: 55px;
+    width: fit-content !important;
+  }
+  .radarTitleContainer {
+    flex-direction: column;
+    top: 50px;
+    width: 90%;
+    align-items: center;
+  }
+  .radarTitle {
+    width: fit-content;
+  }
+  .radarComponents {
+    z-index: 1;
+    margin-top: 80px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .radarTitleContainer {
+    display: none;
   }
 }
