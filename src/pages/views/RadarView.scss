@@ -130,8 +130,8 @@
 
 @media only screen and (max-width: 600px) {
   .radarTitle {
-    font-size: 23px !important;
-    margin: 160px 20px 20px 20px !important;
+    // font-size: 23px !important;
+    // margin: 160px 20px 20px 20px !important;
   }
 }
 
@@ -238,5 +238,93 @@
 @media only screen and (max-width: 767px) {
   .radarTitleContainer {
     display: none;
+  }
+  .option-button {
+    display: none;
+  }
+  .radarContainer {
+    path,
+    circle {
+      display: none;
+    }
+
+    text {
+      &.horizon-text {
+        display: none;
+      }
+    }
+
+    g.quadrant-text {
+      scale: 1.9;
+
+      &.quadrant-preparedness {
+        translate: 1.5vw 15.5vh;
+        position: relative;
+      }
+
+      &.quadrant-response {
+        translate: -5.5vw 15.5vh;
+      }
+
+      &.quadrant-mitigation {
+        translate: 5.5vw -15.5vh;
+      }
+
+      &.quadrant-recovery {
+        translate: -5.5vw -15.5vh;
+      }
+    }
+
+    .tabsComponents {
+      display: none;
+    }
+
+    .radarComponents {
+      width: 100vw;
+      @media only screen and (max-width: 571px) {
+        transform: scale(0.7);
+
+        div:first-of-type {
+          display: flex;
+          justify-content: center;
+          overflow: visible !important;
+        }
+      }
+
+      @media only screen and (max-width: 392px) {
+        transform: scale(0.4);
+      }
+    }
+
+    .maturity-levels-desc {
+      display: none;
+    }
+  }
+}
+
+.quadrantView {
+  @media only screen and (max-width: 1130px) {
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      align-self: flex-start;
+    }
+    .horizontalList {
+      div {
+        min-width: 70vw;
+        max-width: 80vw;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding-top: 90px !important;
+    .horizontalList {
+      div {
+        margin-bottom: 100px;
+      }
+    }
   }
 }
