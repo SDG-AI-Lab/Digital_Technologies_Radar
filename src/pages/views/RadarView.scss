@@ -90,7 +90,6 @@
   .tabsComponents p {
     width: auto;
   }
-
   .tabsComponents h5 {
     font-size: 15px !important;
     font-weight: thin !important;
@@ -125,13 +124,6 @@
   .tabsComponents h6 {
     font-size: 15px !important;
     font-weight: 500 !important;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .radarTitle {
-    // font-size: 23px !important;
-    // margin: 160px 20px 20px 20px !important;
   }
 }
 
@@ -185,12 +177,6 @@
   .tabsComponents {
     margin: 80px 0 0 80px !important;
     min-width: 500px !important;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .radarTitle {
-    font-size: 23px !important;
   }
 }
 
@@ -300,6 +286,9 @@
       display: none;
     }
   }
+  .radarTitle {
+    font-size: 23px !important;
+  }
 }
 
 .quadrantView {
@@ -312,18 +301,41 @@
     }
     .horizontalList {
       div {
-        min-width: 70vw;
+        min-width: 60vw;
         max-width: 80vw;
         margin-bottom: 40px;
       }
     }
+    .quadrantRadar {
+      transform: scale(1.2);
+    }
   }
-
   @media only screen and (max-width: 767px) {
     padding-top: 90px !important;
+    width: 100vw;
     .horizontalList {
+      margin-top: -40px;
       div {
-        margin-bottom: 100px;
+        margin-bottom: 100px !important;
+      }
+      @media only screen and (max-width: 571px) {
+        margin-top: -100px;
+      }
+      @media only screen and (max-width: 392px) {
+        margin-top: -200px;
+      }
+    }
+    .quadrantRadar {
+      transform: scale(1);
+      margin-top: -40px;
+
+      @media only screen and (max-width: 571px) {
+        transform: scale(0.7);
+        margin-top: -40px;
+      }
+      @media only screen and (max-width: 392px) {
+        transform: scale(0.4);
+        margin-top: -100px;
       }
     }
   }
