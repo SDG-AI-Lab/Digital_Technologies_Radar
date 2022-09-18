@@ -240,7 +240,15 @@
   .option-button {
     display: none;
   }
+  .radarComponentsContainer {
+    > div:last-of-type {
+      display: none !important;
+    }
+  }
   .radarContainer {
+    + div {
+      display: none !important;
+    }
     path,
     circle {
       display: none;
