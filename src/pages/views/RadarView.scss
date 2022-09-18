@@ -238,7 +238,19 @@
     display: none;
   }
   .option-button {
-    display: none;
+    zoom: 0.6;
+    align-self: flex-end;
+    position: absolute;
+    left: unset;
+    top: 40px;
+
+    @media only screen and (max-width: 392px) {
+      top: 60px;
+      z-index: 12;
+    }
+  }
+  .how-to-button {
+    display: none !important;
   }
   .radarComponentsContainer {
     > div:last-of-type {
@@ -318,6 +330,7 @@
 
     button {
       align-self: flex-start;
+      z-index: 8;
     }
     .horizontalList {
       div {
@@ -332,6 +345,9 @@
   @media only screen and (max-width: 767px) {
     padding-top: 90px !important;
     width: 100vw;
+    button {
+      z-index: 12;
+    }
     .horizontalList {
       margin-top: -40px;
       > div {

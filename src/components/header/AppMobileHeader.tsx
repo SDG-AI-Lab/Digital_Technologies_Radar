@@ -24,6 +24,7 @@ export const AppMobileHeader: React.FC = () => {
           fontWeight={500}
           textAlign={'center'}
           alignSelf={'center'}
+          zIndex={10}
         >
           Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
         </Text>
