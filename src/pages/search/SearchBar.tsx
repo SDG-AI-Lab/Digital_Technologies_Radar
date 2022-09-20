@@ -33,7 +33,7 @@ export const SearchBar: React.FC = () => {
         merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
           'Disaster Cycle'
         ]
-          .concat(',')
+          .concat(', ')
           .concat(item['Disaster Cycle']);
       } else {
         //if (typeof item['Disaster Cycle'] == 'string')

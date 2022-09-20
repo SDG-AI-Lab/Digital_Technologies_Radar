@@ -96,8 +96,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         borderWidth: 2,
         borderRadius: 10,
         marginTop: 40,
-        padding: 15,
-        maxWidth: 500
+        padding: '15px 5px'
       }}
     >
       <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
