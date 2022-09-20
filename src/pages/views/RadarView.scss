@@ -9,6 +9,9 @@
   .tabsComponents {
     margin: 0 !important;
     padding: 20px 5px;
+    .chakra-tabs {
+      width: 100%;
+    }
     .chakra-tabs__tab-panel {
       padding: 16px 0;
     }
@@ -209,7 +212,10 @@
 #chakra-modal-3.filter-modal {
   top: 75px !important;
   @media only screen and (max-width: 767px) {
-    top: 155px !important;
+    top: 115px !important;
+  }
+  @media only screen and (max-width: 392px) {
+    top: 128px !important;
   }
 }
 
@@ -237,7 +243,8 @@
   .radarTitleContainer {
     display: none;
   }
-  .option-button {
+  .quadrant-filter {
+    display: flex !important;
     zoom: 0.6;
     align-self: flex-end;
     position: absolute;
@@ -248,9 +255,13 @@
       top: 60px;
       z-index: 12;
     }
+    .how-to-button {
+      display: none;
+    }
   }
-  .how-to-button {
-    display: none !important;
+  .how-to-button,
+  .option-button {
+    display: none;
   }
   .radarComponentsContainer {
     > div:last-of-type {
@@ -278,18 +289,22 @@
       &.quadrant-preparedness {
         translate: 1.5vw 15.5vh;
         position: relative;
+        fill: green !important;
       }
 
       &.quadrant-response {
         translate: -5.5vw 15.5vh;
+        fill: red !important;
       }
 
       &.quadrant-mitigation {
         translate: 5.5vw -15.5vh;
+        fill: blue !important;
       }
 
       &.quadrant-recovery {
         translate: -5.5vw -15.5vh;
+        fill: #e7d438 !important;
       }
     }
 
@@ -372,9 +387,6 @@
           width: 75vw;
           &:first-of-type {
             font-weight: bold;
-          }
-          &:last-of-type {
-            background-color: #ececec;
           }
         }
       }

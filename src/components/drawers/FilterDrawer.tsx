@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Button,
   Box,
@@ -20,7 +21,11 @@ export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Box className='option-button'>
+      <Box
+        className={`option-button ${
+          useLocation().pathname.includes('quadrant') && 'quadrant-filter'
+        }`}
+      >
         <Box overflowY='auto' width='0px'>
           <HowToPopup />
         </Box>
