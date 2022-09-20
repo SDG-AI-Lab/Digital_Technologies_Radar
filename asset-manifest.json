@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.de746489.css",
-    "main.js": "/static/js/main.9cf34397.js",
+    "main.css": "/static/css/main.3ddc1cff.css",
+    "main.js": "/static/js/main.2892c15d.js",
     "static/js/787.7a2ae1f3.chunk.js": "/static/js/787.7a2ae1f3.chunk.js",
     "static/media/background_blur.png": "/static/media/background_blur.98476fcbce63a63b1be1.png",
     "static/media/cbi_logo_2.png": "/static/media/cbi_logo_2.e29f880fa54f718d59e4.png",
@@ -11,12 +11,12 @@
     "static/media/SDG_WHITE_logo.png": "/static/media/SDG_WHITE_logo.e32f6cd201d0a6f5f298.png",
     "static/media/sdgailab_white.png": "/static/media/sdgailab_white.e32f6cd201d0a6f5f298.png",
     "index.html": "/index.html",
-    "main.de746489.css.map": "/static/css/main.de746489.css.map",
-    "main.9cf34397.js.map": "/static/js/main.9cf34397.js.map",
+    "main.3ddc1cff.css.map": "/static/css/main.3ddc1cff.css.map",
+    "main.2892c15d.js.map": "/static/js/main.2892c15d.js.map",
     "787.7a2ae1f3.chunk.js.map": "/static/js/787.7a2ae1f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.de746489.css",
-    "static/js/main.9cf34397.js"
+    "static/css/main.3ddc1cff.css",
+    "static/js/main.2892c15d.js"
   ]
 }
