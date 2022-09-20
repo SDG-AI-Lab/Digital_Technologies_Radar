@@ -14,6 +14,7 @@ export const AppMobileHeader: React.FC = () => {
         top={0}
         borderBottom='1px solid #E2E8F0'
         backgroundColor='#FFFFFF'
+        zIndex={9}
       >
         <Box my={3} ml={5}>
           <UNLogo />
@@ -23,6 +24,7 @@ export const AppMobileHeader: React.FC = () => {
           fontWeight={500}
           textAlign={'center'}
           alignSelf={'center'}
+          zIndex={10}
         >
           Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
         </Text>

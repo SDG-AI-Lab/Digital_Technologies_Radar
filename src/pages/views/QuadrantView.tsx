@@ -37,16 +37,19 @@ export const QuadrantView: React.FC = () => {
   }, [selectedQuadrant]);
 
   return (
-    <div style={{ display: 'flex', flex: 1, padding: 2 }}>
+    <div
+      className='quadrantView'
+      style={{ display: 'flex', flex: 1, padding: 2 }}
+    >
       <BackButton to='RADAR' />
-      <div style={{ flex: 1 }}>
+      <div className='quadrantRadar' style={{ flex: 1 }}>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||
         quadIndex === 1 ||
         quadIndex === 2 ||
         quadIndex === 3) && (
-        <div style={{ flex: '0.75' }}>
+        <div className='horizontalList' style={{ flex: '0.75' }}>
           <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
         </div>
       )}
