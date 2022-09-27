@@ -67,6 +67,12 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   }, [displayBlips, horizonKey, quadIndex]);
 
   useEffect(() => {
+    if (techFilters && techFilters.length > 0) {
+      setTabIndex(1);
+    }
+  }, [techFilters]);
+
+  useEffect(() => {
     if (selectedItem) {
       setTabIndex(2);
     }
