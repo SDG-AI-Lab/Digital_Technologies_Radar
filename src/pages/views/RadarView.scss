@@ -7,7 +7,7 @@
   height: max-content;
 
   .tabsComponents {
-    margin: 0 !important;
+    margin: 0 0 15px !important;
     padding: 20px 5px;
     .chakra-tabs {
       width: 100%;
@@ -263,8 +263,9 @@
     + div {
       display: none !important;
     }
+
     path,
-    circle {
+    .blip {
       display: none;
     }
 
@@ -278,23 +279,23 @@
       scale: 1.9;
 
       &.quadrant-preparedness {
-        translate: 1.5vw 15.5vh;
+        translate: 5vw 22vh;
         position: relative;
         fill: green !important;
       }
 
       &.quadrant-response {
-        translate: -5.5vw 15.5vh;
+        translate: -10vw 22vh;
         fill: red !important;
       }
 
       &.quadrant-mitigation {
-        translate: 5.5vw -15.5vh;
+        translate: 12vw -18vh;
         fill: blue !important;
       }
 
       &.quadrant-recovery {
-        translate: -5.5vw -15.5vh;
+        translate: -10vw -18vh;
         fill: #e7d438 !important;
       }
     }
@@ -316,7 +317,7 @@
       }
 
       @media only screen and (max-width: 392px) {
-        transform: scale(0.4);
+        transform: scale(0.5);
       }
     }
 
@@ -337,6 +338,8 @@
     button {
       align-self: flex-start;
       z-index: 8;
+      position: sticky;
+      top: 90px;
     }
     .horizontalList {
       div {
