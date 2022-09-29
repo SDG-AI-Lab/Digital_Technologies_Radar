@@ -374,11 +374,9 @@
       tr {
         display: flex;
         flex-direction: column;
-        width: 100vw;
 
         td {
           padding: 16px 5px;
-          width: 75vw;
           &:first-of-type {
             font-weight: bold;
           }
