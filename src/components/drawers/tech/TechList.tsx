@@ -80,6 +80,9 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
     }
     return false;
   };
+  useEffect(() => {
+    !Boolean(techFilters.length) && setFilteredBlips(false, blips);
+  }, [techFilters]);
 
   return (
     <div
