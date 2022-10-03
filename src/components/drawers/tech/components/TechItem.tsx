@@ -33,6 +33,20 @@ export const TechItem: React.FC<{
   );
   const [isItemHovered, setIsItemHovered] = useState(false);
 
+  /* Checking for mobile view */
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
+
   useEffect(() => {
     setBackgroundColor(
       selected ||
@@ -51,9 +65,10 @@ export const TechItem: React.FC<{
           hoveredItem,
           [tech.slug],
           techKey
-        )
+        ) ||
+        !isMobile
     );
-  }, [tech, selected, hoveredItem, hoveredTech]);
+  }, [tech, selected, hoveredItem, hoveredTech, techFilter]);
 
   const changeBackgroundEnter = (): void => {
     setHoveredTech(tech.slug);
