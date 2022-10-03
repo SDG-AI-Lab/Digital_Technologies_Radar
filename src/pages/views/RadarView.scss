@@ -365,6 +365,16 @@
       .chakra-tabs__tab-panel {
         padding: 16px 0;
       }
+      @media only screen and (max-width: 420px) {
+        .chakra-tabs__tablist {
+          display: flex;
+          flex-direction: column;
+          h5[aria-selected=true] {
+            border-bottom-color: inherit;
+            border-radius: 6px;
+          }
+        }
+      }
       .MuiAccordionDetails-root {
         padding: 8px 0;
       }
