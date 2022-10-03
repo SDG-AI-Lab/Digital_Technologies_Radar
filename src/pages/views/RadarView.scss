@@ -369,7 +369,7 @@
         .chakra-tabs__tablist {
           display: flex;
           flex-direction: column;
-          h5[aria-selected=true] {
+          h5[aria-selected='true'] {
             border-bottom-color: inherit;
             border-radius: 6px;
           }
