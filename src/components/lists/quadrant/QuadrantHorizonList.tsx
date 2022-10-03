@@ -10,6 +10,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { HorizonItem } from './HorizonItem';
 import { BlipView } from '../../views/blip/BlipView';
 import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
+import { TechDescription } from '../../../radar/tech/TechDescription';
 import './DataLists.scss';
 
 export type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -66,8 +67,14 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
   }, [displayBlips, horizonKey, quadIndex]);
 
   useEffect(() => {
-    if (selectedItem) {
+    if (techFilters && techFilters.length > 0) {
       setTabIndex(1);
+    }
+  }, [techFilters]);
+
+  useEffect(() => {
+    if (selectedItem) {
+      setTabIndex(2);
     }
   }, [selectedItem]);
 
@@ -102,6 +109,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
       <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
         <TabList>
           <Tab as='h5'>Stages</Tab>
+          <Tab as='h5'>Technologies</Tab>
           <Tab as='h5'>Project</Tab>
         </TabList>
         <TabPanels minHeight={445}>
@@ -127,6 +135,9 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
                 />
               ))}
             </div>
+          </TabPanel>
+          <TabPanel overflowY='auto'>
+            <TechDescription />
           </TabPanel>
           <TabPanel>
             <ScrollableDiv maxHeight={413}>
