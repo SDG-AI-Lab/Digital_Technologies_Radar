@@ -1,22 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.6c23b956.css",
-    "main.js": "/static/js/main.fec3b4bc.js",
+    "main.js": "/static/js/main.a63c5312.js",
     "static/js/787.7a2ae1f3.chunk.js": "/static/js/787.7a2ae1f3.chunk.js",
-    "static/media/background_blur.png": "/static/media/background_blur.98476fcbce63a63b1be1.png",
-    "static/media/cbi_logo_2.png": "/static/media/cbi_logo_2.e29f880fa54f718d59e4.png",
+    "static/media/background2.jpg": "/static/media/background2.f23affceb6e02c142256.jpg",
     "static/media/technology_radar_dataset_updated_v6.csv": "/static/media/technology_radar_dataset_updated_v6.41204ec3392e257bc6b6.csv",
+    "static/media/logos.png": "/static/media/logos.ad9e829979203fe261dc.png",
     "static/media/UNDP_logo.png": "/static/media/UNDP_logo.811464c8a71909b2f27d.png",
     "static/media/SDG_BLACK_logo.png": "/static/media/SDG_BLACK_logo.cff2188904f1b1acc816.png",
     "static/media/SDG_WHITE_logo.png": "/static/media/SDG_WHITE_logo.e32f6cd201d0a6f5f298.png",
-    "static/media/sdgailab_white.png": "/static/media/sdgailab_white.e32f6cd201d0a6f5f298.png",
     "index.html": "/index.html",
     "main.6c23b956.css.map": "/static/css/main.6c23b956.css.map",
-    "main.fec3b4bc.js.map": "/static/js/main.fec3b4bc.js.map",
+    "main.a63c5312.js.map": "/static/js/main.a63c5312.js.map",
     "787.7a2ae1f3.chunk.js.map": "/static/js/787.7a2ae1f3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6c23b956.css",
-    "static/js/main.fec3b4bc.js"
+    "static/js/main.a63c5312.js"
   ]
 }
