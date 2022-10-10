@@ -82,18 +82,19 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://github.com/SDG-AI-Lab/Course-Images/blob/main/20220507_103527.jpg?raw=true" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/versatileblessing" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Blessing Ojediran</b>
       </a> 
       </br>
-      <a href="https://github.com/uxfoodie" rel="nofollow noreferrer">
+      <a href="Behance.net/uxfoodie" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">She has develop the mockups for the website. The website has modelled by using these mockups.</p>
+    <p align="center">UX designer from Nigeria. Have a Bachelor of Nursing Science degree</p>
+    <p><i>"I have been designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar."</i></p>
     </td>
     <td>
     <p align="center">
@@ -153,10 +154,10 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://github.com/SDG-AI-Lab/Course-Images/blob/main/Black%20and%20White%20Minimalist%20Company%20Profile%20-%20Business%20Presentation%20(1).jpg?raw=true" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/fpenarru/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Francisco José Peñarrubia</b>
       </a> 
       </br>
@@ -164,7 +165,8 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">He has actively developed frontend components for the radar.</p>
+    <p>Telecommunications Engineer, involved in Open Source GIS software development for more than 20 years</p>
+    <p><i>"As an engineer, I like to build new things, and learn. Working on TechRadar project allowed me to learn by doing, meet very talented people and help a nice community in UN's Family"</i></p>
     </td>
     <td>
     <p align="center">
