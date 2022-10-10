@@ -72,7 +72,8 @@ class VolunteerContent {
       'Telecommunications Engineer, involved in Open Source GIS software development for more than 20 years',
     quote:
       "As an engineer, I like to build new things, and learn. Working on TechRadar project allowed me to learn by doing, meet very talented people and help a nice community in UN's Family",
-    imageSrc: '',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/Black%20and%20White%20Minimalist%20Company%20Profile%20-%20Business%20Presentation%20(1).jpg?raw=true',
     linkedinLink: 'https://www.linkedin.com/in/fpenarru/',
     githubLink: 'https://github.com/fpenarru'
   } as const;
