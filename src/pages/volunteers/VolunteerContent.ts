@@ -23,11 +23,13 @@ class VolunteerContent {
   static readonly BlessingO: VolunteerContentChild = {
     name: 'Blessing Ojediran',
     background:
-      'She has develop the mockups for the website. The website has modelled by using these mockups.',
-    quote: '',
-    imageSrc: '',
-    linkedinLink: '',
-    githubLink: 'https://github.com/uxfoodie'
+      'UX designer from Nigeria. Have a Bachelor of Nursing Science degree',
+    quote:
+      'I have been designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar.',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/20220507_103527.jpg?raw=true',
+    linkedinLink: 'https://www.linkedin.com/in/versatileblessing',
+    githubLink: 'Behance.net/uxfoodie'
   } as const;
 
   static readonly EyoabT: VolunteerContentChild = {

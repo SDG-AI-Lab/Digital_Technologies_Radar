@@ -82,18 +82,19 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
   <tr>
     <td>
     <p align="center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
+      <img src="https://github.com/SDG-AI-Lab/Course-Images/blob/main/20220507_103527.jpg?raw=true" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/[removed]" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/versatileblessing" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Blessing Ojediran</b>
       </a> 
       </br>
-      <a href="https://github.com/uxfoodie" rel="nofollow noreferrer">
+      <a href="Behance.net/uxfoodie" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">She has develop the mockups for the website. The website has modelled by using these mockups.</p>
+    <p align="center">UX designer from Nigeria. Have a Bachelor of Nursing Science degree</p>
+    <p><i>"I have been designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar."</i></p>
     </td>
     <td>
     <p align="center">
