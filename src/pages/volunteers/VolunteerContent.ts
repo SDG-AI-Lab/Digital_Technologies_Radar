@@ -23,11 +23,13 @@ class VolunteerContent {
   static readonly BlessingO: VolunteerContentChild = {
     name: 'Blessing Ojediran',
     background:
-      'She has develop the mockups for the website. The website has modelled by using these mockups.',
-    quote: '',
-    imageSrc: '',
-    linkedinLink: '',
-    githubLink: 'https://github.com/uxfoodie'
+      'UX designer from Nigeria. Have a Bachelor of Nursing Science degree',
+    quote:
+      'I have been designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar.',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/20220507_103527.jpg?raw=true',
+    linkedinLink: 'https://www.linkedin.com/in/versatileblessing',
+    githubLink: 'Behance.net/uxfoodie'
   } as const;
 
   static readonly EyoabT: VolunteerContentChild = {
@@ -72,7 +74,8 @@ class VolunteerContent {
       'Telecommunications Engineer, involved in Open Source GIS software development for more than 20 years',
     quote:
       "As an engineer, I like to build new things, and learn. Working on TechRadar project allowed me to learn by doing, meet very talented people and help a nice community in UN's Family",
-    imageSrc: '',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/Black%20and%20White%20Minimalist%20Company%20Profile%20-%20Business%20Presentation%20(1).jpg?raw=true',
     linkedinLink: 'https://www.linkedin.com/in/fpenarru/',
     githubLink: 'https://github.com/fpenarru'
   } as const;
