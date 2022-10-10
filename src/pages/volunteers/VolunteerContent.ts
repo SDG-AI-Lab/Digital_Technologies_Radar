@@ -67,11 +67,13 @@ class VolunteerContent {
   } as const;
 
   static readonly FranciscoJ: VolunteerContentChild = {
-    name: 'Francisco José Peñarrubia',
-    background: 'He has actively developed frontend components for the radar.',
-    quote: ' ',
+    name: 'Francisco Peñarrubia',
+    background:
+      'Telecommunications Engineer, involved in Open Source GIS software development for more than 20 years',
+    quote:
+      "As an engineer, I like to build new things, and learn. Working on TechRadar project allowed me to learn by doing, meet very talented people and help a nice community in UN's Family",
     imageSrc: '',
-    linkedinLink: '',
+    linkedinLink: 'https://www.linkedin.com/in/fpenarru/',
     githubLink: 'https://github.com/fpenarru'
   } as const;
 

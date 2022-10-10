@@ -29,7 +29,7 @@ export const Home: React.FC = () => (
           letterSpacing='3px'
           marginTop='200px'
         >
-          DIGITAL TECHNOLOGIES RADAR FOR DISASTER RISK REDUCTION
+          FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION (FTR4DRR)
         </chakra.p>
         <Stack
           position={useBreakpointValue({ base: 'absolute', md: 'inherit' })}
@@ -39,7 +39,8 @@ export const Home: React.FC = () => (
               size='lg'
               borderRadius='8px'
               borderWidth='2px'
-              marginTop={'-25px'}
+              marginTop={'-60px'}
+              colorScheme='blue'
             >
               Launch Radar
             </Button>

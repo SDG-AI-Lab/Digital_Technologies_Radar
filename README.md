@@ -156,7 +156,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/UN_Volunteers_logo.svg/2560px-UN_Volunteers_logo.svg.png" />
     </p>
     <p>
-      <a href="https://www.linkedin.com/" rel="nofollow noreferrer">
+      <a href="https://www.linkedin.com/in/fpenarru/" rel="nofollow noreferrer">
         <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Francisco José Peñarrubia</b>
       </a> 
       </br>
@@ -164,7 +164,8 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
         <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
       </a>
     </p>
-    <p align="center">He has actively developed frontend components for the radar.</p>
+    <p>Telecommunications Engineer, involved in Open Source GIS software development for more than 20 years</p>
+    <p><i>"As an engineer, I like to build new things, and learn. Working on TechRadar project allowed me to learn by doing, meet very talented people and help a nice community in UN's Family"</i></p>
     </td>
     <td>
     <p align="center">
