@@ -78,7 +78,12 @@ export const Home: React.FC = () => (
         }}
       >
         <MenuItem to={ROUTES.RADAR}>
-          <Button size='lg' borderRadius='8px' borderWidth='2px'>
+          <Button
+            size='lg'
+            borderRadius='8px'
+            borderWidth='2px'
+            colorScheme='blue'
+          >
             Launch Radar
           </Button>
         </MenuItem>
