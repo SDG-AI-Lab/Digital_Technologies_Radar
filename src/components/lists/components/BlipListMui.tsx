@@ -49,29 +49,6 @@ export const BlipListMui: React.FC = React.memo(() => {
   const [quadBlips, setQuadBlips] = useState<QuadType[]>([]);
 
   useEffect(() => {
-    // Filtering by TechList, although I think this should be done in RadarLib, when action
-    // setTechFilters is dispatched. TODO: Ask Nuno about it.
-    let blipsToUse = blips;
-    if (isFiltered) {
-      blipsToUse = filteredBlips;
-    }
-    if (techFilters.length > 0) {
-      setFilteredBlips(
-        true,
-        blipsToUse.filter((b) => {
-          let hasTech = false;
-          (b[techKey] || []).forEach((blipTech) => {
-            console.log('blipTech', blipTech);
-            if (techFilters.includes(Utilities.createSlug(blipTech)))
-              hasTech = true;
-          });
-          return hasTech;
-        })
-      );
-    }
-  }, [techFilters]);
-
-  useEffect(() => {
     let blipsToUse = blips;
     if (isFiltered) {
       blipsToUse = filteredBlips;
