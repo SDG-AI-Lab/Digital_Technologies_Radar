@@ -20,7 +20,8 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       hoveredTech,
       hoveredItem,
       useCaseFilter,
-      disasterTypeFilter
+      disasterTypeFilter,
+      isFiltered
     },
     actions: { setTechFilter, setHoveredTech },
     processes: { setFilteredBlips }
@@ -33,7 +34,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
   const [tech, setTech] = useState<TechItemType[]>([]);
 
   const resetTech = (): void => {
-    setFilteredBlips(false, blips);
+    setFilteredBlips(isFiltered, blips);
     setTechFilter([]);
   };
 
@@ -46,10 +47,16 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
         useCaseFilter,
         disasterTypeFilter
       ).forEach((b) => {
+        
         (b[keys.techKey] as string[]).forEach((techy) => {
           const foundTech = radarData.tech.find((t) => t.type === techy);
+          //console.log('disasterTypeFilter', disasterTypeFilter);
+          //console.log('useCaseFilter', useCaseFilter);
+          //console.log('techFilters', techFilters);
 
           if (foundTech && !newTechMap.has(foundTech.slug)) {
+            //console.log('foundTech', foundTech);
+            //console.log('newTechMap', newTechMap);
             // could be added
             if (
               b[keys.useCaseKey] === useCaseFilter ||
@@ -97,14 +104,17 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
           {tech.map((t) => {
             const toggleTechFilter = (): void => {
               if (techFilters && techFilters.length > 0) {
+                console.log('toggled filter')
                 const item = techFilters.find((tech) => tech === t.slug);
                 if (item) {
                   setTechFilter([
                     ...techFilters.filter((tech) => tech !== item)
                   ]);
+                  console.log('techFilters', techFilters)
                   return;
                 }
               }
+              console.log('t.slug', t.slug)
               setTechFilter([...techFilters, t.slug]);
             };
             return (

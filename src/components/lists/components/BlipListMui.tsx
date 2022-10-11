@@ -27,6 +27,7 @@ export const BlipListMui: React.FC = React.memo(() => {
       filteredBlips,
       isFiltered,
       techFilters,
+      disasterTypeFilter,
       radarData: { quadrants }
     },
     processes: { setFilteredBlips }
@@ -50,12 +51,17 @@ export const BlipListMui: React.FC = React.memo(() => {
   useEffect(() => {
     // Filtering by TechList, although I think this should be done in RadarLib, when action
     // setTechFilters is dispatched. TODO: Ask Nuno about it.
+    let blipsToUse = blips;
+    if (isFiltered) {
+      blipsToUse = filteredBlips;
+    }
     if (techFilters.length > 0) {
       setFilteredBlips(
         true,
-        blips.filter((b) => {
+        blipsToUse.filter((b) => {
           let hasTech = false;
           (b[techKey] || []).forEach((blipTech) => {
+            console.log('blipTech', blipTech);
             if (techFilters.includes(Utilities.createSlug(blipTech)))
               hasTech = true;
           });
@@ -82,7 +88,6 @@ export const BlipListMui: React.FC = React.memo(() => {
       };
       quads.push(q);
     }
-    console.log('Categorizing blips for quadrants');
     // Two pass, one for quadrant blips and second to
     displayBlips.forEach((blip) => {
       // get quad
