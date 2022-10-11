@@ -124,6 +124,18 @@ class VolunteerContent {
     githubLink: 'https://github.com/lordakarias'
   } as const;
 
+  static readonly JacksonO: VolunteerContentChild = {
+    name: 'Jackson Onyango',
+    background:
+      'Software Engineer with 6 years experience in full-stack web development (PREN, MERN, RoR, Python/Django/Flask, PHP/WordPress). Interested in  Machine Learning and AI',
+    quote:
+      'I am excited about combining technology with engineering to push boundaries. I have enjoyed working on the frontend of the TechRadar project it gave me a chance to put to use my UI knowledge and I also got to a learn new UI component library',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/Jackson.jpeg?raw=true',
+    linkedinLink: 'www.linkedin.com/in/jackson-o-08b9b9240',
+    githubLink: 'https://github.com/jacksono'
+  } as const;
+
   static readonly BeniamS: VolunteerContentChild = {
     name: 'Beniam Shewaye',
     background:
@@ -201,6 +213,7 @@ export const volunteerContentList: ReadonlyArray<VolunteerContentChild> = [
   VolunteerContent.SvenS,
   VolunteerContent.VladyslavaD,
   VolunteerContent.ZekariasT,
+  VolunteerContent.JacksonO,
 
   VolunteerContent.BeniamS,
   VolunteerContent.AhmedA,
