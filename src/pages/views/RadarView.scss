@@ -9,6 +9,9 @@
   .tabsComponents {
     margin: 0 0 15px !important;
     padding: 20px 5px;
+    max-width: none !important;
+    flex-basis: 50%;
+
     .chakra-tabs {
       width: 100%;
     }
@@ -24,7 +27,7 @@
   }
 
   .radarComponentsContainer {
-    flex-basis: 60%;
+    zoom: 1.3;
   }
 }
 
@@ -33,9 +36,10 @@
   position: absolute;
   justify-content: space-between;
   top: 20px;
+  width: 93vw;
 
   .titleFiller {
-    width: 550px;
+    width: 450px;
     z-index: -1;
   }
 }
@@ -46,18 +50,21 @@
   }
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 1400px) {
   .radarContainer {
     flex-direction: column;
     align-items: center;
     margin-right: 0;
 
     .tabsComponents {
-      min-width: 80vw !important;
+      max-width: 80vw !important;
 
       .chakra-tabs {
         width: 100%;
       }
+    }
+    .titleFiller {
+      width: 550px !important;
     }
   }
 }
@@ -134,7 +141,7 @@
     font-weight: 600;
   }
   .tabsComponents h5 {
-    font-size: 15px !important;
+    font-size: 22px !important;
     font-weight: 500 !important;
   }
   .tabsComponents h6 {
@@ -144,6 +151,7 @@
 }
 
 @media only screen and (max-width: 991px) {
+  
   .radarComponents {
     margin: 0 auto;
   }
@@ -227,6 +235,9 @@
   .radarComponents {
     z-index: 1;
     margin-top: 80px;
+  }
+  .radarComponentsContainer {
+    zoom: 1 !important;
   }
 }
 
