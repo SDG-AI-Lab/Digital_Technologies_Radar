@@ -5,10 +5,12 @@
   justify-content: space-between;
   margin: 30px 28px 30px 0;
   height: max-content;
+  flex-direction: column;
 
   .tabsComponents {
     margin: 0 0 15px !important;
     padding: 20px 5px;
+    min-width: 70vw !important;
     .chakra-tabs {
       width: 100%;
     }
@@ -24,7 +26,10 @@
   }
 
   .radarComponentsContainer {
-    flex-basis: 60%;
+    zoom: 1.5;
+    @media only screen and (max-width: 992px) {
+      zoom: 1;
+    }
   }
 }
 
@@ -33,9 +38,10 @@
   position: absolute;
   justify-content: space-between;
   top: 20px;
+  width: 93vw;
 
   .titleFiller {
-    width: 550px;
+    width: 450px;
     z-index: -1;
   }
 }
@@ -51,14 +57,9 @@
     flex-direction: column;
     align-items: center;
     margin-right: 0;
-
-    .tabsComponents {
-      min-width: 80vw !important;
-
-      .chakra-tabs {
-        width: 100%;
-      }
-    }
+  }
+  .titleFiller {
+    width: 550px !important;
   }
 }
 
