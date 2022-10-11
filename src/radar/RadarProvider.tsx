@@ -14,7 +14,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/technology_radar_dataset_updated_v6.csv';
+import csvData from '../assets/csv/technology_radar_dataset_updated_v7.csv';
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
 
