@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6c23b956.css",
-    "main.js": "/static/js/main.bcd7ad01.js",
+    "main.css": "/static/css/main.b44f30f8.css",
+    "main.js": "/static/js/main.fb0b1190.js",
     "static/js/787.7a2ae1f3.chunk.js": "/static/js/787.7a2ae1f3.chunk.js",
     "static/media/background2.jpg": "/static/media/background2.f23affceb6e02c142256.jpg",
     "static/media/technology_radar_dataset_updated_v7.csv": "/static/media/technology_radar_dataset_updated_v7.73a4f1e4307fc2c4de4d.csv",
@@ -10,12 +10,12 @@
     "static/media/SDG_BLACK_logo.png": "/static/media/SDG_BLACK_logo.cff2188904f1b1acc816.png",
     "static/media/SDG_WHITE_logo.png": "/static/media/SDG_WHITE_logo.e32f6cd201d0a6f5f298.png",
     "index.html": "/index.html",
-    "main.6c23b956.css.map": "/static/css/main.6c23b956.css.map",
-    "main.bcd7ad01.js.map": "/static/js/main.bcd7ad01.js.map",
+    "main.b44f30f8.css.map": "/static/css/main.b44f30f8.css.map",
+    "main.fb0b1190.js.map": "/static/js/main.fb0b1190.js.map",
     "787.7a2ae1f3.chunk.js.map": "/static/js/787.7a2ae1f3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6c23b956.css",
-    "static/js/main.bcd7ad01.js"
+    "static/css/main.b44f30f8.css",
+    "static/js/main.fb0b1190.js"
   ]
 }
