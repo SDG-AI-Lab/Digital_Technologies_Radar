@@ -84,7 +84,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
             </TabList>
             <TabPanels overflowY='auto'>
               <TabPanel overflowY='auto'>
-                <ScrollableDiv maxHeight={460}>
+                <ScrollableDiv maxHeight={770}>
                   <BlipListMui />
                 </ScrollableDiv>
               </TabPanel>
@@ -92,7 +92,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
                 <TechDescription />
               </TabPanel>
               <TabPanel overflowY='auto'>
-                <ScrollableDiv maxHeight={460}>
+                <ScrollableDiv maxHeight={770}>
                   <BlipView />
                 </ScrollableDiv>
               </TabPanel>
@@ -114,5 +114,5 @@ const TabOuterBoxProps: BoxProps = {
   mr: '10',
   p: '5',
   maxWidth: '500px',
-  height: '575px'
+  height: '800px'
 };
