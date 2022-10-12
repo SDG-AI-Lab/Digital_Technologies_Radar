@@ -81,10 +81,10 @@ export const HowToPopup: React.FC = () => {
                     <p>
                       Got any further questions or comments?{' '}
                       <a
-                        href='https://forms.office.com/pages/responsepage.aspx?id=Xtvls0QpN0iZ9XSIrOVDGUdlGNAMNehOnzuv5w8XXdVUMVVIVUlVWFVQWEU1TVRHODBURVc2SE1YOC4u'
+                        href='mailto:ftr4drr@undp.org'
                         style={{ color: 'blue', textDecoration: 'underline' }}
                       >
-                        Contact out us.
+                        Contact out us via e-mail.
                       </a>
                     </p>
                   </div>
