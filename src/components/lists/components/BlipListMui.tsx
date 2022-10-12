@@ -26,15 +26,12 @@ export const BlipListMui: React.FC = React.memo(() => {
       blips,
       filteredBlips,
       isFiltered,
-      techFilters,
-      disasterTypeFilter,
       radarData: { quadrants }
-    },
-    processes: { setFilteredBlips }
+    }
   } = useRadarState();
   const {
     state: {
-      keys: { horizonKey, techKey }
+      keys: { horizonKey }
     }
   } = useDataState();
 
