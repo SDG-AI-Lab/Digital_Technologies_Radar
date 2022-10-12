@@ -48,7 +48,7 @@ export const Volunteers: React.VFC = () => {
                 ml={0}
               >
                 {volunteerContentList
-                  .slice(0, 11)
+                  .slice(0, 12)
                   .map((volunteerContentChild, index) => (
                     <div className='volunteer-content' key={index}>
                       <VolunteerOrganization
@@ -70,7 +70,7 @@ export const Volunteers: React.VFC = () => {
                 ml={0}
               >
                 {volunteerContentList
-                  .slice(11, 15)
+                  .slice(12, 16)
                   .map((volunteerContentChild, index) => (
                     <div className='volunteer-content' key={index}>
                       <VolunteerOrganization
@@ -88,7 +88,7 @@ export const Volunteers: React.VFC = () => {
 
               <SimpleGrid columns={{ base: 1, sm: 2 }} py={6} ml={0}>
                 {volunteerContentList
-                  .slice(15, 17)
+                  .slice(16, 18)
                   .map((volunteerContentChild, index) => (
                     <div className='volunteer-content' key={index}>
                       <VolunteerOrganization

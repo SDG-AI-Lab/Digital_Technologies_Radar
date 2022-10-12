@@ -136,6 +136,18 @@ class VolunteerContent {
     githubLink: 'https://github.com/jacksono'
   } as const;
 
+  static readonly HakanA: VolunteerContentChild = {
+    name: 'Hakan Aksuman',
+    background:
+      'Currently full stack developer previously civil engineer, participated in data driven web development projects for more than 1 year',
+    quote:
+      'As a data and web development enthusiast, this project broadened my horizon in terms of implementing up to date technologies with a great team effort.',
+    imageSrc:
+      'https://github.com/SDG-AI-Lab/Course-Images/blob/main/photoUnvHakanAksuman.jpg?raw=true',
+    linkedinLink: 'www.linkedin.com/in/hakanaksuman',
+    githubLink: 'https://github.com/haksuman'
+  } as const;
+
   static readonly BeniamS: VolunteerContentChild = {
     name: 'Beniam Shewaye',
     background:
@@ -183,8 +195,7 @@ class VolunteerContent {
 
   static readonly VioletteH: VolunteerContentChild = {
     name: 'Violette Heron',
-    background:
-      'She has develop the mockups for the website. The website has modelled by using these mockups.',
+    background: 'She has actively supported the deployment of the project.',
     quote: '',
     imageSrc: '',
     linkedinLink: 'https://www.linkedin.com/',
@@ -193,8 +204,7 @@ class VolunteerContent {
 
   static readonly NajiA: VolunteerContentChild = {
     name: 'Naji Alhusami',
-    background:
-      'He has actively developed both backend and frontend components for the radar.',
+    background: 'He has actively supported the deployment of the project.',
     quote: '',
     imageSrc: '',
     linkedinLink: 'https://www.linkedin.com/[removed]',
@@ -214,6 +224,7 @@ export const volunteerContentList: ReadonlyArray<VolunteerContentChild> = [
   VolunteerContent.VladyslavaD,
   VolunteerContent.ZekariasT,
   VolunteerContent.JacksonO,
+  VolunteerContent.HakanA,
 
   VolunteerContent.BeniamS,
   VolunteerContent.AhmedA,
