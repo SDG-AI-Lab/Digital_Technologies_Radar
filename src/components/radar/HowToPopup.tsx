@@ -79,7 +79,13 @@ export const HowToPopup: React.FC = () => {
                   <div className='content'>
                     <h2 className='timeline-boundary'>Feedback</h2>
                     <p>
-                      Got any further questions or comments? Contact support.
+                      Got any further questions or comments?{' '}
+                      <a
+                        href='https://forms.office.com/pages/responsepage.aspx?id=Xtvls0QpN0iZ9XSIrOVDGUdlGNAMNehOnzuv5w8XXdVUMVVIVUlVWFVQWEU1TVRHODBURVc2SE1YOC4u'
+                        style={{ color: 'blue', textDecoration: 'underline' }}
+                      >
+                        Contact out us.
+                      </a>
                     </p>
                   </div>
                 </div>

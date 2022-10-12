@@ -147,7 +147,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
               <Box as='tbody'>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Description
+                    <b>Description:</b>
                   </Box>
                   <Box
                     as='td'
@@ -162,7 +162,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Technology
+                    <b>Technology:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Technology']}
@@ -170,7 +170,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Disaster Type
+                    <b>Disaster Type:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Disaster Type']}
@@ -178,7 +178,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Use Case
+                    <b>Use Case:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Use Case']}
@@ -186,7 +186,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    UN Host Organization
+                    <b>UN Host Organization:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Un Host Organisation']}
@@ -194,7 +194,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Partner
+                    <b>Partner:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Supporting Partners']}
@@ -202,7 +202,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Data
+                    <b>Data:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Data']}
@@ -210,7 +210,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Theme
+                    <b>Theme:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Theme']}
@@ -218,7 +218,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Source
+                    <b>Source:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     <Link
@@ -232,7 +232,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
-                    Publication Date
+                    <b>Publication Date:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
                     {techContent['Date of Implementation']}
