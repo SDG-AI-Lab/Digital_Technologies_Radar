@@ -79,7 +79,13 @@ export const HowToPopup: React.FC = () => {
                   <div className='content'>
                     <h2 className='timeline-boundary'>Feedback</h2>
                     <p>
-                      Got any further questions or comments? Contact support.
+                      Got any further questions or comments?{' '}
+                      <a
+                        href='mailto:ftr4drr@undp.org'
+                        style={{ color: 'blue', textDecoration: 'underline' }}
+                      >
+                        Contact out us via e-mail.
+                      </a>
                     </p>
                   </div>
                 </div>

@@ -103,7 +103,9 @@ export const BlipView: FC = () => {
           <Table variant='unstyled'>
             <Tbody>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Description</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Description:</b>
+                </Td>
                 <Td
                   style={{
                     textAlign: 'justify',
@@ -114,35 +116,51 @@ export const BlipView: FC = () => {
                 </Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Technology</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Technology:</b>
+                </Td>
                 <Td>{selectedItem['Technology']?.join(', ')}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Disaster Type</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Disaster Type:</b>
+                </Td>
                 <Td>{selectedItem['Disaster Type']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Use Case</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Use Case:</b>
+                </Td>
                 <Td>{selectedItem['Use Case']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>UN Host Organization</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>UN Host Organization:</b>
+                </Td>
                 <Td>{selectedItem['Un Host Organisation']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Partner</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Partner:</b>
+                </Td>
                 <Td>{selectedItem['Supporting Partners']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Data</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Data:</b>
+                </Td>
                 <Td>{selectedItem['Data']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Theme</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Theme:</b>
+                </Td>
                 <Td>{selectedItem['Theme']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Source</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Source:</b>
+                </Td>
                 <Td>
                   <Link
                     href={`${selectedItem['Source']}`}
@@ -154,7 +172,9 @@ export const BlipView: FC = () => {
                 </Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>Publication Date</Td>
+                <Td style={{ verticalAlign: 'top' }}>
+                  <b>Publication Date:</b>
+                </Td>
                 <Td>{selectedItem['Date of Implementation']}</Td>
               </Tr>
             </Tbody>
