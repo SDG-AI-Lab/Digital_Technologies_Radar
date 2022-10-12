@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.b44f30f8.css",
-    "main.js": "/static/js/main.a86c9ecd.js",
+    "main.js": "/static/js/main.5b9f4e29.js",
     "static/js/787.7a2ae1f3.chunk.js": "/static/js/787.7a2ae1f3.chunk.js",
     "static/media/background2.jpg": "/static/media/background2.f23affceb6e02c142256.jpg",
     "static/media/technology_radar_dataset_updated_v7.csv": "/static/media/technology_radar_dataset_updated_v7.73a4f1e4307fc2c4de4d.csv",
@@ -11,11 +11,11 @@
     "static/media/SDG_WHITE_logo.png": "/static/media/SDG_WHITE_logo.e32f6cd201d0a6f5f298.png",
     "index.html": "/index.html",
     "main.b44f30f8.css.map": "/static/css/main.b44f30f8.css.map",
-    "main.a86c9ecd.js.map": "/static/js/main.a86c9ecd.js.map",
+    "main.5b9f4e29.js.map": "/static/js/main.5b9f4e29.js.map",
     "787.7a2ae1f3.chunk.js.map": "/static/js/787.7a2ae1f3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b44f30f8.css",
-    "static/js/main.a86c9ecd.js"
+    "static/js/main.5b9f4e29.js"
   ]
 }
