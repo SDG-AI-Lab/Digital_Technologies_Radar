@@ -72,7 +72,7 @@ export const TechDescription: React.FC = () => {
 
 const TechDescriptionOuterBoxProps: BoxProps = {
   p: '1',
-  maxHeight: '460px',
+  maxHeight: '720px',
   overflow: 'scroll'
 };
 
