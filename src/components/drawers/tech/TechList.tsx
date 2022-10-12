@@ -9,9 +9,7 @@ import {
 import { TechItem } from './components/TechItem';
 import './TechList.scss';
 
-export const TechList: React.FC<{ showTitle?: boolean }> = ({
-  showTitle = true
-}) => {
+export const TechList: React.FC = () => {
   const {
     state: {
       blips,
@@ -22,8 +20,7 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       useCaseFilter,
       disasterTypeFilter
     },
-    actions: { setTechFilter, setHoveredTech },
-    processes: { setFilteredBlips }
+    actions: { setTechFilter, setHoveredTech }
   } = useRadarState();
 
   const {
@@ -33,7 +30,6 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
   const [tech, setTech] = useState<TechItemType[]>([]);
 
   const resetTech = (): void => {
-    setFilteredBlips(false, blips);
     setTechFilter([]);
   };
 
@@ -48,7 +44,6 @@ export const TechList: React.FC<{ showTitle?: boolean }> = ({
       ).forEach((b) => {
         (b[keys.techKey] as string[]).forEach((techy) => {
           const foundTech = radarData.tech.find((t) => t.type === techy);
-
           if (foundTech && !newTechMap.has(foundTech.slug)) {
             // could be added
             if (
