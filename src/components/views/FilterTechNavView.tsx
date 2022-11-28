@@ -6,7 +6,6 @@ export const FilterTechNavView = () => (
     style={{
       flexDirection: 'column',
       backgroundColor: 'white'
-      // borderBottom: '1px solid white'
     }}
     px={2}
   >

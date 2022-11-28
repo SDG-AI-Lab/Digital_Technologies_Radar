@@ -94,7 +94,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
    * constructs Components that need to allow for all sorts of use cases, therefore they
    * need to implement too much.
    * We do not.
-   * So we use simple divs whenever - also, consider removing these 2 Boxes here.
+   *  TODO So we use simple divs whenever - also, consider removing these 2 Boxes here.
    */
   return (
     <div

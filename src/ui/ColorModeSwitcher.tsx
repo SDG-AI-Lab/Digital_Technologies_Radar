@@ -19,7 +19,6 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
       size='md'
       fontSize='lg'
       variant='ghost'
-      // color="current"
       colorScheme='blue'
       marginLeft='2'
       onClick={toggleColorMode}

@@ -11,14 +11,6 @@ import {
   QuadrantHorizonList
 } from '../quadrant/QuadrantHorizonList';
 import { HorizonItem } from '../quadrant/HorizonItem';
-import {
-  // Accordion,
-  // AccordionButton,
-  // AccordionIcon,
-  // AccordionItem,
-  // AccordionPanel,
-  Box
-} from '@chakra-ui/react';
 import { ShowIcon } from '../quadrant/ShowIcon';
 import { ScrollableDiv } from './ScrollableDiv';
 
@@ -41,7 +33,6 @@ export const BlipList: React.FC = React.memo(() => {
   const [show, setShow] = useState(false);
   const toggleShow = () => {
     if (!show) {
-      // triggerSiblings(quadrantName);
       setTimeout(() => {
         setShow(true);
       });
@@ -87,9 +78,7 @@ export const BlipList: React.FC = React.memo(() => {
       quads.push(q);
     }
     console.log('Categorizing blips for quadrants');
-    // Two pass, one for quadrant blips and second to
     displayBlips.forEach((blip) => {
-      // get quad
       let q = quads[blip.quadrantIndex];
       let h = q.horizons;
       let hName: string = blip[horizonKey];
@@ -121,9 +110,6 @@ export const BlipList: React.FC = React.memo(() => {
 
   const renderQuadrants = (): ReactNode => {
     return quadrants.map((quadrant: string) => {
-      // test only one
-      // const quadrant = quadrants[0];
-      // end test only one
       return (
         <div key={quadrant}>
           <div
@@ -139,20 +125,6 @@ export const BlipList: React.FC = React.memo(() => {
           <ScrollableDiv show={show} maxHeight={400}>
             {renderHorizons(quadrant)}
           </ScrollableDiv>
-
-          {/* <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box flex='1' textAlign='left' fontWeight='bold'>
-                  {Utilities.capitalize(quadrant)}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              <div>{renderHorizons(quadrant)}</div>
-            </AccordionPanel>
-          </AccordionItem> */}
         </div>
       );
     });
@@ -160,7 +132,6 @@ export const BlipList: React.FC = React.memo(() => {
 
   return (
     <div style={{ width: 400 }}>
-      {/* <Accordion allowToggle>{renderQuadrants()}</Accordion> */}
       {renderQuadrants()}
     </div>
   );

@@ -1,5 +1,3 @@
-// import Icon from '@mui/material/Icon/Icon';
-
 export const ShowIcon: React.FC<{
   isOpen: boolean;
   isDisabled?: boolean;

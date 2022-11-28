@@ -36,8 +36,6 @@ export const SearchBar: React.FC = () => {
           .concat(', ')
           .concat(item['Disaster Cycle']);
       } else {
-        //if (typeof item['Disaster Cycle'] == 'string')
-        //  item['Disaster Cycle'] = [item['Disaster Cycle']];
         merge.push(item);
       }
     });
