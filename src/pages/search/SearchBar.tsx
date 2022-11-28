@@ -45,7 +45,6 @@ export const SearchBar: React.FC = () => {
     setMergedTechs(merge);
   };
 
-  //console.log('new Filter ', newFilter);
 
   /* Handle input change events, filter(search) based on this change events */
 

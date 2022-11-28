@@ -359,7 +359,6 @@ export const CustomFilter: React.FC = () => {
   }, [years]);
 
   const onSliderChange: (value: number | number[]) => void = (val) => {
-    // console.log('parent onRangerSelectionChange cchange', val);
     if (typeof val === 'object') onYearRangeChange(val);
     setSliderReset(false);
   };

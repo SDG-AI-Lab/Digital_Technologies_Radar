@@ -23,12 +23,10 @@ export const AppRangerSlider: React.FC<Props> = ({
 
   useEffect(() => {
     if (min) setSelectedMin(min);
-    // console.log('min', min);
   }, [min]);
 
   useEffect(() => {
     if (max) setSelectedMax(max);
-    // console.log('max', max);
   }, [max]);
 
   const onChange = (value: number | number[]) => {
@@ -45,7 +43,6 @@ export const AppRangerSlider: React.FC<Props> = ({
 
   useEffect(() => {
     if (reset) {
-      // console.log('will be resetted');
       setSelectedMax(max);
       setSelectedMin(min);
     }
