@@ -6,10 +6,7 @@ import {
   Utilities
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import {
-  BlipsPerQuadType,
-  QuadrantHorizonList
-} from '../quadrant/QuadrantHorizonList';
+import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 import { HorizonItem } from '../quadrant/HorizonItem';
 import { ShowIcon } from '../quadrant/ShowIcon';
 import { ScrollableDiv } from './ScrollableDiv';
@@ -18,10 +15,8 @@ export const BlipList: React.FC = React.memo(() => {
   const {
     state: {
       blips,
-      isFiltered,
       techFilters,
-      filteredBlips,
-      radarData: { quadrants, horizons }
+      radarData: { quadrants }
     }
   } = useRadarState();
   const {
@@ -130,9 +125,5 @@ export const BlipList: React.FC = React.memo(() => {
     });
   };
 
-  return (
-    <div style={{ width: 400 }}>
-      {renderQuadrants()}
-    </div>
-  );
+  return <div style={{ width: 400 }}>{renderQuadrants()}</div>;
 });
