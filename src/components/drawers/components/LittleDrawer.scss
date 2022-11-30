@@ -1,0 +1,30 @@
+
+.littleDrawer {
+  position: relative;
+  width: 42;
+  height: 40;
+  transition: all 0.5s;
+  margin-bottom: 10;
+
+  &-open {
+    width: 350;
+    height: 400
+  }
+
+  &-conatianer {
+    padding: 20px 20px 20px 50px;
+    height: 400;
+  }
+
+  &-box {
+    height: 100%;
+    overflow: auto;
+    color: black;
+    padding-right: 5px;
+  }
+
+  &-iconContainer {
+    position: absolute;
+    top: 0;
+  }
+}
