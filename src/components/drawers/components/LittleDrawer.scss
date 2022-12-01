@@ -28,3 +28,12 @@
     top: 0;
   }
 }
+.littleDrawerIconButton {
+  height: 40px;
+  width: 40px;
+
+  &-adj {
+    margin-top: -1px;
+    margin-right: -1px;
+  }
+}

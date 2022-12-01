@@ -16,33 +16,7 @@ header {
   right: 30px;
   margin: 0;
 }
-.customFilterContainer {
-  border-bottom: 0px !important;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin: 30px 0;
-}
-.customFilterContainer div {
-  max-height: 230px !important;
-  margin-left: 10px;
-  width: 100%;
-}
-.customFilterContainer button {
-  position: absolute;
-  bottom: calc(100% - 400px);
-  right: 30px;
-  margin: 0;
-}
-.customFilterContainer select {
-  max-width: 300px !important;
-}
-.customFilterContainer svg {
-  padding-left: 180px;
-}
-.customFilterContainer .rc-slider-handle {
-  width: 15px;
-  height: 15px;
-}
+
 .rc-slider {
   width: 220px !important;
   margin-left: -5px !important;
