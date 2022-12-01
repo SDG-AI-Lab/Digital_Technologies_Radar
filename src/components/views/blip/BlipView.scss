@@ -1,0 +1,24 @@
+.blipView {
+  .projectTitle {
+    justify-content: center;
+    text-align: center;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+    font-weight: 600;
+  }
+
+  .projectBadgeContainer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  td:nth-of-type(odd){
+    vertical-align: top;
+  }
+
+  .projectDescription {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}
