@@ -6,6 +6,8 @@ import { UNLogo } from './components/UNLogo';
 import { UNDPLogo } from './components/UNDPLogo';
 import { Flex } from '@chakra-ui/react';
 
+import './Navbar.scss';
+
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppLeftNav: React.FC = () => {
   return (
@@ -16,7 +18,7 @@ export const AppLeftNav: React.FC = () => {
         direction={'column'}
         alignItems={'center'}
         py={5}
-        style={{ borderRight: '1px solid Snow', backgroundColor: 'Snow' }}
+        className='appLeftNav'
       >
         <Box>
           <UNLogo p={1} />
