@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactLabelComp } from '@undp_sdg_ai_lab/undp-radar';
 
-import './NameComp.scss'
+import './NameComp.scss';
 
 export const QuadrantNameComp: ReactLabelComp = ({
   label,
