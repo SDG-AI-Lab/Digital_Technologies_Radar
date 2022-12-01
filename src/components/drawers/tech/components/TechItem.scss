@@ -3,3 +3,47 @@
   width: 25px;
   border-radius: 20px;
 }
+
+.scrollableDiv {
+  max-height: 80px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  overflow-y: undefined;
+  overflow-x: undefined;
+  display: flex;
+  flex-wrap: wrap;
+
+  &-overflowX {
+    overflow-x: auto;
+  }
+
+  &-overflowY {
+    overflow-y: auto;
+  }
+}
+
+button {
+  &.button {
+    border: none;
+    background: none;
+    display: flex;
+    flex: auto;
+    align-items: center;
+    padding: 1px;
+    margin-right: 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+
+  .btnContainer {
+    width: 100%;
+  }
+
+  .btnTechItem {
+    padding: 4px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
