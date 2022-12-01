@@ -115,7 +115,6 @@ const Horizons: React.FC<{
 
   const handleChangeHorizon =
     (horizon: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-
       setExpandedHorizon(isExpanded ? horizon : '');
     };
 
