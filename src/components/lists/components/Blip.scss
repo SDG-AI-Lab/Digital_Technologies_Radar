@@ -16,8 +16,6 @@
     max-height: 400px;
     overflow: hidden;
     scroll-behavior: smooth;
-    overflow-y: undefined;
-    overflow-x: undefined;
     display: none;
 
     &--overflowX {
@@ -33,11 +31,8 @@
     }
   }
 
-  &-title {
-    text-align: undefined;
-    &--center {
-      text-align: center;
-    }
+  &-title--center {
+    text-align: center;
   }
 }
 

@@ -45,11 +45,8 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
     <>
       {quadrantBlips.length > 0 && (
         <div>
-          <div
-            onClick={toggleShow}
-            style={{ display: 'flex', padding: 5, cursor: 'pointer' }}
-          >
-            <h5 style={{ flex: 1, textAlign: 'left' }}>{horizonName}</h5>
+          <div onClick={toggleShow} className='quadrantStagesTab'>
+            <h5>{horizonName}</h5>
             <ShowIcon isOpen={show} />
           </div>
 
