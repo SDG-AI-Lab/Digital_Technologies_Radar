@@ -14,8 +14,11 @@ import { NotFound404, Radar, Search, About, Volunteers, Home } from '../pages';
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
+//Styles
+import './AppNav.scss'
+
 export const NavApp = () => (
-  <Flex style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
+  <Flex className='navApp'>
     <AppLeftNav />
     <AppBottomNav />
     <AppMobileHeader />

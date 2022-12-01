@@ -5,6 +5,8 @@ import { v4 } from 'uuid';
 
 import { AppConst, TechDescriptionType } from '../../components/constants/app';
 
+import './TechDescription.scss';
+
 export const TechDescription: React.FC = () => {
   const {
     state: { radarData, techFilters }
@@ -40,19 +42,16 @@ export const TechDescription: React.FC = () => {
                 <div key={v4()}>
                   {selectedTech && (
                     <Box {...TechDescriptionInnerBoxProps}>
-                      <Text
-                        as='h4'
-                        style={{
-                          textAlign: 'left',
-                          fontWeight: 600,
-                          fontSize: 20
-                        }}
-                      >
+                      <Text as='h4' className='techDescription-title'>
                         {selectedTechKey}
                       </Text>
 
                       {selectedTech.map((text) => (
-                        <Text key={v4()} pt={5} style={{ textAlign: 'left' }}>
+                        <Text
+                          key={v4()}
+                          pt={5}
+                          className='techDescription-text'
+                        >
                           {text}
                         </Text>
                       ))}

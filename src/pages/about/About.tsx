@@ -21,7 +21,6 @@ export const About: React.VFC = () => {
     <>
       <Button
         onClick={onFeedbackClick}
-        style={{ cursor: 'pointer' }}
         position={'absolute'}
         colorScheme='orange'
         right={30}

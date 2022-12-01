@@ -17,6 +17,8 @@ import {
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 
+import './Search.scss';
+
 interface SearchViewProps {
   techContent: BaseCSVType;
 }
@@ -73,28 +75,12 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
             '2xl': '62rem'
           }}
         >
-          <ModalHeader
-            pb={0}
-            mr={10}
-            style={{
-              justifyContent: 'center',
-              textAlign: 'center',
-              textTransform: 'capitalize'
-            }}
-          >
+          <ModalHeader pb={0} mr={10} className='searchModalHeader'>
             {techContent['Ideas/Concepts/Examples']}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Stack
-              direction='row'
-              mt={3}
-              mb={4}
-              style={{
-                justifyContent: 'center',
-                flexWrap: 'wrap'
-              }}
-            >
+            <Stack direction='row' mt={3} mb={4} className='searchModalBody'>
               <Badge
                 px={2}
                 py={1}
@@ -151,10 +137,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                   </Box>
                   <Box
                     as='td'
-                    style={{
-                      textAlign: 'justify',
-                      textJustify: 'inter-word'
-                    }}
+                    className='searchModalDescription'
                     {...tdContentStyle}
                   >
                     {techContent['Description']}
