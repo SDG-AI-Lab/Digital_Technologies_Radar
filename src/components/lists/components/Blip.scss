@@ -1,7 +1,7 @@
 .blipListQuadrant {
+  cursor: pointer;
   display: flex;
   padding: 5px;
-  cursor: pointer;
 
   h4 {
     flex: 1;
@@ -13,10 +13,10 @@
   width: 400px;
 
   &-scroll {
+    display: none;
     max-height: 400px;
     overflow: hidden;
     scroll-behavior: smooth;
-    display: none;
 
     &--overflowX {
       overflow-x: auto;
