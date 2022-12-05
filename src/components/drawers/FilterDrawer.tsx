@@ -23,7 +23,7 @@ export const FilterDrawer: React.FC = () => {
     <>
       <Box
         className={`option-button ${
-          useLocation().pathname.includes('quadrant') && 'quadrant-filter'
+          useLocation().pathname.includes('quadrant') ? 'quadrant-filter' : ''
         }`}
       >
         <Box overflowY='auto' width='0px'>

@@ -19,17 +19,17 @@ export const SearchBar: React.FC = () => {
     mergeDiasterCycle();
   }, [blips]);
 
-  let merge: BaseCSVType[] = [];
+  const merge: BaseCSVType[] = [];
 
   /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
-  const mergeDiasterCycle = () => {
+  const mergeDiasterCycle = (): void => {
     blips.forEach(function (item) {
-      var existingBips = merge.filter(function (v, i) {
+      const existingBips = merge.filter(function (v, i) {
         return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
       });
 
       if (existingBips.length) {
-        var existingIndex = merge.indexOf(existingBips[0]);
+        const existingIndex = merge.indexOf(existingBips[0]);
         merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
           'Disaster Cycle'
         ]
@@ -45,7 +45,7 @@ export const SearchBar: React.FC = () => {
 
   /* Handle input change events, filter(search) based on this change events */
 
-  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const searchword = event.target.value.toLowerCase();
     setTechSearch(searchword);
     const query = searchword.toLowerCase();

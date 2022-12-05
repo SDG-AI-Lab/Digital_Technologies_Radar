@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { ReactNode, useEffect, useState } from 'react';
 import {
   BlipType,
@@ -28,7 +29,7 @@ export const BlipList: React.FC = React.memo(() => {
   } = useDataState();
 
   const [show, setShow] = useState(false);
-  const toggleShow = () => {
+  const toggleShow = (): void => {
     if (!show) {
       setTimeout(() => {
         setShow(true);
@@ -36,17 +37,17 @@ export const BlipList: React.FC = React.memo(() => {
     } else setShow(false);
   };
 
-  type QuadType = {
+  interface QuadType {
     qIndex: number;
     horizons: BlipsPerQuadType;
-  };
+  }
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const [quadBlips, setQuadBlips] = useState<QuadType[]>([]);
 
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
-  const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
+  const triggerSiblings = (horizon: string): void => setSourceHorizon(horizon);
 
   useEffect(() => {
     if (techFilters.length > 0) {
@@ -66,9 +67,9 @@ export const BlipList: React.FC = React.memo(() => {
   }, [blips, techFilters]);
 
   useEffect(() => {
-    var quads = new Array<QuadType>();
+    const quads = new Array<QuadType>();
     for (let i = 0; i < quadrants.length; i++) {
-      var q: QuadType = {
+      const q: QuadType = {
         qIndex: i,
         horizons: {}
       };
@@ -76,9 +77,9 @@ export const BlipList: React.FC = React.memo(() => {
     }
     console.log('Categorizing blips for quadrants');
     displayBlips.forEach((blip) => {
-      let q = quads[blip.quadrantIndex];
-      let h = q.horizons;
-      let hName: string = blip[horizonKey];
+      const q = quads[blip.quadrantIndex];
+      const h = q.horizons;
+      const hName: string = blip[horizonKey];
       if (h[hName] === undefined) {
         h[hName] = new Array<BlipType>();
       }

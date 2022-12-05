@@ -6,7 +6,7 @@ interface AboutOrganizationProps {
 }
 
 const AboutOrganization: React.FunctionComponent<AboutOrganizationProps> = (
-  props
+  props: AboutOrganizationProps
 ) => {
   return (
     <div>

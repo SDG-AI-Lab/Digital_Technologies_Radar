@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react';
 import {
   BlipType,
@@ -15,10 +16,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 import { HorizonItemMui } from '../quadrant/HorizonItemMui';
 
-type QuadType = {
+interface QuadType {
   qIndex: number;
   horizons: BlipsPerQuadType;
-};
+}
 
 export const BlipListMui: React.FC = React.memo(() => {
   const {
@@ -54,18 +55,18 @@ export const BlipListMui: React.FC = React.memo(() => {
   }, [blips, filteredBlips]);
 
   useEffect(() => {
-    var quads = new Array<QuadType>();
+    const quads = new Array<QuadType>();
     for (let i = 0; i < quadrants.length; i++) {
-      var q: QuadType = {
+      const q: QuadType = {
         qIndex: i,
         horizons: {}
       };
       quads.push(q);
     }
     displayBlips.forEach((blip) => {
-      let q = quads[blip.quadrantIndex];
-      let h = q.horizons;
-      let hName: string = blip[horizonKey];
+      const q = quads[blip.quadrantIndex];
+      const h = q.horizons;
+      const hName: string = blip[horizonKey];
       if (h[hName] === undefined) {
         h[hName] = new Array<BlipType>();
       }

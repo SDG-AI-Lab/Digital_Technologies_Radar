@@ -23,7 +23,7 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
     };
   }, []);
 
-  const innerOnClick = () => {
+  const innerOnClick = (): void => {
     if (props.onClick) props.onClick();
   };
 

@@ -3,9 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
 // Components
-import { AppLeftNav } from '../components';
-import { AppBottomNav } from '../components';
-import { AppMobileHeader } from '../components';
+import { AppLeftNav, AppMobileHeader, AppBottomNav } from '../components';
+
 // Layouts
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
@@ -14,10 +13,10 @@ import { NotFound404, Radar, Search, About, Volunteers, Home } from '../pages';
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
-//Styles
+// Styles
 import './AppNav.scss';
 
-export const NavApp = () => (
+export const NavApp: React.FC = () => (
   <Flex className='navApp'>
     <AppLeftNav />
     <AppBottomNav />

@@ -231,22 +231,28 @@ export const CustomFilter: React.FC = () => {
     // filter start years
     if (startYearFilter !== 'all') {
       isFiltered = true;
-      let start = Number(startYearFilter);
-      let end = isNaN(Number(endYearFilter))
+      const start = Number(startYearFilter);
+      const end = isNaN(Number(endYearFilter))
         ? new Date().getFullYear()
         : Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
     if (endYearFilter !== 'all') {
       isFiltered = true;
-      let start = isNaN(Number(startYearFilter))
+      const start = isNaN(Number(startYearFilter))
         ? 2000 // This assumes the earliest project year
         : Number(startYearFilter);
-      let end = Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const end = Number(endYearFilter);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
@@ -325,7 +331,7 @@ export const CustomFilter: React.FC = () => {
   const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedSdg(e.target.value);
   // on year range change
-  const onYearRangeChange = (e: Number[]) => {
+  const onYearRangeChange = (e: Number[]): void => {
     setSelectedStartYear(String(e[0]));
     setSelectedEndYear(String(e[1]));
   };
@@ -351,7 +357,8 @@ export const CustomFilter: React.FC = () => {
 
   const [min, setMin] = useState<number>();
   const [max, setMax] = useState<number>();
-  const forceNumber = (o: { name: string }) => Number(o.name);
+  const forceNumber = (o: { name: string }): number => Number(o.name);
+
   useEffect(() => {
     const maxApply = Math.max(...years.map(forceNumber));
     const minApply = Math.min(...years.map(forceNumber));

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
-import { FaHome } from 'react-icons/fa';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 

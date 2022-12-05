@@ -1,19 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, VStack, Button, Spacer, Image } from '@chakra-ui/react';
-import { Box, Text, Flex } from '@chakra-ui/react';
-
+import {
+  Container,
+  VStack,
+  Button,
+  Spacer,
+  Image,
+  Box,
+  Text,
+  Flex
+} from '@chakra-ui/react';
 import AboutOrganization from './AboutOrganization';
 import { aboutContentList } from './AboutContent';
 
 export const About: React.VFC = () => {
   const navigate = useNavigate();
-  const onFeedbackClick = () =>
+  const onFeedbackClick = (): any =>
     window.open(
       'https://forms.office.com/pages/responsepage.aspx?id=Xtvls0QpN0iZ9XSIrOVDGUdlGNAMNehOnzuv5w8XXdVUMVVIVUlVWFVQWEU1TVRHODBURVc2SE1YOC4u',
       '_newtab'
     );
-  const onVolunteerInfoClick = () => {
+  const onVolunteerInfoClick = (): void => {
     navigate('/volunteers');
   };
 

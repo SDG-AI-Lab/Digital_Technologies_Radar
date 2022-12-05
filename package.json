@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://drrtechradar.org",
   "dependencies": {
-    "@chakra-ui/react": "^1.8.7",
+    "@chakra-ui/react": "^1.8.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@mui/icons-material": "^5.6.1",

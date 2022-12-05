@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { Flex, Box, Button, Text } from '@chakra-ui/react';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
-import { FaHome } from 'react-icons/fa';
 
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from '../../navigation/routes';

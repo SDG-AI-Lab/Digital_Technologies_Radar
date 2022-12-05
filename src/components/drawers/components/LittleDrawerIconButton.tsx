@@ -29,10 +29,10 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
   label = null
 }) => {
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
-  const open = () => {
+  const open = (): void => {
     if (!isOpen) setIsPopupOpen(!isPopupOpen);
   };
-  const close = () => {
+  const close = (): void => {
     setIsPopupOpen(false);
   };
 
