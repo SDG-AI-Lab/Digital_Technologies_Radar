@@ -33,8 +33,10 @@ export const BackButton: React.FC<Props> = ({ to }) => {
             switch (to) {
               case 'QUADRANT':
                 setSelectedItem(null);
-                if (selectedQuadrant)
-                  nav(`${ROUTES.QUADRANT}/${selectedQuadrant}`);
+                if (selectedQuadrant) {
+                  const navRoute: string = ROUTES.QUADRANT;
+                  nav(`${navRoute}/${selectedQuadrant}`);
+                }
                 break;
               case 'ABOUT':
                 nav(ROUTES.ABOUT);
