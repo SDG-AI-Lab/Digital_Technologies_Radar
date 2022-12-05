@@ -13,7 +13,7 @@ import {
 import { CustomFilter } from './filter/CustomFilter';
 import { TechList } from './tech/TechList';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { HowToPopup } from '../../components/radar/HowToPopup';
+import { HowToPopup } from 'components/radar/HowToPopup';
 
 import './FilterDrawer.scss';
 
