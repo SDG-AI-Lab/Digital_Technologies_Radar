@@ -5,7 +5,7 @@ import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 
 import { MenuItem } from './components/MenuItem';
-import { ROUTES } from '../../navigation/routes';
+import { ROUTES } from 'navigation/routes';
 
 interface Props {
   isOpen: boolean;
