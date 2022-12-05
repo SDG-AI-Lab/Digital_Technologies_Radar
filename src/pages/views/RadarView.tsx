@@ -14,10 +14,10 @@ import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 import { WaitingForRadar } from 'radar/components';
 import { PopOverView } from './PopOverView';
-import { TechDescription } from '../../radar/tech/TechDescription';
-import { BlipView } from '../../components/views/blip/BlipView';
-import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
-import { BlipListMui } from '../../components/lists/components/BlipListMui';
+import { TechDescription } from 'radar/tech/TechDescription';
+import { BlipView } from 'components/views/blip/BlipView';
+import { ScrollableDiv } from 'components/lists/components/ScrollableDiv';
+import { BlipListMui } from 'components/lists/components/BlipListMui';
 
 import './RadarView.scss';
 
