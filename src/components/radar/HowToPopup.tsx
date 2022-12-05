@@ -10,10 +10,10 @@ import {
   Button
 } from '@chakra-ui/react';
 import './HowToPopup.scss';
-import Blip from '../../../src/assets/components/Blips.png';
-import TechnologiesFilter from '../../../src/assets/components/Technologies.png';
-import DisasterDropdown from '../../../src/assets/components/Disaster_type.png';
-import QuadrantTitle from '../../../src/assets/components/Quadrant.png';
+import Blip from 'assets/components/Blips.png';
+import TechnologiesFilter from 'assets/components/Technologies.png';
+import DisasterDropdown from 'assets/components/Disaster_type.png';
+import QuadrantTitle from 'assets/components/Quadrant.png';
 
 export const HowToPopup: React.FC = () => {
   return (
