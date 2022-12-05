@@ -10,7 +10,7 @@ import {
 
 import { volunteerContentList } from './VolunteerContent';
 import VolunteerOrganization from './VolunteerOrganization';
-import { BackButton } from '../../radar/components';
+import { BackButton } from 'radar/components';
 
 export const Volunteers: React.VFC = () => {
   return (
