@@ -3,7 +3,7 @@ import { useRadarState, TechKey } from '@undp_sdg_ai_lab/undp-radar';
 import { Box, BoxProps, Text } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 
-import { AppConst, TechDescriptionType } from '../../components/constants/app';
+import { AppConst, TechDescriptionType } from 'components/constants/app';
 
 import './TechDescription.scss';
 
