@@ -8,9 +8,9 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
-import { BlipView } from '../../views/blip/BlipView';
-import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
-import { TechDescription } from '../../../radar/tech/TechDescription';
+import { BlipView } from 'components/views/blip/BlipView';
+import { ScrollableDiv } from 'components/lists/components/ScrollableDiv';
+import { TechDescription } from 'radar/tech/TechDescription';
 import './DataLists.scss';
 
 export type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -78,13 +78,13 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
     }
   }, [selectedItem]);
 
-  const tabsChangeHandler = (ind: number) => {
+  const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
   };
 
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
-  const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
+  const triggerSiblings = (horizon: string): void => setSourceHorizon(horizon);
 
   /**
    * @ImplNote
