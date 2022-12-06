@@ -21,14 +21,11 @@ export const HowToPopup: React.FC = () => {
       <Popover trigger={'hover'} variant={'max70PercentHeight'}>
         <PopoverTrigger>
           <Button
-            position={'absolute'}
-            right={30}
             m={7}
             px={25}
             colorScheme='blue'
             rightIcon={<AiOutlineAim />}
             borderRadius={'0'}
-            className='how-to-button'
           >
             How to use
           </Button>

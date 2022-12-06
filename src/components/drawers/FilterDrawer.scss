@@ -9,9 +9,28 @@ header {
 }
 
 .option-button {
+  align-items: center;
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: space-between;
   z-index: 1;
+
+  + div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    h2 {
+      order: 2;
+    }
+
+    button:last-of-type {
+      order: 3
+    }
+  }
+
 }
 
 @media only screen and (max-width: 921px) {
@@ -29,6 +48,12 @@ header {
     width: 100%;
   }
 }
+
 .filterWrapper {
   padding-right: 10px;
+}
+
+
+button {
+  margin-left: 10px !important;
 }
