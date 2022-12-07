@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import {
   Box,
-  Heading,
   Tabs,
   TabList,
   TabPanels,
@@ -45,19 +44,6 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-      <div className='radarTitleContainer'>
-        <Heading
-          fontSize={30}
-          color='DarkSlateGray'
-          textAlign='center'
-          p={15}
-          paddingTop={15}
-          className='radarTitle'
-        >
-          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-        </Heading>
-        <div className='titleFiller' />
-      </div>
       <SimpleGrid
         alignItems='center'
         columns={{ sm: 1, md: 1, lg: 2 }}

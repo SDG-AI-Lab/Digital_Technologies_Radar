@@ -11,7 +11,7 @@ import './Navbar.scss';
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppLeftNav: React.FC = () => {
   return (
-    <Box display={{ base: 'none', md: 'block' }} zIndex='10'>
+    <Box display={{ base: 'none', md: 'block' }}>
       <Flex
         w={75}
         h={'100%'}
