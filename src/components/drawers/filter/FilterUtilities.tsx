@@ -115,7 +115,7 @@ const getImplementers = (
     });
   });
 
-  let arr = Array.from(newImplementers.values()).sort((a, b) =>
+  const arr = Array.from(newImplementers.values()).sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
@@ -143,7 +143,7 @@ const getSDGs = (rawBlipData: BlipType[], SDGKey: string): SelectableItem[] => {
   });
 
   // Order the resulting array
-  let arr = Array.from(newSDGs.values()).sort(function (a, b) {
+  const arr = Array.from(newSDGs.values()).sort(function (a, b) {
     // we use natural instead of lexicographical order
     return a.name.localeCompare(b.name, undefined, {
       numeric: true,
@@ -204,7 +204,7 @@ const getData = (
     });
   });
 
-  let arr = Array.from(newData.values()).sort((a, b) =>
+  const arr = Array.from(newData.values()).sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 

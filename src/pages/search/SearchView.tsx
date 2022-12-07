@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
 import {
   Modal,
   ModalOverlay,

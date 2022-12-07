@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Outlet } from 'react-router-dom';
 
 import { PopOverView } from '../pages/views/PopOverView';

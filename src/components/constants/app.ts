@@ -4,8 +4,9 @@ import { Utilities } from '@undp_sdg_ai_lab/undp-radar';
 
 export type TechDescriptionType = string[];
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class AppConst {
-  private static getContent = () =>
+  private static readonly getContent = (): string[] =>
     loremIpsum({
       p: 2,
       avgSentencesPerParagraph: 10,

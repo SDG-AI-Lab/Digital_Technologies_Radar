@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'rc-slider'; // rc-slider from https://slider-react-component.vercel.app
 import 'rc-slider/assets/index.css';
 
@@ -28,7 +28,7 @@ export const AppRangerSlider: React.FC<Props> = ({
     if (max) setSelectedMax(max);
   }, [max]);
 
-  const onChange = (value: number | number[]) => {
+  const onChange = (value: number | number[]): void => {
     if (typeof value === 'object') {
       setSelectedMin(value[0]);
       setSelectedMax(value[1]);

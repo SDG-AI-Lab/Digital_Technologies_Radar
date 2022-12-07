@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import {
   Box,
   Center,
@@ -22,13 +24,18 @@ interface SearchResultProps {
   filteredContent: BaseCSVType[];
 }
 
-export const SearchResult: React.FC<SearchResultProps> = (props) => {
+export const SearchResult: React.FC<SearchResultProps> = (
+  props: SearchResultProps
+) => {
   const [page, setPage] = useState(1);
   const PER_PAGE = 15;
   const count = Math.ceil(props.filteredContent.length / PER_PAGE);
   const paginatedData = usePagination(props.filteredContent, PER_PAGE);
 
-  const handlePaginationChange = (e: React.ChangeEvent<any>, p: number) => {
+  const handlePaginationChange = (
+    e: React.ChangeEvent<any>,
+    p: number
+  ): void => {
     setPage(p);
     paginatedData.jump(p);
   };
@@ -40,7 +47,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
       <Box bg={'#fdfdfd'} mb={{ base: 0, md: 50 }}>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
           <SimpleGrid columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}>
-            {paginatedData.currentData().map((value, key) => {
+            {paginatedData.currentData().map((value: any, key: any) => {
               return (
                 <Center py={6} key={key}>
                   <Box

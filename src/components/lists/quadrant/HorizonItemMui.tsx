@@ -81,14 +81,16 @@ const ItemMui: React.FC<{
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
-  const onMouseLeave = () => setHoveredItem(null);
-  const onMouseEnter = () => setHoveredItem(blip);
+  const onMouseLeave = (): void => setHoveredItem(null);
+  const onMouseEnter = (): void => setHoveredItem(blip);
 
-  const onSelect = () => {
+  const onSelect = (): void => {
     setSelectedItem(blip);
   };
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
   const borderSelected = selectedItem?.id === blip.id ? '1px solid blue' : '';
+
+  console.log('heeeerrrrreeee');
 
   return (
     <Accordion
@@ -173,7 +175,7 @@ const ItemMui: React.FC<{
                   textTransform: 'uppercase'
                 }}
               >
-                🎯{' ' + blip['SDG']}
+                🎯{' ' + blip.SDG}
               </Typography>
             </div>
             <Button onClick={onSelect} variant='contained'>

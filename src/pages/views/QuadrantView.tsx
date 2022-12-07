@@ -5,8 +5,8 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { BackButton } from '../../radar/components';
-import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
+import { BackButton } from 'radar/components';
+import { QuadrantHorizonList } from 'components/lists/quadrant/QuadrantHorizonList';
 
 export const QuadrantView: React.FC = () => {
   const {

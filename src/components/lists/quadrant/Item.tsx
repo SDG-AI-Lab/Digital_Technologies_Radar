@@ -32,11 +32,11 @@ export const Item: React.FC<Props> = ({
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
-  const onMouseLeave = () => setHoveredItem(null);
-  const onMouseEnter = () => setHoveredItem(blip);
+  const onMouseLeave = (): void => setHoveredItem(null);
+  const onMouseEnter = (): void => setHoveredItem(blip);
 
   const [show, setShow] = useState(false);
-  const toggleShow = () => {
+  const toggleShow = (): void => {
     if (!show) {
       triggerSiblings(blip.id);
       setTimeout(() => {
@@ -54,7 +54,7 @@ export const Item: React.FC<Props> = ({
     if (close) setShow(false);
   }, [close]);
 
-  const onSelect = () => {
+  const onSelect = (): void => {
     setSelectedItem(blip);
   };
   const showBackgroundColor = hoveredItem?.id === blip.id;

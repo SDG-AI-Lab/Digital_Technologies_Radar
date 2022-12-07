@@ -1,10 +1,16 @@
 import React from 'react';
-import { Container, VStack } from '@chakra-ui/react';
-import { Box, Text, SimpleGrid, Flex } from '@chakra-ui/react';
+import {
+  Container,
+  VStack,
+  Box,
+  Text,
+  SimpleGrid,
+  Flex
+} from '@chakra-ui/react';
 
 import { volunteerContentList } from './VolunteerContent';
 import VolunteerOrganization from './VolunteerOrganization';
-import { BackButton } from '../../radar/components';
+import { BackButton } from 'radar/components';
 
 export const Volunteers: React.VFC = () => {
   return (

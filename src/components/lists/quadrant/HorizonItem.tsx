@@ -20,7 +20,7 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
   close
 }) => {
   const [show, setShow] = useState(false);
-  const toggleShow = () => {
+  const toggleShow = (): void => {
     if (!show) {
       triggerSiblings(horizonName);
       setTimeout(() => {
@@ -39,7 +39,7 @@ export const HorizonItem: React.FC<QuadrantDataListItemProps> = ({
 
   const [sourceBlipId, setSourceBlipId] = useState<string>();
 
-  const triggerItemSiblings = (blipId: string) => setSourceBlipId(blipId);
+  const triggerItemSiblings = (blipId: string): void => setSourceBlipId(blipId);
 
   return (
     <>

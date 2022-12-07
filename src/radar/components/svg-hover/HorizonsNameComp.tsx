@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { ReactLabelComp } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -12,7 +13,7 @@ export const HorizonsNameComp: ReactLabelComp = ({
   className
 }) => (
   <g
-    className={`nameComp ${className}`}
+    className={`nameComp ${className as string}`}
     textAnchor={textAnchor}
     onMouseEnter={onMouseEnter}
     onMouseMove={onMouseMove}

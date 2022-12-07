@@ -15,7 +15,7 @@ export const Radar: React.FC = () => {
     actions: { setSelectedItem }
   } = useRadarState();
 
-  const goToQuadrant = (quadrant: string) =>
+  const goToQuadrant = (quadrant: string): any =>
     nav(`${ROUTES.QUADRANT}/${quadrant}`);
 
   useEffect(() => {
