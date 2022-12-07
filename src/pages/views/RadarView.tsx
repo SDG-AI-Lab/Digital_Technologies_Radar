@@ -48,6 +48,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         alignItems='center'
         columns={{ sm: 1, md: 1, lg: 2 }}
         className='radarContainer'
+        id='radar-container'
       >
         <Box className='radarComponentsContainer'>
           <Box className='radarComponents'>

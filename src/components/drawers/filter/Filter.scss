@@ -11,8 +11,12 @@
 
   div {
     margin-left: 10px;
-    max-height: 230px !important;
+    max-height: 230px;
     width: 100%;
+
+    .customFilterContainer-wrapper--margin {
+      margin: 7px 20px 3px 0;
+    }
   }
 
   button {
@@ -20,10 +24,6 @@
     margin: 0;
     position: absolute;
     right: 30px;
-  }
-
-  select {
-    max-width: 300px !important;
   }
 
   svg {
@@ -38,14 +38,11 @@
   &-wrapper {
     display: flex;
     flex-wrap: wrap;
-    &--margin {
-      margin: 7px 20px 3px 0 !important;
-    }
   }
 
   select {
     border: 1px solid lightgrey;
-    max-width: 150px;
+    max-width: 300px;
     padding: 10px;
   }
 

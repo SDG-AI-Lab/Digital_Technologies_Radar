@@ -3,9 +3,9 @@ header {
   margin-bottom: 7px;
 }
 
-.rc-slider {
-  margin-left: -5px !important;
-  width: 220px !important;
+div.rc-slider {
+  margin-left: -5px;
+  width: 220px;
 }
 
 .option-button {
@@ -30,11 +30,14 @@ header {
       order: 3;
     }
   }
+
+  button {
+    margin-left: 0;
+  }
 }
 
 @media only screen and (max-width: 921px) {
   .option-button {
-    margin-top: 0px !important;
     width: 100%;
   }
 }
@@ -43,15 +46,10 @@ header {
   .option-button {
     left: 0;
     margin: 0px;
-    margin-top: 80px !important;
     width: 100%;
   }
 }
 
 .filterWrapper {
   padding-right: 10px;
-}
-
-button {
-  margin-left: 10px !important;
 }
