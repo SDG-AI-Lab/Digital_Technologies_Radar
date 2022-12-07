@@ -21,6 +21,9 @@ export const ScrollableDiv: React.FC<Props> = ({
       'blipList-scroll--overflowX': overflowX,
       'blipList-scroll--show': show
     })}
+    style={{
+      maxHeight // maxHeight comes in as a prop so this style will be dynamic
+    }}
   >
     {children}
   </div>
