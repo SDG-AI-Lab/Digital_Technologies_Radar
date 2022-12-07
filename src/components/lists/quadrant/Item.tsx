@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cx from 'classnames';
 
 import {
   useDataState,
@@ -56,52 +57,38 @@ export const Item: React.FC<Props> = ({
   const onSelect = () => {
     setSelectedItem(blip);
   };
-  const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
+  const showBackgroundColor = hoveredItem?.id === blip.id;
 
   return (
-    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      className='quadrantItem'
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div
-        style={{
-          padding: 5,
-          backgroundColor,
-          display: 'flex',
-          alignItems: 'center'
-        }}
+        className={cx('quadrantItem-container', {
+          'quadrantItem-container--background': showBackgroundColor
+        })}
       >
-        <div
-          onClick={toggleShow}
-          style={{
-            flex: 1,
-            padding: 2,
-            fontSize: 12,
-            fontWeight: 600,
-            cursor: 'pointer',
-            textAlign: 'left'
-          }}
-        >
+        <div onClick={toggleShow} className='quadrantItem-text'>
           {blip[titleKey]}
         </div>
         <ShowIcon isOpen={show} />
       </div>
-      <div style={{ display: show ? 'block' : 'none', padding: 5 }}>
-        <div style={{ backgroundColor: '#EDF2F7' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              minHeight: '200px',
-              padding: 10
-            }}
-          >
+      <div
+        className={cx('quadrantItem-descriptionDisplay', {
+          'quadrantItem-descriptionDisplay--show': show
+        })}
+      >
+        <div className='quadrantItem-descriptionContainer'>
+          <div className='quadrantItem-descriptionContainer--text'>
             <div>
               <Text mb='2'>Description</Text>
               <Text fontWeight={'400'} fontSize={'md'}>
                 {blip.Description}
               </Text>
             </div>
-            <div
-              style={{ display: 'flex', flexWrap: 'wrap', padding: '10px 0px' }}
-            >
+            <div className='quadrantItem-descriptionContainer--badge'>
               <Badge
                 isTruncated
                 my='1'

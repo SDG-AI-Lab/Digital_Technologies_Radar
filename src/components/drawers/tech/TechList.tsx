@@ -76,16 +76,8 @@ export const TechList: React.FC = () => {
   };
 
   return (
-    <div
-      className={'techListContainer'}
-      style={{
-        paddingTop: 15,
-        display: 'flex',
-        alignItems: 'center',
-        background: 'Snow'
-      }}
-    >
-      <div style={{ textAlign: 'end' }}>
+    <div className='techListContainer'>
+      <div className='techListContainer-scroll'>
         <ScrollableDiv>
           {tech.map((t) => {
             const toggleTechFilter = (): void => {

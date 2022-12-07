@@ -80,10 +80,7 @@ export const HowToPopup: React.FC = () => {
                     <h2 className='timeline-boundary'>Feedback</h2>
                     <p>
                       Got any further questions or comments?{' '}
-                      <a
-                        href='mailto:ftr4drr@undp.org'
-                        style={{ color: 'blue', textDecoration: 'underline' }}
-                      >
+                      <a href='mailto:ftr4drr@undp.org'>
                         Contact out us via e-mail.
                       </a>
                     </p>

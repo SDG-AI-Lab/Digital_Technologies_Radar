@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { FaCaretLeft, FaCog, FaServer } from 'react-icons/fa';
+import './LittleDrawer.scss';
 
 enum IconType {
   COG = 'COG',
@@ -51,17 +52,17 @@ export const LittleDrawerIconButton: React.FC<Props> = ({
         <Button
           onClick={onToggle}
           borderRadius={30}
-          style={{ height: 40, width: 40 }}
           onMouseOver={open}
           onMouseOut={close}
+          className='littleDrawerIconButton'
         >
           {!isOpen && type === IconType.SERVER && (
-            <FaServer style={{ marginTop: -1, marginRight: -1 }} />
+            <FaServer className='littleDrawerIconButton-adj' />
           )}
           {!isOpen && type === IconType.COG && (
-            <FaCog style={{ marginTop: -1, marginRight: -1 }} />
+            <FaCog className='littleDrawerIconButton-adj' />
           )}
-          {isOpen && <FaCaretLeft style={{ marginTop: -1, marginRight: -1 }} />}
+          {isOpen && <FaCaretLeft className='littleDrawerIconButton-adj' />}
         </Button>
       </PopoverTrigger>
       {label !== null && (

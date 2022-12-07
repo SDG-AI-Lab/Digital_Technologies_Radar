@@ -1,0 +1,37 @@
+.blipListQuadrant {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+
+  h4 {
+    flex: 1;
+    text-align: left;
+   }
+}
+
+.blipList {
+  width: 400px;
+
+  &-scroll {
+    overflow: hidden;
+    scroll-behavior: smooth;
+    display: none;
+
+    &--overflowX {
+      overflow-x: auto;
+    }
+  
+    &--overflowY {
+      overflow-y: auto;
+    }
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &-title--center {
+    text-align: center;
+  }
+}
+

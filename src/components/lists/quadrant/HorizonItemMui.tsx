@@ -43,8 +43,11 @@ export const HorizonItemMui: React.FC<QuadrantDataListItemProps> = ({
           expanded={expandedHorizon === horizonName}
           onChange={handleChange(horizonName)}
         >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <h5 style={{ flex: 1, textAlign: 'left' }}>{horizonName}</h5>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            className='accordionSummary'
+          >
+            <h5>{horizonName}</h5>
           </AccordionSummary>
           <AccordionDetails>
             {quadrantBlips.map((blip) => (
@@ -109,15 +112,8 @@ const ItemMui: React.FC<{
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <div style={{ backgroundColor: '#EDF2F7' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              minHeight: '200px',
-              padding: 10
-            }}
-          >
+        <div className='accordionDetails'>
+          <div className='accordionDetails-description'>
             <div>
               <Typography variant='h6' mb='2'>
                 Description
@@ -126,9 +122,7 @@ const ItemMui: React.FC<{
                 {blip.Description}
               </Typography>
             </div>
-            <div
-              style={{ display: 'flex', flexWrap: 'wrap', padding: '10px 0px' }}
-            >
+            <div className='accordionDetails-badge'>
               <Typography
                 noWrap
                 m={1}

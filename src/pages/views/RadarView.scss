@@ -45,6 +45,7 @@
 }
 
 .horizontalList {
+  flex: 0.75;
   td {
     padding: 10px 0;
   }
@@ -340,7 +341,15 @@
   }
 }
 
+.quadrantRadar {
+  flex: 1;
+}
+
 .quadrantView {
+  display: flex;
+  flex: 1;
+  padding: 2px;
+
   @media only screen and (max-width: 1180px) {
     flex-direction: column;
     align-items: center;
@@ -361,6 +370,7 @@
       transform: scale(1.2);
     }
   }
+
   @media only screen and (max-width: 767px) {
     padding-top: 90px !important;
     width: 100vw;

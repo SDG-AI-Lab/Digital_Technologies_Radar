@@ -37,3 +37,114 @@ ul.radar-list  {
   background-color: darkgrey;
   color: white;
 }
+
+.quadrantStagesTab {
+  display: flex;
+  padding: 5px;
+  cursor: pointer;
+
+  h5 {
+  flex: 1;
+  text-align: left;
+ }
+}
+
+.accordionSummary {
+  h5 {
+    text-align: left;
+    flex: 1;
+  }
+}
+
+.accordionDetails {
+  background-color: #EDF2F7;
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 10px;
+  }
+
+  &-badge {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0px;
+   }
+}
+
+.quadrantItem {
+  &-container {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+
+    &--background {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+
+  &-text {
+    flex: 1;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  &-descriptionDisplay {
+    display: none;
+    padding: 5px;
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &-descriptionContainer {
+    background-color: #EDF2F7;
+
+    &--text {
+      display: flex;
+      flex-direction: column;
+      min-height: 200px;
+      padding: 10px;
+    }
+
+    &--badge {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px 0px;
+    }
+  }
+}
+.quadrantTabsContainer {
+  border-color: rgba(0,0,0,0.1);
+  border-width: 2px;
+  border-radius: 10px;
+  margin-top: 40px;
+  padding: 15px 5px;
+
+  &-tabsPanel {
+    border-color: rgba(0,0,0,0.1);
+    border-width: 2px;
+    border-radius: 10px;
+    margin: 5px 0;
+    padding: 10px;
+  }
+}
+
+.quadrantShowIcon {
+  opacity: 1;
+  transform-origin: center;
+  max-width: 20px;
+
+  &-opacity {
+    opacity: 0.4;
+  }
+
+  &-transform {
+    transform: rotate(-180deg)
+  }
+}

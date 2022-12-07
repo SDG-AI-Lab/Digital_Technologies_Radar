@@ -11,6 +11,8 @@ import { HorizonItem } from '../quadrant/HorizonItem';
 import { ShowIcon } from '../quadrant/ShowIcon';
 import { ScrollableDiv } from './ScrollableDiv';
 
+import './Blip.scss';
+
 export const BlipList: React.FC = React.memo(() => {
   const {
     state: {
@@ -107,13 +109,8 @@ export const BlipList: React.FC = React.memo(() => {
     return quadrants.map((quadrant: string) => {
       return (
         <div key={quadrant}>
-          <div
-            onClick={toggleShow}
-            style={{ display: 'flex', padding: 5, cursor: 'pointer' }}
-          >
-            <h4 style={{ flex: 1, textAlign: 'left' }}>
-              {Utilities.capitalize(quadrant)}
-            </h4>
+          <div onClick={toggleShow} className='blipListQuadrant'>
+            <h4>{Utilities.capitalize(quadrant)}</h4>
             <ShowIcon isOpen={show} />
           </div>
 
@@ -125,5 +122,5 @@ export const BlipList: React.FC = React.memo(() => {
     });
   };
 
-  return <div style={{ width: 400 }}>{renderQuadrants()}</div>;
+  return <div className='blipList'>{renderQuadrants()}</div>;
 });

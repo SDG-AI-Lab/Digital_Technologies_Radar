@@ -97,15 +97,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
    *  TODO So we use simple divs whenever - also, consider removing these 2 Boxes here.
    */
   return (
-    <div
-      style={{
-        borderColor: 'rgba(0,0,0,0.1)',
-        borderWidth: 2,
-        borderRadius: 10,
-        marginTop: 40,
-        padding: '15px 5px'
-      }}
-    >
+    <div className='quadrantTabsContainer'>
       <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
         <TabList>
           <Tab as='h5'>Stages</Tab>
@@ -114,17 +106,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         </TabList>
         <TabPanels minHeight={445}>
           <TabPanel>
-            <div
-              style={{
-                borderColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 2,
-                borderRadius: 10,
-                margin: 5,
-                marginLeft: 0,
-                marginRight: 0,
-                padding: 10
-              }}
-            >
+            <div className='quadrantTabsContainer-tabsPanel'>
               {horizons.map((horizon) => (
                 <HorizonItem
                   key={horizon}

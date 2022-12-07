@@ -6,3 +6,28 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.techListContainer {
+  height: 193px !important;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  background: Snow;
+
+  div {
+    max-height: 193px !important;
+    margin-left: 4px;
+    width: 100%;
+  }
+
+  .resetTechFilterButton {
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    margin: 0;
+  }
+
+  &-scroll {
+    text-align: end;
+  }
+}
