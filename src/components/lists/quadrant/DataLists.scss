@@ -44,9 +44,9 @@ ul.radar-list  {
   cursor: pointer;
 
   h5 {
-  flex: 1;
-  text-align: left;
- }
+    flex: 1;
+    text-align: left;
+  }
 }
 
 .accordionSummary {
@@ -57,7 +57,7 @@ ul.radar-list  {
 }
 
 .accordionDetails {
-  background-color: #EDF2F7;
+  background-color: #edf2f7;
 
   &-description {
     display: flex;
@@ -70,7 +70,7 @@ ul.radar-list  {
     display: flex;
     flex-wrap: wrap;
     padding: 10px 0px;
-   }
+  }
 }
 
 .quadrantItem {
@@ -80,7 +80,7 @@ ul.radar-list  {
     align-items: center;
 
     &--background {
-      background-color: rgba(0,0,0,0.05);
+      background-color: rgba(0, 0, 0, 0.05);
     }
   }
 
@@ -103,7 +103,7 @@ ul.radar-list  {
   }
 
   &-descriptionContainer {
-    background-color: #EDF2F7;
+    background-color: #edf2f7;
 
     &--text {
       display: flex;
@@ -120,14 +120,14 @@ ul.radar-list  {
   }
 }
 .quadrantTabsContainer {
-  border-color: rgba(0,0,0,0.1);
+  border-color: rgba(0, 0, 0, 0.1);
   border-width: 2px;
   border-radius: 10px;
   margin-top: 40px;
   padding: 15px 5px;
 
   &-tabsPanel {
-    border-color: rgba(0,0,0,0.1);
+    border-color: rgba(0, 0, 0, 0.1);
     border-width: 2px;
     border-radius: 10px;
     margin: 5px 0;
@@ -145,6 +145,6 @@ ul.radar-list  {
   }
 
   &-transform {
-    transform: rotate(-180deg)
+    transform: rotate(-180deg);
   }
 }
