@@ -44,7 +44,6 @@ describe('App tests', () => {
       render(<App />, container as any);
     });
     expect(container).toBeDefined();
-
   });
 
   it('has text', () => {
