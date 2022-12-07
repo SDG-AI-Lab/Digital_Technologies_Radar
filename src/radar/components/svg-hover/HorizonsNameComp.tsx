@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
 import { ReactLabelComp } from '@undp_sdg_ai_lab/undp-radar';
 
 import './NameComp.scss';
