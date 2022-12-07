@@ -1,24 +1,24 @@
 .littleDrawer {
-  position: relative;
-  width: 42;
   height: 40;
-  transition: all 0.5s;
   margin-bottom: 10;
+  position: relative;
+  transition: all 0.5s;
+  width: 42;
 
   &-open {
-    width: 350;
     height: 400;
+    width: 350;
   }
 
   &-conatianer {
-    padding: 20px 20px 20px 50px;
     height: 400;
+    padding: 20px 20px 20px 50px;
   }
 
   &-box {
+    color: black;
     height: 100%;
     overflow: auto;
-    color: black;
     padding-right: 5px;
   }
 
@@ -32,7 +32,7 @@
   width: 40px;
 
   &-adj {
-    margin-top: -1px;
     margin-right: -1px;
+    margin-top: -1px;
   }
 }

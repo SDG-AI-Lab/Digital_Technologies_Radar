@@ -1,25 +1,25 @@
 .customFilterContainer {
+  align-items: center;
   background-color: Snow;
-  padding-bottom: 5px;
+  border-bottom: 0px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-bottom: 0px;
-  overflow-y: auto;
-  overflow-x: hidden;
   margin: 30px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5px;
 
   div {
-    max-height: 230px !important;
     margin-left: 10px;
+    max-height: 230px !important;
     width: 100%;
   }
 
   button {
-    position: absolute;
     bottom: calc(100% - 400px);
-    right: 30px;
     margin: 0;
+    position: absolute;
+    right: 30px;
   }
 
   select {
@@ -31,8 +31,8 @@
   }
 
   .rc-slider-handle {
-    width: 15px;
     height: 15px;
+    width: 15px;
   }
 
   &-wrapper {
@@ -44,9 +44,9 @@
   }
 
   select {
+    border: 1px solid lightgrey;
     max-width: 150px;
     padding: 10px;
-    border: 1px solid lightgrey;
   }
 
   &-slider {
@@ -55,16 +55,16 @@
   }
 
   &-reset {
-    padding: 10px 20px;
-    cursor: pointer;
     color: blue;
+    cursor: pointer;
     margin: 5px 0 3px;
+    padding: 10px 20px;
   }
 }
 
 div .handleRender {
   display: block;
-  width: 50px;
-  margin-top: 12px;
   margin-left: -10px;
+  margin-top: 12px;
+  width: 50px;
 }

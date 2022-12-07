@@ -1,7 +1,7 @@
 .popoverContent {
   margin-right: 20px;
-  min-width: 400px;
   min-height: 400px;
+  min-width: 400px;
   overflow-y: hidden;
 }
 
@@ -16,11 +16,11 @@
 }
 
 .container {
-  position: relative;
-  margin: 0 0 20px 20px;
-  padding: 10px;
   color: gray;
+  margin: 0 0 20px 20px;
   max-width: 500px;
+  padding: 10px;
+  position: relative;
 
   a {
     color: blue;
@@ -33,22 +33,22 @@ h1 {
 }
 
 .container .content h2 {
-  font-size: 18px !important;
   color: #000000;
+  font-size: 18px !important;
   font-weight: 500;
-  margin-top: -20px;
   margin-left: 20px;
+  margin-top: -20px;
 }
 
 .container .content h2::before {
+  background: white;
+  border: 3px solid rgb(46, 133, 133);
+  border-radius: 100px;
   content: '';
+  height: 20px;
+  left: -31px;
   position: absolute;
   width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 100px;
-  left: -31px;
-  border: 3px solid rgb(46, 133, 133);
 }
 
 .container .content .timeline-boundary::before {
@@ -57,12 +57,12 @@ h1 {
 }
 
 .container .content p {
-  font-size: 15px !important;
   color: #000000;
+  font-size: 15px !important;
   margin: 10px 0 0px 20px;
 }
 
 .container .content img {
-  width: 100px;
   height: auto;
+  width: 100px;
 }

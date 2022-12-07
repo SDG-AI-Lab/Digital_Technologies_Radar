@@ -1,15 +1,15 @@
 .techItem {
+  border-radius: 20px;
   height: 20px;
   width: 25px;
-  border-radius: 20px;
 }
 
 .scrollableDiv {
+  display: flex;
+  flex-wrap: wrap;
   max-height: 80px;
   overflow: hidden;
   scroll-behavior: smooth;
-  display: flex;
-  flex-wrap: wrap;
 
   &-overflowX {
     overflow-x: auto;
@@ -22,15 +22,15 @@
 
 button {
   &.button {
-    border: none;
+    align-items: center;
     background: none;
+    border: none;
+    cursor: pointer;
     display: flex;
     flex: auto;
-    align-items: center;
-    padding: 1px;
-    margin-right: 12px;
     margin-bottom: 6px;
-    cursor: pointer;
+    margin-right: 12px;
+    padding: 1px;
   }
 
   .btnContainer {
@@ -38,10 +38,10 @@ button {
   }
 
   .btnTechItem {
-    padding: 4px;
     border: 1px solid lightgrey;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 600;
+    padding: 4px;
   }
 }

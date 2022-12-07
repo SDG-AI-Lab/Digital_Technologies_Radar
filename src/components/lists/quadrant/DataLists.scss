@@ -10,10 +10,10 @@ header,
 ul.radar-list  {
   display: block;
   list-style-type: none;
-  margin-block-start: 0em;
   margin-block-end: 0em;
-  margin-inline-start: 0px;
+  margin-block-start: 0em;
   margin-inline-end: 0px;
+  margin-inline-start: 0px;
   padding-inline-start: 0px;
 }
 
@@ -21,8 +21,8 @@ ul.radar-list  {
   margin: 2px;
 }
 .blipItem {
-  border: none;
   background-color: whitesmoke;
+  border: none;
   cursor: pointer;
 
   width: 100%;
@@ -39,9 +39,9 @@ ul.radar-list  {
 }
 
 .quadrantStagesTab {
+  cursor: pointer;
   display: flex;
   padding: 5px;
-  cursor: pointer;
 
   h5 {
     flex: 1;
@@ -51,8 +51,8 @@ ul.radar-list  {
 
 .accordionSummary {
   h5 {
-    text-align: left;
     flex: 1;
+    text-align: left;
   }
 }
 
@@ -75,9 +75,9 @@ ul.radar-list  {
 
 .quadrantItem {
   &-container {
-    padding: 5px;
-    display: flex;
     align-items: center;
+    display: flex;
+    padding: 5px;
 
     &--background {
       background-color: rgba(0, 0, 0, 0.05);
@@ -85,11 +85,11 @@ ul.radar-list  {
   }
 
   &-text {
+    cursor: pointer;
     flex: 1;
-    padding: 2px;
     font-size: 12px;
     font-weight: 600;
-    cursor: pointer;
+    padding: 2px;
     text-align: left;
   }
 
@@ -121,24 +121,24 @@ ul.radar-list  {
 }
 .quadrantTabsContainer {
   border-color: rgba(0, 0, 0, 0.1);
-  border-width: 2px;
   border-radius: 10px;
+  border-width: 2px;
   margin-top: 40px;
   padding: 15px 5px;
 
   &-tabsPanel {
     border-color: rgba(0, 0, 0, 0.1);
-    border-width: 2px;
     border-radius: 10px;
+    border-width: 2px;
     margin: 5px 0;
     padding: 10px;
   }
 }
 
 .quadrantShowIcon {
+  max-width: 20px;
   opacity: 1;
   transform-origin: center;
-  max-width: 20px;
 
   &-opacity {
     opacity: 0.4;
