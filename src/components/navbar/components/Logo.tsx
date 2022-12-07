@@ -43,7 +43,6 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
           {!loading && (
             <chakra.img
               m='auto'
-              // animation={animation}
               src={props.file}
               maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
               maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}

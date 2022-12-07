@@ -1,10 +1,10 @@
 header,
 .row {
-  display: flex; /* aligns all child elements (flex items) in a row */
+  display: flex;
 }
 
 .col {
-  flex: 1; /* distributes space on the line equally among items */
+  flex: 1;
 }
 
 ul.radar-list  {

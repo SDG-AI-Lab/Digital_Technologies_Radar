@@ -9,7 +9,6 @@ import { BackButton } from '../../radar/components';
 export const Volunteers: React.VFC = () => {
   return (
     <>
-      {/* <div style={{ display: 'flex', flex: 1, overflowY: 'scroll' }}> */}
       <Box float='left' ml={{ base: 0, md: 5 }} mt={{ base: 20, md: 5 }} mb={5}>
         <BackButton to='ABOUT' />
       </Box>
@@ -101,7 +100,6 @@ export const Volunteers: React.VFC = () => {
           </Box>
         </VStack>
       </Container>
-      {/* </div> */}
     </>
   );
 };

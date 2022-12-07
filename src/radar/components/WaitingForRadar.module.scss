@@ -1,7 +1,5 @@
 // make font larger, not used for animation
 .loadingEllipsis {
-  // font-size: 30px;
-
   // the animation is created by widening :after with ellipsis
   &:after {
     // ensure animation

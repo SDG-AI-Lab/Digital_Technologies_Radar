@@ -163,7 +163,7 @@ export const CustomFilter: React.FC = () => {
    * This is our filtering logic
    */
   useEffect(() => {
-    let filtered = blips; // we start with all Blips
+    let filtered = blips;
     let isFiltered = false;
 
     // filter subregions
@@ -374,7 +374,6 @@ export const CustomFilter: React.FC = () => {
         paddingBottom: 5,
         display: 'flex',
         flexDirection: 'column',
-        // flexWrap: 'wrap',
         alignItems: 'center'
       }}
     >
@@ -579,7 +578,6 @@ export const CustomFilter: React.FC = () => {
             marginRight: 20
           }}
         >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
           <Select
             id='Select8'
             size='lg'

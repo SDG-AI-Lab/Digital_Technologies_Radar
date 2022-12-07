@@ -73,11 +73,9 @@ export const TechItem: React.FC<{
         flex: 'auto',
         alignItems: 'center',
         padding: 1,
-        // paddingLeft: 10,
         marginRight: 12,
         marginBottom: 6,
         cursor: 'pointer'
-        // width: '100%'
       }}
       type='button'
       onClick={selectTech}
@@ -86,7 +84,7 @@ export const TechItem: React.FC<{
       onFocus={changeBackgroundEnter}
       onBlur={changeBackgroundLeave}
     >
-      <div style={{ /*paddingLeft: 20,*/ width: '100%' }}>
+      <div style={{ width: '100%' }}>
         <div
           style={{
             backgroundColor:

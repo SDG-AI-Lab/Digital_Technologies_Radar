@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-// rc-slider from https://slider-react-component.vercel.app
-import Slider from 'rc-slider';
+import Slider from 'rc-slider'; // rc-slider from https://slider-react-component.vercel.app
 import 'rc-slider/assets/index.css';
 
 import { handleRender } from './HandleRender';
@@ -57,7 +56,6 @@ export const AppRangerSlider: React.FC<Props> = ({
         range
         defaultValue={[selectedMin, selectedMax]}
         value={[selectedMin, selectedMax]}
-        // marks={{ min: min.toString(), max: max.toString() }}
         step={1}
         handleRender={handleRender}
         handleStyle={{

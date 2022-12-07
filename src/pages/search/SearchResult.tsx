@@ -71,9 +71,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
                           alt='Default Image'
                         />
                       </Stack>
-                      <Heading fontSize={'2xl'} fontFamily={'body'}>
-                        {/*{value[Ideas]}*/}
-                      </Heading>
+                      <Heading fontSize={'2xl'} fontFamily={'body'} />
                       <Text color={'gray.500'}>
                         {value.Description.length < 200
                           ? `${value.Description}`

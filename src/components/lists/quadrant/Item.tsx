@@ -31,7 +31,7 @@ export const Item: React.FC<Props> = ({
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
-  const onMouseLeave = () => setHoveredItem(null); // equal for all
+  const onMouseLeave = () => setHoveredItem(null);
   const onMouseEnter = () => setHoveredItem(blip);
 
   const [show, setShow] = useState(false);
@@ -54,14 +54,12 @@ export const Item: React.FC<Props> = ({
   }, [close]);
 
   const onSelect = () => {
-    // setHoveredItem(blip);
     setSelectedItem(blip);
   };
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
 
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      {/* <div> */}
       <div
         style={{
           padding: 5,

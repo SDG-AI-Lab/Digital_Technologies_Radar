@@ -62,9 +62,7 @@ export const BlipListMui: React.FC = React.memo(() => {
       };
       quads.push(q);
     }
-    // Two pass, one for quadrant blips and second to
     displayBlips.forEach((blip) => {
-      // get quad
       let q = quads[blip.quadrantIndex];
       let h = q.horizons;
       let hName: string = blip[horizonKey];

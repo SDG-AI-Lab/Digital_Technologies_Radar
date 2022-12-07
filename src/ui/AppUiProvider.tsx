@@ -8,20 +8,13 @@ import {
   ThemeComponents,
   ThemeConfig
 } from '@chakra-ui/react';
-// import { StyledEngineProvider } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const muiTheme = createTheme();
 
 // More info: https://chakra-ui.com/docs/getting-started
 export const AppUiProvider: React.FC = ({ children }) => {
-  const colors = {
-    // brand: {
-    //   900: "#1a365d",
-    //   800: "#153e75",
-    //   700: "#2a69ac",
-    // },
-  };
+  const colors = {};
 
   const breakpoints = createBreakpoints({
     sm: '36em',

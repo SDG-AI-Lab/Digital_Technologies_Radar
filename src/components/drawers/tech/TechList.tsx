@@ -45,7 +45,6 @@ export const TechList: React.FC = () => {
         (b[keys.techKey] as string[]).forEach((techy) => {
           const foundTech = radarData.tech.find((t) => t.type === techy);
           if (foundTech && !newTechMap.has(foundTech.slug)) {
-            // could be added
             if (
               b[keys.useCaseKey] === useCaseFilter ||
               useCaseFilter === 'all'
@@ -84,7 +83,6 @@ export const TechList: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         background: 'Snow'
-        // flexWrap: 'wrap'
       }}
     >
       <div style={{ textAlign: 'end' }}>

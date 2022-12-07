@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
-// Comps
+// Components
 import { AppLeftNav } from '../components';
 import { AppBottomNav } from '../components';
 import { AppMobileHeader } from '../components';
@@ -32,7 +32,6 @@ export const NavApp = () => (
         <Route path={ROUTES.SEARCH} element={<Search />} />
         <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
 
-        {/* https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb#not-server-rendering -> should be server redirect */}
         <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
         <Route path='*' element={<NotFound404 />} />
       </Routes>

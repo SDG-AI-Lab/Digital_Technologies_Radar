@@ -78,7 +78,7 @@ const ItemMui: React.FC<{
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
-  const onMouseLeave = () => setHoveredItem(null); // equal for all
+  const onMouseLeave = () => setHoveredItem(null);
   const onMouseEnter = () => setHoveredItem(blip);
 
   const onSelect = () => {
