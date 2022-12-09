@@ -12,8 +12,10 @@ import { ROUTES } from '../navigation/routes';
 import { MenuItem } from '../components/navbar/components/MenuItem';
 
 import background from '../assets/landing/background2.jpg';
-import logos from '../assets/landing/logos.png';
-import UNDP from '../assets/landing/UNDP-Logo-Blue-Small.png';
+import UNDPLogo from '../assets/landing/UNDP-Logo-Blue-Small.png';
+import UNDPDRTLogo from '../assets/landing/UNDP_DRT.png';
+import CBILogo from '../assets/landing/cbi_logo.png';
+import SDGAILabLogo from '../assets/landing/sdg_ai_lab.png';
 
 import './Home.scss';
 
@@ -47,7 +49,11 @@ export const Home: React.FC = () => (
             </Button>
           </MenuItem>
         </Stack>
-        <Image src={logos} alt='Logos' className='logosImg' />
+        <div className='partnersList'>
+          <Image src={UNDPDRTLogo} alt='UNDP DRT Logo' />
+          <Image src={SDGAILabLogo} alt='SDG AI Lab Logo' />
+          <Image src={CBILogo} alt='CBI Logo' />
+        </div>
       </VStack>
     </Flex>
     <Flex
@@ -60,7 +66,7 @@ export const Home: React.FC = () => (
       flexDirection={'column'}
     >
       <Image
-        src={UNDP}
+        src={UNDPLogo}
         alt='UNDP Logo'
         className='UNDPLogo'
         onClick={() => window.open('https://www.undp.org/', '_newtab')}
