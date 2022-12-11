@@ -52,7 +52,7 @@ export const Home: React.FC = () => (
         <div className='partnersList'>
           <Image src={UNDPDRTLogo} alt='UNDP DRT Logo' />
           <Image src={SDGAILabLogo} alt='SDG AI Lab Logo' />
-          <Image src={CBILogo} alt='CBI Logo' />
+          <Image src={CBILogo} alt='CBI Logo' className='CBILogo' />
         </div>
       </VStack>
     </Flex>
