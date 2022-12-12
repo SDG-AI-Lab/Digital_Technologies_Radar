@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
 // Components
 import { AppLeftNav, AppMobileHeader, AppBottomNav } from '../components';
-import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
 // Layouts
 import { MainLayout } from '../ui/MainLayout';
@@ -27,9 +27,20 @@ import { RadarContext, RadarContextInterface } from './context';
 import './AppNav.scss';
 
 export const NavApp: React.FC = () => {
+  const [radarStateValues, setRadarStateValues] = useState({
+    region: '',
+    subRegion: '',
+    data: '',
+    startYear: '',
+    endYear: '',
+    implementer: '',
+    sdg: '',
+    country: ''
+  });
+
   const radarContext: RadarContextInterface = {
-    Radar,
-    useRadarState
+    radarStateValues,
+    setRadarStateValues
   };
   return (
     <RadarContext.Provider value={radarContext}>
