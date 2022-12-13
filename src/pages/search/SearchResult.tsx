@@ -3,7 +3,6 @@
 import {
   Box,
   Center,
-  Heading,
   Text,
   Stack,
   SimpleGrid,
@@ -70,22 +69,26 @@ export const SearchResult: React.FC<SearchResultProps> = (
                       >
                         {value['Ideas/Concepts/Examples']}
                       </Text>
-                      <Stack>
+                      <Stack className='searchResultImage'>
                         <Image
-                          objectFit='cover'
+                          objectFit='scale-down'
+                          h='100%'
                           src={`${value['Image Url']}`}
                           fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
                           alt='Default Image'
                         />
                       </Stack>
-                      <Heading fontSize={'2xl'} fontFamily={'body'} />
-                      <Text color={'gray.500'}>
+                      <Text color={'gray.500'} height={170} overflow={'hidden'}>
                         {value.Description.length < 200
                           ? `${value.Description}`
                           : `${value.Description.substring(0, 200)}...`}
                       </Text>
                     </Stack>
-                    <Flex flexWrap={'wrap'} my='5'>
+                    <Flex
+                      flexWrap={'wrap'}
+                      my='5'
+                      className='searchBadgeContainer'
+                    >
                       <Badge
                         isTruncated
                         my='1'
