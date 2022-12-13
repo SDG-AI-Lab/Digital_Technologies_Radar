@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { shuffle } from 'lodash';
 import { ScrollableDiv } from './components/ScrollableDiv';
 import {
   useDataState,
@@ -134,11 +135,11 @@ export const TechList: React.FC = () => {
       });
       const techListArr: any = Array.from(newTechMap.values());
 
-      const newList = techListArr.map((t: any) => {
-        t['color'] = techButtonColors.shift();
+      techListArr.map((t: any) => {
+        const shuffled = shuffle(techButtonColors);
+        t['color'] = shuffled.shift();
         return t;
       });
-      console.log({ techListArr }, { newList });
       setTech(techListArr);
     }
   }, [blips, radarData, useCaseFilter, disasterTypeFilter]);
