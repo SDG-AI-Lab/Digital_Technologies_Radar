@@ -7,6 +7,7 @@ import {
   RadarUtilities
 } from '@undp_sdg_ai_lab/undp-radar';
 import { TechItem } from './components/TechItem';
+import { techButtonColors } from './colors';
 import './TechList.scss';
 
 export const TechList: React.FC = () => {
@@ -58,13 +59,18 @@ export const TechList: React.FC = () => {
               disasterTypeFilter === 'all'
             ) {
               (b[keys.techKey] as string[]).forEach((t) => {
-                if (t === foundTech.type) newTechMap.set(t, foundTech);
+                if (t === foundTech.type) {
+                  newTechMap.set(t, foundTech);
+                }
               });
             }
           }
         });
       });
-      setTech(Array.from(newTechMap.values()));
+      const techListArr: any = Array.from(newTechMap.values());
+      const colors = [...techButtonColors];
+      techListArr.forEach((t: any) => (t['color'] = colors.pop()));
+      setTech(techListArr);
     }
   }, [blips, radarData, useCaseFilter, disasterTypeFilter]);
 
