@@ -1,6 +1,8 @@
 import React from 'react';
+import cx from 'classnames';
 
 import { Box, Collapse, useDisclosure } from '@chakra-ui/react';
+import './LittleDrawer.scss';
 
 interface Props {
   height?: number;
@@ -10,7 +12,6 @@ interface Props {
 
 export const LittleDrawer: React.FC<Props> = ({
   children,
-
   height = 400,
   width = 350,
   icon: Icon
@@ -18,33 +19,16 @@ export const LittleDrawer: React.FC<Props> = ({
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: isOpen ? width : 42,
-        height: isOpen ? height : 40,
-        transition: 'all 0.5s',
-        marginBottom: 10
-      }}
-    >
+    <div className={cx('littleDrawer', { 'littleDrawer-open': isOpen })}>
       <Collapse in={isOpen} animateOpacity>
         <Box color='white' rounded='md' shadow='md' maxW={width} maxH={height}>
-          <div style={{ padding: 20, paddingLeft: 50, height }}>
-            <div
-              style={{
-                height: '100%',
-                overflow: 'auto',
-                color: 'black',
-                paddingRight: 5
-              }}
-            >
-              {children}
-            </div>
+          <div className='littleDrawer-container'>
+            <div className='littleDrawer-box'>{children}</div>
           </div>
         </Box>
       </Collapse>
 
-      <div style={{ position: 'absolute', top: 0 }}>
+      <div className='littleDrawer-iconContainer'>
         {<Icon onToggle={onToggle} isOpen={isOpen} />}
       </div>
     </div>

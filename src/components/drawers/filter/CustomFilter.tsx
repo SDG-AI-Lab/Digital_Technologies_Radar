@@ -17,6 +17,7 @@ import {
   dataKey
 } from './FilterConstants';
 import { AppRangerSlider } from './AppRanderSlider';
+import './Filter.scss';
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -163,7 +164,7 @@ export const CustomFilter: React.FC = () => {
    * This is our filtering logic
    */
   useEffect(() => {
-    let filtered = blips; // we start with all Blips
+    let filtered = blips;
     let isFiltered = false;
 
     // filter subregions
@@ -230,22 +231,28 @@ export const CustomFilter: React.FC = () => {
     // filter start years
     if (startYearFilter !== 'all') {
       isFiltered = true;
-      let start = Number(startYearFilter);
-      let end = isNaN(Number(endYearFilter))
+      const start = Number(startYearFilter);
+      const end = isNaN(Number(endYearFilter))
         ? new Date().getFullYear()
         : Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
     if (endYearFilter !== 'all') {
       isFiltered = true;
-      let start = isNaN(Number(startYearFilter))
+      const start = isNaN(Number(startYearFilter))
         ? 2000 // This assumes the earliest project year
         : Number(startYearFilter);
-      let end = Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const end = Number(endYearFilter);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
@@ -324,7 +331,7 @@ export const CustomFilter: React.FC = () => {
   const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedSdg(e.target.value);
   // on year range change
-  const onYearRangeChange = (e: Number[]) => {
+  const onYearRangeChange = (e: Number[]): void => {
     setSelectedStartYear(String(e[0]));
     setSelectedEndYear(String(e[1]));
   };
@@ -350,7 +357,8 @@ export const CustomFilter: React.FC = () => {
 
   const [min, setMin] = useState<number>();
   const [max, setMax] = useState<number>();
-  const forceNumber = (o: { name: string }) => Number(o.name);
+  const forceNumber = (o: { name: string }): number => Number(o.name);
+
   useEffect(() => {
     const maxApply = Math.max(...years.map(forceNumber));
     const minApply = Math.min(...years.map(forceNumber));
@@ -359,43 +367,17 @@ export const CustomFilter: React.FC = () => {
   }, [years]);
 
   const onSliderChange: (value: number | number[]) => void = (val) => {
-    // console.log('parent onRangerSelectionChange cchange', val);
     if (typeof val === 'object') onYearRangeChange(val);
     setSliderReset(false);
   };
 
   return (
-    <div
-      className={'customFilterContainer'}
-      style={{
-        backgroundColor: 'Snow',
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'lightgrey',
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-        display: 'flex',
-        flexDirection: 'column',
-        // flexWrap: 'wrap',
-        alignItems: 'center'
-      }}
-    >
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+    <div className='customFilterContainer'>
+      <div className='customFilterContainer-wrapper'>
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select0'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onRegionChange}
             value={selectedRegion}
           >
@@ -408,22 +390,10 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select_Subregion'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onSubregionChange}
             value={selectedSubregion}
           >
@@ -436,22 +406,10 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select1'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onCountryChange}
             value={selectedCountry}
           >
@@ -463,22 +421,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select2'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onDisasterTypeChange}
             value={selectedDisasterType}
           >
@@ -490,22 +436,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select3'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onUseCaseChange}
             value={selectedUserCase}
           >
@@ -517,22 +451,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select4'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onImplementerChange}
             value={selectedImplementer}
           >
@@ -544,22 +466,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select5'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onSdgChange}
             value={selectedSdg}
           >
@@ -572,23 +482,10 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select8'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onDataChange}
             value={selectedData}
           >
@@ -601,15 +498,7 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 18,
-            marginBottom: 3,
-            marginLeft: 20,
-            marginRight: 40,
-            width: 200
-          }}
-        >
+        <div className='customFilterContainer-slider'>
           {min && max && (
             <AppRangerSlider
               max={max}
@@ -625,12 +514,7 @@ export const CustomFilter: React.FC = () => {
         <div>
           <button
             type='button'
-            style={{
-              padding: '10px 20px',
-              cursor: 'pointer',
-              color: 'blue',
-              margin: '5px 0 3px'
-            }}
+            className='customFilterContainer-reset'
             onClick={onResetFilter}
           >
             Reset

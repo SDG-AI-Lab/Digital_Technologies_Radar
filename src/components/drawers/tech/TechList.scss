@@ -1,8 +1,33 @@
 .resetTechFilterButton {
-  margin: 10px 16px 0 10px;
   border: none;
-  padding: 10px 20px;
   color: blue;
-  font-size: 15px;
   cursor: pointer;
+  font-size: 15px;
+  margin: 10px 16px 0 10px;
+  padding: 10px 20px;
+}
+
+.techListContainer {
+  align-items: center;
+  background: Snow;
+  display: flex;
+  height: 195px;
+  padding-top: 15px;
+
+  div {
+    margin-left: 4px;
+    max-height: 195px;
+    width: 100%;
+  }
+
+  .resetTechFilterButton {
+    margin: 0;
+    position: absolute;
+    right: 30px;
+    top: 50px;
+  }
+
+  &-scroll {
+    text-align: end;
+  }
 }

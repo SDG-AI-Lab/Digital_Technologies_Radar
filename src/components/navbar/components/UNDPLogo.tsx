@@ -4,8 +4,8 @@ import { ChakraProps, useColorMode } from '@chakra-ui/react';
 
 import { Logo } from './Logo';
 
-import logoBlack from '../../../assets/logos/SDG_BLACK_logo.png';
-import logoWhite from '../../../assets/logos/SDG_WHITE_logo.png';
+import logoBlack from 'assets/logos/SDG_BLACK_logo.png';
+import logoWhite from 'assets/logos/SDG_WHITE_logo.png';
 
 export const UNDPLogo: React.FC<ChakraProps> = (props) => {
   const { colorMode } = useColorMode();

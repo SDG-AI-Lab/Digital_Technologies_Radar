@@ -45,7 +45,6 @@ export const TechList: React.FC = () => {
         (b[keys.techKey] as string[]).forEach((techy) => {
           const foundTech = radarData.tech.find((t) => t.type === techy);
           if (foundTech && !newTechMap.has(foundTech.slug)) {
-            // could be added
             if (
               b[keys.useCaseKey] === useCaseFilter ||
               useCaseFilter === 'all'
@@ -77,17 +76,8 @@ export const TechList: React.FC = () => {
   };
 
   return (
-    <div
-      className={'techListContainer'}
-      style={{
-        paddingTop: 15,
-        display: 'flex',
-        alignItems: 'center',
-        background: 'Snow'
-        // flexWrap: 'wrap'
-      }}
-    >
-      <div style={{ textAlign: 'end' }}>
+    <div className='techListContainer'>
+      <div className='techListContainer-scroll'>
         <ScrollableDiv>
           {tech.map((t) => {
             const toggleTechFilter = (): void => {

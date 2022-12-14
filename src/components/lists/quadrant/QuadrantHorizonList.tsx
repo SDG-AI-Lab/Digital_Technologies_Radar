@@ -8,9 +8,9 @@ import {
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 import { HorizonItem } from './HorizonItem';
-import { BlipView } from '../../views/blip/BlipView';
-import { ScrollableDiv } from '../../lists/components/ScrollableDiv';
-import { TechDescription } from '../../../radar/tech/TechDescription';
+import { BlipView } from 'components/views/blip/BlipView';
+import { ScrollableDiv } from 'components/lists/components/ScrollableDiv';
+import { TechDescription } from 'radar/tech/TechDescription';
 import './DataLists.scss';
 
 export type BlipsPerQuadType = Record<string, BlipType[]>;
@@ -78,13 +78,13 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
     }
   }, [selectedItem]);
 
-  const tabsChangeHandler = (ind: number) => {
+  const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
   };
 
   const [sourceHorizon, setSourceHorizon] = useState<string>();
 
-  const triggerSiblings = (horizon: string) => setSourceHorizon(horizon);
+  const triggerSiblings = (horizon: string): void => setSourceHorizon(horizon);
 
   /**
    * @ImplNote
@@ -94,18 +94,10 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
    * constructs Components that need to allow for all sorts of use cases, therefore they
    * need to implement too much.
    * We do not.
-   * So we use simple divs whenever - also, consider removing these 2 Boxes here.
+   *  TODO So we use simple divs whenever - also, consider removing these 2 Boxes here.
    */
   return (
-    <div
-      style={{
-        borderColor: 'rgba(0,0,0,0.1)',
-        borderWidth: 2,
-        borderRadius: 10,
-        marginTop: 40,
-        padding: '15px 5px'
-      }}
-    >
+    <div className='quadrantTabsContainer'>
       <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
         <TabList>
           <Tab as='h5'>Stages</Tab>
@@ -114,17 +106,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         </TabList>
         <TabPanels minHeight={445}>
           <TabPanel>
-            <div
-              style={{
-                borderColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 2,
-                borderRadius: 10,
-                margin: 5,
-                marginLeft: 0,
-                marginRight: 0,
-                padding: 10
-              }}
-            >
+            <div className='quadrantTabsContainer-tabsPanel'>
               {horizons.map((horizon) => (
                 <HorizonItem
                   key={horizon}

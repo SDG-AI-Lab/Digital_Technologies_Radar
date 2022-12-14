@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import cx from 'classnames';
 import { chakra, ChakraProps, Text, SkeletonCircle } from '@chakra-ui/react';
 
+import './Logo.scss';
 interface Props {
   file?: string | undefined;
   maxwidthorheight?: number;
@@ -21,15 +23,12 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
     };
   }, []);
 
-  const innerOnClick = () => {
+  const innerOnClick = (): void => {
     if (props.onClick) props.onClick();
   };
 
   return (
-    <div
-      onClick={innerOnClick}
-      style={{ cursor: props.onClick ? 'pointer' : undefined }}
-    >
+    <div onClick={innerOnClick} className={cx({ logo: props.onClick })}>
       {props.file ? (
         <>
           {loading && (
@@ -43,7 +42,6 @@ export const Logo: React.FC<ChakraProps & Props> = (props) => {
           {!loading && (
             <chakra.img
               m='auto'
-              // animation={animation}
               src={props.file}
               maxW={props.maxwidthorheight ? props.maxwidthorheight : 50}
               maxH={props.maxwidthorheight ? props.maxwidthorheight : 50}

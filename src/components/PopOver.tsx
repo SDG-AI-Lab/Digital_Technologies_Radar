@@ -17,7 +17,7 @@ export const PopOver: React.FC = () => {
     }
   } = useDataState();
 
-  const isMobile = () => {
+  const isMobile = (): boolean => {
     return (
       'ontouchstart' in document.documentElement &&
       window.matchMedia('only screen and (max-width: 760px)').matches

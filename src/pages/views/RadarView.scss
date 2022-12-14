@@ -1,16 +1,16 @@
-.radarContainer {
-  display: flex !important;
-  width: 100%;
+#radar-container.radarContainer {
   align-items: center;
+  display: flex;
+  height: max-content;
   justify-content: space-between;
   margin: 30px 28px 30px 0;
-  height: max-content;
+  width: 100%;
 
   .tabsComponents {
-    margin: 0 0 15px !important;
-    padding: 20px 5px;
-    max-width: none !important;
     flex-basis: 50%;
+    margin: 0 0 15px !important;
+    max-width: none !important;
+    padding: 20px 5px;
 
     .chakra-tabs {
       width: 100%;
@@ -31,20 +31,8 @@
   }
 }
 
-.radarTitleContainer {
-  display: flex;
-  position: absolute;
-  justify-content: space-between;
-  top: 20px;
-  width: 93vw;
-
-  .titleFiller {
-    width: 450px;
-    z-index: -1;
-  }
-}
-
 .horizontalList {
+  flex: 0.75;
   td {
     padding: 10px 0;
   }
@@ -52,8 +40,8 @@
 
 @media only screen and (max-width: 1400px) {
   .radarContainer {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     margin-right: 0;
 
     .tabsComponents {
@@ -62,9 +50,6 @@
       .chakra-tabs {
         width: 100%;
       }
-    }
-    .titleFiller {
-      width: 550px !important;
     }
   }
 }
@@ -78,12 +63,12 @@
     margin-top: 20px !important;
   }
   .tabsComponents {
-    margin: 20px auto;
     display: flex;
     justify-content: center;
-    width: 90%;
+    margin: 20px auto;
     min-width: 370px;
     overflow-x: auto;
+    width: 90%;
   }
   .tabsComponents p {
     width: auto;
@@ -98,17 +83,13 @@
   .radarComponents {
     margin: 0 auto;
   }
-  .radarTitle {
-    font-size: 23px !important;
-    margin-top: 160px !important;
-  }
   .tabsComponents {
-    margin: 20px auto;
     display: flex;
     justify-content: center;
-    width: 90%;
+    margin: 20px auto;
     min-width: 500px;
     overflow-x: auto;
+    width: 90%;
   }
   .tabsComponents p {
     width: auto;
@@ -124,21 +105,17 @@
     margin: 0 auto;
     width: 100%;
   }
-  .radarTitle {
-    font-size: 23px !important;
-    margin: 160px 20px 20px 20px !important;
-  }
   .tabsComponents {
-    margin: 20px auto;
     display: flex;
     justify-content: center;
-    width: 100%;
+    margin: 20px auto;
     min-width: 370px;
     overflow-x: auto;
+    width: 100%;
   }
   .tabsComponents p {
-    width: auto;
     font-weight: 600;
+    width: auto;
   }
   .tabsComponents h5 {
     font-size: 22px !important;
@@ -154,17 +131,13 @@
   .radarComponents {
     margin: 0 auto;
   }
-  .radarTitle {
-    font-size: 23px !important;
-    margin-top: 20px !important;
-  }
   .tabsComponents {
-    margin: 20px auto !important;
     display: flex;
     justify-content: center;
-    width: 90%;
+    margin: 20px auto !important;
     min-width: 370px;
     overflow-x: auto;
+    width: 90%;
   }
   .radarContainer {
     margin: 0 auto;
@@ -176,11 +149,6 @@
     width: 100%;
   }
 
-  .radarTitle {
-    font-size: 23px !important;
-    margin: 0 0 0 35px !important;
-    width: 80%;
-  }
   .tabsComponents {
     margin: 80px 0 0 80px !important;
     min-width: 400px !important;
@@ -191,11 +159,6 @@
   .radarComponents {
     margin: 0 auto;
   }
-  .radarTitle {
-    font-size: 30px !important;
-    margin: 0 0 0 35px !important;
-    width: 100%;
-  }
   .tabsComponents {
     margin: 80px 0 0 80px !important;
     min-width: 500px !important;
@@ -203,11 +166,6 @@
 }
 
 @media only screen and (min-width: 992px) {
-  .radarTitle {
-    font-size: 23px !important;
-    margin: 0 0 0 35px !important;
-    width: 90%;
-  }
   .tabsComponents {
     margin: 80px 0 0 80px !important;
     max-width: 290px !important;
@@ -222,18 +180,9 @@
     left: 55px;
     width: fit-content !important;
   }
-  .radarTitleContainer {
-    flex-direction: column;
-    top: 50px;
-    width: 90%;
-    align-items: center;
-  }
-  .radarTitle {
-    width: fit-content;
-  }
   .radarComponents {
-    z-index: 1;
     margin-top: 80px;
+    z-index: 1;
   }
   .radarComponents {
     zoom: 1 !important;
@@ -241,16 +190,13 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .radarTitleContainer {
-    display: none;
-  }
   .quadrant-filter {
-    display: flex !important;
-    zoom: 0.6;
     align-self: flex-end;
-    position: absolute;
+    display: flex !important;
     left: unset;
+    position: absolute;
     top: 40px;
+    zoom: 0.6;
 
     @media only screen and (max-width: 392px) {
       top: 60px;
@@ -289,24 +235,24 @@
       scale: 1.9;
 
       &.quadrant-preparedness {
-        translate: 5vw 22vh;
-        position: relative;
         fill: green !important;
+        position: relative;
+        translate: 5vw 22vh;
       }
 
       &.quadrant-response {
-        translate: -10vw 22vh;
         fill: red !important;
+        translate: -10vw 22vh;
       }
 
       &.quadrant-mitigation {
-        translate: 12vw -18vh;
         fill: blue !important;
+        translate: 12vw -18vh;
       }
 
       &.quadrant-recovery {
-        translate: -10vw -18vh;
         fill: #e7d438 !important;
+        translate: -10vw -18vh;
       }
     }
 
@@ -335,32 +281,38 @@
       display: none;
     }
   }
-  .radarTitle {
-    font-size: 23px !important;
-  }
+}
+
+.quadrantRadar {
+  flex: 1;
 }
 
 .quadrantView {
+  display: flex;
+  flex: 1;
+  padding: 2px;
+
   @media only screen and (max-width: 1180px) {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
 
     button {
       align-self: flex-start;
-      z-index: 8;
       position: sticky;
       top: 90px;
+      z-index: 8;
     }
     .horizontalList {
       div {
-        min-width: 60vw;
         max-width: 80vw;
+        min-width: 60vw;
       }
     }
     .quadrantRadar {
       transform: scale(1.2);
     }
   }
+
   @media only screen and (max-width: 767px) {
     padding-top: 90px !important;
     width: 100vw;
@@ -411,16 +363,16 @@
       }
     }
     .quadrantRadar {
-      transform: scale(1);
       margin-top: -40px;
+      transform: scale(1);
 
       @media only screen and (max-width: 571px) {
-        transform: scale(0.7);
         margin-top: -40px;
+        transform: scale(0.7);
       }
       @media only screen and (max-width: 392px) {
-        transform: scale(0.4);
         margin-top: -100px;
+        transform: scale(0.4);
       }
     }
   }

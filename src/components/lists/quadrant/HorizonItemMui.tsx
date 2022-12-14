@@ -43,8 +43,11 @@ export const HorizonItemMui: React.FC<QuadrantDataListItemProps> = ({
           expanded={expandedHorizon === horizonName}
           onChange={handleChange(horizonName)}
         >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <h5 style={{ flex: 1, textAlign: 'left' }}>{horizonName}</h5>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            className='accordionSummary'
+          >
+            <h5>{horizonName}</h5>
           </AccordionSummary>
           <AccordionDetails>
             {quadrantBlips.map((blip) => (
@@ -78,14 +81,16 @@ const ItemMui: React.FC<{
     actions: { setHoveredItem, setSelectedItem }
   } = useRadarState();
 
-  const onMouseLeave = () => setHoveredItem(null); // equal for all
-  const onMouseEnter = () => setHoveredItem(blip);
+  const onMouseLeave = (): void => setHoveredItem(null);
+  const onMouseEnter = (): void => setHoveredItem(blip);
 
-  const onSelect = () => {
+  const onSelect = (): void => {
     setSelectedItem(blip);
   };
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
   const borderSelected = selectedItem?.id === blip.id ? '1px solid blue' : '';
+
+  console.log('heeeerrrrreeee');
 
   return (
     <Accordion
@@ -109,15 +114,8 @@ const ItemMui: React.FC<{
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <div style={{ backgroundColor: '#EDF2F7' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              minHeight: '200px',
-              padding: 10
-            }}
-          >
+        <div className='accordionDetails'>
+          <div className='accordionDetails-description'>
             <div>
               <Typography variant='h6' mb='2'>
                 Description
@@ -126,9 +124,7 @@ const ItemMui: React.FC<{
                 {blip.Description}
               </Typography>
             </div>
-            <div
-              style={{ display: 'flex', flexWrap: 'wrap', padding: '10px 0px' }}
-            >
+            <div className='accordionDetails-badge'>
               <Typography
                 noWrap
                 m={1}
@@ -179,7 +175,7 @@ const ItemMui: React.FC<{
                   textTransform: 'uppercase'
                 }}
               >
-                🎯{' ' + blip['SDG']}
+                🎯{' ' + blip.SDG}
               </Typography>
             </div>
             <Button onClick={onSelect} variant='contained'>

@@ -1,0 +1,67 @@
+.customFilterContainer {
+  align-items: center;
+  background-color: Snow;
+  border-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 5px;
+
+  div {
+    margin-left: 10px;
+    max-height: 230px;
+    width: 100%;
+
+    .customFilterContainer-wrapper--margin {
+      margin: 7px 20px 3px 0;
+    }
+  }
+
+  button {
+    bottom: calc(100% - 400px);
+    margin: 0;
+    position: absolute;
+    right: 30px;
+  }
+
+  svg {
+    padding-left: 180px;
+  }
+
+  .rc-slider-handle {
+    height: 15px;
+    width: 15px;
+  }
+
+  &-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  select {
+    border: 1px solid lightgrey;
+    max-width: 300px;
+    padding: 10px;
+  }
+
+  &-slider {
+    margin: 18px 40px 3px 20px;
+    width: 200px;
+  }
+
+  &-reset {
+    color: blue;
+    cursor: pointer;
+    margin: 5px 0 3px;
+    padding: 10px 20px;
+  }
+}
+
+div .handleRender {
+  display: block;
+  margin-left: -10px;
+  margin-top: 12px;
+  width: 50px;
+}

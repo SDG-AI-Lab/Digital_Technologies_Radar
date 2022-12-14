@@ -15,6 +15,8 @@ import background from '../assets/landing/background2.jpg';
 import logos from '../assets/landing/logos.png';
 import UNDP from '../assets/landing/UNDP-Logo-Blue-Small.png';
 
+import './Home.scss';
+
 export const Home: React.FC = () => (
   <Flex w={'full'} h={'100vh'} overflowY={'auto'} flexDirection={'row'}>
     <Flex w={useBreakpointValue({ base: '0', md: '30vw' })} h={'100vh'}>
@@ -31,9 +33,7 @@ export const Home: React.FC = () => (
         >
           FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION (FTR4DRR)
         </chakra.p>
-        <Stack
-          position={useBreakpointValue({ base: 'absolute', md: 'inherit' })}
-        >
+        <Stack>
           <MenuItem to={ROUTES.RADAR}>
             <Button
               size='lg'
@@ -41,12 +41,13 @@ export const Home: React.FC = () => (
               borderWidth='2px'
               marginTop={'-60px'}
               colorScheme='blue'
+              className='launchBtnDesktop'
             >
               Launch Radar
             </Button>
           </MenuItem>
         </Stack>
-        <Image src={logos} alt='Logos' style={{ padding: '0 10px 20px' }} />
+        <Image src={logos} alt='Logos' className='logosImg' />
       </VStack>
     </Flex>
     <Flex
@@ -61,22 +62,10 @@ export const Home: React.FC = () => (
       <Image
         src={UNDP}
         alt='UNDP Logo'
-        style={{
-          width: useBreakpointValue({ base: '0', md: '100px' }),
-          marginTop: '-15px',
-          cursor: 'pointer',
-          right: '-10px',
-          position: 'absolute'
-        }}
+        className='UNDPLogo'
         onClick={() => window.open('https://www.undp.org/', '_newtab')}
       />
-      <div
-        style={{
-          alignSelf: 'center',
-          marginTop: '50vh',
-          visibility: useBreakpointValue({ base: 'initial', md: 'hidden' })
-        }}
-      >
+      <div className='launchBtnMobile'>
         <MenuItem to={ROUTES.RADAR}>
           <Button
             size='lg'

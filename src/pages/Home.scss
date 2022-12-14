@@ -1,0 +1,30 @@
+.logosImg {
+  padding: 0 10px 20px;
+}
+
+.UNDPLogo {
+  cursor: pointer;
+  margin-top: -15px;
+  position: absolute;
+  right: -10px;
+  width: 100px;
+
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.launchBtnMobile {
+  align-self: center;
+  margin-top: 50vh;
+
+  @media only screen and (min-width: 767px) {
+    display: none;
+  }
+}
+
+a .launchBtnDesktop {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
-import { FaHome } from 'react-icons/fa';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 
 import { MenuItem } from './components/MenuItem';
-import { ROUTES } from '../../navigation/routes';
+import { ROUTES } from 'navigation/routes';
 
 interface Props {
   isOpen: boolean;

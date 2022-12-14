@@ -1,19 +1,19 @@
 header,
 .row {
-  display: flex; /* aligns all child elements (flex items) in a row */
+  display: flex;
 }
 
 .col {
-  flex: 1; /* distributes space on the line equally among items */
+  flex: 1;
 }
 
 ul.radar-list  {
   display: block;
   list-style-type: none;
-  margin-block-start: 0em;
   margin-block-end: 0em;
-  margin-inline-start: 0px;
+  margin-block-start: 0em;
   margin-inline-end: 0px;
+  margin-inline-start: 0px;
   padding-inline-start: 0px;
 }
 
@@ -21,8 +21,8 @@ ul.radar-list  {
   margin: 2px;
 }
 .blipItem {
-  border: none;
   background-color: whitesmoke;
+  border: none;
   cursor: pointer;
 
   width: 100%;
@@ -36,4 +36,115 @@ ul.radar-list  {
 .blipItemHovered {
   background-color: darkgrey;
   color: white;
+}
+
+.quadrantStagesTab {
+  cursor: pointer;
+  display: flex;
+  padding: 5px;
+
+  h5 {
+    flex: 1;
+    text-align: left;
+  }
+}
+
+.accordionSummary {
+  h5 {
+    flex: 1;
+    text-align: left;
+  }
+}
+
+.accordionDetails {
+  background-color: #edf2f7;
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 10px;
+  }
+
+  &-badge {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0px;
+  }
+}
+
+.quadrantItem {
+  &-container {
+    align-items: center;
+    display: flex;
+    padding: 5px;
+
+    &--background {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &-text {
+    cursor: pointer;
+    flex: 1;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px;
+    text-align: left;
+  }
+
+  &-descriptionDisplay {
+    display: none;
+    padding: 5px;
+
+    &--show {
+      display: block;
+    }
+  }
+
+  &-descriptionContainer {
+    background-color: #edf2f7;
+
+    &--text {
+      display: flex;
+      flex-direction: column;
+      min-height: 200px;
+      padding: 10px;
+    }
+
+    &--badge {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px 0px;
+    }
+  }
+}
+.quadrantTabsContainer {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border-width: 2px;
+  margin-top: 40px;
+  padding: 15px 5px;
+
+  &-tabsPanel {
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    border-width: 2px;
+    margin: 5px 0;
+    padding: 10px;
+  }
+}
+
+.quadrantShowIcon {
+  max-width: 20px;
+  opacity: 1;
+  transform-origin: center;
+
+  &-opacity {
+    opacity: 0.4;
+  }
+
+  &-transform {
+    transform: rotate(-180deg);
+  }
 }

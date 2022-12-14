@@ -5,8 +5,8 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { BackButton } from '../../radar/components';
-import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
+import { BackButton } from 'radar/components';
+import { QuadrantHorizonList } from 'components/lists/quadrant/QuadrantHorizonList';
 
 export const QuadrantView: React.FC = () => {
   const {
@@ -37,19 +37,16 @@ export const QuadrantView: React.FC = () => {
   }, [selectedQuadrant]);
 
   return (
-    <div
-      className='quadrantView'
-      style={{ display: 'flex', flex: 1, padding: 2 }}
-    >
+    <div className='quadrantView'>
       <BackButton to='RADAR' />
-      <div className='quadrantRadar' style={{ flex: 1 }}>
+      <div className='quadrantRadar'>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||
         quadIndex === 1 ||
         quadIndex === 2 ||
         quadIndex === 3) && (
-        <div className='horizontalList' style={{ flex: '0.75' }}>
+        <div className='horizontalList'>
           <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
         </div>
       )}

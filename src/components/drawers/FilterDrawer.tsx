@@ -8,12 +8,13 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
-  useDisclosure
+  useDisclosure,
+  Heading
 } from '@chakra-ui/react';
 import { CustomFilter } from './filter/CustomFilter';
 import { TechList } from './tech/TechList';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { HowToPopup } from '../../components/radar/HowToPopup';
+import { HowToPopup } from 'components/radar/HowToPopup';
 
 import './FilterDrawer.scss';
 
@@ -23,10 +24,20 @@ export const FilterDrawer: React.FC = () => {
     <>
       <Box
         className={`option-button ${
-          useLocation().pathname.includes('quadrant') && 'quadrant-filter'
+          useLocation().pathname.includes('quadrant') ? 'quadrant-filter' : ''
         }`}
       >
-        <Box overflowY='auto' width='0px'>
+        <Heading
+          fontSize={30}
+          color='DarkSlateGray'
+          textAlign='center'
+          p={15}
+          paddingTop={15}
+          w={'100%'}
+        >
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+        </Heading>
+        <Box>
           <HowToPopup />
         </Box>
         <Button
