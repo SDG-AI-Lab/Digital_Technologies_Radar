@@ -165,7 +165,7 @@ export const BlipView: FC = () => {
           </Table>
         </Box>
       ) : (
-        <Text>Please choose a blip</Text>
+        <Text paddingLeft={'16px'}>Please choose a blip</Text>
       )}
     </div>
   );
