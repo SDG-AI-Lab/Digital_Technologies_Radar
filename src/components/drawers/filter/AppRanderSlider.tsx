@@ -7,6 +7,8 @@ import { handleRender } from './HandleRender';
 interface Props {
   min: number;
   max: number;
+  selectedStart: number;
+  selectedEnd: number;
   onChange?: ((value: number | number[]) => void) | undefined;
   reset: boolean;
 }
@@ -14,6 +16,8 @@ interface Props {
 export const AppRangerSlider: React.FC<Props> = ({
   min,
   max,
+  selectedStart,
+  selectedEnd,
   onChange: changeParent,
   reset = false
 }) => {
@@ -21,11 +25,11 @@ export const AppRangerSlider: React.FC<Props> = ({
   const [selectedMax, setSelectedMax] = useState<number>(max);
 
   useEffect(() => {
-    if (min) setSelectedMin(min);
+    if (min) setSelectedMin(selectedStart || min);
   }, [min]);
 
   useEffect(() => {
-    if (max) setSelectedMax(max);
+    if (max) setSelectedMax(selectedEnd || max);
   }, [max]);
 
   const onChange = (value: number | number[]): void => {

@@ -16,7 +16,8 @@ export const QuadrantView: React.FC = () => {
       filteredBlips,
       selectedQuadrant,
       radarData: { quadrants }
-    }
+    },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const [bufferBlips, setBufferBlips] = useState<BlipType[]>([]);
@@ -29,6 +30,10 @@ export const QuadrantView: React.FC = () => {
     // TODO: filter by tech
     setBufferBlips(newBufferBlips);
   }, [filteredBlips, blips, isFiltered, quadIndex]);
+
+  useEffect(() => {
+    setFilteredBlips(isFiltered, filteredBlips);
+  }, []);
 
   useEffect(() => {
     if (selectedQuadrant) {

@@ -1,4 +1,9 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
+import React, {
+  ChangeEventHandler,
+  useEffect,
+  useState,
+  useContext
+} from 'react';
 import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
@@ -17,6 +22,8 @@ import {
   dataKey
 } from './FilterConstants';
 import { AppRangerSlider } from './AppRanderSlider';
+import { RadarContext } from 'navigation/context';
+
 import './Filter.scss';
 
 export const CustomFilter: React.FC = () => {
@@ -32,23 +39,41 @@ export const CustomFilter: React.FC = () => {
     }
   } = useDataState();
 
+  const { radarStateValues, setRadarStateValues } = useContext(RadarContext);
+
   // FILTERS
   // subregions
-  const [subregionFilter, setSubregionFilter] = useState<string>('all');
+  const [subregionFilter, setSubregionFilter] = useState<string>(
+    radarStateValues.subRegion || 'all'
+  );
   // regions
-  const [regionFilter, setRegionFilter] = useState<string>('all');
+  const [regionFilter, setRegionFilter] = useState<string>(
+    radarStateValues.region || 'all'
+  );
   // countries
-  const [countryFilter, setCountryFilter] = useState<string>('all');
+  const [countryFilter, setCountryFilter] = useState<string>(
+    radarStateValues.country || 'all'
+  );
   // implementer
-  const [implementerFilter, setImplementerFilter] = useState<string>('all');
+  const [implementerFilter, setImplementerFilter] = useState<string>(
+    radarStateValues.implementer || 'all'
+  );
   // sdg
-  const [sdgFilter, setSdgFilter] = useState<string>('all');
+  const [sdgFilter, setSdgFilter] = useState<string>(
+    radarStateValues.sdg || 'all'
+  );
   // start year
-  const [startYearFilter, setStartYearFilter] = useState<string>('all');
+  const [startYearFilter, setStartYearFilter] = useState<string>(
+    radarStateValues.startYear || 'all'
+  );
   // end year
-  const [endYearFilter, setEndYearFilter] = useState<string>('all');
+  const [endYearFilter, setEndYearFilter] = useState<string>(
+    radarStateValues.endYear || 'all'
+  );
   // data
-  const [dataFilter, setDataFilter] = useState<string>('all');
+  const [dataFilter, setDataFilter] = useState<string>(
+    radarStateValues.data || 'all'
+  );
 
   // ALL OPTIONS
   // subregions
@@ -310,14 +335,20 @@ export const CustomFilter: React.FC = () => {
     selectedData
   ]);
   // on subregion filter change
-  const onSubregionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onSubregionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedSubregion(e.target.value);
+    setRadarStateValues({ ...radarStateValues, subRegion: e.target.value });
+  };
   // on region filter change
-  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedRegion(e.target.value);
+    setRadarStateValues({ ...radarStateValues, region: e.target.value });
+  };
   // on country filter change
-  const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCountry(e.target.value);
+    setRadarStateValues({ ...radarStateValues, country: e.target.value });
+  };
   // on disaster type filter change
   const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedDisasterType(e.target.value);
@@ -325,19 +356,30 @@ export const CustomFilter: React.FC = () => {
   const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedUserCase(e.target.value);
   // on implementer filter change
-  const onImplementerChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onImplementerChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedImplementer(e.target.value);
+    setRadarStateValues({ ...radarStateValues, implementer: e.target.value });
+  };
   // on SDG filter change
-  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedSdg(e.target.value);
+    setRadarStateValues({ ...radarStateValues, sdg: e.target.value });
+  };
   // on year range change
   const onYearRangeChange = (e: Number[]): void => {
     setSelectedStartYear(String(e[0]));
     setSelectedEndYear(String(e[1]));
+    setRadarStateValues({
+      ...radarStateValues,
+      startYear: String(e[0]),
+      endYear: String(e[1])
+    });
   };
   // on data filter change
-  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedData(e.target.value);
+    setRadarStateValues({ ...radarStateValues, data: e.target.value });
+  };
 
   const [sliderReset, setSliderReset] = useState(false);
   const onResetFilter = (): void => {
@@ -353,6 +395,7 @@ export const CustomFilter: React.FC = () => {
     setSelectedData('all');
 
     setSliderReset(true);
+    setRadarStateValues({});
   };
 
   const [min, setMin] = useState<number>();
@@ -362,8 +405,8 @@ export const CustomFilter: React.FC = () => {
   useEffect(() => {
     const maxApply = Math.max(...years.map(forceNumber));
     const minApply = Math.min(...years.map(forceNumber));
-    setMin(minApply);
-    setMax(maxApply);
+    if (minApply !== Infinity) setMin(minApply);
+    if (minApply !== -Infinity) setMax(maxApply);
   }, [years]);
 
   const onSliderChange: (value: number | number[]) => void = (val) => {
@@ -503,6 +546,8 @@ export const CustomFilter: React.FC = () => {
             <AppRangerSlider
               max={max}
               min={min}
+              selectedStart={Number(radarStateValues.startYear)}
+              selectedEnd={Number(radarStateValues.endYear)}
               onChange={onSliderChange}
               reset={sliderReset}
             />
