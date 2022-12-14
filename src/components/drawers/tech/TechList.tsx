@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { shuffle } from 'lodash';
 import { ScrollableDiv } from './components/ScrollableDiv';
 import {
   useDataState,
@@ -8,6 +7,7 @@ import {
   RadarUtilities
 } from '@undp_sdg_ai_lab/undp-radar';
 import { TechItem } from './components/TechItem';
+import { techButtonColors } from './colors';
 import './TechList.scss';
 
 export const TechList: React.FC = () => {
@@ -34,72 +34,6 @@ export const TechList: React.FC = () => {
     setTechFilter([]);
   };
 
-  const techButtonColors = [
-    '#6404BB',
-    '#1C2B1A',
-    '#2E4F41',
-    '#404040',
-    '#662400',
-    '#006663',
-    '#9C3E00',
-    '#D7F205',
-    '#F25774',
-    '#0597F2',
-    '#49D907',
-    '#970FF2',
-    '#404040',
-    '#049DD9',
-    '#6883A6',
-    '#BF9B6F',
-    '#3345A6',
-    '#D959D0',
-    '#593434',
-    '#A62C21',
-    '#B2A2CE',
-    '#D918B9',
-    '#F2B807',
-    '#B8FFBF',
-    '#8F002D',
-    '#00940F',
-    '#2C6CBF',
-    '#595334',
-    '#A69333',
-    '#593C39',
-    '#E8FF17',
-    '#8000E0',
-    '#849400',
-    '#BF5079',
-    '#4D8CC4',
-    '#BDC44D',
-    '#BF84BB'
-  ];
-
-  const kala = [
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#6204bb',
-    '#1C2B1A',
-    '#6204bb',
-    '#1C2B1A',
-    '#6204bb',
-    '#6204bb',
-    '#1C2B1A',
-    '#6204bb',
-    '#1C2B1A',
-    '#6204bb'
-  ];
   useEffect(() => {
     if (blips.length > 0) {
       const newTechMap: Map<string, TechItemType> = new Map();
@@ -136,8 +70,7 @@ export const TechList: React.FC = () => {
       const techListArr: any = Array.from(newTechMap.values());
 
       techListArr.map((t: any) => {
-        const shuffled = shuffle(techButtonColors);
-        t['color'] = shuffled.shift();
+        t['color'] = techButtonColors.pop();
         return t;
       });
       setTech(techListArr);
