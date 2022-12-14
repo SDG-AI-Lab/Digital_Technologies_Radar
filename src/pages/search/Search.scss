@@ -13,3 +13,15 @@
   text-align: justify;
   text-justify: inter-word;
 }
+
+.searchResultImage {
+  height: 150px;
+}
+.searchBadgeContainer {
+  height: 80px;
+  overflow: auto;
+
+  span {
+    height: fit-content;
+  }
+}
