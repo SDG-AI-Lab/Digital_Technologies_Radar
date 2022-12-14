@@ -69,10 +69,7 @@ export const TechList: React.FC = () => {
       });
       const techListArr: any = Array.from(newTechMap.values());
 
-      techListArr.map((t: any) => {
-        t['color'] = techButtonColors.pop();
-        return t;
-      });
+      techListArr.forEach((t: any) => (t['color'] = techButtonColors.pop()));
       setTech(techListArr);
     }
   }, [blips, radarData, useCaseFilter, disasterTypeFilter]);
