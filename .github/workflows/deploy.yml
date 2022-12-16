@@ -31,4 +31,4 @@ jobs:
         run: npm install pm2 -g
 
       - name: Restart application
-        run: pm2 restart Radar
+        run: pm2 start app.config.json
