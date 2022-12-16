@@ -33,7 +33,7 @@ export const Home: React.FC = () => (
           letterSpacing='3px'
           marginTop='200px'
         >
-          FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION
+          FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION (FTR4DRR)
         </chakra.p>
         <Stack>
           <MenuItem to={ROUTES.RADAR}>
