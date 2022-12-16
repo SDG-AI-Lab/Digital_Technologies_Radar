@@ -1,0 +1,28 @@
+name: Continuous Deployment
+on:
+  push:
+    branches: [test-deploy]
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout develop branch
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.20.0'
+
+      - name: Install dependencies
+        run: rm -rf node_modules && yarn install --frozen-lockfile
+
+      - name: Test application
+        run: yarn pretest
+
+      - name: Build application
+        run: yarn build
+
+      - name: Restart application
+        run: pm2 restart Radar
