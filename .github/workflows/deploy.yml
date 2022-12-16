@@ -16,7 +16,7 @@ jobs:
           node-version: '14.20.0'
 
       - name: Setup yarn
-        run: npm install --global yarn
+        run: npm install yarn
 
       - name: Install dependencies
         run: rm -rf node_modules && yarn install --frozen-lockfile
@@ -26,6 +26,9 @@ jobs:
 
       - name: Build application
         run: yarn build
+
+      - name: Install process manager
+        run: npm install pm2
 
       - name: Restart application
         run: pm2 restart Radar
