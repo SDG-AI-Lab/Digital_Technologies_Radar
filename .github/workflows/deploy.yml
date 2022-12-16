@@ -28,7 +28,7 @@ jobs:
         run: yarn build
 
       - name: Install process manager
-        run: npm install pm2 -g
+        run: npm install pm2
 
       - name: Restart application
         run: pm2 start app.config.json
