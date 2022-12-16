@@ -19,7 +19,7 @@ jobs:
         run: npm install yarn
 
       - name: Install dependencies
-        run: rm -rf node_modules && yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Test application
         run: yarn pretest
@@ -28,7 +28,7 @@ jobs:
         run: yarn build
 
       - name: Install process manager
-        run: npm install pm2
+        run: npm install pm2 -g
 
       - name: Restart application
         run: pm2 restart Radar
