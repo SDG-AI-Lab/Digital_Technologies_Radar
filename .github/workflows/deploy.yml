@@ -1,13 +1,13 @@
-name: Continuous Deployment
+name: Deploy develop branch
 on:
   push:
-    branches: [test-deploy]
+    branches: [develop]
 
 jobs:
   deployment:
     runs-on: self-hosted
     steps:
-      - name: Checkout test branch
+      - name: Checkout develop branch
         uses: actions/checkout@v2
 
       - name: Setup Node.js
