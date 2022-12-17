@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import cx from 'classnames';
 import {
   Button,
   Box,
@@ -22,11 +23,7 @@ export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Box
-        className={`option-button ${
-          useLocation().pathname.includes('quadrant') ? 'quadrant-filter' : ''
-        }`}
-      >
+      <Box className='option-button'>
         <Heading
           fontSize={30}
           color='DarkSlateGray'
@@ -34,10 +31,11 @@ export const FilterDrawer: React.FC = () => {
           p={15}
           paddingTop={15}
           w={'100%'}
+          className='titleHeader'
         >
           Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
         </Heading>
-        <Box>
+        <Box className='howTo'>
           <HowToPopup />
         </Box>
         <Button
@@ -47,6 +45,9 @@ export const FilterDrawer: React.FC = () => {
           rightIcon={<AiOutlineSetting />}
           borderRadius={'0'}
           onClick={onOpen}
+          className={cx({
+            quadrantFilter: useLocation().pathname.includes('quadrant')
+          })}
         >
           Filter
         </Button>

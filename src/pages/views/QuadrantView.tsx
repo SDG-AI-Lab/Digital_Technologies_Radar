@@ -44,6 +44,7 @@ export const QuadrantView: React.FC = () => {
   return (
     <div className='quadrantView'>
       <BackButton to='RADAR' />
+
       <div className='quadrantRadar'>
         <QuadrantRadar />
       </div>

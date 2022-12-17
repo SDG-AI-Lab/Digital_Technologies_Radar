@@ -34,6 +34,19 @@ div.rc-slider {
   button {
     margin-left: 0;
   }
+
+  @media only screen and (max-width: 768px) {
+    justify-content: flex-end;
+    .titleHeader,
+    .howTo {
+      display: none;
+    }
+
+    .quadrantFilter {
+      margin-top: 160px;
+      zoom: 0.6;
+    }
+  }
 }
 
 @media only screen and (max-width: 921px) {

@@ -50,8 +50,16 @@ export const Home: React.FC = () => (
           </MenuItem>
         </Stack>
         <div className='partnersList'>
-          <Image src={UNDPDRTLogo} alt='UNDP DRT Logo' />
-          <Image src={SDGAILabLogo} alt='SDG AI Lab Logo' />
+          <Image
+            src={UNDPDRTLogo}
+            alt='UNDP DRT Logo'
+            className='UNDPDRTLogo'
+          />
+          <Image
+            src={SDGAILabLogo}
+            alt='SDG AI Lab Logo'
+            className='SDGAILogo'
+          />
           <Image src={CBILogo} alt='CBI Logo' className='CBILogo' />
         </div>
       </VStack>
