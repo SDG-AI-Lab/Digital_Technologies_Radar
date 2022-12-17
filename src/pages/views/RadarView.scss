@@ -8,10 +8,23 @@
   width: 100%;
 
   .tabsComponents {
+    border: none;
     flex-basis: 50%;
     margin: 0 0 15px !important;
     max-width: none !important;
     padding: 20px 5px;
+    * {
+      border: none;
+      box-shadow: none;
+    }
+    h5 {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    h5[aria-selected='true'] {
+      font-size: 25px !important;
+      font-weight: bold !important;
+    }
 
     .chakra-tabs {
       width: 100%;

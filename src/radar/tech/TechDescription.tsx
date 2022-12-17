@@ -63,7 +63,7 @@ export const TechDescription: React.FC = () => {
           </Box>
         </Box>
       ) : (
-        <Text>Please choose a technology</Text>
+        <Text paddingLeft={'16px'}>Please choose a technology</Text>
       )}
     </React.Fragment>
   );
