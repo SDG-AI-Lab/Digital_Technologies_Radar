@@ -1,6 +1,7 @@
 #radar-container.radarContainer {
   align-items: center;
   display: flex;
+  gap: 40px;
   height: max-content;
   justify-content: space-between;
   margin: 30px 28px 30px 0;
@@ -24,6 +25,13 @@
     td {
       padding: 16px 5px;
     }
+    @media only screen and (max-width: 1400px) {
+      max-width: 80vw !important;
+
+      .chakra-tabs {
+        width: 100%;
+      }
+    }
   }
 
   .radarComponents {
@@ -42,15 +50,8 @@
   .radarContainer {
     align-items: center;
     flex-direction: column;
+    gap: 10px !important;
     margin-right: 0;
-
-    .tabsComponents {
-      max-width: 80vw !important;
-
-      .chakra-tabs {
-        width: 100%;
-      }
-    }
   }
 }
 
@@ -181,10 +182,10 @@
     width: fit-content !important;
   }
   .radarComponents {
+    display: flex;
+    justify-content: center;
     margin-top: 80px;
     z-index: 1;
-  }
-  .radarComponents {
     zoom: 1 !important;
   }
 }
@@ -202,14 +203,8 @@
       top: 60px;
       z-index: 12;
     }
-    .how-to-button {
-      display: none;
-    }
   }
-  .how-to-button,
-  .option-button {
-    display: none;
-  }
+
   .radarComponentsContainer {
     > div:last-of-type {
       display: none !important;
@@ -285,6 +280,10 @@
 
 .quadrantRadar {
   flex: 1;
+
+  div {
+    display: none;
+  }
 }
 
 .quadrantView {
@@ -298,8 +297,7 @@
 
     button {
       align-self: flex-start;
-      position: sticky;
-      top: 90px;
+      position: absolute;
       z-index: 8;
     }
     .horizontalList {
@@ -314,9 +312,9 @@
   }
 
   @media only screen and (max-width: 767px) {
-    padding-top: 90px !important;
     width: 100vw;
     button {
+      top: 90px;
       z-index: 12;
     }
     .horizontalList {
@@ -397,6 +395,9 @@
   div {
     svg {
       right: -9px !important;
+      @media only screen and (max-width: 991px) {
+        top: 292px !important;
+      }
     }
   }
 }

@@ -1,17 +1,21 @@
 .partnersList {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   justify-content: center;
-  padding: 0 40px 5px;
+  padding-bottom: 1.25rem;
   width: 100%;
 
   img {
-    height: 40%;
     padding: 0 8px;
-    width: 45%;
 
     &.CBILogo {
-      height: 35%;
+      max-width: 45%;
+    }
+    &.SDGAILogo {
+      max-width: 18%;
+    }
+    &.UNDPDRTLogo {
+      max-width: 35%;
     }
   }
 }
