@@ -19,6 +19,12 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/dot-notation": "off",
-    "@typescript-eslint/prefer-nullish-coalescing": "off"
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/triple-slash-reference": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

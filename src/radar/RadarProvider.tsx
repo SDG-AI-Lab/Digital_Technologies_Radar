@@ -40,7 +40,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
     idea: 'Digital Solution has been identified and explained in the project document. Not available on the market for implementation.  '
   };
 
-  const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
+  const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
     ({
       Region: Utilities.cleanupStringArray(item.Region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
