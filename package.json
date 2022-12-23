@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://drrtechradar.org",
   "dependencies": {
+    "@amcharts/amcharts5": "^5.2.45",
+    "@amcharts/amcharts5-fonts": "^5.0.1",
+    "@amcharts/amcharts5-geodata": "^5.1.0",
     "@chakra-ui/react": "^1.8.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",

@@ -1,0 +1,32 @@
+.radarMapView {
+  padding: 0 1rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  max-height: 95vh;
+
+  .slider {
+    font-size: 14px;
+    max-height: 400px;
+    padding: 10px;
+    zoom: 0.8;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    img {
+      height: 80px;
+      object-fit: scale-down;
+    }
+
+    button {
+      height: 25px;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 const HOME = '/';
 const RADAR = '/radar';
+const MAP_VIEW = '/map-view';
 const ABOUT = '/about';
 const VOLUNTEERS = '/volunteers';
 const SEARCH = '/search';
@@ -13,6 +14,7 @@ const BLIP_PARAM = `${BLIP}/:techItemId`;
 export const ROUTES = {
   HOME,
   RADAR,
+  MAP_VIEW,
   ABOUT,
   SEARCH,
   QUADRANT,
