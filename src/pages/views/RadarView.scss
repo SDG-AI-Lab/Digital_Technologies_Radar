@@ -4,6 +4,7 @@
   gap: 40px;
   height: max-content;
   justify-content: space-between;
+  align-items: flex-start;
   margin: 30px 28px 30px 0;
   width: 100%;
 
@@ -16,14 +17,6 @@
     * {
       border: none;
       box-shadow: none;
-    }
-    h5 {
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    h5[aria-selected='true'] {
-      font-size: 25px !important;
-      font-weight: bold !important;
     }
 
     .chakra-tabs {

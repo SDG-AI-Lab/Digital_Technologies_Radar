@@ -1,0 +1,26 @@
+.horizontalMap {
+  min-height: 113vh;
+  max-height: 133vh;
+}
+
+@media only screen and (max-width: 1180px) {
+  .horizontalMap {
+    div {
+      min-width: 60vw;
+      max-width: 80vw;
+
+      min-height: 79vw;
+      max-height: 101vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .horizontalMap {
+    min-width: 80vw;
+    max-width: 90vw;
+
+    min-height: 60vw;
+    max-height: 80vw;
+  }
+}
