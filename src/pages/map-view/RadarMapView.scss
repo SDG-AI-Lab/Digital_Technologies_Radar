@@ -1,7 +1,15 @@
+#am5MapDiv {
+  width: 100%;
+  height: 55vh;
+  @media only screen and (max-width: 1600px) {
+    height: 50vh;
+  }
+}
+
 .radarMapView {
+  overflow: hidden;
   padding: 0 1rem;
   width: 100%;
-  overflow: hidden;
 }
 
 .mapContainer {
@@ -12,10 +20,10 @@
   .slider {
     font-size: 14px;
     max-height: 400px;
-    padding: 10px;
-    zoom: 0.8;
     -ms-overflow-style: none; /* IE and Edge */
+    padding: 10px;
     scrollbar-width: none; /* Firefox */
+    zoom: 0.8;
 
     img {
       height: 80px;

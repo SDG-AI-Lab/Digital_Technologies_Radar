@@ -22,7 +22,6 @@ import {
 import { QuadrantView } from '../pages/views/QuadrantView';
 import { MapViewLayout } from '../layouts/MapViewLayout';
 import { RadarMapView } from '../pages/map-view/RadarMapView';
-import { QuadrantMapView } from '../pages/map-view/QuadrantMapView';
 // Context
 import { RadarContext, RadarContextInterface } from './context';
 
@@ -69,12 +68,7 @@ export const NavApp: React.FC = () => {
             </Route>
             <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
               <Route path={''} element={<RadarMapView />}></Route>
-              <Route path={ROUTES.QUADRANT}>
-                <Route
-                  path={ROUTES.QUADRANT_PARAM}
-                  element={<QuadrantMapView />}
-                />
-              </Route>
+              <Route path={ROUTES.QUADRANT}></Route>
             </Route>
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />

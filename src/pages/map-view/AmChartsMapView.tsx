@@ -237,7 +237,7 @@ function AmChartsMapView(props: MapViewProps): any {
     };
   }, [props.blips]);
 
-  return <div id='am5MapDiv' style={{ width: '100%', height: '55vh' }} />;
+  return <div id='am5MapDiv' />;
 }
 
 export default React.memo(AmChartsMapView);
