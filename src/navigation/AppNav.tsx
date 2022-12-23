@@ -20,8 +20,6 @@ import {
 } from '../pages';
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
-import { MapViewLayout } from '../layouts/MapViewLayout';
-import { RadarMapView } from '../pages/map-view/RadarMapView';
 // Context
 import { RadarContext, RadarContextInterface } from './context';
 
@@ -49,11 +47,7 @@ export const NavApp: React.FC = () => {
       <Flex className='navApp'>
         <AppLeftNav />
         <AppBottomNav />
-        {/* <AppMobileHeader /> */}
-        <Routes>
-          <Route path={ROUTES.MAP_VIEW} element={<AppMobileHeader />} />
-          <Route path='*' element={<AppMobileHeader />} />
-        </Routes>
+        <AppMobileHeader />
         <MainLayout>
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />
@@ -65,10 +59,6 @@ export const NavApp: React.FC = () => {
                   element={<QuadrantView />}
                 />
               </Route>
-            </Route>
-            <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
-              <Route path={''} element={<RadarMapView />}></Route>
-              <Route path={ROUTES.QUADRANT}></Route>
             </Route>
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />
