@@ -8,6 +8,8 @@ import {
 import { BackButton } from 'radar/components';
 import { QuadrantHorizonList } from 'components/lists/quadrant/QuadrantHorizonList';
 
+import './QuadrantView.scss';
+
 export const QuadrantView: React.FC = () => {
   const {
     state: {

@@ -49,11 +49,7 @@ export const NavApp: React.FC = () => {
       <Flex className='navApp'>
         <AppLeftNav />
         <AppBottomNav />
-        {/* <AppMobileHeader /> */}
-        <Routes>
-          <Route path={ROUTES.MAP_VIEW} element={<AppMobileHeader />} />
-          <Route path='*' element={<AppMobileHeader />} />
-        </Routes>
+        <AppMobileHeader />
         <MainLayout>
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />

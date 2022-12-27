@@ -3442,7 +3442,7 @@
     "@typescript-eslint/types" "5.46.1"
     eslint-visitor-keys "^3.3.0"
 
-"@undp_sdg_ai_lab/undp-radar@^1.0.10":
+"@undp_sdg_ai_lab/undp-radar@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-1.1.0.tgz#d1fd82e68cc7dfbf5823679273c24fe0d6b8a052"
   integrity sha512-Lvk26poFu3axxa2K+dMZcL2llZ9FVisoRSZ2bF1QBPL6PA9ciJM56XJi8KE6gscd/2yqbuCzuSbDwky5Kh2aBw==

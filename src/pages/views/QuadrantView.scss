@@ -1,0 +1,98 @@
+.quadrantRadar {
+  flex: 1;
+  padding-top: 20px;
+
+  div {
+    display: none;
+  }
+}
+
+.quadrantView {
+  display: flex;
+  flex: 1;
+  padding: 2px;
+
+  @media only screen and (max-width: 1180px) {
+    align-items: center;
+    flex-direction: column;
+
+    button {
+      align-self: flex-start;
+      position: absolute;
+      z-index: 8;
+    }
+    .horizontalList {
+      div {
+        max-width: 80vw;
+        min-width: 60vw;
+      }
+    }
+    .quadrantRadar {
+      transform: scale(1.2);
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 100vw;
+    button {
+      top: 90px;
+      z-index: 12;
+    }
+    .horizontalList {
+      margin-top: -40px;
+      > div {
+        margin-bottom: 100px !important;
+        td {
+          padding: 10px 0;
+        }
+      }
+      .chakra-tabs__tab-panel {
+        padding: 16px 0;
+      }
+      @media only screen and (max-width: 420px) {
+        .chakra-tabs__tablist {
+          display: flex;
+          flex-direction: column;
+          h5[aria-selected='true'] {
+            border-bottom-color: inherit;
+            border-radius: 6px;
+          }
+        }
+      }
+      .MuiAccordionDetails-root {
+        padding: 8px 0;
+      }
+      tr {
+        display: flex;
+        flex-direction: column;
+
+        td {
+          padding: 16px 5px;
+          &:first-of-type {
+            font-weight: bold;
+          }
+        }
+      }
+
+      @media only screen and (max-width: 571px) {
+        margin-top: -100px;
+      }
+      @media only screen and (max-width: 392px) {
+        margin-top: -200px;
+      }
+    }
+    .quadrantRadar {
+      margin-top: -40px;
+      transform: scale(1);
+
+      @media only screen and (max-width: 571px) {
+        margin-top: -40px;
+        transform: scale(0.7);
+      }
+      @media only screen and (max-width: 392px) {
+        margin-top: -100px;
+        transform: scale(0.4);
+      }
+    }
+  }
+}
