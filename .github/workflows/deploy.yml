@@ -1,13 +1,13 @@
-name: Deploy develop branch
+name: Deploy to staging
 on:
   push:
-    branches: [develop]
+    branches: [staging]
 
 jobs:
   deployment:
     runs-on: self-hosted
     steps:
-      - name: Checkout develop branch
+      - name: Checkout staging branch
         uses: actions/checkout@v2
 
       - name: Setup Node.js

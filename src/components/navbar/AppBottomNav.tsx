@@ -3,6 +3,7 @@ import React from 'react';
 import { Flex, Box, Button, Text } from '@chakra-ui/react';
 import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
+import { SiOpenstreetmap } from 'react-icons/si';
 import { FiTarget } from 'react-icons/fi';
 
 import { MenuItem } from './components/MenuItem';
@@ -47,6 +48,25 @@ export const AppBottomNav: React.FC = () => {
               <FiTarget size={25} color='#3182CE' />
               <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
                 Radar
+              </Text>
+            </Button>
+          </MenuItem>
+        </Box>
+
+        <Box flex={1}>
+          <MenuItem to={ROUTES.MAP_VIEW}>
+            <Button
+              py={8}
+              width={'100%'}
+              bgColor='gray.50'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+            >
+              <SiOpenstreetmap size={25} color='#3182CE' />
+              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                Map
               </Text>
             </Button>
           </MenuItem>
