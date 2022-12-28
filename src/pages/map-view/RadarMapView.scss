@@ -29,6 +29,9 @@
       height: 80px;
       object-fit: scale-down;
     }
+    + div {
+      max-width: 300px;
+    }
 
     button {
       height: 25px;

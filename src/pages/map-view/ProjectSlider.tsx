@@ -20,7 +20,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
       {blips.map((value, key) => (
         <Box
           minW={'300px'}
-          w={'full'}
+          maxW={'300px'}
           boxShadow={'2xl'}
           rounded={'md'}
           p={'10px 8px'}

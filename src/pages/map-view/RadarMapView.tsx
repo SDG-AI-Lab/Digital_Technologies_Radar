@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { MapContainer, TileLayer, Popup, CircleMarker } from 'react-leaflet';
+import { getCode } from 'country-list';
+import geos from 'geos-major';
 
 import './RadarMapView.scss';
-import AmChartsMapView from './AmChartsMapView';
+import { mapBlips } from './helpers';
 
 import { ProjectSlider } from './ProjectSlider';
 
@@ -40,6 +43,27 @@ export const RadarMapView: React.FC = () => {
     }
   }, [techFilters]);
 
+  const getCordinates = (countryName: string): number[] => {
+    const code = getCode(countryName);
+
+    if (code) {
+      const { latitude, longitude } = geos.country(code);
+      return [latitude, longitude];
+    }
+    return [0, 0];
+  };
+
+  const colorMap: any = {
+    recovery: '#E7D438',
+    response: '#ED6058',
+    preparedness: '#44936E',
+    mitigation: '#A5E0FF'
+  };
+
+  const handleClick = (project) => {
+    console.log({ project });
+    setDisplayBlips([project]);
+  };
   return (
     <div className='radarMapView'>
       <Grid
@@ -52,7 +76,73 @@ export const RadarMapView: React.FC = () => {
           colSpan={{ sm: 1, md: 1, lg: 2 }}
           className='mapContainer'
         >
-          <AmChartsMapView blips={displayBlips} />
+          <MapContainer
+            center={getCordinates('algeria')}
+            zoom={2}
+            dragging={false}
+            minZoom={2}
+            attributionControl={false}
+            fillColor='blue'
+          >
+            <TileLayer
+              // url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+              url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
+              // attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {Array.from(mapBlips(displayBlips)).map((blipDetails) => {
+              const countryName = blipDetails[0];
+              let position = getCordinates(countryName);
+              if (blipDetails[1].length > 1) {
+                return blipDetails[1].map((project, index) => {
+                  position = [
+                    position[0] + 0.1 * index,
+                    position[1] + 0.1 * index
+                  ];
+                  const color = colorMap[project['Disaster Cycle']];
+                  return (
+                    <CircleMarker
+                      key={project.id}
+                      center={position}
+                      radius={8}
+                      color={color}
+                      fill={true}
+                      fillColor={color}
+                      stroke={false}
+                      fillOpacity={1}
+                      eventHandlers={{
+                        click: () => {
+                          handleClick(project);
+                        }
+                      }}
+                    >
+                      <Popup>Country: {blipDetails[0]}</Popup>
+                    </CircleMarker>
+                  );
+                });
+              }
+              const project = blipDetails[1][0];
+              const color = colorMap[project['Disaster Cycle']];
+              return (
+                <CircleMarker
+                  key={blipDetails[0]}
+                  center={position}
+                  eventHandlers={{
+                    click: (e) => {
+                      console.log('marker clicked', e);
+                    }
+                  }}
+                  radius={8}
+                  color={color}
+                  fill={true}
+                  fillColor={color}
+                  stroke={false}
+                  fillOpacity={1}
+                >
+                  <Popup> Country: {blipDetails[0]}</Popup>
+                </CircleMarker>
+              );
+            })}
+          </MapContainer>
           <ProjectSlider blips={displayBlips} />
         </GridItem>
       </Grid>
