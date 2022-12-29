@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires  */
+
 import React, { useEffect, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
@@ -9,7 +11,7 @@ import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
 
-const geos = require('geos-major');
+var geos = require('geos-major');
 
 export const RadarMapView: React.FC = () => {
   const {
@@ -30,10 +32,6 @@ export const RadarMapView: React.FC = () => {
     if (techFilters.length > 0) {
       const filteredBlipsAccordingToTechFilters = displayBlips.filter(
         (blip) => {
-          // blip.Technology and the techFilters sent by Radar state is different
-          // e.g. blip.Technology=['Geographical Information Systems']
-          // whereas techFilters=['geographical-information-systems']
-          // as a workaround, try to convert blip.Technology to techFilter format
           const blipTechnology = blip.Technology.map((tf) => {
             return tf.toLowerCase().replaceAll(' ', '-');
           });
@@ -100,6 +98,7 @@ export const RadarMapView: React.FC = () => {
                     <CircleMarker
                       key={project.id}
                       center={position}
+                      // @ts-expect-error
                       radius={8}
                       color={color}
                       fill={true}
@@ -125,6 +124,7 @@ export const RadarMapView: React.FC = () => {
                       console.log('marker clicked', e);
                     }
                   }}
+                  // @ts-expect-error
                   radius={8}
                   color={color}
                   fill={true}
