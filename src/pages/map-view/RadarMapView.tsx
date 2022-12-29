@@ -3,11 +3,13 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { MapContainer, TileLayer, Popup, CircleMarker } from 'react-leaflet';
 import { getCode } from 'country-list';
-import geos from 'geos-major';
+
 import { BlipPopOver, mapBlips } from './helpers';
 import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
+
+const geos = require('geos-major');
 
 export const RadarMapView: React.FC = () => {
   const {
@@ -119,7 +121,7 @@ export const RadarMapView: React.FC = () => {
                   key={blipDetails[0]}
                   center={position}
                   eventHandlers={{
-                    click: (e) => {
+                    click: (e: any) => {
                       console.log('marker clicked', e);
                     }
                   }}
@@ -131,8 +133,7 @@ export const RadarMapView: React.FC = () => {
                   fillOpacity={1}
                 >
                   <Popup>
-                    {' '}
-                    <BlipPopOver project={project} />{' '}
+                    <BlipPopOver project={project} />
                   </Popup>
                 </CircleMarker>
               );
