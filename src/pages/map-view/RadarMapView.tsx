@@ -4,11 +4,10 @@ import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { MapContainer, TileLayer, Popup, CircleMarker } from 'react-leaflet';
 import { getCode } from 'country-list';
 import geos from 'geos-major';
+import { BlipPopOver, mapBlips } from './helpers';
+import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
-import { mapBlips } from './helpers';
-
-import { ProjectSlider } from './ProjectSlider';
 
 export const RadarMapView: React.FC = () => {
   const {
@@ -60,10 +59,6 @@ export const RadarMapView: React.FC = () => {
     mitigation: '#A5E0FF'
   };
 
-  const handleClick = (project) => {
-    console.log({ project });
-    setDisplayBlips([project]);
-  };
   return (
     <div className='radarMapView'>
       <Grid
@@ -109,13 +104,10 @@ export const RadarMapView: React.FC = () => {
                       fillColor={color}
                       stroke={false}
                       fillOpacity={1}
-                      eventHandlers={{
-                        click: () => {
-                          handleClick(project);
-                        }
-                      }}
                     >
-                      <Popup>Country: {blipDetails[0]}</Popup>
+                      <Popup>
+                        <BlipPopOver project={project} />
+                      </Popup>
                     </CircleMarker>
                   );
                 });
@@ -138,7 +130,10 @@ export const RadarMapView: React.FC = () => {
                   stroke={false}
                   fillOpacity={1}
                 >
-                  <Popup> Country: {blipDetails[0]}</Popup>
+                  <Popup>
+                    {' '}
+                    <BlipPopOver project={project} />{' '}
+                  </Popup>
                 </CircleMarker>
               );
             })}

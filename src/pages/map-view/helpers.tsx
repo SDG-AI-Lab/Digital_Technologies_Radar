@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { Box, Heading, VStack, HStack, Badge, Text } from '@chakra-ui/react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 
 export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
@@ -42,4 +43,69 @@ export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
   });
 
   return blipsMap;
+};
+
+export const BlipPopOver = ({ project }: any) => {
+  return (
+    <Box maxW={300}>
+      <Heading>
+        <Text fontSize={18} className={'popOverTitle'}>
+          {project['Ideas/Concepts/Examples']}
+        </Text>
+      </Heading>
+
+      <Text fontSize={15} className={'popOverDescription'}>
+        {project['Description']}
+      </Text>
+
+      <VStack>
+        <HStack>
+          <Badge
+            px={2}
+            py={1}
+            borderRadius='md'
+            bg='purple.50'
+            textTransform='capitalize'
+            className={'popBadge'}
+          >
+            📍 {project['Country of Implementation']}
+          </Badge>
+          <Badge
+            px={2}
+            py={1}
+            borderRadius='md'
+            bg='green.50'
+            textTransform='capitalize'
+            className={'popBadge'}
+          >
+            🎯 {project['SDG']?.join(', ')}
+          </Badge>
+        </HStack>
+        <HStack>
+          <Badge
+            px={2}
+            py={1}
+            borderRadius='md'
+            bg='black'
+            color='white'
+            textTransform='capitalize'
+            className={'popBadge'}
+          >
+            🏠 {project['Status/Maturity']}
+          </Badge>
+          <Badge
+            px={2}
+            py={1}
+            borderRadius='md'
+            bg='#2B6CB0'
+            color='#fff'
+            textTransform='capitalize'
+            className={'popBadge'}
+          >
+            🌋 {project['Disaster Cycle']}
+          </Badge>
+        </HStack>
+      </VStack>
+    </Box>
+  );
 };

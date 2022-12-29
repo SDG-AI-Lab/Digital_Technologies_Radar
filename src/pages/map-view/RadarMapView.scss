@@ -15,7 +15,7 @@
 .mapContainer {
   display: flex;
   flex-direction: column;
-  max-height: 95vh;
+  max-height: 90vh;
 
   .slider {
     font-size: 14px;
@@ -24,6 +24,11 @@
     padding: 10px;
     scrollbar-width: none; /* Firefox */
     zoom: 0.8;
+
+    .badgeContainer {
+      height: 45px;
+      overflow: auto;
+    }
 
     img {
       height: 80px;
@@ -35,6 +40,9 @@
 
     button {
       height: 25px;
+      background-color: none;
+      justify-content: flex-start;
+      width: fit-content;
     }
     &::-webkit-scrollbar {
       display: none;
