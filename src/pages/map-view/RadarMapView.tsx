@@ -3,8 +3,19 @@
 
 import React, { useEffect, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
-import { BlipType, ToolTip, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
-import { MapContainer, TileLayer, Popup, CircleMarker } from 'react-leaflet';
+import {
+  BlipType,
+  ToolTip,
+  useRadarState,
+  BaseCSVType
+} from '@undp_sdg_ai_lab/undp-radar';
+import {
+  MapContainer,
+  TileLayer,
+  Popup,
+  CircleMarker,
+  Tooltip
+} from 'react-leaflet';
 import { getCode } from 'country-list';
 
 import { BlipPopOver, mapBlips, getRandomHexColor } from './helpers';
@@ -19,13 +30,48 @@ export const RadarMapView: React.FC = () => {
   } = useRadarState();
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
+  // const [mergedBlips, setMergedBlips] = useState<BlipType[]>([]);
 
   useEffect(() => {
+    mergeDiasterCycle();
+  }, [blips]);
+
+  const merge: BlipType[] = [];
+
+  /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
+  const mergeDiasterCycle = (): void => {
     let blipsToUse = blips;
     if (isFiltered) {
       blipsToUse = filteredBlips;
     }
-    setDisplayBlips(blipsToUse);
+    blipsToUse.forEach(function (item) {
+      const existingBips = merge.filter(function (v, i) {
+        return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
+      });
+
+      if (existingBips.length) {
+        const existingIndex = merge.indexOf(existingBips[0]);
+        merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
+          'Disaster Cycle'
+        ]
+          .concat(', ')
+          .concat(item['Disaster Cycle']);
+      } else {
+        merge.push(item);
+      }
+    });
+
+    // setMergedBlips(merge);
+    setDisplayBlips(merge);
+  };
+
+  useEffect(() => {
+    // let blipsToUse = blips;
+    // if (isFiltered) {
+    //   blipsToUse = filteredBlips;
+    // }
+    // setDisplayBlips(blipsToUse);
+    mergeDiasterCycle();
   }, [blips, filteredBlips]);
 
   useEffect(() => {
@@ -100,9 +146,6 @@ export const RadarMapView: React.FC = () => {
                     }
                   }}
                   // @ts-expect-error
-                  radius={
-                    blipDetails[1].length > 1 ? 4 * blipDetails[1].length : 8
-                  }
                   radius={Math.max((33 / 12) * blipDetails[1].length, 9)}
                   color={color}
                   fill={true}
@@ -110,11 +153,16 @@ export const RadarMapView: React.FC = () => {
                   stroke={false}
                   fillOpacity={1}
                 >
-                  {/* <Popup>
-                    <BlipPopOver project={project} />
-                  </Popup> */}
-
-                  <ToolTip>test</ToolTip>
+                  <Popup>
+                    <BlipPopOver projects={blipDetails[1]} />
+                  </Popup>
+                  <Tooltip offset={[0, 0]} opacity={1}>
+                    {`${countryName}${
+                      blipDetails[1].length > 1
+                        ? `: ${blipDetails[1].length} Projects`
+                        : ''
+                    }`}
+                  </Tooltip>
                 </CircleMarker>
               );
             })}
