@@ -22,7 +22,7 @@
     max-height: 400px;
     -ms-overflow-style: none; /* IE and Edge */
     padding: 10px;
-    scrollbar-width: none; /* Firefox */
+    // scrollbar-width: none; /* Firefox */
     zoom: 0.8;
 
     .badgeContainer {
@@ -45,7 +45,12 @@
       width: fit-content;
     }
     &::-webkit-scrollbar {
-      display: none;
+      height: 8px
     }
   }
+}
+
+.projectItem {
+  cursor: pointer;
+  color: blue;
 }

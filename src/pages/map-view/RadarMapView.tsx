@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires  */
+/* eslint-disable @typescript-eslint/restrict-plus-operands  */
 /* eslint no-var: 0 */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
-import {
-  BlipType,
-  ToolTip,
-  useRadarState,
-  BaseCSVType
-} from '@undp_sdg_ai_lab/undp-radar';
+import { techButtonColors } from 'components/drawers/tech/colors';
+import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import {
   MapContainer,
   TileLayer,
@@ -18,7 +15,7 @@ import {
 } from 'react-leaflet';
 import { getCode } from 'country-list';
 
-import { BlipPopOver, mapBlips, getRandomHexColor } from './helpers';
+import { BlipPopOver, mapBlips } from './helpers';
 import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
@@ -30,7 +27,10 @@ export const RadarMapView: React.FC = () => {
   } = useRadarState();
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
-  // const [mergedBlips, setMergedBlips] = useState<BlipType[]>([]);
+  const setPopupClosed = useReducer((x: any) => x + 1, 0)[1];
+  const [popupState, setPopupState] = useState('closed');
+  const [countrySelected, setCountrySelected] = useState(false);
+  const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
 
   useEffect(() => {
     mergeDiasterCycle();
@@ -51,6 +51,7 @@ export const RadarMapView: React.FC = () => {
 
       if (existingBips.length) {
         const existingIndex = merge.indexOf(existingBips[0]);
+        // @ts-expect-error
         merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
           'Disaster Cycle'
         ]
@@ -61,16 +62,10 @@ export const RadarMapView: React.FC = () => {
       }
     });
 
-    // setMergedBlips(merge);
     setDisplayBlips(merge);
   };
 
   useEffect(() => {
-    // let blipsToUse = blips;
-    // if (isFiltered) {
-    //   blipsToUse = filteredBlips;
-    // }
-    // setDisplayBlips(blipsToUse);
     mergeDiasterCycle();
   }, [blips, filteredBlips]);
 
@@ -98,13 +93,6 @@ export const RadarMapView: React.FC = () => {
     return [0, 0];
   };
 
-  const colorMap: any = {
-    recovery: '#E7D438',
-    response: '#ED6058',
-    preparedness: '#44936E',
-    mitigation: '#A5E0FF'
-  };
-
   return (
     <div className='radarMapView'>
       <Grid
@@ -125,17 +113,14 @@ export const RadarMapView: React.FC = () => {
             attributionControl={false}
             fillColor='blue'
           >
-            <TileLayer
-              // url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png'
-              // attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
+            <TileLayer url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' />
             {Array.from(mapBlips(displayBlips)).map((blipDetails) => {
               const countryName = blipDetails[0];
               const position = getCordinates(countryName);
-              // const project = blipDetails[1][0][0];
-              // const color = colorMap[project['Disaster Cycle']];
-              const color = getRandomHexColor();
+              const color =
+                techButtonColors[
+                  Math.floor(Math.random() * techButtonColors.length)
+                ];
               return (
                 <CircleMarker
                   key={blipDetails[0]}
@@ -146,17 +131,38 @@ export const RadarMapView: React.FC = () => {
                     }
                   }}
                   // @ts-expect-error
-                  radius={Math.max((33 / 12) * blipDetails[1].length, 9)}
+                  radius={Math.max((40 / 12) * blipDetails[1].length, 6)}
                   color={color}
                   fill={true}
                   fillColor={color}
                   stroke={false}
                   fillOpacity={1}
                 >
-                  <Popup>
-                    <BlipPopOver projects={blipDetails[1]} />
+                  <Popup
+                    eventHandlers={{
+                      remove: () => {
+                        setPopupState('closed');
+                        setCountryProjects([]);
+                        setCountrySelected(false);
+                      },
+                      add: () => {
+                        setPopupState('open');
+                        setCountryProjects(blipDetails[1]);
+                        setCountrySelected(true);
+                      }
+                    }}
+                  >
+                    <BlipPopOver
+                      projects={blipDetails[1]}
+                      setPopupClosed={setPopupClosed}
+                      popupState={popupState}
+                    />
                   </Popup>
-                  <Tooltip offset={[0, 0]} opacity={1}>
+                  <Tooltip
+                    // @ts-expect-error
+                    offset={[0, 0]}
+                    opacity={1}
+                  >
                     {`${countryName}${
                       blipDetails[1].length > 1
                         ? `: ${blipDetails[1].length} Projects`
@@ -167,7 +173,9 @@ export const RadarMapView: React.FC = () => {
               );
             })}
           </MapContainer>
-          <ProjectSlider blips={displayBlips} />
+          <ProjectSlider
+            blips={countrySelected ? countryProjects : displayBlips}
+          />
         </GridItem>
       </Grid>
     </div>
