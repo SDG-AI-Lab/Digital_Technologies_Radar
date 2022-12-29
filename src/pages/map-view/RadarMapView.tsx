@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires  */
+/* eslint no-var: 0 */
 
 import React, { useEffect, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
@@ -10,7 +11,6 @@ import { BlipPopOver, mapBlips } from './helpers';
 import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
-
 var geos = require('geos-major');
 
 export const RadarMapView: React.FC = () => {
