@@ -3,11 +3,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
-import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, ToolTip, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { MapContainer, TileLayer, Popup, CircleMarker } from 'react-leaflet';
 import { getCode } from 'country-list';
 
-import { BlipPopOver, mapBlips } from './helpers';
+import { BlipPopOver, mapBlips, getRandomHexColor } from './helpers';
 import { ProjectSlider } from './ProjectSlider';
 
 import './RadarMapView.scss';
@@ -86,35 +86,10 @@ export const RadarMapView: React.FC = () => {
             />
             {Array.from(mapBlips(displayBlips)).map((blipDetails) => {
               const countryName = blipDetails[0];
-              let position = getCordinates(countryName);
-              if (blipDetails[1].length > 1) {
-                return blipDetails[1].map((project, index) => {
-                  position = [
-                    position[0] + 0.1 * index,
-                    position[1] + 0.1 * index
-                  ];
-                  const color = colorMap[project['Disaster Cycle']];
-                  return (
-                    <CircleMarker
-                      key={project.id}
-                      center={position}
-                      // @ts-expect-error
-                      radius={8}
-                      color={color}
-                      fill={true}
-                      fillColor={color}
-                      stroke={false}
-                      fillOpacity={1}
-                    >
-                      <Popup>
-                        <BlipPopOver project={project} />
-                      </Popup>
-                    </CircleMarker>
-                  );
-                });
-              }
-              const project = blipDetails[1][0];
-              const color = colorMap[project['Disaster Cycle']];
+              const position = getCordinates(countryName);
+              // const project = blipDetails[1][0][0];
+              // const color = colorMap[project['Disaster Cycle']];
+              const color = getRandomHexColor();
               return (
                 <CircleMarker
                   key={blipDetails[0]}
@@ -125,16 +100,21 @@ export const RadarMapView: React.FC = () => {
                     }
                   }}
                   // @ts-expect-error
-                  radius={8}
+                  radius={
+                    blipDetails[1].length > 1 ? 4 * blipDetails[1].length : 8
+                  }
+                  radius={Math.max((33 / 12) * blipDetails[1].length, 9)}
                   color={color}
                   fill={true}
                   fillColor={color}
                   stroke={false}
                   fillOpacity={1}
                 >
-                  <Popup>
+                  {/* <Popup>
                     <BlipPopOver project={project} />
-                  </Popup>
+                  </Popup> */}
+
+                  <ToolTip>test</ToolTip>
                 </CircleMarker>
               );
             })}
