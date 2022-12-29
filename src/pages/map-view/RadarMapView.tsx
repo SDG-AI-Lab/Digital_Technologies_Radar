@@ -74,7 +74,7 @@ export const RadarMapView: React.FC = () => {
           <MapContainer
             center={getCordinates('algeria')}
             zoom={2}
-            dragging={false}
+            // dragging={false}
             minZoom={2}
             attributionControl={false}
             fillColor='blue'
