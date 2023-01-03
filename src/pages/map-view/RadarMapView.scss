@@ -1,11 +1,3 @@
-#am5MapDiv {
-  width: 100%;
-  height: 55vh;
-  @media only screen and (max-width: 1600px) {
-    height: 50vh;
-  }
-}
-
 .radarMapView {
   overflow: hidden;
   padding: 0 1rem;
@@ -16,6 +8,7 @@
   display: flex;
   flex-direction: column;
   max-height: 90vh;
+  z-index: 0;
 
   .slider {
     font-size: 14px;

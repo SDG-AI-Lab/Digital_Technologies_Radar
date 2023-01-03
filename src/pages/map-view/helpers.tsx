@@ -1,35 +1,44 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Box, Heading, VStack, HStack, Badge, Text } from '@chakra-ui/react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
+import { RadarContext } from 'navigation/context';
 
 export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
   const blipsMap = new Map();
+  const { radarStateValues } = useContext(RadarContext);
+  const selectedCountry = radarStateValues?.country;
+
   blips.forEach((blip: any) => {
     const countries = blip['Country of Implementation'];
 
     countries
-      .filter(
-        (country: string) =>
-          ![
-            'Global',
-            'EU countries',
-            'Jamacia',
-            'Democratic Republic of the Congo',
-            'Micronesi'
-          ].includes(country)
-      )
+      .filter((country: string) => {
+        if (selectedCountry) {
+          return country === selectedCountry;
+        }
+        return !['Global', 'EU countries'].includes(country);
+      })
       .forEach((country: string) => {
         if (country === 'Jamacia') {
-          blip['Country of Implementation'].push('Jamaica');
+          const index = blip['Country of Implementation'].indexOf('Jamacia');
+          blip['Country of Implementation'].splice(index, 1, 'Jamaica');
         }
         if (country === 'Democratic Republic of the Congo') {
-          blip['Country of Implementation'].push(
+          const index = blip['Country of Implementation'].indexOf(
+            'Democratic Republic of the Congo'
+          );
+          blip['Country of Implementation'].splice(
+            index,
+            1,
             'Congo, Democratic Republic of the'
           );
         }
         if (country === 'Micronesi') {
-          blip['Country of Implementation'].push(
+          const index = blip['Country of Implementation'].indexOf('Micronesi');
+          blip['Country of Implementation'].splice(
+            index,
+            1,
             'Micronesia, Federated States of'
           );
         }
@@ -45,7 +54,12 @@ export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
   return blipsMap;
 };
 
-export const BlipPopOver = ({ projects, setPopupClosed, popupState }: any) => {
+export const BlipPopOver = ({
+  projects,
+  setPopupClosed,
+  popupState,
+  setCountryProjects
+}: any) => {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [detailview, setDetailview] = useState(false);
 
@@ -126,6 +140,7 @@ export const BlipPopOver = ({ projects, setPopupClosed, popupState }: any) => {
               setSelectedProject(project);
               setDetailview(true);
               setPopupClosed();
+              setCountryProjects([project]);
             }}
           >
             {project['Ideas/Concepts/Examples']}

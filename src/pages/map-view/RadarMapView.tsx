@@ -4,7 +4,6 @@
 
 import React, { useEffect, useState, useReducer } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
-import { techButtonColors } from 'components/drawers/tech/colors';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import {
   MapContainer,
@@ -67,7 +66,7 @@ export const RadarMapView: React.FC = () => {
 
   useEffect(() => {
     mergeDiasterCycle();
-  }, [blips, filteredBlips]);
+  }, [blips, filteredBlips, techFilters]);
 
   useEffect(() => {
     if (techFilters.length > 0) {
@@ -108,33 +107,21 @@ export const RadarMapView: React.FC = () => {
           <MapContainer
             center={getCordinates('algeria')}
             zoom={2}
-            // dragging={false}
             minZoom={2}
             attributionControl={false}
-            fillColor='blue'
           >
             <TileLayer url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' />
             {Array.from(mapBlips(displayBlips)).map((blipDetails) => {
               const countryName = blipDetails[0];
-              const position = getCordinates(countryName);
-              const color =
-                techButtonColors[
-                  Math.floor(Math.random() * techButtonColors.length)
-                ];
               return (
                 <CircleMarker
                   key={blipDetails[0]}
-                  center={position}
-                  eventHandlers={{
-                    click: (e: any) => {
-                      console.log('marker clicked', e);
-                    }
-                  }}
+                  center={getCordinates(countryName)}
+                  // eventHandlers={{click: (e: any) => {}}}
+
                   // @ts-expect-error
                   radius={Math.max((40 / 12) * blipDetails[1].length, 6)}
-                  color={color}
-                  fill={true}
-                  fillColor={color}
+                  fillColor={'#2B6CB0'}
                   stroke={false}
                   fillOpacity={1}
                 >
@@ -156,6 +143,7 @@ export const RadarMapView: React.FC = () => {
                       projects={blipDetails[1]}
                       setPopupClosed={setPopupClosed}
                       popupState={popupState}
+                      setCountryProjects={setCountryProjects}
                     />
                   </Popup>
                   <Tooltip
