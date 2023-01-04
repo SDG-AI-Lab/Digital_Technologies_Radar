@@ -5,6 +5,7 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import lo from 'lodash';
 import {
   MapContainer,
   TileLayer,
@@ -26,14 +27,19 @@ export const RadarMapView: React.FC = () => {
     state: { techFilters, blips, isFiltered, filteredBlips }
   } = useRadarState();
 
-  console.log('radar', useRadarState());
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const setPopupClosed = useReducer((x: any) => x + 1, 0)[1];
   const [popupState, setPopupState] = useState('closed');
   const [countrySelected, setCountrySelected] = useState(false);
   const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
 
-  const { setBlipsMerged } = useContext(RadarContext);
+  const { setBlipsMerged, radarStateValues } = useContext(RadarContext);
+
+  useEffect(() => {
+    if (isFiltered || !lo.every(radarStateValues, (v) => v === '')) {
+      window.location.reload();
+    }
+  }, []);
 
   useEffect(() => {
     mergeDiasterCycle();
@@ -43,7 +49,6 @@ export const RadarMapView: React.FC = () => {
 
   /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
   const mergeDiasterCycle = (): void => {
-    console.log('Woot');
     let blipsToUse = [...blips];
     if (isFiltered) {
       blipsToUse = [...filteredBlips];
