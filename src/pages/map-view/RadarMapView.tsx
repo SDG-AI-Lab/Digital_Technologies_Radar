@@ -32,6 +32,7 @@ export const RadarMapView: React.FC = () => {
   const [popupState, setPopupState] = useState('closed');
   const [countrySelected, setCountrySelected] = useState(false);
   const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
+  const [techBlips, setTechBlips] = useState<BlipType[]>([]);
 
   const { setBlipsMerged, radarStateValues } = useContext(RadarContext);
 
@@ -43,7 +44,7 @@ export const RadarMapView: React.FC = () => {
 
   useEffect(() => {
     mergeDiasterCycle();
-  }, [blips, filteredBlips, techFilters]);
+  }, [blips, filteredBlips, techFilters, techBlips]);
 
   const merge: BlipType[] = [];
 
@@ -53,6 +54,10 @@ export const RadarMapView: React.FC = () => {
     if (isFiltered) {
       blipsToUse = [...filteredBlips];
     }
+    if (techBlips.length) {
+      blipsToUse = techBlips;
+    }
+
     blipsToUse.forEach(function (item) {
       const existingBips = merge.filter(function (v, i) {
         return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
@@ -76,17 +81,13 @@ export const RadarMapView: React.FC = () => {
   };
 
   useEffect(() => {
-    if (techFilters.length > 0) {
-      const filteredBlipsAccordingToTechFilters = displayBlips.filter(
-        (blip) => {
-          const blipTechnology = blip.Technology.map((tf) => {
-            return tf.toLowerCase().replaceAll(' ', '-');
-          });
-          return blipTechnology.some((t) => techFilters.includes(t));
-        }
-      );
-      setDisplayBlips(filteredBlipsAccordingToTechFilters);
-    }
+    const filteredBlipsAccordingToTechFilters = filteredBlips.filter((blip) => {
+      const blipTechnology = blip.Technology.map((tf) => {
+        return tf.toLowerCase().replaceAll(' ', '-');
+      });
+      return blipTechnology.some((t) => techFilters.includes(t));
+    });
+    setTechBlips(filteredBlipsAccordingToTechFilters);
   }, [techFilters]);
 
   const getCordinates = (countryName: string): number[] => {
