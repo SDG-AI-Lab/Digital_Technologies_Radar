@@ -1,26 +1,45 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint no-var: 0 */
 import { useState, useEffect, useContext } from 'react';
 import { Box, Heading, VStack, HStack, Badge, Text } from '@chakra-ui/react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 import { RadarContext } from 'navigation/context';
+import { getCode } from 'country-list';
+
+var geos = require('geos-major');
 
 export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
   const blipsMap = new Map();
   const { radarStateValues } = useContext(RadarContext);
-  const selectedCountry = radarStateValues?.country;
+  const {
+    country: selectedCountry,
+    region: selectedRegion,
+    subRegion: selectedSubRegion
+  } = radarStateValues;
 
   blips.forEach((blip: any) => {
     const countries = blip['Country of Implementation'];
 
     countries
       .filter((country: string) => {
-        if (selectedCountry) {
-          return (
-            country === selectedCountry &&
-            !['Global', 'EU countries'].includes(country)
-          );
+        if (['Global', 'EU countries'].includes(country)) {
+          return false;
         }
-        return !['Global', 'EU countries'].includes(country);
+
+        const code = getCode(country);
+        const { continent, subContinent } = geos.country(code) || {};
+
+        if (selectedCountry && selectedCountry !== 'all') {
+          return country === selectedCountry;
+        }
+        if (selectedSubRegion && selectedSubRegion !== 'all') {
+          return subContinent === selectedSubRegion;
+        }
+        if (selectedRegion && selectedRegion !== 'all') {
+          return continent === selectedRegion;
+        }
+        return true;
       })
       .forEach((country: string) => {
         if (country === 'Jamacia') {
