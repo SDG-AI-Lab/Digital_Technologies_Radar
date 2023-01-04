@@ -132,11 +132,6 @@ ul.radar-list  {
   }
   h5 {
     cursor: pointer;
-    transition: all 0.2s;
-  }
-  h5[aria-selected='true'] {
-    font-size: 25px !important;
-    font-weight: bold !important;
   }
 
   &-tabsPanel {

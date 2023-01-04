@@ -5,12 +5,20 @@
   div {
     display: none;
   }
+
+  @media only screen and (max-width: 1180px) {
+    padding-top: 55px;
+  }
 }
 
 .quadrantView {
   display: flex;
   flex: 1;
   padding: 2px;
+
+  .quadrantTitle {
+    text-align: center;
+  }
 
   @media only screen and (max-width: 1180px) {
     align-items: center;
@@ -86,11 +94,11 @@
       transform: scale(1);
 
       @media only screen and (max-width: 571px) {
-        margin-top: -40px;
+        margin-top: -130px;
         transform: scale(0.7);
       }
       @media only screen and (max-width: 392px) {
-        margin-top: -100px;
+        margin-top: -200px;
         transform: scale(0.4);
       }
     }

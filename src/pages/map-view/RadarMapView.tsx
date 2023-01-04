@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands  */
 /* eslint no-var: 0 */
 
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import {
@@ -16,6 +16,7 @@ import { getCode } from 'country-list';
 
 import { BlipPopOver, mapBlips } from './helpers';
 import { ProjectSlider } from './ProjectSlider';
+import { RadarContext } from 'navigation/context';
 
 import './RadarMapView.scss';
 var geos = require('geos-major');
@@ -25,23 +26,27 @@ export const RadarMapView: React.FC = () => {
     state: { techFilters, blips, isFiltered, filteredBlips }
   } = useRadarState();
 
+  console.log('radar', useRadarState());
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
   const setPopupClosed = useReducer((x: any) => x + 1, 0)[1];
   const [popupState, setPopupState] = useState('closed');
   const [countrySelected, setCountrySelected] = useState(false);
   const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
 
+  const { setBlipsMerged } = useContext(RadarContext);
+
   useEffect(() => {
     mergeDiasterCycle();
-  }, [blips]);
+  }, [blips, filteredBlips, techFilters]);
 
   const merge: BlipType[] = [];
 
   /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
   const mergeDiasterCycle = (): void => {
-    let blipsToUse = blips;
+    console.log('Woot');
+    let blipsToUse = [...blips];
     if (isFiltered) {
-      blipsToUse = filteredBlips;
+      blipsToUse = [...filteredBlips];
     }
     blipsToUse.forEach(function (item) {
       const existingBips = merge.filter(function (v, i) {
@@ -62,11 +67,8 @@ export const RadarMapView: React.FC = () => {
     });
 
     setDisplayBlips(merge);
+    setBlipsMerged(true);
   };
-
-  useEffect(() => {
-    mergeDiasterCycle();
-  }, [blips, filteredBlips, techFilters]);
 
   useEffect(() => {
     if (techFilters.length > 0) {

@@ -7,6 +7,15 @@
   margin: 30px 28px 30px 0;
   width: 100%;
 
+  @media only screen and (min-width: 1401px) {
+    height: 80vh;
+    align-items: flex-start;
+    .tabsComponents {
+      height: 100%;
+      margin: 0 !important;
+      overflow-y: auto;
+    }
+  }
   .tabsComponents {
     border: none;
     display: flex;
@@ -22,6 +31,9 @@
 
     .chakra-tabs {
       width: 100%;
+      h5 {
+        cursor: pointer;
+      }
     }
     .chakra-tabs__tab-panel {
       padding: 16px 0;
@@ -93,7 +105,7 @@
       }
     }
     @media only screen and (min-width: 1200px) {
-      margin: 80px 0 0 80px !important;
+      // margin: 80px 0 0 80px !important;
     }
   }
 

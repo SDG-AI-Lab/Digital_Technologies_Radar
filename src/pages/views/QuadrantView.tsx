@@ -48,6 +48,7 @@ export const QuadrantView: React.FC = () => {
       <BackButton to='RADAR' />
 
       <div className='quadrantRadar'>
+        <h4 className='quadrantTitle'>{selectedQuadrant?.toUpperCase()}</h4>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||

@@ -23,7 +23,8 @@ export const SearchBar: React.FC = () => {
 
   /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
   const mergeDiasterCycle = (): void => {
-    blips.forEach(function (item) {
+    const blipsToUse = [...blips];
+    blipsToUse.forEach(function (item) {
       const existingBips = merge.filter(function (v, i) {
         return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
       });

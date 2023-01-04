@@ -15,7 +15,10 @@ export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
     countries
       .filter((country: string) => {
         if (selectedCountry) {
-          return country === selectedCountry;
+          return (
+            country === selectedCountry &&
+            !['Global', 'EU countries'].includes(country)
+          );
         }
         return !['Global', 'EU countries'].includes(country);
       })

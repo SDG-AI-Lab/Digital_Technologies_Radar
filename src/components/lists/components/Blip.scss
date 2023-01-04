@@ -17,6 +17,10 @@
     overflow: hidden;
     scroll-behavior: smooth;
 
+    @media only screen and (min-width: 1900px) {
+      max-height: 100% !important;
+    }
+
     &--overflowX {
       overflow-x: auto;
     }

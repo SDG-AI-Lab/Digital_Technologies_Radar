@@ -12,6 +12,8 @@ export interface RadarContextInterface {
     country: string;
   };
   setRadarStateValues: Function;
+  setBlipsMerged: Function;
+  blipsMerged: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
