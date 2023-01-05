@@ -10,6 +10,8 @@ export interface RadarContextInterface {
     implementer: string;
     sdg: string;
     country: string;
+    disasterCycle: string;
+    maturityStage: string;
   };
   setRadarStateValues: Function;
   setBlipsMerged: Function;

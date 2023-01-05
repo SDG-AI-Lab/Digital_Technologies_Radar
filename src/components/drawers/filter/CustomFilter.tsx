@@ -25,6 +25,7 @@ import { AppRangerSlider } from './AppRanderSlider';
 import { RadarContext } from 'navigation/context';
 
 import './Filter.scss';
+import { useLocation } from 'react-router-dom';
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -35,7 +36,12 @@ export const CustomFilter: React.FC = () => {
 
   const {
     state: {
-      keys: { useCaseKey, disasterTypeKey: disasterKey }
+      keys: {
+        useCaseKey,
+        disasterTypeKey: disasterKey,
+        quadrantKey,
+        horizonKey
+      }
     }
   } = useDataState();
 
@@ -74,6 +80,14 @@ export const CustomFilter: React.FC = () => {
   const [dataFilter, setDataFilter] = useState<string>(
     radarStateValues.data || 'all'
   );
+  // disaster cycles
+  const [disasterCycleFilter, setDisasterCycleFilter] = useState<string>(
+    radarStateValues.disasterCycle || 'all'
+  );
+  // maturity stage
+  const [maturityStageFilter, setMaturityStageFilter] = useState<string>(
+    radarStateValues.maturityStage || 'all'
+  );
 
   // ALL OPTIONS
   // subregions
@@ -84,6 +98,10 @@ export const CustomFilter: React.FC = () => {
   const [countries, setCountries] = useState<SelectableItem[]>([]);
   // disasters
   const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
+  // disaster cycles
+  const [disasterCycles, setDisasterCycles] = useState<SelectableItem[]>([]);
+  // maturity stages
+  const [maturityStages, setMaturityStages] = useState<SelectableItem[]>([]);
   // use cases
   const [useCases, setUseCases] = useState<SelectableItem[]>([]);
   // implementers
@@ -110,6 +128,18 @@ export const CustomFilter: React.FC = () => {
       // disaster options
       const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
       setDisasterTypes(newDisasterTyes);
+      // disaster cycle options
+      const newDisasterCycles = FilterUtils.getDisasterCycles(
+        blips,
+        quadrantKey
+      );
+      setDisasterCycles(newDisasterCycles);
+      // maturity stage options
+      const newMaturityStages = FilterUtils.getMaturityStages(
+        blips,
+        horizonKey
+      );
+      setMaturityStages(newMaturityStages);
       // usecase options
       const newUseCases = FilterUtils.getUseCases(blips, useCaseKey);
       setUseCases(newUseCases);
@@ -149,6 +179,16 @@ export const CustomFilter: React.FC = () => {
   // selectedDisasterType
   const [selectedDisasterType, setSelectedDisasterType] = useState<string>(
     disasterTypeFilter === null ? 'all' : disasterTypeFilter
+  );
+
+  // selectedDisasterCycle
+  const [selectedDisasterCycle, setSelectedDisasterCycle] = useState<string>(
+    disasterCycleFilter === null ? 'all' : disasterCycleFilter
+  );
+
+  // selectedMaturityStage
+  const [selectedMaturityStage, setSelectedMaturityStage] = useState<string>(
+    maturityStageFilter === null ? 'all' : maturityStageFilter
   );
 
   // selectedUserCase
@@ -230,6 +270,22 @@ export const CustomFilter: React.FC = () => {
       filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
     }
 
+    // filter disaster cycles
+    if (disasterCycleFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter(
+        (i) => i[quadrantKey] === disasterCycleFilter.toLowerCase()
+      );
+    }
+
+    // filter maturity stages
+    if (maturityStageFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter(
+        (i) => i[horizonKey] === maturityStageFilter.toLowerCase()
+      );
+    }
+
     // filter use cases
     if (useCaseFilter !== 'all') {
       isFiltered = true;
@@ -300,6 +356,8 @@ export const CustomFilter: React.FC = () => {
     subregionFilter,
     countryFilter,
     disasterTypeFilter,
+    disasterCycleFilter,
+    maturityStageFilter,
     useCaseFilter,
     implementerFilter,
     sdgFilter,
@@ -316,6 +374,8 @@ export const CustomFilter: React.FC = () => {
     setRegionFilter(selectedRegion);
     setCountryFilter(selectedCountry);
     setDisasterTypeFilter(selectedDisasterType);
+    setDisasterCycleFilter(selectedDisasterCycle);
+    setMaturityStageFilter(selectedMaturityStage);
     setUseCaseFilter(selectedUserCase);
     setImplementerFilter(selectedImplementer);
     setSdgFilter(selectedSdg);
@@ -327,6 +387,8 @@ export const CustomFilter: React.FC = () => {
     selectedRegion,
     selectedCountry,
     selectedDisasterType,
+    selectedDisasterCycle,
+    selectedMaturityStage,
     selectedUserCase,
     selectedImplementer,
     selectedSdg,
@@ -352,6 +414,16 @@ export const CustomFilter: React.FC = () => {
   // on disaster type filter change
   const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedDisasterType(e.target.value);
+  // on disaster cycle filter change
+  const onDisasterCycleChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setSelectedDisasterCycle(e.target.value);
+    setRadarStateValues({ ...radarStateValues, disasterCycle: e.target.value });
+  };
+  // on maturity stage filter change
+  const onMaturityStageChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setSelectedMaturityStage(e.target.value);
+    setRadarStateValues({ ...radarStateValues, maturityStage: e.target.value });
+  };
   // on use case filter change
   const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedUserCase(e.target.value);
@@ -387,6 +459,8 @@ export const CustomFilter: React.FC = () => {
     setSelectedRegion('all');
     setSelectedCountry('all');
     setSelectedDisasterType('all');
+    setSelectedDisasterCycle('all');
+    setSelectedMaturityStage('all');
     setSelectedUserCase('all');
     setSelectedImplementer('all');
     setSelectedSdg('all');
@@ -479,6 +553,40 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
+        {useLocation().pathname.includes('map-view') && (
+          <>
+            <div className='customFilterContainer-wrapper--margin'>
+              <Select
+                id='Select2'
+                size='lg'
+                onChange={onDisasterCycleChange}
+                value={selectedDisasterCycle}
+              >
+                <option value='all'>Disaster Cycle</option>
+                {disasterCycles.map((item) => (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            <div className='customFilterContainer-wrapper--margin'>
+              <Select
+                id='Select2'
+                size='lg'
+                onChange={onMaturityStageChange}
+                value={selectedMaturityStage}
+              >
+                <option value='all'>Maturity Stage</option>
+                {maturityStages.map((item) => (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </>
+        )}
         <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select3'

@@ -37,7 +37,9 @@ export const NavApp: React.FC = () => {
     endYear: '',
     implementer: '',
     sdg: '',
-    country: ''
+    country: '',
+    disasterCycle: '',
+    maturityStage: ''
   });
 
   const [blipsMerged, setBlipsMerged] = useState(false);

@@ -90,8 +90,6 @@ const ItemMui: React.FC<{
   const backgroundColor = hoveredItem?.id === blip.id ? 'rgba(0,0,0,0.05)' : '';
   const borderSelected = selectedItem?.id === blip.id ? '1px solid blue' : '';
 
-  console.log('heeeerrrrreeee');
-
   return (
     <Accordion
       TransitionProps={{ unmountOnExit: true }}
