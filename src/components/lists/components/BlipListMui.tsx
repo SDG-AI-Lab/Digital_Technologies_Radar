@@ -75,9 +75,18 @@ export const BlipListMui: React.FC = React.memo(() => {
     });
   }, [displayBlips]);
 
+  const reorderQuadrants = (quadrants: string[]): string[] => {
+    if (!quadrants.length) {
+      return [];
+    }
+    const lastItem = quadrants.pop();
+    quadrants.splice(0, 0, lastItem as string);
+    return quadrants;
+  };
+
   return (
     <>
-      {quadrants.map((quad) => (
+      {reorderQuadrants([...quadrants]).map((quad) => (
         <Accordion
           key={quad}
           TransitionProps={{ unmountOnExit: true }}
@@ -120,10 +129,11 @@ const Horizons: React.FC<{
     };
 
   const quadB = blips[quadrants.indexOf(quadrant)];
+  const horizonOrder = ['idea', 'validation', 'prototype', 'production'];
   return (
     <>
       {quadB &&
-        Object.keys(quadB.horizons).map((hName: string) => (
+        horizonOrder.map((hName: string) => (
           <HorizonItemMui
             key={quadrant + '-' + hName}
             horizonName={Utilities.capitalize(hName)}
