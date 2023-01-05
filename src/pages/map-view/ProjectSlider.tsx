@@ -19,7 +19,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
     >
       {blips.map((value, key) => (
         <Box
-          minW={'300px'}
+          minW={'290px'}
           maxW={'300px'}
           boxShadow={'2xl'}
           rounded={'md'}
@@ -30,7 +30,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
           display={'flex'}
           flexDirection='column'
           justifyContent='space-between'
-          gap={'15px'}
+          h={'320px'}
         >
           <Stack>
             <Text
