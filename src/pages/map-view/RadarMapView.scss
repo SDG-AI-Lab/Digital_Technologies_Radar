@@ -1,6 +1,6 @@
 .radarMapView {
   overflow: hidden;
-  padding: 0 1rem;
+  // padding: 0 1rem;
   width: 100%;
 }
 .leaflet-popup-content-wrapper {
@@ -52,8 +52,9 @@
       height: 80px;
       object-fit: scale-down;
     }
-    + div {
-      max-width: 300px;
+
+    div:first-of-type {
+      margin: 0;
     }
 
     button {

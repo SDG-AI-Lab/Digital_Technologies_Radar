@@ -46,7 +46,8 @@ export const FilterDrawer: React.FC = () => {
           borderRadius={'0'}
           onClick={onOpen}
           className={cx({
-            quadrantFilter: useLocation().pathname.includes('quadrant')
+            quadrantFilter: useLocation().pathname.includes('quadrant'),
+            mapFilter: useLocation().pathname.includes('map-view')
           })}
         >
           Filter

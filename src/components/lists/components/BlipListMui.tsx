@@ -117,7 +117,7 @@ const Horizons: React.FC<{
 }> = ({ quadrant, blips }) => {
   const {
     state: {
-      radarData: { quadrants }
+      radarData: { quadrants, horizons }
     }
   } = useRadarState();
 
@@ -129,19 +129,20 @@ const Horizons: React.FC<{
     };
 
   const quadB = blips[quadrants.indexOf(quadrant)];
-  const horizonOrder = ['idea', 'validation', 'prototype', 'production'];
   return (
     <>
       {quadB &&
-        horizonOrder.map((hName: string) => (
-          <HorizonItemMui
-            key={quadrant + '-' + hName}
-            horizonName={Utilities.capitalize(hName)}
-            handleChange={handleChangeHorizon}
-            quadrantBlips={quadB.horizons[hName]}
-            expandedHorizon={expandedHorizon}
-          />
-        ))}
+        [...horizons]
+          .reverse()
+          .map((hName: string) => (
+            <HorizonItemMui
+              key={quadrant + '-' + hName}
+              horizonName={Utilities.capitalize(hName)}
+              handleChange={handleChangeHorizon}
+              quadrantBlips={quadB.horizons[hName]}
+              expandedHorizon={expandedHorizon}
+            />
+          ))}
     </>
   );
 };

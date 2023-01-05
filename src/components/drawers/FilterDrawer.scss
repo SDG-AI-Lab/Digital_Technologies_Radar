@@ -42,9 +42,15 @@ div.rc-slider {
       display: none;
     }
 
-    .quadrantFilter {
+    .quadrantFilter,
+    .mapFilter {
       margin-top: 160px;
       zoom: 0.6;
+    }
+
+    .mapFilter {
+      position: fixed;
+      top: -20px;
     }
   }
 }
