@@ -6,6 +6,7 @@ import { Box, Heading, VStack, HStack, Badge, Text } from '@chakra-ui/react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 import { RadarContext } from 'navigation/context';
 import { getCode } from 'country-list';
+import { SearchView } from 'pages/search/SearchView';
 
 var geos = require('geos-major');
 
@@ -102,6 +103,7 @@ export const BlipPopOver = ({
       <Text fontSize={15} className={'popOverDescription'}>
         {selectedProject['Description']}
       </Text>
+      <SearchView techContent={selectedProject} />
 
       <VStack>
         <HStack>
