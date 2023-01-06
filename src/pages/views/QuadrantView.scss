@@ -16,6 +16,21 @@
   flex: 1;
   padding: 2px;
 
+  button {
+    align-self: flex-start;
+  }
+
+  @media only screen and (max-height: 725px) {
+    zoom: 0.8;
+    max-width: 2000px;
+    margin: 0 auto;
+    align-items: center !important;
+  }
+
+  @media only screen and (max-height: 620px) {
+    zoom: 0.6;
+  }
+
   .quadrantTitle {
     text-align: center;
   }
