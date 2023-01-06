@@ -34,7 +34,7 @@
   z-index: 0;
 
   @media only screen and (max-width: 767px) {
-    max-height: 85vh;
+    max-height: 95vh;
   }
 
   .slider {
@@ -63,14 +63,18 @@
       justify-content: flex-start;
       width: fit-content;
     }
-
-    @media only screen and (max-width: 767px) {
-      max-height: 400px;
-    }
   }
 }
 
 .projectItem {
   color: blue;
   cursor: pointer;
+}
+
+.leaflet-control-container {
+  div {
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
 }

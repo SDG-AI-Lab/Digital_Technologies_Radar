@@ -21,6 +21,12 @@ div.rc-slider {
     width: 100%;
   }
 
+  &--mapPage {
+    @media only screen and (max-width: 400px) {
+      justify-content: flex-start !important;
+    }
+  }
+
   @media only screen and (max-width: 1400px) {
     h2 {
       order: 2;
@@ -37,6 +43,7 @@ div.rc-slider {
 
   @media only screen and (max-width: 768px) {
     justify-content: flex-end;
+
     .titleHeader,
     .howTo {
       display: none;

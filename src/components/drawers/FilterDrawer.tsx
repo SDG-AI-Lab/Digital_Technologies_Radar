@@ -23,7 +23,11 @@ export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Box className='option-button'>
+      <Box
+        className={cx('option-button', {
+          'option-button--mapPage': useLocation().pathname.includes('map-view')
+        })}
+      >
         <Heading
           fontSize={30}
           color='DarkSlateGray'
