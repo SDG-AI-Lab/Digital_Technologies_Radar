@@ -31,11 +31,13 @@ export const SearchBar: React.FC = () => {
 
       if (existingBips.length) {
         const existingIndex = merge.indexOf(existingBips[0]);
-        merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
-          'Disaster Cycle'
-        ]
-          .concat(', ')
-          .concat(item['Disaster Cycle']);
+        if (merge[existingIndex]['Disaster Cycle'].split(',').length < 4) {
+          merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
+            'Disaster Cycle'
+          ]
+            .concat(', ')
+            .concat(item['Disaster Cycle']);
+        }
       } else {
         merge.push(item);
       }
