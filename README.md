@@ -21,9 +21,8 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn pretest`
 
-Checks if all files match the Code style set in `Prettier` and `Eslint` 
+Checks if all files match the Code style set in `Prettier` and `Eslint`
 This will run on the `pre-push` git hook and also on the automated checks in GitHub
-
 
 ### `yarn build`
 
@@ -40,6 +39,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 We have a `pre-push` git hook which will run before a `git push --` is executed. The hook runs `yarn pretest` which is described above.
 
 To set up the git hook run the command below from the root of the codebase
+
 ```bash
 # Copy the gitHooks/hooks folder to your .git directory
 cp -fR gitHooks/hooks .git
@@ -49,14 +49,14 @@ Please follow the steps for making changes in the project:
 
 ![gitflow-Page-2 drawio (1)](https://user-images.githubusercontent.com/28465079/160427617-cfa45839-69c2-4bc5-872c-1a8ba4685d85.png)
 
-
 ## CI/CD
+
 We use Github actions and runners to do CI/CD.
 The live site is hosted on GitHub pages and is deployed using the `publish.yml` file which is picked up by a GitHub action when there's a successful push to the master branch. The site can be accessed from [here](https://drrtechradar.org/)
 
 For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://142.93.254.247)
 
-Pull requests raised to either the master or the develop branch will trigger the `CI Development` workflow as configured in the `develop.yml` file. 
+Pull requests raised to either the master or the develop branch will trigger the `CI Development` workflow as configured in the `develop.yml` file.
 
 ## Learn More
 
@@ -117,7 +117,7 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
       </a>
     </p>
     <p align="center">UX designer from Nigeria. Have a Bachelor of Nursing Science degree</p>
-    <p><i>"I have been designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar."</i></p>
+    <p><i>"I have beesn designing since 2021 and I had a great time working on this project. It is my dream to build useful products. I hope lives are improved using this radar."</i></p>
     </td>
     <td>
     <p align="center">
