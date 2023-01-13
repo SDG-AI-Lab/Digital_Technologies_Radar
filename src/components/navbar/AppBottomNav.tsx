@@ -59,6 +59,7 @@ export const AppBottomNav: React.FC = () => {
               py={8}
               width={'100%'}
               bgColor='gray.50'
+              borderRadius={0}
               flexDirection={'column'}
               _focus={{
                 outline: 'none'
