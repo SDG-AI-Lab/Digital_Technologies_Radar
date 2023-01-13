@@ -18,10 +18,13 @@ import {
   Volunteers,
   Home
 } from '../pages';
+
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
+
 import { MapViewLayout } from '../layouts/MapViewLayout';
 import { RadarMapView } from '../pages/map-view/RadarMapView';
+
 // Context
 import { RadarContext, RadarContextInterface } from './context';
 
