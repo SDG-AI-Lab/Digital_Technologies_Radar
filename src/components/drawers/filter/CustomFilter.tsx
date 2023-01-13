@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint no-var: 0 */
 import React, {
   ChangeEventHandler,
   useEffect,
@@ -26,6 +28,9 @@ import { RadarContext } from 'navigation/context';
 
 import './Filter.scss';
 import { useLocation } from 'react-router-dom';
+import { getCode } from 'country-list';
+
+var geos = require('geos-major');
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -515,11 +520,20 @@ export const CustomFilter: React.FC = () => {
             value={selectedSubregion}
           >
             <option value='all'>Subregion</option>
-            {subregions.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
+            {subregions.map((item) => {
+              let showOption = true;
+              if (regionFilter && !['all', 'Global'].includes(regionFilter)) {
+                // @ts-expect-error
+                showOption = item.raw.Region.includes(regionFilter);
+              }
+              return (
+                showOption && (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                )
+              );
+            })}
           </Select>
         </div>
 
@@ -531,11 +545,38 @@ export const CustomFilter: React.FC = () => {
             value={selectedCountry}
           >
             <option value='all'>Country</option>
-            {countries.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
+            {countries.map((item) => {
+              let showOption = true;
+              const code = getCode(item.name);
+              const { continent, subContinent } = geos.country(code) || {};
+              if (regionFilter && !['all', 'Global'].includes(regionFilter)) {
+                if (regionFilter === 'Europe' && item.name === 'EU countries') {
+                  showOption = true;
+                } else {
+                  showOption = continent === regionFilter;
+                }
+              }
+              if (
+                subregionFilter &&
+                !['all', 'Global'].includes(subregionFilter)
+              ) {
+                if (
+                  subregionFilter.includes('Europe') &&
+                  item.name === 'EU countries'
+                ) {
+                  showOption = true;
+                } else {
+                  showOption = subContinent === subregionFilter;
+                }
+              }
+              return (
+                (showOption || item.name === 'Global') && (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                )
+              );
+            })}
           </Select>
         </div>
         <div className='customFilterContainer-wrapper--margin'>

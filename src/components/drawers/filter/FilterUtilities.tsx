@@ -19,7 +19,8 @@ const getSubregions = (
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {
-      newSubregions.set(region, { uuid: uuidv4(), name: region });
+      // @ts-expect-error
+      newSubregions.set(region, { uuid: uuidv4(), name: region, raw: val });
     });
   });
 
