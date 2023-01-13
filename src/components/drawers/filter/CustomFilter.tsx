@@ -603,7 +603,7 @@ export const CustomFilter: React.FC = () => {
                 onChange={onDisasterCycleChange}
                 value={selectedDisasterCycle}
               >
-                <option value='all'>Disaster Cycle</option>
+                <option value='all'>Quadrant</option>
                 {disasterCycles.map((item) => (
                   <option key={item.uuid} value={item.name}>
                     {item.name}
