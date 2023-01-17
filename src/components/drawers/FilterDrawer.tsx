@@ -23,7 +23,11 @@ export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <Box className='option-button'>
+      <Box
+        className={cx('option-button', {
+          'option-button--mapPage': useLocation().pathname.includes('map-view')
+        })}
+      >
         <Heading
           fontSize={30}
           color='DarkSlateGray'
@@ -46,7 +50,8 @@ export const FilterDrawer: React.FC = () => {
           borderRadius={'0'}
           onClick={onOpen}
           className={cx({
-            quadrantFilter: useLocation().pathname.includes('quadrant')
+            quadrantFilter: useLocation().pathname.includes('quadrant'),
+            mapFilter: useLocation().pathname.includes('map-view')
           })}
         >
           Filter

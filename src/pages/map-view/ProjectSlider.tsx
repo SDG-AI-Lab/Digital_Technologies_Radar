@@ -15,12 +15,12 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
       h={700}
       overflow='scroll'
       p={'20px 0'}
-      mb={30}
+      mb={'33px'}
     >
       {blips.map((value, key) => (
         <Box
-          minW={'300px'}
-          w={'full'}
+          minW={'290px'}
+          maxW={'300px'}
           boxShadow={'2xl'}
           rounded={'md'}
           p={'10px 8px'}
@@ -30,6 +30,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
           display={'flex'}
           flexDirection='column'
           justifyContent='space-between'
+          h={'320px'}
         >
           <Stack>
             <Text
@@ -51,9 +52,9 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
               />
             </Stack>
             <Text color={'gray.500'}>
-              {value.Description.length < 200
+              {value.Description.length < 150
                 ? `${value.Description}`
-                : `${value.Description.substring(0, 200)}...`}
+                : `${value.Description.substring(0, 150)}...`}
             </Text>
           </Stack>
           <Flex flexWrap={'wrap'} className='badgeContainer'>

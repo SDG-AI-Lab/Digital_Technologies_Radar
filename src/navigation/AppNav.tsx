@@ -18,8 +18,13 @@ import {
   Volunteers,
   Home
 } from '../pages';
+
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
+
+import { MapViewLayout } from '../layouts/MapViewLayout';
+import { RadarMapView } from '../pages/map-view/RadarMapView';
+
 // Context
 import { RadarContext, RadarContextInterface } from './context';
 
@@ -35,12 +40,18 @@ export const NavApp: React.FC = () => {
     endYear: '',
     implementer: '',
     sdg: '',
-    country: ''
+    country: '',
+    disasterCycle: '',
+    maturityStage: ''
   });
+
+  const [blipsMerged, setBlipsMerged] = useState(false);
 
   const radarContext: RadarContextInterface = {
     radarStateValues,
-    setRadarStateValues
+    setRadarStateValues,
+    blipsMerged,
+    setBlipsMerged
   };
   return (
     <RadarContext.Provider value={radarContext}>
@@ -52,13 +63,16 @@ export const NavApp: React.FC = () => {
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />
             <Route path={ROUTES.RADAR} element={<RadarLayout />}>
-              <Route path={''} element={<RadarComponent />}></Route>
               <Route path={ROUTES.QUADRANT}>
                 <Route
                   path={ROUTES.QUADRANT_PARAM}
                   element={<QuadrantView />}
                 />
               </Route>
+              <Route path={''} element={<RadarComponent />}></Route>
+            </Route>
+            <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
+              <Route path={''} element={<RadarMapView />}></Route>
             </Route>
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />

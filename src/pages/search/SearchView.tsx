@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// /* eslint-disable react/prop-types */
 import {
   Modal,
   ModalOverlay,
@@ -48,6 +47,10 @@ const tdContentStyle = {
 
 export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getHostOrg = (hosts: any): string => {
+    return hosts.join(', ');
+  };
   return (
     <>
       <Button
@@ -174,7 +177,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>UN Host Organization:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Un Host Organisation']}
+                    {getHostOrg(techContent['Un Host Organisation'])}
                   </Box>
                 </Box>
                 <Box as='tr'>

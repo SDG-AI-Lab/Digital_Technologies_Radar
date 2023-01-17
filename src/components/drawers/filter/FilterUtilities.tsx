@@ -4,7 +4,9 @@ import {
   BlipType,
   DisasterTypeKey,
   SelectableItem,
-  UseCaseKey
+  UseCaseKey,
+  QuadrantKey,
+  HorizonKey
 } from '@undp_sdg_ai_lab/undp-radar';
 
 const getSubregions = (
@@ -17,7 +19,8 @@ const getSubregions = (
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {
-      newSubregions.set(region, { uuid: uuidv4(), name: region });
+      // @ts-expect-error
+      newSubregions.set(region, { uuid: uuidv4(), name: region, raw: val });
     });
   });
 
@@ -80,6 +83,50 @@ const getDisasterTypes = (
       });
   });
   return Array.from(newDisterTypes.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+};
+
+const getDisasterCycles = (
+  rawBlipData: BlipType[],
+  disasterCycleKey: QuadrantKey
+): SelectableItem[] => {
+  const newDisterCycles: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    let disasterCycleName = val[disasterCycleKey].split(',')[0];
+    // convert to title case
+    disasterCycleName = disasterCycleName.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+    if (disasterCycleName !== '' && !newDisterCycles.has(disasterCycleName))
+      newDisterCycles.set(disasterCycleName, {
+        uuid: uuidv4(),
+        name: disasterCycleName
+      });
+  });
+  return Array.from(newDisterCycles.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+};
+
+const getMaturityStages = (
+  rawBlipData: BlipType[],
+  maturityStageKey: HorizonKey
+): SelectableItem[] => {
+  const newMaturityStages: Map<string, SelectableItem> = new Map();
+  rawBlipData.forEach((val) => {
+    let maturityStage = val[maturityStageKey] as string;
+    // convert to title case
+    maturityStage = maturityStage.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+    if (maturityStage !== '' && !newMaturityStages.has(maturityStage))
+      newMaturityStages.set(maturityStage, {
+        uuid: uuidv4(),
+        name: maturityStage
+      });
+  });
+  return Array.from(newMaturityStages.values()).sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 };
@@ -224,6 +271,8 @@ export const FilterUtils = {
   getRegions,
   getCountries,
   getDisasterTypes,
+  getDisasterCycles,
+  getMaturityStages,
   getUseCases,
   getImplementers,
   getSDGs,

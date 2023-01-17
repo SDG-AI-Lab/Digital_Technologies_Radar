@@ -10,8 +10,12 @@ export interface RadarContextInterface {
     implementer: string;
     sdg: string;
     country: string;
+    disasterCycle: string;
+    maturityStage: string;
   };
   setRadarStateValues: Function;
+  setBlipsMerged: Function;
+  blipsMerged: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

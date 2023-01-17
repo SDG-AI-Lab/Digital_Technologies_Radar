@@ -107,7 +107,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
         <TabPanels minHeight={445}>
           <TabPanel>
             <div className='quadrantTabsContainer-tabsPanel'>
-              {horizons.map((horizon) => (
+              {[...horizons].reverse().map((horizon) => (
                 <HorizonItem
                   key={horizon}
                   horizonName={Utilities.capitalize(horizon)}

@@ -1,4 +1,10 @@
 .filterTechNavView {
   background-color: white;
   flex-direction: column;
+
+  + div {
+    @media only screen and (max-height: 620px) {
+      justify-content: center;
+    }
+  }
 }

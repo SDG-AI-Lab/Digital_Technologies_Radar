@@ -80,14 +80,13 @@ export const TechList: React.FC = () => {
     }
     return false;
   };
-
   return (
     <div className='techListContainer'>
       <div className='techListContainer-scroll'>
         <ScrollableDiv>
           {tech.map((t) => {
-            const toggleTechFilter = (): void => {
-              if (techFilters && techFilters.length > 0) {
+            const toggleTechFilter = (filters: any): void => {
+              if (filters && filters.length > 0) {
                 const item = techFilters.find((tech) => tech === t.slug);
                 if (item) {
                   setTechFilter([

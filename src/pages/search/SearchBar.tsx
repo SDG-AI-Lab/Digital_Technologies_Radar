@@ -23,18 +23,21 @@ export const SearchBar: React.FC = () => {
 
   /* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
   const mergeDiasterCycle = (): void => {
-    blips.forEach(function (item) {
+    const blipsToUse = [...blips];
+    blipsToUse.forEach(function (item) {
       const existingBips = merge.filter(function (v, i) {
         return v['Ideas/Concepts/Examples'] === item['Ideas/Concepts/Examples'];
       });
 
       if (existingBips.length) {
         const existingIndex = merge.indexOf(existingBips[0]);
-        merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
-          'Disaster Cycle'
-        ]
-          .concat(', ')
-          .concat(item['Disaster Cycle']);
+        if (merge[existingIndex]['Disaster Cycle'].split(',').length < 4) {
+          merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
+            'Disaster Cycle'
+          ]
+            .concat(', ')
+            .concat(item['Disaster Cycle']);
+        }
       } else {
         merge.push(item);
       }

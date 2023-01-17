@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   Box,
   Tabs,
@@ -17,6 +17,7 @@ import { TechDescription } from 'radar/tech/TechDescription';
 import { BlipView } from 'components/views/blip/BlipView';
 import { ScrollableDiv } from 'components/lists/components/ScrollableDiv';
 import { BlipListMui } from 'components/lists/components/BlipListMui';
+import { RadarContext } from 'navigation/context';
 
 import './RadarView.scss';
 
@@ -24,7 +25,16 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
   const {
     state: { techFilters, selectedItem }
   } = useRadarState();
+
+  const { blipsMerged, setBlipsMerged } = useContext(RadarContext);
   const [tabIndex, setTabIndex] = React.useState(0);
+
+  useEffect(() => {
+    if (blipsMerged) {
+      setBlipsMerged(false);
+      window.location.reload();
+    }
+  }, []);
 
   useEffect(() => {
     if (techFilters && techFilters.length > 0) {

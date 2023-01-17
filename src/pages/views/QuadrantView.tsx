@@ -8,6 +8,8 @@ import {
 import { BackButton } from 'radar/components';
 import { QuadrantHorizonList } from 'components/lists/quadrant/QuadrantHorizonList';
 
+import './QuadrantView.scss';
+
 export const QuadrantView: React.FC = () => {
   const {
     state: {
@@ -46,6 +48,7 @@ export const QuadrantView: React.FC = () => {
       <BackButton to='RADAR' />
 
       <div className='quadrantRadar'>
+        <h4 className='quadrantTitle'>{selectedQuadrant?.toUpperCase()}</h4>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||
