@@ -10,10 +10,10 @@ import {
   Button
 } from '@chakra-ui/react';
 import './HowToPopup.scss';
-import Blip from '../../../src/assets/components/Blips.png';
-import TechnologiesFilter from '../../../src/assets/components/Technologies.png';
-import DisasterDropdown from '../../../src/assets/components/Disaster_type.png';
-import QuadrantTitle from '../../../src/assets/components/Quadrant.png';
+import Blip from 'assets/components/Blips.png';
+import TechnologiesFilter from 'assets/components/Technologies.png';
+import DisasterDropdown from 'assets/components/Disaster_type.png';
+import QuadrantTitle from 'assets/components/Quadrant.png';
 
 export const HowToPopup: React.FC = () => {
   return (
@@ -21,14 +21,11 @@ export const HowToPopup: React.FC = () => {
       <Popover trigger={'hover'} variant={'max70PercentHeight'}>
         <PopoverTrigger>
           <Button
-            position={'absolute'}
-            right={30}
             m={7}
             px={25}
             colorScheme='blue'
             rightIcon={<AiOutlineAim />}
             borderRadius={'0'}
-            className='how-to-button'
           >
             How to use
           </Button>
@@ -80,10 +77,7 @@ export const HowToPopup: React.FC = () => {
                     <h2 className='timeline-boundary'>Feedback</h2>
                     <p>
                       Got any further questions or comments?{' '}
-                      <a
-                        href='mailto:ftr4drr@undp.org'
-                        style={{ color: 'blue', textDecoration: 'underline' }}
-                      >
+                      <a href='mailto:ftr4drr@undp.org'>
                         Contact out us via e-mail.
                       </a>
                     </p>

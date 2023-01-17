@@ -5,8 +5,10 @@ import {
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
 
-import { BackButton } from '../../radar/components';
-import { QuadrantHorizonList } from '../../components/lists/quadrant/QuadrantHorizonList';
+import { BackButton } from 'radar/components';
+import { QuadrantHorizonList } from 'components/lists/quadrant/QuadrantHorizonList';
+
+import './QuadrantView.scss';
 
 export const QuadrantView: React.FC = () => {
   const {
@@ -16,7 +18,8 @@ export const QuadrantView: React.FC = () => {
       filteredBlips,
       selectedQuadrant,
       radarData: { quadrants }
-    }
+    },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const [bufferBlips, setBufferBlips] = useState<BlipType[]>([]);
@@ -31,25 +34,28 @@ export const QuadrantView: React.FC = () => {
   }, [filteredBlips, blips, isFiltered, quadIndex]);
 
   useEffect(() => {
+    setFilteredBlips(isFiltered, filteredBlips);
+  }, []);
+
+  useEffect(() => {
     if (selectedQuadrant) {
       setQuadIndex(quadrants.indexOf(selectedQuadrant));
     } else setQuadIndex(false);
   }, [selectedQuadrant]);
 
   return (
-    <div
-      className='quadrantView'
-      style={{ display: 'flex', flex: 1, padding: 2 }}
-    >
+    <div className='quadrantView'>
       <BackButton to='RADAR' />
-      <div className='quadrantRadar' style={{ flex: 1 }}>
+
+      <div className='quadrantRadar'>
+        <h4 className='quadrantTitle'>{selectedQuadrant?.toUpperCase()}</h4>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||
         quadIndex === 1 ||
         quadIndex === 2 ||
         quadIndex === 3) && (
-        <div className='horizontalList' style={{ flex: '0.75' }}>
+        <div className='horizontalList'>
           <QuadrantHorizonList blips={bufferBlips} quadIndex={quadIndex} />
         </div>
       )}

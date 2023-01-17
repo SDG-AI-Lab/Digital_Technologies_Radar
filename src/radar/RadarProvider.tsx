@@ -40,7 +40,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
     idea: 'Digital Solution has been identified and explained in the project document. Not available on the market for implementation.  '
   };
 
-  const mapping: MappingType<RawBlipType> = (item: { [key: string]: string }) =>
+  const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
     ({
       Region: Utilities.cleanupStringArray(item.Region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
@@ -82,7 +82,6 @@ export const AppRadarProvider: React.FC = ({ children }) => {
 
   const colors: ColorsParamType = {
     quadrants: {
-      // colors: null,
       // colors from https://www.colorhexa.com/color-names
       colors: [
         { r: 235, g: 76, b: 66, opacity: 1 }, // Carmine Pink

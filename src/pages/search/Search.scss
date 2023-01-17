@@ -1,0 +1,27 @@
+.searchModalHeader {
+  justify-content: center;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.searchModalBody {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.searchModalDescription {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.searchResultImage {
+  height: 150px;
+}
+.searchBadgeContainer {
+  height: 80px;
+  overflow: auto;
+
+  span {
+    height: fit-content;
+  }
+}

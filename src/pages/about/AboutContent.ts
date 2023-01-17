@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 export interface AboutContentChild {
   title: string;
   description: string;
@@ -37,7 +38,7 @@ class AboutContent {
     } as const;
 }
 
-export const aboutContentList: ReadonlyArray<AboutContentChild> = [
+export const aboutContentList: readonly AboutContentChild[] = [
   AboutContent.aboutDigitalTechnologiesRadarContent,
   AboutContent.aboutDigitalResilienceTeamContent,
   AboutContent.aboutSDGAiLabContent,

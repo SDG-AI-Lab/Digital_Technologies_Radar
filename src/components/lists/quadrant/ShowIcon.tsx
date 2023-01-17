@@ -1,20 +1,18 @@
-// import Icon from '@mui/material/Icon/Icon';
+import cx from 'classnames';
 
 export const ShowIcon: React.FC<{
   isOpen: boolean;
   isDisabled?: boolean;
   className?: string;
-}> = ({ isOpen, isDisabled = false, className, ...props }) => (
+  // eslint-disable-next-line react/prop-types
+}> = ({ isOpen, isDisabled = false, ...props }) => (
   <svg
     viewBox='0 0 24 24'
     aria-hidden
-    className={className}
-    style={{
-      opacity: isDisabled ? 0.4 : 1,
-      transform: isOpen ? 'rotate(-180deg)' : undefined,
-      transformOrigin: 'center',
-      maxWidth: 20
-    }}
+    className={cx('quadrantShowIcon', {
+      'quadrantShowIcon-opacity': isDisabled,
+      'quadrantShowIcon-transform': isOpen
+    })}
     {...props}
   >
     <path

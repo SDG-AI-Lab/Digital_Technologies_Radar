@@ -65,13 +65,12 @@ svg text.quadrant-text,
 svg text.horizon-text,
 .horizon-text,
 .quadrant-text {
-  /* font-weight: 600 !important; */
   fill: rgba(0, 0, 0, 1) !important;
 }
 svg text.quadrant-text:hover {
   fill: rgba(0, 0, 0, 0.7) !important;
 }
-/* End delete these */
+/* TODO End delete these */
 
 /* SCROLLBAR */
 *::-webkit-scrollbar {
@@ -98,4 +97,10 @@ svg text.quadrant-text:hover {
   overflow: hidden;
   margin: 0;
   padding: 0;
+}
+
+/* React leaflet */
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
 }

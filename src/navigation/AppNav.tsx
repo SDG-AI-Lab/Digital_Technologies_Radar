@@ -1,41 +1,88 @@
+import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { ROUTES } from './routes';
-// Comps
-import { AppLeftNav } from '../components';
-import { AppBottomNav } from '../components';
-import { AppMobileHeader } from '../components';
+// Components
+import { AppLeftNav, AppMobileHeader, AppBottomNav } from '../components';
+
 // Layouts
 import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
 // Pages
-import { NotFound404, Radar, Search, About, Volunteers, Home } from '../pages';
+import {
+  NotFound404,
+  Radar as RadarComponent,
+  Search,
+  About,
+  Volunteers,
+  Home
+} from '../pages';
+
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
 
-export const NavApp = () => (
-  <Flex style={{ height: '100vh', width: '100vw', overflow: 'hidden' }}>
-    <AppLeftNav />
-    <AppBottomNav />
-    <AppMobileHeader />
-    <MainLayout>
-      <Routes>
-        <Route path={ROUTES.HOME} element={<Home />} />
-        <Route path={ROUTES.RADAR} element={<RadarLayout />}>
-          <Route path={''} element={<Radar />}></Route>
-          <Route path={ROUTES.QUADRANT}>
-            <Route path={ROUTES.QUADRANT_PARAM} element={<QuadrantView />} />
-          </Route>
-        </Route>
-        <Route path={ROUTES.ABOUT} element={<About />} />
-        <Route path={ROUTES.SEARCH} element={<Search />} />
-        <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
+import { MapViewLayout } from '../layouts/MapViewLayout';
+import { RadarMapView } from '../pages/map-view/RadarMapView';
 
-        {/* https://gist.github.com/mjackson/b5748add2795ce7448a366ae8f8ae3bb#not-server-rendering -> should be server redirect */}
-        <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
-        <Route path='*' element={<NotFound404 />} />
-      </Routes>
-    </MainLayout>
-  </Flex>
-);
+// Context
+import { RadarContext, RadarContextInterface } from './context';
+
+// Styles
+import './AppNav.scss';
+
+export const NavApp: React.FC = () => {
+  const [radarStateValues, setRadarStateValues] = useState({
+    region: '',
+    subRegion: '',
+    data: '',
+    startYear: '',
+    endYear: '',
+    implementer: '',
+    sdg: '',
+    country: '',
+    disasterCycle: '',
+    maturityStage: ''
+  });
+
+  const [blipsMerged, setBlipsMerged] = useState(false);
+
+  const radarContext: RadarContextInterface = {
+    radarStateValues,
+    setRadarStateValues,
+    blipsMerged,
+    setBlipsMerged
+  };
+  return (
+    <RadarContext.Provider value={radarContext}>
+      <Flex className='navApp'>
+        <AppLeftNav />
+        <AppBottomNav />
+        <AppMobileHeader />
+        <MainLayout>
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.RADAR} element={<RadarLayout />}>
+              <Route path={ROUTES.QUADRANT}>
+                <Route
+                  path={ROUTES.QUADRANT_PARAM}
+                  element={<QuadrantView />}
+                />
+              </Route>
+              <Route path={''} element={<RadarComponent />}></Route>
+            </Route>
+            <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
+              <Route path={''} element={<RadarMapView />}></Route>
+            </Route>
+            <Route path={ROUTES.ABOUT} element={<About />} />
+            <Route path={ROUTES.SEARCH} element={<Search />} />
+            <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
+
+            <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
+            <Route path='*' element={<NotFound404 />} />
+          </Routes>
+        </MainLayout>
+      </Flex>
+    </RadarContext.Provider>
+  );
+};

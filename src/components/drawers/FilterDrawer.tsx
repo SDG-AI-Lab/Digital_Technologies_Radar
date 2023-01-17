@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import cx from 'classnames';
 import {
   Button,
   Box,
@@ -8,12 +9,13 @@ import {
   DrawerContent,
   DrawerCloseButton,
   DrawerHeader,
-  useDisclosure
+  useDisclosure,
+  Heading
 } from '@chakra-ui/react';
 import { CustomFilter } from './filter/CustomFilter';
 import { TechList } from './tech/TechList';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { HowToPopup } from '../../components/radar/HowToPopup';
+import { HowToPopup } from 'components/radar/HowToPopup';
 
 import './FilterDrawer.scss';
 
@@ -22,11 +24,22 @@ export const FilterDrawer: React.FC = () => {
   return (
     <>
       <Box
-        className={`option-button ${
-          useLocation().pathname.includes('quadrant') && 'quadrant-filter'
-        }`}
+        className={cx('option-button', {
+          'option-button--mapPage': useLocation().pathname.includes('map-view')
+        })}
       >
-        <Box overflowY='auto' width='0px'>
+        <Heading
+          fontSize={30}
+          color='DarkSlateGray'
+          textAlign='center'
+          p={15}
+          paddingTop={15}
+          w={'100%'}
+          className='titleHeader'
+        >
+          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+        </Heading>
+        <Box className='howTo'>
           <HowToPopup />
         </Box>
         <Button
@@ -36,6 +49,10 @@ export const FilterDrawer: React.FC = () => {
           rightIcon={<AiOutlineSetting />}
           borderRadius={'0'}
           onClick={onOpen}
+          className={cx({
+            quadrantFilter: useLocation().pathname.includes('quadrant'),
+            mapFilter: useLocation().pathname.includes('map-view')
+          })}
         >
           Filter
         </Button>

@@ -1,0 +1,84 @@
+.radarMapView {
+  overflow: hidden;
+  // padding: 0 1rem;
+  width: 100%;
+}
+.leaflet-popup-content-wrapper {
+  .popOverDescription {
+    -webkit-line-clamp: 3;
+  }
+  .chakra-button {
+    background: white;
+    color: blue;
+    font-size: 15px;
+    font-weight: normal;
+    height: 3px;
+    padding: 0;
+    position: relative;
+    top: -19px;
+
+    &:hover {
+      background: white;
+      text-decoration: underline;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.mapContainer {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  z-index: 0;
+
+  @media only screen and (max-width: 767px) {
+    max-height: 95vh;
+  }
+
+  .slider {
+    font-size: 14px;
+    max-height: 360px;
+    padding: 10px;
+    zoom: 0.8;
+
+    .badgeContainer {
+      height: 45px;
+      overflow: auto;
+    }
+
+    img {
+      height: 80px;
+      object-fit: scale-down;
+    }
+
+    div:first-of-type {
+      margin: 0;
+    }
+
+    button {
+      background-color: none;
+      height: 25px;
+      justify-content: flex-start;
+      width: fit-content;
+    }
+
+    @media only screen and (max-height: 725px) {
+      display: none;
+    }
+  }
+}
+
+.projectItem {
+  color: blue;
+  cursor: pointer;
+}
+
+.leaflet-control-container {
+  div {
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+}

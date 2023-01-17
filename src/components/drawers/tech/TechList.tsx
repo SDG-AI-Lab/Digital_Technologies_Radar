@@ -7,6 +7,7 @@ import {
   RadarUtilities
 } from '@undp_sdg_ai_lab/undp-radar';
 import { TechItem } from './components/TechItem';
+import { techButtonColors } from './colors';
 import './TechList.scss';
 
 export const TechList: React.FC = () => {
@@ -45,7 +46,6 @@ export const TechList: React.FC = () => {
         (b[keys.techKey] as string[]).forEach((techy) => {
           const foundTech = radarData.tech.find((t) => t.type === techy);
           if (foundTech && !newTechMap.has(foundTech.slug)) {
-            // could be added
             if (
               b[keys.useCaseKey] === useCaseFilter ||
               useCaseFilter === 'all'
@@ -59,13 +59,18 @@ export const TechList: React.FC = () => {
               disasterTypeFilter === 'all'
             ) {
               (b[keys.techKey] as string[]).forEach((t) => {
-                if (t === foundTech.type) newTechMap.set(t, foundTech);
+                if (t === foundTech.type) {
+                  newTechMap.set(t, foundTech);
+                }
               });
             }
           }
         });
       });
-      setTech(Array.from(newTechMap.values()));
+      const techListArr: any = Array.from(newTechMap.values());
+      const colors = [...techButtonColors];
+      techListArr.forEach((t: any) => (t['color'] = colors.pop()));
+      setTech(techListArr);
     }
   }, [blips, radarData, useCaseFilter, disasterTypeFilter]);
 
@@ -75,23 +80,13 @@ export const TechList: React.FC = () => {
     }
     return false;
   };
-
   return (
-    <div
-      className={'techListContainer'}
-      style={{
-        paddingTop: 15,
-        display: 'flex',
-        alignItems: 'center',
-        background: 'Snow'
-        // flexWrap: 'wrap'
-      }}
-    >
-      <div style={{ textAlign: 'end' }}>
+    <div className='techListContainer'>
+      <div className='techListContainer-scroll'>
         <ScrollableDiv>
           {tech.map((t) => {
-            const toggleTechFilter = (): void => {
-              if (techFilters && techFilters.length > 0) {
+            const toggleTechFilter = (filters: any): void => {
+              if (filters && filters.length > 0) {
                 const item = techFilters.find((tech) => tech === t.slug);
                 if (item) {
                   setTechFilter([

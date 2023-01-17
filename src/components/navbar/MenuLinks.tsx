@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
-import { FaHome } from 'react-icons/fa';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
+import { SiOpenstreetmap } from 'react-icons/si';
 
 import { MenuItem } from './components/MenuItem';
-import { ROUTES } from '../../navigation/routes';
+import { ROUTES } from 'navigation/routes';
 
 interface Props {
   isOpen: boolean;
@@ -43,6 +43,19 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
             bg='#0062ac'
           >
             <FiTarget size={30} />
+          </Button>
+        </MenuItem>
+
+        <MenuItem to={ROUTES.MAP_VIEW}>
+          <Button
+            rounded='md'
+            colorScheme='blue'
+            py={7}
+            px={1}
+            width={'100%'}
+            bg='#0062ac'
+          >
+            <SiOpenstreetmap size={30} />
           </Button>
         </MenuItem>
 

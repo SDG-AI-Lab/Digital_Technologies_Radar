@@ -1,4 +1,11 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint no-var: 0 */
+import React, {
+  ChangeEventHandler,
+  useEffect,
+  useState,
+  useContext
+} from 'react';
 import { Select } from '@chakra-ui/react';
 import {
   SelectableItem,
@@ -17,6 +24,13 @@ import {
   dataKey
 } from './FilterConstants';
 import { AppRangerSlider } from './AppRanderSlider';
+import { RadarContext } from 'navigation/context';
+
+import './Filter.scss';
+import { useLocation } from 'react-router-dom';
+import { getCode } from 'country-list';
+
+var geos = require('geos-major');
 
 export const CustomFilter: React.FC = () => {
   const {
@@ -27,27 +41,58 @@ export const CustomFilter: React.FC = () => {
 
   const {
     state: {
-      keys: { useCaseKey, disasterTypeKey: disasterKey }
+      keys: {
+        useCaseKey,
+        disasterTypeKey: disasterKey,
+        quadrantKey,
+        horizonKey
+      }
     }
   } = useDataState();
 
+  const { radarStateValues, setRadarStateValues } = useContext(RadarContext);
+
   // FILTERS
   // subregions
-  const [subregionFilter, setSubregionFilter] = useState<string>('all');
+  const [subregionFilter, setSubregionFilter] = useState<string>(
+    radarStateValues.subRegion || 'all'
+  );
   // regions
-  const [regionFilter, setRegionFilter] = useState<string>('all');
+  const [regionFilter, setRegionFilter] = useState<string>(
+    radarStateValues.region || 'all'
+  );
   // countries
-  const [countryFilter, setCountryFilter] = useState<string>('all');
+  const [countryFilter, setCountryFilter] = useState<string>(
+    radarStateValues.country || 'all'
+  );
   // implementer
-  const [implementerFilter, setImplementerFilter] = useState<string>('all');
+  const [implementerFilter, setImplementerFilter] = useState<string>(
+    radarStateValues.implementer || 'all'
+  );
   // sdg
-  const [sdgFilter, setSdgFilter] = useState<string>('all');
+  const [sdgFilter, setSdgFilter] = useState<string>(
+    radarStateValues.sdg || 'all'
+  );
   // start year
-  const [startYearFilter, setStartYearFilter] = useState<string>('all');
+  const [startYearFilter, setStartYearFilter] = useState<string>(
+    radarStateValues.startYear || 'all'
+  );
   // end year
-  const [endYearFilter, setEndYearFilter] = useState<string>('all');
+  const [endYearFilter, setEndYearFilter] = useState<string>(
+    radarStateValues.endYear || 'all'
+  );
   // data
-  const [dataFilter, setDataFilter] = useState<string>('all');
+  const [dataFilter, setDataFilter] = useState<string>(
+    radarStateValues.data || 'all'
+  );
+  // disaster cycles
+  const [disasterCycleFilter, setDisasterCycleFilter] = useState<string>(
+    radarStateValues.disasterCycle || 'all'
+  );
+  // maturity stage
+  const [maturityStageFilter, setMaturityStageFilter] = useState<string>(
+    radarStateValues.maturityStage || 'all'
+  );
 
   // ALL OPTIONS
   // subregions
@@ -58,6 +103,10 @@ export const CustomFilter: React.FC = () => {
   const [countries, setCountries] = useState<SelectableItem[]>([]);
   // disasters
   const [disasterTypes, setDisasterTypes] = useState<SelectableItem[]>([]);
+  // disaster cycles
+  const [disasterCycles, setDisasterCycles] = useState<SelectableItem[]>([]);
+  // maturity stages
+  const [maturityStages, setMaturityStages] = useState<SelectableItem[]>([]);
   // use cases
   const [useCases, setUseCases] = useState<SelectableItem[]>([]);
   // implementers
@@ -84,6 +133,18 @@ export const CustomFilter: React.FC = () => {
       // disaster options
       const newDisasterTyes = FilterUtils.getDisasterTypes(blips, disasterKey);
       setDisasterTypes(newDisasterTyes);
+      // disaster cycle options
+      const newDisasterCycles = FilterUtils.getDisasterCycles(
+        blips,
+        quadrantKey
+      );
+      setDisasterCycles(newDisasterCycles);
+      // maturity stage options
+      const newMaturityStages = FilterUtils.getMaturityStages(
+        blips,
+        horizonKey
+      );
+      setMaturityStages(newMaturityStages);
       // usecase options
       const newUseCases = FilterUtils.getUseCases(blips, useCaseKey);
       setUseCases(newUseCases);
@@ -125,6 +186,16 @@ export const CustomFilter: React.FC = () => {
     disasterTypeFilter === null ? 'all' : disasterTypeFilter
   );
 
+  // selectedDisasterCycle
+  const [selectedDisasterCycle, setSelectedDisasterCycle] = useState<string>(
+    disasterCycleFilter === null ? 'all' : disasterCycleFilter
+  );
+
+  // selectedMaturityStage
+  const [selectedMaturityStage, setSelectedMaturityStage] = useState<string>(
+    maturityStageFilter === null ? 'all' : maturityStageFilter
+  );
+
   // selectedUserCase
   const [selectedUserCase, setSelectedUserCase] = useState<string>(
     useCaseFilter === null ? 'all' : useCaseFilter
@@ -163,7 +234,7 @@ export const CustomFilter: React.FC = () => {
    * This is our filtering logic
    */
   useEffect(() => {
-    let filtered = blips; // we start with all Blips
+    let filtered = blips;
     let isFiltered = false;
 
     // filter subregions
@@ -204,6 +275,22 @@ export const CustomFilter: React.FC = () => {
       filtered = filtered.filter((i) => i[disasterKey] === disasterTypeFilter);
     }
 
+    // filter disaster cycles
+    if (disasterCycleFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter(
+        (i) => i[quadrantKey] === disasterCycleFilter.toLowerCase()
+      );
+    }
+
+    // filter maturity stages
+    if (maturityStageFilter !== 'all') {
+      isFiltered = true;
+      filtered = filtered.filter(
+        (i) => i[horizonKey] === maturityStageFilter.toLowerCase()
+      );
+    }
+
     // filter use cases
     if (useCaseFilter !== 'all') {
       isFiltered = true;
@@ -230,22 +317,28 @@ export const CustomFilter: React.FC = () => {
     // filter start years
     if (startYearFilter !== 'all') {
       isFiltered = true;
-      let start = Number(startYearFilter);
-      let end = isNaN(Number(endYearFilter))
+      const start = Number(startYearFilter);
+      const end = isNaN(Number(endYearFilter))
         ? new Date().getFullYear()
         : Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
     // filter end years
     if (endYearFilter !== 'all') {
       isFiltered = true;
-      let start = isNaN(Number(startYearFilter))
+      const start = isNaN(Number(startYearFilter))
         ? 2000 // This assumes the earliest project year
         : Number(startYearFilter);
-      let end = Number(endYearFilter);
-      let range = Array.from({ length: end - start + 1 }, (v, k) => k + start);
+      const end = Number(endYearFilter);
+      const range = Array.from(
+        { length: end - start + 1 },
+        (v, k) => k + start
+      );
       filtered = filtered.filter((i) => range.includes(Number(i[yearKey])));
     }
 
@@ -268,6 +361,8 @@ export const CustomFilter: React.FC = () => {
     subregionFilter,
     countryFilter,
     disasterTypeFilter,
+    disasterCycleFilter,
+    maturityStageFilter,
     useCaseFilter,
     implementerFilter,
     sdgFilter,
@@ -284,6 +379,8 @@ export const CustomFilter: React.FC = () => {
     setRegionFilter(selectedRegion);
     setCountryFilter(selectedCountry);
     setDisasterTypeFilter(selectedDisasterType);
+    setDisasterCycleFilter(selectedDisasterCycle);
+    setMaturityStageFilter(selectedMaturityStage);
     setUseCaseFilter(selectedUserCase);
     setImplementerFilter(selectedImplementer);
     setSdgFilter(selectedSdg);
@@ -295,6 +392,8 @@ export const CustomFilter: React.FC = () => {
     selectedRegion,
     selectedCountry,
     selectedDisasterType,
+    selectedDisasterCycle,
+    selectedMaturityStage,
     selectedUserCase,
     selectedImplementer,
     selectedSdg,
@@ -303,34 +402,61 @@ export const CustomFilter: React.FC = () => {
     selectedData
   ]);
   // on subregion filter change
-  const onSubregionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onSubregionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedSubregion(e.target.value);
+    setRadarStateValues({ ...radarStateValues, subRegion: e.target.value });
+  };
   // on region filter change
-  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onRegionChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedRegion(e.target.value);
+    setRadarStateValues({ ...radarStateValues, region: e.target.value });
+  };
   // on country filter change
-  const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onCountryChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedCountry(e.target.value);
+    setRadarStateValues({ ...radarStateValues, country: e.target.value });
+  };
   // on disaster type filter change
   const onDisasterTypeChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedDisasterType(e.target.value);
+  // on disaster cycle filter change
+  const onDisasterCycleChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setSelectedDisasterCycle(e.target.value);
+    setRadarStateValues({ ...radarStateValues, disasterCycle: e.target.value });
+  };
+  // on maturity stage filter change
+  const onMaturityStageChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setSelectedMaturityStage(e.target.value);
+    setRadarStateValues({ ...radarStateValues, maturityStage: e.target.value });
+  };
   // on use case filter change
   const onUseCaseChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
     setSelectedUserCase(e.target.value);
   // on implementer filter change
-  const onImplementerChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onImplementerChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedImplementer(e.target.value);
+    setRadarStateValues({ ...radarStateValues, implementer: e.target.value });
+  };
   // on SDG filter change
-  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onSdgChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedSdg(e.target.value);
+    setRadarStateValues({ ...radarStateValues, sdg: e.target.value });
+  };
   // on year range change
-  const onYearRangeChange = (e: Number[]) => {
+  const onYearRangeChange = (e: Number[]): void => {
     setSelectedStartYear(String(e[0]));
     setSelectedEndYear(String(e[1]));
+    setRadarStateValues({
+      ...radarStateValues,
+      startYear: String(e[0]),
+      endYear: String(e[1])
+    });
   };
   // on data filter change
-  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) =>
+  const onDataChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setSelectedData(e.target.value);
+    setRadarStateValues({ ...radarStateValues, data: e.target.value });
+  };
 
   const [sliderReset, setSliderReset] = useState(false);
   const onResetFilter = (): void => {
@@ -338,6 +464,8 @@ export const CustomFilter: React.FC = () => {
     setSelectedRegion('all');
     setSelectedCountry('all');
     setSelectedDisasterType('all');
+    setSelectedDisasterCycle('all');
+    setSelectedMaturityStage('all');
     setSelectedUserCase('all');
     setSelectedImplementer('all');
     setSelectedSdg('all');
@@ -346,56 +474,32 @@ export const CustomFilter: React.FC = () => {
     setSelectedData('all');
 
     setSliderReset(true);
+    setRadarStateValues({});
   };
 
   const [min, setMin] = useState<number>();
   const [max, setMax] = useState<number>();
-  const forceNumber = (o: { name: string }) => Number(o.name);
+  const forceNumber = (o: { name: string }): number => Number(o.name);
+
   useEffect(() => {
     const maxApply = Math.max(...years.map(forceNumber));
     const minApply = Math.min(...years.map(forceNumber));
-    setMin(minApply);
-    setMax(maxApply);
+    if (minApply !== Infinity) setMin(minApply);
+    if (minApply !== -Infinity) setMax(maxApply);
   }, [years]);
 
   const onSliderChange: (value: number | number[]) => void = (val) => {
-    // console.log('parent onRangerSelectionChange cchange', val);
     if (typeof val === 'object') onYearRangeChange(val);
     setSliderReset(false);
   };
 
   return (
-    <div
-      className={'customFilterContainer'}
-      style={{
-        backgroundColor: 'Snow',
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'lightgrey',
-        borderBottomWidth: 1,
-        paddingBottom: 5,
-        display: 'flex',
-        flexDirection: 'column',
-        // flexWrap: 'wrap',
-        alignItems: 'center'
-      }}
-    >
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+    <div className='customFilterContainer'>
+      <div className='customFilterContainer-wrapper'>
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select0'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onRegionChange}
             value={selectedRegion}
           >
@@ -408,77 +512,77 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select_Subregion'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onSubregionChange}
             value={selectedSubregion}
           >
             <option value='all'>Subregion</option>
-            {subregions.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
+            {subregions.map((item) => {
+              let showOption = true;
+              if (regionFilter && !['all', 'Global'].includes(regionFilter)) {
+                // @ts-expect-error
+                showOption = item.raw.Region.includes(regionFilter);
+              }
+              return (
+                showOption && (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                )
+              );
+            })}
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select1'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onCountryChange}
             value={selectedCountry}
           >
             <option value='all'>Country</option>
-            {countries.map((item) => (
-              <option key={item.uuid} value={item.name}>
-                {item.name}
-              </option>
-            ))}
+            {countries.map((item) => {
+              let showOption = true;
+              const code = getCode(item.name);
+              const { continent, subContinent } = geos.country(code) || {};
+              if (regionFilter && !['all', 'Global'].includes(regionFilter)) {
+                if (regionFilter === 'Europe' && item.name === 'EU countries') {
+                  showOption = true;
+                } else {
+                  showOption = continent === regionFilter;
+                }
+              }
+              if (
+                subregionFilter &&
+                !['all', 'Global'].includes(subregionFilter)
+              ) {
+                if (
+                  subregionFilter.includes('Europe') &&
+                  item.name === 'EU countries'
+                ) {
+                  showOption = true;
+                } else {
+                  showOption = subContinent === subregionFilter;
+                }
+              }
+              return (
+                (showOption || item.name === 'Global') && (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                )
+              );
+            })}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select2'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onDisasterTypeChange}
             value={selectedDisasterType}
           >
@@ -490,22 +594,44 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        {useLocation().pathname.includes('map-view') && (
+          <>
+            <div className='customFilterContainer-wrapper--margin'>
+              <Select
+                id='Select2'
+                size='lg'
+                onChange={onDisasterCycleChange}
+                value={selectedDisasterCycle}
+              >
+                <option value='all'>Quadrant</option>
+                {disasterCycles.map((item) => (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            <div className='customFilterContainer-wrapper--margin'>
+              <Select
+                id='Select2'
+                size='lg'
+                onChange={onMaturityStageChange}
+                value={selectedMaturityStage}
+              >
+                <option value='all'>Maturity Stage</option>
+                {maturityStages.map((item) => (
+                  <option key={item.uuid} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </>
+        )}
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select3'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onUseCaseChange}
             value={selectedUserCase}
           >
@@ -517,22 +643,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select4'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onImplementerChange}
             value={selectedImplementer}
           >
@@ -544,22 +658,10 @@ export const CustomFilter: React.FC = () => {
             ))}
           </Select>
         </div>
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select5'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onSdgChange}
             value={selectedSdg}
           >
@@ -572,23 +674,10 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 7,
-            marginBottom: 3,
-            marginLeft: 0,
-            marginRight: 20
-          }}
-        >
-          {/* <span style={{ marginRight: '10px' }}>End Year</span> */}
+        <div className='customFilterContainer-wrapper--margin'>
           <Select
             id='Select8'
             size='lg'
-            style={{
-              maxWidth: '150px',
-              padding: '10px',
-              border: '1px solid lightgrey'
-            }}
             onChange={onDataChange}
             value={selectedData}
           >
@@ -601,19 +690,13 @@ export const CustomFilter: React.FC = () => {
           </Select>
         </div>
 
-        <div
-          style={{
-            marginTop: 18,
-            marginBottom: 3,
-            marginLeft: 20,
-            marginRight: 40,
-            width: 200
-          }}
-        >
+        <div className='customFilterContainer-slider'>
           {min && max && (
             <AppRangerSlider
               max={max}
               min={min}
+              selectedStart={Number(radarStateValues.startYear)}
+              selectedEnd={Number(radarStateValues.endYear)}
               onChange={onSliderChange}
               reset={sliderReset}
             />
@@ -625,12 +708,7 @@ export const CustomFilter: React.FC = () => {
         <div>
           <button
             type='button'
-            style={{
-              padding: '10px 20px',
-              cursor: 'pointer',
-              color: 'blue',
-              margin: '5px 0 3px'
-            }}
+            className='customFilterContainer-reset'
             onClick={onResetFilter}
           >
             Reset

@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import {
   Box,
   Center,
-  Heading,
   Text,
   Stack,
   SimpleGrid,
@@ -22,13 +23,18 @@ interface SearchResultProps {
   filteredContent: BaseCSVType[];
 }
 
-export const SearchResult: React.FC<SearchResultProps> = (props) => {
+export const SearchResult: React.FC<SearchResultProps> = (
+  props: SearchResultProps
+) => {
   const [page, setPage] = useState(1);
   const PER_PAGE = 15;
   const count = Math.ceil(props.filteredContent.length / PER_PAGE);
   const paginatedData = usePagination(props.filteredContent, PER_PAGE);
 
-  const handlePaginationChange = (e: React.ChangeEvent<any>, p: number) => {
+  const handlePaginationChange = (
+    e: React.ChangeEvent<any>,
+    p: number
+  ): void => {
     setPage(p);
     paginatedData.jump(p);
   };
@@ -40,7 +46,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
       <Box bg={'#fdfdfd'} mb={{ base: 0, md: 50 }}>
         <Flex direction={'column'} minHeight={'100px'} p='5'>
           <SimpleGrid columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}>
-            {paginatedData.currentData().map((value, key) => {
+            {paginatedData.currentData().map((value: any, key: any) => {
               return (
                 <Center py={6} key={key}>
                   <Box
@@ -63,24 +69,26 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
                       >
                         {value['Ideas/Concepts/Examples']}
                       </Text>
-                      <Stack>
+                      <Stack className='searchResultImage'>
                         <Image
-                          objectFit='cover'
+                          objectFit='scale-down'
+                          h='100%'
                           src={`${value['Image Url']}`}
                           fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
                           alt='Default Image'
                         />
                       </Stack>
-                      <Heading fontSize={'2xl'} fontFamily={'body'}>
-                        {/*{value[Ideas]}*/}
-                      </Heading>
-                      <Text color={'gray.500'}>
+                      <Text color={'gray.500'} height={170} overflow={'hidden'}>
                         {value.Description.length < 200
                           ? `${value.Description}`
                           : `${value.Description.substring(0, 200)}...`}
                       </Text>
                     </Stack>
-                    <Flex flexWrap={'wrap'} my='5'>
+                    <Flex
+                      flexWrap={'wrap'}
+                      my='5'
+                      className='searchBadgeContainer'
+                    >
                       <Badge
                         isTruncated
                         my='1'

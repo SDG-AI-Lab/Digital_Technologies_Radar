@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 export interface VolunteerContentChild {
   name: string;
   background: string;
@@ -212,7 +213,7 @@ class VolunteerContent {
   } as const;
 }
 
-export const volunteerContentList: ReadonlyArray<VolunteerContentChild> = [
+export const volunteerContentList: readonly VolunteerContentChild[] = [
   VolunteerContent.NunoR,
   VolunteerContent.BlessingO,
   VolunteerContent.EyoabT,

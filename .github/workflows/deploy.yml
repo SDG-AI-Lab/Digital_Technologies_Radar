@@ -1,0 +1,34 @@
+name: Deploy to staging
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout staging branch
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.20.0'
+
+      - name: Setup yarn
+        run: npm install yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Test application
+        run: yarn pretest
+
+      - name: Build application
+        run: yarn build
+
+      - name: Install process manager
+        run: npm install pm2
+
+      - name: Restart application
+        run: pm2 start app.config.json

@@ -66,19 +66,7 @@ export const TechItem: React.FC<{
 
   return (
     <button
-      style={{
-        border: 'none',
-        background: 'none',
-        display: 'flex',
-        flex: 'auto',
-        alignItems: 'center',
-        padding: 1,
-        // paddingLeft: 10,
-        marginRight: 12,
-        marginBottom: 6,
-        cursor: 'pointer'
-        // width: '100%'
-      }}
+      className='button'
       type='button'
       onClick={selectTech}
       onMouseEnter={changeBackgroundEnter}
@@ -86,19 +74,14 @@ export const TechItem: React.FC<{
       onFocus={changeBackgroundEnter}
       onBlur={changeBackgroundLeave}
     >
-      <div style={{ /*paddingLeft: 20,*/ width: '100%' }}>
+      <div className='btnContainer'>
         <div
+          className='btnTechItem'
+          // Keeping inline style here to maintain dynamic button colors
           style={{
             backgroundColor:
               isItemHovered || selected ? tech.color : backgroundColor,
-            color: isItemHovered || selected ? 'white' : tech.color,
-            padding: 4,
-            border: 1,
-            borderColor: 'lightgrey',
-            borderStyle: 'solid',
-            borderRadius: 5,
-            fontSize: 14,
-            fontWeight: 600
+            color: isItemHovered || selected ? 'white' : tech.color
           }}
         >
           {tech.type}

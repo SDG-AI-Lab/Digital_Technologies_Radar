@@ -1,4 +1,6 @@
 import React from 'react';
+import cx from 'classnames';
+import './Blip.scss';
 
 interface Props {
   maxHeight?: number;
@@ -14,13 +16,13 @@ export const ScrollableDiv: React.FC<Props> = ({
   show = true
 }) => (
   <div
+    className={cx('blipList-scroll', {
+      'blipList-scroll--overflowY': overflowY,
+      'blipList-scroll--overflowX': overflowX,
+      'blipList-scroll--show': show
+    })}
     style={{
-      maxHeight,
-      overflow: 'hidden',
-      scrollBehavior: 'smooth',
-      overflowY: overflowY ? 'auto' : undefined,
-      overflowX: overflowX ? 'auto' : undefined,
-      display: show ? 'block' : 'none'
+      maxHeight // maxHeight comes in as a prop so this style will be dynamic
     }}
   >
     {children}

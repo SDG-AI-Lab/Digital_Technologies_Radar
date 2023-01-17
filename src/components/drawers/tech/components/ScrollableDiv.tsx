@@ -1,4 +1,6 @@
 import React from 'react';
+import cx from 'classnames';
+import './TechItem.scss';
 
 interface Props {
   maxHeight?: number;
@@ -12,15 +14,10 @@ export const ScrollableDiv: React.FC<Props> = ({
   overflowX = false
 }) => (
   <div
-    style={{
-      maxHeight,
-      overflow: 'hidden',
-      scrollBehavior: 'smooth',
-      overflowY: overflowY ? 'auto' : undefined,
-      overflowX: overflowX ? 'auto' : undefined,
-      display: 'flex',
-      flexWrap: 'wrap'
-    }}
+    className={cx('scrollableDiv', {
+      'scrollableDiv-overflowY': overflowY,
+      'scrollableDiv-overflowX': overflowX
+    })}
   >
     {children}
   </div>

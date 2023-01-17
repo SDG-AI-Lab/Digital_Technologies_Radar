@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-// rc-slider from https://slider-react-component.vercel.app
-import Slider from 'rc-slider';
+import React, { useState, useEffect } from 'react';
+import Slider from 'rc-slider'; // rc-slider from https://slider-react-component.vercel.app
 import 'rc-slider/assets/index.css';
 
 import { handleRender } from './HandleRender';
@@ -8,6 +7,8 @@ import { handleRender } from './HandleRender';
 interface Props {
   min: number;
   max: number;
+  selectedStart: number;
+  selectedEnd: number;
   onChange?: ((value: number | number[]) => void) | undefined;
   reset: boolean;
 }
@@ -15,6 +16,8 @@ interface Props {
 export const AppRangerSlider: React.FC<Props> = ({
   min,
   max,
+  selectedStart,
+  selectedEnd,
   onChange: changeParent,
   reset = false
 }) => {
@@ -22,16 +25,14 @@ export const AppRangerSlider: React.FC<Props> = ({
   const [selectedMax, setSelectedMax] = useState<number>(max);
 
   useEffect(() => {
-    if (min) setSelectedMin(min);
-    // console.log('min', min);
+    if (min) setSelectedMin(selectedStart || min);
   }, [min]);
 
   useEffect(() => {
-    if (max) setSelectedMax(max);
-    // console.log('max', max);
+    if (max) setSelectedMax(selectedEnd || max);
   }, [max]);
 
-  const onChange = (value: number | number[]) => {
+  const onChange = (value: number | number[]): void => {
     if (typeof value === 'object') {
       setSelectedMin(value[0]);
       setSelectedMax(value[1]);
@@ -45,7 +46,6 @@ export const AppRangerSlider: React.FC<Props> = ({
 
   useEffect(() => {
     if (reset) {
-      // console.log('will be resetted');
       setSelectedMax(max);
       setSelectedMin(min);
     }
@@ -60,7 +60,6 @@ export const AppRangerSlider: React.FC<Props> = ({
         range
         defaultValue={[selectedMin, selectedMax]}
         value={[selectedMin, selectedMax]}
-        // marks={{ min: min.toString(), max: max.toString() }}
         step={1}
         handleRender={handleRender}
         handleStyle={{

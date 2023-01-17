@@ -13,26 +13,18 @@ import {
 } from '@chakra-ui/react';
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
+import './BlipView.scss';
+
 export const BlipView: FC = () => {
   const {
     state: { selectedItem }
   } = useRadarState();
 
   return (
-    <>
+    <div className='blipView'>
       {selectedItem ? (
         <Box>
-          <Box
-            pb={0}
-            style={{
-              justifyContent: 'center',
-              textAlign: 'center',
-              textTransform: 'capitalize',
-              marginBottom: '5px',
-              fontSize: '1.3em',
-              fontWeight: 600
-            }}
-          >
+          <Box pb={0} className='projectTitle'>
             {selectedItem['Ideas/Concepts/Examples']}
           </Box>
           <Stack>
@@ -49,10 +41,7 @@ export const BlipView: FC = () => {
             direction='row'
             mt={5}
             mb={3}
-            style={{
-              flexWrap: 'wrap',
-              justifyContent: 'center'
-            }}
+            className='projectBadgeContainer'
           >
             {selectedItem['Country of Implementation'].map((item, ind) => (
               <Badge
@@ -103,62 +92,57 @@ export const BlipView: FC = () => {
           <Table variant='unstyled'>
             <Tbody>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Description:</b>
                 </Td>
-                <Td
-                  style={{
-                    textAlign: 'justify',
-                    textJustify: 'inter-word'
-                  }}
-                >
+                <Td className='projectDescription'>
                   {selectedItem['Description']}
                 </Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Technology:</b>
                 </Td>
                 <Td>{selectedItem['Technology']?.join(', ')}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Disaster Type:</b>
                 </Td>
                 <Td>{selectedItem['Disaster Type']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Use Case:</b>
                 </Td>
                 <Td>{selectedItem['Use Case']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>UN Host Organization:</b>
                 </Td>
                 <Td>{selectedItem['Un Host Organisation']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Partner:</b>
                 </Td>
                 <Td>{selectedItem['Supporting Partners']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Data:</b>
                 </Td>
                 <Td>{selectedItem['Data']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Theme:</b>
                 </Td>
                 <Td>{selectedItem['Theme']}</Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Source:</b>
                 </Td>
                 <Td>
@@ -172,7 +156,7 @@ export const BlipView: FC = () => {
                 </Td>
               </Tr>
               <Tr>
-                <Td style={{ verticalAlign: 'top' }}>
+                <Td>
                   <b>Publication Date:</b>
                 </Td>
                 <Td>{selectedItem['Date of Implementation']}</Td>
@@ -181,8 +165,8 @@ export const BlipView: FC = () => {
           </Table>
         </Box>
       ) : (
-        <Text>Please choose a blip</Text>
+        <Text paddingLeft={'16px'}>Please choose a blip</Text>
       )}
-    </>
+    </div>
   );
 };

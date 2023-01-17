@@ -1,7 +1,7 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { ReactLabelComp } from '@undp_sdg_ai_lab/undp-radar';
 
-const style = { cursor: 'pointer' };
+import './NameComp.scss';
 
 export const HorizonsNameComp: ReactLabelComp = ({
   onMouseEnter,
@@ -12,8 +12,7 @@ export const HorizonsNameComp: ReactLabelComp = ({
   className
 }) => (
   <g
-    style={style}
-    className={className}
+    className={`nameComp ${className as string}`}
     textAnchor={textAnchor}
     onMouseEnter={onMouseEnter}
     onMouseMove={onMouseMove}

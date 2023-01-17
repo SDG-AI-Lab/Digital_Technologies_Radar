@@ -1,7 +1,7 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { ReactLabelComp } from '@undp_sdg_ai_lab/undp-radar';
 
-const style = { cursor: 'pointer' };
+import './NameComp.scss';
 
 export const QuadrantNameComp: ReactLabelComp = ({
   label,
@@ -13,14 +13,13 @@ export const QuadrantNameComp: ReactLabelComp = ({
   className
 }) => (
   <g
-    style={style}
-    className={className}
+    className={`nameComp ${className as string}`}
     textAnchor={textAnchor}
     onMouseEnter={onMouseEnter}
     onMouseMove={onMouseMove}
     onMouseOut={onMouseOut}
     onMouseUp={onMouseUp}
   >
-    <text style={style}>{label} 🛈</text>
+    <text className='nameComp'>{label} 🛈</text>
   </g>
 );

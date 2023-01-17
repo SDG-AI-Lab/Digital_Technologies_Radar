@@ -1,0 +1,48 @@
+.partnersList {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1.25rem;
+  width: 100%;
+
+  img {
+    padding: 0 8px;
+
+    &.CBILogo {
+      max-width: 45%;
+    }
+    &.SDGAILogo {
+      max-width: 18%;
+    }
+    &.UNDPDRTLogo {
+      max-width: 35%;
+    }
+  }
+}
+
+.UNDPLogo {
+  cursor: pointer;
+  margin-top: -15px;
+  position: absolute;
+  right: -10px;
+  width: 100px;
+
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.launchBtnMobile {
+  align-self: center;
+  margin-top: 50vh;
+
+  @media only screen and (min-width: 767px) {
+    display: none;
+  }
+}
+
+a .launchBtnDesktop {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+}

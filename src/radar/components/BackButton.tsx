@@ -3,7 +3,7 @@ import { SelectionState } from '@undp_sdg_ai_lab/undp-radar';
 import { IconButton } from '@chakra-ui/button';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
-import { ROUTES } from '../../navigation/routes';
+import { ROUTES } from 'navigation/routes';
 
 enum BackTo {
   RADAR = 'RADAR',
@@ -33,8 +33,10 @@ export const BackButton: React.FC<Props> = ({ to }) => {
             switch (to) {
               case 'QUADRANT':
                 setSelectedItem(null);
-                if (selectedQuadrant)
-                  nav(`${ROUTES.QUADRANT}/${selectedQuadrant}`);
+                if (selectedQuadrant) {
+                  const navRoute: string = ROUTES.QUADRANT;
+                  nav(`${navRoute}/${selectedQuadrant}`);
+                }
                 break;
               case 'ABOUT':
                 nav(ROUTES.ABOUT);

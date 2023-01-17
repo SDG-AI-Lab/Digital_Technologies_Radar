@@ -44,10 +44,6 @@ describe('App tests', () => {
       render(<App />, container as any);
     });
     expect(container).toBeDefined();
-
-    // render(<App />);
-    // const linkElement = screen.getByText(/learn react/i);
-    // expect(linkElement).toBeInTheDocument();
   });
 
   it('has text', () => {

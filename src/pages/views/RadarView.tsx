@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   Box,
-  Heading,
   Tabs,
   TabList,
   TabPanels,
@@ -12,12 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 
-import { WaitingForRadar } from '../../radar/components';
+import { WaitingForRadar } from 'radar/components';
 import { PopOverView } from './PopOverView';
-import { TechDescription } from '../../radar/tech/TechDescription';
-import { BlipView } from '../../components/views/blip/BlipView';
-import { ScrollableDiv } from '../../components/lists/components/ScrollableDiv';
-import { BlipListMui } from '../../components/lists/components/BlipListMui';
+import { TechDescription } from 'radar/tech/TechDescription';
+import { BlipView } from 'components/views/blip/BlipView';
+import { ScrollableDiv } from 'components/lists/components/ScrollableDiv';
+import { BlipListMui } from 'components/lists/components/BlipListMui';
+import { RadarContext } from 'navigation/context';
 
 import './RadarView.scss';
 
@@ -25,7 +25,16 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
   const {
     state: { techFilters, selectedItem }
   } = useRadarState();
+
+  const { blipsMerged, setBlipsMerged } = useContext(RadarContext);
   const [tabIndex, setTabIndex] = React.useState(0);
+
+  useEffect(() => {
+    if (blipsMerged) {
+      setBlipsMerged(false);
+      window.location.reload();
+    }
+  }, []);
 
   useEffect(() => {
     if (techFilters && techFilters.length > 0) {
@@ -39,29 +48,17 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
     }
   }, [selectedItem]);
 
-  const tabsChangeHandler = (ind: number) => {
+  const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
   };
 
   return (
     <>
-      <div className='radarTitleContainer'>
-        <Heading
-          fontSize={30}
-          color='DarkSlateGray'
-          textAlign='center'
-          p={15}
-          paddingTop={15}
-          className='radarTitle'
-        >
-          Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-        </Heading>
-        <div className='titleFiller' />
-      </div>
       <SimpleGrid
         alignItems='center'
         columns={{ sm: 1, md: 1, lg: 2 }}
         className='radarContainer'
+        id='radar-container'
       >
         <Box className='radarComponentsContainer'>
           <Box className='radarComponents'>
