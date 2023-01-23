@@ -25,6 +25,7 @@ export const BackButton: React.FC<Props> = ({ to }) => {
       }): JSX.Element => (
         <IconButton
           aria-label=''
+          className='backButton'
           marginLeft={1}
           background='white'
           color='DodgerBlue'
