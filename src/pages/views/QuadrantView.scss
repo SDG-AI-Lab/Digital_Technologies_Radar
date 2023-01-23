@@ -16,7 +16,7 @@
   flex: 1;
   padding: 2px;
 
-  button {
+  button.backButton {
     align-self: flex-start;
   }
 
@@ -39,7 +39,7 @@
     align-items: center;
     flex-direction: column;
 
-    button {
+    button.backButton {
       align-self: flex-start;
       position: absolute;
       z-index: 8;
