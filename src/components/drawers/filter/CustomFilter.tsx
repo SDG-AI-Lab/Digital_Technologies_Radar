@@ -29,6 +29,7 @@ import { RadarContext } from 'navigation/context';
 import './Filter.scss';
 import { useLocation } from 'react-router-dom';
 import { getCode } from 'country-list';
+import cx from 'classnames';
 
 var geos = require('geos-major');
 
@@ -50,7 +51,8 @@ export const CustomFilter: React.FC = () => {
     }
   } = useDataState();
 
-  const { radarStateValues, setRadarStateValues } = useContext(RadarContext);
+  const { radarStateValues, setRadarStateValues, setFiltered } =
+    useContext(RadarContext);
 
   // FILTERS
   // subregions
@@ -315,7 +317,8 @@ export const CustomFilter: React.FC = () => {
     }
 
     // filter start years
-    if (startYearFilter !== 'all') {
+    const minApply = Math.min(...years.map(forceNumber));
+    if (startYearFilter !== minApply.toString()) {
       isFiltered = true;
       const start = Number(startYearFilter);
       const end = isNaN(Number(endYearFilter))
@@ -329,7 +332,8 @@ export const CustomFilter: React.FC = () => {
     }
 
     // filter end years
-    if (endYearFilter !== 'all') {
+    const maxApply = Math.max(...years.map(forceNumber));
+    if (endYearFilter !== maxApply.toString()) {
       isFiltered = true;
       const start = isNaN(Number(startYearFilter))
         ? 2000 // This assumes the earliest project year
@@ -354,6 +358,7 @@ export const CustomFilter: React.FC = () => {
     // set filter
     setFilteredBlips(isFiltered, filtered);
     setCustomFilterSelected(isFiltered);
+    setFiltered(isFiltered);
   }, [
     useCaseKey,
     disasterKey,
@@ -502,6 +507,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onRegionChange}
             value={selectedRegion}
+            className={cx({ selected: selectedRegion !== 'all' })}
           >
             <option value='all'>Region</option>
             {regions.map((item) => (
@@ -518,6 +524,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onSubregionChange}
             value={selectedSubregion}
+            className={cx({ selected: selectedSubregion !== 'all' })}
           >
             <option value='all'>Subregion</option>
             {subregions.map((item) => {
@@ -543,6 +550,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onCountryChange}
             value={selectedCountry}
+            className={cx({ selected: selectedCountry !== 'all' })}
           >
             <option value='all'>Country</option>
             {countries.map((item) => {
@@ -585,6 +593,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onDisasterTypeChange}
             value={selectedDisasterType}
+            className={cx({ selected: selectedDisasterType !== 'all' })}
           >
             <option value='all'>Disaster Type</option>
             {disasterTypes.map((item) => (
@@ -602,6 +611,7 @@ export const CustomFilter: React.FC = () => {
                 size='lg'
                 onChange={onDisasterCycleChange}
                 value={selectedDisasterCycle}
+                className={cx({ selected: selectedDisasterCycle !== 'all' })}
               >
                 <option value='all'>Quadrant</option>
                 {disasterCycles.map((item) => (
@@ -617,6 +627,7 @@ export const CustomFilter: React.FC = () => {
                 size='lg'
                 onChange={onMaturityStageChange}
                 value={selectedMaturityStage}
+                className={cx({ selected: selectedMaturityStage !== 'all' })}
               >
                 <option value='all'>Maturity Stage</option>
                 {maturityStages.map((item) => (
@@ -634,6 +645,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onUseCaseChange}
             value={selectedUserCase}
+            className={cx({ selected: selectedUserCase !== 'all' })}
           >
             <option value='all'>Use Case</option>
             {useCases.map((item) => (
@@ -649,6 +661,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onImplementerChange}
             value={selectedImplementer}
+            className={cx({ selected: selectedImplementer !== 'all' })}
           >
             <option value='all'>UN Host</option>
             {implementers.map((item) => (
@@ -664,6 +677,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onSdgChange}
             value={selectedSdg}
+            className={cx({ selected: selectedSdg !== 'all' })}
           >
             <option value='all'>SDG</option>
             {sdgs.map((item) => (
@@ -680,6 +694,7 @@ export const CustomFilter: React.FC = () => {
             size='lg'
             onChange={onDataChange}
             value={selectedData}
+            className={cx({ selected: selectedData !== 'all' })}
           >
             <option value='all'>Data</option>
             {data.map((item) => (

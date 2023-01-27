@@ -38,6 +38,11 @@
   &-wrapper {
     display: flex;
     flex-wrap: wrap;
+
+    .selected {
+      background-color: wheat;
+      border: 2px solid green;
+    }
   }
 
   select {

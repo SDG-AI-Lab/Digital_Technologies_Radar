@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { ScrollableDiv } from './components/ScrollableDiv';
 import {
   useDataState,
@@ -8,6 +8,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import { TechItem } from './components/TechItem';
 import { techButtonColors } from './colors';
+import { RadarContext } from 'navigation/context';
 import './TechList.scss';
 
 export const TechList: React.FC = () => {
@@ -30,8 +31,11 @@ export const TechList: React.FC = () => {
 
   const [tech, setTech] = useState<TechItemType[]>([]);
 
+  const { setFiltered } = useContext(RadarContext);
+
   const resetTech = (): void => {
     setTechFilter([]);
+    setFiltered(false);
   };
 
   useEffect(() => {
@@ -96,6 +100,7 @@ export const TechList: React.FC = () => {
                 }
               }
               setTechFilter([...techFilters, t.slug]);
+              setFiltered(true);
             };
             return (
               <TechItem

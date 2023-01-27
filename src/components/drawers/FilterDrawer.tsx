@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import cx from 'classnames';
 import {
@@ -14,13 +14,16 @@ import {
 } from '@chakra-ui/react';
 import { CustomFilter } from './filter/CustomFilter';
 import { TechList } from './tech/TechList';
-import { AiOutlineSetting } from 'react-icons/ai';
+import { AiOutlineSetting, AiFillFilter } from 'react-icons/ai';
 import { HowToPopup } from 'components/radar/HowToPopup';
+import { RadarContext } from 'navigation/context';
 
 import './FilterDrawer.scss';
 
 export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const { filtered } = useContext(RadarContext);
   return (
     <>
       <Box
@@ -46,7 +49,7 @@ export const FilterDrawer: React.FC = () => {
           m={7}
           px={25}
           colorScheme='blue'
-          rightIcon={<AiOutlineSetting />}
+          rightIcon={filtered ? <AiFillFilter /> : <AiOutlineSetting />}
           borderRadius={'0'}
           onClick={onOpen}
           className={cx({
