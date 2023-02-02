@@ -46,12 +46,15 @@ export const NavApp: React.FC = () => {
   });
 
   const [blipsMerged, setBlipsMerged] = useState(false);
+  const [filtered, setFiltered] = useState(false);
 
   const radarContext: RadarContextInterface = {
     radarStateValues,
     setRadarStateValues,
     blipsMerged,
-    setBlipsMerged
+    setBlipsMerged,
+    filtered,
+    setFiltered
   };
   return (
     <RadarContext.Provider value={radarContext}>

@@ -35,14 +35,20 @@ export const RadarMapView: React.FC = () => {
   const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
   const [techBlips, setTechBlips] = useState<BlipType[]>([]);
 
-  const { setBlipsMerged, setRadarStateValues } = useContext(RadarContext);
+  const { setBlipsMerged, setRadarStateValues, setFiltered } =
+    useContext(RadarContext);
 
   useEffect(() => {
     setTechFilter([]);
     setRadarStateValues({});
     if (isFiltered) {
-      setFilteredBlips(true, blips);
+      setFilteredBlips(false, blips);
     }
+    return () => {
+      setFilteredBlips(true, blips);
+      setFiltered(false);
+      setTechFilter([]);
+    };
   }, []);
 
   useEffect(() => {

@@ -21,6 +21,7 @@ import './FilterDrawer.scss';
 
 export const FilterDrawer: React.FC = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <>
       <Box
