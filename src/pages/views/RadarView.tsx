@@ -48,7 +48,6 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   useEffect(() => {
     if (filtered && techFilters && techFilters.length > 0) {
-      console.log({ techFilters }, { filtered });
       setTabIndex(1);
     }
   }, [techFilters]);

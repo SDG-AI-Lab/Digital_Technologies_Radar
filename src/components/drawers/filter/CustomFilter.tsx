@@ -317,8 +317,7 @@ export const CustomFilter: React.FC = () => {
     }
 
     // filter start years
-    const minApply = Math.min(...years.map(forceNumber));
-    if (startYearFilter !== minApply.toString()) {
+    if (startYearFilter !== 'all') {
       isFiltered = true;
       const start = Number(startYearFilter);
       const end = isNaN(Number(endYearFilter))
@@ -332,8 +331,7 @@ export const CustomFilter: React.FC = () => {
     }
 
     // filter end years
-    const maxApply = Math.max(...years.map(forceNumber));
-    if (endYearFilter !== maxApply.toString()) {
+    if (endYearFilter !== 'all') {
       isFiltered = true;
       const start = isNaN(Number(startYearFilter))
         ? 2000 // This assumes the earliest project year
