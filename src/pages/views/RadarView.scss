@@ -146,7 +146,7 @@
       margin-top: 80px;
       width: 100vw;
     }
-    @media only screen and (max-width: 571px) {
+    @media only screen and (max-width: 610px) {
       transform: scale(0.7);
       div:first-of-type {
         display: flex;
@@ -154,7 +154,7 @@
         overflow: visible;
       }
     }
-    @media only screen and (max-width: 392px) {
+    @media only screen and (max-width: 425px) {
       transform: scale(0.5);
     }
   }
