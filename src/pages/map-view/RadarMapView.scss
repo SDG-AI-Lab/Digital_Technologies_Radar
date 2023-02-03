@@ -38,6 +38,7 @@
 
   .slider {
     font-size: 14px;
+    margin-bottom: 10px;
     max-height: 360px;
     padding: 10px;
     zoom: 0.8;
@@ -61,6 +62,15 @@
       height: 25px;
       justify-content: flex-start;
       width: fit-content;
+    }
+
+    @media only screen and (max-width: 767px) {
+      margin-bottom: 0;
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        height: 0;
+      }
     }
 
     @media only screen and (max-height: 725px) {

@@ -8,9 +8,9 @@
   width: 100%;
 
   @media only screen and (max-height: 725px) {
-    max-width: 1200px;
-    margin: 0 auto;
     align-items: center !important;
+    margin: 0 auto;
+    max-width: 1200px;
   }
 
   @media only screen and (max-height: 620px) {
@@ -18,8 +18,8 @@
   }
 
   @media only screen and (min-width: 1401px) {
-    height: 80vh;
     align-items: flex-start;
+    height: 80vh;
     .tabsComponents {
       height: 100%;
       margin: 0 !important;
