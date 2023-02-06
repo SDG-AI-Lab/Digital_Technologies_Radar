@@ -5,7 +5,6 @@
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { BlipType, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
-import lo from 'lodash';
 import {
   MapContainer,
   TileLayer,
@@ -24,7 +23,9 @@ var geos = require('geos-major');
 
 export const RadarMapView: React.FC = () => {
   const {
-    state: { techFilters, blips, isFiltered, filteredBlips }
+    state: { techFilters, blips, isFiltered, filteredBlips },
+    actions: { setTechFilter },
+    processes: { setFilteredBlips }
   } = useRadarState();
 
   const [displayBlips, setDisplayBlips] = useState<BlipType[]>([]);
@@ -34,12 +35,20 @@ export const RadarMapView: React.FC = () => {
   const [countryProjects, setCountryProjects] = useState<BlipType[]>([]);
   const [techBlips, setTechBlips] = useState<BlipType[]>([]);
 
-  const { setBlipsMerged, radarStateValues } = useContext(RadarContext);
+  const { setBlipsMerged, setRadarStateValues, setFiltered } =
+    useContext(RadarContext);
 
   useEffect(() => {
-    if (isFiltered || !lo.every(radarStateValues, (v) => v === '')) {
-      window.location.reload();
+    setTechFilter([]);
+    setRadarStateValues({});
+    if (isFiltered) {
+      setFilteredBlips(false, blips);
     }
+    return () => {
+      setFilteredBlips(true, blips);
+      setFiltered(false);
+      setTechFilter([]);
+    };
   }, []);
 
   useEffect(() => {
@@ -55,7 +64,7 @@ export const RadarMapView: React.FC = () => {
       blipsToUse = [...filteredBlips];
     }
     if (techBlips.length) {
-      blipsToUse = techBlips;
+      blipsToUse = [...techBlips];
     }
 
     blipsToUse.forEach(function (item) {
@@ -65,12 +74,19 @@ export const RadarMapView: React.FC = () => {
 
       if (existingBips.length) {
         const existingIndex = merge.indexOf(existingBips[0]);
-        if (merge[existingIndex]['Disaster Cycle'].split(',').length < 4) {
+
+        const disasterCycles =
+          merge[existingIndex]['Disaster Cycle'].split(',');
+
+        if (
+          disasterCycles.length < 4 &&
+          !disasterCycles.includes(item['Disaster Cycle'])
+        ) {
           // @ts-expect-error
           merge[existingIndex]['Disaster Cycle'] = merge[existingIndex][
             'Disaster Cycle'
           ]
-            .concat(', ')
+            .concat(',')
             .concat(item['Disaster Cycle']);
         }
       } else {

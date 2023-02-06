@@ -23,21 +23,31 @@ import './RadarView.scss';
 
 export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
   const {
-    state: { techFilters, selectedItem }
+    state: { techFilters, selectedItem, blips, isFiltered },
+    processes: { setFilteredBlips },
+    actions: { setTechFilter, setSelectedItem }
   } = useRadarState();
 
-  const { blipsMerged, setBlipsMerged } = useContext(RadarContext);
+  const { setRadarStateValues, filtered, setFiltered } =
+    useContext(RadarContext);
   const [tabIndex, setTabIndex] = React.useState(0);
 
   useEffect(() => {
-    if (blipsMerged) {
-      setBlipsMerged(false);
-      window.location.reload();
+    setTechFilter([]);
+    setRadarStateValues({});
+    setTabIndex(0);
+    if (isFiltered) {
+      setFilteredBlips(true, blips);
     }
+
+    return () => {
+      setSelectedItem(null);
+      setFiltered(false);
+    };
   }, []);
 
   useEffect(() => {
-    if (techFilters && techFilters.length > 0) {
+    if (filtered && techFilters && techFilters.length > 0) {
       setTabIndex(1);
     }
   }, [techFilters]);

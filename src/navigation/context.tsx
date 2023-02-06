@@ -16,6 +16,8 @@ export interface RadarContextInterface {
   setRadarStateValues: Function;
   setBlipsMerged: Function;
   blipsMerged: boolean;
+  filtered: boolean;
+  setFiltered: Function;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

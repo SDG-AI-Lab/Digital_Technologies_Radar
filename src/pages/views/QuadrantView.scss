@@ -9,6 +9,12 @@
   @media only screen and (max-width: 1180px) {
     padding-top: 55px;
   }
+
+  svg {
+    @media only screen and (min-width: 1900px) {
+      position: fixed;
+    }
+  }
 }
 
 .quadrantView {
@@ -16,8 +22,9 @@
   flex: 1;
   padding: 2px;
 
-  button {
+  button.backButton {
     align-self: flex-start;
+    position: fixed;
   }
 
   @media only screen and (max-height: 725px) {
@@ -33,13 +40,18 @@
 
   .quadrantTitle {
     text-align: center;
+    @media only screen and (min-width: 1900px) {
+      position: fixed;
+      width: 50%;
+      top: 95px;
+    }
   }
 
   @media only screen and (max-width: 1180px) {
     align-items: center;
     flex-direction: column;
 
-    button {
+    button.backButton {
       align-self: flex-start;
       position: absolute;
       z-index: 8;
