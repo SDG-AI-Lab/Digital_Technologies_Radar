@@ -97,7 +97,7 @@ export const QuadrantHorizonList: React.FC<Props> = ({ blips, quadIndex }) => {
    *  TODO So we use simple divs whenever - also, consider removing these 2 Boxes here.
    */
   return (
-    <div className='quadrantTabsContainer'>
+    <div className='quadrantTabsContainer' data-testid='horizontal-list'>
       <Tabs variant='enclosed' index={tabIndex} onChange={tabsChangeHandler}>
         <TabList>
           <Tab as='h5'>Stages</Tab>

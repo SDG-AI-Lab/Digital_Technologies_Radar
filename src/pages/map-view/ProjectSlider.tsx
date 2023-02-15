@@ -11,6 +11,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
   return (
     <Box
       className='slider'
+      data-testid='slider'
       display={'flex'}
       h={700}
       overflow='scroll'
@@ -31,6 +32,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
           flexDirection='column'
           justifyContent='space-between'
           h={'320px'}
+          data-testid='slider-card'
         >
           <Stack>
             <Text
