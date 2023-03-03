@@ -44,6 +44,7 @@ export const FilterDrawer: React.FC = () => {
           <HowToPopup />
         </Box>
         <Button
+          data-testid='filter'
           m={7}
           px={25}
           colorScheme='blue'

@@ -119,7 +119,7 @@ export const RadarMapView: React.FC = () => {
   };
 
   return (
-    <div className='radarMapView'>
+    <div className='radarMapView' data-testid='map'>
       <Grid
         alignItems='center'
         templateColumns='repeat(auto-fit, minmax(400px, 1fr))'
