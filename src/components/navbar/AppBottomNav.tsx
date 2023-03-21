@@ -88,7 +88,7 @@ export const AppBottomNav: React.FC = () => {
             >
               <RiEarthquakeLine size={25} color='#3182CE' />
               <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
-                Disaster
+                Disasters
               </Text>
             </Button>
           </MenuItem>
