@@ -1,6 +1,7 @@
 const HOME = '/';
 const RADAR = '/radar';
 const MAP_VIEW = '/map-view';
+const DISASTER = '/disaster';
 const ABOUT = '/about';
 const VOLUNTEERS = '/volunteers';
 const SEARCH = '/search';
@@ -15,6 +16,7 @@ export const ROUTES = {
   HOME,
   RADAR,
   MAP_VIEW,
+  DISASTER,
   ABOUT,
   SEARCH,
   QUADRANT,
