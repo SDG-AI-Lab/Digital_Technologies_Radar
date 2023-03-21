@@ -1,0 +1,37 @@
+div .infoCard {
+  display: flex;
+  gap: 5px;
+  height: 300px;
+  &-details {
+    
+    background: rgba(237, 237, 237, 0.48);
+    padding:  10px;
+    width: 300px;
+    position: relative;
+    &--title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+    &--text {
+      height: 200px;
+      overflow-y: hidden;
+    }
+
+    button {
+      bottom: 5px;
+      position: absolute;
+      padding: 5px 18px;
+      background-color: #D9D9D9;
+
+    }
+  }
+  &-pointer {
+    border-color: transparent transparent transparent rgba(237, 237, 237, 0.48);
+    border-style: solid;
+    border-width: 150px 0 150px 150px;
+    height: 0;
+    width: 0;
+  }
+}
