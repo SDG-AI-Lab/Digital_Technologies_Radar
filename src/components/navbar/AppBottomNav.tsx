@@ -5,6 +5,7 @@ import { FaSearch, FaHome } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { SiOpenstreetmap } from 'react-icons/si';
 import { FiTarget } from 'react-icons/fi';
+import { RiEarthquakeLine } from 'react-icons/ri';
 
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from 'navigation/routes';
@@ -68,6 +69,26 @@ export const AppBottomNav: React.FC = () => {
               <SiOpenstreetmap size={25} color='#3182CE' />
               <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
                 Map
+              </Text>
+            </Button>
+          </MenuItem>
+        </Box>
+
+        <Box flex={1}>
+          <MenuItem to={ROUTES.DISASTER}>
+            <Button
+              bgColor='gray.50'
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+            >
+              <RiEarthquakeLine size={25} color='#3182CE' />
+              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                Disaster
               </Text>
             </Button>
           </MenuItem>
