@@ -3,28 +3,22 @@ div .infoCard {
   gap: 5px;
   height: 300px;
   &-details {
-    
     background: rgba(237, 237, 237, 0.48);
-    padding:  10px;
-    width: 300px;
+    padding: 10px;
     position: relative;
+    width: 300px;
     &--title {
+      display: block;
       font-size: 20px;
       font-weight: 600;
       margin-bottom: 10px;
-      display: block;
     }
     &--text {
-      height: 200px;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
       overflow-y: hidden;
-    }
-
-    button {
-      bottom: 5px;
-      position: absolute;
-      padding: 5px 18px;
-      background-color: #D9D9D9;
-
+      text-overflow: ellipsis;
     }
   }
   &-pointer {

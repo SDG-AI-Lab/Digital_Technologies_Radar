@@ -16,7 +16,7 @@ export const Disaster: React.FC = () => (
             avgWordsPerSentence: 7
           })[0]
         }
-        btnProps={{}}
+        btnProps={{ text: 'More Info', link: '#' }}
       />
     </div>
   </div>
