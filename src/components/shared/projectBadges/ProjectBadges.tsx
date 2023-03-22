@@ -40,7 +40,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
           bg='green.50'
           textTransform='capitalize'
         >
-          🎯 {' ' + project['SDG']}
+          🎯 {' ' + sliceForBadge(project['SDG'])}
         </Badge>
       )}
 

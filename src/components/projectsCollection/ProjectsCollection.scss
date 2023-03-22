@@ -1,0 +1,10 @@
+
+.projectsContainer {
+  display: flex;
+  gap: 20px;
+  padding: 5px 10px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    height: 5px;
+  }
+}

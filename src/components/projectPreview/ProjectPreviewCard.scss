@@ -8,7 +8,7 @@
 
     img {
       height: 100%;
-      object-fit: contain;
+      object-fit: scale-down;
       object-position: center;
       width: 100%;
     }
@@ -21,6 +21,7 @@
     font-size: 18px;
     font-weight: 600;
     -webkit-line-clamp: 1;
+    margin-top: 10px;
     max-width: 400px;
     overflow-y: hidden;
     text-overflow: ellipsis;
