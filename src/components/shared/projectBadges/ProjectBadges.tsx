@@ -12,8 +12,8 @@ interface Props {
 
 export const ProjectBadge: React.FC<Props> = ({ project }) => {
   const sliceForBadge = (projectArray: string[]): string[] => {
-    if (projectArray.length > 3) {
-      const sliced = projectArray.slice(0, 3);
+    if (projectArray.length > 2) {
+      const sliced = projectArray.slice(0, 2);
       sliced.push('...');
       return sliced;
     }

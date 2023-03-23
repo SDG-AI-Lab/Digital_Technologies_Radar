@@ -1,7 +1,7 @@
 div .infoCard {
   display: flex;
   gap: 5px;
-  height: 300px;
+  height: 200px;
   &-details {
     background: rgba(237, 237, 237, 0.48);
     padding: 10px;
@@ -9,14 +9,15 @@ div .infoCard {
     width: 300px;
     &--title {
       display: block;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       margin-bottom: 10px;
     }
     &--text {
       -webkit-box-orient: vertical;
       display: -webkit-box;
-      -webkit-line-clamp: 8;
+      font-size: 12px;
+      -webkit-line-clamp: 5;
       overflow-y: hidden;
       text-overflow: ellipsis;
     }
@@ -24,7 +25,7 @@ div .infoCard {
   &-pointer {
     border-color: transparent transparent transparent rgba(237, 237, 237, 0.48);
     border-style: solid;
-    border-width: 150px 0 150px 150px;
+    border-width: 100px 0 100px 100px;
     height: 0;
     width: 0;
   }
