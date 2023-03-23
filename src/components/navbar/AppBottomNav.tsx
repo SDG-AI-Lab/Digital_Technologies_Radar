@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex, Box, Button, Text } from '@chakra-ui/react';
-import { FaSearch, FaHome } from 'react-icons/fa';
+import { FaSearch, FaHome, FaCubes } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { SiOpenstreetmap } from 'react-icons/si';
 import { FiTarget } from 'react-icons/fi';
@@ -75,7 +75,7 @@ export const AppBottomNav: React.FC = () => {
         </Box>
 
         <Box flex={1}>
-          <MenuItem to={ROUTES.DISASTER}>
+          <MenuItem to={ROUTES.DISASTERS}>
             <Button
               bgColor='gray.50'
               borderRadius={'0'}
@@ -89,6 +89,26 @@ export const AppBottomNav: React.FC = () => {
               <RiEarthquakeLine size={25} color='#3182CE' />
               <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
                 Disasters
+              </Text>
+            </Button>
+          </MenuItem>
+        </Box>
+
+        <Box flex={1}>
+          <MenuItem to={ROUTES.TECHNOLOGIES}>
+            <Button
+              bgColor='gray.50'
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+            >
+              <FaCubes size={25} color='#3182CE' />
+              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                Technologies
               </Text>
             </Button>
           </MenuItem>

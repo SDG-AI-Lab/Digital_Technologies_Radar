@@ -17,7 +17,8 @@ import {
   About,
   Volunteers,
   Home,
-  Disaster
+  Disasters,
+  Technologies
 } from '../pages';
 
 // Views
@@ -78,7 +79,8 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
               <Route path={''} element={<RadarMapView />}></Route>
             </Route>
-            <Route path={ROUTES.DISASTER} element={<Disaster />} />
+            <Route path={ROUTES.DISASTERS} element={<Disasters />} />
+            <Route path={ROUTES.TECHNOLOGIES} element={<Technologies />} />
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
