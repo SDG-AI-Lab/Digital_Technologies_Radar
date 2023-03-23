@@ -1,0 +1,25 @@
+.disasterContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  .detailsSection {
+    display: flex;
+  }
+
+  .disasterDetails {
+    margin-right: 30px;
+  }
+
+  .topRow {
+    display: flex;
+    font-size: 18px;
+    font-weight: 600;
+    justify-content: space-between;
+    margin: 0 10px 10px 0;
+
+    a {
+      color: #3258e0;
+    }
+  }
+}

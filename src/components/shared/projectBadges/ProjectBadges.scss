@@ -1,0 +1,9 @@
+.projectBadges {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+  span {
+    margin-bottom: 10px !important;
+    zoom: 0.7;
+  }
+}
