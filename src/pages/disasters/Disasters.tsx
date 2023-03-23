@@ -4,11 +4,11 @@ import { loremIpsum } from 'react-lorem-ipsum';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 
-import './Disaster.scss';
+import './Disasters.scss';
 import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 
-export const Disaster: React.FC = () => {
+export const Disasters: React.FC = () => {
   const {
     state: { blips }
   } = useRadarState();
