@@ -36,7 +36,8 @@ export const Technologies: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className='technologiesPage'>
+      <h3>Technologies</h3>
       <div className='technologies'>
         {techList.map((technology, idx) => {
           const techProjects = blips.filter((i) =>
@@ -84,6 +85,6 @@ export const Technologies: React.FC = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
