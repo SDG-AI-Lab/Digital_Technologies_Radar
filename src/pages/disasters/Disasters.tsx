@@ -42,7 +42,6 @@ export const Disasters: React.FC = () => {
         return (
           <div className='disasterContainer' key={`${idx}${disaster.uuid}`}>
             <div className='topRow'>
-              <span className='disasterType'> {disaster.name}</span>
               {disasterProjects.length > 3 && (
                 <a
                   className='seeAll'
@@ -53,9 +52,7 @@ export const Disasters: React.FC = () => {
             <div className='detailsSection'>
               <div className='disasterDetails'>
                 <InfoCard
-                  title={`What ${disaster.name.at(-1) === 's' ? 'are' : 'is'} ${
-                    disaster.name
-                  }?`}
+                  title={disaster.name}
                   details={
                     loremIpsum({
                       p: 1,

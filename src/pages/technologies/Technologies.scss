@@ -8,6 +8,7 @@
 
   .detailsSection {
     display: flex;
+    gap: 20px;
   }
 
   .technologyDetails {
@@ -18,7 +19,7 @@
     display: flex;
     font-size: 18px;
     font-weight: 600;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin: 0 20px 10px 0;
 
     a {
