@@ -1,0 +1,27 @@
+.filter {
+  + div {
+    display: none;
+  }
+  
+}
+
+div.filter-modal {
+  max-width: 40%;
+  padding: 30px 20px;
+
+  header.chakra-modal__header {
+    padding: 0;
+    margin: 10px 0;
+  }
+}
+
+.filterItems {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+
+  .filterItem {
+    min-width: 140px;
+  }
+}

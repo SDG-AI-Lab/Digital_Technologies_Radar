@@ -7,6 +7,7 @@ import {
   mergeDisasterCycle,
   projectSearch
 } from 'components/shared/helpers/HelperUtils';
+import { Filter } from 'components/shared/filter/Filter';
 
 import './Disasters.scss';
 import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
@@ -48,12 +49,16 @@ export const Disasters: React.FC = () => {
 
   return (
     <div className='disasters'>
-      <input
-        placeholder='Search ....'
-        className='searchBar'
-        value={query}
-        onChange={handleSearch}
-      />
+      <div className='searchFilter'>
+        <input
+          placeholder='Search ....'
+          className='searchBar'
+          value={query}
+          onChange={handleSearch}
+        />
+        <Filter />
+      </div>
+
       <h3>Disasters</h3>
       {disasterTypes.map((disaster, idx) => {
         const blipsToUse = query

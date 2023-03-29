@@ -7,6 +7,11 @@
     margin: 30px 10px;
     text-transform: uppercase;
   }
+
+  .searchFilter {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .disasterContainer {
