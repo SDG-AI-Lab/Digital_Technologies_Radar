@@ -18,6 +18,13 @@ export interface RadarContextInterface {
   blipsMerged: boolean;
   filtered: boolean;
   setFiltered: Function;
+  filteredValues: {
+    status: any;
+    stages: any;
+    technologies: any;
+    parameters: any;
+  };
+  setFilteredValues: Function;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

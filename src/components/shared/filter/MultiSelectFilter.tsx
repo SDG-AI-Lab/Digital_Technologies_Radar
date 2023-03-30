@@ -15,7 +15,8 @@ export const MultiSelectFilter: React.FC<Props> = ({ options }) => {
         value={selected}
         onChange={setSelected}
         labelledBy='Try'
-        // hasSelectAll={false}
+        hasSelectAll={false}
+        disableSearch={true}
       />
     </div>
   );
