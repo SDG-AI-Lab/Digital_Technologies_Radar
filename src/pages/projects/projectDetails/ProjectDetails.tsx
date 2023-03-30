@@ -29,7 +29,6 @@ export const ProjectDetails: React.FC = () => {
     }
   }, [blips]);
 
-  console.log({ project });
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
 
