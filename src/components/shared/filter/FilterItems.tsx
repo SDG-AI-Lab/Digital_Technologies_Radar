@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import cx from 'classnames';
 import { Button } from '@chakra-ui/react';
 import { MultiSelectFilter } from './MultiSelectFilter';
@@ -24,9 +24,6 @@ export const FilterItems: React.FC<Props> = ({
     parameterCount,
     setParameterCount
   } = useContext(RadarContext);
-  useEffect(() => {
-    console.log({ filteredValues });
-  }, []);
 
   const handleButtonClick = (label: string, node: any): any => {
     const newFilteredValues: any = {
@@ -39,13 +36,11 @@ export const FilterItems: React.FC<Props> = ({
     } else {
       node.classList.add('filterItem--selected');
     }
-    console.log('called');
 
     setFilteredValues(newFilteredValues);
   };
 
   const handleMultiSelect = (label: string, selected: string[]): any => {
-    console.log('hererrrrr', { filteredValues });
     const newFilteredValues: any = {
       ...filteredValues
     };

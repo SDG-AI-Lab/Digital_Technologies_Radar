@@ -162,7 +162,7 @@ export const Filter: React.FC = () => {
   };
 
   useEffect(() => {
-    // console.log({ filteredValues });
+    // handle filter logic here
   }, [filteredValues]);
 
   const getFilterCount = (category: string): number => {
