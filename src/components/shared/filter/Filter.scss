@@ -2,26 +2,41 @@
   + div {
     display: none;
   }
-  
 }
 
 div.filter-modal {
   max-width: 40%;
+  overflow: scroll;
   padding: 30px 20px;
 
   header.chakra-modal__header {
-    padding: 0;
     margin: 10px 0;
+    padding: 0;
   }
 }
 
 .filterItems {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 30px;
-  flex-wrap: wrap;
 
   .filterItem {
     min-width: 140px;
   }
+
+  .multi-select {
+    max-width: 200px;
+    min-width: 120px;
+  }
+}
+
+.dropdown-content {
+  height: 100%;
+  max-width: 200px;
+  padding-top: 8px;
+  position: relaive !important;
+  top: -300px !important;
+  width: max-content !important;
+  z-index: 1;
 }
