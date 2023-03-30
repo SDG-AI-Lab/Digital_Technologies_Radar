@@ -1,0 +1,52 @@
+.projectDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+
+  .projectHero {
+    display: flex;
+
+    .projectTitle {
+      background-color: #ede7d9;
+      display: flex;
+      flex-basis: 50%;
+      flex-direction: column;
+      flex-grow: 0;
+      height: 400px;
+      justify-content: space-between;
+      padding: 50px;
+
+      span {
+        font-family: Gill Sans;
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 65px;
+        text-align: left;
+      }
+
+      .seeProject {
+        background: #212e35;
+        border-radius: 6px;
+        color: white;
+        font-family: Gill Sans;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        line-height: 19px;
+        padding: 20px 70px;
+        text-align: left;
+        width: max-content;
+      }
+    }
+
+    .projectImg {
+      background-color: #ede7d9;
+      border: 1px solid #ede7d9;
+      flex-basis: 50%;
+      > img {
+        height: 400px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
