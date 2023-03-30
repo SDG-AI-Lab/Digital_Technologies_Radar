@@ -6,10 +6,11 @@ div .infoCard {
     background: rgba(237, 237, 237, 0.48);
     padding: 10px;
     position: relative;
-    width: 300px;
+    width: 250px;
+
     &--title {
       display: block;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       margin-bottom: 10px;
     }

@@ -36,7 +36,8 @@ export const Technologies: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className='technologiesPage'>
+      <h3>Technologies</h3>
       <div className='technologies'>
         {techList.map((technology, idx) => {
           const techProjects = blips.filter((i) =>
@@ -51,7 +52,6 @@ export const Technologies: React.FC = () => {
               key={`${idx}${technology.uuid}`}
             >
               <div className='topRow'>
-                <span className='technology'> {technology.type}</span>
                 {techProjects.length > 3 && (
                   <a
                     className='seeAll'
@@ -62,9 +62,7 @@ export const Technologies: React.FC = () => {
               <div className='detailsSection'>
                 <div className='disasterDetails'>
                   <InfoCard
-                    title={`What ${
-                      technology.type.at(-1) === 's' ? 'are' : 'is'
-                    } ${technology.type}?`}
+                    title={technology.type}
                     details={
                       techDescription
                         ? techDescription[0]
@@ -87,6 +85,6 @@ export const Technologies: React.FC = () => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };

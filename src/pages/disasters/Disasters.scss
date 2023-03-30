@@ -1,6 +1,19 @@
 .disasters {
   overflow: scroll;
+  padding: 30px 20px;
+
+  h3 {
+    margin-left: 10px;
+    margin: 30px 10px;
+    text-transform: uppercase;
+  }
+
+  .searchFilter {
+    display: flex;
+    justify-content: space-between;
+  }
 }
+
 .disasterContainer {
   display: flex;
   flex-direction: column;
@@ -8,6 +21,7 @@
 
   .detailsSection {
     display: flex;
+    gap: 20px;
   }
 
   .disasterDetails {
@@ -18,11 +32,46 @@
     display: flex;
     font-size: 18px;
     font-weight: 600;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin: 0 20px 10px 0;
 
     a {
       color: #3258e0;
     }
+  }
+}
+
+.searchBar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: inherit;
+  border: 1px solid;
+  border-color: inherit;
+  border-radius: var(--chakra-radii-md);
+  font-size: var(--chakra-fontSizes-md);
+  height: var(--chakra-sizes-10);
+  margin-bottom: 40px;
+  min-width: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  -webkit-padding-end: var(--chakra-space-4);
+  padding-inline-end: var(--chakra-space-4);
+  padding-inline-start: var(--chakra-space-4);
+  -webkit-padding-start: var(--chakra-space-4);
+  position: static;
+  transition-duration: var(--chakra-transition-duration-normal);
+  transition-property: var(--chakra-transition-property-common);
+  width: 60%;
+
+  &:hover {
+    border-color: #3182ce;
+  }
+
+  &:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 1px #3182ce;
+    z-index: 1;
   }
 }

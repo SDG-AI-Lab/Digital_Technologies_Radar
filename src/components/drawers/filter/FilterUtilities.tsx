@@ -154,12 +154,17 @@ const getImplementers = (
 ): SelectableItem[] => {
   const newImplementers: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipImplementers: Set<string> = new Set(val[implementerKey]);
-    blipImplementers.delete('');
+    if (
+      val[implementerKey] !== '' &&
+      !newImplementers.has(val[implementerKey])
+    ) {
+      const blipImplementers: Set<string> = new Set(val[implementerKey]);
+      blipImplementers.delete('');
 
-    blipImplementers.forEach((implementer) => {
-      newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
-    });
+      blipImplementers.forEach((implementer) => {
+        newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
+      });
+    }
   });
 
   const arr = Array.from(newImplementers.values()).sort((a, b) =>
@@ -167,12 +172,12 @@ const getImplementers = (
   );
 
   // Move 'No Information' to the back of the ordered array
-  const index = arr
-    .map(function (e) {
-      return e.name;
-    })
-    .indexOf('No Information');
-  arr.push(arr.splice(index, 1)[0]);
+  // const index = arr
+  //   .map(function (e) {
+  //     return e.name;
+  //   })
+  //   .indexOf('No Information');
+  // arr.push(arr.splice(index, 1)[0]);
 
   return arr;
 };

@@ -21,7 +21,16 @@ const radarContext: RadarContextInterface = {
   setBlipsMerged: jest.fn(),
   blipsMerged: false,
   filtered: false,
-  setFiltered: jest.fn()
+  setFiltered: jest.fn(),
+  filteredValues: {
+    status: [],
+    stages: [],
+    technologies: [],
+    parameters: []
+  },
+  setFilteredValues: jest.fn(),
+  parameterCount: [],
+  setParameterCount: jest.fn()
 };
 
 describe('RadarMapView', () => {
