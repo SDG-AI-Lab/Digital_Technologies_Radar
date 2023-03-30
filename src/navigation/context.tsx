@@ -27,6 +27,8 @@ export interface RadarContextInterface {
   setFilteredValues: Function;
   parameterCount: any;
   setParameterCount: Function;
+  currentProject: any;
+  setCurrentProject: Function;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

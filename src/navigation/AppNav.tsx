@@ -75,6 +75,8 @@ export const NavApp: React.FC = () => {
     }))
   );
 
+  const [currentProject, setCurrentProject] = useState();
+
   const radarContext: RadarContextInterface = {
     radarStateValues,
     setRadarStateValues,
@@ -85,7 +87,9 @@ export const NavApp: React.FC = () => {
     filteredValues,
     setFilteredValues,
     parameterCount,
-    setParameterCount
+    setParameterCount,
+    currentProject,
+    setCurrentProject
   };
   return (
     <RadarContext.Provider value={radarContext}>
