@@ -66,6 +66,7 @@ export const Filter: React.FC = () => {
   const { filteredValues, setFilteredValues } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
+  // const [totalFilterCount, setTotalFilterCount] = useState(0);
   const [labels, setLabels] = useState<Labels>({
     status: [],
     stages: [],
@@ -156,7 +157,19 @@ export const Filter: React.FC = () => {
     setFilteredValues(filterValues);
   };
 
-  console.log({ filteredValues });
+  useEffect(() => {
+    console.log({ filteredValues });
+  }, [filteredValues]);
+
+  const getFilterCount = (category: string): number => {
+    let count = 0;
+    Object.keys((filteredValues as any)[category]).forEach((key) => {
+      if ((filteredValues as any)[category][key]) count += 1;
+    });
+
+    return count;
+  };
+
   return (
     <>
       <Button
@@ -173,17 +186,27 @@ export const Filter: React.FC = () => {
           <DrawerContent className='filter-modal' backgroundColor='#fffafa'>
             <DrawerCloseButton />
             <div>
-              <DrawerHeader mt={10}>STATUS</DrawerHeader>
-              <FilterItems labels={labels.status} />
-              <DrawerHeader>STAGE</DrawerHeader>
-              <FilterItems labels={labels.stages} />
-              <DrawerHeader mt={10}>TECHNOLOGY</DrawerHeader>
-              <FilterItems labels={labels.technologies} />
+              <DrawerHeader mt={10}>{`STATUS (${getFilterCount(
+                'status'
+              )})`}</DrawerHeader>
+              <FilterItems labels={labels.status} category='status' />
+              <DrawerHeader>{`STAGE(${getFilterCount(
+                'stages'
+              )})`}</DrawerHeader>
+              <FilterItems labels={labels.stages} category='stages' />
+              <DrawerHeader mt={10}>{`TECHNOLOGY(${getFilterCount(
+                'technologies'
+              )})`}</DrawerHeader>
+              <FilterItems
+                labels={labels.technologies}
+                category='technologies'
+              />
               <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
               <FilterItems
                 labels={labels.parameters}
                 multi={true}
                 options={options}
+                category='parameters'
               />
             </div>
           </DrawerContent>

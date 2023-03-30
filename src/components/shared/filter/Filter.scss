@@ -23,6 +23,16 @@ div.filter-modal {
 
   .filterItem {
     min-width: 140px;
+    &:focus {
+      box-shadow: none;
+    }
+    
+
+    &--selected {
+      color: #1F5A95;
+      background: rgb(203, 213, 224);
+      box-shadow: var(--chakra-shadows-outline) !important;
+    }
   }
 
   .multi-select {
