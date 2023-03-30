@@ -28,7 +28,9 @@ const radarContext: RadarContextInterface = {
     technologies: [],
     parameters: []
   },
-  setFilteredValues: jest.fn()
+  setFilteredValues: jest.fn(),
+  parameterCount: [],
+  setParameterCount: jest.fn()
 };
 
 test('renders the Radar component when not loading', () => {

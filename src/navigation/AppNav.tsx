@@ -33,6 +33,16 @@ import { RadarContext, RadarContextInterface } from './context';
 // Styles
 import './AppNav.scss';
 
+const PARAMETERS = [
+  'Region',
+  'SubRegion',
+  'Country',
+  'Disaster Type',
+  'UN Host',
+  'SDG',
+  'Data'
+];
+
 export const NavApp: React.FC = () => {
   const [radarStateValues, setRadarStateValues] = useState({
     region: '',
@@ -55,6 +65,11 @@ export const NavApp: React.FC = () => {
     technologies: [],
     parameters: []
   });
+  const [parameterCount, setParameterCount] = useState(
+    PARAMETERS.map((p) => ({
+      [p]: 0
+    }))
+  );
 
   const radarContext: RadarContextInterface = {
     radarStateValues,
@@ -64,7 +79,9 @@ export const NavApp: React.FC = () => {
     filtered,
     setFiltered,
     filteredValues,
-    setFilteredValues
+    setFilteredValues,
+    parameterCount,
+    setParameterCount
   };
   return (
     <RadarContext.Provider value={radarContext}>

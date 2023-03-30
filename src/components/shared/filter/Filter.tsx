@@ -151,14 +151,18 @@ export const Filter: React.FC = () => {
     };
     Object.keys(currentLabels).forEach((key: string) => {
       currentLabels[key].forEach((value: string) => {
-        filterValues[key][value] = false;
+        if (key === 'parameters') {
+          filterValues[key][value] = [];
+        } else {
+          filterValues[key][value] = false;
+        }
       });
     });
     setFilteredValues(filterValues);
   };
 
   useEffect(() => {
-    console.log({ filteredValues });
+    // console.log({ filteredValues });
   }, [filteredValues]);
 
   const getFilterCount = (category: string): number => {
@@ -186,21 +190,39 @@ export const Filter: React.FC = () => {
           <DrawerContent className='filter-modal' backgroundColor='#fffafa'>
             <DrawerCloseButton />
             <div>
-              <DrawerHeader mt={10}>{`STATUS (${getFilterCount(
-                'status'
-              )})`}</DrawerHeader>
+              <DrawerHeader mt={10}>
+                STATUS
+                {getFilterCount('status') ? (
+                  <span className='filterCount'>
+                    {`(${getFilterCount('status')})`}
+                  </span>
+                ) : null}
+              </DrawerHeader>
               <FilterItems labels={labels.status} category='status' />
-              <DrawerHeader>{`STAGE(${getFilterCount(
-                'stages'
-              )})`}</DrawerHeader>
+
+              <DrawerHeader>
+                STAGE
+                {getFilterCount('stages') ? (
+                  <span className='filterCount'>
+                    {`(${getFilterCount('stages')})`}
+                  </span>
+                ) : null}
+              </DrawerHeader>
               <FilterItems labels={labels.stages} category='stages' />
-              <DrawerHeader mt={10}>{`TECHNOLOGY(${getFilterCount(
-                'technologies'
-              )})`}</DrawerHeader>
+
+              <DrawerHeader mt={10}>
+                TECHNOLOGY
+                {getFilterCount('technologies') ? (
+                  <span className='filterCount'>
+                    {`(${getFilterCount('technologies')})`}
+                  </span>
+                ) : null}
+              </DrawerHeader>
               <FilterItems
                 labels={labels.technologies}
                 category='technologies'
               />
+
               <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
               <FilterItems
                 labels={labels.parameters}
