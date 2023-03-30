@@ -1,12 +1,19 @@
-.projectDetails {
+.projectDetailsPage {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
 
   .projectHero {
     display: flex;
 
-    .projectTitle {
+    > .projectTitle {
       background-color: #ede7d9;
       display: flex;
       flex-basis: 50%;
@@ -39,13 +46,85 @@
       }
     }
 
-    .projectImg {
+    > .projectImg {
       background-color: #ede7d9;
       border: 1px solid #ede7d9;
       flex-basis: 50%;
       > img {
         height: 400px;
         margin: 0 auto;
+      }
+    }
+  }
+
+  .projectBody {
+    background-color: #ede7d940;
+    display: flex;
+
+    .projectToc {
+      display: flex;
+      flex-basis: 20%;
+      flex-direction: column;
+      height: 100vh;
+      padding-left: 50px;
+      padding-top: 45px;
+      position: sticky;
+      top: 0;
+
+      a {
+        font-family: Gill Sans;
+        font-size: 24px;
+        letter-spacing: 0.06em;
+        line-height: 28px;
+        margin-bottom: 10px;
+        text-align: left;
+      }
+
+      .bolden {
+        font-weight: 700;
+      }
+    }
+
+    .projectContent {
+      display: flex;
+      flex-basis: 80%;
+      flex-direction: column;
+      padding-top: 45px;
+    }
+
+    .projectDetailsTitle {
+      font-family: Gill Sans;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .projectDetailsContent {
+      font-family: Gill Sans;
+      font-size: 24px;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    .separater {
+      border: 1px solid #00000040;
+      margin: 20px 0;
+    }
+
+    .otherDetails {
+      font-family: Gill Sans;
+      margin-bottom: 20px;
+      text-align: left;
+
+      .otherDetailsLabel {
+        font-size: 24px;
+        font-weight: 500;
+        margin-right: 15px;
+      }
+
+      .otherDetailsContent {
+        font-size: 20px;
+        font-style: italic;
       }
     }
   }
