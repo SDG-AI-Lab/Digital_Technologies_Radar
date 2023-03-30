@@ -1,6 +1,8 @@
 const HOME = '/';
 const RADAR = '/radar';
 const MAP_VIEW = '/map-view';
+const PROJECTS = '/projects';
+const PROJECT_DETAILS = '/projects/:projectId';
 const DISASTERS = '/disasters';
 const TECHNOLOGIES = '/technologies';
 const ABOUT = '/about';
@@ -17,6 +19,8 @@ export const ROUTES = {
   HOME,
   RADAR,
   MAP_VIEW,
+  PROJECTS,
+  PROJECT_DETAILS,
   DISASTERS,
   TECHNOLOGIES,
   ABOUT,
