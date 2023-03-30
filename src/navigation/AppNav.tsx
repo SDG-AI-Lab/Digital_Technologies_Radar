@@ -18,8 +18,12 @@ import {
   Volunteers,
   Home,
   Disasters,
-  Technologies
+  Technologies,
+  Projects,
+  ProjectDetails
 } from '../pages';
+
+// import { ProjectDetails } from '../pages';
 
 // Views
 import { QuadrantView } from '../pages/views/QuadrantView';
@@ -104,6 +108,8 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
               <Route path={''} element={<RadarMapView />}></Route>
             </Route>
+            <Route path={ROUTES.PROJECTS} element={<Projects />} />
+            <Route path={`${ROUTES.PROJECTS}/*`} element={<ProjectDetails />} />
             <Route path={ROUTES.DISASTERS} element={<Disasters />} />
             <Route path={ROUTES.TECHNOLOGIES} element={<Technologies />} />
             <Route path={ROUTES.ABOUT} element={<About />} />

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex, Box, Button, Text } from '@chakra-ui/react';
-import { FaSearch, FaHome, FaCubes } from 'react-icons/fa';
+import { FaSearch, FaHome, FaCubes, FaProjectDiagram } from 'react-icons/fa';
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { SiOpenstreetmap } from 'react-icons/si';
 import { FiTarget } from 'react-icons/fi';
@@ -69,6 +69,26 @@ export const AppBottomNav: React.FC = () => {
               <SiOpenstreetmap size={25} color='#3182CE' />
               <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
                 Map
+              </Text>
+            </Button>
+          </MenuItem>
+        </Box>
+
+        <Box flex={1}>
+          <MenuItem to={ROUTES.PROJECTS}>
+            <Button
+              bgColor='gray.50'
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+            >
+              <FaProjectDiagram size={25} color='#3182CE' />
+              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                Projects
               </Text>
             </Button>
           </MenuItem>
