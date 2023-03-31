@@ -2,6 +2,7 @@
   margin: 0 auto;
   max-width: 1440px;
   overflow: scroll;
+  padding-top: 20px;
   width: 90vw;
   -ms-overflow-style: none; /* IE and Edge */
   scroll-behavior: smooth;
@@ -11,9 +12,12 @@
     width: 0;
   }
   h3 {
-    margin-left: 10px;
+    margin: 30px 10px;
     text-transform: uppercase;
-    margin-top: 20px;
+  }
+  .searchFilter {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -50,8 +54,10 @@
 
 @media only screen and (max-width: 768px) {
   .technologiesPage {
-    h3 {
-      margin-top: 90px;
+    margin-top: 20px;
+    .searchFilter {
+      position: relative;
+      top: 60px;
     }
   }
 
