@@ -12,18 +12,17 @@
       object-position: center;
       width: 100%;
     }
-  }
-
-  .projectTitle {
-    -webkit-box-orient: vertical;
-    color: #0062ac;
-    display: -webkit-box;
-    font-size: 14px;
-    font-weight: 600;
-    -webkit-line-clamp: 1;
-    margin-top: 10px;
-    max-width: 300px;
-    overflow-y: hidden;
-    text-overflow: ellipsis;
+    .projectTitle {
+      -webkit-box-orient: vertical;
+      color: #0062ac;
+      display: -webkit-box;
+      font-size: 14px;
+      font-weight: 600;
+      -webkit-line-clamp: 1;
+      margin-top: 10px;
+      max-width: 300px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
