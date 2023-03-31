@@ -77,7 +77,7 @@ export const Filter: React.FC = () => {
   useEffect(() => {
     const technologies = tech;
     const labels = {
-      status: ['Preparedness', 'Response', 'Resilience', 'Recovery'],
+      status: ['Preparedness', 'Response', 'Mitigation', 'Recovery'],
       stages: ['Idea', 'Validation', 'Prototype', 'Production'],
       technologies: transformArray(technologies, 'type'),
       parameters: PARAMETERS
@@ -162,7 +162,7 @@ export const Filter: React.FC = () => {
   };
 
   useEffect(() => {
-    // handle filter logic here
+    // console.log({ filteredValues });
   }, [filteredValues]);
 
   const getFilterCount = (category: string): number => {
@@ -180,9 +180,9 @@ export const Filter: React.FC = () => {
         leftIcon={<BiFilterAlt />}
         borderRadius={'0'}
         onClick={onOpen}
-        className='filter'
+        className={'filter'}
       >
-        <span className='filterText'>FILTERS</span>
+        FILTERS
       </Button>
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
