@@ -2,3 +2,12 @@
   background-color: Snow;
   border-right: 1px solid Snow;
 }
+
+.bottomNav {
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+}

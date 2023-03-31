@@ -20,7 +20,6 @@
       flex-direction: column;
       flex-grow: 0;
       height: 400px;
-      // justify-content: space-between;
       padding: 50px;
 
       span {
@@ -35,6 +34,7 @@
         overflow-y: hidden;
         text-align: left;
         text-overflow: ellipsis;
+        margin-top: -35px;
       }
 
       .seeProject {
@@ -49,7 +49,7 @@
         padding: 20px 70px;
         position: relative;
         text-align: left;
-        top: 40px;
+        top: 70px;
         width: max-content;
       }
     }
@@ -152,6 +152,17 @@
       }
       .projectImg {
         display: none;
+      }
+    }
+
+    .projectBody {
+      .projectToc {
+        display: none;
+      }
+
+      .projectContent {
+        flex-basis: 100%;
+        padding: 45px 20px;
       }
     }
   }
