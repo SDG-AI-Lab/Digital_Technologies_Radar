@@ -45,7 +45,7 @@ export const Technologies: React.FC = () => {
 
   useEffect(() => {
     getTechList();
-  }, []);
+  }, [blips]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, blips);
