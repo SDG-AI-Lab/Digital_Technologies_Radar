@@ -6,8 +6,17 @@ import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollec
 import { AppConst } from 'components/constants/app';
 
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
-import { BlipType, TechItemType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
+import {
+  BaseCSVType,
+  BlipType,
+  TechItemType
+} from '@undp_sdg_ai_lab/undp-radar/dist/types';
 import './Technologies.scss';
+import { Filter } from 'components/shared/filter/Filter';
+import {
+  mergeDisasterCycle,
+  projectSearch
+} from 'components/shared/helpers/HelperUtils';
 
 export const Technologies: React.FC = () => {
   const {
@@ -15,6 +24,8 @@ export const Technologies: React.FC = () => {
   } = useRadarState();
 
   const [techList, setTechList] = useState<TechItemType[]>([]);
+  const [query, setQuery] = useState('');
+  const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
 
   const getTechList = (): void => {
     setTechList(radarData.tech);
@@ -34,20 +45,38 @@ export const Technologies: React.FC = () => {
 
   useEffect(() => {
     getTechList();
-  }, []);
+  }, [blips]);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const results = projectSearch(event.target.value, blips);
+    setQuery(event.target.value);
+    setProjectResults(results);
+  };
 
   return (
     <div className='technologiesPage'>
+      <div className='searchFilter'>
+        <input
+          placeholder='Search ....'
+          className='searchBar'
+          value={query}
+          onChange={handleSearch}
+        />
+        <Filter />
+      </div>
       <h3>Technologies</h3>
       <div className='technologies'>
         {techList.map((technology, idx) => {
-          const techProjects: any = blips.filter((i) =>
+          const blipsToUse = query
+            ? projectResults || []
+            : mergeDisasterCycle(blips);
+          const techProjects: any = blipsToUse.filter((i) =>
             i['Technology'].includes(technology.type)
           );
           const techDescription = AppConst.technologyDescriptions.get(
             technology.slug
           ) as string[];
-          return (
+          return techProjects.length ? (
             <div
               className='technologiesContainer'
               key={`${idx}${technology.uuid}`}
@@ -84,6 +113,8 @@ export const Technologies: React.FC = () => {
                 }
               </div>
             </div>
+          ) : (
+            <></>
           );
         })}
       </div>
