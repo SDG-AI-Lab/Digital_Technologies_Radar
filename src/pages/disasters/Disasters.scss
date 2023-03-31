@@ -8,7 +8,7 @@
   padding: 30px 20px;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
-  width: 95vw;
+  width: 90vw;
   &::-webkit-scrollbar {
     height: 0;
     width: 0;
@@ -93,6 +93,13 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .disasters {
+    .searchFilter {
+      position: relative;
+      top: 60px;
+    }
+  }
+
   .disasterContainer {
     .detailsSection {
       gap: 0;

@@ -180,9 +180,9 @@ export const Filter: React.FC = () => {
         leftIcon={<BiFilterAlt />}
         borderRadius={'0'}
         onClick={onOpen}
-        className={'filter'}
+        className='filter'
       >
-        FILTERS
+        <span className='filterText'>FILTERS</span>
       </Button>
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
