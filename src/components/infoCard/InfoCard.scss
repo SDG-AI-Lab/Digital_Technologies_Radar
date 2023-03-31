@@ -2,6 +2,7 @@ div .infoCard {
   display: flex;
   gap: 5px;
   height: 200px;
+  margin-top: 5px;
   &-details {
     background: rgba(237, 237, 237, 0.48);
     padding: 10px;
@@ -29,5 +30,13 @@ div .infoCard {
     border-width: 100px 0 100px 100px;
     height: 0;
     width: 0;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    zoom: 0.8;
+  }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
   }
 }

@@ -2,6 +2,11 @@
   + div {
     display: none;
   }
+  @media only screen and (max-width: 768px) {
+    .filterText {
+      display: none;
+    }
+  }
 }
 
 div.filter-modal {

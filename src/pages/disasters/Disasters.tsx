@@ -70,6 +70,7 @@ export const Disasters: React.FC = () => {
         return disasterProjects.length ? (
           <div className='disasterContainer' key={`${idx}${disaster.uuid}`}>
             <div className='topRow'>
+              <span className='topRowTitle'>{disaster.name}</span>
               {disasterProjects.length > 3 && (
                 <a
                   className='seeAll'

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from 'react';
 import { InfoCard } from 'components/infoCard/InfoCard';
 import { loremIpsum } from 'react-lorem-ipsum';
@@ -40,7 +41,7 @@ export const Technologies: React.FC = () => {
       <h3>Technologies</h3>
       <div className='technologies'>
         {techList.map((technology, idx) => {
-          const techProjects = blips.filter((i) =>
+          const techProjects: any = blips.filter((i) =>
             i['Technology'].includes(technology.type)
           );
           const techDescription = AppConst.technologyDescriptions.get(
@@ -52,6 +53,7 @@ export const Technologies: React.FC = () => {
               key={`${idx}${technology.uuid}`}
             >
               <div className='topRow'>
+                <span className='topRowTitle'>{technology.type}</span>
                 {techProjects.length > 3 && (
                   <a
                     className='seeAll'
