@@ -20,15 +20,21 @@
       flex-direction: column;
       flex-grow: 0;
       height: 400px;
-      justify-content: space-between;
+      // justify-content: space-between;
       padding: 50px;
 
       span {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
         font-family: Gill Sans;
-        font-size: 50px;
+        font-size: 40px;
         font-weight: 700;
+        -webkit-line-clamp: 4;
         line-height: 65px;
+        margin-bottom: -20px;
+        overflow-y: hidden;
         text-align: left;
+        text-overflow: ellipsis;
       }
 
       .seeProject {
@@ -41,7 +47,9 @@
         letter-spacing: 0.06em;
         line-height: 19px;
         padding: 20px 70px;
+        position: relative;
         text-align: left;
+        top: 40px;
         width: max-content;
       }
     }
@@ -60,6 +68,7 @@
   .projectBody {
     background-color: #ede7d940;
     display: flex;
+    gap: 20px;
 
     .projectToc {
       display: flex;
@@ -125,6 +134,24 @@
       .otherDetailsContent {
         font-size: 20px;
         font-style: italic;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .projectDetailsPage {
+    .projectHero {
+      margin-top: 80px;
+
+      .projectTitle {
+        align-items: center;
+        flex-basis: 100%;
+        span {
+          text-align: center;
+        }
+      }
+      .projectImg {
+        display: none;
       }
     }
   }

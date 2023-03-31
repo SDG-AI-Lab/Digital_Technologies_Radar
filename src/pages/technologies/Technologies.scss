@@ -1,7 +1,8 @@
 .technologiesPage {
   margin: 0 auto;
-  max-width: 1370px;
+  max-width: 1440px;
   overflow: scroll;
+  width: 90vw;
   -ms-overflow-style: none; /* IE and Edge */
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
@@ -12,6 +13,7 @@
   h3 {
     margin-left: 10px;
     text-transform: uppercase;
+    margin-top: 20px;
   }
 }
 
@@ -19,6 +21,7 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  width: 87vw;
 
   .detailsSection {
     display: flex;
@@ -36,8 +39,38 @@
     justify-content: flex-end;
     margin: 0 20px 10px 0;
 
+    .topRowTitle {
+      display: none;
+    }
+
     a {
       color: #3258e0;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .technologiesPage {
+    h3 {
+      margin-top: 90px;
+    }
+  }
+
+  .technologiesContainer {
+    .detailsSection {
+      gap: 0;
+    }
+
+    .disasterDetails {
+      margin: 0;
+    }
+
+    .topRow {
+      justify-content: space-between;
+
+      .topRowTitle {
+        display: block;
+      }
     }
   }
 }
