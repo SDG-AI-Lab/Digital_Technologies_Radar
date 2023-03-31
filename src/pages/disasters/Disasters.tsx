@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InfoCard } from 'components/infoCard/InfoCard';
 import { loremIpsum } from 'react-lorem-ipsum';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
@@ -12,7 +12,6 @@ import { Filter } from 'components/shared/filter/Filter';
 import './Disasters.scss';
 import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
 import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
-import { RadarContext } from 'navigation/context';
 
 export const Disasters: React.FC = () => {
   const {
@@ -27,9 +26,6 @@ export const Disasters: React.FC = () => {
 
   const [query, setQuery] = useState('');
   const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
-  const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
-
-  const { filteredValues } = useContext(RadarContext);
 
   const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
 
@@ -46,118 +42,10 @@ export const Disasters: React.FC = () => {
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const results = projectSearch(
-      event.target.value,
-      filteredProjects as BlipType[]
-    );
+    const results = projectSearch(event.target.value, blips);
     setQuery(event.target.value);
     setProjectResults(results);
   };
-
-  useEffect(() => {
-    setFilteredProjects(blips);
-  }, [blips]);
-
-  useEffect(() => {
-    if (!filteredProjects) return;
-
-    // status filter
-    let statusFilters: any = Object.keys(filteredValues['status']).reduce(
-      (statusArr: any, status) => {
-        if (filteredValues['status'][status])
-          statusArr.push(status.toLowerCase());
-        return statusArr;
-      },
-      []
-    );
-
-    // stages filter
-    let stageFilters = Object.keys(filteredValues['stages']).reduce(
-      (stagesArr: any, stage) => {
-        if (filteredValues['stages'][stage])
-          stagesArr.push(stage.toLowerCase());
-        return stagesArr;
-      },
-      []
-    );
-
-    // technologies filter
-    let techFilters = Object.keys(filteredValues['technologies']).reduce(
-      (techArr: any, tech) => {
-        if (filteredValues['technologies'][tech]) techArr.push(tech);
-        return techArr;
-      },
-      []
-    );
-
-    // status filter
-    let filterStatus = true;
-    let statusFilteredProjects: BlipType[] = [];
-    if (!statusFilters.length) {
-      if (stageFilters.length || techFilters.length) filterStatus = false;
-      statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
-    }
-    if (filterStatus) {
-      statusFilteredProjects = blips.filter((project) => {
-        return statusFilters.includes(project['Disaster Cycle']);
-      });
-    }
-
-    // stages filter
-    let filterStages = true;
-    let stagesFilteredProjects: BlipType[] = [];
-    if (!stageFilters.length) {
-      if (statusFilters.length || techFilters.length) filterStages = false;
-      stageFilters = ['idea', 'validation', 'prototype', 'production'];
-    }
-    if (filterStages) {
-      stagesFilteredProjects = blips.filter((project) => {
-        return stageFilters.includes(project['Status/Maturity']);
-      });
-    }
-
-    // tech filter
-    let filterTech = false;
-    let techFilteredProjects: BlipType[] = [];
-    if (!techFilters.length) {
-      if (statusFilters.length || stageFilters.length) filterTech = false;
-      techFilters = [
-        'Geographical Information Systems',
-        'Data Collection',
-        'Data Analysis',
-        'Cyber Physical Systems',
-        'Big Data',
-        'Artificial Intelligence',
-        'Machine Learning',
-        'Computer Vision',
-        'Natural Language Processing',
-        'Cloud Computing',
-        'Remote Sensing',
-        'Mobile App',
-        'Chatbot',
-        'Internet of Things',
-        'Drones',
-        'Web Mapping',
-        'Blockchain',
-        'Crowdsourcing',
-        'Social Media',
-        'Data Extraction',
-        'Web-based App',
-        'Data Mining'
-      ];
-    }
-    if (filterTech) {
-      techFilteredProjects = blips.filter((project) => {
-        return techFilters.some((r: any) => project['Technology'].includes(r));
-      });
-    }
-
-    setFilteredProjects([
-      ...stagesFilteredProjects,
-      ...statusFilteredProjects,
-      ...techFilteredProjects
-    ]);
-  }, [filteredValues]);
 
   return (
     <div className='disasters'>
@@ -175,7 +63,7 @@ export const Disasters: React.FC = () => {
       {disasterTypes.map((disaster, idx) => {
         const blipsToUse = query
           ? projectResults || []
-          : mergeDisasterCycle(filteredProjects as BlipType[]);
+          : mergeDisasterCycle(blips);
         const disasterProjects = (blipsToUse || []).filter(
           (i) => i[disasterKey] === disaster.name
         );
@@ -213,7 +101,7 @@ export const Disasters: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div key={idx} />
+          <> </>
         );
       })}
     </div>
