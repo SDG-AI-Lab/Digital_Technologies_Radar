@@ -3,8 +3,10 @@ div .infoCard {
   gap: 5px;
   height: 200px;
   margin-top: 5px;
+
   &-details {
     background: rgba(237, 237, 237, 0.48);
+    flex-basis: 70%;
     padding: 10px;
     position: relative;
     width: 250px;
@@ -24,12 +26,21 @@ div .infoCard {
       text-overflow: ellipsis;
     }
   }
-  &-pointer {
-    border-color: transparent transparent transparent rgba(237, 237, 237, 0.48);
-    border-style: solid;
-    border-width: 100px 0 100px 100px;
-    height: 0;
-    width: 0;
+
+  .infoImage {
+    flex-basis: 30%;
+    width: 100px;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .pointer {
+    bottom: 15px;
+    margin: 0;
+    position: absolute;
+    right: 25px;
   }
 
   @media only screen and (max-width: 1000px) {
