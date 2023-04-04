@@ -20,33 +20,41 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
 
   return (
     <div className='projectPreviewContainer'>
-      <div className='image'>
-        <img
-          src={
-            project['Image Url'].length > 0
-              ? `${project['Image Url']}`
-              : fallBackImage
-          }
-          onError={(e) => {
-            // @ts-expect-error
-            e.target.src = fallBackImage;
-          }}
-          alt='Default Image'
-        />
-      </div>
-      <div className='projectDetails'>
-        <Link
-          to={`/projects/${project['Ideas/Concepts/Examples']}`}
-          onClick={() => setCurrentProject(project)}
-        >
-          <span className='projectTitle'>
-            {project['Ideas/Concepts/Examples']}
-          </span>
-        </Link>
-
-        <div className='projectBadges'>
-          <ProjectBadge project={project} />
+      <div className='imageAndDetails'>
+        <div className='image'>
+          <img
+            src={
+              project['Image Url'].length > 0
+                ? `${project['Image Url']}`
+                : fallBackImage
+            }
+            onError={(e) => {
+              // @ts-expect-error
+              e.target.src = fallBackImage;
+            }}
+            alt='Default Image'
+          />
         </div>
+        <div className='projectDetails'>
+          <Link
+            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            onClick={() => setCurrentProject(project)}
+          >
+            <span className='projectTitle'>
+              {project['Ideas/Concepts/Examples']}
+            </span>
+          </Link>
+          <span className='projectDescription'>{project['Description']}</span>
+          <Link
+            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            onClick={() => setCurrentProject(project)}
+          >
+            <span className='projectLearnMore'>Learn More</span>
+          </Link>
+        </div>
+      </div>
+      <div className='projectBadges'>
+        <ProjectBadge project={project} />
       </div>
     </div>
   );
