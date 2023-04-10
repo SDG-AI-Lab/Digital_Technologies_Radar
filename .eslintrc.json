@@ -20,7 +20,8 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
-    "@typescript-eslint/triple-slash-reference": "off"
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/complex": "off"
   },
   "settings": {
     "react": {
