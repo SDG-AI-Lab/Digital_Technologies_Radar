@@ -1,8 +1,8 @@
 .projectsList {
-  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  padding: 30px 20px;
 
   .projectsListContainer {
     display: flex;
@@ -11,14 +11,13 @@
     }
 
     .filters {
-      flex-basis: 40%;
       background-color: aqua;
+      flex-basis: 40%;
     }
   }
 
   hr {
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     margin: 15px 0;
   }
- 
 }

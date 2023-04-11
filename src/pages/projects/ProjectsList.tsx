@@ -48,7 +48,7 @@ export const Projects: React.FC = () => {
         <div className='projectContainer'>
           {mergeDisasterCycle(blips).map((project) => (
             <div key={project.id}>
-              <Project project={project} />
+              <Project project={project as BlipType} />
               <hr />
             </div>
           ))}
