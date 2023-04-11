@@ -13,6 +13,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 
 import './Projects.scss';
+import { FilterComponent } from 'components/shared/filter/FilterComponent';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -54,7 +55,9 @@ export const Projects: React.FC = () => {
           ))}
         </div>
 
-        <div className='filters'></div>
+        <div className='filters'>
+          <FilterComponent />
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
   }
 }
 
-div.filter-modal {
+div.filterModal {
   max-width: 40%;
   overflow: scroll;
   padding: 30px 20px;
@@ -30,18 +30,25 @@ div.filter-modal {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 30px;
+  margin: 10px 0 30px;
 
   .filterItem {
+    background-color: white;
+    border-radius: 5px;
+    color: #000000;
+    font-family: 'Gill Sans';
+    font-size: 14px;
+    font-weight: 400;
     min-width: 140px;
     &:focus {
       box-shadow: none;
     }
 
     &--selected {
-      background: rgb(203, 213, 224);
-      box-shadow: var(--chakra-shadows-outline) !important;
-      color: #1f5a95;
+      // background: rgb(203, 213, 224);
+      // box-shadow: var(--chakra-shadows-outline) !important;
+      outline-color: #0062ac;
+      // color: #1f5a95;
     }
   }
 

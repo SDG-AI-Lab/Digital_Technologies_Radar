@@ -9,7 +9,6 @@ interface Props {
 }
 
 export const Project: React.FC<Props> = ({ project }) => {
-  console.log({ project });
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (

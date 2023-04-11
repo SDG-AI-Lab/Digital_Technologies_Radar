@@ -1,15 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  useDisclosure
-} from '@chakra-ui/react';
-import { BiFilterAlt } from 'react-icons/bi';
 import { FilterItems } from './FilterItems';
 import {
   subregionKey,
@@ -20,6 +9,7 @@ import {
   dataKey
 } from 'components/drawers/filter/FilterConstants';
 
+import './FilterComponent.scss';
 import './Filter.scss';
 import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
@@ -48,8 +38,7 @@ const PARAMETERS = [
   'Data'
 ];
 
-export const Filter: React.FC = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+export const FilterComponent: React.FC = () => {
   const {
     state: {
       blips,
@@ -72,6 +61,8 @@ export const Filter: React.FC = () => {
     technologies: [],
     parameters: []
   });
+
+  console.log({ options });
 
   useEffect(() => {
     const technologies = tech;
@@ -174,65 +165,47 @@ export const Filter: React.FC = () => {
   };
 
   return (
-    <>
-      <Button
-        leftIcon={<BiFilterAlt />}
-        borderRadius={'0'}
-        onClick={onOpen}
-        className={'filter'}
-      >
-        FILTERS
-      </Button>
-      <Box className='responsive-filters'>
-        <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-          <DrawerOverlay />
-          <DrawerContent className='filterModal' backgroundColor='#fffafa'>
-            <DrawerCloseButton />
-            <div>
-              <DrawerHeader mt={10}>
-                STATUS
-                {getFilterCount('status') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('status')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems labels={labels.status} category='status' />
+    <div className='filterComponent'>
+      <p> FILTERS </p>
+      <div>
+        <label>
+          STATUS
+          {getFilterCount('status') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('status')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.status} category='status' />
 
-              <DrawerHeader>
-                STAGE
-                {getFilterCount('stages') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('stages')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems labels={labels.stages} category='stages' />
+        <label>
+          STAGE
+          {getFilterCount('stages') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('stages')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.stages} category='stages' />
 
-              <DrawerHeader mt={10}>
-                TECHNOLOGY
-                {getFilterCount('technologies') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('technologies')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems
-                labels={labels.technologies}
-                category='technologies'
-              />
+        <label>
+          TECHNOLOGY
+          {getFilterCount('technologies') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('technologies')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.technologies} category='technologies' />
 
-              <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
-              <FilterItems
-                labels={labels.parameters}
-                multi={true}
-                options={options}
-                category='parameters'
-              />
-            </div>
-          </DrawerContent>
-        </Drawer>
-      </Box>
-    </>
+        <label>PARAMETERS</label>
+        {/* <FilterItems
+            labels={labels.parameters}
+            multi={true}
+            options={options}
+            category='parameters'
+          /> */}
+      </div>
+    </div>
   );
 };

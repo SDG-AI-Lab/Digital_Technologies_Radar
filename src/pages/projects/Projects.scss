@@ -6,12 +6,12 @@
 
   .projectsListContainer {
     display: flex;
+    gap: 20px;
     .projectContainer {
       flex-basis: 60%;
     }
 
     .filters {
-      background-color: aqua;
       flex-basis: 40%;
     }
   }
