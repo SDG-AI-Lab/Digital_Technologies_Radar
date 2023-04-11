@@ -29,10 +29,10 @@ div .infoCard {
 
   .infoImage {
     flex-basis: 30%;
-    width: 100px;
 
     img {
       height: 100%;
+      object-fit: cover;
     }
   }
 

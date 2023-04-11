@@ -1,15 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  useDisclosure
-} from '@chakra-ui/react';
-import { BiFilterAlt } from 'react-icons/bi';
 import { FilterItems } from './FilterItems';
 import {
   subregionKey,
@@ -20,8 +9,13 @@ import {
   dataKey
 } from 'components/drawers/filter/FilterConstants';
 
+import './FilterComponent.scss';
 import './Filter.scss';
-import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  BlipType,
+  useDataState,
+  useRadarState
+} from '@undp_sdg_ai_lab/undp-radar';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import { RadarContext } from 'navigation/context';
 
@@ -48,11 +42,14 @@ const PARAMETERS = [
   'Data'
 ];
 
-export const Filter: React.FC = () => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+interface Props {
+  projects: BlipType[];
+}
+
+export const FilterComponent: React.FC<Props> = ({ projects }) => {
   const {
     state: {
-      blips,
+      // projects,
       radarData: { tech }
     }
   } = useRadarState();
@@ -72,6 +69,8 @@ export const Filter: React.FC = () => {
     technologies: [],
     parameters: []
   });
+
+  console.log({ options });
 
   useEffect(() => {
     const technologies = tech;
@@ -94,14 +93,14 @@ export const Filter: React.FC = () => {
       setLabels(updatedLabels);
       setInitialFilteredValues(updatedLabels);
     }
-    const regions = FilterUtils.getRegions(blips, regionKey);
-    const subregions = FilterUtils.getSubregions(blips, subregionKey);
-    const countries = FilterUtils.getCountries(blips, countryKey);
-    const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
-    const useCases = FilterUtils.getUseCases(blips, useCaseKey);
-    const implementers = FilterUtils.getImplementers(blips, implementerKey);
-    const sdgs = FilterUtils.getSDGs(blips, sdgKey);
-    const data = FilterUtils.getData(blips, dataKey);
+    const regions = FilterUtils.getRegions(projects, regionKey);
+    const subregions = FilterUtils.getSubregions(projects, subregionKey);
+    const countries = FilterUtils.getCountries(projects, countryKey);
+    const disasterTypes = FilterUtils.getDisasterTypes(projects, disasterKey);
+    const useCases = FilterUtils.getUseCases(projects, useCaseKey);
+    const implementers = FilterUtils.getImplementers(projects, implementerKey);
+    const sdgs = FilterUtils.getSDGs(projects, sdgKey);
+    const data = FilterUtils.getData(projects, dataKey);
 
     const options = {
       Region: transformArray(regions).map((a: string) => ({
@@ -139,7 +138,7 @@ export const Filter: React.FC = () => {
     };
 
     setOptions(options);
-  }, [tech, blips]);
+  }, [tech, projects]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {
@@ -174,65 +173,47 @@ export const Filter: React.FC = () => {
   };
 
   return (
-    <>
-      <Button
-        leftIcon={<BiFilterAlt />}
-        borderRadius={'0'}
-        onClick={onOpen}
-        className={'filter'}
-      >
-        FILTERS
-      </Button>
-      <Box className='responsive-filters'>
-        <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-          <DrawerOverlay />
-          <DrawerContent className='filterModal' backgroundColor='#fffafa'>
-            <DrawerCloseButton />
-            <div>
-              <DrawerHeader mt={10}>
-                STATUS
-                {getFilterCount('status') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('status')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems labels={labels.status} category='status' />
+    <div className='filterComponent'>
+      <p> FILTERS </p>
+      <div>
+        <label>
+          STATUS
+          {getFilterCount('status') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('status')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.status} category='status' />
 
-              <DrawerHeader>
-                STAGE
-                {getFilterCount('stages') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('stages')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems labels={labels.stages} category='stages' />
+        <label>
+          STAGE
+          {getFilterCount('stages') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('stages')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.stages} category='stages' />
 
-              <DrawerHeader mt={10}>
-                TECHNOLOGY
-                {getFilterCount('technologies') ? (
-                  <span className='filterCount'>
-                    {`(${getFilterCount('technologies')})`}
-                  </span>
-                ) : null}
-              </DrawerHeader>
-              <FilterItems
-                labels={labels.technologies}
-                category='technologies'
-              />
+        <label>
+          TECHNOLOGY
+          {getFilterCount('technologies') ? (
+            <span className='filterCount'>
+              {`(${getFilterCount('technologies')})`}
+            </span>
+          ) : null}
+        </label>
+        <FilterItems labels={labels.technologies} category='technologies' />
 
-              <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
-              <FilterItems
-                labels={labels.parameters}
-                multi={true}
-                options={options}
-                category='parameters'
-              />
-            </div>
-          </DrawerContent>
-        </Drawer>
-      </Box>
-    </>
+        <label>PARAMETERS</label>
+        {/* <FilterItems
+            labels={labels.parameters}
+            multi={true}
+            options={options}
+            category='parameters'
+          /> */}
+      </div>
+    </div>
   );
 };
