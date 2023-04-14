@@ -1,0 +1,43 @@
+.projectRadar {
+  display: flex;
+  height: 100vh;
+  gap: 5px;
+
+  .tabsSection {
+    flex-basis: 50%;
+  }
+  .projectsSection {
+    flex-basis: 50%;
+    overflow: scroll;
+
+    .accordion {
+      position: sticky;
+      top: 0;
+
+      .accordionSummary {
+        background-color: #D9D9D933;
+        border-radius: 6px;
+        ;
+      }
+    }
+
+    .MuiAccordionDetails-root {
+      height: 600px;
+      overflow: scroll;
+    }
+
+    .projectComponent {
+      zoom: 0.8;
+      padding: 10px;
+      .pjrojectDetails-large {
+
+      .title-large {
+        -webkit-line-clamp: 1;
+      }
+      .projectBadgesContainer {
+        width: 100%;
+      }
+    }
+    }
+  }
+}
