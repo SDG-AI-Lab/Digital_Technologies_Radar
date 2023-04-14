@@ -16,7 +16,7 @@ import { RadarContext } from 'navigation/context';
 export const ProjectsRadar: React.FC = () => {
   const {
     actions: { setBlips },
-    state: { blips }
+    state: { blips, rawBlips }
   } = useRadarState();
 
   const { filteredValues, setFilteredValues } = useContext(RadarContext);
@@ -25,7 +25,7 @@ export const ProjectsRadar: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
-
+  const [allBlips, setAllBlips] = useState<BlipType[]>();
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -33,6 +33,10 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     setFilteredProjects(blips);
+
+    if (!allBlips?.length) {
+      setAllBlips(blips);
+    }
   }, [blips]);
 
   useEffect(() => {
@@ -66,12 +70,10 @@ export const ProjectsRadar: React.FC = () => {
       statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
     }
     if (filterStatus) {
-      statusFilteredProjects = blips.filter((project) => {
+      statusFilteredProjects = allBlips.filter((project) => {
         return statusFilters.includes(project['Disaster Cycle']);
       });
     }
-
-    console.log({ statusFilters }, { statusFilteredProjects });
 
     // stages filter
     let filterStages = true;
@@ -81,9 +83,13 @@ export const ProjectsRadar: React.FC = () => {
       stageFilters = ['idea', 'validation', 'prototype', 'production'];
     }
     if (filterStages) {
-      stagesFilteredProjects = blips.filter((project) => {
+      stagesFilteredProjects = allBlips.filter((project) => {
         return stageFilters.includes(project['Status/Maturity']);
       });
+    }
+
+    if (!filterStages && !filterStatus) {
+      return setFilteredProjects(allBlips);
     }
 
     setFilteredProjects([...stagesFilteredProjects, ...statusFilteredProjects]);
