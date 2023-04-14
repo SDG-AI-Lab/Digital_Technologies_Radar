@@ -61,6 +61,7 @@ export const FilterComponent: React.FC<Props> = ({ projects }) => {
   } = useDataState();
 
   const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const { filteredBlips, setFilteredBlips } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
@@ -69,8 +70,6 @@ export const FilterComponent: React.FC<Props> = ({ projects }) => {
     technologies: [],
     parameters: []
   });
-
-  console.log({ options });
 
   useEffect(() => {
     const technologies = tech;

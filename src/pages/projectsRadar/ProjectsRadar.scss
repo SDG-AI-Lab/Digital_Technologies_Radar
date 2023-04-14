@@ -36,6 +36,9 @@
       }
       .projectBadgesContainer {
         width: 100%;
+        .projectBadges-large span {
+          zoom: 0.7;
+        }
       }
     }
     }
