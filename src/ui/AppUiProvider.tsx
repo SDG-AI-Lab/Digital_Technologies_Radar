@@ -10,27 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const muiTheme = createTheme({
-  palette: {
-    primary: {
-      main: '#000'
-    },
-    secondary: {
-      main: '#ccc'
-    }
-  },
-  typography: {
-    fontFamily: 'Roboto'
-  },
-  shadows: [
-    'none',
-    '0px 15px 60px rgba(0, 0, 0, 0.25)',
-    '0px 35px 60px rgba(0, 0, 0, 0.25)',
-    '20px 55px 60px rgba(0, 0, 0, 0.25)',
-    '10px 15px 60px rgba(0, 0, 0, 0.25)',
-    ...Array(20).fill('none')
-  ]
-});
+const muiTheme = createTheme();
 
 // More info: https://chakra-ui.com/docs/getting-started
 export const AppUiProvider: React.FC = ({ children }) => {

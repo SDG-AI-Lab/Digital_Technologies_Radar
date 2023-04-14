@@ -26,7 +26,6 @@ export const ProjectsRadar: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
 
-  console.log('radr', useRadarState(), { setBlips });
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -71,6 +70,8 @@ export const ProjectsRadar: React.FC = () => {
         return statusFilters.includes(project['Disaster Cycle']);
       });
     }
+
+    console.log({ statusFilters }, { statusFilteredProjects });
 
     // stages filter
     let filterStages = true;
