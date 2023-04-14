@@ -1,4 +1,5 @@
 const HOME = '/';
+const PROJECTS_RADAR = '/projectsRadar';
 const RADAR = '/radar';
 const MAP_VIEW = '/map-view';
 const PROJECTS = '/projects';
@@ -17,6 +18,7 @@ const BLIP_PARAM = `${BLIP}/:techItemId`;
 
 export const ROUTES = {
   HOME,
+  PROJECTS_RADAR,
   RADAR,
   MAP_VIEW,
   PROJECTS,

@@ -35,6 +35,26 @@ export const AppBottomNav: React.FC = () => {
         </Box>
 
         <Box flex={1}>
+          <MenuItem to={ROUTES.PROJECTS_RADAR}>
+            <Button
+              bgColor='gray.50'
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+            >
+              <FiTarget size={25} color='#3182CE' />
+              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                Projects Radar
+              </Text>
+            </Button>
+          </MenuItem>
+        </Box>
+
+        <Box flex={1}>
           <MenuItem to={ROUTES.RADAR}>
             <Button
               bgColor='gray.50'

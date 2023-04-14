@@ -1,4 +1,5 @@
 import { Home } from './Home';
+import { ProjectsRadar } from './projectsRadar/ProjectsRadar';
 import { Radar } from './Radar';
 import { About } from './about/About';
 import { Search } from './search/Search';
@@ -11,6 +12,7 @@ import { Technologies } from './technologies/Technologies';
 
 export {
   Home,
+  ProjectsRadar,
   Radar,
   About,
   Search,

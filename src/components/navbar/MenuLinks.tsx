@@ -34,6 +34,19 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
+        <MenuItem to={ROUTES.PROJECTS_RADAR}>
+          <Button
+            rounded='md'
+            colorScheme='blue'
+            py={7}
+            px={1}
+            width={'100%'}
+            bg='#0062ac'
+          >
+            <FiTarget size={30} />
+          </Button>
+        </MenuItem>
+
         <MenuItem to={ROUTES.RADAR}>
           <Button
             rounded='md'

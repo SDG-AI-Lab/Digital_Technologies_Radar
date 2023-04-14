@@ -20,7 +20,8 @@ import {
   Disasters,
   Technologies,
   Projects,
-  ProjectDetails
+  ProjectDetails,
+  ProjectsRadar
 } from '../pages';
 
 // import { ProjectDetails } from '../pages';
@@ -100,6 +101,7 @@ export const NavApp: React.FC = () => {
         <MainLayout>
           <Routes>
             <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.PROJECTS_RADAR} element={<ProjectsRadar />} />
             <Route path={ROUTES.RADAR} element={<RadarLayout />}>
               <Route path={ROUTES.QUADRANT}>
                 <Route
