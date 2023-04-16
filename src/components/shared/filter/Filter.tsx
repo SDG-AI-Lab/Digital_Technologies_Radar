@@ -225,7 +225,7 @@ export const Filter: React.FC = () => {
               <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
               <FilterItems
                 labels={labels.parameters}
-                multi={true}
+                // multi={true}
                 options={options}
                 category='parameters'
               />

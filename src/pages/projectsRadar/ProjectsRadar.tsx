@@ -2,7 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { BlipType, Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import {
+  BaseCSVType,
+  BlipType,
+  Radar,
+  useRadarState
+} from '@undp_sdg_ai_lab/undp-radar';
 import './ProjectsRadar.scss';
 
 import { WaitingForRadar } from 'radar/components';
@@ -12,27 +17,33 @@ import { Project } from 'pages/projects/projectComponent/Project';
 import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
+import { projectSearch } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
   const {
     actions: { setBlips },
-    state: { blips, rawBlips }
+    state: { blips }
   } = useRadarState();
 
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const { filteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
   const [allBlips, setAllBlips] = useState<BlipType[]>();
+  const [query, setQuery] = useState('');
+  const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
   };
 
   useEffect(() => {
-    setFilteredProjects(blips);
+    if (blips.length) {
+      setFilteredProjects(blips);
+      setLoading(false);
+    }
 
     if (!allBlips?.length) {
       setAllBlips(blips);
@@ -62,6 +73,8 @@ export const ProjectsRadar: React.FC = () => {
       []
     );
 
+    const blipsToUse = query ? (projectResults as BlipType[]) : allBlips;
+
     // status filter
     let filterStatus = true;
     let statusFilteredProjects: BlipType[] = [];
@@ -70,7 +83,7 @@ export const ProjectsRadar: React.FC = () => {
       statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
     }
     if (filterStatus) {
-      statusFilteredProjects = allBlips.filter((project) => {
+      statusFilteredProjects = (blipsToUse || []).filter((project) => {
         return statusFilters.includes(project['Disaster Cycle']);
       });
     }
@@ -83,7 +96,7 @@ export const ProjectsRadar: React.FC = () => {
       stageFilters = ['idea', 'validation', 'prototype', 'production'];
     }
     if (filterStages) {
-      stagesFilteredProjects = allBlips.filter((project) => {
+      stagesFilteredProjects = (blipsToUse || []).filter((project) => {
         return stageFilters.includes(project['Status/Maturity']);
       });
     }
@@ -98,18 +111,28 @@ export const ProjectsRadar: React.FC = () => {
   useEffect(() => {
     if (filteredProjects) {
       console.log({ filteredProjects });
-      setBlips(filteredProjects as BlipType[]);
+      setBlips(filteredProjects);
     }
   }, [filteredProjects]);
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const results = projectSearch(
+      event.target.value,
+      filteredProjects as BlipType[]
+    );
+    setQuery(event.target.value);
+    setProjectResults(results);
+    setFilteredProjects(results as BlipType[]);
+  };
+
   return (
-    <>
+    <div className='projectRadarContainer'>
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
           className='searchBar'
-          value={'query'}
-          onChange={() => console.log('loger')}
+          value={query}
+          onChange={handleSearch}
         />
       </div>
       <div className='projectRadar'>
@@ -120,8 +143,8 @@ export const ProjectsRadar: React.FC = () => {
             onChange={tabsChangeHandler}
           >
             <TabList>
-              <Tab as='h5'>Radar</Tab>
-              <Tab as='h5'>Map</Tab>
+              <Tab as='h5'>RADAR</Tab>
+              <Tab as='h5'>MAP</Tab>
             </TabList>
             <TabPanels overflowY='auto'>
               <TabPanel overflowY='auto' data-testid='stages-panel'>
@@ -131,7 +154,7 @@ export const ProjectsRadar: React.FC = () => {
                     data-testid='radar-component'
                   >
                     {loading && <WaitingForRadar size='620px' />}
-                    {filteredProjects && <Radar />}
+                    {!loading && <Radar />}
                   </Box>
                   <PopOverView />
                 </Box>
@@ -156,10 +179,13 @@ export const ProjectsRadar: React.FC = () => {
               <h5>FILTERS</h5>
             </AccordionSummary>
             <AccordionDetails>
-              <FilterComponent projects={blips} />
+              <FilterComponent projects={blips} config={{ header: false }} />
             </AccordionDetails>
           </Accordion>
           <div className='projectContainer'>
+            <span className='projectsCount'>{`${
+              (filteredProjects || []).length
+            } Projects`}</span>
             {(filteredProjects || []).map((project) => (
               <div key={project.id}>
                 <Project project={project} />
@@ -169,6 +195,6 @@ export const ProjectsRadar: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

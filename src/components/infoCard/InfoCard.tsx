@@ -2,7 +2,14 @@ import React from 'react';
 
 import Pointer from 'assets/components/arrow-right.svg';
 
-import { Image } from '@chakra-ui/react';
+import {
+  Drawer,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay,
+  Image,
+  useDisclosure
+} from '@chakra-ui/react';
 
 import './InfoCard.scss';
 
@@ -17,6 +24,7 @@ interface Props {
 }
 
 export const InfoCard: React.FC<Props> = ({ title, details }) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
@@ -34,8 +42,27 @@ export const InfoCard: React.FC<Props> = ({ title, details }) => {
       <div className='infoCard-details'>
         <span className='infoCard-details--title'> {title}</span>
         <p className='infoCard-details--text'> {details}</p>
-        <Image className='pointer' m={5} src={Pointer} />
+        <Image className='pointer' m={5} src={Pointer} onClick={onOpen} />
       </div>
+
+      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent className='infoDrawer' backgroundColor='#fffafa'>
+          <DrawerCloseButton />
+          <div>
+            <img
+              src={fallBackImage}
+              onError={(e) => {
+                // @ts-expect-error
+                e.target.src = fallBackImage;
+              }}
+              alt='Default Image'
+            />
+            <span className='infoDrawerTitle'>{title}</span>
+            <p className='infoDrawerTitle-details'> {details}</p>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };

@@ -51,3 +51,23 @@ div .infoCard {
     display: none;
   }
 }
+
+div.infoDrawer {
+  max-width: 40%;
+  overflow: scroll;
+  
+  .infoDrawerTitle {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    padding: 30px 40px;
+    text-transform: uppercase;
+
+  }
+
+  .infoDrawerTitle-details {
+    padding: 10px 40px;
+    font-size: 14px;
+
+  }
+}

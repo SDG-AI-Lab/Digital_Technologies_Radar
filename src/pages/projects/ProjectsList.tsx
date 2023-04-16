@@ -117,7 +117,7 @@ export const Projects: React.FC = () => {
         </div>
 
         <div className='filters'>
-          <FilterComponent projects={blips} />
+          <FilterComponent projects={blips} config={{ header: true }} />
         </div>
       </div>
     </div>

@@ -44,15 +44,19 @@ const PARAMETERS = [
 
 interface Props {
   projects: BlipType[];
+  config: {
+    header: boolean;
+  };
 }
 
-export const FilterComponent: React.FC<Props> = ({ projects }) => {
+export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
   const {
     state: {
-      // projects,
       radarData: { tech }
     }
   } = useRadarState();
+
+  const { header } = config;
 
   const {
     state: {
@@ -61,7 +65,6 @@ export const FilterComponent: React.FC<Props> = ({ projects }) => {
   } = useDataState();
 
   const { filteredValues, setFilteredValues } = useContext(RadarContext);
-  const { filteredBlips, setFilteredBlips } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
@@ -173,7 +176,7 @@ export const FilterComponent: React.FC<Props> = ({ projects }) => {
 
   return (
     <div className='filterComponent'>
-      <p> FILTERS </p>
+      {header && <p> FILTERS </p>}
       <div>
         <label>
           STATUS
@@ -206,12 +209,12 @@ export const FilterComponent: React.FC<Props> = ({ projects }) => {
         <FilterItems labels={labels.technologies} category='technologies' />
 
         <label>PARAMETERS</label>
-        {/* <FilterItems
-            labels={labels.parameters}
-            multi={true}
-            options={options}
-            category='parameters'
-          /> */}
+        <FilterItems
+          labels={labels.parameters}
+          // multi={true}
+          options={options}
+          category='parameters'
+        />
       </div>
     </div>
   );
