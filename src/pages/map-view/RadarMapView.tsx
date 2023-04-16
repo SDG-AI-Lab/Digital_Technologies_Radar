@@ -134,7 +134,7 @@ export const RadarMapView: React.FC = () => {
             // center={getCordinates('algeria')}
             center={[0, 0]}
             zoom={1}
-            // minZoom={2}
+            minZoom={2}
             attributionControl={false}
           >
             <TileLayer url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' />

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { InfoCard } from 'components/infoCard/InfoCard';
 import { loremIpsum } from 'react-lorem-ipsum';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
@@ -17,11 +17,15 @@ import {
   mergeDisasterCycle,
   projectSearch
 } from 'components/shared/helpers/HelperUtils';
+import { Link } from 'react-router-dom';
+import { RadarContext } from 'navigation/context';
 
 export const Technologies: React.FC = () => {
   const {
     state: { blips, radarData }
   } = useRadarState();
+
+  const { setProjectsGroup } = useContext(RadarContext);
 
   const [techList, setTechList] = useState<TechItemType[]>([]);
   const [query, setQuery] = useState('');
@@ -84,10 +88,11 @@ export const Technologies: React.FC = () => {
               <div className='topRow'>
                 <span className='topRowTitle'>{technology.type}</span>
                 {techProjects.length > 3 && (
-                  <a
+                  <Link
                     className='seeAll'
-                    href='#'
-                  >{`See All (${techProjects.length})`}</a>
+                    to={'/projects'}
+                    onClick={() => setProjectsGroup(techProjects)}
+                  >{`See All (${techProjects.length})`}</Link>
                 )}
               </div>
               <div className='detailsSection'>

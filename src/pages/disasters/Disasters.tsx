@@ -13,6 +13,7 @@ import './Disasters.scss';
 import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
 import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 import { RadarContext } from 'navigation/context';
+import { Link } from 'react-router-dom';
 
 export const Disasters: React.FC = () => {
   const {
@@ -29,7 +30,7 @@ export const Disasters: React.FC = () => {
   const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
 
-  const { filteredValues } = useContext(RadarContext);
+  const { filteredValues, setProjectsGroup } = useContext(RadarContext);
 
   const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
 
@@ -184,10 +185,11 @@ export const Disasters: React.FC = () => {
             <div className='topRow'>
               <span className='topRowTitle'>{disaster.name}</span>
               {disasterProjects.length > 3 && (
-                <a
+                <Link
                   className='seeAll'
-                  href='#'
-                >{`See All (${disasterProjects?.length})`}</a>
+                  to={'/projects'}
+                  onClick={() => setProjectsGroup(disasterProjects)}
+                >{`See All (${disasterProjects?.length})`}</Link>
               )}
             </div>
             <div className='detailsSection'>

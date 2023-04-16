@@ -27,7 +27,7 @@ export const ProjectsRadar: React.FC = () => {
 
   const { filteredValues } = useContext(RadarContext);
 
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
@@ -110,7 +110,6 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     if (filteredProjects) {
-      console.log({ filteredProjects });
       setBlips(filteredProjects);
     }
   }, [filteredProjects]);
@@ -124,6 +123,10 @@ export const ProjectsRadar: React.FC = () => {
     setProjectResults(results);
     setFilteredProjects(results as BlipType[]);
   };
+
+  useEffect(() => {
+    setTabIndex(0);
+  }, []);
 
   return (
     <div className='projectRadarContainer'>

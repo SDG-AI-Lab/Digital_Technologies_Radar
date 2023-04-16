@@ -9,6 +9,7 @@ import { Projects } from './projects/ProjectsList';
 import { ProjectDetails } from './projects/projectDetails/ProjectDetails';
 import { Disasters } from './disasters/Disasters';
 import { Technologies } from './technologies/Technologies';
+import { HomePage } from './homePage/HomePage';
 
 export {
   Home,
@@ -21,5 +22,6 @@ export {
   Projects,
   ProjectDetails,
   Disasters,
-  Technologies
+  Technologies,
+  HomePage
 };

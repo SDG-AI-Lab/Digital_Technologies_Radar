@@ -54,45 +54,49 @@ export const AppBottomNav: React.FC = () => {
           </MenuItem>
         </Box>
 
-        <Box flex={1}>
-          <MenuItem to={ROUTES.RADAR}>
-            <Button
-              bgColor='gray.50'
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-            >
-              <FiTarget size={25} color='#3182CE' />
-              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
-                Radar
-              </Text>
-            </Button>
-          </MenuItem>
-        </Box>
+        {false && (
+          <Box flex={1}>
+            <MenuItem to={ROUTES.RADAR}>
+              <Button
+                bgColor='gray.50'
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                <FiTarget size={25} color='#3182CE' />
+                <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                  Radar
+                </Text>
+              </Button>
+            </MenuItem>
+          </Box>
+        )}
 
-        <Box flex={1}>
-          <MenuItem to={ROUTES.MAP_VIEW}>
-            <Button
-              py={8}
-              width={'100%'}
-              bgColor='gray.50'
-              borderRadius={0}
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-            >
-              <SiOpenstreetmap size={25} color='#3182CE' />
-              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
-                Map
-              </Text>
-            </Button>
-          </MenuItem>
-        </Box>
+        {false && (
+          <Box flex={1}>
+            <MenuItem to={ROUTES.MAP_VIEW}>
+              <Button
+                py={8}
+                width={'100%'}
+                bgColor='gray.50'
+                borderRadius={0}
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                <SiOpenstreetmap size={25} color='#3182CE' />
+                <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                  Map
+                </Text>
+              </Button>
+            </MenuItem>
+          </Box>
+        )}
 
         <Box flex={1}>
           <MenuItem to={ROUTES.PROJECTS}>
@@ -154,45 +158,49 @@ export const AppBottomNav: React.FC = () => {
           </MenuItem>
         </Box>
 
-        <Box flex={1}>
-          <MenuItem to={ROUTES.ABOUT}>
-            <Button
-              bgColor='gray.50'
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-            >
-              <BsFillInfoSquareFill size={25} color='#3182CE' />
-              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
-                About
-              </Text>
-            </Button>
-          </MenuItem>
-        </Box>
+        {false && (
+          <Box flex={1}>
+            <MenuItem to={ROUTES.ABOUT}>
+              <Button
+                bgColor='gray.50'
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                <BsFillInfoSquareFill size={25} color='#3182CE' />
+                <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                  About
+                </Text>
+              </Button>
+            </MenuItem>
+          </Box>
+        )}
 
-        <Box flex={1}>
-          <MenuItem to={ROUTES.SEARCH}>
-            <Button
-              bgColor='gray.50'
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-            >
-              <FaSearch size={25} color='#3182CE' />
-              <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
-                Search
-              </Text>
-            </Button>
-          </MenuItem>
-        </Box>
+        {false && (
+          <Box flex={1}>
+            <MenuItem to={ROUTES.SEARCH}>
+              <Button
+                bgColor='gray.50'
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+              >
+                <FaSearch size={25} color='#3182CE' />
+                <Text color={'blue.500'} fontSize='0.9em' mt='5px'>
+                  Search
+                </Text>
+              </Button>
+            </MenuItem>
+          </Box>
+        )}
       </Flex>
     </Box>
   );

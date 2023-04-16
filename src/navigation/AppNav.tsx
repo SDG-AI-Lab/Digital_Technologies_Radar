@@ -16,7 +16,7 @@ import {
   Search,
   About,
   Volunteers,
-  Home,
+  HomePage,
   Disasters,
   Technologies,
   Projects,
@@ -77,6 +77,7 @@ export const NavApp: React.FC = () => {
   );
 
   const [currentProject, setCurrentProject] = useState();
+  const [projectsGroup, setProjectsGroup] = useState([]);
 
   const radarContext: RadarContextInterface = {
     radarStateValues,
@@ -90,7 +91,9 @@ export const NavApp: React.FC = () => {
     parameterCount,
     setParameterCount,
     currentProject,
-    setCurrentProject
+    setCurrentProject,
+    projectsGroup,
+    setProjectsGroup
   };
   return (
     <RadarContext.Provider value={radarContext}>
@@ -100,7 +103,7 @@ export const NavApp: React.FC = () => {
         <AppMobileHeader />
         <MainLayout>
           <Routes>
-            <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.HOME} element={<HomePage />} />
             <Route path={ROUTES.PROJECTS_RADAR} element={<ProjectsRadar />} />
             <Route path={ROUTES.RADAR} element={<RadarLayout />}>
               <Route path={ROUTES.QUADRANT}>

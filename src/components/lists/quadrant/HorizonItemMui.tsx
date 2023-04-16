@@ -47,7 +47,7 @@ export const HorizonItemMui: React.FC<QuadrantDataListItemProps> = ({
             expandIcon={<ExpandMoreIcon />}
             className='accordionSummary'
           >
-            <h5>{'horizonName'}</h5>
+            <h5>{horizonName}</h5>
           </AccordionSummary>
           <AccordionDetails>
             {quadrantBlips.map((blip) => (
