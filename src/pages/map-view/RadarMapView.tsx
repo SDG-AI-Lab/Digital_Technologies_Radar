@@ -131,8 +131,9 @@ export const RadarMapView: React.FC = () => {
           className='mapContainer'
         >
           <MapContainer
-            center={getCordinates('algeria')}
-            zoom={2}
+            // center={getCordinates('algeria')}
+            center={[0, 0]}
+            zoom={1}
             minZoom={2}
             attributionControl={false}
           >
@@ -187,9 +188,11 @@ export const RadarMapView: React.FC = () => {
               );
             })}
           </MapContainer>
-          <ProjectSlider
-            blips={countrySelected ? countryProjects : displayBlips}
-          />
+          {false && (
+            <ProjectSlider
+              blips={countrySelected ? countryProjects : displayBlips}
+            />
+          )}
         </GridItem>
       </Grid>
     </div>

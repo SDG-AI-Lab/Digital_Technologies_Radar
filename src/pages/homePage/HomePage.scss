@@ -1,0 +1,55 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  .projectsShowcase {
+    display: flex;
+    gap: 2px;
+  }
+
+  .homeImage {
+    background-color: beige;
+    display: flex;
+    flex: 1;
+    height: 600px;
+
+    img {
+      height: 100%;
+      object-fit: fill;
+      object-position: center;
+      width: 100%;
+    }
+  }
+
+  .aboutSection {
+    background-color: #f7f7f7;
+    display: flex;
+    gap: 20px;
+    padding: 60px;
+
+    .aboutTitle {
+      color: #c1391d;
+      flex-basis: 40%;
+      font-family: 'Gill Sans';
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 28px;
+    }
+
+    .aboutDetails {
+
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      flex-basis: 60%;
+      font-family: 'Gill Sans';
+      font-size: 14px;
+      font-weight: 400;
+      -webkit-line-clamp: 5;
+      line-height: 16px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

@@ -34,7 +34,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.RADAR}>
+        <MenuItem to={ROUTES.PROJECTS_RADAR}>
           <Button
             rounded='md'
             colorScheme='blue'
@@ -47,18 +47,35 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.MAP_VIEW}>
-          <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
-          >
-            <SiOpenstreetmap size={30} />
-          </Button>
-        </MenuItem>
+        {false && (
+          <MenuItem to={ROUTES.RADAR}>
+            <Button
+              rounded='md'
+              colorScheme='blue'
+              py={7}
+              px={1}
+              width={'100%'}
+              bg='#0062ac'
+            >
+              <FiTarget size={30} />
+            </Button>
+          </MenuItem>
+        )}
+
+        {false && (
+          <MenuItem to={ROUTES.MAP_VIEW}>
+            <Button
+              rounded='md'
+              colorScheme='blue'
+              py={7}
+              px={1}
+              width={'100%'}
+              bg='#0062ac'
+            >
+              <SiOpenstreetmap size={30} />
+            </Button>
+          </MenuItem>
+        )}
 
         <MenuItem to={ROUTES.PROJECTS}>
           <Button
@@ -99,31 +116,35 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.ABOUT}>
-          <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
-          >
-            <BsFillInfoSquareFill size={25} color='white' />
-          </Button>
-        </MenuItem>
+        {false && (
+          <MenuItem to={ROUTES.ABOUT}>
+            <Button
+              rounded='md'
+              colorScheme='blue'
+              py={7}
+              px={1}
+              width={'100%'}
+              bg='#0062ac'
+            >
+              <BsFillInfoSquareFill size={25} color='white' />
+            </Button>
+          </MenuItem>
+        )}
 
-        <MenuItem to={ROUTES.SEARCH}>
-          <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
-          >
-            <FaSearch size={30} />
-          </Button>
-        </MenuItem>
+        {false && (
+          <MenuItem to={ROUTES.SEARCH}>
+            <Button
+              rounded='md'
+              colorScheme='blue'
+              py={7}
+              px={1}
+              width={'100%'}
+              bg='#0062ac'
+            >
+              <FaSearch size={30} />
+            </Button>
+          </MenuItem>
+        )}
       </Stack>
     </Box>
     <Box />

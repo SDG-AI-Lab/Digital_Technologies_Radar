@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import './ProjectComponent.scss';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { ProjectBadge } from 'components/shared/projectBadges/ProjectBadges';
+import { RadarContext } from 'navigation/context';
+import { Link } from 'react-router-dom';
 
 interface Props {
   project: BlipType;
 }
 
 export const Project: React.FC<Props> = ({ project }) => {
+  const { setCurrentProject } = useContext(RadarContext);
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
@@ -38,9 +41,13 @@ export const Project: React.FC<Props> = ({ project }) => {
               <ProjectBadge project={project} />
             </div>
           )}
-          <div className='moreBtn'>
+          <Link
+            className='moreBtn'
+            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            onClick={() => setCurrentProject(project)}
+          >
             <button>MORE</button>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -25,11 +25,17 @@ export const Projects: React.FC = () => {
     state: { blips }
   } = useRadarState();
 
-  const { filteredValues } = useContext(RadarContext);
+  const { filteredValues, projectsGroup } = useContext(RadarContext);
 
   useEffect(() => {
     setFilteredProjects(blips);
   }, [blips]);
+
+  useEffect(() => {
+    if (projectsGroup.length) {
+      setFilteredProjects(projectsGroup);
+    }
+  }, []);
 
   useEffect(() => {
     if (!filteredProjects) return;
@@ -117,7 +123,7 @@ export const Projects: React.FC = () => {
         </div>
 
         <div className='filters'>
-          <FilterComponent projects={blips} />
+          <FilterComponent projects={blips} config={{ header: true }} />
         </div>
       </div>
     </div>

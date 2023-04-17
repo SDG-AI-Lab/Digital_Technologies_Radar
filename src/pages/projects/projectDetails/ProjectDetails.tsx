@@ -54,7 +54,7 @@ export const ProjectDetails: React.FC = () => {
             rel='noopener noreferrer'
             className='seeProject'
           >
-            SEE PROJECT
+            SEE PROJECT SOURCE
           </a>
         </div>
         <div className='projectImg'>

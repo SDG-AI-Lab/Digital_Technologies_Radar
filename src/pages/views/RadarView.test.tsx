@@ -32,7 +32,9 @@ const radarContext: RadarContextInterface = {
   parameterCount: [],
   setParameterCount: jest.fn(),
   currentProject: {},
-  setCurrentProject: jest.fn()
+  setCurrentProject: jest.fn(),
+  projectsGroup: [],
+  setProjectsGroup: jest.fn()
 };
 
 test('renders the Radar component when not loading', () => {
