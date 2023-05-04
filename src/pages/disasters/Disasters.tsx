@@ -33,6 +33,7 @@ export const Disasters: React.FC = () => {
   const { filteredValues, setProjectsGroup } = useContext(RadarContext);
 
   const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
+  console.log({ disasterTypes });
 
   const getThreeRandomBlips = (projects: BlipType[]): BlipType[] => {
     const result = [];
