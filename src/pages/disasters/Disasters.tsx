@@ -1,15 +1,12 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useState, useEffect } from 'react';
 import { loremIpsum } from 'react-lorem-ipsum';
 import { Link } from 'react-router-dom';
-import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
+import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 
-import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
-import {
-  mergeDisasterCycle,
-  projectSearch
-} from 'components/shared/helpers/HelperUtils';
+import { projectSearch } from 'components/shared/helpers/HelperUtils';
 import { Filter } from 'components/shared/filter/Filter';
 import { InfoCard } from 'components/infoCard/InfoCard';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
@@ -24,34 +21,13 @@ export const Disasters: React.FC = () => {
     state: { blips }
   } = useRadarState();
 
-  const {
-    state: {
-      keys: { disasterTypeKey: disasterKey }
-    }
-  } = useDataState();
-
   const [query, setQuery] = useState('');
   const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
   const [loading, setLoading] = useState(true);
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
-  const [disasterCount, setDisasterCount] = useState<any>({});
 
   const { filteredValues, setProjectsGroup } = useContext(RadarContext);
-
-  // const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
-
-  const getThreeRandomBlips = (projects: BlipType[]): BlipType[] => {
-    const result = [];
-    const length = projects.length;
-    const size = length > 3 ? 3 : length;
-    for (let i = 0; i < size; i++) {
-      const randomIndex = Math.floor(Math.random() * length);
-      result.push(projects[randomIndex]);
-    }
-
-    return result;
-  };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(
@@ -63,58 +39,28 @@ export const Disasters: React.FC = () => {
   };
 
   const getDisasters = async (): Promise<any> => {
-    console.log('aaaaa');
+    await getDisasterProjects();
     const { data, error } = await supabase
       .from('disaster_types')
       .select(`name, description, img_url`)
       .order('name');
 
     if (!error) {
-      const disasters: any = [];
-      for (const disaster of data) {
-        const { count } = await supabase
-          .from('disaster_projects')
-          .select('*', { count: 'exact', head: true })
-          .eq('disaster', disaster.name);
-        disasters.push({ disaster, count });
-      }
-      setDisasterTypes(disasters);
+      setDisasterTypes(data);
       setLoading(false);
     }
   };
 
-  // useEffect(() => {
-  //   // console.log({ disasterCount }, Object.keys(disasterCount));
-  //   if (disasterTypes.length) {
-  //     const countObj = {};
-  //     disasterTypes.forEach(async (disaster) => {
-  //       const { count } = await supabase
-  //         .from('disaster_projects')
-  //         .select('*', { count: 'exact', head: true })
-  //         .eq('disaster', disaster.name);
-  //       countObj[disaster.name] = count;
-  //     });
-  //     setDisasterCount(countObj);
-
-  //   }
-  // }, [disasterTypes]);
-
-  const getCount = async (disasterName) => {
-    const { count } = await supabase
-      .from('disaster_projects')
-      .select('*', { count: 'exact', head: true })
-      .eq('disaster', disasterName);
-    console.log({ count });
-    return count as number;
+  const getDisasterProjects = async () => {
+    const { data, error } = await supabase.from('disaster_projects').select();
+    if (!error) {
+      setFilteredProjects(data);
+    }
   };
 
   useEffect(() => {
     getDisasters();
   }, []);
-
-  useEffect(() => {
-    setFilteredProjects(blips);
-  }, [blips]);
 
   useEffect(() => {
     if (!filteredProjects) return;
@@ -217,8 +163,6 @@ export const Disasters: React.FC = () => {
     ]);
   }, [filteredValues]);
 
-  console.log({ disasterTypes });
-
   return loading ? (
     <Loader />
   ) : (
@@ -234,25 +178,24 @@ export const Disasters: React.FC = () => {
       </div>
 
       <h3>Disasters</h3>
-      {disasterTypes.map(({ disaster, count }) => {
-        const blipsToUse = query
-          ? projectResults || []
-          : mergeDisasterCycle(filteredProjects as BlipType[]);
-        const disasterProjects = (blipsToUse || []).filter(
-          (i) => i[disasterKey] === disaster.name
+      {disasterTypes.map((disaster: any, idx) => {
+        // const blipsToUse = query
+        //   ? projectResults || []
+        //   : mergeDisasterCycle(filteredProjects as BlipType[]);
+        const disasterProjects = (filteredProjects || []).filter(
+          (i) => i['disaster'] === disaster.name
         );
 
-        return disasterProjects.length ? (
-          <div className='disasterContainer' key={disaster.uuid}>
-            {/* disasterCount */}
+        return (
+          <div className='disasterContainer' key={idx}>
             <div className='topRow'>
               <span className='topRowTitle'>{disaster.name}</span>
-              {count > 3 && (
+              {disasterProjects.length > 3 && (
                 <Link
                   className='seeAll'
                   to={'/projects'}
                   onClick={() => setProjectsGroup(disasterProjects)}
-                >{`See All (${count as string})`}</Link>
+                >{`See All (${disasterProjects.length})`}</Link>
               )}
             </div>
             <div className='detailsSection' key={disaster.uuid}>
@@ -271,16 +214,11 @@ export const Disasters: React.FC = () => {
                   btnProps={{ text: 'More Info', link: '#' }}
                 />
               </div>
-              {
-                <ProjectsCollection
-                  // @ts-expect-error
-                  projects={getThreeRandomBlips(disasterProjects)}
-                />
-              }
+              {disasterProjects && (
+                <ProjectsCollection projects={disasterProjects.slice(0, 3)} />
+              )}
             </div>
           </div>
-        ) : (
-          <div key={idx} />
         );
       })}
     </div>
