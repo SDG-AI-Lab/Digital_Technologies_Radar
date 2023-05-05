@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useState, useEffect } from 'react';
-import { InfoCard } from 'components/infoCard/InfoCard';
 import { loremIpsum } from 'react-lorem-ipsum';
-import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
+import { Link } from 'react-router-dom';
+import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
+import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
+
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import {
   mergeDisasterCycle,
   projectSearch
 } from 'components/shared/helpers/HelperUtils';
 import { Filter } from 'components/shared/filter/Filter';
+import { InfoCard } from 'components/infoCard/InfoCard';
+import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
+import { RadarContext } from 'navigation/context';
+import { Loader } from 'helpers/Loader';
+import { supabase } from 'helpers/databaseClient';
 
 import './Disasters.scss';
-import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
-import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
-import { RadarContext } from 'navigation/context';
-import { Link } from 'react-router-dom';
 
 export const Disasters: React.FC = () => {
   const {
@@ -29,11 +33,13 @@ export const Disasters: React.FC = () => {
   const [query, setQuery] = useState('');
   const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
+  const [loading, setLoading] = useState(true);
+  const [disasterTypes, setDisasterTypes] = useState<any>([]);
+  const [disasterCount, setDisasterCount] = useState<any>({});
 
   const { filteredValues, setProjectsGroup } = useContext(RadarContext);
 
-  const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
-  console.log({ disasterTypes });
+  // const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
 
   const getThreeRandomBlips = (projects: BlipType[]): BlipType[] => {
     const result = [];
@@ -55,6 +61,56 @@ export const Disasters: React.FC = () => {
     setQuery(event.target.value);
     setProjectResults(results);
   };
+
+  const getDisasters = async (): Promise<any> => {
+    console.log('aaaaa');
+    const { data, error } = await supabase
+      .from('disaster_types')
+      .select(`name, description, img_url`)
+      .order('name');
+
+    if (!error) {
+      const disasters: any = [];
+      for (const disaster of data) {
+        const { count } = await supabase
+          .from('disaster_projects')
+          .select('*', { count: 'exact', head: true })
+          .eq('disaster', disaster.name);
+        disasters.push({ disaster, count });
+      }
+      setDisasterTypes(disasters);
+      setLoading(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   // console.log({ disasterCount }, Object.keys(disasterCount));
+  //   if (disasterTypes.length) {
+  //     const countObj = {};
+  //     disasterTypes.forEach(async (disaster) => {
+  //       const { count } = await supabase
+  //         .from('disaster_projects')
+  //         .select('*', { count: 'exact', head: true })
+  //         .eq('disaster', disaster.name);
+  //       countObj[disaster.name] = count;
+  //     });
+  //     setDisasterCount(countObj);
+
+  //   }
+  // }, [disasterTypes]);
+
+  const getCount = async (disasterName) => {
+    const { count } = await supabase
+      .from('disaster_projects')
+      .select('*', { count: 'exact', head: true })
+      .eq('disaster', disasterName);
+    console.log({ count });
+    return count as number;
+  };
+
+  useEffect(() => {
+    getDisasters();
+  }, []);
 
   useEffect(() => {
     setFilteredProjects(blips);
@@ -161,7 +217,11 @@ export const Disasters: React.FC = () => {
     ]);
   }, [filteredValues]);
 
-  return (
+  console.log({ disasterTypes });
+
+  return loading ? (
+    <Loader />
+  ) : (
     <div className='disasters'>
       <div className='searchFilter'>
         <input
@@ -174,30 +234,34 @@ export const Disasters: React.FC = () => {
       </div>
 
       <h3>Disasters</h3>
-      {disasterTypes.map((disaster, idx) => {
+      {disasterTypes.map(({ disaster, count }) => {
         const blipsToUse = query
           ? projectResults || []
           : mergeDisasterCycle(filteredProjects as BlipType[]);
         const disasterProjects = (blipsToUse || []).filter(
           (i) => i[disasterKey] === disaster.name
         );
+
         return disasterProjects.length ? (
-          <div className='disasterContainer' key={`${idx}${disaster.uuid}`}>
+          <div className='disasterContainer' key={disaster.uuid}>
+            {/* disasterCount */}
             <div className='topRow'>
               <span className='topRowTitle'>{disaster.name}</span>
-              {disasterProjects.length > 3 && (
+              {count > 3 && (
                 <Link
                   className='seeAll'
                   to={'/projects'}
                   onClick={() => setProjectsGroup(disasterProjects)}
-                >{`See All (${disasterProjects?.length})`}</Link>
+                >{`See All (${count as string})`}</Link>
               )}
             </div>
-            <div className='detailsSection'>
+            <div className='detailsSection' key={disaster.uuid}>
               <div className='disasterDetails'>
                 <InfoCard
                   title={disaster.name}
+                  imgUrl={disaster.img_url}
                   details={
+                    disaster.description ||
                     loremIpsum({
                       p: 1,
                       avgSentencesPerParagraph: 10,
