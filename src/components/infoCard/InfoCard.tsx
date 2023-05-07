@@ -16,6 +16,7 @@ import './InfoCard.scss';
 interface Props {
   title: string;
   details: string;
+  imgUrl: string;
   btnProps: {
     text: string;
     link: string;
@@ -23,7 +24,7 @@ interface Props {
   };
 }
 
-export const InfoCard: React.FC<Props> = ({ title, details }) => {
+export const InfoCard: React.FC<Props> = ({ title, details, imgUrl }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
@@ -31,7 +32,7 @@ export const InfoCard: React.FC<Props> = ({ title, details }) => {
     <div className='infoCard'>
       <div className='infoImage'>
         <img
-          src={fallBackImage}
+          src={imgUrl}
           onError={(e) => {
             // @ts-expect-error
             e.target.src = fallBackImage;
@@ -51,7 +52,7 @@ export const InfoCard: React.FC<Props> = ({ title, details }) => {
           <DrawerCloseButton />
           <div>
             <img
-              src={fallBackImage}
+              src={imgUrl}
               onError={(e) => {
                 // @ts-expect-error
                 e.target.src = fallBackImage;

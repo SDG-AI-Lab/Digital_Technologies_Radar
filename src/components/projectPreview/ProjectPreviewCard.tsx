@@ -24,8 +24,8 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
         <div className='image'>
           <img
             src={
-              project['Image Url'].length > 0
-                ? `${project['Image Url']}`
+              project['img_url'].length > 0
+                ? `${project['img_url']}`
                 : fallBackImage
             }
             onError={(e) => {
@@ -37,14 +37,12 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
         </div>
         <div className='projectDetails'>
           <Link
-            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            to={`/projects/${project['name']}`}
             onClick={() => setCurrentProject(project)}
           >
-            <span className='projectTitle'>
-              {project['Ideas/Concepts/Examples']}
-            </span>
+            <span className='projectTitle'>{project['name']}</span>
           </Link>
-          <span className='projectDescription'>{project['Description']}</span>
+          <span className='projectDescription'>{project['description']}</span>
           <Link
             to={`/projects/${project['Ideas/Concepts/Examples']}`}
             onClick={() => setCurrentProject(project)}

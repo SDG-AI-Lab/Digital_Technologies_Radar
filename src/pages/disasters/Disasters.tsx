@@ -1,166 +1,114 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useState, useEffect } from 'react';
-import { InfoCard } from 'components/infoCard/InfoCard';
 import { loremIpsum } from 'react-lorem-ipsum';
-import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
-import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
-import {
-  mergeDisasterCycle,
-  projectSearch
-} from 'components/shared/helpers/HelperUtils';
-import { Filter } from 'components/shared/filter/Filter';
-
-import './Disasters.scss';
-import { useRadarState, useDataState } from '@undp_sdg_ai_lab/undp-radar';
-import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
-import { RadarContext } from 'navigation/context';
 import { Link } from 'react-router-dom';
 
+import {
+  projectSearch,
+  getFilteredProjects
+} from 'components/shared/helpers/HelperUtils';
+import { Filter } from 'components/shared/filter/Filter';
+import { InfoCard } from 'components/infoCard/InfoCard';
+import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
+import { RadarContext } from 'navigation/context';
+import { Loader } from 'helpers/Loader';
+import { supabase } from 'helpers/databaseClient';
+
+import './Disasters.scss';
+
+const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION;
+
 export const Disasters: React.FC = () => {
-  const {
-    state: { blips }
-  } = useRadarState();
-
-  const {
-    state: {
-      keys: { disasterTypeKey: disasterKey }
-    }
-  } = useDataState();
-
   const [query, setQuery] = useState('');
-  const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
-  const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
+  const [filteredProjects, setFilteredProjects] = useState<any>();
+  const [loading, setLoading] = useState(true);
+  const [disasterTypes, setDisasterTypes] = useState<any>([]);
+  const [projectsToUse, setProjectsToUse] = useState<any>([]);
+  const [projectsList, setProjectsList] = useState<any>([]);
 
   const { filteredValues, setProjectsGroup } = useContext(RadarContext);
 
-  const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const results = projectSearch(event.target.value, filteredProjects);
 
-  const getThreeRandomBlips = (projects: BlipType[]): BlipType[] => {
-    const result = [];
-    const length = projects.length;
-    const size = length > 3 ? 3 : length;
-    for (let i = 0; i < size; i++) {
-      const randomIndex = Math.floor(Math.random() * length);
-      result.push(projects[randomIndex]);
-    }
-
-    return result;
+    setQuery(event.target.value);
+    setProjectsToUse(results);
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const results = projectSearch(
-      event.target.value,
-      filteredProjects as BlipType[]
-    );
-    setQuery(event.target.value);
-    setProjectResults(results);
+  const getDisasterData = async (): Promise<any> => {
+    await getDisasterProjects();
+
+    const storedDisasterTypes = localStorage.getItem('disasterTypes');
+    if (storedDisasterTypes) {
+      setDisasterTypes(JSON.parse(storedDisasterTypes).data);
+    } else {
+      const { data, error } = await supabase
+        .from('disaster_types')
+        .select(`name, description, img_url`)
+        .order('name');
+
+      if (!error) {
+        setDisasterTypes(data);
+        localStorage.setItem(
+          'disasterTypes',
+          JSON.stringify({
+            version: VERSION,
+            data
+          })
+        );
+      }
+    }
+    setLoading(false);
+  };
+
+  const getDisasterProjects = async () => {
+    const storedProjects = localStorage.getItem('disasterProjects');
+    if (storedProjects) {
+      const { data } = JSON.parse(storedProjects);
+      setFilteredProjects(data);
+      setProjectsList(data);
+    } else {
+      const { data, error } = await supabase.from('disaster_projects').select();
+      if (!error) {
+        setFilteredProjects(data as any);
+        setProjectsList(data);
+        localStorage.setItem(
+          'disasterProjects',
+          JSON.stringify({
+            version: VERSION,
+            data
+          })
+        );
+      }
+    }
   };
 
   useEffect(() => {
-    setFilteredProjects(blips);
-  }, [blips]);
+    setProjectsToUse(filteredProjects);
+  }, [filteredProjects]);
+
+  useEffect(() => {
+    getDisasterData();
+  }, []);
 
   useEffect(() => {
     if (!filteredProjects) return;
 
-    // status filter
-    let statusFilters: any = Object.keys(filteredValues['status']).reduce(
-      (statusArr: any, status) => {
-        if (filteredValues['status'][status])
-          statusArr.push(status.toLowerCase());
-        return statusArr;
-      },
-      []
+    const result = getFilteredProjects(
+      filteredValues,
+      setFilteredProjects,
+      projectsList
     );
 
-    // stages filter
-    let stageFilters = Object.keys(filteredValues['stages']).reduce(
-      (stagesArr: any, stage) => {
-        if (filteredValues['stages'][stage])
-          stagesArr.push(stage.toLowerCase());
-        return stagesArr;
-      },
-      []
-    );
-
-    // technologies filter
-    let techFilters = Object.keys(filteredValues['technologies']).reduce(
-      (techArr: any, tech) => {
-        if (filteredValues['technologies'][tech]) techArr.push(tech);
-        return techArr;
-      },
-      []
-    );
-
-    // status filter
-    let filterStatus = true;
-    let statusFilteredProjects: BlipType[] = [];
-    if (!statusFilters.length) {
-      if (stageFilters.length || techFilters.length) filterStatus = false;
-      statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
-    }
-    if (filterStatus) {
-      statusFilteredProjects = blips.filter((project) => {
-        return statusFilters.includes(project['Disaster Cycle']);
-      });
-    }
-
-    // stages filter
-    let filterStages = true;
-    let stagesFilteredProjects: BlipType[] = [];
-    if (!stageFilters.length) {
-      if (statusFilters.length || techFilters.length) filterStages = false;
-      stageFilters = ['idea', 'validation', 'prototype', 'production'];
-    }
-    if (filterStages) {
-      stagesFilteredProjects = blips.filter((project) => {
-        return stageFilters.includes(project['Status/Maturity']);
-      });
-    }
-
-    // tech filter
-    let filterTech = false;
-    let techFilteredProjects: BlipType[] = [];
-    if (!techFilters.length) {
-      if (statusFilters.length || stageFilters.length) filterTech = false;
-      techFilters = [
-        'Geographical Information Systems',
-        'Data Collection',
-        'Data Analysis',
-        'Cyber Physical Systems',
-        'Big Data',
-        'Artificial Intelligence',
-        'Machine Learning',
-        'Computer Vision',
-        'Natural Language Processing',
-        'Cloud Computing',
-        'Remote Sensing',
-        'Mobile App',
-        'Chatbot',
-        'Internet of Things',
-        'Drones',
-        'Web Mapping',
-        'Blockchain',
-        'Crowdsourcing',
-        'Social Media',
-        'Data Extraction',
-        'Web-based App',
-        'Data Mining'
-      ];
-    }
-    if (filterTech) {
-      techFilteredProjects = blips.filter((project) => {
-        return techFilters.some((r: any) => project['Technology'].includes(r));
-      });
-    }
-
-    setFilteredProjects([
-      ...stagesFilteredProjects,
-      ...statusFilteredProjects,
-      ...techFilteredProjects
-    ]);
+    if (result) setFilteredProjects(result);
   }, [filteredValues]);
 
-  return (
+  return loading ? (
+    <div className='disasters'>
+      <Loader />
+    </div>
+  ) : (
     <div className='disasters'>
       <div className='searchFilter'>
         <input
@@ -173,51 +121,50 @@ export const Disasters: React.FC = () => {
       </div>
 
       <h3>Disasters</h3>
-      {disasterTypes.map((disaster, idx) => {
-        const blipsToUse = query
-          ? projectResults || []
-          : mergeDisasterCycle(filteredProjects as BlipType[]);
-        const disasterProjects = (blipsToUse || []).filter(
-          (i) => i[disasterKey] === disaster.name
-        );
-        return disasterProjects.length ? (
-          <div className='disasterContainer' key={`${idx}${disaster.uuid}`}>
-            <div className='topRow'>
-              <span className='topRowTitle'>{disaster.name}</span>
-              {disasterProjects.length > 3 && (
-                <Link
-                  className='seeAll'
-                  to={'/projects'}
-                  onClick={() => setProjectsGroup(disasterProjects)}
-                >{`See All (${disasterProjects?.length})`}</Link>
-              )}
-            </div>
-            <div className='detailsSection'>
-              <div className='disasterDetails'>
-                <InfoCard
-                  title={disaster.name}
-                  details={
-                    loremIpsum({
-                      p: 1,
-                      avgSentencesPerParagraph: 10,
-                      avgWordsPerSentence: 7
-                    })[0]
-                  }
-                  btnProps={{ text: 'More Info', link: '#' }}
-                />
+      {projectsToUse.length ? (
+        disasterTypes.map((disaster: any, idx: number) => {
+          const disasterProjects = (projectsToUse || []).filter(
+            (i: any) => i['disaster'] === disaster.name
+          );
+
+          return disasterProjects.length ? (
+            <div className='disasterContainer' key={idx}>
+              <div className='topRow'>
+                <span className='topRowTitle'>{disaster.name}</span>
+                {disasterProjects.length > 3 && (
+                  <Link
+                    className='seeAll'
+                    to={'/projects'}
+                    onClick={() => setProjectsGroup(disasterProjects)}
+                  >{`See All (${disasterProjects.length as string})`}</Link>
+                )}
               </div>
-              {
-                <ProjectsCollection
-                  // @ts-expect-error
-                  projects={getThreeRandomBlips(disasterProjects)}
-                />
-              }
+              <div className='detailsSection' key={disaster.uuid}>
+                <div className='disasterDetails'>
+                  <InfoCard
+                    title={disaster.name}
+                    imgUrl={disaster.img_url}
+                    details={
+                      disaster.description ||
+                      loremIpsum({
+                        p: 1,
+                        avgSentencesPerParagraph: 10,
+                        avgWordsPerSentence: 7
+                      })[0]
+                    }
+                    btnProps={{ text: 'More Info', link: '#' }}
+                  />
+                </div>
+                {disasterProjects && (
+                  <ProjectsCollection projects={disasterProjects.slice(0, 3)} />
+                )}
+              </div>
             </div>
-          </div>
-        ) : (
-          <div key={idx} />
-        );
-      })}
+          ) : null;
+        })
+      ) : (
+        <div> No projects found</div>
+      )}
     </div>
   );
 };
