@@ -15,7 +15,7 @@ import './InfoCard.scss';
 
 interface Props {
   title: string;
-  details: string;
+  details: string[];
   imgUrl: string;
   btnProps: {
     text: string;
@@ -60,7 +60,11 @@ export const InfoCard: React.FC<Props> = ({ title, details, imgUrl }) => {
               alt='Default Image'
             />
             <span className='infoDrawerTitle'>{title}</span>
-            <p className='infoDrawerTitle-details'> {details}</p>
+            {details.map((detail, idx) => (
+              <p className='infoDrawerTitle-details' key={idx}>
+                {detail}
+              </p>
+            ))}
           </div>
         </DrawerContent>
       </Drawer>
