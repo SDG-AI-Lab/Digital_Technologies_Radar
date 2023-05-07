@@ -99,6 +99,7 @@ export const Technologies: React.FC = () => {
                 <div className='disasterDetails'>
                   <InfoCard
                     title={technology.type}
+                    imgUrl={''}
                     details={
                       techDescription
                         ? techDescription[0]
