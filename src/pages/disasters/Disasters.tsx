@@ -63,9 +63,9 @@ export const Disasters: React.FC = () => {
   };
 
   const getDisasterProjects = async () => {
-    const storedProjects = localStorage.getItem('disasterProjects');
-    if (storedProjects) {
-      const { data } = JSON.parse(storedProjects);
+    const storedDisasterProjects = localStorage.getItem('disasterProjects');
+    if (storedDisasterProjects) {
+      const { data } = JSON.parse(storedDisasterProjects);
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
@@ -123,44 +123,49 @@ export const Disasters: React.FC = () => {
       <h3>Disasters</h3>
       {projectsToUse.length ? (
         disasterTypes.map((disaster: any, idx: number) => {
-          const disasterProjects = (projectsToUse || []).filter(
+          const disasterProjects = projectsToUse.filter(
             (i: any) => i['disaster'] === disaster.name
           );
 
-          return disasterProjects.length ? (
-            <div className='disasterContainer' key={idx}>
-              <div className='topRow'>
-                <span className='topRowTitle'>{disaster.name}</span>
-                {disasterProjects.length > 3 && (
-                  <Link
-                    className='seeAll'
-                    to={'/projects'}
-                    onClick={() => setProjectsGroup(disasterProjects)}
-                  >{`See All (${disasterProjects.length as string})`}</Link>
-                )}
-              </div>
-              <div className='detailsSection' key={disaster.uuid}>
-                <div className='disasterDetails'>
-                  <InfoCard
-                    title={disaster.name}
-                    imgUrl={disaster.img_url}
-                    details={
-                      disaster.description ||
-                      loremIpsum({
-                        p: 1,
-                        avgSentencesPerParagraph: 10,
-                        avgWordsPerSentence: 7
-                      })[0]
-                    }
-                    btnProps={{ text: 'More Info', link: '#' }}
-                  />
+          return (
+            !!disasterProjects.length && (
+              <div className='disasterContainer' key={idx}>
+                <div className='topRow'>
+                  <span className='topRowTitle'>{disaster.name}</span>
+                  {disasterProjects.length > 3 && (
+                    <Link
+                      className='seeAll'
+                      to={'/projects'}
+                      onClick={() => setProjectsGroup(disasterProjects)}
+                    >{`See All (${disasterProjects.length as string})`}</Link>
+                  )}
                 </div>
-                {disasterProjects && (
-                  <ProjectsCollection projects={disasterProjects.slice(0, 3)} />
-                )}
+                <div className='detailsSection' key={disaster.uuid}>
+                  <div className='disasterDetails'>
+                    <InfoCard
+                      title={disaster.name}
+                      imgUrl={disaster.img_url}
+                      details={
+                        disaster.description
+                          ? [`${disaster.description as string}`]
+                          : loremIpsum({
+                              p: 2,
+                              avgSentencesPerParagraph: 10,
+                              avgWordsPerSentence: 7
+                            })
+                      }
+                      btnProps={{ text: 'More Info', link: '#' }}
+                    />
+                  </div>
+                  {disasterProjects && (
+                    <ProjectsCollection
+                      projects={disasterProjects.slice(0, 3)}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          ) : null;
+            )
+          );
         })
       ) : (
         <div> No projects found</div>
