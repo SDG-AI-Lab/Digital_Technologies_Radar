@@ -18,7 +18,8 @@ export const MultiSelectFilter: React.FC<Props> = ({
   const { filteredValues } = useContext(RadarContext);
 
   useEffect(() => {
-    setSelected(filteredValues['parameters'][label]);
+    const value = filteredValues['parameters'][label];
+    setSelected(value || []);
   }, []);
 
   useEffect(() => {

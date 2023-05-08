@@ -91,16 +91,14 @@ export const getFilteredProjects = (
     []
   );
 
-  const parameterFilteredProjects = getParameterFilteredProjects(
-    filteredValues.parameters,
-    projectsList
-  );
+  const parameterFilteredProjects =
+    getParameterFilteredProjects(filteredValues.parameters, projectsList) || [];
 
   if (
     !statusFilters.length &&
     !stageFilters.length &&
     !techFilters.length &&
-    !parameterFilteredProjects
+    !parameterFilteredProjects.length
   ) {
     return setter(projectsList);
   }

@@ -34,7 +34,7 @@ const transformArray = (array: any, key: string = 'name'): string[] => {
 
 const PARAMETERS = [
   'Region',
-  'SubRegion',
+  'Sub Region',
   'Country',
   'Disaster Type',
   'UN Host',
@@ -110,7 +110,7 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
         label: a,
         value: a?.toLowerCase()
       })),
-      SubRegion: transformArray(subregions).map((a: string) => ({
+      'Sub Region': transformArray(subregions).map((a: string) => ({
         label: a,
         value: a.toLowerCase()
       })),
@@ -208,7 +208,7 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
         <label>PARAMETERS</label>
         <FilterItems
           labels={labels.parameters}
-          // multi={true}
+          multi={true}
           options={options}
           category='parameters'
         />
