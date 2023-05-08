@@ -14,7 +14,7 @@ import { RadarContext } from 'navigation/context';
 import { supabase } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION;
+const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');

@@ -17,7 +17,7 @@ import { supabase } from 'helpers/databaseClient';
 
 import './Disasters.scss';
 
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION;
+const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const Disasters: React.FC = () => {
   const [query, setQuery] = useState('');
