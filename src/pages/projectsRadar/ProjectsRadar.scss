@@ -30,12 +30,34 @@
       overflow: scroll;
 
       .accordion {
+        background: white;
+        border-style: none;
         position: sticky;
         top: 0;
 
-        .accordionSummary {
+        *,
+        *::after,
+        *::before {
+          border-style: none;
+        }
+
+        h2 {
           background-color: #d9d9d933;
           border-radius: 6px;
+          outline: none;
+          &:focus-visible {
+            outline: none;
+          }
+
+          > button {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .filterComponent {
+          height: 600px;
+          overflow: scroll;
         }
       }
 

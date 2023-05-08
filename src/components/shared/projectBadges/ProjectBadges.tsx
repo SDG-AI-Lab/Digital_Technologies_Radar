@@ -29,7 +29,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         color='white'
         textTransform='capitalize'
       >
-        🏠 {project['status']}
+        🏠 {project['status'] || project['Maturity/Status']}
       </Badge>
 
       {project['SDG'] && project['SDG'][0] !== 'No Information' && (
@@ -40,7 +40,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
           bg='green.50'
           textTransform='capitalize'
         >
-          🎯 {' ' + sliceForBadge(project['sdg'])}
+          🎯 {' ' + sliceForBadge(project['sdg'] || project['SDG'])}
         </Badge>
       )}
 
@@ -52,7 +52,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         color='#fff'
         textTransform='capitalize'
       >
-        🌋 {' ' + project['disaster_cycle']}
+        🌋 {' ' + (project['disaster_cycle'] || project['Disaster Cycle'])}
       </Badge>
       <Badge
         px={2}
@@ -61,7 +61,11 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         bg='purple.50'
         textTransform='capitalize'
       >
-        📍{'' + sliceForBadge(project['country'])}
+        📍
+        {'' +
+          sliceForBadge(
+            project['country'] || project['Country of Implementation']
+          )}
       </Badge>
     </Stack>
   );

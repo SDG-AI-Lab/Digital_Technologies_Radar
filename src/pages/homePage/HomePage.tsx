@@ -16,8 +16,8 @@ export const HomePage: React.FC = () => {
     <div className='homePage'>
       {blips.length && (
         <div className='projectsShowcase'>
-          {[blips[97], blips[34], blips[67]].map((project) => (
-            <>
+          {[blips[97], blips[34], blips[67]].map((project, idx) => (
+            <div key={idx}>
               <div className='homeImage'>
                 <img
                   src={
@@ -32,7 +32,7 @@ export const HomePage: React.FC = () => {
                   alt='Default Image'
                 />
               </div>
-            </>
+            </div>
           ))}
         </div>
       )}
