@@ -96,31 +96,171 @@ export const getFilteredProjects = (
   }
 
   // status filter
-  let statusFilteredProjects: any = [];
-
-  statusFilteredProjects = projectsList.filter((project: any) => {
+  const statusFilteredProjects = projectsList.filter((project: any) => {
     return statusFilters.some((item: any) =>
       project['disaster_cycle'].includes(item)
     );
   });
 
   // stages filter
-  let stageFilteredProjects: any = [];
-
-  stageFilteredProjects = projectsList.filter((project: any) => {
+  const stageFilteredProjects = projectsList.filter((project: any) => {
     return stageFilters.includes(project['status'].trim());
   });
 
-  let techFilteredProjects: any = [];
-  techFilteredProjects = projectsList.filter((project: any) => {
+  const techFilteredProjects = projectsList.filter((project: any) => {
     return techFilters.some((item: any) =>
       project['technology'].includes(item)
     );
   });
 
+  const parameterFilteredProjects = getParameterFilteredProjects(
+    filteredValues.parameters,
+    projectsList
+  );
+
   return [
     ...stageFilteredProjects,
     ...statusFilteredProjects,
-    ...techFilteredProjects
+    ...techFilteredProjects,
+    ...parameterFilteredProjects
+  ];
+
+  // return [...new Set(results)];
+};
+
+const getParameterFilteredProjects = (
+  parameterFilters: any,
+  projectsList: any
+): any => {
+  // Region
+  const regionFilters: any = parameterFilters['Region'].reduce(
+    (regionArr: any, region: { label: string; value: string }) => {
+      regionArr.push(region.label);
+      return regionArr;
+    },
+    []
+  );
+
+  let regionFilteredProjects: any = [];
+  regionFilteredProjects = projectsList.filter((project: any) => {
+    return regionFilters.some((item: any) => project['region'].includes(item));
+  });
+
+  // Sub Region
+  const subRegionFilters: any = parameterFilters['Sub Region'].reduce(
+    (subRegionArr: any, subRegion: { label: string; value: string }) => {
+      subRegionArr.push(subRegion.label);
+      return subRegionArr;
+    },
+    []
+  );
+
+  const subRegionFilteredProjects = projectsList.filter((project: any) => {
+    return subRegionFilters.some((item: any) =>
+      project['sub_region'].includes(item)
+    );
+  });
+
+  // Country
+  const countryFilters: any = parameterFilters['Country'].reduce(
+    (countryArr: any, country: { label: string; value: string }) => {
+      countryArr.push(country.label);
+      return countryArr;
+    },
+    []
+  );
+
+  const countryFilteredProjects = projectsList.filter((project: any) => {
+    return countryFilters.some((item: any) =>
+      project['country'].includes(item)
+    );
+  });
+
+  // Data
+  const dataFilters: any = parameterFilters['Data'].reduce(
+    (dataArr: any, data: { label: string; value: string }) => {
+      dataArr.push(data.label);
+      return dataArr;
+    },
+    []
+  );
+
+  const dataFilteredProjects = projectsList.filter((project: any) => {
+    return dataFilters.some((item: any) => project['data'].includes(item));
+  });
+
+  // SDG
+  const sdgFilters: any = parameterFilters['SDG'].reduce(
+    (sdgArr: any, sdg: { label: string; value: string }) => {
+      sdgArr.push(sdg.label);
+      return sdgArr;
+    },
+    []
+  );
+
+  const sdgFilteredProjects = projectsList.filter((project: any) => {
+    return sdgFilters.some((item: any) => project['sdg'].includes(item));
+  });
+
+  // UN Host
+  const unHostFilters: any = parameterFilters['UN Host'].reduce(
+    (unHostArr: any, unHost: { label: string; value: string }) => {
+      unHostArr.push(unHost.label);
+      return unHostArr;
+    },
+    []
+  );
+
+  const unHostFilteredProjects = projectsList.filter((project: any) => {
+    return unHostFilters.some((item: any) => project['un_host'].includes(item));
+  });
+
+  // Disaster Type
+  const disasterFilters: any = parameterFilters['Disaster Type'].reduce(
+    (disasterArr: any, disaster: { label: string; value: string }) => {
+      disasterArr.push(disaster.label);
+      return disasterArr;
+    },
+    []
+  );
+
+  const disasterFilteredProjects = projectsList.filter((project: any) => {
+    return disasterFilters.some((item: any) =>
+      project['disaster'].includes(item)
+    );
+  });
+
+  return [
+    ...regionFilteredProjects,
+    ...subRegionFilteredProjects,
+    ...countryFilteredProjects,
+    ...dataFilteredProjects,
+    ...sdgFilteredProjects,
+    ...unHostFilteredProjects,
+    ...disasterFilteredProjects
   ];
 };
+
+// const getParamFilteredProjects = (
+//   parameterFilters: any,
+//   key: any,
+//   projectsList: any[]
+// ): any => {
+//   console.log('herre');
+//   const filters: any = parameterFilters.reduce(
+//     (filterArr: any, option: { label: string; value: string }) => {
+//       filterArr.push(option.label);
+//       return filterArr;
+//     },
+//     []
+//   );
+
+//   const slug = key.toLowerCase().split('').join('_');
+//   const filteredProjects = projectsList.filter((project: any) => {
+//     return filters.some((item: any) => project[slug].includes(item));
+//   });
+
+//   console.log({ slug }, { filteredProjects });
+
+//   // return filteredProjects;
+// };

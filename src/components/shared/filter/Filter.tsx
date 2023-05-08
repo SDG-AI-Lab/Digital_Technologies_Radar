@@ -40,7 +40,7 @@ const transformArray = (array: any, key: string = 'name'): string[] => {
 
 const PARAMETERS = [
   'Region',
-  'SubRegion',
+  'Sub Region',
   'Country',
   'Disaster Type',
   'UN Host',
@@ -108,7 +108,7 @@ export const Filter: React.FC = () => {
         label: a,
         value: a?.toLowerCase()
       })),
-      SubRegion: transformArray(subregions).map((a: string) => ({
+      'Sub Region': transformArray(subregions).map((a: string) => ({
         label: a,
         value: a.toLowerCase()
       })),
@@ -161,7 +161,7 @@ export const Filter: React.FC = () => {
   };
 
   useEffect(() => {
-    // console.log({ filteredValues });
+    console.log({ filteredValues });
   }, [filteredValues]);
 
   const getFilterCount = (category: string): number => {
@@ -225,7 +225,7 @@ export const Filter: React.FC = () => {
               <DrawerHeader mt={10}>PARAMETERS</DrawerHeader>
               <FilterItems
                 labels={labels.parameters}
-                // multi={true}
+                multi={true}
                 options={options}
                 category='parameters'
               />

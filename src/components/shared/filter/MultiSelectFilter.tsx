@@ -35,6 +35,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
         labelledBy='Select'
         hasSelectAll={false}
         disableSearch={true}
+        ClearSelectedIcon={null}
       />
     </div>
   );
