@@ -52,6 +52,7 @@ interface Props {
 export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
   const {
     state: {
+      blips,
       radarData: { tech }
     }
   } = useRadarState();
@@ -95,14 +96,14 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
       setLabels(updatedLabels);
       setInitialFilteredValues(updatedLabels);
     }
-    const regions = FilterUtils.getRegions(projects, regionKey);
-    const subregions = FilterUtils.getSubregions(projects, subregionKey);
-    const countries = FilterUtils.getCountries(projects, countryKey);
-    const disasterTypes = FilterUtils.getDisasterTypes(projects, disasterKey);
-    const useCases = FilterUtils.getUseCases(projects, useCaseKey);
-    const implementers = FilterUtils.getImplementers(projects, implementerKey);
-    const sdgs = FilterUtils.getSDGs(projects, sdgKey);
-    const data = FilterUtils.getData(projects, dataKey);
+    const regions = FilterUtils.getRegions(blips, regionKey);
+    const subregions = FilterUtils.getSubregions(blips, subregionKey);
+    const countries = FilterUtils.getCountries(blips, countryKey);
+    const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
+    const useCases = FilterUtils.getUseCases(blips, useCaseKey);
+    const implementers = FilterUtils.getImplementers(blips, implementerKey);
+    const sdgs = FilterUtils.getSDGs(blips, sdgKey);
+    const data = FilterUtils.getData(blips, dataKey);
 
     const options = {
       Region: transformArray(regions).map((a: string) => ({

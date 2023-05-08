@@ -1,108 +1,88 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useEffect, useState } from 'react';
 
 import {
   projectSearch,
-  mergeDisasterCycle
+  getFilteredProjects
 } from 'components/shared/helpers/HelperUtils';
 
 import { Project } from './projectComponent/Project';
-import {
-  BaseCSVType,
-  BlipType,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
 
 import './Projects.scss';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
+import { supabase } from 'helpers/databaseClient';
+import { Loader } from 'helpers/Loader';
+
+const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION;
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
-  const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
-
-  const {
-    state: { blips }
-  } = useRadarState();
+  const [projectsToUse, setProjectsToUse] = useState<any>([]);
+  const [filteredProjects, setFilteredProjects] = useState<any>([]);
+  const [loading, setLoading] = useState<Boolean>(true);
+  const [projectsList, setProjectsList] = useState<any>([]);
 
   const { filteredValues, projectsGroup } = useContext(RadarContext);
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const results = projectSearch(event.target.value, filteredProjects);
+    setQuery(event.target.value);
+    setProjectsToUse(results);
+  };
+
   useEffect(() => {
-    setFilteredProjects(blips);
-  }, [blips]);
+    setProjectsToUse(filteredProjects);
+  }, [filteredProjects]);
 
   useEffect(() => {
     if (projectsGroup.length) {
       setFilteredProjects(projectsGroup);
+    } else {
+      getProjects();
     }
   }, []);
 
   useEffect(() => {
-    if (!filteredProjects) return;
+    if (!filteredProjects.length) return;
 
-    // status filter
-    let statusFilters: any = Object.keys(filteredValues['status']).reduce(
-      (statusArr: any, status) => {
-        if (filteredValues['status'][status])
-          statusArr.push(status.toLowerCase());
-        return statusArr;
-      },
-      []
+    const result = getFilteredProjects(
+      filteredValues,
+      setFilteredProjects,
+      projectsList
     );
 
-    // stages filter
-    let stageFilters = Object.keys(filteredValues['stages']).reduce(
-      (stagesArr: any, stage) => {
-        if (filteredValues['stages'][stage])
-          stagesArr.push(stage.toLowerCase());
-        return stagesArr;
-      },
-      []
-    );
-
-    // status filter
-    let filterStatus = true;
-    let statusFilteredProjects: BlipType[] = [];
-    if (!statusFilters.length) {
-      if (stageFilters.length) filterStatus = false;
-      statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
-    }
-    if (filterStatus) {
-      statusFilteredProjects = blips.filter((project) => {
-        return statusFilters.includes(project['Disaster Cycle']);
-      });
-    }
-
-    // stages filter
-    let filterStages = true;
-    let stagesFilteredProjects: BlipType[] = [];
-    if (!stageFilters.length) {
-      if (statusFilters.length) filterStages = false;
-      stageFilters = ['idea', 'validation', 'prototype', 'production'];
-    }
-    if (filterStages) {
-      stagesFilteredProjects = blips.filter((project) => {
-        return stageFilters.includes(project['Status/Maturity']);
-      });
-    }
-
-    setFilteredProjects([...stagesFilteredProjects, ...statusFilteredProjects]);
+    if (result) setFilteredProjects(result);
   }, [filteredValues]);
 
-  function handleSearch(event: React.ChangeEvent<HTMLInputElement>): void {
-    const results = projectSearch(
-      event.target.value,
-      filteredProjects as BlipType[]
-    );
-    setQuery(event.target.value);
-    setProjectResults(results);
-  }
+  const getProjects = async (): Promise<any> => {
+    const storedProjects = localStorage.getItem('projectsList');
+    if (storedProjects) {
+      const { data } = JSON.parse(storedProjects);
+      setFilteredProjects(data);
+      setProjectsList(data);
+    } else {
+      const { data, error } = await supabase.from('projects').select();
+      if (!error) {
+        setFilteredProjects(data);
+        setProjectsList(data);
+        localStorage.setItem(
+          'projectsList',
+          JSON.stringify({
+            version: VERSION,
+            data
+          })
+        );
+      }
+    }
+    setLoading(false);
+  };
 
-  const blipsToUse = query
-    ? projectResults || []
-    : mergeDisasterCycle(filteredProjects as BlipType[]);
-
-  return (
+  return loading ? (
+    <div className='technologiesPage'>
+      <Loader />
+    </div>
+  ) : (
     <div className='projectsList'>
       <div className='searchFilter'>
         <input
@@ -112,20 +92,27 @@ export const Projects: React.FC = () => {
           onChange={handleSearch}
         />
       </div>
-      <div className='projectsListContainer'>
-        <div className='projectContainer'>
-          {blipsToUse.map((project) => (
-            <div key={project.id}>
-              <Project project={project as BlipType} />
-              <hr />
-            </div>
-          ))}
-        </div>
+      {projectsToUse.length ? (
+        <div className='projectsListContainer'>
+          <div className='projectContainer'>
+            {projectsToUse.map((project: any) => (
+              <div key={project.id}>
+                <Project project={project} />
+                <hr />
+              </div>
+            ))}
+          </div>
 
-        <div className='filters'>
-          <FilterComponent projects={blips} config={{ header: true }} />
+          <div className='filters'>
+            <FilterComponent
+              projects={filteredProjects}
+              config={{ header: true }}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div>No Projects Found</div>
+      )}
     </div>
   );
 };

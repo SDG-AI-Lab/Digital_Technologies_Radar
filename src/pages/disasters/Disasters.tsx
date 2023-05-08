@@ -21,7 +21,7 @@ const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION;
 
 export const Disasters: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [filteredProjects, setFilteredProjects] = useState<any>();
+  const [filteredProjects, setFilteredProjects] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
@@ -93,7 +93,7 @@ export const Disasters: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!filteredProjects) return;
+    if (!filteredProjects.length) return;
 
     const result = getFilteredProjects(
       filteredValues,

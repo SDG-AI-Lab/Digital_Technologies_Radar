@@ -19,7 +19,7 @@ export const Project: React.FC<Props> = ({ project }) => {
       <div className='projectImage-large'>
         <img
           src={
-            project?.['Image Url'].length > 0
+            project?.img_url.length > 0
               ? `${project['Image Url']}`
               : fallBackImage
           }
@@ -31,10 +31,8 @@ export const Project: React.FC<Props> = ({ project }) => {
         />
       </div>
       <div className='pjrojectDetails-large'>
-        <div className='title-large'>
-          {project?.['Ideas/Concepts/Examples']}
-        </div>
-        <span className='description-large'>{project?.Description}</span>
+        <div className='title-large'>{project?.name}</div>
+        <span className='description-large'>{project?.description}</span>
         <div className='projectBadgesContainer'>
           {project && (
             <div className='projectBadges-large'>
