@@ -22,9 +22,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    if (selected.length) {
-      setMultiSelected(selected);
-    }
+    setMultiSelected(selected);
   }, [selected]);
   return (
     <div>
@@ -35,6 +33,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
         labelledBy='Select'
         hasSelectAll={false}
         disableSearch={true}
+        ClearSelectedIcon={null}
       />
     </div>
   );

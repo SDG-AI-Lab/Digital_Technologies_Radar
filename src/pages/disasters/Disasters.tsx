@@ -94,7 +94,6 @@ export const Disasters: React.FC = () => {
 
   useEffect(() => {
     if (!filteredProjects.length) return;
-
     const result = getFilteredProjects(
       filteredValues,
       setFilteredProjects,
