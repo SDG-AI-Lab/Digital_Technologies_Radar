@@ -160,10 +160,6 @@ export const Filter: React.FC = () => {
     setFilteredValues(filterValues);
   };
 
-  useEffect(() => {
-    console.log({ filteredValues });
-  }, [filteredValues]);
-
   const getFilterCount = (category: string): number => {
     let count = 0;
     Object.keys((filteredValues as any)[category]).forEach((key) => {

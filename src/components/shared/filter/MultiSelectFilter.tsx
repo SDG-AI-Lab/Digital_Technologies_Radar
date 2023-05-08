@@ -22,9 +22,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
   }, []);
 
   useEffect(() => {
-    if (selected.length) {
-      setMultiSelected(selected);
-    }
+    setMultiSelected(selected);
   }, [selected]);
   return (
     <div>

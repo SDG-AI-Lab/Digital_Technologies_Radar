@@ -91,7 +91,17 @@ export const getFilteredProjects = (
     []
   );
 
-  if (!statusFilters.length && !stageFilters.length && !techFilters.length) {
+  const parameterFilteredProjects = getParameterFilteredProjects(
+    filteredValues.parameters,
+    projectsList
+  );
+
+  if (
+    !statusFilters.length &&
+    !stageFilters.length &&
+    !techFilters.length &&
+    !parameterFilteredProjects
+  ) {
     return setter(projectsList);
   }
 
@@ -113,19 +123,14 @@ export const getFilteredProjects = (
     );
   });
 
-  const parameterFilteredProjects = getParameterFilteredProjects(
-    filteredValues.parameters,
-    projectsList
-  );
-
-  return [
+  const results = [
     ...stageFilteredProjects,
     ...statusFilteredProjects,
     ...techFilteredProjects,
     ...parameterFilteredProjects
   ];
 
-  // return [...new Set(results)];
+  return [...new Set(results)];
 };
 
 const getParameterFilteredProjects = (
@@ -230,6 +235,18 @@ const getParameterFilteredProjects = (
     );
   });
 
+  if (
+    !disasterFilters.length &&
+    !unHostFilters.length &&
+    !sdgFilters.length &&
+    !dataFilters.length &&
+    !countryFilters.length &&
+    !subRegionFilters.length &&
+    !regionFilters.length
+  ) {
+    return false;
+  }
+
   return [
     ...regionFilteredProjects,
     ...subRegionFilteredProjects,
@@ -246,7 +263,6 @@ const getParameterFilteredProjects = (
 //   key: any,
 //   projectsList: any[]
 // ): any => {
-//   console.log('herre');
 //   const filters: any = parameterFilters.reduce(
 //     (filterArr: any, option: { label: string; value: string }) => {
 //       filterArr.push(option.label);
@@ -259,8 +275,6 @@ const getParameterFilteredProjects = (
 //   const filteredProjects = projectsList.filter((project: any) => {
 //     return filters.some((item: any) => project[slug].includes(item));
 //   });
-
-//   console.log({ slug }, { filteredProjects });
 
 //   // return filteredProjects;
 // };
