@@ -1,18 +1,20 @@
 .projectsList {
   display: flex;
   flex-direction: column;
-  overflow: scroll;
   padding: 30px 20px;
 
   .projectsListContainer {
     display: flex;
     gap: 20px;
+    height: 88vh;
     .projectContainer {
       flex-basis: 60%;
+      overflow: scroll;
     }
 
     .filters {
       flex-basis: 40%;
+      overflow: scroll;
     }
   }
 

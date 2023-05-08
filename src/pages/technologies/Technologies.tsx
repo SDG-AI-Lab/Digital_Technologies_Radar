@@ -23,7 +23,7 @@ export const Technologies: React.FC = () => {
   const [techList, setTechList] = useState<any[]>([]);
   const [query, setQuery] = useState('');
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
-  const [filteredProjects, setFilteredProjects] = useState<any>();
+  const [filteredProjects, setFilteredProjects] = useState<any>([]);
   const [projectsList, setProjectsList] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(true);
 
@@ -42,7 +42,7 @@ export const Technologies: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!filteredProjects) return;
+    if (!filteredProjects.length) return;
 
     const result = getFilteredProjects(
       filteredValues,
