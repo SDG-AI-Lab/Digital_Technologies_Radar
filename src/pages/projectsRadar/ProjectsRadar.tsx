@@ -1,7 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs
+} from '@chakra-ui/react';
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   BaseCSVType,
   BlipType,
@@ -14,7 +25,6 @@ import { WaitingForRadar } from 'radar/components';
 import { PopOverView } from 'pages/views/PopOverView';
 import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
-import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
 import { projectSearch } from 'components/shared/helpers/HelperUtils';
@@ -171,31 +181,36 @@ export const ProjectsRadar: React.FC = () => {
         <div className='projectsSection'>
           <Accordion
             className='accordion'
-            TransitionProps={{ unmountOnExit: true }}
-            expanded={expanded}
+            allowMultiple={true}
             onChange={() => setExpanded((prevState) => !prevState)}
           >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              className='accordionSummary'
-            >
-              <h5>FILTERS</h5>
-            </AccordionSummary>
-            <AccordionDetails>
-              <FilterComponent projects={blips} config={{ header: false }} />
-            </AccordionDetails>
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box as='span' flex='1' textAlign='left'>
+                    <h5>FILTERS</h5>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                <FilterComponent projects={blips} config={{ header: false }} />
+              </AccordionPanel>
+            </AccordionItem>
           </Accordion>
-          <div className='projectContainer'>
-            <span className='projectsCount'>{`${
-              (filteredProjects || []).length
-            } Projects`}</span>
-            {(filteredProjects || []).map((project) => (
-              <div key={project.id}>
-                <Project project={project} />
-                <hr />
-              </div>
-            ))}
-          </div>
+          {!expanded && (
+            <div className='projectContainer'>
+              <span className='projectsCount'>{`${
+                (filteredProjects || []).length
+              } Projects`}</span>
+              {(filteredProjects || []).map((project) => (
+                <div key={project.id}>
+                  <Project project={project} />
+                  <hr />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

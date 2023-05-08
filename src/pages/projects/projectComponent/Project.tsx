@@ -18,11 +18,7 @@ export const Project: React.FC<Props> = ({ project }) => {
     <div className='projectComponent'>
       <div className='projectImage-large'>
         <img
-          src={
-            project?.img_url.length > 0
-              ? `${project['Image Url']}`
-              : fallBackImage
-          }
+          src={project.img_url || `${project['Image Url']}`}
           onError={(e) => {
             // @ts-expect-error
             e.target.src = fallBackImage;
@@ -31,8 +27,12 @@ export const Project: React.FC<Props> = ({ project }) => {
         />
       </div>
       <div className='pjrojectDetails-large'>
-        <div className='title-large'>{project?.name}</div>
-        <span className='description-large'>{project?.description}</span>
+        <div className='title-large'>
+          {project?.name || project['Ideas/Concepts/Examples']}
+        </div>
+        <span className='description-large'>
+          {project?.description || project.Description}
+        </span>
         <div className='projectBadgesContainer'>
           {project && (
             <div className='projectBadges-large'>
