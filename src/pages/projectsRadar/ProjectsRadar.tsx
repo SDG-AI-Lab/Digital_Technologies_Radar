@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionButton,
@@ -30,7 +30,6 @@ import { projectSearch } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
   const {
-    actions: { setBlips },
     state: { blips }
   } = useRadarState();
 
@@ -75,6 +74,7 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     setTabIndex(0);
+    console.log({ projectResults });
   }, []);
 
   return (
