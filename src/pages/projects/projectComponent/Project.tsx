@@ -41,7 +41,9 @@ export const Project: React.FC<Props> = ({ project }) => {
           )}
           <Link
             className='moreBtn'
-            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            to={`/projects/${
+              project.uuid || project['Ideas/Concepts/Examples']
+            }`}
             onClick={() => setCurrentProject(project)}
           >
             <button>MORE</button>

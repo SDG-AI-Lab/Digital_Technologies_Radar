@@ -23,11 +23,7 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
       <div className='imageAndDetails'>
         <div className='image'>
           <img
-            src={
-              project['img_url'].length > 0
-                ? `${project['img_url']}`
-                : fallBackImage
-            }
+            src={project['img_url']}
             onError={(e) => {
               // @ts-expect-error
               e.target.src = fallBackImage;
@@ -44,7 +40,7 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
           </Link>
           <span className='projectDescription'>{project['description']}</span>
           <Link
-            to={`/projects/${project['Ideas/Concepts/Examples']}`}
+            to={`/projects/${project['uuid']}`}
             onClick={() => setCurrentProject(project)}
           >
             <span className='projectLearnMore'>Learn More</span>

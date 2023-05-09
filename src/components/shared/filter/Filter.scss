@@ -36,7 +36,6 @@ div.filterModal {
     background-color: white;
     border-radius: 5px;
     color: #000000;
-    font-family: 'Gill Sans';
     font-size: 14px;
     font-weight: 400;
     min-width: 140px;
@@ -45,10 +44,7 @@ div.filterModal {
     }
 
     &--selected {
-      // background: rgb(203, 213, 224);
-      // box-shadow: var(--chakra-shadows-outline) !important;
       outline-color: #0062ac;
-      // color: #1f5a95;
     }
   }
 

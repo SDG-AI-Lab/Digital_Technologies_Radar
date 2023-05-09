@@ -1,33 +1,43 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
-import { RadarContext } from 'navigation/context';
-import { useRadarState, BlipType } from '@undp_sdg_ai_lab/undp-radar';
+import { Loader } from 'helpers/Loader';
+import { supabase } from 'helpers/databaseClient';
 
 import './ProjectDetails.scss';
 
 export const ProjectDetails: React.FC = () => {
-  const [project, setProject] = useState<BlipType>();
+  const [project, setProject] = useState<any>(null);
   const [selectedSection, setSelectedSection] = useState<string>('details');
   const projectId = useLocation().pathname?.split('/')[2];
 
-  const {
-    state: { blips }
-  } = useRadarState();
+  const fetchProject = async (): Promise<any> => {
+    if (projectId.includes('%')) {
+      const { data, error } = await supabase
+        .from('projects')
+        .select()
+        .eq('name', decodeURIComponent(projectId).trim());
 
-  const { currentProject } = useContext(RadarContext);
+      if (!error) {
+        setProject(data[0] as any);
+      }
+    } else {
+      const { data, error } = await supabase
+        .from('projects')
+        .select()
+        .eq('uuid', projectId);
+
+      if (!error) {
+        setProject(data[0] as any);
+      }
+    }
+  };
 
   useEffect(() => {
-    if (!currentProject) {
-      const project = blips.filter(
-        (p) => p['Ideas/Concepts/Examples'] === decodeURIComponent(projectId)
-      )[0];
-      setProject(project);
-    } else {
-      setProject(currentProject);
-    }
-  }, [blips]);
+    fetchProject();
+  }, []);
 
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
@@ -43,13 +53,15 @@ export const ProjectDetails: React.FC = () => {
     }
   };
 
-  return (
+  console.log({ project }, decodeURIComponent(projectId));
+
+  return project ? (
     <div className='projectDetailsPage'>
       <div className='projectHero'>
         <div className='projectTitle'>
-          <span>{(project as any)?.['Ideas/Concepts/Examples']}</span>
+          <span>{project?.['name']}</span>
           <a
-            href={(project as any)?.['Source']}
+            href={project?.['source']}
             target='_blank'
             rel='noopener noreferrer'
             className='seeProject'
@@ -59,11 +71,7 @@ export const ProjectDetails: React.FC = () => {
         </div>
         <div className='projectImg'>
           <img
-            src={
-              (project as any)?.['Image Url'].length > 0
-                ? `${(project as any)?.['Image Url']}`
-                : fallBackImage
-            }
+            src={project.img_url}
             onError={(e) => {
               // @ts-expect-error
               e.target.src = fallBackImage;
@@ -128,33 +136,27 @@ export const ProjectDetails: React.FC = () => {
         <div className='projectContent'>
           <section id='project-details-section'>
             <span className='projectDetailsTitle'> Details</span>
-            <p className='projectDetailsContent'>
-              {(project as any)?.['Description']}
-            </p>
+            <p className='projectDetailsContent'>{project?.['description']}</p>
           </section>
           <hr className='separater' />
 
           <section id='project-technology-section'>
             <span className='projectDetailsTitle'> Technology</span>
             <p className='projectDetailsContent'>
-              {joinArrayStrings((project as any)?.['Technology'])}
+              {joinArrayStrings(project?.['technology'])}
             </p>
           </section>
           <hr className='separater' />
 
           <section id='project-use-case-section'>
             <span className='projectDetailsTitle'> Use Case </span>
-            <p className='projectDetailsContent'>
-              {(project as any)?.['Use Case']}
-            </p>
+            <p className='projectDetailsContent'>{project?.['use_case']}</p>
           </section>
           <hr className='separater' />
 
           <section id='project-partners-section'>
             <span className='projectDetailsTitle'> Partners </span>
-            <p className='projectDetailsContent'>
-              {(project as any)?.['Supporting Partners']}
-            </p>
+            <p className='projectDetailsContent'>{project?.['partner']}</p>
           </section>
           <hr className='separater' />
 
@@ -163,31 +165,31 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Disaster Type:</span>
               <span className='otherDetailsContent'>
-                {(project as any)?.['Disaster Type']}
+                {project?.['disaster_type']}
               </span>
             </div>
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> UN Host Organization:</span>
               <span className='otherDetailsContent'>
-                {(project as any)?.['UN Host Organization'] || 'N/A'}
+                {project?.['un_host'] || 'N/A'}
               </span>
             </div>
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Data:</span>
               <span className='otherDetailsContent'>
-                {(project as any)?.['Data'] || 'N/A'}
+                {project?.['data'] || 'N/A'}
               </span>
             </div>
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Theme:</span>
               <span className='otherDetailsContent'>
-                {(project as any)?.['Theme'] || 'N/A'}
+                {project?.['theme'] || 'N/A'}
               </span>
             </div>
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Publication Date:</span>
               <span className='otherDetailsContent'>
-                {(project as any)?.['Date of Implementation'] || 'N/A'}
+                {project?.['date'] || 'N/A'}
               </span>
             </div>
           </section>
@@ -195,5 +197,7 @@ export const ProjectDetails: React.FC = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Loader />
   );
 };
