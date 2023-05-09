@@ -26,7 +26,6 @@ import { PopOverView } from 'pages/views/PopOverView';
 import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
-import { RadarContext } from 'navigation/context';
 import { projectSearch } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
@@ -34,8 +33,6 @@ export const ProjectsRadar: React.FC = () => {
     actions: { setBlips },
     state: { blips }
   } = useRadarState();
-
-  const { filteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -60,69 +57,11 @@ export const ProjectsRadar: React.FC = () => {
     }
   }, [blips]);
 
-  useEffect(() => {
-    if (!filteredProjects) return;
-
-    // status filter
-    let statusFilters: any = Object.keys(filteredValues['status']).reduce(
-      (statusArr: any, status) => {
-        if (filteredValues['status'][status])
-          statusArr.push(status.toLowerCase());
-        return statusArr;
-      },
-      []
-    );
-
-    // stages filter
-    let stageFilters = Object.keys(filteredValues['stages']).reduce(
-      (stagesArr: any, stage) => {
-        if (filteredValues['stages'][stage])
-          stagesArr.push(stage.toLowerCase());
-        return stagesArr;
-      },
-      []
-    );
-
-    const blipsToUse = query ? (projectResults as BlipType[]) : allBlips;
-
-    // status filter
-    let filterStatus = true;
-    let statusFilteredProjects: BlipType[] = [];
-    if (!statusFilters.length) {
-      if (stageFilters.length) filterStatus = false;
-      statusFilters = ['preparedness', 'response', 'mitigation', 'recovery'];
-    }
-    if (filterStatus) {
-      statusFilteredProjects = (blipsToUse || []).filter((project) => {
-        return statusFilters.includes(project['Disaster Cycle']);
-      });
-    }
-
-    // stages filter
-    let filterStages = true;
-    let stagesFilteredProjects: BlipType[] = [];
-    if (!stageFilters.length) {
-      if (statusFilters.length) filterStages = false;
-      stageFilters = ['idea', 'validation', 'prototype', 'production'];
-    }
-    if (filterStages) {
-      stagesFilteredProjects = (blipsToUse || []).filter((project) => {
-        return stageFilters.includes(project['Status/Maturity']);
-      });
-    }
-
-    if (!filterStages && !filterStatus) {
-      return setFilteredProjects(allBlips);
-    }
-
-    setFilteredProjects([...stagesFilteredProjects, ...statusFilteredProjects]);
-  }, [filteredValues]);
-
-  useEffect(() => {
-    if (filteredProjects) {
-      setBlips(filteredProjects);
-    }
-  }, [filteredProjects]);
+  // useEffect(() => {
+  //   if (filteredProjects) {
+  //     setBlips(filteredProjects);
+  //   }
+  // }, [filteredProjects]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(
