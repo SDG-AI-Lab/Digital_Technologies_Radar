@@ -54,7 +54,7 @@ Please follow the steps for making changes in the project:
 We use Github actions and runners to do CI/CD.
 The live site is hosted on GitHub pages and is deployed using the `publish.yml` file which is picked up by a GitHub action when there's a successful push to the master branch. The site can be accessed from [here](https://drrtechradar.org/)
 
-For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://209.38.248.37:3000/)
+For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch (or branch specified in the deploy.yml file) will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://209.38.248.37)
 
 Pull requests raised to either the master or the develop branch will trigger the `CI Development` workflow as configured in the `develop.yml` file. 
 
