@@ -1,7 +1,7 @@
 import './HomePage.scss';
 
 import { Image } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import React from 'react';
 import { aboutContentList } from 'pages/about/AboutContent';
 import logo from '../../assets/FTRDRR.svg';
