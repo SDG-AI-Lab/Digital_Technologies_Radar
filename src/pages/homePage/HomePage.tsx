@@ -1,17 +1,13 @@
 import './HomePage.scss';
 
 import React, { useContext, useEffect, useState } from 'react';
-
 import { Image } from '@chakra-ui/react';
-import { Project } from '../../pages/projects/projectComponent/Project';
-import { RadarContext } from 'navigation/context';
+import React from 'react';
 import { aboutContentList } from 'pages/about/AboutContent';
 import logo from '../../assets/FTRDRR.svg';
-import { supabase } from 'helpers/databaseClient';
-
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const HomePage: React.FC = () => {
+
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const { projectsGroup } = useContext(RadarContext);
   const MAX_PROJECTS = 3;
@@ -69,16 +65,6 @@ export const HomePage: React.FC = () => {
             )}
           </div>
         </div>
-      </div>
-      <div className='projectSection'>
-        {projectsToUse
-          .map((project: any) => (
-            <div key={project.id}>
-              <Project project={project} />
-              <hr />
-            </div>
-          ))
-          .slice(0, MAX_PROJECTS)}
       </div>
     </div>
   );
