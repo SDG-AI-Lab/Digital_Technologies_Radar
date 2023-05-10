@@ -70,7 +70,7 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className='projectSection'>
+      <div className='projectSections'>
         {projectsToUse
           .map((project: any) => (
             <div key={project.id}>
