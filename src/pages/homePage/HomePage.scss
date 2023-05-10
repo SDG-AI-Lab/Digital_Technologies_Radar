@@ -2,51 +2,87 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+  padding: 60px;
 
-  .projectsShowcase {
-    display: flex;
-    gap: 2px;
+  // .projectsShowcase {
+  //   display: flex;
+  //   gap: 2px;
+  // }
+
+  // .homeImage {
+  //   background-color: beige;
+  //   display: flex;
+  //   flex: 1;
+  //   height: 600px;
+
+  //   img {
+  //     height: 100%;
+  //     object-fit: cover;
+  //     object-position: center;
+  //     width: 100%;
+  //   }
+  // }
+
+  .logoSection {
+    position: sticky;
+    padding-bottom: 50px;
   }
 
-  .homeImage {
-    background-color: beige;
-    display: flex;
-    flex: 1;
-    height: 600px;
+  .bodySection {
+    width: 70%;
 
-    img {
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      width: 100%;
-    }
-  }
-
-  .aboutSection {
-    background-color: #f7f7f7;
-    display: flex;
-    gap: 20px;
-    padding: 60px;
-
-    .aboutTitle {
-      color: #c1391d;
-      flex-basis: 40%;
-      font-size: 24px;
+    .maintitle {
+      font-size: 36px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      line-height: 28px;
+      line-height: 44px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #0062ac;
+      padding-bottom: 75px;
     }
 
-    .aboutDetails {
-      -webkit-box-orient: vertical;
-      display: -webkit-box;
-      flex-basis: 60%;
-      font-size: 14px;
-      font-weight: 400;
-      -webkit-line-clamp: 5;
-      line-height: 16px;
-      overflow-y: hidden;
-      text-overflow: ellipsis;
+    .descriptionSection {
+      display: flex;
+      flex-direction: column;
+
+      .aboutDetails {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: left;
+        text-overflow: ellipsis;
+        padding-bottom: 40px;
+      }
+      #bold {
+        font-weight: 800;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    padding: 20px;
+    .logoSection {
+      width: 40%;
+      padding-top: 100px;
+    }
+
+    .bodySection {
+      width: 100%;
+
+      .maintitle {
+        padding-bottom: 45px;
+        font-size: 26px;
+        line-height: 34px;
+      }
+      .descriptionSection {
+        .aboutDetails {
+          font-size: 12px;
+          line-height: 16px;
+          padding-bottom: 20px;
+        }
+      }
     }
   }
 }

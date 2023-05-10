@@ -1,46 +1,35 @@
-import React from 'react';
-
-import { aboutContentList } from 'pages/about/AboutContent';
 import './HomePage.scss';
+
+import { Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
+import React from 'react';
+import { aboutContentList } from 'pages/about/AboutContent';
+import logo from '../../assets/FTRDRR.svg';
 
 export const HomePage: React.FC = () => {
-  const {
-    state: { blips }
-  } = useRadarState();
-
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='homePage'>
-      {blips.length && (
-        <div className='projectsShowcase'>
-          {[blips[97], blips[34], blips[67]].map((project, idx) => (
-            <div key={idx}>
-              <div className='homeImage'>
-                <img
-                  src={
-                    project['Image Url'].length > 0
-                      ? `${project['Image Url']}`
-                      : fallBackImage
-                  }
-                  onError={(e) => {
-                    // @ts-expect-error
-                    e.target.src = fallBackImage;
-                  }}
-                  alt='Default Image'
-                />
-              </div>
-            </div>
-          ))}
+      <div className='logoSection'>
+        <Image src={logo} />
+      </div>
+      <div className='bodySection'>
+        <div className='maintitle'>
+          Frontier Technology Radar for Disaster Risk Reduction
         </div>
-      )}
-      <div className='aboutSection'>
-        <Link className='aboutTitle' to='/about'>
-          About Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
-        </Link>
-        <span className='aboutDetails'>{aboutContentList[0].description}</span>
+        <div className='descriptionSection'>
+          <div className='aboutDetails' id='bold'>
+            {aboutContentList[0].description.substring(
+              0,
+              aboutContentList[0].description.indexOf('.')
+            )}
+          </div>
+          <div className='aboutDetails'>
+            {aboutContentList[0].description.substring(
+              aboutContentList[0].description.indexOf('.') + 1,
+              aboutContentList[0].description.indexOf('s.') + 1
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
