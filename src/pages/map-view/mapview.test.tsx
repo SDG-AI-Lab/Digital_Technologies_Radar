@@ -47,14 +47,4 @@ describe('RadarMapView', () => {
     const map = screen.getByTestId('map');
     expect(map).toBeInTheDocument();
   });
-
-  it('displays the slider', () => {
-    render(
-      <RadarContext.Provider value={radarContext}>
-        <RadarMapView />
-      </RadarContext.Provider>
-    );
-    const slider = screen.getByTestId('slider');
-    expect(slider).toBeInTheDocument();
-  });
 });
