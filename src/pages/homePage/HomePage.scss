@@ -42,6 +42,12 @@
     }
   }
 
+  .projectSections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   @media only screen and (max-width: 767px) {
     padding: 20px;
     .logoSection {
@@ -64,6 +70,10 @@
           padding-bottom: 20px;
         }
       }
+    }
+
+    .projectSections {
+      flex-direction: column;
     }
   }
 }

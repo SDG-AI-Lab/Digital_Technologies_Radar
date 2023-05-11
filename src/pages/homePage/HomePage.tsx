@@ -2,8 +2,8 @@ import './HomePage.scss';
 
 import React, { useContext, useEffect, useState } from 'react';
 
+import { HomeCard } from './components/HomeCard';
 import { Image } from '@chakra-ui/react';
-import { Project } from '../../pages/projects/projectComponent/Project';
 import { RadarContext } from 'navigation/context';
 import { aboutContentList } from 'pages/about/AboutContent';
 import logo from '../../assets/FTRDRR.svg';
@@ -74,7 +74,7 @@ export const HomePage: React.FC = () => {
         {projectsToUse
           .map((project: any) => (
             <div key={project.id}>
-              <Project project={project} />
+              <HomeCard project={project} />
               <hr />
             </div>
           ))

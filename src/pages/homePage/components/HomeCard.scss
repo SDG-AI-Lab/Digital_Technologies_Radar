@@ -1,0 +1,110 @@
+.homeComponent {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  height: 400px;
+
+  .homeImage-large {
+    width: 100%;
+    background-color: #dddddd;
+    flex-basis: 30%;
+    position: relative;
+
+    img {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .moreBtn {
+      background-color: none;
+      position: absolute;
+      top: 80%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      button {
+        background-color: #0062ac;
+        color: white;
+        font-size: smaller;
+        font-weight: 600;
+        float: right;
+        padding: 5px 30px;
+      }
+    }
+  }
+
+  .homeDetails-large {
+    display: flex;
+    flex-basis: 70%;
+    flex-direction: column;
+    gap: 10px;
+
+    .title-large {
+      -webkit-box-orient: vertical;
+      color: black;
+      display: -webkit-box;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      -webkit-line-clamp: 2;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+    }
+
+    .description-large {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+      font-weight: 500;
+      -webkit-line-clamp: 3;
+      min-height: 60px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .homeBadgesContainer {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+
+      .homeBadges-large {
+        // flex-basis: 60%;
+        span {
+          margin: 0;
+          zoom: 1;
+        }
+      }
+    }
+
+    div.projectBadges {
+      // flex-wrap: nowrap;
+      gap: 5px;
+      max-width: 500px;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    width: 20vw;
+    .homeImage-large {
+      .moreBtn {
+        button {
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 90vw;
+    .homeImage-large {
+      .moreBtn {
+        button {
+          padding: 5px 30px;
+        }
+      }
+    }
+  }
+}
