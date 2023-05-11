@@ -13,15 +13,38 @@ const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
+  const [TechprojectsToUse, setTechProjectsToUse] = useState<any>([]);
+  const [DisasterprojectsToUse, setDisasterProjectsToUse] = useState<any>([]);
   const { projectsGroup } = useContext(RadarContext);
   const MAX_PROJECTS = 3;
 
+  // projects
   useEffect(() => {
     if (projectsGroup.length) {
       const firstThreeProjects = projectsGroup.slice(0, MAX_PROJECTS);
       setProjectsToUse(firstThreeProjects);
     } else {
       void getProjects();
+    }
+  });
+
+  // tech
+  useEffect(() => {
+    if (projectsGroup.length) {
+      const techprojects = projectsGroup;
+      setTechProjectsToUse(techprojects);
+    } else {
+      void getTechProjects();
+    }
+  });
+
+  // disaster
+  useEffect(() => {
+    if (projectsGroup.length) {
+      const disasterprojects = projectsGroup;
+      setDisasterProjectsToUse(disasterprojects);
+    } else {
+      void getDisasterProjects();
     }
   });
 
@@ -46,6 +69,49 @@ export const HomePage: React.FC = () => {
       }
     }
   };
+
+  const getTechProjects = async (): Promise<any> => {
+    const storedTechProjects = localStorage.getItem('techProjects');
+    if (storedTechProjects) {
+      const { data } = JSON.parse(storedTechProjects);
+      setTechProjectsToUse(data);
+    } else {
+      const { data, error } = await supabase
+        .from('technology_projects')
+        .select();
+      if (!error) {
+        setTechProjectsToUse(data);
+        localStorage.setItem(
+          'techProjects',
+          JSON.stringify({
+            version: VERSION,
+            data
+          })
+        );
+      }
+    }
+  };
+
+  const getDisasterProjects = async (): Promise<any> => {
+    const storedDisasterProjects = localStorage.getItem('disasterProjects');
+    if (storedDisasterProjects) {
+      const { data } = JSON.parse(storedDisasterProjects);
+      setDisasterProjectsToUse(data);
+    } else {
+      const { data, error } = await supabase.from('disaster_projects').select();
+      if (!error) {
+        setDisasterProjectsToUse(data);
+        localStorage.setItem(
+          'disasterProjects',
+          JSON.stringify({
+            version: VERSION,
+            data
+          })
+        );
+      }
+    }
+  };
+
   return (
     <div className='homePage'>
       <div className='logoSection'>
@@ -79,6 +145,24 @@ export const HomePage: React.FC = () => {
             </div>
           ))
           .slice(0, MAX_PROJECTS)}
+      </div>
+      <div className='techSections'>
+        <h3>Technologies</h3>
+        {TechprojectsToUse.map((project: any) => (
+          <div key={project.id}>
+            <HomeCard project={project} />
+            <hr />
+          </div>
+        )).slice(0, 4)}
+      </div>
+      <div className='disastersSections'>
+        <h3>Disasters</h3>
+        {DisasterprojectsToUse.map((project: any) => (
+          <div key={project.id}>
+            <HomeCard project={project} />
+            <hr />
+          </div>
+        )).slice(0, 4)}
       </div>
     </div>
   );
