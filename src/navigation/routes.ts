@@ -5,6 +5,7 @@ const MAP_VIEW = '/map-view';
 const PROJECTS = '/projects';
 const PROJECT_DETAILS = '/projects/:projectId';
 const DISASTERS = '/disasters';
+const DISASTER_DETAILS = '/disasaters/:projectId';
 const TECHNOLOGIES = '/technologies';
 const ABOUT = '/about';
 const VOLUNTEERS = '/volunteers';
@@ -24,6 +25,7 @@ export const ROUTES = {
   PROJECTS,
   PROJECT_DETAILS,
   DISASTERS,
+  DISASTER_DETAILS,
   TECHNOLOGIES,
   ABOUT,
   SEARCH,

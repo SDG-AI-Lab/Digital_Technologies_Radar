@@ -128,7 +128,8 @@ export const getFilteredProjects = (
     ...parameterFilteredProjects
   ];
 
-  return [...new Set(results)];
+  return results;
+  // return [...new Set(results)];
 };
 
 const getParameterFilteredProjects = (

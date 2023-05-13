@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 export const InfoDetails: React.FC = () => {
-  const { id } = useParams();
+  const p = useParams();
+  console.log('whatt', useParams());
 
-  return <h3>{`Infodetials  + ${id}`}</h3>;
+  return <h3>{`Infodetials  + ${p}`}</h3>;
 };
