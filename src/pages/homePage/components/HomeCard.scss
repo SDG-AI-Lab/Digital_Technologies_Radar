@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: column;
   width: 25vw;
-  height: 400px;
+  height: 370px;
 
   .homeImage-large {
     width: 100%;
-    background-color: #dddddd;
     flex-basis: 30%;
     position: relative;
 
@@ -14,23 +13,19 @@
       height: 200px;
       width: 100%;
       object-fit: cover;
+      border-radius: 1em;
     }
 
     .moreBtn {
-      background-color: none;
       position: absolute;
       top: 80%;
       left: 80%;
       transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
-      button {
-        background-color: #0062ac;
-        color: white;
-        font-size: smaller;
-        font-weight: 600;
-        float: right;
-        padding: 5px 30px;
-      }
+      font-size: smaller;
+      font-weight: 600;
+      float: right;
+      padding: 5px 30px;
     }
   }
 
@@ -45,7 +40,7 @@
       color: black;
       display: -webkit-box;
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 24px;
       -webkit-line-clamp: 2;
       overflow-y: hidden;
