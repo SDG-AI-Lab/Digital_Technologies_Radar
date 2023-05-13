@@ -53,8 +53,6 @@ export const ProjectDetails: React.FC = () => {
     }
   };
 
-  console.log({ project }, decodeURIComponent(projectId));
-
   return project ? (
     <div className='projectDetailsPage'>
       <div className='projectHero'>
