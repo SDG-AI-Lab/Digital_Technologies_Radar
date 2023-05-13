@@ -3,6 +3,9 @@
   flex-direction: column;
   overflow: auto;
   padding: 60px;
+  a {
+    text-decoration: underline;
+  }
 
   .logoSection {
     position: sticky;
@@ -40,6 +43,15 @@
         font-weight: 800;
       }
     }
+  }
+
+  .projectTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0px;
+    font-weight: 700;
+    color: #0062ac;
   }
 
   .projectSections {
