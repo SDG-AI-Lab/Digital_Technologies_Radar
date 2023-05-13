@@ -2,21 +2,16 @@ import React from 'react';
 
 import Pointer from 'assets/components/arrow-right.svg';
 
-import {
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Image,
-  useDisclosure
-} from '@chakra-ui/react';
+import { Image } from '@chakra-ui/react';
 
 import './InfoCard.scss';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   title: string;
   details: string[];
   imgUrl: string;
+  slug: string;
   btnProps: {
     text: string;
     link: string;
@@ -24,8 +19,8 @@ interface Props {
   };
 }
 
-export const InfoCard: React.FC<Props> = ({ title, details, imgUrl }) => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+export const InfoCard: React.FC<Props> = ({ title, details, imgUrl, slug }) => {
+  const infoRoute = useLocation().pathname.split('/')[1];
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
@@ -43,31 +38,10 @@ export const InfoCard: React.FC<Props> = ({ title, details, imgUrl }) => {
       <div className='infoCard-details'>
         <span className='infoCard-details--title'> {title}</span>
         <p className='infoCard-details--text'> {details}</p>
-        <Image className='pointer' m={5} src={Pointer} onClick={onOpen} />
+        <Link to={`/${infoRoute}/${slug}`}>
+          <Image className='pointer' m={5} src={Pointer} />
+        </Link>
       </div>
-
-      <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent className='infoDrawer' backgroundColor='#fffafa'>
-          <DrawerCloseButton />
-          <div>
-            <img
-              src={imgUrl}
-              onError={(e) => {
-                // @ts-expect-error
-                e.target.src = fallBackImage;
-              }}
-              alt='Default Image'
-            />
-            <span className='infoDrawerTitle'>{title}</span>
-            {details.map((detail, idx) => (
-              <p className='infoDrawerTitle-details' key={idx}>
-                {detail}
-              </p>
-            ))}
-          </div>
-        </DrawerContent>
-      </Drawer>
     </div>
   );
 };

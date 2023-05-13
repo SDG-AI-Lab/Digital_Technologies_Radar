@@ -15,7 +15,7 @@ import { RadarContext } from 'navigation/context';
 import { supabase } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
+const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version-01';
 
 export const Technologies: React.FC = () => {
   const { setProjectsGroup, filteredValues } = useContext(RadarContext);
@@ -62,7 +62,7 @@ export const Technologies: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('technologies')
-        .select(`name, description, img_url`)
+        .select(`name, description, img_url, slug`)
         .order('name');
 
       if (!error) {
@@ -147,7 +147,8 @@ export const Technologies: React.FC = () => {
                     <div className='disasterDetails'>
                       <InfoCard
                         title={technology.name}
-                        imgUrl={''}
+                        slug={technology.slug}
+                        imgUrl={technology.img_url}
                         details={
                           technology.description
                             ? techDescription

@@ -1,6 +1,5 @@
 div .infoCard {
   display: flex;
-  gap: 5px;
   height: 200px;
   margin-top: 5px;
 
@@ -28,7 +27,7 @@ div .infoCard {
   }
 
   .infoImage {
-    flex-basis: 30%;
+    width: 100px;
 
     img {
       height: 100%;

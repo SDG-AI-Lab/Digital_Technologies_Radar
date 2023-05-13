@@ -1,4 +1,4 @@
-.projectDetailsPage {
+.itemDetailsPage {
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -10,18 +10,21 @@
     width: 0;
   }
 
-  .projectHero {
+  .itemHero {
     display: flex;
     height: 400px;
 
-    > .projectTitle {
-      background-color: #ede7d9;
+    > .itemTitle {
+      align-items: center;
+      background-color: #212e35;
+      color: white;
       display: flex;
       flex-basis: 50%;
       flex-direction: column;
       flex-grow: 0;
       justify-content: center;
       padding: 50px;
+      text-transform: uppercase;
 
       span {
         -webkit-box-orient: vertical;
@@ -37,10 +40,10 @@
         text-overflow: ellipsis;
       }
 
-      .seeProject {
-        background: #212e35;
+      .seeitem {
+        background: #ede7d9;
         border-radius: 6px;
-        color: white;
+        color: black;
         font-size: 16px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -53,7 +56,9 @@
       }
     }
 
-    > .projectImg {
+    > .itemImg {
+      background-color: #212e35;
+      border: 1px solid #212e35;
       flex-basis: 50%;
       > img {
         height: 100%;
@@ -63,12 +68,12 @@
     }
   }
 
-  .projectBody {
+  .itemBody {
     background-color: #ede7d940;
     display: flex;
     gap: 20px;
 
-    .projectToc {
+    .itemToc {
       display: flex;
       flex-basis: 20%;
       flex-direction: column;
@@ -79,7 +84,7 @@
       top: 0;
 
       a {
-        font-size: 20px;
+        font-size: 18px;
         letter-spacing: 0.06em;
         line-height: 28px;
         margin-bottom: 10px;
@@ -91,24 +96,29 @@
       }
     }
 
-    .projectContent {
+    .itemContent {
       display: flex;
       flex-basis: 80%;
       flex-direction: column;
       padding-top: 45px;
     }
 
-    .projectDetailsTitle {
-      font-size: 20px;
+    .itemDetailsTitle {
+      font-size: 24px;
       font-weight: 700;
       text-align: left;
     }
 
-    .projectDetailsContent {
-      font-size: 20px;
+    .itemDetailsContent {
+      font-size: 18px;
       font-weight: 400;
+      margin-top: 30px;
       padding-right: 40px;
       text-align: justify;
+
+      p {
+        margin-bottom: 20px;
+      }
     }
 
     .separater {
@@ -121,7 +131,7 @@
       text-align: left;
 
       .otherDetailsLabel {
-        font-size: 20px;
+        font-size: 24px;
         font-weight: 500;
         margin-right: 15px;
       }
@@ -134,28 +144,28 @@
   }
 }
 @media only screen and (max-width: 768px) {
-  .projectDetailsPage {
-    .projectHero {
+  .itemDetailsPage {
+    .itemHero {
       margin-top: 80px;
 
-      .projectTitle {
+      .itemTitle {
         align-items: center;
         flex-basis: 100%;
         span {
           text-align: center;
         }
       }
-      .projectImg {
+      .itemImg {
         display: none;
       }
     }
 
-    .projectBody {
-      .projectToc {
+    .itemBody {
+      .itemToc {
         display: none;
       }
 
-      .projectContent {
+      .itemContent {
         flex-basis: 100%;
         padding: 45px 20px;
       }

@@ -45,7 +45,7 @@ export const Disasters: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('disaster_types')
-        .select(`name, description, img_url`)
+        .select(`name, description, img_url, slug`)
         .order('name');
 
       if (!error) {
@@ -144,6 +144,7 @@ export const Disasters: React.FC = () => {
                     <InfoCard
                       title={disaster.name}
                       imgUrl={disaster.img_url}
+                      slug={disaster.slug}
                       details={
                         disaster.description
                           ? [`${disaster.description as string}`]
