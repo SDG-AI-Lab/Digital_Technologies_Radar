@@ -4,24 +4,9 @@
   overflow: auto;
   padding: 60px;
 
-  // .projectsShowcase {
-  //   display: flex;
-  //   gap: 2px;
-  // }
-
-  // .homeImage {
-  //   background-color: beige;
-  //   display: flex;
-  //   flex: 1;
-  //   height: 600px;
-
-  //   img {
-  //     height: 100%;
-  //     object-fit: cover;
-  //     object-position: center;
-  //     width: 100%;
-  //   }
-  // }
+  a.seeAll:hover {
+    text-decoration: underline;
+  }
 
   .logoSection {
     position: sticky;
@@ -61,6 +46,21 @@
     }
   }
 
+  .projectTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0px;
+    font-weight: 700;
+    color: #0062ac;
+  }
+
+  .projectSections {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   @media only screen and (max-width: 767px) {
     padding: 20px;
     .logoSection {
@@ -83,6 +83,10 @@
           padding-bottom: 20px;
         }
       }
+    }
+
+    .projectSections {
+      flex-direction: column;
     }
   }
 }
