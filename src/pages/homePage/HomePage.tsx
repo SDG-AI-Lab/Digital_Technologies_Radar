@@ -20,7 +20,6 @@ export const HomePage: React.FC = () => {
   const { projectsGroup } = useContext(RadarContext);
   const MAX_PROJECTS = 3;
 
-  // projects
   useEffect(() => {
     if (projectsGroup.length) {
       const firstThreeProjects = projectsGroup.slice(0, MAX_PROJECTS);
@@ -40,7 +39,6 @@ export const HomePage: React.FC = () => {
       setProjectsToUse(firstThreeProjects);
     } else {
       const { data, error } = await supabase.from('projects').select().limit(3);
-      // const { data, error } = await supabase.from('technologies').select().limit(3);
       if (!error) {
         const firstThreeProjects = data.slice(0, MAX_PROJECTS);
         setProjectsToUse(firstThreeProjects);
