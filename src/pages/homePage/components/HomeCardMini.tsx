@@ -9,16 +9,17 @@ import { RadarContext } from 'navigation/context';
 
 interface Props {
   project: BlipType;
+  type: string;
 }
 
-export const HomeCardMini: React.FC<Props> = ({ project }) => {
+export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='homeComponent'>
       <Link
-        to={`/projects/${project.uuid || project['Ideas/Concepts/Examples']}`}
+        to={`/${type}/${project.slug || project.uuid}`}
         onClick={() => setCurrentProject(project)}
       >
         <div className='homeImage-large'>

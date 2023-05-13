@@ -15,8 +15,8 @@ const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
-  const [TechprojectsToUse, setTechProjectsToUse] = useState<any>([]);
-  const [DisasterprojectsToUse, setDisasterProjectsToUse] = useState<any>([]);
+  const [technologies, setTechnologies] = useState<any>([]);
+  const [disasterTypes, setDisasterTypes] = useState<any>([]);
   const { projectsGroup } = useContext(RadarContext);
   const MAX_PROJECTS = 3;
 
@@ -26,8 +26,8 @@ export const HomePage: React.FC = () => {
       setProjectsToUse(firstThreeProjects);
     } else {
       void getProjects();
-      void getTechProjects();
-      void getDisasterProjects();
+      void getTechnologies();
+      void getDisasters();
     }
   }, []);
 
@@ -52,21 +52,18 @@ export const HomePage: React.FC = () => {
       }
     }
   };
-  const getTechProjects = async (): Promise<any> => {
-    const storedTechProjects = localStorage.getItem('techProjects');
-    if (storedTechProjects) {
-      const { data } = JSON.parse(storedTechProjects);
+  const getTechnologies = async (): Promise<any> => {
+    const storedTechnologies = localStorage.getItem('technologies');
+    if (storedTechnologies) {
+      const { data } = JSON.parse(storedTechnologies);
       const firstThree = data.slice(0, MAX_PROJECTS);
-      setTechProjectsToUse(firstThree);
+      setTechnologies(firstThree);
     } else {
-      const { data, error } = await supabase
-        .from('technologies')
-        .select()
-        .limit(3);
+      const { data, error } = await supabase.from('technologies').select();
       if (!error) {
-        setTechProjectsToUse(data);
+        setTechnologies(data);
         localStorage.setItem(
-          'techProjects',
+          'technologies',
           JSON.stringify({
             version: VERSION,
             data
@@ -76,18 +73,18 @@ export const HomePage: React.FC = () => {
     }
   };
 
-  const getDisasterProjects = async (): Promise<any> => {
-    const storedDisasterProjects = localStorage.getItem('disasterProjects');
-    if (storedDisasterProjects) {
-      const { data } = JSON.parse(storedDisasterProjects);
+  const getDisasters = async (): Promise<any> => {
+    const storedDisasters = localStorage.getItem('disasterTypes');
+    if (storedDisasters) {
+      const { data } = JSON.parse(storedDisasters);
       const firstThree = data.slice(0, MAX_PROJECTS);
-      setDisasterProjectsToUse(firstThree);
+      setDisasterTypes(firstThree);
     } else {
       const { data, error } = await supabase.from('disaster_types').select();
       if (!error) {
-        setDisasterProjectsToUse(data);
+        setDisasterTypes(data);
         localStorage.setItem(
-          'disasterProjects',
+          'disasterTypes',
           JSON.stringify({
             version: VERSION,
             data
@@ -136,24 +133,28 @@ export const HomePage: React.FC = () => {
         <Link className='seeAll' to={'/technologies'}>{`See All`}</Link>
       </div>
       <div className='projectSections'>
-        {TechprojectsToUse.map((project: any) => (
-          <div key={project.id}>
-            <HomeCardMini project={project} />
-            <hr />
-          </div>
-        )).slice(0, 4)}
+        {technologies
+          .map((tech: any) => (
+            <div key={tech.id}>
+              <HomeCardMini project={tech} type='technologies' />
+              <hr />
+            </div>
+          ))
+          .slice(3, 6)}
       </div>
       <div className='projectTitle'>
         <h3>Disasters</h3>
         <Link className='seeAll' to={'/disasters'}>{`See All`}</Link>
       </div>
       <div className='projectSections'>
-        {DisasterprojectsToUse.map((project: any) => (
-          <div key={project.id}>
-            <HomeCardMini project={project} />
-            <hr />
-          </div>
-        )).slice(0, 4)}
+        {disasterTypes
+          .map((disaster: any) => (
+            <div key={disaster.id}>
+              <HomeCardMini project={disaster} type='disasters' />
+              <hr />
+            </div>
+          ))
+          .slice(1, 4)}
       </div>
     </div>
   );
