@@ -1,13 +1,13 @@
-import React from 'react';
-import { Box, Button, Stack } from '@chakra-ui/react';
-import { FaSearch, FaHome, FaCubes, FaProjectDiagram } from 'react-icons/fa';
+import { Box, Button, Stack, Text } from '@chakra-ui/react';
+import { FaCubes, FaHome, FaProjectDiagram, FaSearch } from 'react-icons/fa';
+
 import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
-import { SiOpenstreetmap } from 'react-icons/si';
-import { RiEarthquakeLine } from 'react-icons/ri';
-
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from 'navigation/routes';
+import React from 'react';
+import { RiEarthquakeLine } from 'react-icons/ri';
+import { SiOpenstreetmap } from 'react-icons/si';
 
 interface Props {
   isOpen: boolean;
@@ -23,41 +23,56 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       <Stack spacing={3}>
         <MenuItem to={ROUTES.HOME}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FaHome size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Home
+            </Text>
           </Button>
         </MenuItem>
 
         <MenuItem to={ROUTES.PROJECTS_RADAR}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FiTarget size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Radar
+            </Text>
           </Button>
         </MenuItem>
 
         {false && (
           <MenuItem to={ROUTES.RADAR}>
             <Button
-              rounded='md'
-              colorScheme='blue'
-              py={7}
-              px={1}
-              width={'100%'}
-              bg='#0062ac'
+              background='none'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
             >
               <FiTarget size={30} />
+              <Text color={'black'} fontSize='10px' mt='5px'>
+                Radar
+              </Text>
             </Button>
           </MenuItem>
         )}
@@ -65,12 +80,14 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
         {false && (
           <MenuItem to={ROUTES.MAP_VIEW}>
             <Button
-              rounded='md'
-              colorScheme='blue'
-              py={7}
-              px={1}
-              width={'100%'}
-              bg='#0062ac'
+              background='none'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
             >
               <SiOpenstreetmap size={30} />
             </Button>
@@ -79,52 +96,69 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
 
         <MenuItem to={ROUTES.PROJECTS}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FaProjectDiagram size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Projects
+            </Text>
           </Button>
         </MenuItem>
 
         <MenuItem to={ROUTES.DISASTERS}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <RiEarthquakeLine size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Disasters
+            </Text>
           </Button>
         </MenuItem>
 
         <MenuItem to={ROUTES.TECHNOLOGIES}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FaCubes size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Technologies
+            </Text>
           </Button>
         </MenuItem>
 
         {false && (
           <MenuItem to={ROUTES.ABOUT}>
             <Button
-              rounded='md'
-              colorScheme='blue'
-              py={7}
-              px={1}
-              width={'100%'}
-              bg='#0062ac'
+              background='none'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
             >
               <BsFillInfoSquareFill size={25} color='white' />
             </Button>
@@ -134,12 +168,14 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
         {false && (
           <MenuItem to={ROUTES.SEARCH}>
             <Button
-              rounded='md'
-              colorScheme='blue'
-              py={7}
-              px={1}
-              width={'100%'}
-              bg='#0062ac'
+              background='none'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
             >
               <FaSearch size={30} />
             </Button>
