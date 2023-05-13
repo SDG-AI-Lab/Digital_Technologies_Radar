@@ -140,7 +140,7 @@ export const HomePage: React.FC = () => {
               <hr />
             </div>
           ))
-          .slice(3, 6)}
+          .slice(0, 3)}
       </div>
       <div className='projectTitle'>
         <h3>Disasters</h3>
@@ -154,7 +154,7 @@ export const HomePage: React.FC = () => {
               <hr />
             </div>
           ))
-          .slice(1, 4)}
+          .slice(0, 3)}
       </div>
     </div>
   );
