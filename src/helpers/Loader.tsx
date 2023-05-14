@@ -1,8 +1,13 @@
+import React from 'react';
 import { Flex, Skeleton } from '@chakra-ui/react';
 
-export const Loader: React.FC = () => (
+interface Props {
+  rows?: number;
+}
+
+export const Loader: React.FC<Props> = ({ rows = 3 }) => (
   <>
-    {[...Array(3)].map((_, idx) => {
+    {[...Array(rows)].map((_, idx) => {
       return (
         <Flex pt={20} gap={10} key={idx}>
           <Skeleton height='200px' width='40%' />

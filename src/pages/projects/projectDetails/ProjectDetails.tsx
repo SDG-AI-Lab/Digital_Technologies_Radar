@@ -17,7 +17,7 @@ export const ProjectDetails: React.FC = () => {
     if (projectId.includes('%')) {
       const { data, error } = await supabase
         .from('projects')
-        .select()
+        .select(`*, disaster_types(name)`)
         .eq('name', decodeURIComponent(projectId).trim());
 
       if (!error) {
@@ -26,7 +26,7 @@ export const ProjectDetails: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('projects')
-        .select()
+        .select(`*, disaster_types(name)`)
         .eq('uuid', projectId);
 
       if (!error) {
@@ -52,6 +52,8 @@ export const ProjectDetails: React.FC = () => {
       element.scrollIntoView();
     }
   };
+
+  console.group({ project });
 
   return project ? (
     <div className='projectDetailsPage'>
@@ -163,7 +165,7 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Disaster Type:</span>
               <span className='otherDetailsContent'>
-                {project?.['disaster_type']}
+                {project?.disaster_types.name}
               </span>
             </div>
             <div className='otherDetails'>

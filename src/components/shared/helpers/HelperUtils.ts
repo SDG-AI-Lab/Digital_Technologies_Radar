@@ -115,6 +115,7 @@ export const getFilteredProjects = (
     return stageFilters.includes(project['status'].trim());
   });
 
+  // tech filter
   const techFilteredProjects = projectsList.filter((project: any) => {
     return techFilters.some((item: any) =>
       project['technology'].includes(item)
@@ -128,8 +129,7 @@ export const getFilteredProjects = (
     ...parameterFilteredProjects
   ];
 
-  return results;
-  // return [...new Set(results)];
+  return [...new Set(results)];
 };
 
 const getParameterFilteredProjects = (
@@ -230,7 +230,7 @@ const getParameterFilteredProjects = (
 
   const disasterFilteredProjects = projectsList.filter((project: any) => {
     return disasterFilters.some((item: any) =>
-      project['disaster'].includes(item)
+      project.disaster_types.name.includes(item)
     );
   });
 

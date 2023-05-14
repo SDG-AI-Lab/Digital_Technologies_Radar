@@ -4,7 +4,7 @@ div .infoCard {
   margin-top: 5px;
 
   &-details {
-    background: rgba(237, 237, 237, 0.48);
+    background: #d4d6d8;
     flex-basis: 70%;
     padding: 10px;
     position: relative;
@@ -64,7 +64,7 @@ div.infoDrawer {
   }
 
   .infoDrawerTitle-details {
-    padding: 10px 40px;
     font-size: 14px;
+    padding: 10px 40px;
   }
 }

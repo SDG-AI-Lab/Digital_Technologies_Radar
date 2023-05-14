@@ -12,13 +12,11 @@ import {
 } from 'components/shared/helpers/HelperUtils';
 import { Link } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
-import { supabase } from 'helpers/databaseClient';
+import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version-01';
-
 export const Technologies: React.FC = () => {
-  const { setProjectsGroup, filteredValues } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues } = useContext(RadarContext);
 
   const [techList, setTechList] = useState<any[]>([]);
   const [query, setQuery] = useState('');
@@ -56,9 +54,11 @@ export const Technologies: React.FC = () => {
   const getTechData = async (): Promise<any> => {
     await getTechProjects();
 
-    const storedTechList = localStorage.getItem('techList');
-    if (storedTechList) {
-      setTechList(JSON.parse(storedTechList).data);
+    const storedTechList = JSON.parse(
+      localStorage.getItem('techList') as string
+    );
+    if (storedTechList && storedTechList.version === DATA_VERSION) {
+      setTechList(storedTechList.data);
     } else {
       const { data, error } = await supabase
         .from('technologies')
@@ -70,7 +70,7 @@ export const Technologies: React.FC = () => {
         localStorage.setItem(
           'techList',
           JSON.stringify({
-            version: VERSION,
+            version: DATA_VERSION,
             data
           })
         );
@@ -80,9 +80,11 @@ export const Technologies: React.FC = () => {
   };
 
   const getTechProjects = async (): Promise<any> => {
-    const storedTechProjects = localStorage.getItem('techProjects');
-    if (storedTechProjects) {
-      const { data } = JSON.parse(storedTechProjects);
+    const storedTechProjects = JSON.parse(
+      localStorage.getItem('techProjects') as string
+    );
+    if (storedTechProjects && storedTechProjects.version === DATA_VERSION) {
+      const { data } = storedTechProjects;
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
@@ -95,7 +97,7 @@ export const Technologies: React.FC = () => {
         localStorage.setItem(
           'techProjects',
           JSON.stringify({
-            version: VERSION,
+            version: DATA_VERSION,
             data
           })
         );
@@ -122,8 +124,8 @@ export const Technologies: React.FC = () => {
       <div className='technologies'>
         {projectsToUse.length ? (
           techList.map((technology, idx) => {
-            const techProjects: any = projectsToUse.filter((i: any) =>
-              i['technology'].includes(technology.name)
+            const techProjects: any = projectsToUse.filter((project: any) =>
+              project.tech.includes(technology.name)
             );
 
             const techDescription = technology.description.split('##');
@@ -134,12 +136,19 @@ export const Technologies: React.FC = () => {
                   key={`${idx}${technology.uuid}`}
                 >
                   <div className='topRow'>
-                    <span className='topRowTitle'>{technology.type}</span>
+                    <span className='topRowTitle'>{technology.name}</span>
                     {techProjects.length > 3 && (
                       <Link
                         className='seeAll'
                         to={'/projects'}
-                        onClick={() => setProjectsGroup(techProjects)}
+                        onClick={() => {
+                          const newFilteredValues: any = {
+                            ...filteredValues
+                          };
+                          newFilteredValues['technologies'][technology.name] =
+                            true;
+                          setFilteredValues(newFilteredValues);
+                        }}
                       >{`See All (${techProjects.length})`}</Link>
                     )}
                   </div>

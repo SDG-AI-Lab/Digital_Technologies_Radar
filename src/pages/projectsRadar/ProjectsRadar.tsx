@@ -41,6 +41,8 @@ export const ProjectsRadar: React.FC = () => {
   const [query, setQuery] = useState('');
   const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
 
+  console.log({ projectResults });
+
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
   };
@@ -74,7 +76,6 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     setTabIndex(0);
-    console.log({ projectResults });
   }, []);
 
   return (

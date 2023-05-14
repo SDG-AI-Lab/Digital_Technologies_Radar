@@ -85,6 +85,8 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     };
 
     setLabels(labels);
+
+    return () => setInitialFilteredValues(labels);
   }, []);
 
   useEffect(() => {
