@@ -83,6 +83,7 @@ export const Filter: React.FC = () => {
     };
 
     setLabels(labels);
+    setInitialFilteredValues(labels);
   }, []);
 
   useEffect(() => {

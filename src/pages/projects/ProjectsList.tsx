@@ -11,10 +11,8 @@ import { Project } from './projectComponent/Project';
 import './Projects.scss';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
-import { supabase } from 'helpers/databaseClient';
+import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
-
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -56,20 +54,24 @@ export const Projects: React.FC = () => {
   }, [filteredValues]);
 
   const getProjects = async (): Promise<any> => {
-    const storedProjects = localStorage.getItem('projectsList');
-    if (storedProjects) {
-      const { data } = JSON.parse(storedProjects);
+    const storedProjects = JSON.parse(
+      localStorage.getItem('projectsList') as string
+    );
+    if (storedProjects && storedProjects.version === DATA_VERSION) {
+      const { data } = storedProjects;
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase.from('projects').select();
+      const { data, error } = await supabase
+        .from('projects')
+        .select(`*, disaster_types(name)`);
       if (!error) {
         setFilteredProjects(data);
         setProjectsList(data);
         localStorage.setItem(
           'projectsList',
           JSON.stringify({
-            version: VERSION,
+            version: DATA_VERSION,
             data
           })
         );
@@ -92,6 +94,7 @@ export const Projects: React.FC = () => {
           onChange={handleSearch}
         />
       </div>
+      <h3>{`PROJECTS (${projectsToUse.length as string})`}</h3>
       {projectsToUse.length ? (
         <div className='projectsListContainer'>
           <div className='projectContainer'>

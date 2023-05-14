@@ -2,11 +2,11 @@
   margin: 0 auto;
   max-width: 1440px;
   overflow: scroll;
-  padding-top: 20px;
-  width: 90vw;
   -ms-overflow-style: none; /* IE and Edge */
+  padding-top: 20px;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
+  width: 90vw;
   &::-webkit-scrollbar {
     height: 0;
     width: 0;
@@ -21,10 +21,17 @@
   }
 }
 
+.technologies {
+  > div:nth-child(odd) {
+    background-color: aliceblue;
+  }
+}
+
 .technologiesContainer {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  margin-bottom: 20px;
+  padding: 10px 10px 40px;
 
   .detailsSection {
     display: flex;
@@ -39,11 +46,12 @@
     display: flex;
     font-size: 18px;
     font-weight: 600;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin: 0 20px 10px 0;
 
     .topRowTitle {
-      display: none;
+      color: #1f5a95;
+      text-transform: uppercase;
     }
 
     a {

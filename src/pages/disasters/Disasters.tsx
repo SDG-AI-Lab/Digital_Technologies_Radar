@@ -13,11 +13,9 @@ import { InfoCard } from 'components/infoCard/InfoCard';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
 import { RadarContext } from 'navigation/context';
 import { Loader } from 'helpers/Loader';
-import { supabase } from 'helpers/databaseClient';
+import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 
 import './Disasters.scss';
-
-const VERSION = process.env.REACT_APP_DISASTER_DATA_VERSION || 'version- 01';
 
 export const Disasters: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -27,7 +25,7 @@ export const Disasters: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const [projectsList, setProjectsList] = useState<any>([]);
 
-  const { filteredValues, setProjectsGroup } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues } = useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -39,9 +37,12 @@ export const Disasters: React.FC = () => {
   const getDisasterData = async (): Promise<any> => {
     await getDisasterProjects();
 
-    const storedDisasterTypes = localStorage.getItem('disasterTypes');
-    if (storedDisasterTypes) {
-      setDisasterTypes(JSON.parse(storedDisasterTypes).data);
+    const storedDisasterTypes = JSON.parse(
+      localStorage.getItem('disasterTypes') as string
+    );
+    if (storedDisasterTypes && storedDisasterTypes.version === DATA_VERSION) {
+      const { data } = storedDisasterTypes;
+      setDisasterTypes(data);
     } else {
       const { data, error } = await supabase
         .from('disaster_types')
@@ -53,7 +54,7 @@ export const Disasters: React.FC = () => {
         localStorage.setItem(
           'disasterTypes',
           JSON.stringify({
-            version: VERSION,
+            version: DATA_VERSION,
             data
           })
         );
@@ -63,9 +64,14 @@ export const Disasters: React.FC = () => {
   };
 
   const getDisasterProjects = async () => {
-    const storedDisasterProjects = localStorage.getItem('disasterProjects');
-    if (storedDisasterProjects) {
-      const { data } = JSON.parse(storedDisasterProjects);
+    const storedDisasterProjects = JSON.parse(
+      localStorage.getItem('disasterProjects') as string
+    );
+    if (
+      storedDisasterProjects &&
+      storedDisasterProjects.version === DATA_VERSION
+    ) {
+      const { data } = storedDisasterProjects;
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
@@ -76,7 +82,7 @@ export const Disasters: React.FC = () => {
         localStorage.setItem(
           'disasterProjects',
           JSON.stringify({
-            version: VERSION,
+            version: DATA_VERSION,
             data
           })
         );
@@ -135,7 +141,18 @@ export const Disasters: React.FC = () => {
                     <Link
                       className='seeAll'
                       to={'/projects'}
-                      onClick={() => setProjectsGroup(disasterProjects)}
+                      onClick={() => {
+                        const newFilteredValues: any = {
+                          ...filteredValues
+                        };
+                        newFilteredValues['parameters']['Disaster Type'] = [
+                          {
+                            label: disaster.name,
+                            value: disaster.name.toLowerCase()
+                          }
+                        ];
+                        setFilteredValues(newFilteredValues);
+                      }}
                     >{`See All (${disasterProjects.length as string})`}</Link>
                   )}
                 </div>
