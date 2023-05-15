@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionButton,
@@ -13,12 +13,7 @@ import {
   Tabs
 } from '@chakra-ui/react';
 
-import {
-  BaseCSVType,
-  BlipType,
-  Radar,
-  useRadarState
-} from '@undp_sdg_ai_lab/undp-radar';
+import { BlipType, Radar, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import './ProjectsRadar.scss';
 
 import { WaitingForRadar } from 'radar/components';
@@ -26,22 +21,24 @@ import { PopOverView } from 'pages/views/PopOverView';
 import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
-import { projectSearch } from 'components/shared/helpers/HelperUtils';
+import { RadarContext } from 'navigation/context';
+import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
   const {
+    actions: { setBlips, setSelectedQuadrant },
     state: { blips }
   } = useRadarState();
+
+  console.log(useRadarState());
+
+  const { filteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
-  const [filteredProjects, setFilteredProjects] = useState<BlipType[]>();
+  const [filteredProjects, setFilteredProjects] = useState<BlipType[]>([]);
   const [allBlips, setAllBlips] = useState<BlipType[]>();
-  const [query, setQuery] = useState('');
-  const [projectResults, setProjectResults] = useState<BaseCSVType[]>();
-
-  console.log({ projectResults });
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -58,21 +55,17 @@ export const ProjectsRadar: React.FC = () => {
     }
   }, [blips]);
 
-  // useEffect(() => {
-  //   if (filteredProjects) {
-  //     setBlips(filteredProjects);
-  //   }
-  // }, [filteredProjects]);
+  useEffect(() => {
+    if (!filteredProjects.length) return;
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const results = projectSearch(
-      event.target.value,
-      filteredProjects as BlipType[]
+    const result = getFilteredProjects(
+      filteredValues,
+      setBlips,
+      allBlips as BlipType[]
     );
-    setQuery(event.target.value);
-    setProjectResults(results);
-    setFilteredProjects(results as BlipType[]);
-  };
+
+    if (result) setBlips(result);
+  }, [filteredValues]);
 
   useEffect(() => {
     setTabIndex(0);
@@ -80,14 +73,6 @@ export const ProjectsRadar: React.FC = () => {
 
   return (
     <div className='projectRadarContainer'>
-      <div className='searchFilter'>
-        <input
-          placeholder='Search ....'
-          className='searchBar'
-          value={query}
-          onChange={handleSearch}
-        />
-      </div>
       <div className='projectRadar'>
         <div className='tabsSection'>
           <Tabs
@@ -96,7 +81,9 @@ export const ProjectsRadar: React.FC = () => {
             onChange={tabsChangeHandler}
           >
             <TabList>
-              <Tab as='h5'>RADAR</Tab>
+              <Tab as='h5' onClick={() => setSelectedQuadrant(null)}>
+                RADAR
+              </Tab>
               <Tab as='h5'>MAP</Tab>
             </TabList>
             <TabPanels overflowY='auto'>
@@ -134,7 +121,10 @@ export const ProjectsRadar: React.FC = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                <FilterComponent projects={blips} config={{ header: false }} />
+                <FilterComponent
+                  projects={blips}
+                  config={{ header: false, status: tabIndex === 1 }}
+                />
               </AccordionPanel>
             </AccordionItem>
           </Accordion>

@@ -46,6 +46,7 @@ interface Props {
   projects: BlipType[];
   config: {
     header: boolean;
+    status: boolean;
   };
 }
 
@@ -57,7 +58,7 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     }
   } = useRadarState();
 
-  const { header } = config;
+  const { header, status } = config;
 
   const {
     state: {
@@ -177,15 +178,19 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     <div className='filterComponent'>
       {header && <p> FILTERS </p>}
       <div>
-        <label>
-          STATUS
-          {getFilterCount('status') ? (
-            <span className='filterCount'>
-              {`(${getFilterCount('status')})`}
-            </span>
-          ) : null}
-        </label>
-        <FilterItems labels={labels.status} category='status' />
+        {status && (
+          <>
+            <label>
+              STATUS
+              {getFilterCount('status') ? (
+                <span className='filterCount'>
+                  {`(${getFilterCount('status')})`}
+                </span>
+              ) : null}
+            </label>
+            <FilterItems labels={labels.status} category='status' />
+          </>
+        )}
 
         <label>
           STAGE

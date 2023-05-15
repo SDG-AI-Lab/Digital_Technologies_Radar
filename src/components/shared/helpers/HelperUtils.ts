@@ -106,19 +106,21 @@ export const getFilteredProjects = (
   // status filter
   const statusFilteredProjects = projectsList.filter((project: any) => {
     return statusFilters.some((item: any) =>
-      project['disaster_cycle'].includes(item)
+      (project['disaster_cycle'] || project['Disaster Cycle']).includes(item)
     );
   });
 
   // stages filter
   const stageFilteredProjects = projectsList.filter((project: any) => {
-    return stageFilters.includes(project['status'].trim());
+    return stageFilters.includes(
+      (project['status'] || project['Status/Maturity']).trim()
+    );
   });
 
   // tech filter
   const techFilteredProjects = projectsList.filter((project: any) => {
     return techFilters.some((item: any) =>
-      project['technology'].includes(item)
+      (project['technology'] || project['Technology']).includes(item)
     );
   });
 
@@ -176,7 +178,9 @@ const getParameterFilteredProjects = (
 
   const countryFilteredProjects = projectsList.filter((project: any) => {
     return countryFilters.some((item: any) =>
-      project['country'].includes(item)
+      (project['country'] || project['Country of Implementation']).includes(
+        item
+      )
     );
   });
 
@@ -190,7 +194,9 @@ const getParameterFilteredProjects = (
   );
 
   const dataFilteredProjects = projectsList.filter((project: any) => {
-    return dataFilters.some((item: any) => project['data'].includes(item));
+    return dataFilters.some((item: any) =>
+      (project['data'] || project['Data']).includes(item)
+    );
   });
 
   // SDG
@@ -203,7 +209,9 @@ const getParameterFilteredProjects = (
   );
 
   const sdgFilteredProjects = projectsList.filter((project: any) => {
-    return sdgFilters.some((item: any) => project['sdg'].includes(item));
+    return sdgFilters.some((item: any) =>
+      (project['sdg'] || project['SDG']).includes(item)
+    );
   });
 
   // UN Host
@@ -216,7 +224,9 @@ const getParameterFilteredProjects = (
   );
 
   const unHostFilteredProjects = projectsList.filter((project: any) => {
-    return unHostFilters.some((item: any) => project['un_host'].includes(item));
+    return unHostFilters.some((item: any) =>
+      (project['un_host'] || project['Un Host Organisation']).includes(item)
+    );
   });
 
   // Disaster Type
@@ -230,7 +240,9 @@ const getParameterFilteredProjects = (
 
   const disasterFilteredProjects = projectsList.filter((project: any) => {
     return disasterFilters.some((item: any) =>
-      project.disaster_types.name.includes(item)
+      (project?.disaster_types?.name || project['Disasater Type']).includes(
+        item
+      )
     );
   });
 

@@ -75,7 +75,9 @@ export const Disasters: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase.from('disaster_projects').select();
+      const { data, error } = await supabase
+        .from('disaster_projects')
+        .select(`*, disaster_types(name)`);
       if (!error) {
         setFilteredProjects(data as any);
         setProjectsList(data);
