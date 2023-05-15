@@ -47,10 +47,8 @@ export const HomePage: React.FC = () => {
       localStorage.getItem('technologiesHomePage') as string
     );
     if (storedTechnologies && storedTechnologies.version === DATA_VERSION) {
-      console.log('herere');
       setTechnologies(storedTechnologies.data);
     } else {
-      console.log('2222herere');
       const { data, error } = await supabase
         .from('technologies')
         .select()

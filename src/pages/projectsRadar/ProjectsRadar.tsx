@@ -30,8 +30,6 @@ export const ProjectsRadar: React.FC = () => {
     state: { blips }
   } = useRadarState();
 
-  console.log(useRadarState());
-
   const { filteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
