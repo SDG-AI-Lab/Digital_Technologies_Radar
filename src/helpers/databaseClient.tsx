@@ -9,4 +9,4 @@ const supabaseKey =
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const DATA_VERSION = process.env.REACT_APP_DATA_VERSION || 'version-02';
+export const DATA_VERSION = process.env.REACT_APP_DATA_VERSION || '15/05/23';
