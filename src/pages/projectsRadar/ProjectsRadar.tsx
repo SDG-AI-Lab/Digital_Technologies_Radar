@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Accordion,
   AccordionButton,
@@ -21,27 +21,24 @@ import { PopOverView } from 'pages/views/PopOverView';
 import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
-import {
-  getFilteredProjects,
-  projectSearch
-} from 'components/shared/helpers/HelperUtils';
 import { RadarContext } from 'navigation/context';
+import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
   const {
-    state: { blips },
-    actions: { setBlips }
+    actions: { setBlips, setSelectedQuadrant },
+    state: { blips }
   } = useRadarState();
 
   console.log(useRadarState());
+
+  const { filteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>([]);
   const [allBlips, setAllBlips] = useState<BlipType[]>();
-
-  const { filteredValues } = useContext(RadarContext);
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -59,21 +56,15 @@ export const ProjectsRadar: React.FC = () => {
   }, [blips]);
 
   useEffect(() => {
-    if (filteredProjects) {
-      setBlips(filteredProjects);
-    }
-  }, [filteredProjects]);
-
-  useEffect(() => {
     if (!filteredProjects.length) return;
 
     const result = getFilteredProjects(
       filteredValues,
-      setFilteredProjects,
-      filteredProjects
+      setBlips,
+      allBlips as BlipType[]
     );
 
-    if (result) setFilteredProjects(result);
+    if (result) setBlips(result);
   }, [filteredValues]);
 
   useEffect(() => {
@@ -90,7 +81,9 @@ export const ProjectsRadar: React.FC = () => {
             onChange={tabsChangeHandler}
           >
             <TabList>
-              <Tab as='h5'>RADAR</Tab>
+              <Tab as='h5' onClick={() => setSelectedQuadrant(null)}>
+                RADAR
+              </Tab>
               <Tab as='h5'>MAP</Tab>
             </TabList>
             <TabPanels overflowY='auto'>
@@ -128,7 +121,10 @@ export const ProjectsRadar: React.FC = () => {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                <FilterComponent projects={blips} config={{ header: false }} />
+                <FilterComponent
+                  projects={blips}
+                  config={{ header: false, status: tabIndex === 1 }}
+                />
               </AccordionPanel>
             </AccordionItem>
           </Accordion>

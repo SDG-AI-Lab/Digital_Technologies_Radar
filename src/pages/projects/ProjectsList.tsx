@@ -105,7 +105,7 @@ export const Projects: React.FC = () => {
           <div className='filters'>
             <FilterComponent
               projects={filteredProjects}
-              config={{ header: true }}
+              config={{ header: true, status: true }}
             />
           </div>
         </div>

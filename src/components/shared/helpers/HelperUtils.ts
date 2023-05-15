@@ -103,7 +103,6 @@ export const getFilteredProjects = (
     return setter(projectsList);
   }
 
-  console.log({ projectsList });
   // status filter
   const statusFilteredProjects = projectsList.filter((project: any) => {
     return statusFilters.some((item: any) =>
@@ -179,7 +178,9 @@ const getParameterFilteredProjects = (
 
   const countryFilteredProjects = projectsList.filter((project: any) => {
     return countryFilters.some((item: any) =>
-      (project['country'] || project['Country']).includes(item)
+      (project['country'] || project['Country of Implementation']).includes(
+        item
+      )
     );
   });
 
