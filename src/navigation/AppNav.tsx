@@ -121,12 +121,22 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.DISASTERS} element={<Disasters />} />
             <Route
               path={`${ROUTES.DISASTERS}/:id`}
-              element={<InfoDetails tableName='disaster_types' />}
+              element={
+                <InfoDetails
+                  tableName='disaster_types'
+                  relation='disaster_projects'
+                />
+              }
             />
             <Route path={ROUTES.TECHNOLOGIES} element={<Technologies />} />
             <Route
               path={`${ROUTES.TECHNOLOGIES}/:id`}
-              element={<InfoDetails tableName='technologies' />}
+              element={
+                <InfoDetails
+                  tableName='technologies'
+                  relation='technology_projects'
+                />
+              }
             />
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />

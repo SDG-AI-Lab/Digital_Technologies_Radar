@@ -26,8 +26,8 @@ import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
 
 export const ProjectsRadar: React.FC = () => {
   const {
-    actions: { setBlips, setSelectedQuadrant },
-    state: { blips }
+    actions: { setBlips, setSelectedQuadrant, setSelectedItem },
+    state: { blips, selectedItem }
   } = useRadarState();
 
   const { filteredValues } = useContext(RadarContext);
@@ -67,7 +67,14 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     setTabIndex(0);
+    return () => setSelectedItem(null);
   }, []);
+
+  useEffect(() => {
+    if (selectedItem) {
+      window.location.href = `/#/projects/${selectedItem['Ideas/Concepts/Examples']}`;
+    }
+  }, [selectedItem]);
 
   return (
     <div className='projectRadarContainer'>

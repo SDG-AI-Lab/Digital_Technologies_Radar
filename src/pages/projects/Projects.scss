@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   padding: 30px 20px;
+  max-width: 1440px;
+  margin: 0 auto;
 
   .projectsListContainer {
     display: flex;

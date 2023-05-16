@@ -8,13 +8,16 @@ import { supabase } from 'helpers/databaseClient';
 
 import './InfoDetails.scss';
 import { LoremIpsum } from 'react-lorem-ipsum';
+import { Project } from 'pages/projects/projectComponent/Project';
 
 interface Props {
   tableName: string;
+  relation: string;
 }
 
-export const InfoDetails: React.FC<Props> = ({ tableName }) => {
+export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   const [item, setItem] = useState<any>(null);
+  const [projects, setProjects] = useState<any>([]);
   const [selectedSection, setSelectedSection] = useState<string>('overview');
   const { id } = useParams();
 
@@ -26,6 +29,19 @@ export const InfoDetails: React.FC<Props> = ({ tableName }) => {
 
     if (!error) {
       setItem(data[0] as any);
+    }
+
+    getProjects();
+  };
+
+  const getProjects = async (): Promise<any> => {
+    const { data, error } = await supabase
+      .from(relation)
+      .select()
+      .eq('slug', id);
+
+    if (!error) {
+      setProjects(data);
     }
   };
 
@@ -80,12 +96,21 @@ export const InfoDetails: React.FC<Props> = ({ tableName }) => {
           >
             Overview
           </Link>
-          <Link to='#'>IMPACT</Link>
-          <Link to='#'>SOLUTIONS</Link>
-          <Link to='#'>DATA</Link>
+          <Link
+            to='#'
+            className={cx({ bolden: selectedSection === 'projects' })}
+            onClick={() => {
+              handleScroll('item-projects-section');
+              setSelectedSection('projects');
+            }}
+          >
+            Projects
+          </Link>
+          <Link to='#'>Impact</Link>
+          <Link to='#'>Data</Link>
         </div>
         <div className='itemContent'>
-          <section id='overview'>
+          <section id='item-details-section'>
             <span className='itemDetailsTitle'> Overview</span>
 
             {item.description ? (
@@ -99,6 +124,18 @@ export const InfoDetails: React.FC<Props> = ({ tableName }) => {
                 <LoremIpsum p={2} />
               </p>
             )}
+          </section>
+          <hr className='separater' />
+          <section id='item-projects-section'>
+            <span className='itemDetailsTitle'> Projects </span>
+            <div className='projectContainer projectsList'>
+              {projects.map((project: any) => (
+                <div key={project.id}>
+                  <Project project={project} />
+                  <hr />
+                </div>
+              ))}
+            </div>
           </section>
           <hr className='separater' />
         </div>

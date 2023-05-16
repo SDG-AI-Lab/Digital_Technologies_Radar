@@ -1,6 +1,8 @@
 .itemDetailsPage {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  max-width: 1440px;
   overflow: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scroll-behavior: smooth;
@@ -69,7 +71,6 @@
   }
 
   .itemBody {
-    background-color: #ede7d940;
     display: flex;
     gap: 20px;
 
@@ -143,6 +144,13 @@
     }
   }
 }
+
+@media only screen and (max-width: 930px) {
+  .itemDetailsPage .itemHero .itemTitle {
+    padding: 100px;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .itemDetailsPage {
     .itemHero {
@@ -152,7 +160,13 @@
         align-items: center;
         flex-basis: 100%;
         span {
+          -webkit-box-orient: vertical;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          overflow-y: hidden;
           text-align: center;
+          text-overflow: ellipsis;
+          word-break: break-word;
         }
       }
       .itemImg {

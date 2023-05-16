@@ -138,7 +138,12 @@ export const Disasters: React.FC = () => {
             !!disasterProjects.length && (
               <div className='disasterContainer' key={idx}>
                 <div className='topRow'>
-                  <span className='topRowTitle'>{disaster.name}</span>
+                  <Link
+                    to={`/disasters/${disaster.slug as string}`}
+                    className='topRowTitle'
+                  >
+                    {disaster.name}
+                  </Link>
                   {disasterProjects.length > 3 && (
                     <Link
                       className='seeAll'

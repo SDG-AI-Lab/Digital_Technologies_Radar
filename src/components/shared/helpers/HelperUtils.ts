@@ -149,7 +149,9 @@ const getParameterFilteredProjects = (
 
   let regionFilteredProjects: any = [];
   regionFilteredProjects = projectsList.filter((project: any) => {
-    return regionFilters.some((item: any) => project['region'].includes(item));
+    return regionFilters.some((item: any) =>
+      (project['region'] || project['Region']).includes(item)
+    );
   });
 
   // Sub Region
@@ -163,7 +165,7 @@ const getParameterFilteredProjects = (
 
   const subRegionFilteredProjects = projectsList.filter((project: any) => {
     return subRegionFilters.some((item: any) =>
-      project['sub_region'].includes(item)
+      (project['sub_region'] || project['Subregion']).includes(item)
     );
   });
 
@@ -267,23 +269,11 @@ const getParameterFilteredProjects = (
   ];
 };
 
-// const getParamFilteredProjects = (
-//   parameterFilters: any,
-//   key: any,
-//   projectsList: any[]
-// ): any => {
-//   const filters: any = parameterFilters.reduce(
-//     (filterArr: any, option: { label: string; value: string }) => {
-//       filterArr.push(option.label);
-//       return filterArr;
-//     },
-//     []
-//   );
-
-//   const slug = key.toLowerCase().split('').join('_');
-//   const filteredProjects = projectsList.filter((project: any) => {
-//     return filters.some((item: any) => project[slug].includes(item));
-//   });
-
-//   // return filteredProjects;
-// };
+export const sliceForBadge = (projectArray: string[]): string[] => {
+  if (projectArray.length > 2) {
+    const sliced = projectArray.slice(0, 2);
+    sliced.push('...');
+    return sliced;
+  }
+  return projectArray;
+};

@@ -136,7 +136,12 @@ export const Technologies: React.FC = () => {
                   key={`${idx}${technology.uuid}`}
                 >
                   <div className='topRow'>
-                    <span className='topRowTitle'>{technology.name}</span>
+                    <Link
+                      to={`/technologies/${technology.slug as string}`}
+                      className='topRowTitle'
+                    >
+                      {technology.name}
+                    </Link>
                     {techProjects.length > 3 && (
                       <Link
                         className='seeAll'

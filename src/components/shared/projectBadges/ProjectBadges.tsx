@@ -3,6 +3,7 @@ import React from 'react';
 import { Badge, Stack } from '@chakra-ui/react';
 
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
+import { sliceForBadge } from '../helpers/HelperUtils';
 
 import './ProjectBadges.scss';
 
@@ -11,14 +12,6 @@ interface Props {
 }
 
 export const ProjectBadge: React.FC<Props> = ({ project }) => {
-  const sliceForBadge = (projectArray: string[]): string[] => {
-    if (projectArray.length > 2) {
-      const sliced = projectArray.slice(0, 2);
-      sliced.push('...');
-      return sliced;
-    }
-    return projectArray;
-  };
   return (
     <Stack direction='row' mt={3} mb={4} className='projectBadges'>
       <Badge
@@ -52,7 +45,11 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         color='#fff'
         textTransform='capitalize'
       >
-        🌋 {' ' + (project['disaster_cycle'] || project['Disaster Cycle'])}
+        🌋{' '}
+        {' ' +
+          sliceForBadge(
+            project['disaster_cycle'] || project['Disaster Cycle'].split(',')
+          )}
       </Badge>
       <Badge
         px={2}
