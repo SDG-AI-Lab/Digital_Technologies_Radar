@@ -1,18 +1,18 @@
+import './Projects.scss';
+
+import { DATA_VERSION, supabase } from 'helpers/databaseClient';
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useEffect, useState } from 'react';
-
 import {
-  projectSearch,
-  getFilteredProjects
+  getFilteredProjects,
+  projectSearch
 } from 'components/shared/helpers/HelperUtils';
 
-import { Project } from './projectComponent/Project';
-
-import './Projects.scss';
+import { Filter } from 'components/shared/filter/Filter';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
-import { RadarContext } from 'navigation/context';
-import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
+import { Project } from './projectComponent/Project';
+import { RadarContext } from 'navigation/context';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -89,6 +89,7 @@ export const Projects: React.FC = () => {
           value={query}
           onChange={handleSearch}
         />
+        <Filter />
       </div>
       <h3>{`PROJECTS (${projectsToUse.length as string})`}</h3>
       {projectsToUse.length ? (

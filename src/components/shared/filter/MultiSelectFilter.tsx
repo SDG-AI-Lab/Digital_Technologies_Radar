@@ -1,6 +1,7 @@
-import { RadarContext } from 'navigation/context';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
 import { MultiSelect } from 'react-multi-select-component';
+import { RadarContext } from 'navigation/context';
 
 interface Props {
   options: Array<{ value: string; label: string; disabled?: boolean }>;

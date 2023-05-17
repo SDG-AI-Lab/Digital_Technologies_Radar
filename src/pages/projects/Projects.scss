@@ -4,26 +4,71 @@
   padding: 30px 20px;
   max-width: 1440px;
   margin: 0 auto;
+  button {
+    margin: 10px;
+  }
+
+  .searchFilter {
+    background: none !important;
+    display: flex;
+    justify-content: space-between;
+  }
 
   .projectsListContainer {
     display: flex;
     gap: 20px;
     height: 88vh;
     margin-top: 20px;
+
     .projectContainer {
       flex-basis: 60%;
       overflow: scroll;
+
+      @media only screen and (max-width: 768px) {
+        flex-basis: 100%;
+      }
+
+      .projectImage {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+      }
     }
 
     .filters {
       flex-basis: 40%;
       overflow: scroll;
       margin-bottom: 90px;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
     }
   }
 
   hr {
     border: 1px solid #cccccc;
     margin: 15px 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 100px 20px;
+    width: 100vw;
+
+    .searchFilter {
+      .searchBar {
+        width: 50vw;
+      }
+    }
+
+    .projectsListContainer {
+      .projectContainer {
+        .projectImage {
+          width: 200px; /* Set a fixed width */
+          height: 200px;
+        }
+      }
+    }
   }
 }
