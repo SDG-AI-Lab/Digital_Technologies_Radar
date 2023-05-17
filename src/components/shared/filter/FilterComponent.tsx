@@ -144,7 +144,7 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     };
 
     setOptions(options);
-  }, [tech, projects]);
+  }, [tech]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {
