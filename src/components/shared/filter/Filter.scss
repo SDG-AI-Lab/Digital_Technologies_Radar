@@ -27,9 +27,9 @@ div.filterModal {
 }
 
 .filterItems {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 10px;
+  grid-template-columns: repeat(2, auto);
   margin: 10px 0 30px;
 
   .filterItem {
@@ -38,7 +38,9 @@ div.filterModal {
     color: #000000;
     font-size: 14px;
     font-weight: 400;
-    min-width: 140px;
+    height: auto;
+    padding: 15px 0;
+    white-space: break-spaces;
     &:focus {
       box-shadow: none;
     }
@@ -49,7 +51,6 @@ div.filterModal {
   }
 
   .multi-select {
-    max-width: 200px;
     min-width: 120px;
   }
 }
@@ -62,4 +63,10 @@ div.filterModal {
   top: -200px !important;
   width: max-content !important;
   z-index: 1;
+}
+
+@media only screen and (max-width: 970px) {
+  .filterItems {
+    grid-template-columns: 1fr;
+  }
 }
