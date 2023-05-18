@@ -131,8 +131,8 @@ export const RadarMapView: React.FC = () => {
           className='mapContainer'
         >
           <MapContainer
-            // center={getCordinates('algeria')}
-            center={[0, 0]}
+            // center={getCordinates('jamaica')}
+            center={[-50, 0]}
             zoom={1}
             minZoom={2}
             attributionControl={false}
@@ -144,8 +144,7 @@ export const RadarMapView: React.FC = () => {
                 <CircleMarker
                   key={blipDetails[0]}
                   center={getCordinates(countryName)}
-                  // eventHandlers={{click: (e: any) => {}}}
-
+                  // eventHandlers={{ click: (e: any) => {} }}
                   // @ts-expect-error
                   radius={Math.max((40 / 12) * blipDetails[1].length, 6)}
                   fillColor={'#2B6CB0'}
