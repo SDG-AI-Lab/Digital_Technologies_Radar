@@ -2,6 +2,11 @@
   overflow: hidden;
   width: 100%;
   flex-grow: 1; /* Ensure the radar map expands to fill the available space */
+
+  @media only screen and (max-width: 1100px) {
+    width: 100vw;
+    height: 40vh;
+  }
 }
 
 .leaflet-popup-content-wrapper {
@@ -66,7 +71,7 @@
       width: fit-content;
     }
 
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: 768px) {
       margin-bottom: 0;
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */
