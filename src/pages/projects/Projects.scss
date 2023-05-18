@@ -1,29 +1,81 @@
 .projectsList {
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
-  max-width: 1440px;
   margin: 0 auto;
+  max-width: 1440px;
+  padding: 30px 20px;
+  button {
+    margin: 10px;
+  }
+
+  .searchFilter {
+    background: none !important;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      display: none;
+    }
+  }
 
   .projectsListContainer {
     display: flex;
     gap: 20px;
     height: 88vh;
     margin-top: 20px;
+
     .projectContainer {
       flex-basis: 60%;
       overflow: scroll;
+
+      @media only screen and (max-width: 768px) {
+        flex-basis: 100%;
+      }
+
+      .projectImage {
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        width: 200px;
+      }
     }
 
     .filters {
       flex-basis: 40%;
-      overflow: scroll;
       margin-bottom: 90px;
+      overflow: scroll;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
     }
   }
 
   hr {
     border: 1px solid #cccccc;
     margin: 15px 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 100px 20px;
+    width: 100vw;
+
+    .searchFilter {
+      .searchBar {
+        width: 50vw;
+      }
+      button {
+        display: flex;
+      }
+    }
+
+    .projectsListContainer {
+      .projectContainer {
+        .projectImage {
+          height: 200px;
+          width: 200px; /* Set a fixed width */
+        }
+      }
+    }
   }
 }

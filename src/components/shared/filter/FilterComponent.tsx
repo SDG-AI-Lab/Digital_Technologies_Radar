@@ -1,21 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { FilterItems } from './FilterItems';
-import {
-  subregionKey,
-  regionKey,
-  countryKey,
-  implementerKey,
-  sdgKey,
-  dataKey
-} from 'components/drawers/filter/FilterConstants';
-
 import './FilterComponent.scss';
 import './Filter.scss';
+
 import {
   BlipType,
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  countryKey,
+  dataKey,
+  implementerKey,
+  regionKey,
+  sdgKey,
+  subregionKey
+} from 'components/drawers/filter/FilterConstants';
+
+import { FilterItems } from './FilterItems';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import { RadarContext } from 'navigation/context';
 
@@ -219,6 +220,7 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
           options={options}
           category='parameters'
         />
+        <div className='space'></div>
       </div>
     </div>
   );

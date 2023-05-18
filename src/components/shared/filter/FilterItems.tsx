@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useContext } from 'react';
-import cx from 'classnames';
+
 import { Button } from '@chakra-ui/react';
 import { MultiSelectFilter } from './MultiSelectFilter';
 import { RadarContext } from 'navigation/context';
+import cx from 'classnames';
 
 interface Props {
   labels: string[];
