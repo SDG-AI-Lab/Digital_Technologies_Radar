@@ -69,11 +69,13 @@ export const NavApp: React.FC = () => {
     technologies: [],
     parameters: []
   });
-  const [parameterCount, setParameterCount] = useState(
-    PARAMETERS.map((p) => ({
-      [p]: 0
-    }))
-  );
+  const [parameterCount, setParameterCount] = useState(() => {
+    return PARAMETERS.reduce((a, b) => {
+      // @ts-expect-error
+      a[b] = 0;
+      return a;
+    }, {});
+  });
 
   const [currentProject, setCurrentProject] = useState();
   const [projectsGroup, setProjectsGroup] = useState([]);

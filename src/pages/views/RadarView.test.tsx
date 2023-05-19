@@ -33,7 +33,7 @@ const radarContext: RadarContextInterface = {
   setParameterCount: jest.fn(),
   currentProject: {},
   setCurrentProject: jest.fn(),
-  projectsGroup: [],
+  projectsGroup: '',
   setProjectsGroup: jest.fn()
 };
 
