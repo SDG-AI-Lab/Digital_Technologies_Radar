@@ -27,10 +27,10 @@ import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
 export const ProjectsRadar: React.FC = () => {
   const {
     actions: { setBlips, setSelectedQuadrant, setSelectedItem },
-    state: { blips, selectedItem }
+    state: { blips, selectedItem, selectedQuadrant }
   } = useRadarState();
 
-  const { filteredValues } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues } = useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -71,6 +71,33 @@ export const ProjectsRadar: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (selectedQuadrant) {
+      const newFilteredValues: any = {
+        ...filteredValues
+      };
+      const status =
+        selectedQuadrant.charAt(0).toUpperCase() + selectedQuadrant.slice(1);
+      newFilteredValues['status'][status] = true;
+      setFilteredValues(newFilteredValues);
+      setExpanded(false);
+    } else {
+      const statusValues: any = {};
+      ['Preparedness', 'Response', 'Mitigation', 'Recovery'].forEach(
+        (key: string) => {
+          statusValues[key] = false;
+        }
+      );
+      setFilteredValues((currentValues: any) => {
+        console.log('hhh', { currentValues }, { statusValues });
+        return {
+          ...currentValues,
+          status: statusValues
+        };
+      });
+    }
+  }, [selectedQuadrant]);
+
+  useEffect(() => {
     if (selectedItem) {
       window.location.href = `/#/projects/${selectedItem['Ideas/Concepts/Examples']}`;
     }
@@ -86,7 +113,12 @@ export const ProjectsRadar: React.FC = () => {
             onChange={tabsChangeHandler}
           >
             <TabList>
-              <Tab as='h5' onClick={() => setSelectedQuadrant(null)}>
+              <Tab
+                as='h5'
+                onClick={() => {
+                  setSelectedQuadrant(null);
+                }}
+              >
                 RADAR
               </Tab>
               <Tab as='h5'>MAP</Tab>
@@ -111,28 +143,30 @@ export const ProjectsRadar: React.FC = () => {
           </Tabs>
         </div>
         <div className='projectsSection'>
-          <Accordion
-            className='accordion'
-            allowMultiple={true}
-            onChange={() => setExpanded((prevState) => !prevState)}
-          >
-            <AccordionItem>
-              <h2>
-                <AccordionButton>
-                  <Box as='span' flex='1' textAlign='left'>
-                    <h5>FILTERS</h5>
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                <FilterComponent
-                  projects={blips}
-                  config={{ header: false, status: tabIndex === 1 }}
-                />
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
+          {!selectedQuadrant && (
+            <Accordion
+              className='accordion'
+              allowMultiple={true}
+              onChange={() => setExpanded((prevState) => !prevState)}
+            >
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box as='span' flex='1' textAlign='left'>
+                      <h5>FILTERS</h5>
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <FilterComponent
+                    projects={blips}
+                    config={{ header: false, status: tabIndex === 1 }}
+                  />
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          )}
           {!expanded && (
             <div className='projectContainer'>
               <span className='projectsCount'>{`${

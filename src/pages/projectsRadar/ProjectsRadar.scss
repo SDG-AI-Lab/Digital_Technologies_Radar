@@ -29,6 +29,7 @@
     .projectsSection {
       flex-basis: 50%;
       width: 100%;
+      overflow-y: scroll;
 
       .accordion {
         background: white;
