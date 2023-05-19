@@ -53,8 +53,6 @@ export const ProjectDetails: React.FC = () => {
     }
   };
 
-  console.group({ project });
-
   return project ? (
     <div className='projectDetailsPage'>
       <div className='projectHero'>
