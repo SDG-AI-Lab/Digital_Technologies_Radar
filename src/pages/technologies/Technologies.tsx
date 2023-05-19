@@ -16,7 +16,8 @@ import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
 export const Technologies: React.FC = () => {
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues, setProjectsGroup } =
+    useContext(RadarContext);
 
   const [techList, setTechList] = useState<any[]>([]);
   const [query, setQuery] = useState('');
@@ -153,6 +154,7 @@ export const Technologies: React.FC = () => {
                           newFilteredValues['technologies'][technology.name] =
                             true;
                           setFilteredValues(newFilteredValues);
+                          setProjectsGroup(technology.name);
                         }}
                       >{`See All (${techProjects.length})`}</Link>
                     )}

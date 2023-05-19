@@ -15,7 +15,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
 }) => {
   const [selected, setSelected] = useState([]);
 
-  const { filteredValues } = useContext(RadarContext);
+  const { filteredValues, setProjectsGroup } = useContext(RadarContext);
 
   useEffect(() => {
     const value = filteredValues['parameters'][label];
@@ -30,7 +30,10 @@ export const MultiSelectFilter: React.FC<Props> = ({
       <MultiSelect
         options={options}
         value={selected}
-        onChange={setSelected}
+        onChange={(e: any) => {
+          setSelected(e);
+          setProjectsGroup('');
+        }}
         labelledBy='Select'
         hasSelectAll={false}
         disableSearch={true}

@@ -21,8 +21,7 @@ export const Projects: React.FC = () => {
   const [loading, setLoading] = useState<Boolean>(true);
   const [projectsList, setProjectsList] = useState<any>([]);
 
-  const { filteredValues, projectsGroup, parameterCount, setProjectsGroup } =
-    useContext(RadarContext);
+  const { filteredValues, projectsGroup } = useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -46,22 +45,9 @@ export const Projects: React.FC = () => {
       setFilteredProjects,
       projectsList
     );
-
-    if (
-      totalParameterCount(parameterCount) > 1 ||
-      !totalParameterCount(parameterCount)
-    ) {
-      setProjectsGroup('');
-    }
     if (result) setFilteredProjects(result);
   }, [filteredValues]);
 
-  const totalParameterCount = (parameters: any): any => {
-    return Object.values(parameters).reduce(
-      (a: any, b: any) => (a as number) + (b as number),
-      0
-    );
-  };
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
       localStorage.getItem('projectsList') as string
@@ -88,8 +74,6 @@ export const Projects: React.FC = () => {
     }
     setLoading(false);
   };
-
-  console.log({ parameterCount });
 
   return loading ? (
     <div className='technologiesPage'>

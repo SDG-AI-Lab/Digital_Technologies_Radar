@@ -22,7 +22,8 @@ export const FilterItems: React.FC<Props> = ({
     filteredValues,
     setFilteredValues,
     parameterCount,
-    setParameterCount
+    setParameterCount,
+    setProjectsGroup
   } = useContext(RadarContext);
 
   const handleButtonClick = (label: string, node: any): any => {
@@ -38,6 +39,7 @@ export const FilterItems: React.FC<Props> = ({
     }
 
     setFilteredValues(newFilteredValues);
+    setProjectsGroup('');
   };
 
   const handleMultiSelect = (label: string, selected: string[]): any => {
@@ -46,7 +48,6 @@ export const FilterItems: React.FC<Props> = ({
     };
 
     newFilteredValues[category][label] = selected;
-
     setFilteredValues(newFilteredValues);
     getFilterCount(label);
   };
