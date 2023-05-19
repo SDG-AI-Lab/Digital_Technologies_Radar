@@ -21,7 +21,7 @@ export const Projects: React.FC = () => {
   const [loading, setLoading] = useState<Boolean>(true);
   const [projectsList, setProjectsList] = useState<any>([]);
 
-  const { filteredValues } = useContext(RadarContext);
+  const { filteredValues, projectsGroup } = useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -45,7 +45,6 @@ export const Projects: React.FC = () => {
       setFilteredProjects,
       projectsList
     );
-
     if (result) setFilteredProjects(result);
   }, [filteredValues]);
 
@@ -92,6 +91,9 @@ export const Projects: React.FC = () => {
         <Filter />
       </div>
       <h3>{`PROJECTS (${projectsToUse.length as string})`}</h3>
+      {Boolean(projectsGroup.length) && (
+        <span>{`(${projectsGroup as string})`}</span>
+      )}
       {projectsToUse.length ? (
         <div className='projectsListContainer'>
           <div className='projectContainer'>

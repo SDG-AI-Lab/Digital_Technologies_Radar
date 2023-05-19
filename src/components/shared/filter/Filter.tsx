@@ -158,6 +158,7 @@ export const Filter: React.FC = () => {
         }
       });
     });
+
     setFilteredValues(filterValues);
   };
 

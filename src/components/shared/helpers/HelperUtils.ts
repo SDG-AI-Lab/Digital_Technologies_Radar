@@ -277,3 +277,20 @@ export const sliceForBadge = (projectArray: string[]): string[] => {
   }
   return projectArray;
 };
+
+export const totalParameterCount = (parameters: any): any => {
+  return Object.values(parameters).reduce(
+    (a: any, b: any) => (a as number) + (b as number),
+    0
+  );
+};
+
+export const PARAMETERS = [
+  'Region',
+  'SubRegion',
+  'Country',
+  'Disaster Type',
+  'UN Host',
+  'SDG',
+  'Data'
+];

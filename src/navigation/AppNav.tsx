@@ -31,21 +31,14 @@ import { QuadrantView } from '../pages/views/QuadrantView';
 import { MapViewLayout } from '../layouts/MapViewLayout';
 import { RadarMapView } from '../pages/map-view/RadarMapView';
 
+// Helpers
+import { PARAMETERS } from 'components/shared/helpers/HelperUtils';
+
 // Context
 import { RadarContext, RadarContextInterface } from './context';
 
 // Styles
 import './AppNav.scss';
-
-const PARAMETERS = [
-  'Region',
-  'SubRegion',
-  'Country',
-  'Disaster Type',
-  'UN Host',
-  'SDG',
-  'Data'
-];
 
 export const NavApp: React.FC = () => {
   const [radarStateValues, setRadarStateValues] = useState({
@@ -69,11 +62,13 @@ export const NavApp: React.FC = () => {
     technologies: [],
     parameters: []
   });
-  const [parameterCount, setParameterCount] = useState(
-    PARAMETERS.map((p) => ({
-      [p]: 0
-    }))
-  );
+  const [parameterCount, setParameterCount] = useState(() => {
+    return PARAMETERS.reduce((a, b) => {
+      // @ts-expect-error
+      a[b] = 0;
+      return a;
+    }, {});
+  });
 
   const [currentProject, setCurrentProject] = useState();
   const [projectsGroup, setProjectsGroup] = useState([]);

@@ -25,7 +25,13 @@ export const Disasters: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const [projectsList, setProjectsList] = useState<any>([]);
 
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const {
+    filteredValues,
+    setFilteredValues,
+    setProjectsGroup,
+    parameterCount,
+    setParameterCount
+  } = useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -159,6 +165,11 @@ export const Disasters: React.FC = () => {
                           }
                         ];
                         setFilteredValues(newFilteredValues);
+                        setParameterCount({
+                          ...parameterCount,
+                          'Disaster Type': 1
+                        });
+                        setProjectsGroup(disaster.name);
                       }}
                     >{`See All (${disasterProjects.length as string})`}</Link>
                   )}
