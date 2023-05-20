@@ -37,6 +37,8 @@ export const ProjectsRadar: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
   const [filteredProjects, setFilteredProjects] = useState<BlipType[]>([]);
   const [allBlips, setAllBlips] = useState<BlipType[]>();
+  const [currentNumber, setCurrentNumber] = useState<number>(10);
+  const [showPagination, setShowPagination] = useState<boolean>(true);
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -64,6 +66,14 @@ export const ProjectsRadar: React.FC = () => {
 
     if (result) setBlips(result);
   }, [filteredValues]);
+
+  useEffect(() => {
+    if (currentNumber + 10 < filteredProjects.length) {
+      setShowPagination(true);
+    } else {
+      setShowPagination(false);
+    }
+  }, [filteredProjects]);
 
   useEffect(() => {
     setTabIndex(0);
@@ -102,6 +112,15 @@ export const ProjectsRadar: React.FC = () => {
       window.location.href = `/#/projects/${selectedItem['Ideas/Concepts/Examples']}`;
     }
   }, [selectedItem]);
+
+  const handleLoadMore = (): void => {
+    if (currentNumber + 10 > filteredProjects.length) {
+      setCurrentNumber(filteredProjects.length);
+      setShowPagination(false);
+    } else {
+      setCurrentNumber((currentNumber) => currentNumber + 10);
+    }
+  };
 
   return (
     <div className='projectRadarContainer'>
@@ -143,7 +162,9 @@ export const ProjectsRadar: React.FC = () => {
           </Tabs>
         </div>
         <div className='projectsSection'>
-          {!selectedQuadrant && (
+          {selectedQuadrant ? (
+            <div className='filter-space' />
+          ) : (
             <Accordion
               className='accordion'
               allowMultiple={true}
@@ -169,15 +190,27 @@ export const ProjectsRadar: React.FC = () => {
           )}
           {!expanded && (
             <div className='projectContainer'>
-              <span className='projectsCount'>{`${
-                (filteredProjects || []).length
-              } Projects`}</span>
-              {(filteredProjects || []).map((project) => (
-                <div key={project.id}>
-                  <Project project={project} />
-                  <hr />
+              <span className='projectsCount'>
+                {`(${
+                  currentNumber > filteredProjects.length
+                    ? filteredProjects.length
+                    : currentNumber
+                } of ${filteredProjects.length} Projects) `}
+              </span>
+              {(filteredProjects.slice(0, currentNumber) || []).map(
+                (project) => (
+                  <div key={project.id}>
+                    <Project project={project} />
+                    <hr />
+                  </div>
+                )
+              )}
+
+              {showPagination && (
+                <div className='loadMoreBtn'>
+                  <button onClick={handleLoadMore}>Load More Projects</button>
                 </div>
-              ))}
+              )}
             </div>
           )}
         </div>

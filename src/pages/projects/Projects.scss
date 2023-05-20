@@ -12,10 +12,17 @@
     background: none !important;
     display: flex;
     justify-content: space-between;
+    width: 100vw;
 
     button {
       display: none;
     }
+  }
+
+  .titleRow {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
   .projectsListContainer {
@@ -27,6 +34,19 @@
     .projectContainer {
       flex-basis: 60%;
       overflow: scroll;
+      margin-bottom: 100px;
+
+      .loadMoreBtn {
+        display: flex;
+        justify-content: center;
+        button {
+          background-color: #252e3c;
+          color: white;
+          font-size: smaller;
+          font-weight: 600;
+          padding: 5px 30px;
+        }
+      }
 
       @media only screen and (max-width: 768px) {
         flex-basis: 100%;

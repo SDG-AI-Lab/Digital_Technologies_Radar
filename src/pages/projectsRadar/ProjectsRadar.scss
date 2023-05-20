@@ -28,8 +28,31 @@
     }
     .projectsSection {
       flex-basis: 50%;
-      width: 100%;
+      margin-bottom: 100px;
       overflow-y: scroll;
+      width: 100%;
+
+      .filter-space {
+        background: white;
+        height: 40px;
+        position: sticky;
+        top: 0;
+      }
+
+      .projectContainer {
+        .loadMoreBtn {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+          button {
+            background-color: #252e3c;
+            color: white;
+            font-size: smaller;
+            font-weight: 600;
+            padding: 5px 30px;
+          }
+        }
+      }
 
       .accordion {
         background: white;
@@ -76,6 +99,7 @@
         padding-bottom: 10px;
         padding-left: 15px;
         padding-right: 0px;
+
         .pjrojectDetails-large {
           .title-large {
             -webkit-line-clamp: 1;
@@ -94,10 +118,14 @@
     }
 
     .projectsCount {
+      background: white;
+      display: block;
       font-size: 12px;
       font-style: italic;
       font-weight: 700;
       padding: 10px;
+      position: sticky;
+      top: 40px;
     }
   }
 }
@@ -112,8 +140,8 @@
       flex-direction: column;
       height: auto;
       .projectsSection {
-        width: 90vw;
         padding: 0 10px;
+        width: 90vw;
         .accordion .filterComponent {
           height: auto;
         }

@@ -20,6 +20,8 @@ export const Projects: React.FC = () => {
   const [filteredProjects, setFilteredProjects] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(true);
   const [projectsList, setProjectsList] = useState<any>([]);
+  const [currentNumber, setCurrentNumber] = useState<number>(10);
+  const [showPagination, setShowPagination] = useState<boolean>(true);
 
   const { filteredValues, projectsGroup } = useContext(RadarContext);
 
@@ -32,6 +34,14 @@ export const Projects: React.FC = () => {
   useEffect(() => {
     setProjectsToUse(filteredProjects);
   }, [filteredProjects]);
+
+  useEffect(() => {
+    if (currentNumber + 10 < projectsToUse.length) {
+      setShowPagination(true);
+    } else {
+      setShowPagination(false);
+    }
+  }, [projectsToUse]);
 
   useEffect(() => {
     getProjects();
@@ -75,6 +85,15 @@ export const Projects: React.FC = () => {
     setLoading(false);
   };
 
+  const handleLoadMore = (): void => {
+    if (currentNumber + 10 > projectsToUse.length) {
+      setCurrentNumber(projectsToUse.length);
+      setShowPagination(false);
+    } else {
+      setCurrentNumber((currentNumber) => currentNumber + 10);
+    }
+  };
+
   return loading ? (
     <div className='technologiesPage'>
       <Loader />
@@ -90,19 +109,32 @@ export const Projects: React.FC = () => {
         />
         <Filter />
       </div>
-      <h3>{`PROJECTS (${projectsToUse.length as string})`}</h3>
+      <div className='titleRow'>
+        <h3>PROJECTS </h3>
+        <span>{`(${
+          currentNumber > projectsToUse.length
+            ? (projectsToUse.length as string)
+            : currentNumber
+        } of ${projectsToUse.length as string})`}</span>
+      </div>
+
       {Boolean(projectsGroup.length) && (
         <span>{`(${projectsGroup as string})`}</span>
       )}
       {projectsToUse.length ? (
         <div className='projectsListContainer'>
           <div className='projectContainer'>
-            {projectsToUse.map((project: any) => (
+            {projectsToUse.slice(0, currentNumber).map((project: any) => (
               <div key={project.id}>
                 <Project project={project} />
                 <hr />
               </div>
             ))}
+            {showPagination && (
+              <div className='loadMoreBtn'>
+                <button onClick={handleLoadMore}>Load More Projects</button>
+              </div>
+            )}
           </div>
 
           <div className='filters'>
