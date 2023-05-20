@@ -39,11 +39,13 @@
         margin-top: -35px;
         overflow-y: hidden;
         text-align: left;
+        text-align: center;
         text-overflow: ellipsis;
+        word-break: break-word;
       }
 
       .seeitem {
-        background: #ede7d9;
+        background: #f7f7f7;
         border-radius: 6px;
         color: black;
         font-size: 16px;

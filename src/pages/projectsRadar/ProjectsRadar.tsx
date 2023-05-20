@@ -23,6 +23,7 @@ import { Project } from 'pages/projects/projectComponent/Project';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
 import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
+import { SearchView } from 'pages/search/SearchView';
 
 export const ProjectsRadar: React.FC = () => {
   const {
@@ -107,12 +108,6 @@ export const ProjectsRadar: React.FC = () => {
     }
   }, [selectedQuadrant]);
 
-  useEffect(() => {
-    if (selectedItem) {
-      window.location.href = `/#/projects/${selectedItem['Ideas/Concepts/Examples']}`;
-    }
-  }, [selectedItem]);
-
   const handleLoadMore = (): void => {
     if (currentNumber + 10 > filteredProjects.length) {
       setCurrentNumber(filteredProjects.length);
@@ -120,6 +115,10 @@ export const ProjectsRadar: React.FC = () => {
     } else {
       setCurrentNumber((currentNumber) => currentNumber + 10);
     }
+  };
+
+  const handleClose = (): void => {
+    setSelectedItem(null);
   };
 
   return (
@@ -161,6 +160,13 @@ export const ProjectsRadar: React.FC = () => {
             </TabPanels>
           </Tabs>
         </div>
+        {selectedItem && (
+          <SearchView
+            techContent={selectedItem}
+            setOpen={true}
+            setClose={handleClose}
+          />
+        )}
         <div className='projectsSection'>
           {selectedQuadrant ? (
             <div className='filter-space' />

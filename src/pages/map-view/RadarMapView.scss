@@ -36,7 +36,7 @@
 .mapContainer {
   display: flex;
   flex-direction: column;
-  max-height: 100vh; /* Use 100vh to occupy the full height of the viewport */
+  max-height: 90vh; /* Use 100vh to occupy the full height of the viewport */
   z-index: 0;
 
   @media only screen and (max-width: 767px) {

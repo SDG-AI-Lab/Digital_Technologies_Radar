@@ -96,7 +96,7 @@ export const BlipPopOver = ({
     <Box minW={300}>
       <Heading>
         <Text fontSize={18} className={'popOverTitle'}>
-          {selectedProject['Ideas/Concepts/Examples']}
+          {"selectedProject['Ideas/Concepts/Examples']"}
         </Text>
       </Heading>
 

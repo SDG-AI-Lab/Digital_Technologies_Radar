@@ -133,7 +133,10 @@ export const ProjectDetails: React.FC = () => {
         </div>
         <div className='projectContent'>
           <section id='project-details-section'>
-            <span className='projectDetailsTitle'> Details</span>
+            <span className='projectDetailsTitle'>
+              {' '}
+              {`${project?.['name']}`}
+            </span>
             <p className='projectDetailsContent'>{project?.['description']}</p>
           </section>
           <hr className='separater' />
