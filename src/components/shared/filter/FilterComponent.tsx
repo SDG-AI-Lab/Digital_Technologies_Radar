@@ -1,12 +1,10 @@
-import './FilterComponent.scss';
-import './Filter.scss';
-
+import React, { useContext, useEffect, useState } from 'react';
 import {
   BlipType,
   useDataState,
   useRadarState
 } from '@undp_sdg_ai_lab/undp-radar';
-import React, { useContext, useEffect, useState } from 'react';
+
 import {
   countryKey,
   dataKey,
@@ -19,6 +17,9 @@ import {
 import { FilterItems } from './FilterItems';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import { RadarContext } from 'navigation/context';
+
+import './FilterComponent.scss';
+import './Filter.scss';
 
 interface Labels {
   status: string[];

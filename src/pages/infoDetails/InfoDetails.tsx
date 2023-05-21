@@ -111,7 +111,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
         </div>
         <div className='itemContent'>
           <section id='item-details-section'>
-            <span className='itemDetailsTitle'> Overview</span>
+            <span className='itemDetailsTitle'> {item.name} </span>
 
             {item.description ? (
               item.description.split('##').map((i: string, idx: number) => (

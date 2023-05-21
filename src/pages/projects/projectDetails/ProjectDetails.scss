@@ -144,8 +144,11 @@
 
 @media only screen and (max-width: 768px) {
   .projectDetailsPage {
+    width: 100vw;
+    margin-bottom: 60px;
     .projectHero {
-      margin-top: 80px;
+      justify-content: center;
+      align-items: center;
 
       .projectTitle {
         align-items: center;
@@ -172,7 +175,11 @@
 
       .projectContent {
         flex-basis: 100%;
-        padding: 45px 20px;
+        padding: 0 20px;
+      }
+
+      .projectDetailsContent {
+        padding: 0;
       }
     }
   }

@@ -12,16 +12,25 @@
     background: none !important;
     display: flex;
     justify-content: space-between;
-    width: 100vw;
 
     button {
       display: none;
     }
+    @media only screen and (max-width: 768px) {
+      align-items: baseline;
+
+      .searchBar {
+        width: 50vw;
+      }
+      button {
+        display: flex;
+      }
+    }
   }
 
   .titleRow {
-    display: flex;
     align-items: center;
+    display: flex;
     gap: 5px;
   }
 
@@ -33,8 +42,8 @@
 
     .projectContainer {
       flex-basis: 60%;
-      overflow: scroll;
       margin-bottom: 100px;
+      overflow: scroll;
 
       .loadMoreBtn {
         display: flex;
@@ -48,15 +57,23 @@
         }
       }
 
-      @media only screen and (max-width: 768px) {
-        flex-basis: 100%;
-      }
-
       .projectImage {
         height: 200px;
         object-fit: cover;
         object-position: center;
         width: 200px;
+
+        @media only screen and (max-width: 768px) {
+          height: 200px;
+          width: 200px; /* Set a fixed width */
+        }
+      }
+
+      @media only screen and (max-width: 768px) {
+        display: flex;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 5px;
       }
     }
 
@@ -69,33 +86,25 @@
         display: none;
       }
     }
+    
+    @media only screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 78vh;
+    }
   }
 
   hr {
     border: 1px solid #cccccc;
     margin: 15px 0;
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   @media only screen and (max-width: 768px) {
     padding: 100px 20px;
     width: 100vw;
-
-    .searchFilter {
-      .searchBar {
-        width: 50vw;
-      }
-      button {
-        display: flex;
-      }
-    }
-
-    .projectsListContainer {
-      .projectContainer {
-        .projectImage {
-          height: 200px;
-          width: 200px; /* Set a fixed width */
-        }
-      }
-    }
   }
 }

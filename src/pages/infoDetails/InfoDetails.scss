@@ -155,10 +155,16 @@
 
 @media only screen and (max-width: 768px) {
   .itemDetailsPage {
+    width: 100vw;
+    margin-bottom: 60px;
     .itemHero {
-      margin-top: 80px;
+      margin-top: 78px;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
 
       .itemTitle {
+        display: none;
         align-items: center;
         flex-basis: 100%;
         span {
@@ -172,7 +178,7 @@
         }
       }
       .itemImg {
-        display: none;
+        // display: none;
       }
     }
 
