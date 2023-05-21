@@ -18,12 +18,23 @@
   .searchFilter {
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
+
+    @media only screen and (max-width: 768px) {
+      position: relative;
+      top: 65px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 20px 0;
+    width: 100vw;
   }
 }
 
 .technologies {
   > div:nth-child(odd) {
-    background-color: aliceblue;
+    background-color: #f7f7f7;
   }
 }
 
@@ -36,6 +47,9 @@
   .detailsSection {
     display: flex;
     gap: 20px;
+    @media only screen and (max-width: 768px) {
+      gap: 0;
+    }
   }
 
   .technologyDetails {
@@ -52,6 +66,9 @@
     .topRowTitle {
       color: #1f5a95;
       text-transform: uppercase;
+      @media only screen and (max-width: 768px) {
+        display: block;
+      }
     }
 
     a {
@@ -61,29 +78,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .technologiesPage {
-    margin-top: 20px;
-    .searchFilter {
-      position: relative;
-      top: 60px;
-    }
-  }
-
-  .technologiesContainer {
-    .detailsSection {
-      gap: 0;
-    }
-
-    .disasterDetails {
-      margin: 0;
-    }
-
-    .topRow {
-      justify-content: space-between;
-
-      .topRowTitle {
-        display: block;
-      }
-    }
+  .disasterDetails {
+    margin: 0;
   }
 }

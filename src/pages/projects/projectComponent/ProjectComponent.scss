@@ -11,8 +11,8 @@
       margin: 0 auto;
       object-fit: cover;
     }
-    @media only screen and (max-width: 768px) { 
-      display: none; 
+    @media only screen and (max-width: 768px) {
+      display: none;
     }
   }
 
@@ -45,8 +45,8 @@
       min-height: 60px;
       overflow-y: hidden;
       text-overflow: ellipsis;
-      
-      @media only screen and (max-width: 768px) { 
+
+      @media only screen and (max-width: 768px) {
         -webkit-line-clamp: 3;
       }
     }
@@ -58,7 +58,6 @@
       width: 100%;
 
       .projectBadges-large {
-    
         span {
           margin: 0;
           zoom: 0.8;
@@ -75,7 +74,7 @@
         }
       }
 
-      @media only screen and (max-width: 768px) { 
+      @media only screen and (max-width: 768px) {
         width: 85vw;
       }
     }
@@ -85,12 +84,12 @@
       max-width: 500px;
     }
 
-    @media only screen and (max-width: 768px) { 
+    @media only screen and (max-width: 768px) {
       padding: 0;
     }
   }
-  @media only screen and (max-width: 768px) {  
-    background-color: #F7F7F7; 
+  @media only screen and (max-width: 768px) {
+    background-color: #f7f7f7;
     padding: 10px;
   }
 }

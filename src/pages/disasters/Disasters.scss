@@ -5,7 +5,7 @@
   max-width: 1440px;
   overflow: scroll;
   -ms-overflow-style: none; /* IE and Edge */
-  padding: 30px 20px;
+  padding-top: 20px;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   width: 90vw;
@@ -15,7 +15,7 @@
   }
 
   > div:nth-child(odd) {
-    background-color: aliceblue;
+    background-color: #f7f7f7;
   }
 
   h3 {
@@ -27,6 +27,17 @@
     background: none !important;
     display: flex;
     justify-content: space-between;
+    padding-right: 10px;
+
+    @media only screen and (max-width: 768px) {
+      position: relative;
+      top: 65px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin-top: 20px 0;
+    width: 100vw;
   }
 }
 
@@ -39,10 +50,18 @@
   .detailsSection {
     display: flex;
     gap: 20px;
+
+    @media only screen and (max-width: 768px) {
+      gap: 0;
+    }
   }
 
   .disasterDetails {
     margin-right: 30px;
+
+    @media only screen and (max-width: 768px) {
+      margin: 0;
+    }
   }
 
   .topRow {
@@ -58,6 +77,9 @@
     .topRowTitle {
       color: #2868ac;
       text-transform: uppercase;
+      @media only screen and (max-width: 768px) {
+        display: block;
+      }
     }
   }
 }
@@ -94,32 +116,5 @@
     border-color: #3182ce;
     box-shadow: 0 0 0 1px #3182ce;
     z-index: 1;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .disasters {
-    .searchFilter {
-      position: relative;
-      top: 60px;
-    }
-  }
-
-  .disasterContainer {
-    .detailsSection {
-      gap: 0;
-    }
-
-    .disasterDetails {
-      margin: 0;
-    }
-
-    .topRow {
-      justify-content: space-between;
-
-      .topRowTitle {
-        display: block;
-      }
-    }
   }
 }
