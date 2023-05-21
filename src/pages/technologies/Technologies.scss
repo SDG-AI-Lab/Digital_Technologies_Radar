@@ -3,7 +3,7 @@
   max-width: 1440px;
   overflow: scroll;
   -ms-overflow-style: none; /* IE and Edge */
-  padding-top: 20px;
+  padding: 30px 20px;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   width: 90vw;
@@ -29,6 +29,7 @@
   @media only screen and (max-width: 768px) {
     margin-top: 20px 0;
     width: 100vw;
+    padding: 20px 0 0;
   }
 }
 

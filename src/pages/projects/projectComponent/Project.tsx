@@ -26,7 +26,7 @@ export const Project: React.FC<Props> = ({ project }) => {
           alt='Default Image'
         />
       </div>
-      <div className='pjrojectDetails-large'>
+      <div className='projectDetails-large'>
         <div className='title-large'>
           {project?.name || project['Ideas/Concepts/Examples']}
         </div>
