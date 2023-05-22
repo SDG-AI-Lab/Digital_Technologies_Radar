@@ -69,7 +69,8 @@ export const Filter: React.FC = () => {
     setFilteredValues,
     projectsGroup,
     parameterCount,
-    setParameterCount
+    setParameterCount,
+    setProjectsGroup
   } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
@@ -205,6 +206,7 @@ export const Filter: React.FC = () => {
     };
     setInitialFilteredValues(labels);
     setParameterCount(initialParameterCount);
+    setProjectsGroup('');
   };
 
   return (

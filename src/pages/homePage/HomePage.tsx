@@ -66,6 +66,7 @@ export const HomePage: React.FC = () => {
             marginTop={'-60px'}
             colorScheme='blue'
             className='launchBtnDesktop'
+            backgroundColor={'#2868AC'}
           >
             Launch Radar
           </Button>
