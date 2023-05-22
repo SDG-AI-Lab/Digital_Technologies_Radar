@@ -3,6 +3,8 @@
   flex-direction: column;
   overflow: auto;
   padding: 60px;
+  max-width: 1440px;
+  margin: 0 auto;
 
   a.seeAll:hover {
     text-decoration: underline;
@@ -14,7 +16,18 @@
   }
 
   .bodySection {
-    // width: 70%;
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+    align-items: center;
+
+    .textSection {
+      flex-basis: 60%;
+    }
+
+    a {
+      margin: 0 auto;
+    }
 
     .maintitle {
       font-size: 36px;
@@ -36,12 +49,20 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 24px;
-        text-align: left;
+        text-align: justify;
         text-overflow: ellipsis;
         padding-bottom: 40px;
       }
       #bold {
         font-weight: 800;
+      }
+    }
+
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+
+      a {
+        display: none;
       }
     }
   }

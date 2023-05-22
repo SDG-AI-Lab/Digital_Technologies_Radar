@@ -20,6 +20,7 @@ import { RadarContext } from 'navigation/context';
 
 import './FilterComponent.scss';
 import './Filter.scss';
+import { initialParameterCount } from '../helpers/HelperUtils';
 
 interface Labels {
   status: string[];
@@ -68,7 +69,8 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     }
   } = useDataState();
 
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues, setParameterCount } =
+    useContext(RadarContext);
 
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
@@ -89,7 +91,10 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
 
     setLabels(labels);
 
-    return () => setInitialFilteredValues(labels);
+    return () => {
+      setInitialFilteredValues(labels);
+      setParameterCount(initialParameterCount);
+    };
   }, []);
 
   useEffect(() => {

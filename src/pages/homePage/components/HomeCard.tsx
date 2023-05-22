@@ -3,7 +3,6 @@ import './HomeCard.scss';
 import React, { useContext } from 'react';
 
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
-import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { ProjectBadge } from 'components/shared/projectBadges/ProjectBadges';
 import { RadarContext } from 'navigation/context';
@@ -32,10 +31,6 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
             }}
             alt='Default Image'
           />
-          <Button className='moreBtn' colorScheme='blue'>
-            {' '}
-            MORE{' '}
-          </Button>
         </div>
         <div className='homeDetails-large'>
           <div className='title-large'>

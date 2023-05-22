@@ -32,7 +32,7 @@ import { MapViewLayout } from '../layouts/MapViewLayout';
 import { RadarMapView } from '../pages/map-view/RadarMapView';
 
 // Helpers
-import { PARAMETERS } from 'components/shared/helpers/HelperUtils';
+import { initialParameterCount } from 'components/shared/helpers/HelperUtils';
 
 // Context
 import { RadarContext, RadarContextInterface } from './context';
@@ -62,13 +62,7 @@ export const NavApp: React.FC = () => {
     technologies: [],
     parameters: []
   });
-  const [parameterCount, setParameterCount] = useState(() => {
-    return PARAMETERS.reduce((a, b) => {
-      // @ts-expect-error
-      a[b] = 0;
-      return a;
-    }, {});
-  });
+  const [parameterCount, setParameterCount] = useState(initialParameterCount);
 
   const [currentProject, setCurrentProject] = useState();
   const [projectsGroup, setProjectsGroup] = useState([]);

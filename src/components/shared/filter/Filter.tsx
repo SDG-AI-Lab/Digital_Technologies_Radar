@@ -23,6 +23,7 @@ import {
 import './Filter.scss';
 import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
+import { initialParameterCount } from 'components/shared/helpers/HelperUtils';
 import { RadarContext } from 'navigation/context';
 
 interface Labels {
@@ -63,7 +64,12 @@ export const Filter: React.FC = () => {
     }
   } = useDataState();
 
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const {
+    filteredValues,
+    setFilteredValues,
+    projectsGroup,
+    setParameterCount
+  } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
@@ -83,7 +89,10 @@ export const Filter: React.FC = () => {
     };
 
     setLabels(labels);
-    setInitialFilteredValues(labels);
+    if (!projectsGroup) {
+      setInitialFilteredValues(labels);
+      setParameterCount(initialParameterCount);
+    }
   }, []);
 
   useEffect(() => {

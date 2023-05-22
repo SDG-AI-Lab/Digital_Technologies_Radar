@@ -294,3 +294,9 @@ export const PARAMETERS = [
   'SDG',
   'Data'
 ];
+
+export const initialParameterCount = PARAMETERS.reduce((a, b) => {
+  // @ts-expect-error
+  a[b] = 0;
+  return a;
+}, {});

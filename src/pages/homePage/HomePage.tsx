@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react';
 
 import { HomeCard } from './components/HomeCard';
 import { HomeCardMini } from './components/HomeCardMini';
-import { Image } from '@chakra-ui/react';
+import { Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { aboutContentList } from 'pages/about/AboutContent';
 import logo from '../../assets/FTRDRR.svg';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
+import { ROUTES } from 'navigation/routes';
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
@@ -97,23 +98,37 @@ export const HomePage: React.FC = () => {
         <Image src={logo} />
       </div>
       <div className='bodySection'>
-        <div className='maintitle'>
-          Frontier Technology Radar for Disaster Risk Reduction
-        </div>
-        <div className='descriptionSection'>
-          <div className='aboutDetails' id='bold'>
-            {aboutContentList[0].description.substring(
-              0,
-              aboutContentList[0].description.indexOf('.')
-            )}
+        <div className='textSection'>
+          <div className='maintitle'>
+            Frontier Technology Radar for Disaster Risk Reduction
           </div>
-          <div className='aboutDetails'>
-            {aboutContentList[0].description.substring(
-              aboutContentList[0].description.indexOf('.') + 1,
-              aboutContentList[0].description.indexOf('s.') + 1
-            )}
+          <div className='descriptionSection'>
+            <div className='aboutDetails' id='bold'>
+              {aboutContentList[0].description.substring(
+                0,
+                aboutContentList[0].description.indexOf('.')
+              )}
+            </div>
+            <div className='aboutDetails'>
+              {aboutContentList[0].description.substring(
+                aboutContentList[0].description.indexOf('.') + 1,
+                aboutContentList[0].description.indexOf('s.') + 1
+              )}
+            </div>
           </div>
         </div>
+        <Link to={ROUTES.PROJECTS_RADAR}>
+          <Button
+            size='lg'
+            borderRadius='8px'
+            borderWidth='2px'
+            marginTop={'-60px'}
+            colorScheme='blue'
+            className='launchBtnDesktop'
+          >
+            Launch Radar
+          </Button>
+        </Link>
       </div>
       {technologies.length > 0 ? (
         <>
