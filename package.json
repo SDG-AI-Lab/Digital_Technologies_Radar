@@ -27,6 +27,7 @@
     "react-leaflet": "3.2.0",
     "react-lorem-ipsum": "^1.4.9",
     "react-multi-select-component": "^4.3.4",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.0.2",
     "react-scripts": "5.0.0",
     "sass": "^1.49.9",
