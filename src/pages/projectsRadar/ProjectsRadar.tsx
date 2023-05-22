@@ -22,7 +22,10 @@ import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
-import { getFilteredProjects } from 'components/shared/helpers/HelperUtils';
+import {
+  getFilteredProjects,
+  mergeDisasterCycle
+} from 'components/shared/helpers/HelperUtils';
 import { SearchView } from 'pages/search/SearchView';
 
 export const ProjectsRadar: React.FC = () => {
@@ -48,7 +51,7 @@ export const ProjectsRadar: React.FC = () => {
 
   useEffect(() => {
     if (blips.length) {
-      setFilteredProjects(blips);
+      setFilteredProjects(mergeDisasterCycle(blips) as BlipType[]);
       setLoading(false);
     }
 
@@ -209,6 +212,7 @@ export const ProjectsRadar: React.FC = () => {
                     : currentNumber
                 } of ${filteredProjects.length} Projects) `}
               </span>
+
               {(filteredProjects.slice(0, currentNumber) || []).map(
                 (project) => (
                   <div key={project.id}>
