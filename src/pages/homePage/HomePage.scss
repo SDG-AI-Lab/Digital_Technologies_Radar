@@ -10,9 +10,28 @@
     text-decoration: underline;
   }
 
+  .carouselContainer {
+    height: 500px;
+
+    img {
+      height: 400px !important;
+      object-fit: cover;
+    }
+  }
+
   .logoSection {
     position: sticky;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
+  }
+
+  .maintitle {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #0062ac;
+    padding-bottom: 30px;
   }
 
   .bodySection {
@@ -27,16 +46,6 @@
 
     a {
       margin: 0 auto;
-    }
-
-    .maintitle {
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 44px;
-      letter-spacing: 0em;
-      text-align: left;
-      color: #0062ac;
-      padding-bottom: 75px;
     }
 
     .descriptionSection {
