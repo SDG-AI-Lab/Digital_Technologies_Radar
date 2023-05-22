@@ -46,7 +46,6 @@ export const Projects: React.FC = () => {
   useEffect(() => {
     getProjects();
   }, []);
-  console.log({ filteredValues });
 
   useEffect(() => {
     if (!filteredProjects.length) return;
@@ -104,6 +103,7 @@ export const Projects: React.FC = () => {
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
+          type='search'
           className='searchBar'
           value={query}
           onChange={handleSearch}

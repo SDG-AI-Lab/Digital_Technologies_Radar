@@ -51,9 +51,14 @@ interface Props {
     header: boolean;
     status: boolean;
   };
+  setTotalFiltersCount?: Function;
 }
 
-export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
+export const FilterComponent: React.FC<Props> = ({
+  projects,
+  config,
+  setTotalFiltersCount = () => {}
+}) => {
   const {
     state: {
       blips,
@@ -69,8 +74,12 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     }
   } = useDataState();
 
-  const { filteredValues, setFilteredValues, setParameterCount } =
-    useContext(RadarContext);
+  const {
+    filteredValues,
+    setFilteredValues,
+    setParameterCount,
+    parameterCount
+  } = useContext(RadarContext);
 
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
@@ -181,9 +190,48 @@ export const FilterComponent: React.FC<Props> = ({ projects, config }) => {
     return count;
   };
 
+  const totalFilterCount = (): number => {
+    let total = 0;
+
+    ['status', 'stages', 'technologies'].forEach((element) => {
+      total += getFilterCount(element);
+    });
+
+    const params = Object.keys(parameterCount).reduce(
+      (a, key) => a + (parameterCount[key] as number),
+      0
+    );
+
+    setTotalFiltersCount(total + params);
+    return total + params;
+  };
+
+  const handleFilterReset = (): void => {
+    const labels = {
+      status: ['Preparedness', 'Response', 'Mitigation', 'Recovery'],
+      stages: ['Idea', 'Validation', 'Prototype', 'Production'],
+      technologies: transformArray(tech, 'type'),
+      parameters: PARAMETERS
+    };
+    setInitialFilteredValues(labels);
+    setParameterCount(initialParameterCount);
+  };
+
   return (
     <div className='filterComponent'>
-      {header && <p> FILTERS </p>}
+      <div className='filterRow'>
+        {header && (
+          <p>
+            FILTERS
+            {`${totalFilterCount() > 0 ? `(${totalFilterCount()})` : ''} `}{' '}
+          </p>
+        )}
+        {totalFilterCount() > 0 && (
+          <span className='resetFilter' onClick={handleFilterReset}>
+            {'Reset all'}
+          </span>
+        )}
+      </div>
       <div>
         {status && (
           <>

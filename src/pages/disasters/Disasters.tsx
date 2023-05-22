@@ -126,6 +126,7 @@ export const Disasters: React.FC = () => {
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
+          type='search'
           className='searchBar'
           value={query}
           onChange={handleSearch}

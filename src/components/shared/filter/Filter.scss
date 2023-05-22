@@ -64,3 +64,20 @@ div.filterModal {
   width: max-content !important;
   z-index: 1;
 }
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.resetFilter {
+  margin-left: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #2868ac;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

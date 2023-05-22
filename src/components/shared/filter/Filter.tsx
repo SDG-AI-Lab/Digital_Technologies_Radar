@@ -68,6 +68,7 @@ export const Filter: React.FC = () => {
     filteredValues,
     setFilteredValues,
     projectsGroup,
+    parameterCount,
     setParameterCount
   } = useContext(RadarContext);
 
@@ -180,6 +181,32 @@ export const Filter: React.FC = () => {
     return count;
   };
 
+  const totalFilterCount = (): number => {
+    let total = 0;
+
+    ['status', 'stages', 'technologies'].forEach((element) => {
+      total += getFilterCount(element);
+    });
+
+    const params = Object.keys(parameterCount).reduce(
+      (a, key) => a + (parameterCount[key] as number),
+      0
+    );
+
+    return total + params;
+  };
+
+  const handleFilterReset = (): void => {
+    const labels = {
+      status: ['Preparedness', 'Response', 'Mitigation', 'Recovery'],
+      stages: ['Idea', 'Validation', 'Prototype', 'Production'],
+      technologies: transformArray(tech, 'type'),
+      parameters: PARAMETERS
+    };
+    setInitialFilteredValues(labels);
+    setParameterCount(initialParameterCount);
+  };
+
   return (
     <>
       <Button
@@ -188,7 +215,7 @@ export const Filter: React.FC = () => {
         onClick={onOpen}
         className={'filter'}
       >
-        FILTERS
+        FILTERS {`${totalFilterCount() > 0 ? `(${totalFilterCount()})` : ''} `}
       </Button>
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
@@ -196,6 +223,11 @@ export const Filter: React.FC = () => {
           <DrawerContent className='filterModal' backgroundColor='#fffafa'>
             <DrawerCloseButton />
             <div>
+              {totalFilterCount() > 0 && (
+                <span className='resetFilter' onClick={handleFilterReset}>
+                  {'Reset all'}
+                </span>
+              )}
               <DrawerHeader mt={10}>
                 STATUS
                 {getFilterCount('status') ? (

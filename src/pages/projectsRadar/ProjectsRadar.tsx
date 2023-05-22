@@ -40,6 +40,7 @@ export const ProjectsRadar: React.FC = () => {
   const [allBlips, setAllBlips] = useState<BlipType[]>();
   const [currentNumber, setCurrentNumber] = useState<number>(10);
   const [showPagination, setShowPagination] = useState<boolean>(true);
+  const [totalFilterCount, setTotalFilterCount] = useState<number>(0);
 
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
@@ -99,7 +100,6 @@ export const ProjectsRadar: React.FC = () => {
         }
       );
       setFilteredValues((currentValues: any) => {
-        console.log('hhh', { currentValues }, { statusValues });
         return {
           ...currentValues,
           status: statusValues
@@ -180,7 +180,12 @@ export const ProjectsRadar: React.FC = () => {
                 <h2>
                   <AccordionButton>
                     <Box as='span' flex='1' textAlign='left'>
-                      <h5>FILTERS</h5>
+                      <h5>
+                        FILTERS{' '}
+                        {`${
+                          totalFilterCount > 0 ? `(${totalFilterCount})` : ''
+                        } `}
+                      </h5>
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
@@ -189,6 +194,7 @@ export const ProjectsRadar: React.FC = () => {
                   <FilterComponent
                     projects={blips}
                     config={{ header: false, status: tabIndex === 1 }}
+                    setTotalFiltersCount={setTotalFilterCount}
                   />
                 </AccordionPanel>
               </AccordionItem>

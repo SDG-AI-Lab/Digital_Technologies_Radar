@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
 import { Button, Image } from '@chakra-ui/react';
@@ -32,10 +32,6 @@ const CAROUSEL_ITEMS = [
 ];
 
 export const HomePage: React.FC = () => {
-  useEffect(() => {
-    console.log('Loaded');
-  }, []);
-
   return (
     <div className='homePage'>
       <div className='logoSection'>
