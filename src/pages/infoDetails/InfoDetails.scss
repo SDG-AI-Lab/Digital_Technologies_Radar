@@ -24,9 +24,8 @@
       flex-basis: 50%;
       flex-direction: column;
       flex-grow: 0;
-      justify-content: center;
-      padding: 50px;
-      text-transform: uppercase;
+      justify-content: space-evenly;
+      margin-top: -20px;
 
       span {
         -webkit-box-orient: vertical;
@@ -35,14 +34,14 @@
         font-weight: 700;
         -webkit-line-clamp: 4;
         line-height: 65px;
-        margin-bottom: -20px;
-        margin-top: -35px;
         overflow-y: hidden;
         text-align: left;
         text-align: center;
         text-overflow: ellipsis;
         word-break: break-word;
       }
+      padding: 50px;
+      text-transform: uppercase;
 
       .seeitem {
         background: #f7f7f7;
@@ -55,7 +54,6 @@
         padding: 20px 70px;
         position: relative;
         text-align: left;
-        top: 70px;
         width: max-content;
       }
     }
@@ -155,17 +153,17 @@
 
 @media only screen and (max-width: 768px) {
   .itemDetailsPage {
-    width: 100vw;
     margin-bottom: 60px;
+    width: 100vw;
     .itemHero {
-      margin-top: 78px;
-      justify-content: center;
       align-items: center;
       flex-direction: column;
+      justify-content: center;
+      margin-top: 78px;
 
       .itemTitle {
-        display: none;
         align-items: center;
+        display: none;
         flex-basis: 100%;
         span {
           -webkit-box-orient: vertical;
@@ -176,9 +174,6 @@
           text-overflow: ellipsis;
           word-break: break-word;
         }
-      }
-      .itemImg {
-        // display: none;
       }
     }
 

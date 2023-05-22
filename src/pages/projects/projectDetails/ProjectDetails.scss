@@ -18,13 +18,13 @@
 
     > .projectTitle {
       background-color: #252e3c;
+      color: white;
       display: flex;
       flex-basis: 50%;
       flex-direction: column;
       flex-grow: 0;
-      justify-content: center;
-      padding: 50px;
-      color: white;
+      justify-content: space-evenly;
+      margin-top: -20px;
 
       span {
         -webkit-box-orient: vertical;
@@ -33,17 +33,16 @@
         font-weight: 700;
         -webkit-line-clamp: 2;
         line-height: 65px;
-        margin-bottom: -20px;
-        margin-top: -35px;
         overflow-y: hidden;
         text-align: left;
         text-overflow: ellipsis;
       }
+      padding: 50px;
 
       .seeProject {
         background: #f7f7f7;
-        color: black;
         border-radius: 6px;
+        color: black;
         font-size: 16px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -51,7 +50,6 @@
         padding: 20px 70px;
         position: relative;
         text-align: left;
-        top: 70px;
         width: max-content;
       }
     }
@@ -144,11 +142,11 @@
 
 @media only screen and (max-width: 768px) {
   .projectDetailsPage {
-    width: 100vw;
     margin-bottom: 60px;
+    width: 100vw;
     .projectHero {
-      justify-content: center;
       align-items: center;
+      justify-content: center;
 
       .projectTitle {
         align-items: center;
