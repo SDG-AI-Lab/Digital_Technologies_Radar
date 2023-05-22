@@ -15,13 +15,13 @@ const CAROUSEL_ITEMS = [
     img_url:
       'https://images.unsplash.com/photo-1473260079709-83c808703435?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2220&q=80',
     label: 'DISASTERS',
-    route: 'disasters'
+    route: '/#/disasters'
   },
   {
     img_url:
       'https://images.unsplash.com/photo-1486257293255-8810a92c541f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80',
     label: 'TECHNOLOGIES',
-    route: '#/technologies'
+    route: '/#/technologies'
   },
   {
     img_url:
@@ -82,7 +82,6 @@ export const HomePage: React.FC = () => {
           autoPlay={true}
           infiniteLoop={true}
           onClickItem={(e) => {
-            console.log({ e });
             window.location.href = CAROUSEL_ITEMS[e].route;
           }}
         >
