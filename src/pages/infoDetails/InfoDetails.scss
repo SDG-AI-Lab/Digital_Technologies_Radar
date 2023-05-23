@@ -14,7 +14,7 @@
 
   .itemHero {
     display: flex;
-    height: 400px;
+    min-height: 400px;
 
     > .itemTitle {
       align-items: center;
@@ -85,7 +85,7 @@
       top: 0;
 
       a {
-        font-size: 18px;
+        font-size: 20px;
         letter-spacing: 0.06em;
         line-height: 28px;
         margin-bottom: 10px;
@@ -102,18 +102,22 @@
       flex-basis: 80%;
       flex-direction: column;
       padding-top: 45px;
+
+      .projectsList {
+        width: unset;
+      }
     }
 
     .itemDetailsTitle {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       text-align: left;
     }
 
     .itemDetailsContent {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 400;
-      margin-top: 30px;
+      // margin-top: 30px;
       padding-right: 40px;
       text-align: justify;
 
@@ -127,21 +131,21 @@
       margin: 20px 0;
     }
 
-    .otherDetails {
-      margin-bottom: 20px;
-      text-align: left;
+    // .otherDetails {
+    //   margin-bottom: 20px;
+    //   text-align: left;
 
-      .otherDetailsLabel {
-        font-size: 24px;
-        font-weight: 500;
-        margin-right: 15px;
-      }
+    //   .otherDetailsLabel {
+    //     font-size: 24px;
+    //     font-weight: 500;
+    //     margin-right: 15px;
+    //   }
 
-      .otherDetailsContent {
-        font-size: 20px;
-        font-style: italic;
-      }
-    }
+    //   .otherDetailsContent {
+    //     font-size: 20px;
+    //     font-style: italic;
+    //   }
+    // }
   }
 }
 
