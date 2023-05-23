@@ -36,13 +36,6 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
           <div className='title-large'>
             {project?.name || project['Ideas/Concepts/Examples']}
           </div>
-          <div className='homeBadgesContainer'>
-            {project && (
-              <div className='homeBadges-large'>
-                <ProjectBadge project={project} />
-              </div>
-            )}
-          </div>
         </div>
       </Link>
     </div>
