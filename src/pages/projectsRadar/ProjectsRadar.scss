@@ -1,7 +1,8 @@
 .projectRadarContainer {
   margin: 0 auto;
   max-width: 1440px;
-  padding: 50px 10px 0;
+  padding: 30px 10px 0;
+  width: 90vw;
 
   .projectRadar {
     display: flex;
@@ -40,11 +41,11 @@
 
       .projectContainer {
         .loadMoreContainer {
-          display: flex;
-          justify-content: center;
           align-items: center;
-          margin-top: 20px;
+          display: flex;
           flex-direction: column;
+          justify-content: center;
+          margin-top: 20px;
           button {
             background-color: #252e3c;
             color: white;

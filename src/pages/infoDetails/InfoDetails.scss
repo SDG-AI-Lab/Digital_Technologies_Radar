@@ -5,8 +5,10 @@
   max-width: 1440px;
   overflow: scroll;
   -ms-overflow-style: none; /* IE and Edge */
+  padding: 30px 20px;
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
+  width: 90vw;
   &::-webkit-scrollbar {
     height: 0;
     width: 0;
@@ -15,6 +17,7 @@
   .itemHero {
     display: flex;
     min-height: 400px;
+    overflow: hidden;
 
     > .itemTitle {
       align-items: center;
@@ -26,6 +29,8 @@
       flex-grow: 0;
       justify-content: space-evenly;
       margin-top: -20px;
+      padding: 50px;
+      text-transform: uppercase;
 
       span {
         -webkit-box-orient: vertical;
@@ -40,8 +45,6 @@
         text-overflow: ellipsis;
         word-break: break-word;
       }
-      padding: 50px;
-      text-transform: uppercase;
 
       .seeitem {
         background: #f7f7f7;

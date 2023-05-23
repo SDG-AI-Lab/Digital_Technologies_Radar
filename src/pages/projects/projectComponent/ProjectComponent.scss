@@ -9,7 +9,7 @@
     img {
       height: 100%;
       margin: 0 auto;
-      object-fit: cover;
+      object-fit: fill;
     }
     @media only screen and (max-width: 768px) {
       display: none;
