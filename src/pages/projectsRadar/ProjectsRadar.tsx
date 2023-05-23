@@ -206,11 +206,7 @@ export const ProjectsRadar: React.FC = () => {
           {!expanded && (
             <div className='projectContainer'>
               <span className='projectsCount'>
-                {`(${
-                  currentNumber > filteredProjects.length
-                    ? filteredProjects.length
-                    : currentNumber
-                } of ${filteredProjects.length} Projects) `}
+                {`(${filteredProjects.length} Projects) `}
               </span>
 
               {(filteredProjects.slice(0, currentNumber) || []).map(
@@ -223,8 +219,17 @@ export const ProjectsRadar: React.FC = () => {
               )}
 
               {showPagination && (
-                <div className='loadMoreBtn'>
-                  <button onClick={handleLoadMore}>Load More Projects</button>
+                <div className='loadMoreContainer'>
+                  <span className='projectsCount'>
+                    {`Showing ${
+                      currentNumber > filteredProjects.length
+                        ? filteredProjects.length
+                        : currentNumber
+                    } of ${filteredProjects.length} Projects`}
+                  </span>
+                  <div className='loadMoreBtn'>
+                    <button onClick={handleLoadMore}>Load More Projects</button>
+                  </div>
                 </div>
               )}
             </div>

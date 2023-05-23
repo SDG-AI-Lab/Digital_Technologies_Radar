@@ -4,7 +4,6 @@ import React, { useContext } from 'react';
 
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
-import { ProjectBadge } from 'components/shared/projectBadges/ProjectBadges';
 import { RadarContext } from 'navigation/context';
 
 interface Props {

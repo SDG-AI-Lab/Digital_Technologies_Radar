@@ -112,11 +112,7 @@ export const Projects: React.FC = () => {
       </div>
       <div className='titleRow'>
         <h3>PROJECTS </h3>
-        <span>{`(${
-          currentNumber > projectsToUse.length
-            ? (projectsToUse.length as string)
-            : currentNumber
-        } of ${projectsToUse.length as string})`}</span>
+        <span>{`(${projectsToUse.length as string} Projects)`}</span>
       </div>
 
       {Boolean(projectsGroup.length) && (
@@ -132,8 +128,15 @@ export const Projects: React.FC = () => {
               </div>
             ))}
             {showPagination && (
-              <div className='loadMoreBtn'>
-                <button onClick={handleLoadMore}>Load More Projects</button>
+              <div className='loadMoreContainer'>
+                <span className='projectCount'>{`Showing ${
+                  currentNumber > projectsToUse.length
+                    ? (projectsToUse.length as string)
+                    : currentNumber
+                } of ${projectsToUse.length as string} projects`}</span>
+                <div className='loadMoreBtn'>
+                  <button onClick={handleLoadMore}>Load More Projects</button>
+                </div>
               </div>
             )}
           </div>

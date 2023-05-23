@@ -39,10 +39,12 @@
       }
 
       .projectContainer {
-        .loadMoreBtn {
+        .loadMoreContainer {
           display: flex;
           justify-content: center;
+          align-items: center;
           margin-top: 20px;
+          flex-direction: column;
           button {
             background-color: #252e3c;
             color: white;
