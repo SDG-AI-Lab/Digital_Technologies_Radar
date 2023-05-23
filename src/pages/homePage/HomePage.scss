@@ -93,24 +93,25 @@
     .descriptionSection {
       align-items: center;
       display: flex;
-      font-size: 20px;
+      font-size: 24px;
       gap: 30px;
       line-height: 30px;
       padding: 50px 0;
+      flex-direction: column;
 
       .aboutDetails {
-        flex-basis: 60%;
         text-align: justify;
+        width: 60%;
       }
 
       .partners {
         align-self: center;
-        flex-basis: 40%;
+        padding: 0 20px;
 
         .partnersList {
           align-items: center;
           display: flex;
-          flex-wrap: wrap;
+          // flex-wrap: wrap;
           gap: 25px;
           justify-content: center;
 
@@ -118,25 +119,24 @@
             padding: 0 8px;
 
             &.CBILogo {
-              // max-width: 45%;
+              max-width: 30%;
             }
             &.SDGAILogo {
-              max-width: 35%;
+              max-width: 13%;
             }
             &.UNDPDRTLogo {
-              // max-width: 35%;
+              max-width: 25%;
             }
           }
         }
       }
 
       #bold {
-        font-weight: 800;
+        font-weight: 600;
       }
 
       @media only screen and (max-width: 768px) {
         margin-top: 55px;
-        // height: 400px;
       }
     }
 

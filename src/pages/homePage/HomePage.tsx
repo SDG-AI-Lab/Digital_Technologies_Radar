@@ -3,7 +3,6 @@ import { Carousel } from 'react-responsive-carousel';
 
 import { Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { aboutContentList } from 'pages/about/AboutContent';
 import logo from 'assets/FTRDRR.svg';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
@@ -178,23 +177,23 @@ export const HomePage: React.FC = () => {
       <div className='bodySection'>
         <div className='descriptionSection'>
           <div className='aboutDetails' id='bold'>
-            {aboutContentList[0].description.substring(
-              0,
-              aboutContentList[0].description.indexOf('.')
-            )}
+            Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR)
+            allows the systematic tracking and understanding of frontier
+            technologies in disaster context.
           </div>
           <div className='partners'>
             <div className='partnersList'>
-              <Image
-                src={SDGAILabLogo}
-                alt='SDG AI Lab Logo'
-                className='SDGAILogo'
-              />
               <Image
                 src={UNDPDRTLogo}
                 alt='UNDP DRT Logo'
                 className='UNDPDRTLogo'
               />
+              <Image
+                src={SDGAILabLogo}
+                alt='SDG AI Lab Logo'
+                className='SDGAILogo'
+              />
+
               <Image src={CBILogo} alt='CBI Logo' className='CBILogo' />
             </div>
           </div>
