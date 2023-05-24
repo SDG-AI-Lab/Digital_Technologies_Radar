@@ -3,6 +3,7 @@ import React from 'react';
 import Pointer from 'assets/components/arrow-right.svg';
 
 import { Image } from '@chakra-ui/react';
+import background from 'assets/landing/background2.jpg';
 
 import './InfoCard.scss';
 import { Link, useLocation } from 'react-router-dom';
@@ -21,8 +22,8 @@ interface Props {
 
 export const InfoCard: React.FC<Props> = ({ title, details, imgUrl, slug }) => {
   const infoRoute = useLocation().pathname.split('/')[1];
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+  const fallBackImage = background;
+  // 'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='infoCard'>
       <div className='infoImage'>

@@ -20,7 +20,6 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const CAROUSEL_ITEMS = [
   {
     img_url: background,
-    // 'https://static.wixstatic.com/media/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg/v1/fill/w_460,h_295,fp_0.50_0.50,q_90,enc_auto/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg',
     label:
       'Projects page list all the captured projects so far with links to see more details of each project',
     route: '#/projects'
@@ -204,8 +203,9 @@ export const HomePage: React.FC = () => {
             {projectsToUse.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <h3>Projects</h3>
-                  <Link className='seeAll' to={'/projects'}>{`See All`}</Link>
+                  <Link className='seeAll' to={'/projects'}>
+                    <h3>Projects</h3>
+                  </Link>
                 </div>
                 <div className='projectSections'>
                   {projectsToUse.map((project: any) => (
@@ -224,11 +224,9 @@ export const HomePage: React.FC = () => {
             {technologies.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <h3>Technologies</h3>
-                  <Link
-                    className='seeAll'
-                    to={'/technologies'}
-                  >{`See All`}</Link>
+                  <Link className='seeAll' to={'/technologies'}>
+                    <h3>Technologies</h3>
+                  </Link>
                 </div>
 
                 <div className='projectSections'>
@@ -248,8 +246,9 @@ export const HomePage: React.FC = () => {
             {disasterTypes.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <h3>Disasters</h3>
-                  <Link className='seeAll' to={'/disasters'}>{`See All`}</Link>
+                  <Link className='seeAll' to={'/disasters'}>
+                    <h3>Disasters</h3>
+                  </Link>
                 </div>
                 <div className='projectSections'>
                   {disasterTypes.map((disaster: any) => (

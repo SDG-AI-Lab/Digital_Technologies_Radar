@@ -10,7 +10,7 @@
 
     img {
       height: 200px;
-      object-fit: fill;
+      object-fit: contain;
       width: 100%;
       @media only screen and (max-width: 768px) {
         height: 400px;
@@ -48,6 +48,8 @@
       padding-top: 20px;
       text-overflow: ellipsis;
       text-transform: uppercase;
+      text-align: center;
+      padding: 0 55px;
 
       @media only screen and (max-width: 768px) {
         text-align: center;
