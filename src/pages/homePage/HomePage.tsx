@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 
 import { Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import logo from 'assets/FTRDRR.svg';
+import logo from 'assets/ftrdrr.svg';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 import { HomeCard } from './components/HomeCard';
