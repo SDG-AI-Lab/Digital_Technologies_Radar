@@ -11,12 +11,20 @@ import { HomeCardMini } from './components/HomeCardMini';
 import UNDPDRTLogo from 'assets/landing/UNDP_DRT.png';
 import SDGAILabLogo from 'assets/landing/sdg_ai_lab.png';
 import CBILogo from 'assets/landing/cbi_logo.png';
+import background from 'assets/landing/background2.jpg';
 import { ROUTES } from 'navigation/routes';
 
 import './HomePage.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const CAROUSEL_ITEMS = [
+  {
+    img_url: background,
+    // 'https://static.wixstatic.com/media/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg/v1/fill/w_460,h_295,fp_0.50_0.50,q_90,enc_auto/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg',
+    label:
+      'Projects page list all the captured projects so far with links to see more details of each project',
+    route: '#/projects'
+  },
   {
     img_url:
       'https://plus.unsplash.com/premium_photo-1671974490050-2d19bed9f522?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
@@ -30,13 +38,6 @@ const CAROUSEL_ITEMS = [
     label:
       'Technologies has a list of technologies used in combating disaters, Each technology row includes projects in which that technology was used.',
     route: '/#/technologies'
-  },
-  {
-    img_url:
-      'https://static.wixstatic.com/media/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg/v1/fill/w_460,h_295,fp_0.50_0.50,q_90,enc_auto/5e609a_04a87deb42be4243b65bad54d0a87a04~mv2.jpg',
-    label:
-      'Projects page list all the captured projects so far with links to see more details of each project',
-    route: '#/projects'
   }
 ];
 
