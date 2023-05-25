@@ -71,6 +71,10 @@
         height: 100%;
         justify-content: center;
         text-align: center;
+
+        span {
+          width: 90%;
+        }
       }
       @media only screen and (max-width: 768px) {
         display: none;

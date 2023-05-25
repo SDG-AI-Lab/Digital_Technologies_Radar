@@ -3,9 +3,12 @@
   height: 250px;
 
   .projectImage-large {
-    background-color: #dddddd;
+    // background-color: #dddddd;
+    margin-top: 10px;
+    margin-left: 5px;
     flex-basis: 30%;
-    min-width: 100px;
+    min-width: 30%;
+    box-shadow: 0 5px 20px rgba(67, 89, 113, 0.4);
 
     img {
       height: 100%;

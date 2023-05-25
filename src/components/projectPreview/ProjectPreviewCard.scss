@@ -11,10 +11,11 @@
       height: 120px;
       max-width: 250px;
       width: 250px;
+      background-color: white;
 
       img {
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         width: 100%;
       }
     }
