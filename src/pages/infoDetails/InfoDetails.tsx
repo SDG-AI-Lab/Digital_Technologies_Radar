@@ -64,14 +64,16 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
       <div className='itemHero'>
         <div className='itemTitle'>
           <span>{item.name}</span>
-          <a
-            href={item.img_url}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='seeitem'
-          >
-            GET MORE INFORMATION
-          </a>
+          {item?.source && (
+            <a
+              href={item.source}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='seeitem'
+            >
+              GET MORE INFORMATION
+            </a>
+          )}
         </div>
         <div className='itemImg'>
           <img
