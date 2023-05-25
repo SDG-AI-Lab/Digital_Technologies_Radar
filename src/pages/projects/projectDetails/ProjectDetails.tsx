@@ -7,10 +7,13 @@ import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 
 import './ProjectDetails.scss';
+const fallBackImage =
+  'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
 
 export const ProjectDetails: React.FC = () => {
   const [project, setProject] = useState<any>(null);
   const [selectedSection, setSelectedSection] = useState<string>('details');
+  const [image, setImage] = useState<any>(fallBackImage);
   const projectId = useLocation().pathname?.split('/')[2];
 
   const fetchProject = async (): Promise<any> => {
@@ -31,6 +34,8 @@ export const ProjectDetails: React.FC = () => {
 
       if (!error) {
         setProject(data[0] as any);
+
+        setImage(data[0].img_url);
       }
     }
   };
@@ -38,9 +43,6 @@ export const ProjectDetails: React.FC = () => {
   useEffect(() => {
     fetchProject();
   }, []);
-
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
 
   const joinArrayStrings = (array = []): string => {
     return array?.join(', ');
@@ -52,6 +54,8 @@ export const ProjectDetails: React.FC = () => {
       element.scrollIntoView();
     }
   };
+
+  console.log({ project });
 
   return project ? (
     <div className='projectDetailsPage'>
@@ -67,14 +71,24 @@ export const ProjectDetails: React.FC = () => {
             SEE PROJECT SOURCE
           </a>
         </div>
-        <div className='projectImg'>
+        <div
+          className='projectImg'
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'repeat',
+            backgroundPosition: '50% 50%'
+          }}
+        >
           <img
             src={project.img_url}
             onError={(e) => {
               // @ts-expect-error
               e.target.src = fallBackImage;
+              setImage(fallBackImage);
             }}
             alt='Default Image'
+            style={{ display: 'none' }}
           />
         </div>
       </div>
@@ -157,7 +171,9 @@ export const ProjectDetails: React.FC = () => {
 
           <section id='project-partners-section'>
             <span className='projectDetailsTitle'> Partners </span>
-            <p className='projectDetailsContent'>{project?.['partner']}</p>
+            <p className='projectDetailsContent'>
+              {project?.['partner'].join(', ')}
+            </p>
           </section>
           <hr className='separater' />
 
@@ -172,7 +188,7 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> UN Host Organization:</span>
               <span className='otherDetailsContent'>
-                {project?.['un_host'] || 'N/A'}
+                {project?.['un_host'].join(', ') || 'N/A'}
               </span>
             </div>
             <div className='otherDetails'>
