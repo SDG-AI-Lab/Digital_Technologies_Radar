@@ -223,9 +223,8 @@ export const SearchView: React.FC<SearchViewProps> = ({
                   <Box as='td' {...tdTitleStyle}>
                     <b>Source:</b>
                   </Box>
-                  <Box as='td' {...tdContentStyle}>
+                  <Box as='td' {...tdContentStyle} color='blue.600'>
                     <Link
-                      color='blue.600'
                       to={`/projects/${techContent['Ideas/Concepts/Examples']}`}
                     >
                       Click Here
