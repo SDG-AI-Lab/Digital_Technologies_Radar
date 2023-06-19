@@ -211,7 +211,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className='projectSections'>
                   {projectsToUse.map((project: any) => (
-                    <div key={project.id}>
+                    <div key={project.id} style={{ width: '30%' }}>
                       <HomeCard project={project} />
                     </div>
                   ))}
@@ -233,7 +233,7 @@ export const HomePage: React.FC = () => {
 
                 <div className='projectSections'>
                   {technologies.map((tech: any) => (
-                    <div key={tech.id}>
+                    <div key={tech.id} style={{ width: '30%' }}>
                       <HomeCardMini project={tech} type='technologies' />
                     </div>
                   ))}
@@ -254,11 +254,13 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className='projectSections'>
                   {disasterTypes.map((disaster: any) => (
-                    <HomeCardMini
-                      project={disaster}
-                      type='disasters'
-                      key={disaster.id}
-                    />
+                    <div key={disaster.id} style={{ width: '30%' }}>
+                      <HomeCardMini
+                        project={disaster}
+                        type='disasters'
+                        key={disaster.id}
+                      />
+                    </div>
                   ))}
                 </div>
                 <hr />
