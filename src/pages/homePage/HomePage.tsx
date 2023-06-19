@@ -56,11 +56,10 @@ export const HomePage: React.FC = () => {
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
-      localStorage.getItem('projectsListHomePage') as string
+      localStorage.getItem('projectsHomePage') as string
     );
     if (storedProjects && storedProjects.version === DATA_VERSION) {
       const data = storedProjects.data;
-      data.splice(2, 1);
       setProjectsToUse(data);
     } else {
       const { data, error } = await supabase.from('projects').select().limit(4);
@@ -68,7 +67,7 @@ export const HomePage: React.FC = () => {
         data.splice(2, 1);
         setProjectsToUse(data);
         localStorage.setItem(
-          'projectsListHomePage',
+          'projectsHomePage',
           JSON.stringify({
             version: DATA_VERSION,
             data
