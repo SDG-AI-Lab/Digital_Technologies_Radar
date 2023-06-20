@@ -34,7 +34,8 @@ export const ProjectsRadar: React.FC = () => {
     state: { blips, selectedItem, selectedQuadrant }
   } = useRadarState();
 
-  const { filteredValues, setFilteredValues } = useContext(RadarContext);
+  const { filteredValues, setFilteredValues, parameterCount } =
+    useContext(RadarContext);
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -66,7 +67,8 @@ export const ProjectsRadar: React.FC = () => {
     const result = getFilteredProjects(
       filteredValues,
       setBlips,
-      allBlips as BlipType[]
+      allBlips as BlipType[],
+      parameterCount
     );
 
     if (result) setBlips(result);
