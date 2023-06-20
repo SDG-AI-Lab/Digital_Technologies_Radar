@@ -23,7 +23,8 @@ export const Projects: React.FC = () => {
   const [currentNumber, setCurrentNumber] = useState<number>(10);
   const [showPagination, setShowPagination] = useState<boolean>(true);
 
-  const { filteredValues, projectsGroup } = useContext(RadarContext);
+  const { filteredValues, projectsGroup, parameterCount } =
+    useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -48,12 +49,11 @@ export const Projects: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!filteredProjects.length) return;
-
     const result = getFilteredProjects(
       filteredValues,
       setFilteredProjects,
-      projectsList
+      projectsList,
+      parameterCount
     );
     if (result) setFilteredProjects(result);
   }, [filteredValues]);
@@ -118,8 +118,9 @@ export const Projects: React.FC = () => {
       {Boolean(projectsGroup.length) && (
         <span>{`(${projectsGroup as string})`}</span>
       )}
-      {projectsToUse.length ? (
-        <div className='projectsListContainer'>
+
+      <div className='projectsListContainer'>
+        {projectsToUse.length ? (
           <div className='projectContainer'>
             {projectsToUse.slice(0, currentNumber).map((project: any) => (
               <div key={project.id}>
@@ -140,17 +141,18 @@ export const Projects: React.FC = () => {
               </div>
             )}
           </div>
+        ) : (
+          <div style={{ width: '60%' }}>No Projects Found</div>
+        )}
 
-          <div className='filters'>
-            <FilterComponent
-              projects={filteredProjects}
-              config={{ header: true, status: true }}
-            />
-          </div>
+        <div className='filters'>
+          <FilterComponent
+            projects={projectsList}
+            setProjects={setFilteredProjects}
+            config={{ header: true, status: true }}
+          />
         </div>
-      ) : (
-        <div>No Projects Found</div>
-      )}
+      </div>
     </div>
   );
 };

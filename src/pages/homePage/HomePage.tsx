@@ -17,7 +17,13 @@ import { ROUTES } from 'navigation/routes';
 import './HomePage.scss';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const CAROUSEL_ITEMS = [
+interface CarouselItem {
+  img_url: string;
+  label: string;
+  route: string;
+}
+
+const CAROUSEL_ITEMS: CarouselItem[] = [
   {
     img_url: background,
     label:
