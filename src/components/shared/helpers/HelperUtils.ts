@@ -61,7 +61,8 @@ export const getFilteredProjects = (
     parameters: any;
   },
   setter: Function,
-  projectsList: any[]
+  projectsList: any[],
+  parameterCount?: any
 ): any => {
   // status filter
   const statusFilters: any = Object.keys(filteredValues['status']).reduce(
@@ -91,8 +92,18 @@ export const getFilteredProjects = (
     []
   );
 
+  let filteredProjects = projectsList;
+  const parameters = totalParameterCount(parameterCount);
   const parameterFilteredProjects =
-    getParameterFilteredProjects(filteredValues.parameters, projectsList) || [];
+    getParameterFilteredProjects(
+      filteredValues.parameters,
+      projectsList,
+      parameters
+    ) || [];
+
+  if (parameters) {
+    filteredProjects = parameterFilteredProjects;
+  }
 
   if (
     !statusFilters.length &&
@@ -104,40 +115,47 @@ export const getFilteredProjects = (
   }
 
   // status filter
-  const statusFilteredProjects = projectsList.filter((project: any) => {
-    return statusFilters.some((item: any) =>
-      (project['disaster_cycle'] || project['Disaster Cycle']).includes(item)
-    );
-  });
+  if (statusFilters.length) {
+    const statusFilteredProjects = filteredProjects.filter((project: any) => {
+      return statusFilters.some((item: any) =>
+        (project['disaster_cycle'] || project['Disaster Cycle']).includes(item)
+      );
+    });
+
+    filteredProjects = statusFilteredProjects;
+  }
 
   // stages filter
-  const stageFilteredProjects = projectsList.filter((project: any) => {
-    return stageFilters.includes(
-      (project['status'] || project['Status/Maturity']).trim()
-    );
-  });
+  if (stageFilters.length) {
+    const stageFilteredProjects = filteredProjects.filter((project: any) => {
+      return stageFilters.includes(
+        (project['status'] || project['Status/Maturity']).trim()
+      );
+    });
+
+    filteredProjects = stageFilteredProjects;
+  }
 
   // tech filter
-  const techFilteredProjects = projectsList.filter((project: any) => {
-    return techFilters.some((item: any) =>
-      (project['technology'] || project['Technology']).includes(item)
-    );
-  });
+  if (techFilters.length) {
+    const techFilteredProjects = filteredProjects.filter((project: any) => {
+      return techFilters.some((item: any) =>
+        (project['technology'] || project['Technology']).includes(item)
+      );
+    });
 
-  const results = [
-    ...stageFilteredProjects,
-    ...statusFilteredProjects,
-    ...techFilteredProjects,
-    ...parameterFilteredProjects
-  ];
+    filteredProjects = techFilteredProjects;
+  }
 
-  return [...new Set(results)];
+  return [...new Set(filteredProjects)];
 };
 
 const getParameterFilteredProjects = (
   parameterFilters: any,
-  projectsList: any
+  projectsList: any,
+  parameters: number
 ): any => {
+  if (!parameters) return [];
   // Region
   const regionFilters: any = parameterFilters['Region'].reduce(
     (regionArr: any, region: { label: string; value: string }) => {
@@ -279,10 +297,12 @@ export const sliceForBadge = (projectArray: string[]): string[] => {
 };
 
 export const totalParameterCount = (parameters: any): any => {
-  return Object.values(parameters).reduce(
-    (a: any, b: any) => (a as number) + (b as number),
-    0
-  );
+  if (parameters) {
+    return Object.values(parameters).reduce(
+      (a: any, b: any) => (a as number) + (b as number),
+      0
+    );
+  }
 };
 
 export const PARAMETERS = [

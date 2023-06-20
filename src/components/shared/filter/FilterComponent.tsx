@@ -52,11 +52,13 @@ interface Props {
     status: boolean;
   };
   setTotalFiltersCount?: Function;
+  setProjects?: Function;
 }
 
 export const FilterComponent: React.FC<Props> = ({
   projects,
   config,
+  setProjects = () => {},
   setTotalFiltersCount = () => {}
 }) => {
   const {
@@ -217,6 +219,7 @@ export const FilterComponent: React.FC<Props> = ({
     setInitialFilteredValues(labels);
     setParameterCount(initialParameterCount);
     setProjectsGroup('');
+    setProjects(projects);
   };
 
   return (
