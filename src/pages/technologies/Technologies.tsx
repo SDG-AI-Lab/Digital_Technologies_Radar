@@ -16,8 +16,12 @@ import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
 export const Technologies: React.FC = () => {
-  const { filteredValues, setFilteredValues, setProjectsGroup } =
-    useContext(RadarContext);
+  const {
+    filteredValues,
+    setFilteredValues,
+    setProjectsGroup,
+    parameterCount
+  } = useContext(RadarContext);
 
   const [techList, setTechList] = useState<any[]>([]);
   const [query, setQuery] = useState('');
@@ -41,12 +45,11 @@ export const Technologies: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!filteredProjects.length) return;
-
     const result = getFilteredProjects(
       filteredValues,
       setFilteredProjects,
-      projectsList
+      projectsList,
+      parameterCount
     );
 
     if (result) setFilteredProjects(result);
