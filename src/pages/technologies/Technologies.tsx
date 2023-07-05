@@ -41,6 +41,10 @@ export const Technologies: React.FC = () => {
   }, [filteredProjects]);
 
   useEffect(() => {
+    setFilteredProjects(projectsList);
+  }, [projectsList]);
+
+  useEffect(() => {
     getTechData();
   }, []);
 

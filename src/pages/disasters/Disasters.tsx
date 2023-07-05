@@ -103,6 +103,10 @@ export const Disasters: React.FC = () => {
   }, [filteredProjects]);
 
   useEffect(() => {
+    setFilteredProjects(projectsList);
+  }, [projectsList]);
+
+  useEffect(() => {
     getDisasterData();
   }, []);
 
