@@ -17,6 +17,8 @@ const QUADRANT_PARAM = `:quadrantId`;
 const BLIP = `${RADAR}/technology-item`;
 const BLIP_PARAM = `${BLIP}/:techItemId`;
 
+const NEW = '/new';
+
 export const ROUTES = {
   HOME,
   PROJECTS_RADAR,
@@ -33,5 +35,6 @@ export const ROUTES = {
   QUADRANT_PARAM,
   BLIP,
   BLIP_PARAM,
-  VOLUNTEERS
+  VOLUNTEERS,
+  NEW
 };

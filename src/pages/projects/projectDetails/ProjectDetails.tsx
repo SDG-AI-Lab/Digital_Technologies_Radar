@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 
@@ -14,10 +14,10 @@ export const ProjectDetails: React.FC = () => {
   const [project, setProject] = useState<any>(null);
   const [selectedSection, setSelectedSection] = useState<string>('details');
   const [image, setImage] = useState<any>(fallBackImage);
-  const projectId = useLocation().pathname?.split('/')[2];
+  const projectId = useParams()?.project_id;
 
   const fetchProject = async (): Promise<any> => {
-    if (projectId.includes('%')) {
+    if (projectId?.includes('%')) {
       const { data, error } = await supabase
         .from('projects')
         .select(`*, disaster_types(name)`)
@@ -54,8 +54,6 @@ export const ProjectDetails: React.FC = () => {
       element.scrollIntoView();
     }
   };
-
-  console.log({ project });
 
   return project ? (
     <div className='projectDetailsPage'>

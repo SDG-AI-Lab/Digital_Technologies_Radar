@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 
-import { AppUiProvider } from './ui/AppUiProvider';
 import { NavApp } from './navigation/AppNav';
 import { AppRadarProvider } from './radar/RadarProvider';
+import { AppUiProvider } from './ui/AppUiProvider';
 
 import './App.css';
 

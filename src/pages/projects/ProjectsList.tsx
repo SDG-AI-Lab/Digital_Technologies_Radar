@@ -1,18 +1,20 @@
-import './Projects.scss';
-
-import { DATA_VERSION, supabase } from 'helpers/databaseClient';
 /* eslint-disable @typescript-eslint/no-floating-promises */
+
 import React, { useContext, useEffect, useState } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+
 import {
   getFilteredProjects,
   projectSearch
 } from 'components/shared/helpers/HelperUtils';
-
 import { Filter } from 'components/shared/filter/Filter';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { Loader } from 'helpers/Loader';
-import { Project } from './projectComponent/Project';
 import { RadarContext } from 'navigation/context';
+import { Project } from './projectComponent/Project';
+import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+
+import './Projects.scss';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -31,6 +33,8 @@ export const Projects: React.FC = () => {
     setQuery(event.target.value);
     setProjectsToUse(results);
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProjectsToUse(filteredProjects);
@@ -100,6 +104,7 @@ export const Projects: React.FC = () => {
     </div>
   ) : (
     <div className='projectsList'>
+      <Outlet context={[currentNumber]} />
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
@@ -111,8 +116,16 @@ export const Projects: React.FC = () => {
         <Filter />
       </div>
       <div className='titleRow'>
-        <h3>PROJECTS </h3>
-        <span>{`(${projectsToUse.length as string} Projects)`}</span>
+        <div className='titleRow-left'>
+          <h3>PROJECTS </h3>
+          <span>{`(${projectsToUse.length as string} Projects)`}</span>
+        </div>
+        <span
+          className='titleRow-right'
+          onClick={() => navigate('/projects/new')}
+        >
+          Add New Project
+        </span>
       </div>
 
       {Boolean(projectsGroup.length) && (

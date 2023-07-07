@@ -1,28 +1,29 @@
-import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { ROUTES } from './routes';
 // Components
-import { AppLeftNav, AppMobileHeader, AppBottomNav } from '../components';
+import { AppBottomNav, AppLeftNav, AppMobileHeader } from '../components';
 
 // Layouts
-import { MainLayout } from '../ui/MainLayout';
 import { RadarLayout } from '../layouts/RadarLayout';
+import { MainLayout } from '../ui/MainLayout';
 // Pages
 import {
+  About,
+  CreateProject,
+  Disasters,
+  HomePage,
+  InfoDetails,
   NotFound404,
+  ProjectDetails,
+  Projects,
+  ProjectsRadar,
   Radar as RadarComponent,
   Search,
-  About,
-  Volunteers,
-  HomePage,
-  Disasters,
   Technologies,
-  Projects,
-  ProjectDetails,
-  InfoDetails,
-  ProjectsRadar
+  Volunteers
 } from '../pages';
 
 // Views
@@ -105,8 +106,15 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.MAP_VIEW} element={<MapViewLayout />}>
               <Route path={''} element={<RadarMapView />}></Route>
             </Route>
-            <Route path={ROUTES.PROJECTS} element={<Projects />} />
-            <Route path={`${ROUTES.PROJECTS}/*`} element={<ProjectDetails />} />
+            <Route path={ROUTES.PROJECTS} element={<Outlet />}>
+              <Route index element={<Projects />} />
+              <Route
+                path={`${ROUTES.PROJECTS}/${ROUTES.NEW}`}
+                element={<CreateProject />}
+              />
+              <Route path=':project_id' element={<ProjectDetails />} />
+            </Route>
+
             <Route path={ROUTES.DISASTERS} element={<Disasters />} />
             <Route
               path={`${ROUTES.DISASTERS}/:id`}
