@@ -44,7 +44,7 @@ export const Disasters: React.FC = () => {
     await getDisasterProjects();
 
     const storedDisasterTypes = JSON.parse(
-      localStorage.getItem('disasterTypes') as string
+      localStorage.getItem('drr-disaster-types') as string
     );
     if (storedDisasterTypes && storedDisasterTypes.version === DATA_VERSION) {
       const { data } = storedDisasterTypes;
@@ -58,7 +58,7 @@ export const Disasters: React.FC = () => {
       if (!error) {
         setDisasterTypes(data);
         localStorage.setItem(
-          'disasterTypes',
+          'drr-disaster-types',
           JSON.stringify({
             version: DATA_VERSION,
             data

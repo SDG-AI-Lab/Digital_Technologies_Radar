@@ -17,5 +17,34 @@
   h3 {
     margin-bottom: 20px;
   }
-
 }
+
+.selectMultiple {
+  max-width: 100%;
+}
+.dropdown-content {
+  max-width: 100% !important;
+  top: -50px !important;
+
+  // input {
+  //   color: red;
+  //   &:before {
+  //     content: "Write Content";
+  //     color: #aaa;
+  //   }
+  //   &::placeholder {
+  //     color: transparent;
+  //   }
+  // }
+}
+
+// .dropdown-heading-value {
+//   &:before {
+//     content: "Write Content";
+//     color: #aaa;
+//   }
+//   span {
+//     display: none;
+
+//   }
+// }
