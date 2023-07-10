@@ -44,7 +44,7 @@ export const Disasters: React.FC = () => {
     await getDisasterProjects();
 
     const storedDisasterTypes = JSON.parse(
-      localStorage.getItem('disasterTypes') as string
+      localStorage.getItem('drr-disaster-types') as string
     );
     if (storedDisasterTypes && storedDisasterTypes.version === DATA_VERSION) {
       const { data } = storedDisasterTypes;
@@ -58,7 +58,7 @@ export const Disasters: React.FC = () => {
       if (!error) {
         setDisasterTypes(data);
         localStorage.setItem(
-          'disasterTypes',
+          'drr-disaster-types',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -71,7 +71,7 @@ export const Disasters: React.FC = () => {
 
   const getDisasterProjects = async () => {
     const storedDisasterProjects = JSON.parse(
-      localStorage.getItem('disasterProjects') as string
+      localStorage.getItem('drr-disaster-projects') as string
     );
     if (
       storedDisasterProjects &&
@@ -88,7 +88,7 @@ export const Disasters: React.FC = () => {
         setFilteredProjects(data as any);
         setProjectsList(data);
         localStorage.setItem(
-          'disasterProjects',
+          'drr-disaster-projects',
           JSON.stringify({
             version: DATA_VERSION,
             data

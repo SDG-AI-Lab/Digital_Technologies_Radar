@@ -35,9 +35,24 @@
   }
 
   .titleRow {
-    align-items: center;
     display: flex;
-    gap: 5px;
+    justify-content: space-between;
+
+    &-left {
+      align-items: center;
+      display: flex;
+      gap: 5px;
+    }
+
+    &-right {
+      color: #0062ac;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+        color: blue;
+      }
+    }
   }
 
   .projectsListContainer {

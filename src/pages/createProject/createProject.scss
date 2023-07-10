@@ -1,0 +1,31 @@
+.newProject {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 60px;
+  max-width: 1440px;
+  padding: 30px 20px;
+  width: 90vw;
+  
+
+  .createProject {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 50px;
+  }
+
+  h3 {
+    background-color: #f7f7f7;
+    margin-bottom: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+.selectMultiple {
+  max-width: 100%;
+}
+.dropdown-content {
+  max-width: 100% !important;
+  top: -50px !important;
+}

@@ -11,6 +11,7 @@ import { Disasters } from './disasters/Disasters';
 import { Technologies } from './technologies/Technologies';
 import { HomePage } from './homePage/HomePage';
 import { InfoDetails } from './infoDetails/InfoDetails';
+import { CreateProject } from './createProject/CreateProject';
 
 export {
   Home,
@@ -25,5 +26,6 @@ export {
   Disasters,
   Technologies,
   HomePage,
-  InfoDetails
+  InfoDetails,
+  CreateProject
 };
