@@ -146,7 +146,6 @@ export const CreateProject: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log({ e });
     const { name, value } = e.target;
     setProjectFormValues((prevState) => ({ ...prevState, [name]: value }));
   };
