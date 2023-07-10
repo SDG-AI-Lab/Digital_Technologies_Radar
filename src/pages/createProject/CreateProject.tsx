@@ -168,6 +168,7 @@ export const CreateProject: React.FC = () => {
       case 'selectText':
         return (
           <Select
+            placeholder='Select option'
             w={'50%'}
             name={label}
             value={projectFormValues[label as keyof ProjectFieldValues]}
