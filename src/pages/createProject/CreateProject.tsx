@@ -9,13 +9,20 @@ import {
   Select
 } from '@chakra-ui/react';
 import { SelectMultiple } from './SelectMultiple';
-import { populateData, initialProjectFormValues } from './helpers';
+import {
+  populateData,
+  initialProjectFormValues,
+  validatePayload
+} from './helpers';
 import {
   getTechnologies,
   getDisasterTypes,
-  getDataFromDb
+  getDataFromDb,
+  updateDataVersion
 } from 'helpers/dataUtils';
 import './createProject.scss';
+import { supabase } from 'helpers/databaseClient';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateProject: React.FC = () => {
   const [technologies, setTechnologies] = useState([]);
@@ -31,8 +38,20 @@ export const CreateProject: React.FC = () => {
   const [projectFormValues, setProjectFormValues] = useState(
     initialProjectFormValues
   );
+  const [locationData, setLocationData] = useState({});
+  const [disastersData, setDisastersData] = useState({});
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // const password = prompt('Please enter password');
+    // if (
+    //   password?.toLocaleLowerCase() !==
+    //   (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
+    // ) {
+    //   alert('Invalid Password');
+    //   return navigate('/projects');
+    // }
     void fetchData();
   }, []);
 
@@ -53,15 +72,22 @@ export const CreateProject: React.FC = () => {
   }, [hasFetchedData]);
 
   const fetchData = async (): Promise<any> => {
-    await getDisasterTypes(setDisastersList);
+    // Disasters
+    const disasterListData = await getDisasterTypes(setDisastersList);
+    setDisastersData(disasterListData);
+
+    // Technologies
     await getTechnologies(setTechnologies);
 
     // Countries
-    await getDataFromDb(setCountries, {
+    const locationData = await getDataFromDb(setCountries, {
       cacheKey: 'drr-countries',
       tableName: 'locations',
-      columnName: 'country'
+      columnName: 'all',
+      sortBy: 'country'
     });
+
+    setLocationData(locationData);
 
     // Themes
     await getDataFromDb(setThemes, {
@@ -117,6 +143,7 @@ export const CreateProject: React.FC = () => {
             name={label}
             value={projectFormValues[label]}
             onChange={handleChange}
+            isRequired
           />
         );
       case 'selectText':
@@ -127,10 +154,15 @@ export const CreateProject: React.FC = () => {
             name={label}
             value={projectFormValues[label]}
             onChange={handleChange}
+            required
           >
             {options.map((option, idx) => (
-              <option value={option?.name || option} key={idx}>
-                {option?.name || option}
+              <option
+                value={option?.name || option}
+                key={idx}
+                className='option-text'
+              >
+                {option?.name || option.toUpperCase()}
               </option>
             ))}
           </Select>
@@ -151,33 +183,80 @@ export const CreateProject: React.FC = () => {
     }
   };
 
-  return (
-    <div className='newProject'>
-      <h3>Add New Project</h3>
-      <div className='createProject'>
-        {data.map((field, idx) => (
-          <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-            <FormLabel w={130} textAlign={'end'}>
-              {field.label
-                .replace(
-                  /(^|_)(\w)/g,
-                  (match, group1, group2) =>
-                    (group1 ? ' ' : '') + group2.toUpperCase()
-                )
-                .toUpperCase() + ':'}
-            </FormLabel>
-            {renderField(field)}
-          </FormControl>
-        ))}
-      </div>
+  const addData = async () => {
+    const payload = { ...projectFormValues };
+    console.log({ payload });
+    if (!validatePayload(payload)) return alert('Please fill in all fields');
 
-      <Button
-        w={'30%'}
-        m={'auto'}
-        onClick={() => console.log({ projectFormValues })}
-      >
-        Add Project
-      </Button>
-    </div>
+    // Add Regions and Subregions
+    const regions = new Set();
+    const subRegions = new Set();
+
+    projectFormValues['country']
+      .replace(/[{}]/g, '')
+      .split(',')
+      .forEach((country) => {
+        const location = locationData.data.find(
+          (loc) => loc.country === country.trim()
+        );
+
+        if (location) {
+          regions.add(location.region);
+          subRegions.add(location.subregion);
+        }
+      });
+
+    const regionString = Array.from(regions).join(', ');
+    const subRegionString = Array.from(subRegions).join(', ');
+
+    payload['region'] = `{${regionString}}`;
+    payload['sub_region'] = `{${subRegionString}}`;
+
+    // Add disaster_type_id
+    const disasterObj = disastersData.data.find(
+      (disaster) => disaster.name === projectFormValues['disaster_type'].trim()
+    );
+
+    payload['disaster_type_id'] = disasterObj?.id;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { disaster_type, ...newPayload } = payload;
+
+    const { error } = await supabase.from('projects').insert(newPayload);
+
+    if (error) {
+      console.error({ error });
+    } else {
+      updateDataVersion();
+      alert('Project added Succesfully');
+      navigate('/projects');
+    }
+  };
+
+  return (
+    hasFetchedData && (
+      <div className='newProject'>
+        <h3>Add New Project</h3>
+        <div className='createProject'>
+          {data.map((field, idx) => (
+            <FormControl display={'flex'} gap={3} mb={5} key={idx}>
+              <FormLabel w={130} textAlign={'end'}>
+                {field.label
+                  .replace(
+                    /(^|_)(\w)/g,
+                    (match, group1, group2) =>
+                      (group1 ? ' ' : '') + group2.toUpperCase()
+                  )
+                  .toUpperCase() + ':'}
+              </FormLabel>
+              {renderField(field)}
+            </FormControl>
+          ))}
+        </div>
+
+        <Button w={'30%'} m={'auto'} onClick={addData}>
+          Add Project
+        </Button>
+      </div>
+    )
   );
 };

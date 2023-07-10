@@ -9,4 +9,18 @@ const supabaseKey =
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const DATA_VERSION = process.env.REACT_APP_DATA_VERSION || '19/06/23';
+export const getDataVersion = async () => {
+  const { data, error } = await supabase
+    .from('dataset_version')
+    .select(`data_version`)
+    .single();
+  if (!error) {
+    const version = localStorage.getItem('drr-data-version') as string;
+    if (version !== data?.data_version) {
+      localStorage.setItem('drr-data-version', data?.data_version);
+    }
+  }
+};
+
+export const DATA_VERSION =
+  localStorage.getItem('drr-data-version') || '10/07/2023';

@@ -1,6 +1,7 @@
-import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+import { DATA_VERSION, supabase, getDataVersion } from 'helpers/databaseClient';
 
 export const getTechnologies = async (setter): Promise<any> => {
+  console.log({ DATA_VERSION }, getDataVersion());
   const storedTechList = JSON.parse(
     localStorage.getItem('drr-technologies') as string
   );
@@ -34,10 +35,11 @@ export const getDisasterTypes = async (setter): Promise<any> => {
   if (storedDisasterTypes && storedDisasterTypes.version === DATA_VERSION) {
     const { data } = storedDisasterTypes;
     setter(data);
+    return { data };
   } else {
     const { data, error } = await supabase
       .from('disaster_types')
-      .select(`name, description, img_url, slug`)
+      .select(`id, name, description, img_url, slug`)
       .order('name');
 
     if (!error) {
@@ -49,33 +51,51 @@ export const getDisasterTypes = async (setter): Promise<any> => {
           data
         })
       );
+
+      return { data };
     }
   }
 };
 
 export const getDataFromDb = async (setter, config): Promise<any> => {
-  const { cacheKey, tableName, columnName } = config;
+  const { cacheKey, tableName, columnName, sortBy } = config;
 
   const storedDataTypes = JSON.parse(localStorage.getItem(cacheKey) as string);
   if (storedDataTypes && storedDataTypes.version === DATA_VERSION) {
-    const result = formatOptions(storedDataTypes.data, columnName);
+    const result = formatOptions(storedDataTypes.data, sortBy || columnName);
     setter(result);
+    return { data: storedDataTypes.data };
   } else {
-    const { data, error } = await supabase
-      .from(tableName)
-      .select(columnName)
-      .order(columnName);
+    let dataResponse, errorResponse;
+    if (columnName === 'all') {
+      const { data, error } = await supabase
+        .from(tableName)
+        .select()
+        .order(sortBy);
+      dataResponse = data;
+      errorResponse = error;
+    } else {
+      const { data, error } = await supabase
+        .from(tableName)
+        .select('*')
+        .order(columnName);
+      dataResponse = data;
+      errorResponse = error;
+    }
 
-    if (!error) {
-      const result = formatOptions(data, columnName);
+    if (!errorResponse) {
+      const result = formatOptions(dataResponse, sortBy || columnName);
       setter(result);
+
       localStorage.setItem(
         cacheKey,
         JSON.stringify({
           version: DATA_VERSION,
-          data
+          data: dataResponse
         })
       );
+
+      return { data: dataResponse };
     }
   }
 };
@@ -89,3 +109,10 @@ export const formatOptions = (options, key) =>
     acc.push(option);
     return acc;
   }, []);
+
+export const updateDataVersion = async () => {
+  await supabase
+    .from('dataset_version')
+    .update({ data_version: Date.now() })
+    .eq('id', 1);
+};

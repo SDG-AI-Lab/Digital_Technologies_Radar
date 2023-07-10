@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 export const populateData = ({
   disasterTypes,
@@ -53,7 +54,7 @@ export const populateData = ({
     {
       label: 'status',
       type: 'selectText',
-      options: ['Idea', 'Validation', 'Prototype', 'Production']
+      options: ['idea', 'validation', 'prototype', 'production']
     },
     {
       label: 'disaster_cycle',
@@ -92,11 +93,11 @@ export const populateData = ({
       type: 'selectArray',
       options: countries
     },
-    // {
-    //   label: 'disaster_type',
-    //   type: 'selectText',
-    //   options: disasterTypes
-    // },
+    {
+      label: 'disaster_type',
+      type: 'selectText',
+      options: disasterTypes
+    },
     {
       label: 'technology',
       type: 'selectArray',
@@ -118,11 +119,11 @@ const getSdgs = () => {
 };
 
 export const initialProjectFormValues = {
-  name: '',
-  description: '',
-  source: '',
-  img_url: '',
-  date: '',
+  name: 'test name23',
+  description: 'test descr23',
+  source: 'test source23',
+  img_url: 'test img2',
+  date: '2022',
   theme: '',
   sdg: '',
   data: '',
@@ -133,5 +134,52 @@ export const initialProjectFormValues = {
   un_host: '',
   country: '',
   disaster_type: '',
-  technology: ''
+  disaster_type_id: '',
+  technology: '',
+  region: '',
+  sub_region: ''
+};
+
+export const validatePayload = (payload) => {
+  const {
+    name,
+    description,
+    source,
+    img_url,
+    date,
+    theme,
+    sdg,
+    data,
+    use_case,
+    status,
+    disaster_cycle,
+    partner,
+    un_host,
+    country,
+    disaster_type,
+    technology
+  } = payload;
+
+  if (
+    !name ||
+    !description ||
+    !img_url ||
+    !date ||
+    !theme ||
+    !source ||
+    sdg === '{}' ||
+    data === '{}' ||
+    !use_case ||
+    !status ||
+    !disaster_type ||
+    disaster_cycle === '{}' ||
+    country === '{}' ||
+    partner === '{}' ||
+    un_host === '{}' ||
+    technology === '{}'
+  ) {
+    return false;
+  }
+
+  return true;
 };
