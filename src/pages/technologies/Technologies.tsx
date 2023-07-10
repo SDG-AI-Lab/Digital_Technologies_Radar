@@ -89,7 +89,7 @@ export const Technologies: React.FC = () => {
 
   const getTechProjects = async (): Promise<any> => {
     const storedTechProjects = JSON.parse(
-      localStorage.getItem('techProjects') as string
+      localStorage.getItem('drr-tech-projects') as string
     );
     if (storedTechProjects && storedTechProjects.version === DATA_VERSION) {
       const { data } = storedTechProjects;
@@ -103,7 +103,7 @@ export const Technologies: React.FC = () => {
         setFilteredProjects(data as any);
         setProjectsList(data);
         localStorage.setItem(
-          'techProjects',
+          'drr-tech-projects',
           JSON.stringify({
             version: DATA_VERSION,
             data

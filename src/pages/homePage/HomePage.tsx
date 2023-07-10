@@ -62,7 +62,7 @@ export const HomePage: React.FC = () => {
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
-      localStorage.getItem('projectsHomePage') as string
+      localStorage.getItem('drr-projects-homepage') as string
     );
     if (storedProjects && storedProjects.version === DATA_VERSION) {
       const data = storedProjects.data;
@@ -73,7 +73,7 @@ export const HomePage: React.FC = () => {
         data.splice(2, 1);
         setProjectsToUse(data);
         localStorage.setItem(
-          'projectsHomePage',
+          'drr-projects-homepage',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -84,7 +84,7 @@ export const HomePage: React.FC = () => {
   };
   const getTechnologies = async (): Promise<any> => {
     const storedTechnologies = JSON.parse(
-      localStorage.getItem('technologiesHomePage') as string
+      localStorage.getItem('drr-technologies-homepage') as string
     );
     if (storedTechnologies && storedTechnologies.version === DATA_VERSION) {
       setTechnologies(storedTechnologies.data);
@@ -96,7 +96,7 @@ export const HomePage: React.FC = () => {
       if (!error) {
         setTechnologies(data);
         localStorage.setItem(
-          'technologiesHomePage',
+          'drr-technologies-homepage',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -108,7 +108,7 @@ export const HomePage: React.FC = () => {
 
   const getDisasters = async (): Promise<any> => {
     const storedDisasters = JSON.parse(
-      localStorage.getItem('disasterTypeshomePage') as string
+      localStorage.getItem('drr-disaster-types-homepage') as string
     );
     if (storedDisasters && storedDisasters.version === DATA_VERSION) {
       setDisasterTypes(storedDisasters.data);
@@ -121,7 +121,7 @@ export const HomePage: React.FC = () => {
       if (!error) {
         setDisasterTypes(data);
         localStorage.setItem(
-          'disasterTypeshomePage',
+          'drr-disaster-types-homepage',
           JSON.stringify({
             version: DATA_VERSION,
             data

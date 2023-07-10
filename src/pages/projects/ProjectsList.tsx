@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import {
   getFilteredProjects,
@@ -64,7 +64,7 @@ export const Projects: React.FC = () => {
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
-      localStorage.getItem('projectsList') as string
+      localStorage.getItem('drr-projects-list') as string
     );
     if (storedProjects && storedProjects.version === DATA_VERSION) {
       const { data } = storedProjects;
@@ -78,7 +78,7 @@ export const Projects: React.FC = () => {
         setFilteredProjects(data);
         setProjectsList(data);
         localStorage.setItem(
-          'projectsList',
+          'drr-projects-list',
           JSON.stringify({
             version: DATA_VERSION,
             data

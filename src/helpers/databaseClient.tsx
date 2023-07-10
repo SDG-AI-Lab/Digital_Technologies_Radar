@@ -9,7 +9,7 @@ const supabaseKey =
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const getDataVersion = async () => {
+export const getDataVersion = async (): Promise<void> => {
   const { data, error } = await supabase
     .from('dataset_version')
     .select(`data_version`)

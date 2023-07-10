@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState, useEffect } from 'react';
 import {
   Button,
@@ -20,38 +20,56 @@ import {
   getDataFromDb,
   updateDataVersion
 } from 'helpers/dataUtils';
+import { ProjectFields, ProjectFieldValues, Option } from './types';
 import './createProject.scss';
 import { supabase } from 'helpers/databaseClient';
 import { useNavigate } from 'react-router-dom';
 
 export const CreateProject: React.FC = () => {
-  const [technologies, setTechnologies] = useState([]);
-  const [disasterTypes, setDisastersList] = useState([]);
-  const [themes, setThemes] = useState([]);
+  const [technologies, setTechnologies] = useState<Option[]>([]);
+
+  const [disasterTypes, setDisastersList] = useState<Option[]>([]);
+
+  const [themes, setThemes] = useState<Option[]>([]);
+
   const [hasFetchedData, setHasFetchedData] = useState(false);
-  const [data, setData] = useState([]);
-  const [countries, setCountries] = useState([]);
-  const [dataTypes, setDataTypes] = useState([]);
-  const [useCases, setUseCases] = useState([]);
-  const [partners, setPartners] = useState([]);
-  const [unHosts, setUnHosts] = useState([]);
-  const [projectFormValues, setProjectFormValues] = useState(
-    initialProjectFormValues
-  );
-  const [locationData, setLocationData] = useState({});
-  const [disastersData, setDisastersData] = useState({});
+
+  const [data, setData] = useState<ProjectFields[]>([]);
+
+  const [countries, setCountries] = useState<Option[]>([]);
+
+  const [dataTypes, setDataTypes] = useState<Option[]>([]);
+
+  const [useCases, setUseCases] = useState<Option[]>([]);
+
+  const [partners, setPartners] = useState<Option[]>([]);
+
+  const [unHosts, setUnHosts] = useState<Option[]>([]);
+
+  const [projectFormValues, setProjectFormValues] =
+    useState<ProjectFieldValues>(initialProjectFormValues);
+
+  const [locationData, setLocationData] = useState<{
+    data: Array<{ country: string; region: string; subregion: string }>;
+    version: string;
+  }>({ data: [], version: '' });
+
+  const [disastersData, setDisastersData] = useState<{
+    data: Array<{ id: string; name: string }>;
+    version: string;
+  }>({ data: [], version: '' });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const password = prompt('Please enter password');
-    // if (
-    //   password?.toLocaleLowerCase() !==
-    //   (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
-    // ) {
-    //   alert('Invalid Password');
-    //   return navigate('/projects');
-    // }
+    const password = prompt('Please enter password');
+    if (
+      password?.toLocaleLowerCase() !==
+      (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
+    ) {
+      alert('Invalid Password');
+      return navigate('/projects');
+    }
     void fetchData();
   }, []);
 
@@ -127,12 +145,15 @@ export const CreateProject: React.FC = () => {
     setHasFetchedData(true);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log({ e });
     const { name, value } = e.target;
     setProjectFormValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const renderField = (field) => {
+  const renderField = (
+    field: ProjectFields
+  ): React.ComponentProps<typeof Input> => {
     const { options, type, label } = field;
     switch (type) {
       case 'text':
@@ -141,28 +162,28 @@ export const CreateProject: React.FC = () => {
             type='text'
             w={'50%'}
             name={label}
-            value={projectFormValues[label]}
+            value={projectFormValues[label as keyof ProjectFieldValues]}
             onChange={handleChange}
-            isRequired
           />
         );
       case 'selectText':
         return (
           <Select
-            placeholder='Select option'
             w={'50%'}
             name={label}
-            value={projectFormValues[label]}
-            onChange={handleChange}
-            required
+            value={projectFormValues[label as keyof ProjectFieldValues]}
+            onChange={handleChange as any}
           >
-            {options.map((option, idx) => (
+            {(options || []).map((option, idx) => (
               <option
-                value={option?.name || option}
+                value={
+                  (option as Option)?.name || (option as unknown as string)
+                }
                 key={idx}
                 className='option-text'
               >
-                {option?.name || option.toUpperCase()}
+                {(option as Option)?.name ||
+                  (option as unknown as string).toUpperCase()}
               </option>
             ))}
           </Select>
@@ -171,7 +192,7 @@ export const CreateProject: React.FC = () => {
         return (
           <div style={{ width: '50%', maxWidth: '310px' }}>
             <SelectMultiple
-              options={options}
+              options={options as Option[]}
               loading={!hasFetchedData}
               label={label}
               onChange={setProjectFormValues}
@@ -183,9 +204,8 @@ export const CreateProject: React.FC = () => {
     }
   };
 
-  const addData = async () => {
+  const addProject = async (): Promise<void> => {
     const payload = { ...projectFormValues };
-    console.log({ payload });
     if (!validatePayload(payload)) return alert('Please fill in all fields');
 
     // Add Regions and Subregions
@@ -197,7 +217,7 @@ export const CreateProject: React.FC = () => {
       .split(',')
       .forEach((country) => {
         const location = locationData.data.find(
-          (loc) => loc.country === country.trim()
+          (loc: { country: string }) => loc.country === country.trim()
         );
 
         if (location) {
@@ -226,37 +246,35 @@ export const CreateProject: React.FC = () => {
     if (error) {
       console.error({ error });
     } else {
-      updateDataVersion();
+      void updateDataVersion();
       alert('Project added Succesfully');
       navigate('/projects');
     }
   };
 
-  return (
-    hasFetchedData && (
-      <div className='newProject'>
-        <h3>Add New Project</h3>
-        <div className='createProject'>
-          {data.map((field, idx) => (
-            <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-              <FormLabel w={130} textAlign={'end'}>
-                {field.label
-                  .replace(
-                    /(^|_)(\w)/g,
-                    (match, group1, group2) =>
-                      (group1 ? ' ' : '') + group2.toUpperCase()
-                  )
-                  .toUpperCase() + ':'}
-              </FormLabel>
-              {renderField(field)}
-            </FormControl>
-          ))}
-        </div>
-
-        <Button w={'30%'} m={'auto'} onClick={addData}>
-          Add Project
-        </Button>
+  return hasFetchedData ? (
+    <div className='newProject'>
+      <h3>Add New Project</h3>
+      <div className='createProject'>
+        {data.map((field, idx) => (
+          <FormControl display={'flex'} gap={3} mb={5} key={idx}>
+            <FormLabel w={130} textAlign={'end'}>
+              {field.label
+                .replace(
+                  /(^|_)(\w)/g,
+                  (_match, group1, group2) =>
+                    (group1 ? ' ' : '') + group2.toUpperCase()
+                )
+                .toUpperCase() + ':'}
+            </FormLabel>
+            {renderField(field)}
+          </FormControl>
+        ))}
       </div>
-    )
-  );
+
+      <Button w={'30%'} m={'auto'} onClick={addProject}>
+        Add Project
+      </Button>
+    </div>
+  ) : null;
 };

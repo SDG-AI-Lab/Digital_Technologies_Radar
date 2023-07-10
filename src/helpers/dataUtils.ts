@@ -1,7 +1,7 @@
-import { DATA_VERSION, supabase, getDataVersion } from 'helpers/databaseClient';
+import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+import { Option } from 'pages/createProject/types';
 
-export const getTechnologies = async (setter): Promise<any> => {
-  console.log({ DATA_VERSION }, getDataVersion());
+export const getTechnologies = async (setter: Function): Promise<any> => {
   const storedTechList = JSON.parse(
     localStorage.getItem('drr-technologies') as string
   );
@@ -28,7 +28,7 @@ export const getTechnologies = async (setter): Promise<any> => {
   }
 };
 
-export const getDisasterTypes = async (setter): Promise<any> => {
+export const getDisasterTypes = async (setter: Function): Promise<any> => {
   const storedDisasterTypes = JSON.parse(
     localStorage.getItem('drr-disaster-types') as string
   );
@@ -57,7 +57,15 @@ export const getDisasterTypes = async (setter): Promise<any> => {
   }
 };
 
-export const getDataFromDb = async (setter, config): Promise<any> => {
+export const getDataFromDb = async (
+  setter: Function,
+  config: {
+    cacheKey: string;
+    tableName: string;
+    columnName: string;
+    sortBy?: string;
+  }
+): Promise<any> => {
   const { cacheKey, tableName, columnName, sortBy } = config;
 
   const storedDataTypes = JSON.parse(localStorage.getItem(cacheKey) as string);
@@ -71,7 +79,7 @@ export const getDataFromDb = async (setter, config): Promise<any> => {
       const { data, error } = await supabase
         .from(tableName)
         .select()
-        .order(sortBy);
+        .order(sortBy as string);
       dataResponse = data;
       errorResponse = error;
     } else {
@@ -100,8 +108,8 @@ export const getDataFromDb = async (setter, config): Promise<any> => {
   }
 };
 
-export const formatOptions = (options, key) =>
-  options.reduce((acc, curr) => {
+export const formatOptions = (options: any, key: string): Option[] =>
+  options.reduce((acc: Option[], curr: any) => {
     const option = {
       label: curr[key],
       value: curr[key]
@@ -110,7 +118,7 @@ export const formatOptions = (options, key) =>
     return acc;
   }, []);
 
-export const updateDataVersion = async () => {
+export const updateDataVersion = async (): Promise<void> => {
   await supabase
     .from('dataset_version')
     .update({ data_version: Date.now() })

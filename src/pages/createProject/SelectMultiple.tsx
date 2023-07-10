@@ -1,17 +1,31 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import React, { useState, useEffect } from 'react';
 import { MultiSelect } from 'react-multi-select-component';
+import { Option, ProjectFieldValues } from './types';
 
-export const SelectMultiple = ({ options, loading, label, onChange }) => {
+interface Props {
+  options: Option[];
+  loading: boolean;
+  label: string;
+  onChange: Function;
+}
+
+export const SelectMultiple: React.FC<Props> = ({
+  options,
+  loading,
+  label,
+  onChange
+}) => {
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    onChange((prevState) => ({
+    onChange((prevState: ProjectFieldValues) => ({
       ...prevState,
       [label]: transformOptionsArray(selected)
     }));
   }, [selected]);
 
-  const transformOptionsArray = (options) => {
+  const transformOptionsArray = (options: Option[]): string => {
     const partial = options.reduce(
       (acc, curr) => `${acc}${curr.label.trim()}, `,
       '{'

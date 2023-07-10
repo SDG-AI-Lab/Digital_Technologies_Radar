@@ -71,7 +71,7 @@ export const Disasters: React.FC = () => {
 
   const getDisasterProjects = async () => {
     const storedDisasterProjects = JSON.parse(
-      localStorage.getItem('disasterProjects') as string
+      localStorage.getItem('drr-disaster-projects') as string
     );
     if (
       storedDisasterProjects &&
@@ -88,7 +88,7 @@ export const Disasters: React.FC = () => {
         setFilteredProjects(data as any);
         setProjectsList(data);
         localStorage.setItem(
-          'disasterProjects',
+          'drr-disaster-projects',
           JSON.stringify({
             version: DATA_VERSION,
             data

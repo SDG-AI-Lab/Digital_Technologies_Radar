@@ -1,15 +1,27 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-export const populateData = ({
-  disasterTypes,
-  technologies,
-  countries,
-  themes,
-  dataTypes,
-  useCases,
-  partners,
-  unHosts
-}) => {
+import { ProjectFields, Option, ProjectFieldValues } from './types';
+interface DataProps {
+  disasterTypes: Option[];
+  technologies: Option[];
+  countries: Option[];
+  themes: Option[];
+  dataTypes: Option[];
+  useCases: Option[];
+  partners: Option[];
+  unHosts: Option[];
+}
+
+export const populateData = (props: DataProps): ProjectFields[] => {
+  const {
+    disasterTypes,
+    technologies,
+    countries,
+    themes,
+    dataTypes,
+    useCases,
+    partners,
+    unHosts
+  } = props;
   return [
     {
       label: 'name',
@@ -106,7 +118,7 @@ export const populateData = ({
   ];
 };
 
-const getSdgs = () => {
+const getSdgs = (): Array<{ value: string; label: string }> => {
   const arr = [...Array(17)].map((_, i) => ({
     value: `SDG ${i + 1}`,
     label: `SDG ${i + 1}`
@@ -140,7 +152,7 @@ export const initialProjectFormValues = {
   sub_region: ''
 };
 
-export const validatePayload = (payload) => {
+export const validatePayload = (payload: ProjectFieldValues): boolean => {
   const {
     name,
     description,
