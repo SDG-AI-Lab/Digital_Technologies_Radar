@@ -185,7 +185,7 @@ export const CreateProject: React.FC = () => {
         );
       case 'selectArray':
         return (
-          <div style={{ width: '50%', maxWidth: '310px' }}>
+          <div style={{ width: '50%', maxWidth: '350px' }}>
             <SelectMultiple
               options={options as Option[]}
               loading={!hasFetchedData}

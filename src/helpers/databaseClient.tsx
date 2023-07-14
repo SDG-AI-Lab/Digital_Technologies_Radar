@@ -23,4 +23,4 @@ export const getDataVersion = async (): Promise<void> => {
 };
 
 export const DATA_VERSION =
-  localStorage.getItem('drr-data-version') || '10/07/2023';
+  localStorage.getItem('drr-data-version') || '1689333252563';

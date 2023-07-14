@@ -131,11 +131,11 @@ const getSdgs = (): Array<{ value: string; label: string }> => {
 };
 
 export const initialProjectFormValues = {
-  title: 'project test',
-  description: 'description test',
-  source: 'test',
-  img_url: 'test',
-  date_of_implementation: '2009',
+  title: '',
+  description: '',
+  source: '',
+  img_url: '',
+  date_of_implementation: '',
   theme: '',
   sdg: '',
   data: '',

@@ -14,7 +14,6 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-// import csvData from '../assets/csv/technology_radar_dataset_updated_v9.csv';
 import csvData from '../assets/csv/tr_data_14_07_23_00.csv';
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
@@ -42,29 +41,6 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   };
 
   const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
-    // ({
-    //   Region: Utilities.cleanupStringArray(item.Region.split(',')),
-    //   Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
-    //   'Country of Implementation': Utilities.cleanupStringArray(
-    //     item['Country of Implementation'].split(',')
-    //   ),
-    //   Data: Utilities.cleanupStringArray(item.Data.split(',')),
-    //   'Date of Implementation': item['Date of Implementation'],
-    //   Description: item.Description,
-    //   'Disaster Cycle': item['Disaster Cycle'],
-    //   'Ideas/Concepts/Examples': item['Ideas/Concepts/Examples'],
-    //   Source: item.Source,
-    //   'Status/Maturity': item['Status/Maturity'],
-    //   'Supporting Partners': item['Supporting Partners'],
-    //   'Un Host Organisation': Utilities.cleanupStringArray(
-    //     item['Un Host Organisation'].split(',')
-    //   ),
-    //   'Use Case': item['Use Case'],
-    //   SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
-    //   Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
-    //   'Disaster Type': item['Disaster Type'],
-    //   Theme: item['Theme'],
-    //   'Image Url': item['imgurl']
     ({
       Region: Utilities.cleanupStringArray(item.region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.subregion.split(',')),
