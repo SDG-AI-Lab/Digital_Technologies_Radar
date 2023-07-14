@@ -23,4 +23,8 @@ export const getDataVersion = async (): Promise<void> => {
 };
 
 export const DATA_VERSION =
+<<<<<<< Updated upstream
   localStorage.getItem('drr-data-version') || '1689333252563';
+=======
+  localStorage.getItem('drr-data-version') || '1689333252569';
+>>>>>>> Stashed changes

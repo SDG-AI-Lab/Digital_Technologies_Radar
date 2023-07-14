@@ -15,7 +15,7 @@ import {
   Image
 } from '@chakra-ui/react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 import { useEffect } from 'react';
@@ -55,6 +55,8 @@ export const SearchView: React.FC<SearchViewProps> = ({
   setClose = () => {}
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const path = useLocation().pathname;
 
   const getHostOrg = (hosts: any): string => {
     return hosts.join(', ');
@@ -224,9 +226,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Source:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle} color='blue.600'>
-                    <Link
-                      to={`/projects/${techContent['Ideas/Concepts/Examples']}`}
-                    >
+                    <Link to={`/projects/${techContent['uuid']}?from=${path}`}>
                       Click Here
                     </Link>
                   </Box>
