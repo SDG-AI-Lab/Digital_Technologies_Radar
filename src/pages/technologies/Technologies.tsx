@@ -96,9 +96,7 @@ export const Technologies: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase
-        .from('technology_projects')
-        .select(`*, disaster_types(name)`);
+      const { data, error } = await supabase.from('tech_projects').select();
       if (!error) {
         setFilteredProjects(data as any);
         setProjectsList(data);

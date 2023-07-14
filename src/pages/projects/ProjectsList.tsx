@@ -71,12 +71,11 @@ export const Projects: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase
-        .from('projects')
-        .select(`*, disaster_types(name)`);
+      const { data, error } = await supabase.from('tr_projects').select();
       if (!error) {
         setFilteredProjects(data);
         setProjectsList(data);
+
         localStorage.setItem(
           'drr-projects-list',
           JSON.stringify({
@@ -131,7 +130,6 @@ export const Projects: React.FC = () => {
       {Boolean(projectsGroup.length) && (
         <span>{`(${projectsGroup as string})`}</span>
       )}
-
       <div className='projectsListContainer'>
         {projectsToUse.length ? (
           <div className='projectContainer'>

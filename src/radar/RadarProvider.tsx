@@ -14,7 +14,7 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/technology_radar_dataset_updated_v9.csv';
+import csvData from '../assets/csv/tr_data_14_07_23_00.csv';
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
 
@@ -42,28 +42,29 @@ export const AppRadarProvider: React.FC = ({ children }) => {
 
   const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
     ({
-      Region: Utilities.cleanupStringArray(item.Region.split(',')),
-      Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
+      Region: Utilities.cleanupStringArray(item.region.split(',')),
+      Subregion: Utilities.cleanupStringArray(item.subregion.split(',')),
       'Country of Implementation': Utilities.cleanupStringArray(
-        item['Country of Implementation'].split(',')
+        item.country.split(',')
       ),
-      Data: Utilities.cleanupStringArray(item.Data.split(',')),
-      'Date of Implementation': item['Date of Implementation'],
-      Description: item.Description,
-      'Disaster Cycle': item['Disaster Cycle'],
-      'Ideas/Concepts/Examples': item['Ideas/Concepts/Examples'],
-      Source: item.Source,
-      'Status/Maturity': item['Status/Maturity'],
-      'Supporting Partners': item['Supporting Partners'],
+      Data: Utilities.cleanupStringArray(item.data.split(',')),
+      'Date of Implementation': item.date_of_implementation,
+      Description: item.description,
+      'Disaster Cycle': item.disaster_cycle,
+      'Ideas/Concepts/Examples': item.title,
+      Source: item.source,
+      'Status/Maturity': item.status,
+      'Supporting Partners': item.partner,
       'Un Host Organisation': Utilities.cleanupStringArray(
-        item['Un Host Organisation'].split(',')
+        item.un_host.split(',')
       ),
-      'Use Case': item['Use Case'],
-      SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
-      Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
-      'Disaster Type': item['Disaster Type'],
-      Theme: item['Theme'],
-      'Image Url': item['imgurl']
+      'Use Case': item.use_case,
+      SDG: Utilities.cleanupStringArray(item.sdg.split(',')),
+      Technology: Utilities.cleanupStringArray(item.technology.split(',')),
+      'Disaster Type': item.disaster_type,
+      Theme: item.theme,
+      'Image Url': item.img_url,
+      uuid: item.uuid
     } as unknown as RawBlipType);
 
   const keys: KeysObject = {

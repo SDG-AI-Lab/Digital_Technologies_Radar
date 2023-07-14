@@ -23,7 +23,8 @@ import {
   Radar as RadarComponent,
   Search,
   Technologies,
-  Volunteers
+  Volunteers,
+  DownloadCsv
 } from '../pages';
 
 // Views
@@ -112,6 +113,10 @@ export const NavApp: React.FC = () => {
                 path={`${ROUTES.PROJECTS}/${ROUTES.NEW}`}
                 element={<CreateProject />}
               />
+              <Route
+                path={`${ROUTES.PROJECTS}/${ROUTES.DOWNLOAD}`}
+                element={<DownloadCsv />}
+              />
               <Route path=':project_id' element={<ProjectDetails />} />
             </Route>
 
@@ -121,7 +126,7 @@ export const NavApp: React.FC = () => {
               element={
                 <InfoDetails
                   tableName='disaster_types'
-                  relation='disaster_projects'
+                  relation='disaster_types_projects'
                 />
               }
             />
@@ -131,7 +136,7 @@ export const NavApp: React.FC = () => {
               element={
                 <InfoDetails
                   tableName='technologies'
-                  relation='technology_projects'
+                  relation='tech_projects'
                 />
               }
             />

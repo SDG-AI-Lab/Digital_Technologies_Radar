@@ -33,9 +33,7 @@ export const SelectMultiple: React.FC<Props> = ({
 
     const res = partial.replace(/,(\s+)?$/, '');
 
-    return ['use_case', 'theme'].includes(label)
-      ? res.replace(/{/g, '')
-      : res + '}';
+    return ['use_case'].includes(label) ? res.replace(/{/g, '') : res + '}';
   };
 
   return (

@@ -11,24 +11,22 @@ export interface Option {
 }
 
 export interface ProjectFieldValues {
-  name: string;
+  title: string;
   description: string;
   source: string;
   img_url: string;
-  date: string;
+  date_of_implementation: string;
   theme: string;
   sdg: string;
   data: string;
   use_case: string;
   status: string;
-  disaster_cycle: string;
+  disaster_cycles: string;
   partner: string;
   un_host: string;
   country: string;
   disaster_type: string;
-  disaster_type_id?: string;
   technology: string;
   region: string;
-  sub_region: string;
-  // [key: string]: string | undefined;
+  subregion: string;
 }
