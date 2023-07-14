@@ -24,7 +24,7 @@ export const populateData = (props: DataProps): ProjectFields[] => {
   } = props;
   return [
     {
-      label: 'name',
+      label: 'title',
       type: 'text'
     },
     {
@@ -40,7 +40,7 @@ export const populateData = (props: DataProps): ProjectFields[] => {
       type: 'text'
     },
     {
-      label: 'date',
+      label: 'date_of_implementation',
       type: 'text'
     },
     {
@@ -69,24 +69,24 @@ export const populateData = (props: DataProps): ProjectFields[] => {
       options: ['idea', 'validation', 'prototype', 'production']
     },
     {
-      label: 'disaster_cycle',
+      label: 'disaster_cycles',
       type: 'selectArray',
       options: [
         {
           value: 'prepardness',
-          label: 'Prepardness'
+          label: 'prepardness'
         },
         {
           value: 'response',
-          label: 'Response'
+          label: 'response'
         },
         {
           value: 'recovery',
-          label: 'Recovery'
+          label: 'recovery'
         },
         {
           value: 'mitigation',
-          label: 'Mitigation'
+          label: 'mitigation'
         }
       ]
     },
@@ -131,40 +131,39 @@ const getSdgs = (): Array<{ value: string; label: string }> => {
 };
 
 export const initialProjectFormValues = {
-  name: '',
-  description: '',
-  source: '',
-  img_url: '',
-  date: '',
+  title: 'project test',
+  description: 'description test',
+  source: 'test',
+  img_url: 'test',
+  date_of_implementation: '2009',
   theme: '',
   sdg: '',
   data: '',
   use_case: '',
   status: '',
-  disaster_cycle: '',
+  disaster_cycles: '',
   partner: '',
   un_host: '',
   country: '',
   disaster_type: '',
-  disaster_type_id: '',
   technology: '',
   region: '',
-  sub_region: ''
+  subregion: ''
 };
 
 export const validatePayload = (payload: ProjectFieldValues): boolean => {
   const {
-    name,
+    title,
     description,
     source,
     img_url,
-    date,
+    date_of_implementation,
     theme,
     sdg,
     data,
     use_case,
     status,
-    disaster_cycle,
+    disaster_cycles,
     partner,
     un_host,
     country,
@@ -173,10 +172,10 @@ export const validatePayload = (payload: ProjectFieldValues): boolean => {
   } = payload;
 
   if (
-    !name ||
+    !title ||
     !description ||
     !img_url ||
-    !date ||
+    !date_of_implementation ||
     !theme ||
     !source ||
     sdg === '{}' ||
@@ -184,7 +183,7 @@ export const validatePayload = (payload: ProjectFieldValues): boolean => {
     !use_case ||
     !status ||
     !disaster_type ||
-    disaster_cycle === '{}' ||
+    disaster_cycles === '{}' ||
     country === '{}' ||
     partner === '{}' ||
     un_host === '{}' ||

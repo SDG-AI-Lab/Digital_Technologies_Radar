@@ -33,10 +33,10 @@ export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
         </div>
         <div className='projectDetails'>
           <Link
-            to={`/projects/${project['name']}`}
+            to={`/projects/${project['uuid']}`}
             onClick={() => setCurrentProject(project)}
           >
-            <span className='projectTitle'>{project['name']}</span>
+            <span className='projectTitle'>{project['title']}</span>
           </Link>
           <span className='projectDescription'>{project['description']}</span>
           <Link

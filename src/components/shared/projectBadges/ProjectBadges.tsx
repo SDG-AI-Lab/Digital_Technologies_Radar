@@ -48,7 +48,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         🌋{' '}
         {' ' +
           sliceForBadge(
-            project['disaster_cycle'] || project['Disaster Cycle'].split(',')
+            project['disaster_cycles'] || project['Disaster Cycle'].split(',')
           )}
       </Badge>
       <Badge

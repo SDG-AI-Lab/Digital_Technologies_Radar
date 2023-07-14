@@ -58,6 +58,7 @@ export const ProjectsRadar: React.FC = () => {
 
     if (!allBlips?.length) {
       setAllBlips(blips);
+      console.log({ blips });
     }
   }, [blips]);
 

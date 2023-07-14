@@ -19,6 +19,8 @@ const BLIP_PARAM = `${BLIP}/:techItemId`;
 
 const NEW = '/new';
 
+const DOWNLOAD = '/download';
+
 export const ROUTES = {
   HOME,
   PROJECTS_RADAR,
@@ -36,5 +38,6 @@ export const ROUTES = {
   BLIP,
   BLIP_PARAM,
   VOLUNTEERS,
-  NEW
+  NEW,
+  DOWNLOAD
 };

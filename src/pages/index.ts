@@ -12,6 +12,7 @@ import { Technologies } from './technologies/Technologies';
 import { HomePage } from './homePage/HomePage';
 import { InfoDetails } from './infoDetails/InfoDetails';
 import { CreateProject } from './createProject/CreateProject';
+import { DownloadCsv } from './downloadCsv/DownloadCsv';
 
 export {
   Home,
@@ -27,5 +28,6 @@ export {
   Technologies,
   HomePage,
   InfoDetails,
-  CreateProject
+  CreateProject,
+  DownloadCsv
 };

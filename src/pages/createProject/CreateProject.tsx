@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState, useEffect } from 'react';
@@ -54,11 +55,6 @@ export const CreateProject: React.FC = () => {
     version: string;
   }>({ data: [], version: '' });
 
-  const [disastersData, setDisastersData] = useState<{
-    data: Array<{ id: string; name: string }>;
-    version: string;
-  }>({ data: [], version: '' });
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -91,8 +87,7 @@ export const CreateProject: React.FC = () => {
 
   const fetchData = async (): Promise<any> => {
     // Disasters
-    const disasterListData = await getDisasterTypes(setDisastersList);
-    setDisastersData(disasterListData);
+    await getDisasterTypes(setDisastersList);
 
     // Technologies
     await getTechnologies(setTechnologies);
@@ -230,25 +225,45 @@ export const CreateProject: React.FC = () => {
     const subRegionString = Array.from(subRegions).join(', ');
 
     payload['region'] = `{${regionString}}`;
-    payload['sub_region'] = `{${subRegionString}}`;
+    payload['subregion'] = `{${subRegionString}}`;
 
-    // Add disaster_type_id
-    const disasterObj = disastersData.data.find(
-      (disaster) => disaster.name === projectFormValues['disaster_type'].trim()
-    );
-
-    payload['disaster_type_id'] = disasterObj?.id;
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { disaster_type, ...newPayload } = payload;
-
-    const { error } = await supabase.from('projects').insert(newPayload);
+    // Add to tr_projects table
+    const { error } = await supabase.from('tr_projects').insert(payload);
 
     if (error) {
       console.error({ error });
-    } else {
+    }
+
+    // Add to project_data table
+    let dataError;
+    projectFormValues['disaster_cycles']
+      .replace(/[{}]/g, '')
+      .split(',')
+      .forEach(async (disaster_cycle) => {
+        const dupPayload = { ...payload };
+
+        // @ts-expect-error
+        dupPayload['disaster_cycle'] = disaster_cycle.trim();
+
+        const { disaster_cycles, ...dataPayload } = dupPayload;
+
+        const { error } = await supabase
+          .from('project_data')
+          .insert(dataPayload);
+
+        dataError = error;
+
+        if (error) {
+          console.error({ error });
+        }
+      });
+
+    if (!error && !dataError) {
       void updateDataVersion();
       alert('Project added Succesfully');
       navigate('/projects');
+    } else {
+      alert('Something went wrong!. Please try again');
     }
   };
 
@@ -258,7 +273,7 @@ export const CreateProject: React.FC = () => {
       <div className='createProject'>
         {data.map((field, idx) => (
           <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-            <FormLabel w={130} textAlign={'end'}>
+            <FormLabel w={150} textAlign={'end'}>
               {field.label
                 .replace(
                   /(^|_)(\w)/g,
@@ -276,5 +291,7 @@ export const CreateProject: React.FC = () => {
         Add Project
       </Button>
     </div>
-  ) : null;
+  ) : (
+    <h3 className='newProject'>Loading...</h3>
+  );
 };

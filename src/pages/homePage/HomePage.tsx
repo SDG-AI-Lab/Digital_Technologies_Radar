@@ -68,9 +68,12 @@ export const HomePage: React.FC = () => {
       const data = storedProjects.data;
       setProjectsToUse(data);
     } else {
-      const { data, error } = await supabase.from('projects').select().limit(4);
+      const { data, error } = await supabase
+        .from('tr_projects')
+        .select()
+        .limit(4);
       if (!error) {
-        data.splice(2, 1);
+        data.splice(0, 1);
         setProjectsToUse(data);
         localStorage.setItem(
           'drr-projects-homepage',

@@ -260,7 +260,7 @@ const getParameterFilteredProjects = (
 
   const disasterFilteredProjects = projectsList.filter((project: any) => {
     return disasterFilters.some((item: any) =>
-      (project?.disaster_types?.name || project['Disaster Type']).includes(item)
+      (project?.disaster_type || project['Disaster Type']).includes(item)
     );
   });
 

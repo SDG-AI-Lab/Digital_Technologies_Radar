@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 
@@ -15,28 +15,18 @@ export const ProjectDetails: React.FC = () => {
   const [selectedSection, setSelectedSection] = useState<string>('details');
   const [image, setImage] = useState<any>(fallBackImage);
   const projectId = useParams()?.project_id;
+  const fromRadar = useLocation().search.includes('projectsRadar');
 
   const fetchProject = async (): Promise<any> => {
-    if (projectId?.includes('%')) {
-      const { data, error } = await supabase
-        .from('projects')
-        .select(`*, disaster_types(name)`)
-        .eq('name', decodeURIComponent(projectId).trim());
+    const { data, error } = await supabase
+      .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
+      .select()
+      .eq('uuid', projectId);
 
-      if (!error) {
-        setProject(data[0] as any);
-      }
-    } else {
-      const { data, error } = await supabase
-        .from('projects')
-        .select(`*, disaster_types(name)`)
-        .eq('uuid', projectId);
+    if (!error) {
+      setProject(data[0] as any);
 
-      if (!error) {
-        setProject(data[0] as any);
-
-        setImage(data[0].img_url);
-      }
+      setImage(data[0]?.img_url);
     }
   };
 
@@ -59,7 +49,7 @@ export const ProjectDetails: React.FC = () => {
     <div className='projectDetailsPage'>
       <div className='projectHero'>
         <div className='projectTitle'>
-          <span>{project?.['name']}</span>
+          <span>{project?.['title']}</span>
           <a
             href={project?.['source']}
             target='_blank'
@@ -146,8 +136,7 @@ export const ProjectDetails: React.FC = () => {
         <div className='projectContent'>
           <section id='project-details-section'>
             <span className='projectDetailsTitle'>
-              {' '}
-              {`${project?.['name']}`}
+              {`${project?.['title']}`}
             </span>
             <p className='projectDetailsContent'>{project?.['description']}</p>
           </section>
@@ -180,7 +169,7 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Disaster Type:</span>
               <span className='otherDetailsContent'>
-                {project?.disaster_types.name}
+                {project?.disaster_type}
               </span>
             </div>
             <div className='otherDetails'>
@@ -192,7 +181,7 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Data:</span>
               <span className='otherDetailsContent'>
-                {project?.['data'] || 'N/A'}
+                {project?.['data'].join(', ') || 'N/A'}
               </span>
             </div>
             <div className='otherDetails'>
@@ -204,7 +193,7 @@ export const ProjectDetails: React.FC = () => {
             <div className='otherDetails'>
               <span className='otherDetailsLabel'> Publication Date:</span>
               <span className='otherDetailsContent'>
-                {project?.['date'] || 'N/A'}
+                {project?.['date_of_implementation'] || 'N/A'}
               </span>
             </div>
           </section>
