@@ -40,10 +40,10 @@ export const projectSearch = (
   const query = keyword.toLowerCase();
 
   const _newFilter: BaseCSVType[] = blips.filter((value) => {
+    console.log({ value });
     return (
-      value['name'].toLowerCase().includes(query) ||
+      value['title'].toLowerCase().includes(query) ||
       value.description.toLowerCase().includes(query) ||
-      value['disaster_cycle'].toString().toLowerCase().includes(query) ||
       value['un_host'].toString().toLowerCase().includes(query) ||
       value['country'].toString().toLowerCase().includes(query) ||
       value['sdg'].toString().toLowerCase().includes(query)
