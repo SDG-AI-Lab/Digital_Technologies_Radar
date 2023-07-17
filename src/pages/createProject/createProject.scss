@@ -11,6 +11,10 @@
     gap: 10px;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 50px;
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   h3 {
@@ -21,9 +25,8 @@
   }
 
   @media only screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+    height: 85vh;
     margin: 60px 0 30px;
-    height: 90vh;
     overflow: auto;
   }
 }

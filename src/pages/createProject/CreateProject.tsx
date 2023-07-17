@@ -7,7 +7,8 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select
+  Select,
+  Textarea
 } from '@chakra-ui/react';
 import { SelectMultiple } from './SelectMultiple';
 import {
@@ -140,7 +141,11 @@ export const CreateProject: React.FC = () => {
     setHasFetchedData(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     const { name, value } = e.target;
     setProjectFormValues((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -160,6 +165,17 @@ export const CreateProject: React.FC = () => {
             onChange={handleChange}
           />
         );
+      case 'textArea':
+        return (
+          <Textarea
+            w={'50%'}
+            onChange={handleChange}
+            name={label}
+            value={projectFormValues[label as keyof ProjectFieldValues]}
+            size='sm'
+          />
+        );
+
       case 'selectText':
         return (
           <Select
@@ -287,7 +303,7 @@ export const CreateProject: React.FC = () => {
         ))}
       </div>
 
-      <Button w={'30%'} m={'auto'} onClick={addProject}>
+      <Button w={'30%'} m={'auto'} p={'10px 20px'} onClick={addProject}>
         Add Project
       </Button>
     </div>

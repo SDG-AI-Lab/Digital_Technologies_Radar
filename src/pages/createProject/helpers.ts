@@ -29,7 +29,7 @@ export const populateData = (props: DataProps): ProjectFields[] => {
     },
     {
       label: 'description',
-      type: 'text'
+      type: 'textArea'
     },
     {
       label: 'source',
