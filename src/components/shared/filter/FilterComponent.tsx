@@ -68,6 +68,8 @@ export const FilterComponent: React.FC<Props> = ({
     }
   } = useRadarState();
 
+  console.log(useRadarState());
+
   const { header, status } = config;
 
   const {
@@ -100,9 +102,8 @@ export const FilterComponent: React.FC<Props> = ({
       technologies: transformArray(technologies, 'type'),
       parameters: PARAMETERS
     };
-
+    console.log({ technologies });
     setLabels(labels);
-
     return () => {
       setInitialFilteredValues(labels);
       setParameterCount(initialParameterCount);

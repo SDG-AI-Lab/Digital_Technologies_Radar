@@ -12,7 +12,6 @@ interface Props {
 }
 
 export const ProjectBadge: React.FC<Props> = ({ project }) => {
-  console.log({ project });
   return (
     <Stack direction='row' mt={3} mb={4} className='projectBadges'>
       <Badge
