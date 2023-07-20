@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: '14'
 
+      - run: git config --global url."https://${{ secrets.PAT }}@github.com/".insteadOf ssh://git@github.com/
+
       - name: install
         run: |
           yarn install
