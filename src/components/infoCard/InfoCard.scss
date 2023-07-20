@@ -1,0 +1,70 @@
+div .infoCard {
+  display: flex;
+  height: 200px;
+  margin-top: 5px;
+
+  &-details {
+    background: #d4d6d8;
+    flex-basis: 70%;
+    padding: 10px;
+    position: relative;
+    width: 250px;
+
+    &--title {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    &--text {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 12px;
+      -webkit-line-clamp: 5;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .infoImage {
+    width: 100px;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .pointer {
+    bottom: 15px;
+    margin: 0;
+    position: absolute;
+    right: 25px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    zoom: 0.8;
+  }
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+div.infoDrawer {
+  max-width: 40%;
+  overflow: scroll;
+
+  .infoDrawerTitle {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    padding: 30px 40px;
+    text-transform: uppercase;
+  }
+
+  .infoDrawerTitle-details {
+    font-size: 14px;
+    padding: 10px 40px;
+  }
+}

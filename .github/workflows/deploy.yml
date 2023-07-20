@@ -15,20 +15,14 @@ jobs:
         with:
           node-version: '14.20.0'
 
-      - name: Setup yarn
-        run: npm install yarn
-
       - name: Install dependencies
         run: yarn install
 
       - name: Test application
-        run: yarn pretest
+        run: yarn test
 
       - name: Build application
         run: yarn build
-
-      - name: Install process manager
-        run: npm install pm2
 
       - name: Restart application
         run: pm2 start app.config.json

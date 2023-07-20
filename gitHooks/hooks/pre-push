@@ -61,7 +61,7 @@ if [ -n "$(git status --porcelain)" ]; then
 fi
 
 echo "\nChecking code style  before pushing to the remote repo..."
-yarn pretest
+yarn test
 
 if [ $? -eq 0 ]; then
       echo "\nCheck complete!"

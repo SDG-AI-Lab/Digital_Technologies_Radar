@@ -1,19 +1,17 @@
-import { Box } from '@chakra-ui/layout';
-import React from 'react';
-
-import { MenuLinks } from './MenuLinks';
-import { UNLogo } from './components/UNLogo';
-import { UNDPLogo } from './components/UNDPLogo';
-import { Flex } from '@chakra-ui/react';
-
 import './Navbar.scss';
+
+import { Box } from '@chakra-ui/layout';
+import { Flex } from '@chakra-ui/react';
+import { MenuLinks } from './MenuLinks';
+import React from 'react';
+import { UNDPLogo } from './components/UNDPLogo';
+import { UNLogo } from './components/UNLogo';
 
 // taken from https://github.com/dimitrisraptis96/chakra-ui-navbar/tree/main/src
 export const AppLeftNav: React.FC = () => {
   return (
     <Box display={{ base: 'none', md: 'block' }}>
       <Flex
-        w={75}
         h={'100%'}
         direction={'column'}
         alignItems={'center'}

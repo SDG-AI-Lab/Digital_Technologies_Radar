@@ -1,4 +1,4 @@
-.partnersList {
+.partnersLists {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -43,7 +43,7 @@
 
 a .launchBtnDesktop {
   @media only screen and (max-width: 767px) {
-    display: none;
+    // display: none;
   }
 }
 

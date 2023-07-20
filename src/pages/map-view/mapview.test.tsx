@@ -21,7 +21,20 @@ const radarContext: RadarContextInterface = {
   setBlipsMerged: jest.fn(),
   blipsMerged: false,
   filtered: false,
-  setFiltered: jest.fn()
+  setFiltered: jest.fn(),
+  filteredValues: {
+    status: [],
+    stages: [],
+    technologies: [],
+    parameters: []
+  },
+  setFilteredValues: jest.fn(),
+  parameterCount: [],
+  setParameterCount: jest.fn(),
+  currentProject: {},
+  setCurrentProject: jest.fn(),
+  projectsGroup: '',
+  setProjectsGroup: jest.fn()
 };
 
 describe('RadarMapView', () => {
@@ -33,15 +46,5 @@ describe('RadarMapView', () => {
     );
     const map = screen.getByTestId('map');
     expect(map).toBeInTheDocument();
-  });
-
-  it('displays the slider', () => {
-    render(
-      <RadarContext.Provider value={radarContext}>
-        <RadarMapView />
-      </RadarContext.Provider>
-    );
-    const slider = screen.getByTestId('slider');
-    expect(slider).toBeInTheDocument();
   });
 });

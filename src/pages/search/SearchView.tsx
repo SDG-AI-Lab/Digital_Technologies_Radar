@@ -11,17 +11,21 @@ import {
   Stack,
   Box,
   Badge,
-  Link,
   Button,
   Image
 } from '@chakra-ui/react';
 
+import { Link, useLocation } from 'react-router-dom';
+
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
+import { useEffect } from 'react';
 
 import './Search.scss';
 
 interface SearchViewProps {
   techContent: BaseCSVType;
+  setOpen?: boolean;
+  setClose?: Function;
 }
 
 const tdTitleStyle = {
@@ -45,12 +49,24 @@ const tdContentStyle = {
   paddingTop: '25px'
 };
 
-export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
+export const SearchView: React.FC<SearchViewProps> = ({
+  techContent,
+  setOpen = false,
+  setClose = () => {}
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const path = useLocation().pathname;
 
   const getHostOrg = (hosts: any): string => {
     return hosts.join(', ');
   };
+  useEffect(() => {
+    if (setOpen) {
+      onOpen();
+    }
+  }, []);
+
   return (
     <>
       <Button
@@ -65,6 +81,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
         isOpen={isOpen}
         onClose={() => {
           onClose();
+          setClose();
         }}
         size='xl'
         scrollBehavior='inside'
@@ -208,12 +225,8 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                   <Box as='td' {...tdTitleStyle}>
                     <b>Source:</b>
                   </Box>
-                  <Box as='td' {...tdContentStyle}>
-                    <Link
-                      href={`${techContent['Source']}`}
-                      isExternal
-                      color='blue.600'
-                    >
+                  <Box as='td' {...tdContentStyle} color='blue.600'>
+                    <Link to={`/projects/${techContent['uuid']}?from=${path}`}>
                       Click Here
                     </Link>
                   </Box>

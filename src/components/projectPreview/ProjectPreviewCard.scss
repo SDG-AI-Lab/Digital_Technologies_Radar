@@ -1,0 +1,59 @@
+.projectPreviewContainer {
+  background-color: #edeff0;
+  flex: 0;
+  min-width: 400px;
+  padding: 10px 10px 0;
+  .imageAndDetails {
+    display: flex;
+
+    .image {
+      flex-basis: 40%;
+      height: 120px;
+      max-width: 250px;
+      width: 250px;
+      background-color: white;
+
+      img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+      }
+    }
+
+    .projectDetails {
+      display: flex;
+      flex-basis: 60%;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-left: 15px;
+
+      .projectTitle {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        font-size: 14px;
+        font-weight: 600;
+        -webkit-line-clamp: 1;
+        max-width: 300px;
+        overflow-y: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+      }
+
+      .projectDescription {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        font-size: 14px;
+        font-weight: 400;
+        -webkit-line-clamp: 4;
+        overflow-y: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+      }
+      .projectLearnMore {
+        color: #3258e0;
+        font-size: 14px;
+        text-decoration: underline;
+      }
+    }
+  }
+}

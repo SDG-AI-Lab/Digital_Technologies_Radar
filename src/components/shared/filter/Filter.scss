@@ -1,0 +1,84 @@
+.filter {
+  + div {
+    display: none;
+  }
+  @media only screen and (max-width: 768px) {
+    .filterText {
+      display: none;
+    }
+  }
+}
+
+div.filterModal {
+  max-width: 40%;
+  overflow: scroll;
+  padding: 30px 20px;
+  background-color: #f7f7f7;
+
+  header.chakra-modal__header {
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .filterCount {
+    font-size: 15px;
+    margin: auto 0;
+    padding-left: 5px;
+  }
+}
+
+.filterItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 30px;
+
+  .filterItem {
+    background-color: white;
+    border-radius: 5px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 400;
+    height: auto;
+    padding: 15px;
+    white-space: break-spaces;
+    &:focus {
+      box-shadow: none;
+    }
+
+    &--selected {
+      outline-color: #0062ac;
+    }
+  }
+
+  .multi-select {
+    min-width: 120px;
+  }
+}
+
+.dropdown-content {
+  height: 100%;
+  max-width: 200px;
+  padding-top: 8px;
+  position: relaive !important;
+  top: -200px !important;
+  width: max-content !important;
+  z-index: 1;
+}
+
+.filterRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.resetFilter {
+  margin-left: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #2868ac;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
