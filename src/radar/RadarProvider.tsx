@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AddCSV,
   SetData,
@@ -15,10 +15,26 @@ import {
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
 import csvData from '../assets/csv/tr_data_14_07_23_00.csv';
+import csvData2 from '../assets/csv/tr_data_20_07_23_01.csv';
+
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
+import { supabase } from 'helpers/databaseClient';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
+  const [csvString, setCsvString] = useState('');
+  useEffect(() => {
+    console.log('bwahaaaa', { csvString });
+    void getBlips();
+  }, []);
+
+  const getBlips = async (): Promise<void> => {
+    const { data, error } = await supabase.from('project_data').select().csv();
+    if (!error) {
+      setCsvString(data);
+      console.log({ data });
+    }
+  };
   const quadrantsDescription = {
     preparedness:
       'The knowledge and capacities developed by governments, response and recovery organizations, communities, and individuals to effectively anticipate, respond to and recover from the impacts of likely, imminent or current disasters.',
@@ -45,7 +61,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
       Region: Utilities.cleanupStringArray(item.region.split(',')),
       Subregion: Utilities.cleanupStringArray(item.subregion.split(',')),
       'Country of Implementation': Utilities.cleanupStringArray(
-        item.country.split(',')
+        item.country.replace(/[{}]/g, '').split(',')
       ),
       Data: Utilities.cleanupStringArray(item.data.split(',')),
       'Date of Implementation': item.date_of_implementation,
@@ -59,7 +75,9 @@ export const AppRadarProvider: React.FC = ({ children }) => {
         item.un_host.split(',')
       ),
       'Use Case': item.use_case,
-      SDG: Utilities.cleanupStringArray(item.sdg.split(',')),
+      SDG: Utilities.cleanupStringArray(
+        item.sdg.replace(/[{}"]/g, '').split(',')
+      ),
       Technology: Utilities.cleanupStringArray(item.technology.split(',')),
       'Disaster Type': item.disaster_type,
       Theme: item.theme,
@@ -108,7 +126,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
           HorizonsNameComponent={HorizonsNameComp}
         />
         <RadarDataGenerator />
-        <AddCSV csvFile={csvData} mapping={mapping} />
+        <AddCSV csvFile={csvString} mapping={mapping} isCsvString={true} />
         {children}
       </DataProvider>
     </RadarProvider>

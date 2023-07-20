@@ -12,6 +12,7 @@ interface Props {
 }
 
 export const ProjectBadge: React.FC<Props> = ({ project }) => {
+  console.log({ project });
   return (
     <Stack direction='row' mt={3} mb={4} className='projectBadges'>
       <Badge
@@ -22,7 +23,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         color='white'
         textTransform='capitalize'
       >
-        🏠 {project['status'] || project['Maturity/Status']}
+        🏠 {project['status'] || project['Status/Maturity']}
       </Badge>
 
       {project['SDG'] && project['SDG'][0] !== 'No Information' && (
