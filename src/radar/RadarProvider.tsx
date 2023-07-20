@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AddCSV,
   SetData,
@@ -14,11 +14,22 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/tr_data_14_07_23_00.csv';
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
+import { supabase } from 'helpers/databaseClient';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
+  const [csvString, setCsvString] = useState('');
+  useEffect(() => {
+    void getBlips();
+  }, []);
+
+  const getBlips = async (): Promise<void> => {
+    const { data, error } = await supabase.from('project_data').select().csv();
+    if (!error) {
+      setCsvString(data);
+    }
+  };
   const quadrantsDescription = {
     preparedness:
       'The knowledge and capacities developed by governments, response and recovery organizations, communities, and individuals to effectively anticipate, respond to and recover from the impacts of likely, imminent or current disasters.',
@@ -42,27 +53,37 @@ export const AppRadarProvider: React.FC = ({ children }) => {
 
   const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
     ({
-      Region: Utilities.cleanupStringArray(item.region.split(',')),
-      Subregion: Utilities.cleanupStringArray(item.subregion.split(',')),
-      'Country of Implementation': Utilities.cleanupStringArray(
-        item.country.split(',')
+      Region: Utilities.cleanupStringArray(
+        item.region.replace(/[{}"]/g, '').split(',')
       ),
-      Data: Utilities.cleanupStringArray(item.data.split(',')),
+      Subregion: Utilities.cleanupStringArray(
+        item.subregion.replace(/[{}"]/g, '').split(',')
+      ),
+      'Country of Implementation': Utilities.cleanupStringArray(
+        item.country.replace(/[{}"]/g, '').split(',')
+      ),
+      Data: Utilities.cleanupStringArray(
+        item.data.replace(/[{}"]/g, '').split(',')
+      ),
       'Date of Implementation': item.date_of_implementation,
       Description: item.description,
       'Disaster Cycle': item.disaster_cycle,
       'Ideas/Concepts/Examples': item.title,
-      Source: item.source,
-      'Status/Maturity': item.status,
-      'Supporting Partners': item.partner,
+      Source: item.source.replace(/[{}"]/g, ''),
+      'Status/Maturity': item.status.replace(/[{}"]/g, ''),
+      'Supporting Partners': item.partner.replace(/[{}"]/g, ''),
       'Un Host Organisation': Utilities.cleanupStringArray(
-        item.un_host.split(',')
+        item.un_host.replace(/[{}"]/g, '').split(',')
       ),
-      'Use Case': item.use_case,
-      SDG: Utilities.cleanupStringArray(item.sdg.split(',')),
-      Technology: Utilities.cleanupStringArray(item.technology.split(',')),
-      'Disaster Type': item.disaster_type,
-      Theme: item.theme,
+      'Use Case': item.use_case.replace(/[{}"]/g, ''),
+      SDG: Utilities.cleanupStringArray(
+        item.sdg.replace(/[{}"]/g, '').split(',')
+      ),
+      Technology: Utilities.cleanupStringArray(
+        item.technology.replace(/[{}"]/g, '').split(',')
+      ),
+      'Disaster Type': item.disaster_type.replace(/[{}"]/g, ''),
+      Theme: item.theme.replace(/[{}"]/g, ''),
       'Image Url': item.img_url,
       uuid: item.uuid
     } as unknown as RawBlipType);
@@ -108,7 +129,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
           HorizonsNameComponent={HorizonsNameComp}
         />
         <RadarDataGenerator />
-        <AddCSV csvFile={csvData} mapping={mapping} />
+        <AddCSV csvFile={csvString} mapping={mapping} isCsvString={true} />
         {children}
       </DataProvider>
     </RadarProvider>

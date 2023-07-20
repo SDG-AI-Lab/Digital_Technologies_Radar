@@ -73,8 +73,8 @@ export const populateData = (props: DataProps): ProjectFields[] => {
       type: 'selectArray',
       options: [
         {
-          value: 'prepardness',
-          label: 'prepardness'
+          value: 'preparedness',
+          label: 'preparedness'
         },
         {
           value: 'response',
