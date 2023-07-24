@@ -3220,9 +3220,10 @@
     "@typescript-eslint/types" "5.46.1"
     eslint-visitor-keys "^3.3.0"
 
-"@undp_sdg_ai_lab/undp-radar@SDG-AI-Lab/Digital_Technologies_Radar_Lib#csvString":
-  version "1.0.11"
-  resolved "git+ssh://git@github.com/SDG-AI-Lab/Digital_Technologies_Radar_Lib.git#920c5554927518ea66792fbdd9918044149c9cc3"
+"@undp_sdg_ai_lab/undp-radar@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@undp_sdg_ai_lab/undp-radar/-/undp-radar-1.1.1.tgz#806e70b322021dcf747d8bce0c0df60f8280d9e0"
+  integrity sha512-TcNhy371+lCcrc0xAfkuyUULiueq6Ym1wDGQ2zJ2pRGBcxll0YVXBZ427g4go714EGj/PK3CzcHkhnsceFqNtA==
   dependencies:
     d3 "^7.1.1"
     kiss-react-state "^1.1.1"
