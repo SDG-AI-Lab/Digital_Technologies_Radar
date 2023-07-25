@@ -194,10 +194,14 @@ export const HomePage: React.FC = () => {
                   <RecentDisasters recentDisasters={RECENT_DISASTERS} />
                   <div className='recentDisastersCards'>
                     {RECENT_DISASTERS.map((disasterEvent: any) => (
-                      <div key={disasterEvent.id} style={{ width: '30%' }}>
+                      <Link
+                        to='disaster_events/id'
+                        key={disasterEvent.id}
+                        style={{ width: '30%' }}
+                      >
                         <h4>{disasterEvent.title}</h4>
                         <p>{disasterEvent.summary}</p>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
