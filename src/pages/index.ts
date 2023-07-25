@@ -13,6 +13,7 @@ import { HomePage } from './homePage/HomePage';
 import { InfoDetails } from './infoDetails/InfoDetails';
 import { CreateProject } from './createProject/CreateProject';
 import { DownloadCsv } from './downloadCsv/DownloadCsv';
+import { DisasterEvent } from './disasters/DisasterEvent';
 
 export {
   Home,
@@ -29,5 +30,6 @@ export {
   HomePage,
   InfoDetails,
   CreateProject,
-  DownloadCsv
+  DownloadCsv,
+  DisasterEvent
 };

@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { Link, useParams } from 'react-router-dom';
+
+import { Image } from 'components/shared/image/Image';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 
@@ -49,9 +51,6 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
     fetchItem();
   }, []);
 
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
-
   const handleScroll = (id: string): void => {
     const element = document.getElementById(id);
     if (element) {
@@ -76,14 +75,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
           )}
         </div>
         <div className='itemImg'>
-          <img
-            src={item.img_url}
-            onError={(e) => {
-              // @ts-expect-error
-              e.target.src = fallBackImage;
-            }}
-            alt='Default Image'
-          />
+          <Image imgUrl={item.img_url} />
         </div>
       </div>
       <div className='itemBody'>
@@ -108,8 +100,6 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
           >
             Projects
           </Link>
-          <Link to='#'>Impact</Link>
-          <Link to='#'>Data</Link>
         </div>
         <div className='itemContent'>
           <section id='item-details-section'>
