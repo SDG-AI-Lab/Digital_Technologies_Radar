@@ -1,4 +1,4 @@
-.itemDetailsPage {
+.pageDetails {
   display: flex;
   flex-direction: column;
   margin: 0 auto 60px;
@@ -47,9 +47,9 @@
       }
 
       .seeitem {
-        background: #f7f7f7;
+        background: #c1391d;
         border-radius: 6px;
-        color: black;
+        color: white;
         font-size: 16px;
         font-weight: 700;
         letter-spacing: 0.06em;
@@ -88,6 +88,7 @@
       top: 0;
 
       a {
+        cursor: pointer;
         font-size: 20px;
         letter-spacing: 0.06em;
         line-height: 28px;
@@ -120,7 +121,6 @@
     .itemDetailsContent {
       font-size: 20px;
       font-weight: 400;
-      // margin-top: 30px;
       padding-right: 40px;
       text-align: justify;
 

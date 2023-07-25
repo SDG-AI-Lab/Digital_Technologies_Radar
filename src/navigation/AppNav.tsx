@@ -24,7 +24,8 @@ import {
   Search,
   Technologies,
   Volunteers,
-  DownloadCsv
+  DownloadCsv,
+  DisasterEvent
 } from '../pages';
 
 // Views
@@ -121,6 +122,7 @@ export const NavApp: React.FC = () => {
             </Route>
 
             <Route path={ROUTES.DISASTERS} element={<Disasters />} />
+            <Route path={ROUTES.DISASTER_EVENT} element={<DisasterEvent />} />
             <Route
               path={`${ROUTES.DISASTERS}/:id`}
               element={

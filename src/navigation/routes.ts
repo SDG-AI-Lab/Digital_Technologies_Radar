@@ -21,6 +21,10 @@ const NEW = '/new';
 
 const DOWNLOAD = '/download';
 
+const DISASTER_EVENTS = 'disaster_events';
+
+const DISASTER_EVENT = `${DISASTER_EVENTS}/:event_id`;
+
 export const ROUTES = {
   HOME,
   PROJECTS_RADAR,
@@ -39,5 +43,6 @@ export const ROUTES = {
   BLIP_PARAM,
   VOLUNTEERS,
   NEW,
-  DOWNLOAD
+  DOWNLOAD,
+  DISASTER_EVENT
 };
