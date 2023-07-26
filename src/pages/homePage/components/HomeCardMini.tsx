@@ -18,7 +18,7 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
   return (
     <div className='homeComponent'>
       <Link
-        to={`/${type}/${project.slug || project.uuid}`}
+        to={`/${type}/${project.slug || project.uuid || project.id}`}
         onClick={() => setCurrentProject(project)}
       >
         <div className='homeImage-large'>
@@ -33,7 +33,9 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
         </div>
         <div className='homeDetails-large'>
           <div className='title-large'>
-            {project?.name || project['Ideas/Concepts/Examples']}
+            {project?.name ||
+              project?.title ||
+              project['Ideas/Concepts/Examples']}
           </div>
         </div>
       </Link>

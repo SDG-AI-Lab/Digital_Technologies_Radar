@@ -3,53 +3,26 @@ import { Carousel } from 'react-responsive-carousel';
 
 import { Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import logo from 'assets/ftrdrr2.svg';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 import { HomeCard } from './components/HomeCard';
 import { HomeCardMini } from './components/HomeCardMini';
+import { RecentDisasters } from './components/RecentDisasters';
 import UNDPDRTLogo from 'assets/landing/UNDP_DRT.png';
 import SDGAILabLogo from 'assets/landing/sdg_ai_lab.png';
 import CBILogo from 'assets/landing/cbi_logo.png';
-import background from 'assets/landing/background2.jpg';
 import { ROUTES } from 'navigation/routes';
+import { CAROUSEL_ITEMS } from './helpers';
 
 import './HomePage.scss';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
-interface CarouselItem {
-  img_url: string;
-  label: string;
-  route: string;
-}
-
-const CAROUSEL_ITEMS: CarouselItem[] = [
-  {
-    img_url: background,
-    label:
-      'Projects page lists all the captured projects so far with links to see more details of each project',
-    route: '#/projects'
-  },
-  {
-    img_url:
-      'https://plus.unsplash.com/premium_photo-1671974490050-2d19bed9f522?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-    label:
-      'The Disasters Page has a list of disater types, each showing projects associated with that disaster.',
-    route: '/#/disasters'
-  },
-  {
-    img_url:
-      'https://plus.unsplash.com/premium_photo-1664298145390-fa6018ad4093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1086&q=80',
-    label:
-      'Find a list of technologies used in combating disaters in the technologies page. Each row includes projects in which that technology was used.',
-    route: '/#/technologies'
-  }
-];
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const [technologies, setTechnologies] = useState<any>([]);
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
+  const [recentDisasters, setRecentDisasters] = useState<any>([]);
   const [itemDescription, setItemDescription] = useState(
     CAROUSEL_ITEMS[0].label
   );
@@ -58,6 +31,7 @@ export const HomePage: React.FC = () => {
     void getProjects();
     void getTechnologies();
     void getDisasters();
+    void getRecentDisasters();
   }, []);
 
   const getProjects = async (): Promise<any> => {
@@ -125,6 +99,33 @@ export const HomePage: React.FC = () => {
         setDisasterTypes(data);
         localStorage.setItem(
           'drr-disaster-types-homepage',
+          JSON.stringify({
+            version: DATA_VERSION,
+            data
+          })
+        );
+      }
+    }
+  };
+
+  const getRecentDisasters = async (): Promise<any> => {
+    const storedRecentDisasters = JSON.parse(
+      localStorage.getItem('drr-recent-disasters') as string
+    );
+    if (
+      storedRecentDisasters &&
+      storedRecentDisasters.version === DATA_VERSION
+    ) {
+      setRecentDisasters(storedRecentDisasters.data);
+    } else {
+      const { data, error } = await supabase
+        .from('disaster_events')
+        .select(`id, title, summary, uuid, img_url`)
+        .order('created_at');
+      if (!error) {
+        setRecentDisasters(data);
+        localStorage.setItem(
+          'drr-recent-disasters',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -210,6 +211,33 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
         <div className='cardsSection'>
+          <div className='listSection'>
+            {recentDisasters.length > 0 ? (
+              <>
+                <div className='projectTitle'>
+                  <Link className='seeAll' to={'/disaster_events/id'}>
+                    <h3>Recent Disasters</h3>
+                  </Link>
+                </div>
+                <div className='projectSections'>
+                  <RecentDisasters recentDisasters={recentDisasters} />
+                  <div className='recentDisastersCards'>
+                    {recentDisasters.slice(0, 2).map((disasterEvent: any) => (
+                      <div key={disasterEvent.id} style={{ width: '40%' }}>
+                        <HomeCardMini
+                          project={disasterEvent}
+                          type='disaster_events'
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <hr />
+              </>
+            ) : (
+              <Loader rows={1} />
+            )}
+          </div>
           <div className='listSection'>
             {projectsToUse.length > 0 ? (
               <>

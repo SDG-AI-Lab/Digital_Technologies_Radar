@@ -1,0 +1,31 @@
+.recentDisastersCollection {
+  display: flex;
+  background-color: white;
+  padding: 30px 30px 0;
+  gap: 35px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+
+  .urgentBadge {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .disastersList {
+    display: flex;
+    flex-direction: column;
+
+    .disasterEvent {
+      margin-bottom: 30px;
+
+      &-title {
+        font-size: 16px;
+      }
+
+      &-summary {
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+}
