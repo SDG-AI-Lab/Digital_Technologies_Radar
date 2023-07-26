@@ -154,7 +154,8 @@
 
       .recentDisastersCards {
         display: flex;
-        justify-content: unset;
+        flex-basis: 70%;
+        justify-content: space-around;
       }
     }
 
@@ -175,7 +176,7 @@
   .projectSections {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     gap: 10px;
     justify-content: space-between;
   }

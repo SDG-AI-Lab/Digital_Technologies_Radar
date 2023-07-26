@@ -14,7 +14,7 @@ import UNDPDRTLogo from 'assets/landing/UNDP_DRT.png';
 import SDGAILabLogo from 'assets/landing/sdg_ai_lab.png';
 import CBILogo from 'assets/landing/cbi_logo.png';
 import { ROUTES } from 'navigation/routes';
-import { CAROUSEL_ITEMS, RECENT_DISASTERS } from './helpers';
+import { CAROUSEL_ITEMS } from './helpers';
 
 import './HomePage.scss';
 
@@ -22,6 +22,7 @@ export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const [technologies, setTechnologies] = useState<any>([]);
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
+  const [recentDisasters, setRecentDisasters] = useState<any>([]);
   const [itemDescription, setItemDescription] = useState(
     CAROUSEL_ITEMS[0].label
   );
@@ -30,6 +31,7 @@ export const HomePage: React.FC = () => {
     void getProjects();
     void getTechnologies();
     void getDisasters();
+    void getRecentDisasters();
   }, []);
 
   const getProjects = async (): Promise<any> => {
@@ -97,6 +99,33 @@ export const HomePage: React.FC = () => {
         setDisasterTypes(data);
         localStorage.setItem(
           'drr-disaster-types-homepage',
+          JSON.stringify({
+            version: DATA_VERSION,
+            data
+          })
+        );
+      }
+    }
+  };
+
+  const getRecentDisasters = async (): Promise<any> => {
+    const storedRecentDisasters = JSON.parse(
+      localStorage.getItem('drr-recent-disasters') as string
+    );
+    if (
+      storedRecentDisasters &&
+      storedRecentDisasters.version === DATA_VERSION
+    ) {
+      setRecentDisasters(storedRecentDisasters.data);
+    } else {
+      const { data, error } = await supabase
+        .from('disaster_events')
+        .select(`id, title, summary, uuid, img_url`)
+        .order('created_at');
+      if (!error) {
+        setRecentDisasters(data);
+        localStorage.setItem(
+          'drr-recent-disasters',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -183,7 +212,7 @@ export const HomePage: React.FC = () => {
         </div>
         <div className='cardsSection'>
           <div className='listSection'>
-            {RECENT_DISASTERS.length > 0 ? (
+            {recentDisasters.length > 0 ? (
               <>
                 <div className='projectTitle'>
                   <Link className='seeAll' to={'/disaster_events/id'}>
@@ -191,17 +220,15 @@ export const HomePage: React.FC = () => {
                   </Link>
                 </div>
                 <div className='projectSections'>
-                  <RecentDisasters recentDisasters={RECENT_DISASTERS} />
+                  <RecentDisasters recentDisasters={recentDisasters} />
                   <div className='recentDisastersCards'>
-                    {RECENT_DISASTERS.map((disasterEvent: any) => (
-                      <Link
-                        to='disaster_events/id'
-                        key={disasterEvent.id}
-                        style={{ width: '30%' }}
-                      >
-                        <h4>{disasterEvent.title}</h4>
-                        <p>{disasterEvent.summary}</p>
-                      </Link>
+                    {recentDisasters.slice(0, 2).map((disasterEvent: any) => (
+                      <div key={disasterEvent.id} style={{ width: '40%' }}>
+                        <HomeCardMini
+                          project={disasterEvent}
+                          type='disaster_events'
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>

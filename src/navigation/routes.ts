@@ -23,7 +23,7 @@ const DOWNLOAD = '/download';
 
 const DISASTER_EVENTS = 'disaster_events';
 
-const DISASTER_EVENT = `${DISASTER_EVENTS}/:event_id`;
+const DISASTER_EVENT = `${DISASTER_EVENTS}/:eventId`;
 
 export const ROUTES = {
   HOME,

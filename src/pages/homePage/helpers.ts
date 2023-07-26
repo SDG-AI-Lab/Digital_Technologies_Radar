@@ -28,21 +28,3 @@ export const CAROUSEL_ITEMS: CarouselItem[] = [
     route: '/#/technologies'
   }
 ];
-
-export const RECENT_DISASTERS = [
-  {
-    title: 'Turkey and Syria',
-    summary: '7.8 magnitude earhquake',
-    id: 1
-  },
-  {
-    title: 'Turkey and Syria',
-    summary: '7.8 magnitude earhquake',
-    id: 2
-  },
-  {
-    title: 'Turkey and Syria',
-    summary: '7.8 magnitude earhquake',
-    id: 3
-  }
-];
