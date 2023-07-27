@@ -28,12 +28,14 @@ export const ProjectDetails: React.FC = () => {
     const { data, error } = await supabase
       .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
       .select()
-      .eq('uuid', projectId);
+      .eq('uuid', projectId)
+      .single();
 
     if (!error) {
-      setProject(data[0] as any);
+      setProject(data as any);
+      console.log({ data });
 
-      setImage(data[0]?.img_url);
+      setImage(data?.img_url);
     }
   };
 
@@ -53,20 +55,27 @@ export const ProjectDetails: React.FC = () => {
   };
 
   const handleDelete = async (): Promise<void> => {
-    if (confirm('Are you sure you want to delete this project?')) {
+    const redirectRoute = fromRadar ? '/projectsRadar' : '/projects';
+    const tableNames = ['project_data', 'tr_projects'];
+    const deleteErrors = [];
+    if (!confirm('Are you sure you want to delete this project?')) return;
+
+    for (const table of tableNames) {
       const { error } = await supabase
-        .from('tr_projects')
+        .from(table)
         .delete()
-        .eq('uuid', projectId);
-      if (!error) {
-        updateDataVersion();
-        alert('Deleted successfully');
-        localStorage.removeItem('drr-projects-list');
-        navigate('/projects');
-      } else {
-        alert('There was an error. Please try again');
-        console.error(error);
-      }
+        .eq('title', project.title);
+      if (error) deleteErrors.push(error);
+    }
+
+    if (deleteErrors.length) {
+      alert('There was an error. Please try again');
+      console.error(deleteErrors);
+    } else {
+      updateDataVersion();
+      alert('Deleted successfully');
+      localStorage.removeItem('drr-projects-list');
+      navigate(redirectRoute);
     }
   };
 

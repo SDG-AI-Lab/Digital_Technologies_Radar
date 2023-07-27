@@ -71,7 +71,10 @@ export const Projects: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase.from('tr_projects').select();
+      const { data, error } = await supabase
+        .from('tr_projects')
+        .select()
+        .order('id', { ascending: false });
       if (!error) {
         setFilteredProjects(data);
         setProjectsList(data);
