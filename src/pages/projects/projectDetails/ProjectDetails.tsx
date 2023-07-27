@@ -2,20 +2,27 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
+import { updateDataVersion } from 'helpers/dataUtils';
 
 import './ProjectDetails.scss';
+import { Button } from '@chakra-ui/react';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 const fallBackImage =
   'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
 
+const isAdmin = true;
 export const ProjectDetails: React.FC = () => {
   const [project, setProject] = useState<any>(null);
   const [selectedSection, setSelectedSection] = useState<string>('details');
   const [image, setImage] = useState<any>(fallBackImage);
   const projectId = useParams()?.project_id;
   const fromRadar = useLocation().search.includes('projectsRadar');
+  const navigate = useNavigate();
 
   const fetchProject = async (): Promise<any> => {
     const { data, error } = await supabase
@@ -43,6 +50,28 @@ export const ProjectDetails: React.FC = () => {
     if (element) {
       element.scrollIntoView();
     }
+  };
+
+  const handleDelete = async (): Promise<void> => {
+    if (confirm('Are you sure you want to delete this project?')) {
+      const { error } = await supabase
+        .from('tr_projects')
+        .delete()
+        .eq('uuid', projectId);
+      if (!error) {
+        updateDataVersion();
+        alert('Deleted successfully');
+        localStorage.removeItem('drr-projects-list');
+        navigate('/projects');
+      } else {
+        alert('There was an error. Please try again');
+        console.error(error);
+      }
+    }
+  };
+
+  const handleEdit = (): void => {
+    console.log('We are editing');
   };
 
   return project ? (
@@ -80,6 +109,36 @@ export const ProjectDetails: React.FC = () => {
           />
         </div>
       </div>
+      {isAdmin && (
+        <div className='projectActions'>
+          <Button
+            leftIcon={<EditIcon />}
+            bgColor='#2868AC'
+            variant='solid'
+            color='white'
+            _hover={{ bg: '#6895C4' }}
+            _active={{}}
+            _focus={{}}
+            onClick={handleEdit}
+          >
+            Edit
+          </Button>
+          <Button
+            leftIcon={<DeleteIcon />}
+            bgColor='#C1391D'
+            variant='solid'
+            color='white'
+            _hover={{ bg: '#D37460' }}
+            _active={{}}
+            _focus={{}}
+            onClick={() => {
+              handleDelete();
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
       <div className='projectBody'>
         <div className='projectToc'>
           <Link

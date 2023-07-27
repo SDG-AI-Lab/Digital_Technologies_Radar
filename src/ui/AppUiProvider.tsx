@@ -14,7 +14,13 @@ const muiTheme = createTheme();
 
 // More info: https://chakra-ui.com/docs/getting-started
 export const AppUiProvider: React.FC = ({ children }) => {
-  const colors = {};
+  const colors = {
+    most: {
+      100: '#C1391D',
+      200: '#C1391D',
+      800: '#C1391D'
+    }
+  };
 
   const breakpoints = createBreakpoints({
     sm: '36em',

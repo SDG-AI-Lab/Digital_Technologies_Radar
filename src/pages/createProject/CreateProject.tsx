@@ -59,14 +59,14 @@ export const CreateProject: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const password = prompt('Please enter password');
-    if (
-      password?.toLocaleLowerCase() !==
-      (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
-    ) {
-      alert('Invalid Password');
-      return navigate('/projects');
-    }
+    // const password = prompt('Please enter password');
+    // if (
+    //   password?.toLocaleLowerCase() !==
+    //   (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
+    // ) {
+    //   alert('Invalid Password');
+    //   return navigate('/projects');
+    // }
     void fetchData();
   }, []);
 
@@ -276,6 +276,7 @@ export const CreateProject: React.FC = () => {
 
     if (!error && !dataError) {
       void updateDataVersion();
+      localStorage.removeItem('drr-projects-list');
       alert('Project added Succesfully');
       navigate('/projects');
     } else {
