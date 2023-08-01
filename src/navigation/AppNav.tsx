@@ -12,7 +12,7 @@ import { MainLayout } from '../ui/MainLayout';
 // Pages
 import {
   About,
-  CreateProject,
+  ProjectAction,
   Disasters,
   HomePage,
   InfoDetails,
@@ -112,13 +112,19 @@ export const NavApp: React.FC = () => {
               <Route index element={<Projects />} />
               <Route
                 path={`${ROUTES.PROJECTS}/${ROUTES.NEW}`}
-                element={<CreateProject />}
+                element={<ProjectAction mode='add' />}
               />
+
               <Route
                 path={`${ROUTES.PROJECTS}/${ROUTES.DOWNLOAD}`}
                 element={<DownloadCsv />}
               />
+
               <Route path=':project_id' element={<ProjectDetails />} />
+              <Route
+                path={`${ROUTES.PROJECTS}/:project_id${ROUTES.EDIT}`}
+                element={<ProjectAction mode='edit' />}
+              />
             </Route>
 
             <Route path={ROUTES.DISASTERS} element={<Disasters />} />

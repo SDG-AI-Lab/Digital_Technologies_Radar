@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 import { updateDataVersion } from 'helpers/dataUtils';
+import { RadarContext } from 'navigation/context';
 
 import './ProjectDetails.scss';
 import { Button } from '@chakra-ui/react';
@@ -23,6 +24,7 @@ export const ProjectDetails: React.FC = () => {
   const projectId = useParams()?.project_id;
   const fromRadar = useLocation().search.includes('projectsRadar');
   const navigate = useNavigate();
+  const { setCurrentProject } = useContext(RadarContext);
 
   const fetchProject = async (): Promise<any> => {
     const { data, error } = await supabase
@@ -70,7 +72,6 @@ export const ProjectDetails: React.FC = () => {
 
     if (deleteErrors.length) {
       alert('There was an error. Please try again');
-      console.error(deleteErrors);
     } else {
       updateDataVersion();
       alert('Deleted successfully');
@@ -80,7 +81,8 @@ export const ProjectDetails: React.FC = () => {
   };
 
   const handleEdit = (): void => {
-    console.log('We are editing');
+    setCurrentProject(project);
+    navigate(`/projects/${projectId}/edit`);
   };
 
   return project ? (

@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React, { useState, useEffect } from 'react';
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Select,
-  Textarea
-} from '@chakra-ui/react';
-import { SelectMultiple } from './SelectMultiple';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   populateData,
   initialProjectFormValues,
@@ -20,14 +11,29 @@ import {
   getTechnologies,
   getDisasterTypes,
   getDataFromDb,
-  updateDataVersion
+  updateDataVersion,
+  getProject
 } from 'helpers/dataUtils';
 import { ProjectFields, ProjectFieldValues, Option } from './types';
-import './createProject.scss';
-import { supabase } from 'helpers/databaseClient';
-import { useNavigate } from 'react-router-dom';
 
-export const CreateProject: React.FC = () => {
+import { supabase } from 'helpers/databaseClient';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { RadarContext } from 'navigation/context';
+import { ProjectForm } from 'helpers/ProjectForm';
+
+import './projectAction.scss';
+import { Loader } from 'helpers/Loader';
+
+interface Props {
+  mode: String;
+}
+
+export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
+  const isCreateForm = mode.toLocaleLowerCase().includes('add');
+  const fromRadar = useLocation().search.includes('projectsRadar');
+  const projectId = useParams().project_id;
+
+  const { currentProject, setCurrentProject } = useContext(RadarContext);
   const [technologies, setTechnologies] = useState<Option[]>([]);
 
   const [disasterTypes, setDisastersList] = useState<Option[]>([]);
@@ -35,6 +41,8 @@ export const CreateProject: React.FC = () => {
   const [themes, setThemes] = useState<Option[]>([]);
 
   const [hasFetchedData, setHasFetchedData] = useState(false);
+  const [hasFetchedCurrentProject, setHasFetchedCurrentProject] =
+    useState(false);
 
   const [data, setData] = useState<ProjectFields[]>([]);
 
@@ -67,7 +75,20 @@ export const CreateProject: React.FC = () => {
     //   alert('Invalid Password');
     //   return navigate('/projects');
     // }
+    if (!isCreateForm) {
+      if (currentProject && Object.keys(currentProject).length) {
+        setProjectFormValues(currentProject);
+        setHasFetchedCurrentProject(true);
+      } else {
+        void getProjectData();
+      }
+    } else {
+      setHasFetchedCurrentProject(true);
+    }
     void fetchData();
+    return () => {
+      setCurrentProject({});
+    };
   }, []);
 
   useEffect(() => {
@@ -85,6 +106,17 @@ export const CreateProject: React.FC = () => {
       setData(fields);
     }
   }, [hasFetchedData]);
+
+  useEffect(() => {
+    if (currentProject && Object.keys(currentProject).length) {
+      setProjectFormValues(currentProject);
+    }
+  }, [currentProject]);
+
+  const getProjectData = async (): Promise<void> => {
+    await getProject(setCurrentProject, fromRadar, projectId as string);
+    setHasFetchedCurrentProject(true);
+  };
 
   const fetchData = async (): Promise<any> => {
     // Disasters
@@ -148,71 +180,6 @@ export const CreateProject: React.FC = () => {
   ): void => {
     const { name, value } = e.target;
     setProjectFormValues((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const renderField = (
-    field: ProjectFields
-  ): React.ComponentProps<typeof Input> => {
-    const { options, type, label } = field;
-    switch (type) {
-      case 'text':
-        return (
-          <Input
-            type='text'
-            w={'50%'}
-            name={label}
-            value={projectFormValues[label as keyof ProjectFieldValues]}
-            onChange={handleChange}
-          />
-        );
-      case 'textArea':
-        return (
-          <Textarea
-            w={'50%'}
-            onChange={handleChange}
-            name={label}
-            value={projectFormValues[label as keyof ProjectFieldValues]}
-            size='sm'
-          />
-        );
-
-      case 'selectText':
-        return (
-          <Select
-            placeholder='Select option'
-            w={'50%'}
-            name={label}
-            value={projectFormValues[label as keyof ProjectFieldValues]}
-            onChange={handleChange as any}
-          >
-            {(options || []).map((option, idx) => (
-              <option
-                value={
-                  (option as Option)?.name || (option as unknown as string)
-                }
-                key={idx}
-                className='option-text'
-              >
-                {(option as Option)?.name ||
-                  (option as unknown as string).toUpperCase()}
-              </option>
-            ))}
-          </Select>
-        );
-      case 'selectArray':
-        return (
-          <div style={{ width: '50%', maxWidth: '350px' }}>
-            <SelectMultiple
-              options={options as Option[]}
-              loading={!hasFetchedData}
-              label={label}
-              onChange={setProjectFormValues}
-            />
-          </div>
-        );
-      default:
-        return <Input type='text' w={'50%'} />;
-    }
   };
 
   const addProject = async (): Promise<void> => {
@@ -284,31 +251,19 @@ export const CreateProject: React.FC = () => {
     }
   };
 
-  return hasFetchedData ? (
-    <div className='newProject'>
-      <h3>Add New Project</h3>
-      <div className='createProject'>
-        {data.map((field, idx) => (
-          <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-            <FormLabel w={150} textAlign={'end'}>
-              {field.label
-                .replace(
-                  /(^|_)(\w)/g,
-                  (_match, group1, group2) =>
-                    (group1 ? ' ' : '') + group2.toUpperCase()
-                )
-                .toUpperCase() + ':'}
-            </FormLabel>
-            {renderField(field)}
-          </FormControl>
-        ))}
-      </div>
-
-      <Button w={'30%'} m={'auto'} p={'10px 20px'} onClick={addProject}>
-        Add Project
-      </Button>
-    </div>
+  return hasFetchedData && hasFetchedCurrentProject ? (
+    <ProjectForm
+      data={data}
+      title={`${isCreateForm ? 'Add New' : 'Edit'} Project`}
+      action={isCreateForm ? addProject : () => console.log('edit time')}
+      hasFetchedData={hasFetchedData}
+      projectFormValues={projectFormValues}
+      handleChange={handleChange}
+      setProjectFormValues={setProjectFormValues}
+    />
   ) : (
-    <h3 className='newProject'>Loading...</h3>
+    <h3 className='newProject'>
+      <Loader rows={2} />
+    </h3>
   );
 };
