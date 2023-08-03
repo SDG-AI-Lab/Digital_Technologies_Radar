@@ -75,7 +75,7 @@ export const ProjectFormFields: React.FC<Props> = ({
       return (
         <Select
           placeholder='Select option'
-          w={'50%'}
+          w={'25%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
