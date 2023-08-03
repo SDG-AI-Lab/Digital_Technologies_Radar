@@ -10,12 +10,13 @@ import {
   getFilteredProjects,
   projectSearch
 } from 'components/shared/helpers/HelperUtils';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 
 export const Technologies: React.FC = () => {
+  const navigate = useNavigate();
   const {
     filteredValues,
     setFilteredValues,
@@ -70,7 +71,7 @@ export const Technologies: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('technologies')
-        .select(`name, description, img_url, slug`)
+        .select(`name, description, img_url, slug, source`)
         .order('name');
 
       if (!error) {
@@ -117,6 +118,7 @@ export const Technologies: React.FC = () => {
     </div>
   ) : (
     <div className='technologiesPage'>
+      <Outlet />
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
@@ -127,7 +129,19 @@ export const Technologies: React.FC = () => {
         />
         <Filter />
       </div>
-      <h3>Technologies</h3>
+      <div className='titleRow'>
+        <div className='titleRow-left'>
+          <h3>Technologies</h3>
+        </div>
+        <div className='titleRow-right'>
+          <span
+            className='titleRow-right'
+            onClick={() => navigate('/technologies/new')}
+          >
+            Add New Technology
+          </span>
+        </div>
+      </div>
       <div className='technologies'>
         {projectsToUse.length ? (
           techList.map((technology, idx) => {

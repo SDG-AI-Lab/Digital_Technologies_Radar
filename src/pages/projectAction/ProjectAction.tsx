@@ -184,7 +184,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
   const generatePayload = (): any => {
     const payload = { ...projectFormValues };
-    if (!validatePayload(payload)) return alert('Please fill in all fields');
+    if (!validatePayload(payload)) return false;
 
     // Add Regions and Subregions
     const regions = new Set();
@@ -215,6 +215,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
   const addProject = async (): Promise<void> => {
     const payload = generatePayload();
+    if (!payload) return alert('Pleffase fill in all fields');
     setHasFetchedData(false);
     // Add to tr_projects table
     const { error } = await supabase.from('tr_projects').insert(payload);
@@ -259,6 +260,8 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
   };
 
   const editProject = async (): Promise<void> => {
+    const payload = generatePayload();
+    if (!payload) return alert('Please fill in all fields');
     const {
       id,
       updated_at,
@@ -267,7 +270,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
       tr_projects_id,
       project_data,
       ...dupPayload
-    } = generatePayload();
+    } = payload;
 
     let supabaseError = false;
     setHasFetchedData(false);

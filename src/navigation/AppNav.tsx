@@ -25,7 +25,8 @@ import {
   Technologies,
   Volunteers,
   DownloadCsv,
-  DisasterEvent
+  DisasterEvent,
+  InfoAction
 } from '../pages';
 
 // Views
@@ -111,7 +112,7 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.PROJECTS} element={<Outlet />}>
               <Route index element={<Projects />} />
               <Route
-                path={`${ROUTES.PROJECTS}/${ROUTES.NEW}`}
+                path={`${ROUTES.NEW}`}
                 element={<ProjectAction mode='add' />}
               />
 
@@ -122,32 +123,77 @@ export const NavApp: React.FC = () => {
 
               <Route path=':project_id' element={<ProjectDetails />} />
               <Route
-                path={`${ROUTES.PROJECTS}/:project_id${ROUTES.EDIT}`}
+                path={`:project_id/${ROUTES.EDIT}`}
                 element={<ProjectAction mode='edit' />}
               />
             </Route>
 
-            <Route path={ROUTES.DISASTERS} element={<Disasters />} />
+            <Route path={ROUTES.DISASTERS} element={<Outlet />}>
+              <Route index element={<Disasters />} />
+              <Route
+                path={`${ROUTES.NEW}`}
+                element={
+                  <InfoAction
+                    mode='ADD'
+                    category='DISASTER'
+                    table='disaster_types'
+                  />
+                }
+              />
+              <Route
+                path={`:id`}
+                element={
+                  <InfoDetails
+                    tableName='disaster_types'
+                    relation='disaster_types_projects'
+                  />
+                }
+              />
+              <Route
+                path={`:id/${ROUTES.EDIT}`}
+                element={
+                  <InfoAction
+                    mode='EDIT'
+                    category='DISASTER'
+                    table='disaster_types'
+                  />
+                }
+              />
+            </Route>
             <Route path={ROUTES.DISASTER_EVENT} element={<DisasterEvent />} />
-            <Route
-              path={`${ROUTES.DISASTERS}/:id`}
-              element={
-                <InfoDetails
-                  tableName='disaster_types'
-                  relation='disaster_types_projects'
-                />
-              }
-            />
-            <Route path={ROUTES.TECHNOLOGIES} element={<Technologies />} />
-            <Route
-              path={`${ROUTES.TECHNOLOGIES}/:id`}
-              element={
-                <InfoDetails
-                  tableName='technologies'
-                  relation='tech_projects'
-                />
-              }
-            />
+
+            <Route path={ROUTES.TECHNOLOGIES} element={<Outlet />}>
+              <Route index element={<Technologies />} />
+              <Route
+                path={`${ROUTES.NEW}`}
+                element={
+                  <InfoAction
+                    mode='ADD'
+                    category='TECHNOLOGY'
+                    table='technologies'
+                  />
+                }
+              />
+              <Route
+                path={`:id`}
+                element={
+                  <InfoDetails
+                    tableName='technologies'
+                    relation='tech_projects'
+                  />
+                }
+              />
+              <Route
+                path={`:id/${ROUTES.EDIT}`}
+                element={
+                  <InfoAction
+                    mode='EDIT'
+                    category='TECHNOLOGY'
+                    table='technologies'
+                  />
+                }
+              />
+            </Route>
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />

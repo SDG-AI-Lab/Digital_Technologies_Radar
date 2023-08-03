@@ -1,0 +1,145 @@
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea
+} from '@chakra-ui/react';
+import './InfoAction.scss';
+import { supabase } from 'helpers/databaseClient';
+import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { updateDataVersion } from 'helpers/dataUtils';
+
+type FormProps = Record<string, string>;
+
+type Props = Record<string, string>;
+
+const initialFormValues = {
+  name: '',
+  img_url: '',
+  description: '',
+  source: ''
+};
+
+export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
+  const isCreateForm = mode.toLocaleLowerCase().includes('add');
+  const navigate = useNavigate();
+  const slug = useLocation().pathname.split('/')[2];
+  const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
+  const key = `${
+    category === 'DISASTER' ? 'drr-disaster-types' : 'drr-technologies'
+  }`;
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    const { name, value } = e.target;
+    setFormValues((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  useEffect(() => {
+    if (!isCreateForm) {
+      const itemList = JSON.parse(localStorage.getItem(key) as string);
+
+      const currentItem = itemList.data.find((x: any) => x.slug === slug);
+      setFormValues(currentItem);
+    }
+  }, []);
+
+  const action = async (): Promise<void> => {
+    const payload = { ...formValues };
+    if (Object.values(payload).includes(''))
+      return alert('Please fill all fields');
+    payload['slug'] = toSnakeCase(formValues.name);
+    let supabaseError = false;
+    if (mode === 'ADD') {
+      const { error } = await supabase.from(table).insert(payload as any);
+      supabaseError = !!error;
+    } else {
+      const { error } = await supabase
+        .from(table)
+        .update(payload)
+        .eq('slug', slug);
+      supabaseError = !!error;
+    }
+
+    if (!supabaseError) {
+      alert('Operation Successfull!');
+      void updateDataVersion();
+      localStorage.removeItem(key);
+      navigate(`${category === 'DISASTER' ? '/disasters' : '/technologies'}`);
+    } else {
+      alert('There was an error, please try again');
+    }
+  };
+  return (
+    <div className='newProject'>
+      <h3>{`${mode} ${category}`}</h3>
+      <div className='infoActionForm'>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Title
+          </FormLabel>
+          <Input
+            type='text'
+            w={'50%'}
+            name='name'
+            value={formValues['name']}
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Description
+          </FormLabel>
+          <Textarea
+            w={'50%'}
+            name='description'
+            value={formValues['description']}
+            size='sm'
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Image URL
+          </FormLabel>
+          <Input
+            type='text'
+            w={'50%'}
+            name='img_url'
+            value={formValues['img_url']}
+            onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Source
+          </FormLabel>
+          <Input
+            type='text'
+            w={'50%'}
+            name='source'
+            value={formValues['source']}
+            onChange={handleChange}
+          />
+        </FormControl>
+        <div style={{ margin: '0 40%' }}>
+          <Button
+            w={'100%'}
+            p={'10px 20px'}
+            m={'0 auto'}
+            onClick={() => {
+              void action();
+            }}
+          >
+            SUBMIT
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

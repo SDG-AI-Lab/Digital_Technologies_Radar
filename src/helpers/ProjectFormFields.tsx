@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Input, Select, Textarea } from '@chakra-ui/react';
 import { ProjectFieldValues, Option } from 'pages/projectAction/types';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
@@ -22,7 +22,7 @@ export const ProjectFormFields: React.FC<Props> = ({
   setProjectFormValues
 }) => {
   const { currentProject } = useContext(RadarContext);
-  const { options, type, label } = field;
+  const { options = [], type, label } = field;
   const path = useLocation().pathname;
   const fromRadar = useLocation().search.includes('from-radar=true');
 

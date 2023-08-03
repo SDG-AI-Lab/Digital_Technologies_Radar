@@ -11,7 +11,7 @@ export const getTechnologies = async (setter: Function): Promise<any> => {
   } else {
     const { data, error } = await supabase
       .from('technologies')
-      .select(`name, description, img_url, slug`)
+      .select(`name, description, img_url, slug, source`)
       .order('name');
 
     if (!error) {
@@ -39,7 +39,7 @@ export const getDisasterTypes = async (setter: Function): Promise<any> => {
   } else {
     const { data, error } = await supabase
       .from('disaster_types')
-      .select(`id, name, description, img_url, slug`)
+      .select(`id, name, description, img_url, slug, source`)
       .order('name');
 
     if (!error) {

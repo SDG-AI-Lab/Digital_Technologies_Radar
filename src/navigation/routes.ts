@@ -17,8 +17,8 @@ const QUADRANT_PARAM = `:quadrantId`;
 const BLIP = `${RADAR}/technology-item`;
 const BLIP_PARAM = `${BLIP}/:techItemId`;
 
-const NEW = '/new';
-const EDIT = '/edit';
+const NEW = 'new';
+const EDIT = 'edit';
 
 const DOWNLOAD = '/download';
 

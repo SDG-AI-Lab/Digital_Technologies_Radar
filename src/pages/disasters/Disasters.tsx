@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useState, useEffect } from 'react';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { loremIpsum } from 'react-lorem-ipsum';
-import { Link } from 'react-router-dom';
 
 import {
   projectSearch,
@@ -18,6 +18,7 @@ import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import './Disasters.scss';
 
 export const Disasters: React.FC = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [filteredProjects, setFilteredProjects] = useState<any>([]);
   const [loading, setLoading] = useState(true);
@@ -52,7 +53,7 @@ export const Disasters: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('disaster_types')
-        .select(`name, description, img_url, slug`)
+        .select(`name, description, img_url, slug, source`)
         .order('name');
 
       if (!error) {
@@ -127,6 +128,7 @@ export const Disasters: React.FC = () => {
     </div>
   ) : (
     <div className='disasters'>
+      <Outlet />
       <div className='searchFilter'>
         <input
           placeholder='Search ....'
@@ -137,8 +139,20 @@ export const Disasters: React.FC = () => {
         />
         <Filter />
       </div>
+      <div className='titleRow'>
+        <div className='titleRow-left'>
+          <h3>Disasters</h3>
+        </div>
+        <div className='titleRow-right'>
+          <span
+            className='titleRow-right'
+            onClick={() => navigate('/disasters/new')}
+          >
+            Add New Disaster
+          </span>
+        </div>
+      </div>
 
-      <h3>Disasters</h3>
       {projectsToUse.length ? (
         disasterTypes.map((disaster: any, idx: number) => {
           const disasterProjects = projectsToUse.filter(
