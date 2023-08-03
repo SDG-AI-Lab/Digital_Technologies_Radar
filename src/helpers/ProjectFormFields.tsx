@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Input, Select, Textarea } from '@chakra-ui/react';
 import { ProjectFieldValues, Option } from 'pages/projectAction/types';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
