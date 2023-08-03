@@ -319,3 +319,11 @@ export const initialParameterCount = PARAMETERS.reduce((a, b) => {
   a[b] = 0;
   return a;
 }, {});
+
+export const toSnakeCase = (str = ''): string => {
+  const strArr = str.split(' ');
+  const snakeArr = strArr.reduce((acc, val) => {
+    return acc.concat((val as any).toLowerCase());
+  }, []);
+  return snakeArr.join('_');
+};

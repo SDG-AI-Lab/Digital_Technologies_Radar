@@ -22,7 +22,7 @@ export const ProjectFormFields: React.FC<Props> = ({
   setProjectFormValues
 }) => {
   const { currentProject } = useContext(RadarContext);
-  const { options, type, label } = field;
+  const { options = [], type, label } = field;
   const path = useLocation().pathname;
   const fromRadar = useLocation().search.includes('from-radar=true');
 
@@ -75,7 +75,7 @@ export const ProjectFormFields: React.FC<Props> = ({
       return (
         <Select
           placeholder='Select option'
-          w={'50%'}
+          w={'25%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}

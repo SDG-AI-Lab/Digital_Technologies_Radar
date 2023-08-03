@@ -34,6 +34,27 @@
       margin: 40px 10px 20px;
     }
   }
+
+  .titleRow {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      align-items: center;
+      display: flex;
+      gap: 5px;
+    }
+
+    &-right {
+      color: #0062ac;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+        color: blue;
+      }
+    }
+  }
 }
 
 .technologies {
