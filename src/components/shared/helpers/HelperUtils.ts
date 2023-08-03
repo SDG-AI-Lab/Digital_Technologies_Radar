@@ -1,6 +1,6 @@
 import { BaseCSVType, BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
 
-/* Merge DisasterCycle of Techs with similar Ideas/Concepts/Examples */
+/* Merge DisasterCycle of Projects with similar Ideas/Concepts/Examples */
 export const mergeDisasterCycle = (blips: BlipType[]): BaseCSVType[] => {
   const blipsToUse = blips || [];
   const merge: BaseCSVType[] = [];

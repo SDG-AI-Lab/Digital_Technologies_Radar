@@ -64,7 +64,7 @@ export const getProject = async (
 ): Promise<any> => {
   const { data, error } = await supabase
     .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
-    .select()
+    .select(`${fromRadar ? '*' : '*, project_data(*)'}`)
     .eq('uuid', projectId)
     .single();
 

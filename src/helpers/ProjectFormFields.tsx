@@ -4,6 +4,7 @@ import { Input, Select, Textarea } from '@chakra-ui/react';
 import { ProjectFieldValues, Option } from 'pages/projectAction/types';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
 import { RadarContext } from 'navigation/context';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   field: any;
@@ -22,6 +23,32 @@ export const ProjectFormFields: React.FC<Props> = ({
 }) => {
   const { currentProject } = useContext(RadarContext);
   const { options, type, label } = field;
+  const path = useLocation().pathname;
+  const fromRadar = useLocation().search.includes('from-radar=true');
+
+  const getSelectedValues = (label: string): any[] => {
+    if (path.includes('new')) return [];
+
+    const selectedOptions =
+      label === 'use_case'
+        ? currentProject[label]?.split(',')
+        : fromRadar && label === 'disaster_cycles'
+        ? currentProject['disaster_cycle']?.split(',')
+        : currentProject[label];
+    const selectedValues = selectedOptions.reduce(
+      (acc: Array<{ label: string; value: string }>, curr: string) => {
+        const obj = {
+          label: curr,
+          value: curr
+        };
+        acc.push(obj);
+        return acc;
+      },
+      []
+    );
+
+    return selectedValues;
+  };
   switch (type) {
     case 'text':
       return (
@@ -66,21 +93,7 @@ export const ProjectFormFields: React.FC<Props> = ({
         </Select>
       );
     case 'selectArray': {
-      const selectedOptions =
-        label === 'use_case'
-          ? currentProject[label].split(',')
-          : currentProject[label];
-      const selectedValues = selectedOptions.reduce(
-        (acc: Array<{ label: string; value: string }>, curr: string) => {
-          const obj = {
-            label: curr,
-            value: curr
-          };
-          acc.push(obj);
-          return acc;
-        },
-        []
-      );
+      const selectedValues = getSelectedValues(label);
       return (
         <div style={{ width: '50%', maxWidth: '350px' }}>
           <SelectMultiple

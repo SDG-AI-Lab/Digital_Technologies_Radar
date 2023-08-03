@@ -30,7 +30,7 @@ interface Props {
 
 export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
   const isCreateForm = mode.toLocaleLowerCase().includes('add');
-  const fromRadar = useLocation().search.includes('projectsRadar');
+  const fromRadar = useLocation().search.includes('from-radar=true');
   const projectId = useParams().project_id;
 
   const { currentProject, setCurrentProject } = useContext(RadarContext);
@@ -182,7 +182,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     setProjectFormValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const addProject = async (): Promise<void> => {
+  const generatePayload = (): any => {
     const payload = { ...projectFormValues };
     if (!validatePayload(payload)) return alert('Please fill in all fields');
 
@@ -210,6 +210,12 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     payload['region'] = `{${regionString}}`;
     payload['subregion'] = `{${subRegionString}}`;
 
+    return payload;
+  };
+
+  const addProject = async (): Promise<void> => {
+    const payload = generatePayload();
+    setHasFetchedData(false);
     // Add to tr_projects table
     const { error } = await supabase.from('tr_projects').insert(payload);
 
@@ -219,27 +225,27 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
     // Add to project_data table
     let dataError;
-    projectFormValues['disaster_cycles']
-      .replace(/[{}]/g, '')
-      .split(',')
-      .forEach(async (disaster_cycle) => {
-        const dupPayload = { ...payload };
+    if (!error) {
+      projectFormValues['disaster_cycles']
+        .replace(/[{}]/g, '')
+        .split(',')
+        .forEach(async (disaster_cycle) => {
+          const dupPayload = { ...payload };
+          dupPayload['disaster_cycle'] = disaster_cycle.trim();
 
-        // @ts-expect-error
-        dupPayload['disaster_cycle'] = disaster_cycle.trim();
+          const { disaster_cycles, ...dataPayload } = dupPayload;
 
-        const { disaster_cycles, ...dataPayload } = dupPayload;
+          const { error } = await supabase
+            .from('project_data')
+            .insert(dataPayload);
 
-        const { error } = await supabase
-          .from('project_data')
-          .insert(dataPayload);
+          dataError = error;
 
-        dataError = error;
-
-        if (error) {
-          console.error({ error });
-        }
-      });
+          if (error) {
+            console.error({ error });
+          }
+        });
+    }
 
     if (!error && !dataError) {
       void updateDataVersion();
@@ -249,13 +255,74 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     } else {
       alert('Something went wrong!. Please try again');
     }
+    setHasFetchedData(true);
+  };
+
+  const editProject = async (): Promise<void> => {
+    const {
+      id,
+      updated_at,
+      uuid,
+      created_at,
+      tr_projects_id,
+      project_data,
+      ...dupPayload
+    } = generatePayload();
+
+    let supabaseError = false;
+    setHasFetchedData(false);
+    if (fromRadar) {
+      const { disaster_cycles, disaster_cycle, ...payload } = dupPayload;
+      const { error: radarError } = await supabase
+        .from('project_data')
+        .update(payload)
+        .eq('tr_projects_id', tr_projects_id);
+
+      if (!radarError) {
+        const { disaster_cycle, disaster_cycles, ...payload } = dupPayload;
+        const { error: projectsError } = await supabase
+          .from('tr_projects')
+          .update(payload)
+          .eq('id', tr_projects_id);
+
+        supabaseError = !!projectsError;
+      } else {
+        supabaseError = true;
+      }
+    } else {
+      const relatedProjects = currentProject.project_data;
+      const { error: projectsError } = await supabase
+        .from('tr_projects')
+        .update(dupPayload)
+        .eq('uuid', uuid);
+
+      supabaseError = !!projectsError;
+      relatedProjects.forEach(async (project: any) => {
+        const { disaster_cycles, ...payload } = dupPayload;
+        const { error: radarError } = await supabase
+          .from('project_data')
+          .update(payload)
+          .eq('uuid', project.uuid);
+        supabaseError = !!radarError;
+      });
+    }
+
+    if (supabaseError) {
+      alert('something went wrong, Please try again');
+    } else {
+      void updateDataVersion();
+      localStorage.removeItem('drr-projects-list');
+      alert('Project Updated Succesfully');
+      navigate('/projects');
+    }
+    setHasFetchedData(true);
   };
 
   return hasFetchedData && hasFetchedCurrentProject ? (
     <ProjectForm
       data={data}
       title={`${isCreateForm ? 'Add New' : 'Edit'} Project`}
-      action={isCreateForm ? addProject : () => console.log('edit time')}
+      action={isCreateForm ? addProject : editProject}
       hasFetchedData={hasFetchedData}
       projectFormValues={projectFormValues}
       handleChange={handleChange}

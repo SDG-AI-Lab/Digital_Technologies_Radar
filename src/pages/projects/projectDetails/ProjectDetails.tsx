@@ -29,15 +29,14 @@ export const ProjectDetails: React.FC = () => {
   const fetchProject = async (): Promise<any> => {
     const { data, error } = await supabase
       .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
-      .select()
+      .select(`${fromRadar ? '*' : '*, project_data(*)'}`)
       .eq('uuid', projectId)
       .single();
 
     if (!error) {
       setProject(data as any);
       console.log({ data });
-
-      setImage(data?.img_url);
+      setImage((data as any).img_url);
     }
   };
 
@@ -82,7 +81,7 @@ export const ProjectDetails: React.FC = () => {
 
   const handleEdit = (): void => {
     setCurrentProject(project);
-    navigate(`/projects/${projectId}/edit`);
+    navigate(`/projects/${projectId}/edit?from-radar=${fromRadar}`);
   };
 
   return project ? (

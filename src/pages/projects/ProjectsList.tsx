@@ -73,12 +73,12 @@ export const Projects: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('tr_projects')
-        .select()
+        .select(`*, project_data(*)`)
         .order('id', { ascending: false });
       if (!error) {
+        console.log({ data });
         setFilteredProjects(data);
         setProjectsList(data);
-
         localStorage.setItem(
           'drr-projects-list',
           JSON.stringify({

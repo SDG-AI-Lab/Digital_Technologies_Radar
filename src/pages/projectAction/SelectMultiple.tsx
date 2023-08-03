@@ -21,7 +21,6 @@ export const SelectMultiple: React.FC<Props> = ({
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    // const value = filteredValues['parameters'][label];
     setSelected(selectedValues || []);
   }, []);
 

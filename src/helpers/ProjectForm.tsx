@@ -14,8 +14,6 @@ interface Props {
 }
 
 export const ProjectForm: React.FC<Props> = ({ data, title, ...props }) => {
-  console.log({ data });
-
   return (
     <div className='newProject'>
       <h3>{title}</h3>
