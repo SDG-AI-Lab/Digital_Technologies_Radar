@@ -35,7 +35,6 @@ export const ProjectDetails: React.FC = () => {
 
     if (!error) {
       setProject(data as any);
-      console.log({ data });
       setImage((data as any).img_url);
     }
   };

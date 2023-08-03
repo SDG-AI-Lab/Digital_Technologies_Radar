@@ -76,7 +76,6 @@ export const Projects: React.FC = () => {
         .select(`*, project_data(*)`)
         .order('id', { ascending: false });
       if (!error) {
-        console.log({ data });
         setFilteredProjects(data);
         setProjectsList(data);
         localStorage.setItem(

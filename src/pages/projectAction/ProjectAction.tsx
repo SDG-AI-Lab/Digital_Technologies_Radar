@@ -215,7 +215,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
   const addProject = async (): Promise<void> => {
     const payload = generatePayload();
-    if (!payload) return alert('Pleffase fill in all fields');
+    if (!payload) return alert('Please fill in all fields');
     setHasFetchedData(false);
     // Add to tr_projects table
     const { error } = await supabase.from('tr_projects').insert(payload);
@@ -235,6 +235,11 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
           dupPayload['disaster_cycle'] = disaster_cycle.trim();
 
           const { disaster_cycles, ...dataPayload } = dupPayload;
+          const { _, data: newData } = await supabase
+            .from('tr_projects')
+            .select('id')
+            .order('id', { ascending: false });
+          dataPayload['tr_projects_id'] = (newData as any)[0].id;
 
           const { error } = await supabase
             .from('project_data')
