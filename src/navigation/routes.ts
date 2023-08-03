@@ -18,6 +18,7 @@ const BLIP = `${RADAR}/technology-item`;
 const BLIP_PARAM = `${BLIP}/:techItemId`;
 
 const NEW = '/new';
+const EDIT = '/edit';
 
 const DOWNLOAD = '/download';
 
@@ -43,6 +44,7 @@ export const ROUTES = {
   BLIP_PARAM,
   VOLUNTEERS,
   NEW,
+  EDIT,
   DOWNLOAD,
   DISASTER_EVENT
 };

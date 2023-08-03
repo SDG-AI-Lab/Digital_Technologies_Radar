@@ -8,15 +8,21 @@ interface Props {
   loading: boolean;
   label: string;
   onChange: Function;
+  selectedValues?: any;
 }
 
 export const SelectMultiple: React.FC<Props> = ({
   options,
   loading,
   label,
-  onChange
+  onChange,
+  selectedValues = []
 }) => {
   const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    setSelected(selectedValues || []);
+  }, []);
 
   useEffect(() => {
     onChange((prevState: ProjectFieldValues) => ({

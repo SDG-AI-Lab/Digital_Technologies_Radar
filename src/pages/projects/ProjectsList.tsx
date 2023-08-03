@@ -71,11 +71,14 @@ export const Projects: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase.from('tr_projects').select();
+      const { data, error } = await supabase
+        .from('tr_projects')
+        .select(`*, project_data(*)`)
+        .order('id', { ascending: false });
       if (!error) {
+        console.log({ data });
         setFilteredProjects(data);
         setProjectsList(data);
-
         localStorage.setItem(
           'drr-projects-list',
           JSON.stringify({

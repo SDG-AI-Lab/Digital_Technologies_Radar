@@ -1,5 +1,5 @@
 import { DATA_VERSION, supabase } from 'helpers/databaseClient';
-import { Option } from 'pages/createProject/types';
+import { Option } from 'pages/projectAction/types';
 
 export const getTechnologies = async (setter: Function): Promise<any> => {
   const storedTechList = JSON.parse(
@@ -54,6 +54,22 @@ export const getDisasterTypes = async (setter: Function): Promise<any> => {
 
       return { data };
     }
+  }
+};
+
+export const getProject = async (
+  setter: Function,
+  fromRadar: boolean,
+  projectId: string
+): Promise<any> => {
+  const { data, error } = await supabase
+    .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
+    .select(`${fromRadar ? '*' : '*, project_data(*)'}`)
+    .eq('uuid', projectId)
+    .single();
+
+  if (!error) {
+    setter(data as any);
   }
 };
 

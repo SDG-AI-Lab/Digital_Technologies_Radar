@@ -11,7 +11,7 @@ import { Disasters } from './disasters/Disasters';
 import { Technologies } from './technologies/Technologies';
 import { HomePage } from './homePage/HomePage';
 import { InfoDetails } from './infoDetails/InfoDetails';
-import { CreateProject } from './createProject/CreateProject';
+import { ProjectAction } from './projectAction/ProjectAction';
 import { DownloadCsv } from './downloadCsv/DownloadCsv';
 import { DisasterEvent } from './disasters/DisasterEvent';
 
@@ -29,7 +29,7 @@ export {
   Technologies,
   HomePage,
   InfoDetails,
-  CreateProject,
+  ProjectAction,
   DownloadCsv,
   DisasterEvent
 };

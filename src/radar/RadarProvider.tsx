@@ -25,7 +25,11 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   }, []);
 
   const getBlips = async (): Promise<void> => {
-    const { data, error } = await supabase.from('project_data').select().csv();
+    const { data, error } = await supabase
+      .from('project_data')
+      .select()
+      .order('id', { ascending: false })
+      .csv();
     if (!error) {
       setCsvString(data);
     }
