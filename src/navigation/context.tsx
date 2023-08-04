@@ -31,6 +31,8 @@ export interface RadarContextInterface {
   setCurrentProject: Function;
   projectsGroup: any;
   setProjectsGroup: Function;
+  needsReload: boolean;
+  setNeedsReload: Function;
 }
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

@@ -33,7 +33,8 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
   const fromRadar = useLocation().search.includes('from-radar=true');
   const projectId = useParams().project_id;
 
-  const { currentProject, setCurrentProject } = useContext(RadarContext);
+  const { currentProject, setCurrentProject, setNeedsReload } =
+    useContext(RadarContext);
   const [technologies, setTechnologies] = useState<Option[]>([]);
 
   const [disasterTypes, setDisastersList] = useState<Option[]>([]);
@@ -218,7 +219,11 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     if (!payload) return alert('Please fill in all fields');
     setHasFetchedData(false);
     // Add to tr_projects table
-    const { error } = await supabase.from('tr_projects').insert(payload);
+    const { data: createdRecord, error } = await supabase
+      .from('tr_projects')
+      .insert(payload)
+      .select('id')
+      .single();
 
     if (error) {
       console.error({ error });
@@ -236,14 +241,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
           const { disaster_cycles, ...dataPayload } = dupPayload;
 
-          const { error: newError, data: newData } = await supabase
-            .from('tr_projects')
-            .select('id')
-            .order('id', { ascending: false });
-          if (!newError) {
-            dataPayload['tr_projects_id'] = (newData as any)[0].id;
-          }
-
+          dataPayload['tr_projects_id'] = createdRecord.id;
           const { error } = await supabase
             .from('project_data')
             .insert(dataPayload);
@@ -259,6 +257,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     if (!error && !dataError) {
       void updateDataVersion();
       localStorage.removeItem('drr-projects-list');
+      setNeedsReload(true);
       alert('Project added Succesfully');
       navigate('/projects');
     } else {
@@ -323,6 +322,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     } else {
       void updateDataVersion();
       localStorage.removeItem('drr-projects-list');
+      setNeedsReload(true);
       alert('Project Updated Succesfully');
       navigate('/projects');
     }

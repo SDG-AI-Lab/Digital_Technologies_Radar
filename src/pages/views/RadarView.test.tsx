@@ -34,7 +34,9 @@ const radarContext: RadarContextInterface = {
   currentProject: {},
   setCurrentProject: jest.fn(),
   projectsGroup: '',
-  setProjectsGroup: jest.fn()
+  setProjectsGroup: jest.fn(),
+  needsReload: false,
+  setNeedsReload: jest.fn()
 };
 
 test('renders the Radar component when not loading', () => {

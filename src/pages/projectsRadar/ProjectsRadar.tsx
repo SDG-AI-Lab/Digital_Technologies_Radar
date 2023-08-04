@@ -27,6 +27,7 @@ import {
   mergeDisasterCycle
 } from 'components/shared/helpers/HelperUtils';
 import { SearchView } from 'pages/search/SearchView';
+import { useNavigate } from 'react-router-dom';
 
 export const ProjectsRadar: React.FC = () => {
   const {
@@ -34,8 +35,15 @@ export const ProjectsRadar: React.FC = () => {
     state: { blips, selectedItem, selectedQuadrant }
   } = useRadarState();
 
-  const { filteredValues, setFilteredValues, parameterCount } =
-    useContext(RadarContext);
+  const {
+    filteredValues,
+    setFilteredValues,
+    parameterCount,
+    needsReload,
+    setNeedsReload
+  } = useContext(RadarContext);
+
+  const navigate = useNavigate();
 
   const [tabIndex, setTabIndex] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -83,6 +91,10 @@ export const ProjectsRadar: React.FC = () => {
   }, [filteredProjects]);
 
   useEffect(() => {
+    if (needsReload) {
+      setNeedsReload(false);
+      navigate(0);
+    }
     setTabIndex(0);
     return () => setSelectedItem(null);
   }, []);
