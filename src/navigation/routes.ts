@@ -24,8 +24,6 @@ const DOWNLOAD = '/download';
 
 const DISASTER_EVENTS = 'disaster_events';
 
-const DISASTER_EVENT = `${DISASTER_EVENTS}/:eventId`;
-
 export const ROUTES = {
   HOME,
   PROJECTS_RADAR,
@@ -46,5 +44,5 @@ export const ROUTES = {
   NEW,
   EDIT,
   DOWNLOAD,
-  DISASTER_EVENT
+  DISASTER_EVENTS
 };

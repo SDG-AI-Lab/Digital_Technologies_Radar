@@ -134,6 +134,12 @@
       margin: 20px 0;
     }
   }
+
+  .actions {
+    padding: 10px 50px;
+    display: flex;
+    gap: 10px;
+  }
 }
 
 @media only screen and (max-width: 930px) {

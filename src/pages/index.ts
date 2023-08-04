@@ -15,6 +15,7 @@ import { ProjectAction } from './projectAction/ProjectAction';
 import { DownloadCsv } from './downloadCsv/DownloadCsv';
 import { DisasterEvent } from './disasters/DisasterEvent';
 import { InfoAction } from './infoAction/InfoAction';
+import { EventAction } from './eventAction/EventAction';
 
 export {
   Home,
@@ -33,5 +34,6 @@ export {
   ProjectAction,
   DownloadCsv,
   DisasterEvent,
-  InfoAction
+  InfoAction,
+  EventAction
 };

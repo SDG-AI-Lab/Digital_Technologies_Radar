@@ -26,7 +26,8 @@ import {
   Volunteers,
   DownloadCsv,
   DisasterEvent,
-  InfoAction
+  InfoAction,
+  EventAction
 } from '../pages';
 
 // Views
@@ -163,7 +164,17 @@ export const NavApp: React.FC = () => {
                 }
               />
             </Route>
-            <Route path={ROUTES.DISASTER_EVENT} element={<DisasterEvent />} />
+            <Route path={ROUTES.DISASTER_EVENTS} element={<Outlet />}>
+              <Route path=':eventId' element={<DisasterEvent />} />
+              <Route
+                path={`${ROUTES.NEW}`}
+                element={<EventAction mode='Add' />}
+              />
+              <Route
+                path={`:eventId/${ROUTES.EDIT}`}
+                element={<EventAction mode='Edit' />}
+              />
+            </Route>
 
             <Route path={ROUTES.TECHNOLOGIES} element={<Outlet />}>
               <Route index element={<Technologies />} />
