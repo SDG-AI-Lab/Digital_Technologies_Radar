@@ -18,7 +18,7 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
   return (
     <div className='homeComponent'>
       <Link
-        to={`/${type}/${project.slug || project.uuid || project.id}`}
+        to={`/${type}/${project.uuid || project.slug || project.id}`}
         onClick={() => setCurrentProject(project)}
       >
         <div className='homeImage-large'>

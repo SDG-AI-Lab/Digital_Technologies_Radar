@@ -4,6 +4,12 @@ import { Image } from 'components/shared/image/Image';
 import './PageDetails.scss';
 import cx from 'classnames';
 import { Loader } from 'helpers/Loader';
+import { Button } from '@chakra-ui/react';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from 'helpers/databaseClient';
+import { updateDataVersion } from 'helpers/dataUtils';
 
 interface Props {
   item: Record<string, string | string[]>;
@@ -11,11 +17,15 @@ interface Props {
   loading: boolean;
 }
 
+const isAdmin = true;
+
 export const PageDetails: React.FC<Props> = ({
   item,
   sections = ['overview'],
   loading
 }) => {
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
   const [selectedSection, setSelectedSection] = useState<string>('overview');
   const [itemDetails, setItemDetails] = useState<any>({});
 
@@ -29,6 +39,28 @@ export const PageDetails: React.FC<Props> = ({
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView();
+    }
+  };
+
+  const handleEdit = (): void => {
+    navigate(`${path}/edit`);
+  };
+
+  const handleDelete = async (): Promise<void> => {
+    if (!confirm('Are you sure you want to delete this item?')) return;
+
+    const { error } = await supabase
+      .from('disaster_events')
+      .delete()
+      .eq('uuid', item.uuid);
+
+    if (error) {
+      alert('There was an error. Please try again');
+    } else {
+      void updateDataVersion();
+      localStorage.removeItem('drr-recent-disasters');
+      alert('Deleted successfully');
+      navigate('/');
     }
   };
 
@@ -52,6 +84,36 @@ export const PageDetails: React.FC<Props> = ({
           <Image imgUrl={itemDetails?.img_url as string} />
         </div>
       </div>
+      {isAdmin && (
+        <div className='actions'>
+          <Button
+            leftIcon={<EditIcon />}
+            bgColor='#2868AC'
+            variant='solid'
+            color='white'
+            _hover={{ bg: '#6895C4' }}
+            _active={{}}
+            _focus={{}}
+            onClick={handleEdit}
+          >
+            Edit
+          </Button>
+          <Button
+            leftIcon={<DeleteIcon />}
+            bgColor='#C1391D'
+            variant='solid'
+            color='white'
+            _hover={{ bg: '#D37460' }}
+            _active={{}}
+            _focus={{}}
+            onClick={() => {
+              void handleDelete();
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      )}
 
       <div className='itemBody'>
         <div className='itemToc'>

@@ -5,6 +5,8 @@
   gap: 35px;
   margin-bottom: 20px;
   flex-shrink: 0;
+  height: 250px;
+  overflow: scroll;
 
   .urgentBadge {
     display: flex;

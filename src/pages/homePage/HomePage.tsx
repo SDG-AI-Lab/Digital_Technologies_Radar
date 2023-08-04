@@ -120,7 +120,7 @@ export const HomePage: React.FC = () => {
     } else {
       const { data, error } = await supabase
         .from('disaster_events')
-        .select(`id, title, summary, uuid, img_url`)
+        .select()
         .order('created_at');
       if (!error) {
         setRecentDisasters(data);
@@ -215,9 +215,10 @@ export const HomePage: React.FC = () => {
             {recentDisasters.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <Link className='seeAll' to={'/disaster_events/id'}>
+                  <Link className='seeAll' to={'/'}>
                     <h3>Recent Disasters</h3>
                   </Link>
+                  <Link to='/disaster_events/new'>Add new event</Link>
                 </div>
                 <div className='projectSections'>
                   <RecentDisasters recentDisasters={recentDisasters} />
