@@ -34,6 +34,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   const isCreateForm = mode.toLocaleLowerCase().includes('add');
   const navigate = useNavigate();
   const uuid = useLocation().pathname.split('/')[2];
+  const queryString = useLocation().search;
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
 
   const handleChange = (
@@ -47,11 +48,12 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
-      const itemList = JSON.parse(
-        localStorage.getItem('drr-recent-disasters') as string
-      );
+      const key = queryString.includes('recent=true')
+        ? 'drr-recent-disasters'
+        : 'drr-disaster-events';
+      const itemList = JSON.parse(localStorage.getItem(key) as string);
       const currentItem = itemList.data.find((x: any) => x.uuid === uuid);
-      console.log({ currentItem });
+      if (!currentItem) navigate('/');
       setFormValues(currentItem);
     }
   }, []);

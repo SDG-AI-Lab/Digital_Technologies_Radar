@@ -40,6 +40,7 @@
   .homeDetails-large {
     align-items: center;
     display: flex;
+    flex-direction: column;
     flex-basis: 70%;
     justify-content: center;
 
@@ -57,6 +58,11 @@
       text-align: center;
       text-overflow: ellipsis;
       text-transform: uppercase;
+
+      &-summary {
+        font-size: 14px;
+       font-weight: 400;
+      }
 
       @media only screen and (max-width: 768px) {
         text-align: center;

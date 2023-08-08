@@ -23,6 +23,7 @@ export const HomePage: React.FC = () => {
   const [technologies, setTechnologies] = useState<any>([]);
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
   const [recentDisasters, setRecentDisasters] = useState<any>([]);
+  const [disasterEvents, setDisasterEvents] = useState<any>([]);
   const [itemDescription, setItemDescription] = useState(
     CAROUSEL_ITEMS[0].label
   );
@@ -32,6 +33,7 @@ export const HomePage: React.FC = () => {
     void getTechnologies();
     void getDisasters();
     void getRecentDisasters();
+    void getDisasterEvents();
   }, []);
 
   const getProjects = async (): Promise<any> => {
@@ -121,11 +123,36 @@ export const HomePage: React.FC = () => {
       const { data, error } = await supabase
         .from('disaster_events')
         .select()
+        .eq('help_needed', 1)
         .order('id', { ascending: false });
       if (!error) {
         setRecentDisasters(data);
         localStorage.setItem(
           'drr-recent-disasters',
+          JSON.stringify({
+            version: DATA_VERSION,
+            data
+          })
+        );
+      }
+    }
+  };
+  const getDisasterEvents = async (): Promise<any> => {
+    const storedDisasterEvents = JSON.parse(
+      localStorage.getItem('drr-disaster-events') as string
+    );
+    if (storedDisasterEvents && storedDisasterEvents.version === DATA_VERSION) {
+      setDisasterEvents(storedDisasterEvents.data);
+    } else {
+      const { data, error } = await supabase
+        .from('disaster_events')
+        .select()
+        .eq('help_needed', 0)
+        .order('id', { ascending: false });
+      if (!error) {
+        setDisasterEvents(data);
+        localStorage.setItem(
+          'drr-disaster-events',
           JSON.stringify({
             version: DATA_VERSION,
             data
@@ -239,7 +266,7 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   <div className='recentDisastersCards'>
-                    {recentDisasters.slice(0, 2).map((disasterEvent: any) => (
+                    {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
                       <div key={disasterEvent.id} style={{ width: '40%' }}>
                         <HomeCardMini
                           project={disasterEvent}
