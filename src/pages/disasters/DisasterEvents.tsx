@@ -15,13 +15,11 @@ export const DisasterEvents: React.FC = () => {
   const [data, setData] = useState<any>({});
 
   const getDisasterData = async (): Promise<any> => {
-    // await getDisasterProjects();
     const { data, error } = await supabase
       .from('disaster_events')
       .select(`*, locations(id, country, region)`);
 
     if (!error) {
-      // setDisasterTypes(data);
       const transformedData = data.reduce((acc: any, curr: any) => {
         if (curr.locations.region in acc) {
           acc[curr.locations.region].push(curr);
