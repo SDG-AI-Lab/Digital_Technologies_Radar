@@ -40,6 +40,12 @@ div .infoCard {
     margin: 0;
     position: absolute;
     right: 25px;
+
+    &-badge {
+      bottom: 10px;
+      left: 5px;
+      right: unset;
+    }
   }
 
   @media only screen and (max-width: 1000px) {

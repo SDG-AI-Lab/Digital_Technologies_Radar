@@ -45,7 +45,7 @@ export const PageDetails: React.FC<Props> = ({
   };
 
   const handleEdit = (): void => {
-    navigate(`${path}/edit?recent=${helpNeeded as string}`);
+    navigate(`${path}/edit?recent=${helpNeeded as unknown as string}`);
   };
 
   const handleDelete = async (): Promise<void> => {

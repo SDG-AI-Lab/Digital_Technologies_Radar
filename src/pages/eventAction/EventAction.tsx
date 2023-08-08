@@ -5,13 +5,14 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Select,
   Textarea
 } from '@chakra-ui/react';
 import './EventAction.scss';
 import { supabase } from 'helpers/databaseClient';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { updateDataVersion } from 'helpers/dataUtils';
+import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
 
 type FormProps = Record<string, string | number>;
 
@@ -36,11 +37,13 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   const uuid = useLocation().pathname.split('/')[2];
   const queryString = useLocation().search;
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
+  const [locations, setLocations] = useState<any>([]);
 
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ): void => {
     const { name, value } = e.target;
     setFormValues((prevState) => ({ ...prevState, [name]: value }));
@@ -55,8 +58,20 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       const currentItem = itemList.data.find((x: any) => x.uuid === uuid);
       if (!currentItem) navigate('/');
       setFormValues(currentItem);
+      console.log({ currentItem });
     }
+    void getLocations();
   }, []);
+
+  const getLocations = async (): Promise<void> => {
+    const locations = await getDataFromDb(() => {}, {
+      cacheKey: 'drr-countries',
+      tableName: 'locations',
+      columnName: 'all',
+      sortBy: 'country'
+    });
+    setLocations(locations.data);
+  };
 
   const action = async (): Promise<void> => {
     const payload = { ...formValues };
@@ -206,6 +221,24 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             value={formValues['contacts']}
             onChange={handleChange}
           />
+        </FormControl>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Country
+          </FormLabel>
+          <Select
+            placeholder='Select option'
+            w={'25%'}
+            name='location_id'
+            value={formValues['location_id']}
+            onChange={handleChange}
+          >
+            {(locations || []).map((location: any, idx: any) => (
+              <option value={location.id} key={idx} className='option-text'>
+                {location.country}
+              </option>
+            ))}
+          </Select>
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel w={150} textAlign={'end'}>

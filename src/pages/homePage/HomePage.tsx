@@ -242,7 +242,7 @@ export const HomePage: React.FC = () => {
             {recentDisasters.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <Link className='seeAll' to={'/'}>
+                  <Link className='seeAll' to={'/disaster_events'}>
                     <h3>Recent Disasters</h3>
                   </Link>
                   <Link to='/disaster_events/new'>Add new event</Link>
