@@ -18,7 +18,6 @@
     "framer-motion": "^4",
     "geos-major": "^1.2.1",
     "leaflet": "1.6.0",
-    "node-sass": "^7.0.1",
     "papaparse": "^5.4.1",
     "rc-slider": "^10.0.0",
     "rc-tooltip": "^5.2.2",
@@ -32,7 +31,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.0.2",
     "react-scripts": "5.0.0",
-    "sass": "^1.49.9",
+    "sass": "^1.64.2",
     "typescript": "*",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
-import { Button, Image } from '@chakra-ui/react';
+import { Badge, Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import logo from 'assets/ftrdrr2.svg';
@@ -121,7 +121,7 @@ export const HomePage: React.FC = () => {
       const { data, error } = await supabase
         .from('disaster_events')
         .select()
-        .order('created_at');
+        .order('id', { ascending: false });
       if (!error) {
         setRecentDisasters(data);
         localStorage.setItem(
@@ -221,7 +221,23 @@ export const HomePage: React.FC = () => {
                   <Link to='/disaster_events/new'>Add new event</Link>
                 </div>
                 <div className='projectSections'>
-                  <RecentDisasters recentDisasters={recentDisasters} />
+                  <div className='helpNeeded'>
+                    <div className='urgentBadge'>
+                      <Badge
+                        px={3}
+                        py={1}
+                        borderRadius='lg'
+                        bg='#C1391D'
+                        color='white'
+                        w='fit-content'
+                        h='fit-content'
+                      >
+                        Help Needed
+                      </Badge>
+                    </div>
+                    <RecentDisasters recentDisasters={recentDisasters} />
+                  </div>
+
                   <div className='recentDisastersCards'>
                     {recentDisasters.slice(0, 2).map((disasterEvent: any) => (
                       <div key={disasterEvent.id} style={{ width: '40%' }}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Button,
+  Checkbox,
   FormControl,
   FormLabel,
   Input,
@@ -12,7 +13,7 @@ import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateDataVersion } from 'helpers/dataUtils';
 
-type FormProps = Record<string, string>;
+type FormProps = Record<string, string | number>;
 
 type Props = Record<string, string>;
 
@@ -25,7 +26,8 @@ const initialFormValues = {
   summary: '',
   contacts: '',
   solutions: '',
-  resources: ''
+  resources: '',
+  help_needed: 0
 };
 
 export const EventAction: React.FC<Props> = ({ mode }) => {
@@ -49,13 +51,13 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         localStorage.getItem('drr-recent-disasters') as string
       );
       const currentItem = itemList.data.find((x: any) => x.uuid === uuid);
+      console.log({ currentItem });
       setFormValues(currentItem);
     }
   }, []);
 
   const action = async (): Promise<void> => {
     const payload = { ...formValues };
-    let newUuid = '';
 
     ['resources', 'solutions', 'contacts'].forEach((item) => {
       payload[item] = `{${payload[item]}}`;
@@ -63,7 +65,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
     if (Object.values(payload).includes(''))
       return alert('Please fill all fields');
-    payload['slug'] = toSnakeCase(formValues.title);
+    payload['slug'] = toSnakeCase(formValues.title as string);
     let supabaseError = false;
     if (mode.toLocaleLowerCase() === 'add') {
       const { data, error } = await supabase
@@ -71,8 +73,8 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         .insert(payload as any)
         .select('uuid')
         .single();
+      console.log(data);
       supabaseError = !!error;
-      newUuid = (data as any).uuid;
     } else {
       const { error } = await supabase
         .from('disaster_events')
@@ -86,7 +88,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       alert('Operation Successfull!');
       void updateDataVersion();
       localStorage.removeItem('drr-recent-disasters');
-      navigate(`${newUuid ? `/disaster_events/${newUuid}` : '/'}`);
+      navigate('/');
     } else {
       alert('There was an error, please try again');
     }
@@ -201,6 +203,21 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='contacts'
             value={formValues['contacts']}
             onChange={handleChange}
+          />
+        </FormControl>
+        <FormControl display={'flex'} gap={3} mb={5}>
+          <FormLabel w={150} textAlign={'end'}>
+            Help Needed?
+          </FormLabel>
+          <Checkbox
+            name='help_needed'
+            isChecked={formValues['help_needed'] === 1}
+            onChange={(e) =>
+              setFormValues((prevState) => ({
+                ...prevState,
+                help_needed: e.target.checked ? 1 : 0
+              }))
+            }
           />
         </FormControl>
 
