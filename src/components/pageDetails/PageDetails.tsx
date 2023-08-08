@@ -12,7 +12,7 @@ import { supabase } from 'helpers/databaseClient';
 import { updateDataVersion } from 'helpers/dataUtils';
 
 interface Props {
-  item: Record<string, string | string[]>;
+  item: Record<string, string | string[] | number>;
   sections: string[];
   loading: boolean;
 }
@@ -28,10 +28,12 @@ export const PageDetails: React.FC<Props> = ({
   const path = useLocation().pathname;
   const [selectedSection, setSelectedSection] = useState<string>('overview');
   const [itemDetails, setItemDetails] = useState<any>({});
+  const [helpNeeded, setHelpNeeded] = useState<boolean>(false);
 
   useEffect(() => {
     if (Object.keys(item).length) {
       setItemDetails(item);
+      setHelpNeeded(item.help_needed === 1);
     }
   }, [item]);
 
@@ -43,7 +45,7 @@ export const PageDetails: React.FC<Props> = ({
   };
 
   const handleEdit = (): void => {
-    navigate(`${path}/edit`);
+    navigate(`${path}/edit?recent=${helpNeeded as unknown as string}`);
   };
 
   const handleDelete = async (): Promise<void> => {
@@ -69,7 +71,7 @@ export const PageDetails: React.FC<Props> = ({
       <div className='itemHero'>
         <div className='itemTitle'>
           <span>{itemDetails?.title}</span>
-          {itemDetails?.source && (
+          {itemDetails?.source && helpNeeded && (
             <a
               href={itemDetails?.source as string}
               target='_blank'

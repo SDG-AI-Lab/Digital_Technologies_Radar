@@ -36,8 +36,8 @@
   }
 
   @media only screen and (max-width: 768px) {
-    width: 100vw;
     padding: 30px 0 50px;
+    width: 100vw;
 
     h3 {
       margin: 40px 10px 20px;
@@ -59,8 +59,8 @@
       cursor: pointer;
 
       &:hover {
-        text-decoration: underline;
         color: blue;
+        text-decoration: underline;
       }
     }
   }
@@ -71,6 +71,11 @@
   flex-direction: column;
   margin-bottom: 20px;
   padding: 10px 10px 40px;
+
+  &-event {
+    min-height: 310px;
+    overflow-x: scroll;
+  }
 
   .detailsSection {
     display: flex;
@@ -94,7 +99,9 @@
     font-size: 18px;
     font-weight: 600;
     justify-content: space-between;
+    left: 0;
     margin: 0 20px 10px 0;
+    position: sticky;
 
     a {
       color: #3258e0;

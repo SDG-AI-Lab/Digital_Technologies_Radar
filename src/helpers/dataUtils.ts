@@ -101,8 +101,8 @@ export const getDataFromDb = async (
     } else {
       const { data, error } = await supabase
         .from(tableName)
-        .select('*')
-        .order(columnName);
+        .select(columnName)
+        .order(sortBy as string);
       dataResponse = data;
       errorResponse = error;
     }

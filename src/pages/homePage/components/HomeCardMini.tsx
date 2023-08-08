@@ -1,11 +1,10 @@
-import './HomeCard.scss';
-
 import React, { useContext } from 'react';
 
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
 
+import './HomeCard.scss';
 interface Props {
   project: BlipType;
   type: string;
@@ -37,6 +36,9 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
               project?.title ||
               project['Ideas/Concepts/Examples']}
           </div>
+          {project?.summary && (
+            <div className='title-large-summary'>{project?.summary}</div>
+          )}
         </div>
       </Link>
     </div>

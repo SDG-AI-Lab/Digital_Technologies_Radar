@@ -40,7 +40,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
       .eq('slug', id);
 
     if (!error) {
-      setItem(data[0] as any);
+      setItem(data[0]);
     }
 
     getProjects();
