@@ -82,7 +82,7 @@ export const getDataFromDb = async (
     sortBy?: string;
   }
 ): Promise<any> => {
-  const { cacheKey, tableName, columnName, sortBy } = config;
+  const { cacheKey, tableName, columnName, sortBy = 'id' } = config;
 
   const storedDataTypes = JSON.parse(localStorage.getItem(cacheKey) as string);
   if (storedDataTypes && storedDataTypes.version === DATA_VERSION) {
@@ -95,14 +95,14 @@ export const getDataFromDb = async (
       const { data, error } = await supabase
         .from(tableName)
         .select()
-        .order(sortBy as string);
+        .order(sortBy);
       dataResponse = data;
       errorResponse = error;
     } else {
       const { data, error } = await supabase
         .from(tableName)
         .select(columnName)
-        .order(sortBy as string);
+        .order(sortBy);
       dataResponse = data;
       errorResponse = error;
     }

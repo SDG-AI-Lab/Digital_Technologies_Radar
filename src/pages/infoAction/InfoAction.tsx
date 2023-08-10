@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   FormControl,
@@ -11,6 +11,7 @@ import { supabase } from 'helpers/databaseClient';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateDataVersion } from 'helpers/dataUtils';
+import { RadarContext } from 'navigation/context';
 
 type FormProps = Record<string, string>;
 
@@ -28,6 +29,11 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
   const navigate = useNavigate();
   const slug = useLocation().pathname.split('/')[2];
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
+  const [currentItem, setCurrentItem] = useState<any>({});
+
+  const { projectsToEdit, setProjectsToEdit } = useContext(RadarContext);
+  console.log({ projectsToEdit });
+
   const key = `${
     category === 'DISASTER' ? 'drr-disaster-types' : 'drr-technologies'
   }`;
@@ -44,9 +50,12 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
     if (!isCreateForm) {
       const itemList = JSON.parse(localStorage.getItem(key) as string);
 
-      const currentItem = itemList.data.find((x: any) => x.slug === slug);
-      setFormValues(currentItem);
+      const item = itemList.data.find((x: any) => x.slug === slug);
+      setFormValues(item);
+      setCurrentItem(item);
     }
+    console.log({ projectsToEdit });
+    return () => setProjectsToEdit([]);
   }, []);
 
   const action = async (): Promise<void> => {
@@ -64,6 +73,9 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
         .update(payload)
         .eq('slug', slug);
       supabaseError = !!error;
+      if (!error && payload.name !== currentItem.name) {
+        void updateRelatedProjects(payload.name);
+      }
     }
 
     if (!supabaseError) {
@@ -74,6 +86,26 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
     } else {
       alert('There was an error, please try again');
     }
+  };
+
+  const updateRelatedProjects = (newTitle: string): void => {
+    projectsToEdit.forEach(async (project: any) => {
+      const prevTechArray = project.technology;
+      const newTechArray = prevTechArray.reduce((acc: any, curr: string) => {
+        if (toSnakeCase(curr) === slug) {
+          acc.push(newTitle);
+        } else {
+          acc.push(curr);
+        }
+
+        return acc;
+      }, []);
+
+      await supabase
+        .from('tr_projects')
+        .update({ technology: `{${newTechArray.join(', ') as string}}` })
+        .eq('uuid', project.uuid);
+    });
   };
   return (
     <div className='newProject'>

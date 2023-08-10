@@ -73,6 +73,7 @@ export const NavApp: React.FC = () => {
   const [currentProject, setCurrentProject] = useState();
   const [projectsGroup, setProjectsGroup] = useState([]);
   const [needsReload, setNeedsReload] = useState(false);
+  const [projectsToEdit, setProjectsToEdit] = useState([]);
 
   const radarContext: RadarContextInterface = {
     radarStateValues,
@@ -90,7 +91,9 @@ export const NavApp: React.FC = () => {
     projectsGroup,
     setProjectsGroup,
     needsReload,
-    setNeedsReload
+    setNeedsReload,
+    setProjectsToEdit,
+    projectsToEdit
   };
   return (
     <RadarContext.Provider value={radarContext}>

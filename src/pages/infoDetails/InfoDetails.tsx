@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import { Button } from '@chakra-ui/react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { updateDataVersion } from 'helpers/dataUtils';
+import { RadarContext } from 'navigation/context';
 
 interface Props {
   tableName: string;
@@ -32,6 +33,8 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   const path = useLocation().pathname;
   const isTechPage = path.includes('technologies');
   const navigate = useNavigate();
+
+  const { setProjectsToEdit } = useContext(RadarContext);
 
   const fetchItem = async (): Promise<any> => {
     const { data, error } = await supabase
@@ -69,6 +72,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   };
 
   const handleEdit = (): void => {
+    setProjectsToEdit(projects);
     navigate(`${path}/edit`);
   };
 

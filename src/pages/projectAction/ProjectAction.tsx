@@ -140,35 +140,40 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     await getDataFromDb(setThemes, {
       cacheKey: 'drr-themes',
       tableName: 'themes',
-      columnName: 'theme'
+      columnName: 'all',
+      sortBy: 'theme'
     });
 
     // Data types
     await getDataFromDb(setDataTypes, {
       cacheKey: 'drr-data-types',
       tableName: 'data_types',
-      columnName: 'name'
+      columnName: 'all',
+      sortBy: 'name'
     });
 
     // Use cases
     await getDataFromDb(setUseCases, {
       cacheKey: 'drr-use-cases',
       tableName: 'use_cases',
-      columnName: 'use_case'
+      columnName: 'all',
+      sortBy: 'use_case'
     });
 
     // Partners
     await getDataFromDb(setPartners, {
       cacheKey: 'drr-partners',
       tableName: 'partners',
-      columnName: 'name'
+      columnName: 'all',
+      sortBy: 'name'
     });
 
     // UN Hosts
     await getDataFromDb(setUnHosts, {
       cacheKey: 'drr-un-hosts',
       tableName: 'un_hosts',
-      columnName: 'name'
+      columnName: 'all',
+      sortBy: 'name'
     });
 
     setHasFetchedData(true);
