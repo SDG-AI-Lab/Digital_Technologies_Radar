@@ -10,14 +10,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from 'helpers/databaseClient';
 import { updateDataVersion } from 'helpers/dataUtils';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 interface Props {
   item: Record<string, string | string[] | number>;
   sections: string[];
   loading: boolean;
 }
-
-const isAdmin = true;
 
 export const PageDetails: React.FC<Props> = ({
   item,

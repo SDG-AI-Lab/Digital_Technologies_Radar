@@ -1,27 +1,14 @@
-import jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
-import { Buffer } from 'buffer/';
-
-// export const createJWT = (email: string, role = 'user'): string => {
-//   const token = jwt.sign(
-//     {
-//       email,
-//       role,
-//       exp: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60 // set to expire after 30 days!!
-//     },
-//     process.env.REACT_APP_JWT_SECRET as unknown as string
-//   );
-//   return token;
-// };
-
-export const comparePasswords = async (
-  password: string,
-  hash: string
-): Promise<boolean> => {
-  return bcrypt.compare(password, hash);
+export const comparePasswords = (password: string, hash: string): boolean => {
+  return bcrypt.compareSync(password, hash);
 };
 
-export const hashPassword = async (password: string): Promise<string> => {
-  return bcrypt.hash(password, 5);
+export const hashPassword = (password: string): any => {
+  const hash = bcrypt.hashSync(password, 5);
+  return hash;
 };
+
+export const isAdmin = localStorage.getItem('drr-current-user-id') === 'admin';
+
+export const isSignedIn = !!localStorage.getItem('drr-current-user-id');

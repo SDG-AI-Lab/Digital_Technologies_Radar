@@ -16,13 +16,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 interface Props {
   tableName: string;
   relation: string;
 }
 
-const isAdmin = true;
 export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   const [item, setItem] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
