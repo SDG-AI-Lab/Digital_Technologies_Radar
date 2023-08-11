@@ -20,9 +20,9 @@ const BLIP_PARAM = `${BLIP}/:techItemId`;
 const NEW = 'new';
 const EDIT = 'edit';
 
-const DOWNLOAD = '/download';
+const DISASTER_EVENTS = 'disaster-events';
 
-const DISASTER_EVENTS = 'disaster_events';
+const SIGN_IN = 'sign-in';
 
 export const ROUTES = {
   HOME,
@@ -43,6 +43,6 @@ export const ROUTES = {
   VOLUNTEERS,
   NEW,
   EDIT,
-  DOWNLOAD,
+  SIGN_IN,
   DISASTER_EVENTS
 };

@@ -24,11 +24,11 @@ import {
   Search,
   Technologies,
   Volunteers,
-  DownloadCsv,
   DisasterEvent,
   InfoAction,
   EventAction,
-  DisasterEvents
+  DisasterEvents,
+  SignIn
 } from '../pages';
 
 // Views
@@ -124,11 +124,6 @@ export const NavApp: React.FC = () => {
                 element={<ProjectAction mode='add' />}
               />
 
-              <Route
-                path={`${ROUTES.PROJECTS}/${ROUTES.DOWNLOAD}`}
-                element={<DownloadCsv />}
-              />
-
               <Route path=':project_id' element={<ProjectDetails />} />
               <Route
                 path={`:project_id/${ROUTES.EDIT}`}
@@ -216,6 +211,7 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.ABOUT} element={<About />} />
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
+            <Route path={ROUTES.SIGN_IN} element={<SignIn />} />
 
             <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
             <Route path='*' element={<NotFound404 />} />

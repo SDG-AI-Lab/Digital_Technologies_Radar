@@ -26,7 +26,6 @@ export const DisasterEvents: React.FC = () => {
         } else {
           acc[curr.locations.region] = [curr];
         }
-        console.log(acc[curr.locations.region]);
         return acc;
       }, {});
       setData(transformedData);
@@ -54,7 +53,7 @@ export const DisasterEvents: React.FC = () => {
         <div className='titleRow-right'>
           <span
             className='titleRow-right'
-            onClick={() => navigate('/disaster_events/new')}
+            onClick={() => navigate('/disaster-events/new')}
           >
             Add New Disaster Event
           </span>

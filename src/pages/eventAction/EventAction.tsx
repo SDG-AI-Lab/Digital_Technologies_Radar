@@ -58,7 +58,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       const currentItem = itemList.data.find((x: any) => x.uuid === uuid);
       if (!currentItem) navigate('/');
       setFormValues(currentItem);
-      console.log({ currentItem });
     }
     void getLocations();
   }, []);

@@ -1,7 +1,12 @@
 import { Box, Button, Stack, Text } from '@chakra-ui/react';
-import { FaCubes, FaHome, FaProjectDiagram, FaSearch } from 'react-icons/fa';
+import {
+  FaCubes,
+  FaHome,
+  FaProjectDiagram,
+  FaSignInAlt,
+  FaSignOutAlt
+} from 'react-icons/fa';
 
-import { BsFillInfoSquareFill } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from 'navigation/routes';
@@ -148,39 +153,46 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
-        {false && (
-          <MenuItem to={ROUTES.ABOUT}>
-            <Button
-              background='none'
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-            >
-              <BsFillInfoSquareFill size={25} color='white' />
-            </Button>
-          </MenuItem>
-        )}
-
-        {false && (
-          <MenuItem to={ROUTES.SEARCH}>
-            <Button
-              background='none'
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-            >
-              <FaSearch size={30} />
-            </Button>
-          </MenuItem>
-        )}
+        {
+          // eslint-disable-next-line no-constant-condition
+          true ? (
+            <MenuItem to={ROUTES.SIGN_IN}>
+              <Button
+                background='none'
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+              >
+                <FaSignInAlt size={30} />
+                <Text color={'black'} fontSize='10px' mt='5px'>
+                  Sign In
+                </Text>
+              </Button>
+            </MenuItem>
+          ) : (
+            <MenuItem to={ROUTES.SIGN_IN}>
+              <Button
+                background='none'
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+              >
+                <FaSignOutAlt size={30} />
+                <Text color={'black'} fontSize='10px' mt='5px'>
+                  Sign Out
+                </Text>
+              </Button>
+            </MenuItem>
+          )
+        }
       </Stack>
     </Box>
     <Box />
