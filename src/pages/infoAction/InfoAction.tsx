@@ -32,11 +32,9 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
   const [currentItem, setCurrentItem] = useState<any>({});
 
   const { projectsToEdit, setProjectsToEdit } = useContext(RadarContext);
-  console.log({ projectsToEdit });
+  const isDisastersPage = category === 'DISASTER';
+  const key = isDisastersPage ? 'drr-disaster-types' : 'drr-technologies';
 
-  const key = `${
-    category === 'DISASTER' ? 'drr-disaster-types' : 'drr-technologies'
-  }`;
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -53,8 +51,10 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
       const item = itemList.data.find((x: any) => x.slug === slug);
       setFormValues(item);
       setCurrentItem(item);
+
+      console.log({ projectsToEdit }, { item });
     }
-    console.log({ projectsToEdit });
+
     return () => setProjectsToEdit([]);
   }, []);
 
@@ -74,21 +74,30 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
         .eq('slug', slug);
       supabaseError = !!error;
       if (!error && payload.name !== currentItem.name) {
-        void updateRelatedProjects(payload.name);
+        if (isDisastersPage) {
+          void updateRelatedDisasterProjects(payload.name);
+        } else {
+          void updateRelatedTechProjects(payload.name);
+        }
       }
     }
 
     if (!supabaseError) {
+      const newSlug = toSnakeCase(payload.name);
       alert('Operation Successfull!');
       void updateDataVersion();
       localStorage.removeItem(key);
-      navigate(`${category === 'DISASTER' ? '/disasters' : '/technologies'}`);
+      navigate(
+        `${
+          isDisastersPage ? `/disasters/${newSlug}` : `/technologies/${newSlug}`
+        }`
+      );
     } else {
       alert('There was an error, please try again');
     }
   };
 
-  const updateRelatedProjects = (newTitle: string): void => {
+  const updateRelatedTechProjects = (newTitle: string): void => {
     projectsToEdit.forEach(async (project: any) => {
       const prevTechArray = project.technology;
       const newTechArray = prevTechArray.reduce((acc: any, curr: string) => {
@@ -101,12 +110,27 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
         return acc;
       }, []);
 
-      await supabase
+      const { error } = await supabase
         .from('tr_projects')
         .update({ technology: `{${newTechArray.join(', ') as string}}` })
         .eq('uuid', project.uuid);
+
+      if (!error) localStorage.removeItem('drr-tech-projects');
     });
   };
+
+  const updateRelatedDisasterProjects = (newTitle: string): void => {
+    console.log('herre', { projectsToEdit }, { newTitle });
+    projectsToEdit.forEach(async (project: any) => {
+      const { error } = await supabase
+        .from('tr_projects')
+        .update({ disaster_type: newTitle })
+        .eq('uuid', project.uuid);
+      console.log({ error });
+      if (!error) localStorage.removeItem('drr-disaster-projects');
+    });
+  };
+
   return (
     <div className='newProject'>
       <h3>{`${mode} ${category}`}</h3>
