@@ -47,10 +47,14 @@
     &-right {
       color: #0062ac;
       cursor: pointer;
+      display: flex;
+      gap: 20px;
 
-      &:hover {
-        text-decoration: underline;
-        color: blue;
+      &--item {
+        &:hover {
+          text-decoration: underline;
+          color: blue;
+        }
       }
     }
   }

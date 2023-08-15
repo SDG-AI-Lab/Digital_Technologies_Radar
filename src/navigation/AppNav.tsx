@@ -28,7 +28,8 @@ import {
   InfoAction,
   EventAction,
   DisasterEvents,
-  SignIn
+  SignIn,
+  ReviewProjects
 } from '../pages';
 
 // Views
@@ -123,6 +124,7 @@ export const NavApp: React.FC = () => {
                 path={`${ROUTES.NEW}`}
                 element={<ProjectAction mode='add' />}
               />
+              <Route path={`${ROUTES.REVIEW}`} element={<ReviewProjects />} />
 
               <Route path=':project_id' element={<ProjectDetails />} />
               <Route

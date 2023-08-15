@@ -12,6 +12,7 @@ import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 type FormProps = Record<string, string>;
 
@@ -46,6 +47,8 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
+      if (!isAdmin)
+        return navigate(`/${isDisastersPage ? 'disasters' : 'technologies'}`);
       const itemList = JSON.parse(localStorage.getItem(key) as string);
 
       const item = itemList.data.find((x: any) => x.slug === slug);

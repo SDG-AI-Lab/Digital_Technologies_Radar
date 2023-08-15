@@ -17,6 +17,7 @@ import { DisasterEvents } from './disasters/DisasterEvents';
 import { InfoAction } from './infoAction/InfoAction';
 import { EventAction } from './eventAction/EventAction';
 import { SignIn } from './signIn/SignIn';
+import { ReviewProjects } from './projects/reviewProjects/ReviewProjects';
 
 export {
   Home,
@@ -37,5 +38,6 @@ export {
   InfoAction,
   EventAction,
   DisasterEvents,
-  SignIn
+  SignIn,
+  ReviewProjects
 };

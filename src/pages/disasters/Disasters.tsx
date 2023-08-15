@@ -16,6 +16,7 @@ import { Loader } from 'helpers/Loader';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 
 import './Disasters.scss';
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 export const Disasters: React.FC = () => {
   const navigate = useNavigate();
@@ -143,14 +144,16 @@ export const Disasters: React.FC = () => {
         <div className='titleRow-left'>
           <h3>Disasters</h3>
         </div>
-        <div className='titleRow-right'>
-          <span
-            className='titleRow-right'
-            onClick={() => navigate('/disasters/new')}
-          >
-            Add New Disaster
-          </span>
-        </div>
+        {isSignedIn && (
+          <div className='titleRow-right'>
+            <span
+              className='titleRow-right'
+              onClick={() => navigate('/disasters/new')}
+            >
+              Add New Disaster
+            </span>
+          </div>
+        )}
       </div>
 
       {projectsToUse.length ? (

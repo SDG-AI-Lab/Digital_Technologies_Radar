@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://drrtechradar.org",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@chakra-ui/react": "^1.8.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -16,7 +17,8 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.3.2",
     "country-list": "^2.3.0",
-    "eslint": "^8.0.1",
+    "crypto-browserify": "^3.12.0",
+    "eslint": "7.11.0",
     "framer-motion": "^4",
     "geos-major": "^1.2.1",
     "leaflet": "1.6.0",
@@ -27,12 +29,13 @@
     "react-csv": "^2.2.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "react-leaflet": "3.2.0",
+    "react-leaflet": ">=3.1.0 <3.2.0 || ^3.2.1",
+    "@react-leaflet/core": ">=1.0.0 <1.1.0 || ^1.1.1",
     "react-lorem-ipsum": "^1.4.9",
     "react-multi-select-component": "^4.3.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.0.2",
-    "react-scripts": "5.0.0",
+    "react-scripts": "4.0.3",
     "sass": "^1.64.2",
     "typescript": "^4.9.4",
     "uuid": "^8.3.2",
@@ -97,5 +100,9 @@
     "eslint-plugin-react": "^7.31.11",
     "gh-pages": "^3.2.3",
     "prettier": "^2.5.1"
+  },
+  "browser": {
+    "crypto": false,
+    "stream": false
   }
 }

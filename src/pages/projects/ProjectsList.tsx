@@ -15,6 +15,7 @@ import { Project } from './projectComponent/Project';
 import { DATA_VERSION, supabase } from 'helpers/databaseClient';
 
 import './Projects.scss';
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -74,6 +75,7 @@ export const Projects: React.FC = () => {
       const { data, error } = await supabase
         .from('tr_projects')
         .select(`*, project_data(*)`)
+        .neq('approved', false)
         .order('id', { ascending: false });
       if (!error) {
         setFilteredProjects(data);
@@ -116,18 +118,30 @@ export const Projects: React.FC = () => {
         />
         <Filter />
       </div>
-      <div className='titleRow'>
-        <div className='titleRow-left'>
-          <h3>PROJECTS </h3>
-          <span>{`(${projectsToUse.length as string} Projects)`}</span>
+      {
+        <div className='titleRow'>
+          <div className='titleRow-left'>
+            <h3>PROJECTS </h3>
+            <span>{`(${projectsToUse.length as string} Projects)`}</span>
+          </div>
+          {isSignedIn && (
+            <div className='titleRow-right'>
+              <span
+                className='titleRow-right--item'
+                onClick={() => navigate('/projects/review')}
+              >
+                Review New Projects
+              </span>
+              <span
+                className='titleRow-right--item'
+                onClick={() => navigate('/projects/new')}
+              >
+                Add New Project
+              </span>
+            </div>
+          )}
         </div>
-        <span
-          className='titleRow-right'
-          onClick={() => navigate('/projects/new')}
-        >
-          Add New Project
-        </span>
-      </div>
+      }
 
       {Boolean(projectsGroup.length) && (
         <span>{`(${projectsGroup as string})`}</span>

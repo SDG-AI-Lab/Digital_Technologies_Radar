@@ -23,6 +23,7 @@ const EDIT = 'edit';
 const DISASTER_EVENTS = 'disaster-events';
 
 const SIGN_IN = 'sign-in';
+const REVIEW = 'review';
 
 export const ROUTES = {
   HOME,
@@ -44,5 +45,6 @@ export const ROUTES = {
   NEW,
   EDIT,
   SIGN_IN,
-  DISASTER_EVENTS
+  DISASTER_EVENTS,
+  REVIEW
 };

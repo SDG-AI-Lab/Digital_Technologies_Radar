@@ -14,6 +14,7 @@ import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 export const Technologies: React.FC = () => {
   const navigate = useNavigate();
@@ -133,14 +134,16 @@ export const Technologies: React.FC = () => {
         <div className='titleRow-left'>
           <h3>Technologies</h3>
         </div>
-        <div className='titleRow-right'>
-          <span
-            className='titleRow-right'
-            onClick={() => navigate('/technologies/new')}
-          >
-            Add New Technology
-          </span>
-        </div>
+        {isSignedIn && (
+          <div className='titleRow-right'>
+            <span
+              className='titleRow-right'
+              onClick={() => navigate('/technologies/new')}
+            >
+              Add New Technology
+            </span>
+          </div>
+        )}
       </div>
       <div className='technologies'>
         {projectsToUse.length ? (

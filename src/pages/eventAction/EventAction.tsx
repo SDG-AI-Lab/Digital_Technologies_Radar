@@ -13,6 +13,7 @@ import { supabase } from 'helpers/databaseClient';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 type FormProps = Record<string, string | number>;
 
@@ -51,6 +52,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
+      if (!isAdmin) return navigate('/');
       const key = queryString.includes('recent=true')
         ? 'drr-recent-disasters'
         : 'drr-disaster-events';
