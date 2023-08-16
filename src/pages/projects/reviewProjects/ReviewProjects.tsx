@@ -5,13 +5,20 @@ import { Spinner } from '@chakra-ui/react';
 
 import './ReviewProjects.scss';
 import SearchView from 'pages/search/SearchView';
+import { isAdmin } from 'components/shared/helpers/auth';
+import { useNavigate } from 'react-router-dom';
 
 export const ReviewProjects: React.FC = () => {
   const [projectsToReview, setProjectsToReview] = useState<any>([]);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!isAdmin) {
+      navigate('/projects ');
+    }
     void fetchProjectsToReview();
   }, []);
 

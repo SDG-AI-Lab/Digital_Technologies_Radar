@@ -15,7 +15,7 @@ import { Project } from './projectComponent/Project';
 import { DATA_VERSION, supabase } from 'helpers/databaseClient';
 
 import './Projects.scss';
-import { isSignedIn } from 'components/shared/helpers/auth';
+import { isAdmin, isSignedIn } from 'components/shared/helpers/auth';
 
 export const Projects: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -126,12 +126,14 @@ export const Projects: React.FC = () => {
           </div>
           {isSignedIn && (
             <div className='titleRow-right'>
-              <span
-                className='titleRow-right--item'
-                onClick={() => navigate('/projects/review')}
-              >
-                Review New Projects
-              </span>
+              {isAdmin && (
+                <span
+                  className='titleRow-right--item'
+                  onClick={() => navigate('/projects/review')}
+                >
+                  Review New Projects
+                </span>
+              )}
               <span
                 className='titleRow-right--item'
                 onClick={() => navigate('/projects/new')}
