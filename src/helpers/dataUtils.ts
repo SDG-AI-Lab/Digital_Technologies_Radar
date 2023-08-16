@@ -140,3 +140,16 @@ export const updateDataVersion = async (): Promise<void> => {
     .update({ data_version: Date.now() })
     .eq('id', 1);
 };
+
+export const approveProject = async (uuid: string): Promise<void> => {
+  const { error } = await supabase
+    .from('tr_projects')
+    .update({ approved: true })
+    .eq('uuid', uuid);
+  if (!error) {
+    alert('Project approved successfully');
+  } else {
+    alert('There was an error, please try again');
+  }
+  window.location.reload();
+};

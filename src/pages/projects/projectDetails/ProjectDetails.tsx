@@ -12,11 +12,11 @@ import './ProjectDetails.scss';
 import { Button } from '@chakra-ui/react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 const fallBackImage =
   'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
 
-const isAdmin = true;
 export const ProjectDetails: React.FC = () => {
   const [project, setProject] = useState<any>(null);
   const [selectedSection, setSelectedSection] = useState<string>('details');

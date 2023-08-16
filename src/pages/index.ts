@@ -12,11 +12,13 @@ import { Technologies } from './technologies/Technologies';
 import { HomePage } from './homePage/HomePage';
 import { InfoDetails } from './infoDetails/InfoDetails';
 import { ProjectAction } from './projectAction/ProjectAction';
-import { DownloadCsv } from './downloadCsv/DownloadCsv';
 import { DisasterEvent } from './disasters/DisasterEvent';
 import { DisasterEvents } from './disasters/DisasterEvents';
 import { InfoAction } from './infoAction/InfoAction';
 import { EventAction } from './eventAction/EventAction';
+import { SignIn } from './users/signIn/SignIn';
+import { Register } from './users/register/Register';
+import { ReviewProjects } from './projects/reviewProjects/ReviewProjects';
 
 export {
   Home,
@@ -33,9 +35,11 @@ export {
   HomePage,
   InfoDetails,
   ProjectAction,
-  DownloadCsv,
   DisasterEvent,
   InfoAction,
   EventAction,
-  DisasterEvents
+  DisasterEvents,
+  SignIn,
+  ReviewProjects,
+  Register
 };

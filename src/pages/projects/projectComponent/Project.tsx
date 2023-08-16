@@ -8,9 +8,15 @@ import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
   project: BlipType;
+  handler?: Function;
+  ctaText?: string;
 }
 
-export const Project: React.FC<Props> = ({ project }) => {
+export const Project: React.FC<Props> = ({
+  project,
+  handler = () => {},
+  ctaText = 'More'
+}) => {
   const { setCurrentProject } = useContext(RadarContext);
 
   const path = useLocation().pathname;
@@ -41,15 +47,21 @@ export const Project: React.FC<Props> = ({ project }) => {
               <ProjectBadge project={project} />
             </div>
           )}
-          <Link
-            className='moreBtn'
-            to={`/projects/${
-              project.uuid || project['Ideas/Concepts/Examples']
-            }?from=${path.split('/')[1]}`}
-            onClick={() => setCurrentProject(project)}
-          >
-            <button>MORE</button>
-          </Link>
+          {!ctaText ? (
+            <Link
+              className='moreBtn'
+              to={`/projects/${
+                project.uuid || project['Ideas/Concepts/Examples']
+              }?from=${path.split('/')[1]}`}
+              onClick={() => setCurrentProject(project)}
+            >
+              <button>MORE</button>
+            </Link>
+          ) : (
+            <Link className='moreBtn' to='' onClick={() => handler(project)}>
+              <button>{ctaText}</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

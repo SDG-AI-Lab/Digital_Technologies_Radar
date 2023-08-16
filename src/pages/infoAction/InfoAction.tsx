@@ -12,6 +12,7 @@ import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 type FormProps = Record<string, string>;
 
@@ -46,13 +47,13 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
+      if (!isAdmin)
+        return navigate(`/${isDisastersPage ? 'disasters' : 'technologies'}`);
       const itemList = JSON.parse(localStorage.getItem(key) as string);
 
       const item = itemList.data.find((x: any) => x.slug === slug);
       setFormValues(item);
       setCurrentItem(item);
-
-      console.log({ projectsToEdit }, { item });
     }
 
     return () => setProjectsToEdit([]);
@@ -120,13 +121,12 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
   };
 
   const updateRelatedDisasterProjects = (newTitle: string): void => {
-    console.log('herre', { projectsToEdit }, { newTitle });
     projectsToEdit.forEach(async (project: any) => {
       const { error } = await supabase
         .from('tr_projects')
         .update({ disaster_type: newTitle })
         .eq('uuid', project.uuid);
-      console.log({ error });
+
       if (!error) localStorage.removeItem('drr-disaster-projects');
     });
   };

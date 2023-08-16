@@ -8,6 +8,7 @@ import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
 
 import './Disasters.scss';
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 export const DisasterEvents: React.FC = () => {
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ export const DisasterEvents: React.FC = () => {
         } else {
           acc[curr.locations.region] = [curr];
         }
-        console.log(acc[curr.locations.region]);
         return acc;
       }, {});
       setData(transformedData);
@@ -51,14 +51,16 @@ export const DisasterEvents: React.FC = () => {
         <div className='titleRow-left'>
           <h3>Disaster Events</h3>
         </div>
-        <div className='titleRow-right'>
-          <span
-            className='titleRow-right'
-            onClick={() => navigate('/disaster_events/new')}
-          >
-            Add New Disaster Event
-          </span>
-        </div>
+        {isSignedIn && (
+          <div className='titleRow-right'>
+            <span
+              className='titleRow-right'
+              onClick={() => navigate('/disaster-events/new')}
+            >
+              Add New Disaster Event
+            </span>
+          </div>
+        )}
       </div>
 
       {Object.keys(data).map((key: any, idx: number) => {

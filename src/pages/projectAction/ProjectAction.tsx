@@ -23,6 +23,7 @@ import { ProjectForm } from 'helpers/ProjectForm';
 
 import './projectAction.scss';
 import { Loader } from 'helpers/Loader';
+import { isAdmin } from 'components/shared/helpers/auth';
 
 interface Props {
   mode: String;
@@ -68,15 +69,8 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const password = prompt('Please enter password');
-    // if (
-    //   password?.toLocaleLowerCase() !==
-    //   (process.env.REACT_APP_DATA_PASSWORD || 'sdgailabs')
-    // ) {
-    //   alert('Invalid Password');
-    //   return navigate('/projects');
-    // }
     if (!isCreateForm) {
+      if (!isAdmin) return navigate('/projects');
       if (currentProject && Object.keys(currentProject).length) {
         setProjectFormValues(currentProject);
         setHasFetchedCurrentProject(true);

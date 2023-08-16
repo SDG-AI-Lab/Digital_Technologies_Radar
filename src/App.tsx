@@ -18,6 +18,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     void getDataVersion();
   }, []);
+
   return (
     <AppUiProvider>
       <AppRadarProvider>

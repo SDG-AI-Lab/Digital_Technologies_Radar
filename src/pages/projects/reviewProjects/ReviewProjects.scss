@@ -1,0 +1,13 @@
+.reviewProjects {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 30px 20px;
+  overflow: auto;
+
+  hr {
+    margin-top: 20px;
+  }
+}

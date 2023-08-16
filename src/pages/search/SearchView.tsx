@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,13 +13,14 @@ import {
   Box,
   Badge,
   Button,
-  Image
+  Image,
+  Spinner
 } from '@chakra-ui/react';
 
 import { Link, useLocation } from 'react-router-dom';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
-import { useEffect } from 'react';
+import { approveProject } from 'helpers/dataUtils';
 
 import './Search.scss';
 
@@ -55,8 +57,10 @@ export const SearchView: React.FC<SearchViewProps> = ({
   setClose = () => {}
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loading, setLoading] = useState(false);
 
   const path = useLocation().pathname;
+  console.log({ path });
 
   const getHostOrg = (hosts: any): string => {
     return hosts.join(', ');
@@ -98,7 +102,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
           }}
         >
           <ModalHeader pb={0} mr={10} className='searchModalHeader'>
-            {techContent['Ideas/Concepts/Examples']}
+            {techContent['Ideas/Concepts/Examples'] || techContent['title']}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -110,7 +114,9 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 bg='purple.50'
                 textTransform='capitalize'
               >
-                📍 {techContent['Country of Implementation']}
+                📍{' '}
+                {techContent['Country of Implementation'] ||
+                  techContent['country']}
               </Badge>
               <Badge
                 px={2}
@@ -119,7 +125,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 bg='green.50'
                 textTransform='capitalize'
               >
-                🎯 {' ' + techContent['SDG']}
+                🎯 {' ' + (techContent['SDG'] || techContent['sdg'])}
               </Badge>
               <Badge
                 px={2}
@@ -129,7 +135,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 color='white'
                 textTransform='capitalize'
               >
-                🏠 {techContent['Status/Maturity']}
+                🏠 {techContent['Status/Maturity'] || techContent['status']}
               </Badge>
               <Badge
                 px={2}
@@ -139,13 +145,16 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 color='#fff'
                 textTransform='capitalize'
               >
-                🌋 {' ' + techContent['Disaster Cycle']}
+                🌋{' '}
+                {' ' +
+                  (techContent['Disaster Cycle'] ||
+                    techContent['disaster_cycles'])}
               </Badge>
             </Stack>
             <Stack>
               <Image
                 objectFit='cover'
-                src={`${techContent['Image Url']}`}
+                src={`${techContent['Image Url'] || techContent['img_url']}`}
                 fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
                 alt='Default Image'
               />
@@ -162,7 +171,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     className='searchModalDescription'
                     {...tdContentStyle}
                   >
-                    {techContent['Description']}
+                    {techContent['Description'] || techContent['description']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -170,7 +179,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Technology:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Technology']}
+                    {techContent['Technology'] || techContent['technology']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -178,7 +187,8 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Disaster Type:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Disaster Type']}
+                    {techContent['Disaster Type'] ||
+                      techContent['disaster_type']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -186,7 +196,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Use Case:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Use Case']}
+                    {techContent['Use Case'] || techContent['use_case']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -194,7 +204,10 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>UN Host Organization:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {getHostOrg(techContent['Un Host Organisation'])}
+                    {getHostOrg(
+                      techContent['Un Host Organisation'] ||
+                        techContent['un_host']
+                    )}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -202,7 +215,8 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Partner:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Supporting Partners']}
+                    {techContent['Supporting Partners'] ||
+                      techContent['prtners']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -210,7 +224,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Data:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Data']}
+                    {techContent['Data'] || techContent['data']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -218,7 +232,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Theme:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Theme']}
+                    {techContent['Theme'] || techContent['theme']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -236,13 +250,32 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Publication Date:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Date of Implementation']}
+                    {techContent['Date of Implementation'] ||
+                      techContent['date_of_implementation']}
                   </Box>
                 </Box>
               </Box>
             </Box>
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          {path === '/projects/review' && (
+            <ModalFooter>
+              {!loading ? (
+                <Button
+                  colorScheme='blue'
+                  borderRadius={'0'}
+                  onClick={() => {
+                    void approveProject(techContent['uuid']);
+                    setLoading(true);
+                  }}
+                  position='static'
+                >
+                  Approve
+                </Button>
+              ) : (
+                <Spinner />
+              )}
+            </ModalFooter>
+          )}
         </ModalContent>
       </Modal>
     </>

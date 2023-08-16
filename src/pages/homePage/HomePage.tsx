@@ -17,6 +17,7 @@ import { ROUTES } from 'navigation/routes';
 import { CAROUSEL_ITEMS } from './helpers';
 
 import './HomePage.scss';
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
@@ -242,10 +243,12 @@ export const HomePage: React.FC = () => {
             {recentDisasters.length > 0 ? (
               <>
                 <div className='projectTitle'>
-                  <Link className='seeAll' to={'/disaster_events'}>
+                  <Link className='seeAll' to={'/disaster-events'}>
                     <h3>Recent Disasters</h3>
                   </Link>
-                  <Link to='/disaster_events/new'>Add new event</Link>
+                  {isSignedIn && (
+                    <Link to='/disaster-events/new'>Add new event</Link>
+                  )}
                 </div>
                 <div className='projectSections'>
                   <div className='helpNeeded'>
