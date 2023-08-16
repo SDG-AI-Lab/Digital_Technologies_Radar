@@ -49,7 +49,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/",
     "prettify": "prettier -c src/",
-    "preddtest": "yarn lint && yarn prettify",
+    "pretest": "yarn lint && yarn prettify",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "format": "prettier -w src/"
