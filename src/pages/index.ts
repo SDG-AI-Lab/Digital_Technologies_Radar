@@ -16,7 +16,8 @@ import { DisasterEvent } from './disasters/DisasterEvent';
 import { DisasterEvents } from './disasters/DisasterEvents';
 import { InfoAction } from './infoAction/InfoAction';
 import { EventAction } from './eventAction/EventAction';
-import { SignIn } from './signIn/SignIn';
+import { SignIn } from './users/signIn/SignIn';
+import { Register } from './users/register/Register';
 import { ReviewProjects } from './projects/reviewProjects/ReviewProjects';
 
 export {
@@ -39,5 +40,6 @@ export {
   EventAction,
   DisasterEvents,
   SignIn,
-  ReviewProjects
+  ReviewProjects,
+  Register
 };

@@ -29,7 +29,8 @@ import {
   EventAction,
   DisasterEvents,
   SignIn,
-  ReviewProjects
+  ReviewProjects,
+  Register
 } from '../pages';
 
 // Views
@@ -214,6 +215,7 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.SEARCH} element={<Search />} />
             <Route path={ROUTES.VOLUNTEERS} element={<Volunteers />} />
             <Route path={ROUTES.SIGN_IN} element={<SignIn />} />
+            <Route path={ROUTES.REGISTER} element={<Register />} />
 
             <Route path='/' element={<Navigate replace to={ROUTES.RADAR} />} />
             <Route path='*' element={<NotFound404 />} />

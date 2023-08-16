@@ -4,27 +4,25 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox
+  Checkbox,
+  Spinner
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import {
-  hashPassword,
-  comparePasswords,
-  isSignedIn
-} from 'components/shared/helpers/auth';
+import { hashPassword, isAdmin } from 'components/shared/helpers/auth';
 import { supabase } from 'helpers/databaseClient';
 
-import './SignIn.scss';
+import './Register.scss';
 
-export const SignIn: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [role, setRole] = useState<string>('');
+export const Register: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSignedIn) {
+    if (!isAdmin) {
       navigate('/');
     }
   }, []);
@@ -43,25 +41,8 @@ export const SignIn: React.FC = () => {
     }
   };
 
-  const handleSignIn = async (): Promise<void> => {
-    const { data, error } = await supabase
-      .from('users')
-      .select()
-      .eq('email', email)
-      .single();
-
-    const { role, password: passwordHash } = data || {};
-
-    if (!error && comparePasswords(password, passwordHash)) {
-      localStorage.setItem('drr-current-user-id', role);
-      alert('Successfully Signed In');
-      navigate(0);
-    } else {
-      alert('Incorrect credentials, please check and try again');
-    }
-  };
-
   const handleRegister = async (): Promise<void> => {
+    setLoading(true);
     const payload = {
       email,
       password: hashPassword(password),
@@ -74,11 +55,12 @@ export const SignIn: React.FC = () => {
     } else {
       alert('There was an error, please try again');
     }
+    setLoading(false);
   };
 
   return (
     <div className='signIn'>
-      <h3>Sign In</h3>
+      <h3>Register</h3>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={110}>Email:</FormLabel>
         <Input type='email' name='email' onChange={handleChange} />
@@ -97,23 +79,18 @@ export const SignIn: React.FC = () => {
       </FormControl>
 
       <div className='submit'>
-        <Button
-          p={'10px 30px'}
-          onClick={() => {
-            void handleSignIn();
-          }}
-        >
-          Sign In
-        </Button>
-
-        <Button
-          p={'10px 30px'}
-          onClick={() => {
-            void handleRegister();
-          }}
-        >
-          Register
-        </Button>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Button
+            p={'10px 30px'}
+            onClick={() => {
+              void handleRegister();
+            }}
+          >
+            Register
+          </Button>
+        )}
       </div>
     </div>
   );
