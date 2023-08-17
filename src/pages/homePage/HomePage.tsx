@@ -181,6 +181,7 @@ export const HomePage: React.FC = () => {
               colorScheme='blue'
               className='launchBtnDesktop'
               backgroundColor={'#2868AC'}
+              data-testid='btn-launch-radar'
             >
               Launch Radar
             </Button>
