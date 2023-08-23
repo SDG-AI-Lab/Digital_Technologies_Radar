@@ -7,6 +7,7 @@ import logoBlack from 'assets/logos/SDG_BLACK_logo.png';
 export const UNDPLogo: React.FC<ChakraProps> = (props) => {
   return (
     <Logo
+      data-testid='undp-logo'
       w='45px'
       file={logoBlack}
       maxwidthorheight={45}
