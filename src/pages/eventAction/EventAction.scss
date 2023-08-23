@@ -1,3 +1,13 @@
 .eventActionForm {
-  margin: 0 20%;
+  margin: 0 auto;
+  width: 60vw;
+
+  label {
+    width: 80px;
+  }
+
+  .submitBtn {
+    display: flex;
+    justify-content: center;
+  }
 }
