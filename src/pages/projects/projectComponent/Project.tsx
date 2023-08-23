@@ -47,7 +47,7 @@ export const Project: React.FC<Props> = ({
               <ProjectBadge project={project} />
             </div>
           )}
-          {!ctaText ? (
+          {ctaText !== 'Review' ? (
             <Link
               className='moreBtn'
               to={`/projects/${
