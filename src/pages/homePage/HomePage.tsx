@@ -273,7 +273,7 @@ export const HomePage: React.FC = () => {
                       <div key={disasterEvent.id} style={{ width: '40%' }}>
                         <HomeCardMini
                           project={disasterEvent}
-                          type='disaster_events'
+                          type='disaster-events'
                         />
                       </div>
                     ))}
