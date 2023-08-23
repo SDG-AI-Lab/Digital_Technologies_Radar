@@ -11,7 +11,11 @@ interface Props {
 
 export const MenuToggle: React.FC<Props> = ({ toggle, isOpen }) => {
   return (
-    <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
+    <Box
+      display={{ base: 'block', md: 'none' }}
+      onClick={toggle}
+      data-testid='menu-toggle'
+    >
       <Box display='flex'>
         {isOpen ? <CloseIcon /> : <MenuIcon />}
         <UNLogo pl={5} />

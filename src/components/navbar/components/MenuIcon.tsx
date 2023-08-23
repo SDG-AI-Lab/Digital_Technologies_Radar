@@ -6,6 +6,7 @@ export const MenuIcon: React.FC = () => {
   const { colorMode } = useColorMode();
   return (
     <svg
+      data-testid='menu-icon'
       width='24px'
       viewBox='0 0 20 20'
       xmlns='http://www.w3.org/2000/svg'
