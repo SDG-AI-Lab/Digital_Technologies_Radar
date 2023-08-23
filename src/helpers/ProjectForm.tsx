@@ -14,31 +14,38 @@ interface Props {
 }
 
 export const ProjectForm: React.FC<Props> = ({ data, title, ...props }) => {
+  const fullWidthFields = data.slice(0, 5);
+  const halfWidthFields = data.slice(5);
+
+  const renderField = (field: any) => (
+    <FormControl display={'flex'} gap={3} mb={5} key={field.label}>
+      <FormLabel w={175} textAlign={'end'}>
+        {field.label
+          .replace(
+            /(^|_)(\w)/g,
+            (_match: any, group1: any, group2: any) =>
+              (group1 ? ' ' : '') + group2.toUpperCase()
+          )
+          .toUpperCase() + ':'}
+      </FormLabel>
+
+      <ProjectFormFields
+        field={field}
+        hasFetchedData={props.hasFetchedData}
+        projectFormValues={props.projectFormValues}
+        handleChange={props.handleChange}
+        setProjectFormValues={props.setProjectFormValues}
+      />
+    </FormControl>
+  );
   return (
     <div className='newProject'>
       <h3>{title}</h3>
-      <div className='createProject'>
-        {data.map((field: any, idx: number) => (
-          <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-            <FormLabel w={150} textAlign={'end'}>
-              {field.label
-                .replace(
-                  /(^|_)(\w)/g,
-                  (_match: any, group1: any, group2: any) =>
-                    (group1 ? ' ' : '') + group2.toUpperCase()
-                )
-                .toUpperCase() + ':'}
-            </FormLabel>
-
-            <ProjectFormFields
-              field={field}
-              hasFetchedData={props.hasFetchedData}
-              projectFormValues={props.projectFormValues}
-              handleChange={props.handleChange}
-              setProjectFormValues={props.setProjectFormValues}
-            />
-          </FormControl>
-        ))}
+      <div className='createProject fullWidth'>
+        {fullWidthFields.map((field: any) => renderField(field))}
+      </div>
+      <div className='createProject halfWidth'>
+        {halfWidthFields.map((field: any) => renderField(field))}
       </div>
 
       <Button w={'30%'} m={'auto'} p={'10px 20px'} onClick={props.action}>

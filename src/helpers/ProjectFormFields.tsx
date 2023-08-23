@@ -54,7 +54,7 @@ export const ProjectFormFields: React.FC<Props> = ({
       return (
         <Input
           type='text'
-          w={'50%'}
+          w={'100%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
@@ -63,7 +63,7 @@ export const ProjectFormFields: React.FC<Props> = ({
     case 'textArea':
       return (
         <Textarea
-          w={'50%'}
+          w={'100%'}
           onChange={handleChange}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
@@ -75,7 +75,7 @@ export const ProjectFormFields: React.FC<Props> = ({
       return (
         <Select
           placeholder='Select option'
-          w={'25%'}
+          w={'50%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}

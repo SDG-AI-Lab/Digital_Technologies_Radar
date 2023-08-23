@@ -8,14 +8,20 @@
   width: 90vw;
 
   .createProject {
+    margin: 0 auto;
+    width: 60vw;
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr;
-    margin-bottom: 50px;
 
     @media only screen and (max-width: 768px) {
       grid-template-columns: 1fr;
     }
+  }
+
+  .halfWidth {
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 50px;
   }
 
   h3 {
