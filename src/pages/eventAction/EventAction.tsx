@@ -114,25 +114,21 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   return (
     <div className='newProject'>
       <h3>{`${mode} Event`}</h3>
-      <div className='EventActionForm'>
+      <div className='eventActionForm'>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Title
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Title</FormLabel>
           <Input
             type='text'
-            w={'50%'}
+            w={'100%'}
             name='title'
             value={formValues['title']}
             onChange={handleChange}
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Overview
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Overview</FormLabel>
           <Textarea
-            w={'50%'}
+            w={'100%'}
             name='overview'
             value={formValues['overview']}
             size='sm'
@@ -140,47 +136,39 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Summary
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Summary</FormLabel>
           <Input
             type='text'
-            w={'50%'}
+            w={'100%'}
             name='summary'
             value={formValues['summary']}
             onChange={handleChange}
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Image URL
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Image URL</FormLabel>
           <Input
             type='text'
-            w={'50%'}
+            w={'100%'}
             name='img_url'
             value={formValues['img_url']}
             onChange={handleChange}
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Source
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Source</FormLabel>
           <Input
             type='text'
-            w={'50%'}
+            w={'100%'}
             name='source'
             value={formValues['source']}
             onChange={handleChange}
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Impact
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Impact</FormLabel>
           <Textarea
-            w={'50%'}
+            w={'100%'}
             name='impact'
             value={formValues['impact']}
             size='sm'
@@ -188,11 +176,9 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Resources
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Resources</FormLabel>
           <Textarea
-            w={'50%'}
+            w={'100%'}
             name='resources'
             value={formValues['resources']}
             size='sm'
@@ -200,11 +186,9 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Solutions
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Solutions</FormLabel>
           <Textarea
-            w={'50%'}
+            w={'100%'}
             name='solutions'
             value={formValues['solutions']}
             size='sm'
@@ -212,21 +196,17 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Contact
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Contact</FormLabel>
           <Input
             type='text'
-            w={'50%'}
+            w={'100%'}
             name='contacts'
             value={formValues['contacts']}
             onChange={handleChange}
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Country
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Country</FormLabel>
           <Select
             placeholder='Select option'
             w={'25%'}
@@ -242,9 +222,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           </Select>
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel w={150} textAlign={'end'}>
-            Help Needed?
-          </FormLabel>
+          <FormLabel textAlign={'end'}>Help Needed?</FormLabel>
           <Checkbox
             name='help_needed'
             isChecked={formValues['help_needed'] === 1}
@@ -257,11 +235,9 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
 
-        <div style={{ margin: '0 40%' }}>
+        <div className='submitBtn'>
           <Button
-            w={'100%'}
-            p={'10px 20px'}
-            m={'0 auto'}
+            w={'20%'}
             onClick={() => {
               void action();
             }}
