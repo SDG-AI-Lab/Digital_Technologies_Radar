@@ -149,7 +149,7 @@ export const getFilteredProjects = (
   return [...new Set(filteredProjects)];
 };
 
-const getParameterFilteredProjects = (
+export const getParameterFilteredProjects = (
   parameterFilters: any,
   projectsList: any,
   parameters: number
