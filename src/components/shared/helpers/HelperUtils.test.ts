@@ -131,7 +131,7 @@ describe('getParameterFilteredProjects', () => {
 
     expect(results.length).toBeGreaterThan(0);
     results.map((r: any) =>
-      expect(r.Subregion.includes('South-eastern Asia')).toBeTruthy()
+      expect(r.Subregion).toContain('South-eastern Asia')
     );
   });
 
@@ -173,7 +173,7 @@ describe('getParameterFilteredProjects', () => {
 
     expect(results.length).toBeGreaterThan(0);
     results.map((r: any) =>
-      expect(r['Disaster Type'].includes('Earthquakes')).toBeTruthy()
+      expect(r['Disaster Type']).toContain('Earthquakes')
     );
   });
 
@@ -193,9 +193,7 @@ describe('getParameterFilteredProjects', () => {
     );
     expect(results.length).toBeGreaterThan(0);
     results.map((r: any) =>
-      expect(
-        r['Un Host Organisation'].includes('UN Pulse Lab Jakarta')
-      ).toBeTruthy()
+      expect(r['Un Host Organisation']).toContain('UN Pulse Lab Jakarta')
     );
   });
 
@@ -214,7 +212,7 @@ describe('getParameterFilteredProjects', () => {
       1
     );
     expect(results.length).toBeGreaterThan(0);
-    results.map((r: any) => expect(r['SDG'].includes('SDG 9')).toBeTruthy());
+    results.map((r: any) => expect(r['SDG']).toContain('SDG 9'));
   });
 
   it('should filter by data parameter', () => {
@@ -232,9 +230,7 @@ describe('getParameterFilteredProjects', () => {
       1
     );
     expect(results.length).toBeGreaterThan(0);
-    results.map((r: any) =>
-      expect(r['Data'].includes('Mobile Network Data')).toBeTruthy()
-    );
+    results.map((r: any) => expect(r['Data']).toContain('Mobile Network Data'));
   });
 
   it('should use boolean or for multiple parameters', () => {
@@ -271,7 +267,7 @@ describe('getParameterFilteredProjects', () => {
 
     expect(results.length).toBeGreaterThan(0);
     results.map((r: any) =>
-      expect(r['Country of Implementation'].includes('Nauru')).toBeTruthy()
+      expect(r['Country of Implementation']).toContain('Nauru')
     );
   });
 
