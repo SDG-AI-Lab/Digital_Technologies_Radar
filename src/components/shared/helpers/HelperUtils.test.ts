@@ -1,4 +1,4 @@
-import { getParameterFilteredProjects } from './HelperUtils';
+import { getParameterFilteredProjects, projectSearch } from './HelperUtils';
 
 describe('getParameterFilteredProjects', () => {
   const testProjects = [
@@ -288,5 +288,136 @@ describe('getParameterFilteredProjects', () => {
     );
 
     expect(results.length).toBe(2);
+  });
+});
+
+describe('projectSearch', () => {
+  const testData = [
+    {
+      id: '1',
+      title: 'MobileAid',
+      description:
+        "Using geo-targeting and machine learning to deliver relief to society's most vulnerable groups",
+      source: 'https://www.givedirectly.org/',
+      img_url:
+        'https://www.givedirectly.org/wp-content/uploads/2021/07/Transfer-Withdrawal-scaled-1-705x469.jpeg',
+      date_of_implementation: '2022',
+      disaster_type: 'Various',
+      status: 'production',
+      use_case: 'Disaster Relief logistic/resource allocation',
+      theme: ['Disaster Mitigation'].toString(),
+      technology: [
+        'Machine Learning',
+        'Geographical Information Systems'
+      ].toString(),
+      region: ['Africa'].toString(),
+      subregion: ['Eastern Africa'].toString(),
+      country: ['Malawi'].toString(),
+      partner: [
+        'UNDP',
+        'UNDP Bangladesh /a2i',
+        'World Bank',
+        'Center for Effective Global Action (CEGA)',
+        'USAID',
+        'Google.org',
+        'Government of Togo',
+        'Fonds Social de la Republique Democratique du Congo (Social Fund of the Democratic Republic of Congo)'
+      ].toString(),
+      un_host: ['UNDP'].toString(),
+      data: ['Mobile Network Data'].toString(),
+      sdg: ['SDG 1'].toString(),
+      created_at: '2023-07-11T11:56:45.05823+00:00',
+      updated_at: '2023-07-11T11:56:45.05823+00:00',
+      uuid: '657e845c-98cc-44bf-a4ac-3ff9fa97b534',
+      approved: 'true'
+    },
+    {
+      id: '2',
+      title: '#JustSaveIt',
+      description:
+        'The project aimed to encourage bank account usage more specifically regular deposits made into agent-based bank accounts through a series of WhatsApp messages sent to bank agents. The messages (i.e. graphics, comics, written text) were sent to shop owners (who were also bank agents), urging them to encourage their customers to save the change from purchases made at their shops in their bank accounts. The messages shared as part of the #TabunginAja (#JustSaveIt) campaign, were informed by BeSci and included setting specific goals and applying rules of thumb to prompt the target behaviour (e.g. to encourage agents to ask their customers to save their shopping change if the amount is less than USD0.35).',
+      source:
+        'https://www.bi.team/publications/justsaveit-encouraging-usage-of-agent-based-bank-accounts-to-improve-financial-inclusion/',
+      img_url:
+        'https://www.bi.team/wp-content/uploads/2020/03/justsaveit-157x216.png',
+      date_of_implementation: '2021',
+      disaster_type: 'Various',
+      status: 'production',
+      use_case: 'Situational awareness/actionable information gathering',
+      theme: ['Finance'].toString(),
+      technology: ['Mobile App'].toString(),
+      region: ['Asia'].toString(),
+      subregion: ['South-eastern Asia'].toString(),
+      country: ['Indonesia'].toString(),
+      partner: [
+        'The Secretariat of the Indonesian National Council for Financial Inclusion (S-DNKI)'
+      ].toString(),
+      un_host: ['UN Pulse Lab Jakarta'].toString(),
+      data: ['Mobile Network Data', 'Text Data'].toString(),
+      sdg: ['SDG 1', 'SDG 8', 'SDG 9'].toString(),
+      created_at: '2023-07-11T11:56:45.05823+00:00',
+      updated_at: '2023-07-11T11:56:45.05823+00:00',
+      uuid: '870205be-4b31-497b-913e-e061b1264ecf',
+      approved: 'true'
+    },
+    {
+      id: '3',
+      title: 'D.U.Q. Method',
+      description:
+        'Analysis system to to measure the impact of decisions on forest fires',
+      source: 'https://github.com/Maximiliano-Sotar/NASA-SPACE-APPS',
+      img_url:
+        'https://upload.wikimedia.org/wikipedia/commons/a/a0/Space_Apps_Logo_White.png',
+      date_of_implementation: '2021',
+      disaster_type: 'Wildfires',
+      status: 'prototype',
+      use_case: 'Disaster Relief logistic/resource allocation ',
+      theme: ['Disaster Risk Management'].toString(),
+      technology: [
+        'Geographical Information Systems',
+        'Data Collection',
+        'Data Analysis'
+      ].toString(),
+      region: ['Americas'].toString(),
+      subregion: ['South America'].toString(),
+      country: ['Argentina'].toString(),
+      partner: ['NASA'].toString(),
+      un_host: ['None'].toString(),
+      data: ['Spatial Data'].toString(),
+      sdg: ['SDG 15'].toString(),
+      created_at: '2023-07-11T11:56:45.05823+00:00',
+      updated_at: '2023-07-11T11:56:45.05823+00:00',
+      uuid: 'f15c2eac-d75d-4951-b3e0-f63340d53047',
+      approved: 'true'
+    }
+  ];
+
+  it('should filter on title substring matches', () => {
+    const results = projectSearch('justsave', testData);
+    expect(results.length).toBe(1);
+    expect(results[0].title).toBe('#JustSaveIt');
+  });
+
+  it('should filter on description substring matches', () => {
+    const results = projectSearch('Bank Account', testData);
+    expect(results.length).toBe(1);
+    expect(results[0].title).toBe('#JustSaveIt');
+  });
+
+  it('should filter on UN host substring matches', () => {
+    const results = projectSearch('justsave', testData);
+    expect(results.length).toBe(1);
+    expect(results[0].title).toBe('#JustSaveIt');
+  });
+
+  it('should filter on country substring matches', () => {
+    const results = projectSearch('jakar', testData);
+    expect(results.length).toBe(1);
+    expect(results[0].title).toBe('#JustSaveIt');
+  });
+
+  it('should filter on sdg substring matches', () => {
+    expect(projectSearch('sdg 1', testData).length).toBe(3);
+    expect(projectSearch('sdg 15', testData).length).toBe(1);
   });
 });

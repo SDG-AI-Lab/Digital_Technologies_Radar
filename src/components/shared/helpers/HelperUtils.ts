@@ -35,7 +35,7 @@ export const mergeDisasterCycle = (blips: BlipType[]): BaseCSVType[] => {
 /* Search based on keyword */
 export const projectSearch = (
   keyword: string,
-  blips: BlipType[]
+  blips: BaseCSVType[]
 ): BaseCSVType[] => {
   const query = keyword.toLowerCase();
 
