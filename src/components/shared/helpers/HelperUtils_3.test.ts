@@ -1,5 +1,6 @@
 import { sliceForBadge } from './HelperUtils';
 import { totalParameterCount } from './HelperUtils';
+import { toSnakeCase } from './HelperUtils';
 
 describe('sliceForBadge', () => {
   it('should return the original array when its length is 0', () => {
@@ -73,5 +74,34 @@ describe('totalParameterCount', () => {
     const result = totalParameterCount(parameters);
 
     expect(result).toEqual(0);
+  });
+});
+
+describe('toSnakeCase', () => {
+  it('should convert a string to snake_case', () => {
+    const input = 'Convert This String';
+    const expectedOutput = 'convert_this_string';
+
+    const result = toSnakeCase(input);
+
+    expect(result).toEqual(expectedOutput);
+  });
+
+  it('should handle empty string', () => {
+    const input = '';
+    const expectedOutput = '';
+
+    const result = toSnakeCase(input);
+
+    expect(result).toEqual(expectedOutput);
+  });
+
+  it('should handle already snake_case string', () => {
+    const input = 'already_snake_case';
+    const expectedOutput = 'already_snake_case';
+
+    const result = toSnakeCase(input);
+
+    expect(result).toEqual(expectedOutput);
   });
 });
