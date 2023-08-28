@@ -99,13 +99,13 @@ describe('getFilteredProjects', () => {
     },
 
     parameters: {
-      Region: [] as ParameterFilter[], // Use the defined type
-      'Sub Region': [] as ParameterFilter[], // Use the defined type
-      Country: [] as ParameterFilter[], // Use the defined type
-      'Disaster Type': [] as ParameterFilter[], // Use the defined type
-      'UN Host': [] as ParameterFilter[], // Use the defined type
-      SDG: [] as ParameterFilter[], // Use the defined type
-      Data: [] as ParameterFilter[] // Use the defined type
+      Region: [] as ParameterFilter[],
+      'Sub Region': [] as ParameterFilter[],
+      Country: [] as ParameterFilter[],
+      'Disaster Type': [] as ParameterFilter[],
+      'UN Host': [] as ParameterFilter[],
+      SDG: [] as ParameterFilter[],
+      Data: [] as ParameterFilter[]
     }
   };
 
