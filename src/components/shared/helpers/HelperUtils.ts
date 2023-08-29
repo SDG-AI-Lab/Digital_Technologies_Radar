@@ -117,7 +117,7 @@ export const getFilteredProjects = (
   if (statusFilters.length) {
     const statusFilteredProjects = filteredProjects.filter((project: any) => {
       return statusFilters.some((item: any) =>
-        (project['disaster_cycle'] || project['Disaster Cycle']).includes(item)
+        (project['disaster_cycles'] || project['Disaster Cycle']).includes(item)
       );
     });
 
