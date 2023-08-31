@@ -67,6 +67,7 @@ export const Projects: React.FC = () => {
     const storedProjects = JSON.parse(
       localStorage.getItem('drr-projects-list') as string
     );
+
     if (storedProjects && storedProjects.version === DATA_VERSION) {
       const { data } = storedProjects;
       setFilteredProjects(data);
@@ -137,6 +138,7 @@ export const Projects: React.FC = () => {
               <span
                 className='titleRow-right--item'
                 onClick={() => navigate('/projects/new')}
+                data-testid='add-project'
               >
                 Add New Project
               </span>
