@@ -270,7 +270,11 @@ export const HomePage: React.FC = () => {
 
                   <div className='recentDisastersCards'>
                     {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
-                      <div key={disasterEvent.id} style={{ width: '40%' }}>
+                      <div
+                        key={disasterEvent.id}
+                        style={{ width: '40%' }}
+                        className={'homeCardWrapper'}
+                      >
                         <HomeCardMini
                           project={disasterEvent}
                           type='disaster-events'
