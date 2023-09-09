@@ -41,7 +41,13 @@ export const ProjectForm: React.FC<Props> = ({ data, title, ...props }) => {
         ))}
       </div>
 
-      <Button w={'30%'} m={'auto'} p={'10px 20px'} onClick={props.action}>
+      <Button
+        w={'30%'}
+        m={'auto'}
+        p={'10px 20px'}
+        onClick={props.action}
+        data-testid='project-form-submit'
+      >
         {`${title.toLowerCase().includes('add') ? 'Add' : 'Update'} Project`}
       </Button>
     </div>

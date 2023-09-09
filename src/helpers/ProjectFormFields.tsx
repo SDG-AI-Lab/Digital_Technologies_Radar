@@ -58,6 +58,7 @@ export const ProjectFormFields: React.FC<Props> = ({
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
+          data-testId={`field-${label}`}
         />
       );
     case 'textArea':
@@ -68,6 +69,7 @@ export const ProjectFormFields: React.FC<Props> = ({
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           size='sm'
+          data-testId={`field-${label}`}
         />
       );
 
@@ -79,6 +81,7 @@ export const ProjectFormFields: React.FC<Props> = ({
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
+          data-testId={`field-${label}`}
         >
           {(options || []).map((option: any, idx: any) => (
             <option
@@ -95,7 +98,10 @@ export const ProjectFormFields: React.FC<Props> = ({
     case 'selectArray': {
       const selectedValues = getSelectedValues(label);
       return (
-        <div style={{ width: '50%', maxWidth: '350px' }}>
+        <div
+          style={{ width: '50%', maxWidth: '350px' }}
+          data-testId={`field-${label}`}
+        >
           <SelectMultiple
             options={options as Option[]}
             loading={!hasFetchedData}
