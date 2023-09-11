@@ -149,6 +149,7 @@ export const Disasters: React.FC = () => {
             <span
               className='titleRow-right'
               onClick={() => navigate('/disasters/new')}
+              data-testid='add-disaster'
             >
               Add New Disaster
             </span>
