@@ -23,7 +23,8 @@
     "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/complex": "off",
     "@typescript-eslint/no-implicit-any-index": "off",
-    "@typescript-eslint/restrict-template-expression": "off"
+    "@typescript-eslint/restrict-template-expression": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   },
   "settings": {
     "react": {
