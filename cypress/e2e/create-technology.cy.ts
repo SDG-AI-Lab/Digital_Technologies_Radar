@@ -18,7 +18,7 @@ describe('create technology', () => {
   });
 
   it('creates a technology in supabase', () => {
-    cy.visit('http://localhost:3000/#/technologies');
+    cy.visit('http://localhost:3456/#/technologies');
     cy.get('[data-testid="add-technology"]').click();
     cy.get('[data-testid="field-title"]').type('Test technology');
     cy.get('[data-testid="field-description"]').type(

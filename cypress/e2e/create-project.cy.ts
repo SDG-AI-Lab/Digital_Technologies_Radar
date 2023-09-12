@@ -18,7 +18,7 @@ describe('create project', () => {
   });
 
   it('creates a project in supabase', () => {
-    cy.visit('http://localhost:3000/#/projects');
+    cy.visit('http://localhost:3456/#/projects');
     cy.get('[data-testid="add-project"]').click();
     cy.get('[data-testid="field-title"]').type('Test project');
     cy.get('[data-testid="field-description"]').type(

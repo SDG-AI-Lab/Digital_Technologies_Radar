@@ -18,7 +18,7 @@ describe('create disaster', () => {
   });
 
   it('creates a disaster in supabase', () => {
-    cy.visit('http://localhost:3000/#/disasters');
+    cy.visit('http://localhost:3456/#/disasters');
     cy.get('[data-testid="add-disaster"]').click();
     cy.get('[data-testid="field-title"]').type('Test disaster');
     cy.get('[data-testid="field-description"]').type(
