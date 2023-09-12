@@ -5,6 +5,7 @@
   max-width: 1440px;
   overflow: auto;
   padding: 30px 60px;
+  width: 95vw;
 
   .heroSection {
     background-color: #f7f7f7;
@@ -156,6 +157,17 @@
         display: flex;
         flex-basis: 70%;
         justify-content: space-around;
+        overflow: scroll;
+
+        @media only screen and (max-width: 768px) {
+          gap: 150px;
+          img {
+            width: auto !important;
+          }
+          .homeCardWrapper:first-of-type {
+            margin-left: 50px;
+          }
+        }
       }
     }
 
@@ -180,10 +192,10 @@
     justify-content: space-between;
 
     .helpNeeded {
+      align-items: center;
       display: flex;
       flex-direction: column;
       gap: 5px;
-      align-items: center;
     }
   }
 

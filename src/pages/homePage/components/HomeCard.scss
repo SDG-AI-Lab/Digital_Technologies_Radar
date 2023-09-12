@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  // width: 250px;
 
   a {
     display: flex;
@@ -19,9 +18,6 @@
       height: 200px;
       object-fit: cover;
       width: 100%;
-      @media only screen and (max-width: 768px) {
-        height: 400px;
-      }
     }
 
     .moreBtn {
@@ -40,8 +36,8 @@
   .homeDetails-large {
     align-items: center;
     display: flex;
-    flex-direction: column;
     flex-basis: 70%;
+    flex-direction: column;
     justify-content: center;
 
     .title-large {
@@ -97,6 +93,10 @@
     div.projectBadges {
       gap: 5px;
       max-width: 500px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      align-items: flex-start;
     }
   }
 
