@@ -189,6 +189,7 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
         </FormControl>
         <div style={{ margin: '0 40%' }}>
           <Button
+            data-testid='submit'
             w={'100%'}
             p={'10px 20px'}
             m={'0 auto'}

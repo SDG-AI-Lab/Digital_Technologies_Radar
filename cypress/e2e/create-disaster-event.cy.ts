@@ -20,6 +20,8 @@ describe('create disaster event', () => {
   it('creates a disaster event in supabase', () => {
     cy.visit('http://localhost:3456/#/disaster-events');
     cy.get('[data-testid="add-disaster-event"]').click();
+    cy.get('[data-testid="submit"]').click();
+
     /*   cy.get('[data-testid="field-title"]').type('Test disaster event');
     cy.get('[data-testid="field-description"]').type(
       'Test disaster event description'
@@ -28,7 +30,7 @@ describe('create disaster event', () => {
     cy.get('[data-testid="field-img_url"]').type('Test image url');
 
     // Assert that the data was posted to supabase
-    /cy.wait('@createDisasterEvent').then((interception) => {
+      cy.wait('@createDisasterEvent').then((interception) => {
       expect(interception.request.method).to.eq('POST');
       expect(interception.request.body.description).to.eq(
         'Test disaster event description'

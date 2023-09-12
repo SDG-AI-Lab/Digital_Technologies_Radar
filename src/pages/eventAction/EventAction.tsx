@@ -237,6 +237,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
         <div className='submitBtn'>
           <Button
+            data-testid='submit'
             w={'20%'}
             onClick={() => {
               void action();

@@ -27,6 +27,8 @@ describe('create technology', () => {
     cy.get('[data-testid="field-source"]').type('Test source');
     cy.get('[data-testid="field-img_url"]').type('Test image url');
 
+    cy.get('[data-testid="submit"]').click();
+
     // Assert that the data was posted to supabase
     /*cy.wait('@createTechnology').then((interception) => {
       expect(interception.request.method).to.eq('POST');
