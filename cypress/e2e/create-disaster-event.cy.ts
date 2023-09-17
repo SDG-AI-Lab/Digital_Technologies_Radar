@@ -22,22 +22,19 @@ describe('create disaster event', () => {
     cy.get('[data-testid="add-disaster-event"]').click();
     cy.get('[data-testid="submit"]').click();
 
-    /*   cy.get('[data-testid="field-title"]').type('Test disaster event');
-    cy.get('[data-testid="field-description"]').type(
-      'Test disaster event description'
+    cy.get('[data-testid="field-title"]').type('Test disaster event');
+    cy.get('[data-testid="field-overview"]').type(
+      'Test disaster event overview'
     );
-    cy.get('[data-testid="field-source"]').type('Test source');
+    cy.get('[data-testid="field-summary"]').type('Test summary');
     cy.get('[data-testid="field-img_url"]').type('Test image url');
+    cy.get('[data-testid="field-resources"]').type('Test resources');
+    cy.get('[data-testid="field-solutions"]').type('Test solutions');
+    cy.get('[data-testid="field-contacts"]').type('Test contacts');
 
     // Assert that the data was posted to supabase
-      cy.wait('@createDisasterEvent').then((interception) => {
+    /*cy.wait('@createDisasterEvent').then((interception) => {
       expect(interception.request.method).to.eq('POST');
-      expect(interception.request.body.description).to.eq(
-        'Test disaster event description'
-      );
-      expect(interception.request.body.img_url).to.eq('Test image url');
-      expect(interception.request.body.source).to.eq('Test source');
-      expect(interception.request.body.title).to.eq('Test disaster event');
     });*/
   });
 });

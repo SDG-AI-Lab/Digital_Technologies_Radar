@@ -30,6 +30,15 @@ describe('create disaster', () => {
     cy.get('[data-testid="submit"]').click();
 
     // Assert that the data was posted to supabase
-    cy.wait('@createDisaster').then((interception) => {});
+    cy.wait('@createDisaster').then((interception) => {
+      expect(interception.request.method).to.eq('POST');
+      expect(interception.request.body.description).to.eq(
+        'Test disaster description'
+      );
+      expect(interception.request.body.img_url).to.eq('Test image url');
+      expect(interception.request.body.source).to.eq('Test source');
+      expect(interception.request.body.name).to.eq('Test disaster');
+      expect(interception.request.body.slug).to.eq('test_disaster');
+    });
   });
 });
