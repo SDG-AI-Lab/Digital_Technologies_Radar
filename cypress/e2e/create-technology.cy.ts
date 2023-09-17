@@ -30,14 +30,15 @@ describe('create technology', () => {
     cy.get('[data-testid="submit"]').click();
 
     // Assert that the data was posted to supabase
-    /*cy.wait('@createTechnology').then((interception) => {
+    cy.wait('@createTechnology').then((interception) => {
       expect(interception.request.method).to.eq('POST');
       expect(interception.request.body.description).to.eq(
         'Test technology description'
       );
       expect(interception.request.body.img_url).to.eq('Test image url');
       expect(interception.request.body.source).to.eq('Test source');
-      expect(interception.request.body.title).to.eq('Test technology');
-    });*/
+      expect(interception.request.body.name).to.eq('Test technology');
+      expect(interception.request.body.slug).to.eq('test_technology');
+    });
   });
 });
