@@ -139,6 +139,7 @@ export const Technologies: React.FC = () => {
             <span
               className='titleRow-right'
               onClick={() => navigate('/technologies/new')}
+              data-testid='add-technology'
             >
               Add New Technology
             </span>

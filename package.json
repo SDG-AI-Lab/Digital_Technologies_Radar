@@ -38,6 +38,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "sass": "^1.64.2",
+    "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
@@ -45,7 +46,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "CI=true react-scripts test",
+    "test:unit": "react-scripts test",
+    "test:e2e": "PORT=3456 start-server-and-test start http://localhost:3456 \"cypress run\"",
+    "test": "CI=true yarn run test:unit && yarn run test:e2e",
     "it-test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/",
@@ -85,6 +88,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "cypress": "^13.1.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^24.0.0",
     "eslint-plugin-import": "^2.25.2",

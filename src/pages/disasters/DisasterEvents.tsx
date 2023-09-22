@@ -56,6 +56,7 @@ export const DisasterEvents: React.FC = () => {
             <span
               className='titleRow-right'
               onClick={() => navigate('/disaster-events/new')}
+              data-testid='add-disaster-event'
             >
               Add New Disaster Event
             </span>

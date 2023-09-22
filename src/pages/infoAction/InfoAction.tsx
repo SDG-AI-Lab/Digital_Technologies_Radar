@@ -145,6 +145,7 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
             name='name'
             value={formValues['name']}
             onChange={handleChange}
+            data-testid='field-title'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -157,6 +158,7 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
             value={formValues['description']}
             size='sm'
             onChange={handleChange}
+            data-testid='field-description'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -169,6 +171,7 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
             name='img_url'
             value={formValues['img_url']}
             onChange={handleChange}
+            data-testid='field-img_url'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -181,10 +184,12 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
             name='source'
             value={formValues['source']}
             onChange={handleChange}
+            data-testid='field-source'
           />
         </FormControl>
         <div style={{ margin: '0 40%' }}>
           <Button
+            data-testid='submit'
             w={'100%'}
             p={'10px 20px'}
             m={'0 auto'}

@@ -123,6 +123,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='title'
             value={formValues['title']}
             onChange={handleChange}
+            data-testid='field-title'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -133,6 +134,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             value={formValues['overview']}
             size='sm'
             onChange={handleChange}
+            data-testid='field-overview'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -143,6 +145,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='summary'
             value={formValues['summary']}
             onChange={handleChange}
+            data-testid='field-summary'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -153,6 +156,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='img_url'
             value={formValues['img_url']}
             onChange={handleChange}
+            data-testid='field-img_url'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -163,6 +167,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='source'
             value={formValues['source']}
             onChange={handleChange}
+            data-testid='field-source'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -173,6 +178,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             value={formValues['impact']}
             size='sm'
             onChange={handleChange}
+            data-testid='field-impact'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -183,6 +189,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             value={formValues['resources']}
             size='sm'
             onChange={handleChange}
+            data-testid='field-resources'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -193,6 +200,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             value={formValues['solutions']}
             size='sm'
             onChange={handleChange}
+            data-testid='field-solutions'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -203,6 +211,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             name='contacts'
             value={formValues['contacts']}
             onChange={handleChange}
+            data-testid='field-contacts'
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
@@ -237,6 +246,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
         <div className='submitBtn'>
           <Button
+            data-testid='submit'
             w={'20%'}
             onClick={() => {
               void action();
