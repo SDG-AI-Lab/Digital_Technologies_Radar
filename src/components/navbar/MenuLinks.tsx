@@ -141,23 +141,25 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
             </Button>
           </div>
         ) : (
-          <MenuItem to={ROUTES.SIGN_IN}>
-            <Button
-              background='none'
-              flexDirection={'column'}
-              _focus={{
-                outline: 'none'
-              }}
-              borderRadius={'0'}
-              w={'100%'}
-              py={8}
-            >
-              <FaSignInAlt size={30} />
-              <Text color={'black'} fontSize='10px' mt='5px'>
-                Sign In
-              </Text>
-            </Button>
-          </MenuItem>
+          false && (
+            <MenuItem to={ROUTES.SIGN_IN}>
+              <Button
+                background='none'
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+              >
+                <FaSignInAlt size={30} />
+                <Text color={'black'} fontSize='10px' mt='5px'>
+                  Sign In
+                </Text>
+              </Button>
+            </MenuItem>
+          )
         )}
       </Stack>
     </Box>

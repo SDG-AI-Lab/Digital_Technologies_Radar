@@ -153,25 +153,27 @@ export const AppBottomNav: React.FC = () => {
             </MenuItem>
           </Box>
         ) : (
-          <Box flex={1} w={'15vw'}>
-            <MenuItem to={ROUTES.SIGN_IN}>
-              <Button
-                bgColor='gray.50'
-                borderRadius={'0'}
-                w={'20vw'}
-                py={8}
-                flexDirection={'column'}
-                _focus={{
-                  outline: 'none'
-                }}
-              >
-                <FaSignInAlt size={25} color='#3182CE' />
-                <Text color={'blue.500'} fontSize='0.6em' mt='5px'>
-                  Sign In
-                </Text>
-              </Button>
-            </MenuItem>
-          </Box>
+          false && (
+            <Box flex={1} w={'15vw'}>
+              <MenuItem to={ROUTES.SIGN_IN}>
+                <Button
+                  bgColor='gray.50'
+                  borderRadius={'0'}
+                  w={'20vw'}
+                  py={8}
+                  flexDirection={'column'}
+                  _focus={{
+                    outline: 'none'
+                  }}
+                >
+                  <FaSignInAlt size={25} color='#3182CE' />
+                  <Text color={'blue.500'} fontSize='0.6em' mt='5px'>
+                    Sign In
+                  </Text>
+                </Button>
+              </MenuItem>
+            </Box>
+          )
         )}
       </Flex>
     </Box>
