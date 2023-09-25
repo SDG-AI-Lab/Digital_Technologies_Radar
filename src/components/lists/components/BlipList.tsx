@@ -6,7 +6,6 @@ import {
   useRadarState,
   Utilities
 } from '@undp_sdg_ai_lab/undp-radar';
-
 import { BlipsPerQuadType } from '../quadrant/QuadrantHorizonList';
 import { HorizonItem } from '../quadrant/HorizonItem';
 import { ShowIcon } from '../quadrant/ShowIcon';
@@ -27,7 +26,6 @@ export const BlipList: React.FC = React.memo(() => {
       keys: { horizonKey, techKey }
     }
   } = useDataState();
-
   const [show, setShow] = useState(false);
   const toggleShow = (): void => {
     if (!show) {
@@ -75,7 +73,6 @@ export const BlipList: React.FC = React.memo(() => {
       };
       quads.push(q);
     }
-    console.log('Categorizing blips for quadrants');
     displayBlips.forEach((blip) => {
       const q = quads[blip.quadrantIndex];
       const h = q.horizons;
@@ -123,5 +120,9 @@ export const BlipList: React.FC = React.memo(() => {
     });
   };
 
-  return <div className='blipList'>{renderQuadrants()}</div>;
+  return (
+    <div className='blipList' data-testid='blip-list'>
+      {renderQuadrants()}
+    </div>
+  );
 });
