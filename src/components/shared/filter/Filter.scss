@@ -10,10 +10,10 @@
 }
 
 div.filterModal {
+  background-color: #f7f7f7;
   max-width: 40%;
   overflow: scroll;
   padding: 30px 20px;
-  background-color: #f7f7f7;
 
   header.chakra-modal__header {
     margin: 10px 0;
@@ -30,17 +30,30 @@ div.filterModal {
 .filterItems {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin: 10px 0 30px;
 
+  &.multiSelectContainer {
+    gap: 10px;
+  }
+
   .filterItem {
+    align-items: center;
     background-color: white;
+    border: none;
     border-radius: 5px;
     color: #000000;
+    cursor: pointer;
+    display: flex;
+    flex: auto;
     font-size: 14px;
     font-weight: 400;
     height: auto;
+    margin-bottom: 6px;
+    margin-left: 0;
+    margin-right: 12px;
+    margin-top: 0;
     padding: 15px;
+    padding: 10px;
     white-space: break-spaces;
     &:focus {
       box-shadow: none;
@@ -67,18 +80,24 @@ div.filterModal {
 }
 
 .filterRow {
-  display: flex;
   align-items: center;
+  display: flex;
   margin-bottom: 20px;
 }
 
 .resetFilter {
-  margin-left: 10px;
-  font-size: 14px;
-  cursor: pointer;
   color: #2868ac;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .multiSelect {
+    width: 100%;
   }
 }
