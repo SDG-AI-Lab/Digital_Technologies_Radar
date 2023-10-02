@@ -65,7 +65,7 @@ export const FilterItems: React.FC<Props> = ({
   };
 
   return (
-    <div className='filterItems'>
+    <div className={cx('filterItems', { multiSelectContainer: multi })}>
       {labels.map((label: string, idx) => {
         return multi ? (
           <div className='multiSelect' key={`${idx}${label}`}>
