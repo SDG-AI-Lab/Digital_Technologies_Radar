@@ -33,7 +33,7 @@ div.filterModal {
   margin: 10px 0 30px;
 
   &.multiSelectContainer {
-    gap: 10px
+    gap: 10px;
   }
 
   .filterItem {
@@ -96,7 +96,7 @@ div.filterModal {
   }
 }
 
-@media only screen and (max-width: 768px) { 
+@media only screen and (max-width: 768px) {
   .multiSelect {
     width: 100%;
   }
