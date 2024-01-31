@@ -79,24 +79,24 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 ### Cohort 1 (1 online volunteer)
 
 <table border="1" width="50%">
-  <tr>
-    <td>
-    <p align="center">
-      <img src="https://user-images.githubusercontent.com/28465079/165523780-f3414b24-7895-4178-a212-72875c92baae.jpg" width="50%" height="50%" />
-    </p>
-    <p align="center">
-      <a href="https://www.linkedin.com/in/nmpribeiro/" rel="nofollow noreferrer">
-        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
-      </a> 
-      </br>
-      <a href="https://github.com/nmpribeiro" rel="nofollow noreferrer">
-        <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
-      </a>
-    </p>
-    <p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
-    <p align="center"><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
-    </td>
-  </tr>
+<tr>
+<td>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/28465079/165523780-f3414b24-7895-4178-a212-72875c92baae.jpg" width="50%" height="50%" />
+</p>
+<p align="center">
+<a href="https://www.linkedin.com/in/matterfermion/" rel="nofollow noreferrer">
+<img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
+</a>
+</br>
+<a href="https://github.com/tachyon-ops" rel="nofollow noreferrer">
+<img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
+</a>
+</p>
+<p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
+<p align="center"><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
+</td>
+</tr>
 </table>
 
 ### Cohort 2 (4 online volunteers)
