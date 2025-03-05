@@ -31,6 +31,8 @@ export const Technologies: React.FC = () => {
   const [filteredProjects, setFilteredProjects] = useState<any>([]);
   const [projectsList, setProjectsList] = useState<any>([]);
   const [loading, setLoading] = useState<Boolean>(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 2;
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -113,6 +115,14 @@ export const Technologies: React.FC = () => {
     }
   };
 
+  const handlePageChange = (newPage: number): void => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTechList = techList.slice(startIndex, endIndex);
+
   return loading ? (
     <div className='technologiesPage'>
       <Loader />
@@ -148,7 +158,7 @@ export const Technologies: React.FC = () => {
       </div>
       <div className='technologies'>
         {projectsToUse.length ? (
-          techList.map((technology, idx) => {
+          currentTechList.map((technology, idx) => {
             const techProjects: any = projectsToUse.filter((project: any) =>
               project.tech.includes(technology.name)
             );
@@ -209,6 +219,20 @@ export const Technologies: React.FC = () => {
           })
         ) : (
           <div> No projects found</div>
+        )}
+      </div>
+      <div className='pagination'>
+        {Array.from(
+          { length: Math.ceil(techList.length / itemsPerPage) },
+          (_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={currentPage === i + 1 ? 'active' : ''}
+            >
+              {i + 1}
+            </button>
+          )
         )}
       </div>
     </div>
