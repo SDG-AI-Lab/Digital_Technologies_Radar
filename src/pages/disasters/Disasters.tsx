@@ -26,6 +26,8 @@ export const Disasters: React.FC = () => {
   const [disasterTypes, setDisasterTypes] = useState<any>([]);
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
   const [projectsList, setProjectsList] = useState<any>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   const {
     filteredValues,
@@ -123,6 +125,14 @@ export const Disasters: React.FC = () => {
     if (result) setFilteredProjects(result);
   }, [filteredValues]);
 
+  const handlePageChange = (newPage: number): void => {
+    setCurrentPage(newPage);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentDisasterTypes = disasterTypes.slice(startIndex, endIndex);
+
   return loading ? (
     <div className='disasters'>
       <Loader />
@@ -158,7 +168,7 @@ export const Disasters: React.FC = () => {
       </div>
 
       {projectsToUse.length ? (
-        disasterTypes.map((disaster: any, idx: number) => {
+        currentDisasterTypes.map((disaster: any, idx: number) => {
           const disasterProjects = projectsToUse.filter(
             (i: any) => i['disaster'] === disaster.name
           );
@@ -228,6 +238,20 @@ export const Disasters: React.FC = () => {
       ) : (
         <div> No projects found</div>
       )}
+      <div className='pagination'>
+        {Array.from(
+          { length: Math.ceil(disasterTypes.length / itemsPerPage) },
+          (_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={currentPage === i + 1 ? 'active' : ''}
+            >
+              {i + 1}
+            </button>
+          )
+        )}
+      </div>
     </div>
   );
 };
