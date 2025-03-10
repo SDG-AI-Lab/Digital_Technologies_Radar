@@ -96,6 +96,17 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
     setLoading(false);
   };
 
+  const [currentProjectPage, setCurrentProjectPage] = useState(1);
+  const projectsPerPage = 2;
+
+  const handleProjectPageChange = (newPage: number): void => {
+    setCurrentProjectPage(newPage);
+  };
+
+  const startProjectIndex = (currentProjectPage - 1) * projectsPerPage;
+  const endProjectIndex = startProjectIndex + projectsPerPage;
+  const currentProjects = projects.slice(startProjectIndex, endProjectIndex);
+
   return item && !loading ? (
     <div className='itemDetailsPage'>
       <div className='itemHero'>
@@ -189,12 +200,26 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
           <section id='item-projects-section'>
             <span className='itemDetailsTitle'> Projects </span>
             <div className='projectContainer projectsList'>
-              {projects.map((project: any) => (
+              {currentProjects.map((project: any) => (
                 <div key={project.id}>
                   <Project project={project} />
                   <hr />
                 </div>
               ))}
+            </div>
+            <div className='pagination'>
+              {Array.from(
+                { length: Math.ceil(projects.length / projectsPerPage) },
+                (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleProjectPageChange(i + 1)}
+                    className={currentProjectPage === i + 1 ? 'active' : ''}
+                  >
+                    {i + 1}
+                  </button>
+                )
+              )}
             </div>
           </section>
           <hr className='separater' />
