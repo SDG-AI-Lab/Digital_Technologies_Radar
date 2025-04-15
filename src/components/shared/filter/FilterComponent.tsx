@@ -84,6 +84,9 @@ export const FilterComponent: React.FC<Props> = ({
     setProjectsGroup
   } = useContext(RadarContext);
 
+  const selectedRegions = filteredValues.parameters['Region'];
+  const selectedSubregions = filteredValues.parameters['Sub Region'];
+
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
     status: [],
@@ -127,16 +130,48 @@ export const FilterComponent: React.FC<Props> = ({
     const sdgs = FilterUtils.getSDGs(blips, sdgKey);
     const data = FilterUtils.getData(blips, dataKey);
 
+    const selectedRegionLabels = transformArray(selectedRegions || [], 'label');
+    const selectedSubregionLabels = transformArray(
+      selectedSubregions || [],
+      'label'
+    );
+
     const options = {
       Region: transformArray(regions).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
-      'Sub Region': transformArray(subregions).map((a: string) => ({
+      'Sub Region': transformArray(
+        subregions.filter(
+          (sr) =>
+            selectedRegionLabels.length === 0 ||
+            selectedRegionLabels.includes('Global') ||
+            selectedRegionLabels.some((region) =>
+              sr.raw.Region.includes(region)
+            )
+        )
+      ).map((a: string) => ({
         label: a,
         value: a.toLowerCase()
       })),
-      Country: transformArray(countries).map((a: string) => ({
+      Country: transformArray(
+        countries
+          .filter(
+            (c) =>
+              selectedRegionLabels.length === 0 ||
+              selectedRegionLabels.includes('Global') ||
+              selectedRegionLabels.some((region) =>
+                c.raw.Region.includes(region)
+              )
+          )
+          .filter(
+            (c) =>
+              selectedSubregionLabels.length === 0 ||
+              selectedSubregionLabels.some((subregion) =>
+                c.raw.Subregion.includes(subregion)
+              )
+          )
+      ).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
@@ -163,7 +198,7 @@ export const FilterComponent: React.FC<Props> = ({
     };
 
     setOptions(options);
-  }, [tech]);
+  }, [tech, selectedRegions?.length, selectedSubregions?.length]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {

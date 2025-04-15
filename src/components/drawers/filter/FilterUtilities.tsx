@@ -12,14 +12,15 @@ import {
 const getSubregions = (
   rawBlipData: BlipType[],
   regionKey: string
-): SelectableItem[] => {
-  const newSubregions: Map<string, SelectableItem> = new Map();
+): Array<SelectableItem & { raw: BlipType }> => {
+  const newSubregions: Map<string, SelectableItem & { raw: BlipType }> =
+    new Map();
+
   rawBlipData.forEach((val) => {
     const blipRegions: Set<string> = new Set(val[regionKey]);
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {
-      // @ts-expect-error
       newSubregions.set(region, { uuid: uuidv4(), name: region, raw: val });
     });
   });
@@ -51,14 +52,15 @@ const getRegions = (
 const getCountries = (
   rawBlipData: BlipType[],
   countryKey: string
-): SelectableItem[] => {
-  const newCountries: Map<string, SelectableItem> = new Map();
+): Array<SelectableItem & { raw: BlipType }> => {
+  const newCountries: Map<string, SelectableItem & { raw: BlipType }> =
+    new Map();
   rawBlipData.forEach((val) => {
     const blipCountries: Set<string> = new Set(val[countryKey]);
     blipCountries.delete('');
 
     blipCountries.forEach((country) => {
-      newCountries.set(country, { uuid: uuidv4(), name: country });
+      newCountries.set(country, { uuid: uuidv4(), name: country, raw: val });
     });
   });
 
