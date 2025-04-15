@@ -12,12 +12,19 @@ var geos = require('geos-major');
 
 export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
   const blipsMap = new Map();
-  const { radarStateValues } = useContext(RadarContext);
-  const {
-    country: selectedCountry,
-    region: selectedRegion,
-    subRegion: selectedSubRegion
-  } = radarStateValues;
+  const { filteredValues } = useContext(RadarContext);
+
+  const selectedRegionLabels = (filteredValues.parameters['Region'] || []).map(
+    (r: { label: string }) => r.label
+  );
+
+  const selectedSubregionLabels = (
+    filteredValues.parameters['Sub Region'] || []
+  ).map((sr: { label: string }) => sr.label);
+
+  const selectedCountryLabels = (
+    filteredValues.parameters['Country'] || []
+  ).map((c: { label: string }) => c.label);
 
   blips.forEach((blip: any) => {
     const countries = blip['Country of Implementation'];
@@ -31,15 +38,18 @@ export const mapBlips = (blips: BlipType[]): Map<string, BlipType[]> => {
         const code = getCode(country);
         const { continent, subContinent } = geos.country(code) || {};
 
-        if (selectedCountry && selectedCountry !== 'all') {
-          return country === selectedCountry;
+        if (selectedCountryLabels.length) {
+          return selectedCountryLabels.includes(country);
         }
-        if (selectedSubRegion && selectedSubRegion !== 'all') {
-          return subContinent === selectedSubRegion;
+
+        if (selectedSubregionLabels.length) {
+          return selectedSubregionLabels.includes(subContinent);
         }
-        if (selectedRegion && selectedRegion !== 'all') {
-          return continent === selectedRegion;
+
+        if (selectedRegionLabels.length) {
+          return selectedRegionLabels.includes(continent);
         }
+
         return true;
       })
       .forEach((country: string) => {
