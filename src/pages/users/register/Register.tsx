@@ -16,7 +16,7 @@ import './Register.scss';
 export const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('user');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
