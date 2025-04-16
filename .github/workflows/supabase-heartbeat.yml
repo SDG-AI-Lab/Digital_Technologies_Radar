@@ -1,0 +1,31 @@
+name: Supabase Daily Heartbeat
+
+on:
+  schedule:
+    # This runs at 12:00 PM UTC every day
+    - cron: '0 12 * * *'
+
+  # Optional: Allow manual triggering through GitHub UI
+  workflow_dispatch:
+
+jobs:
+  ping_supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Supabase Status
+        id: ping
+        run: |
+          echo "Pinging Supabase database to prevent inactivity pause..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X GET "https://sxmzetpbqzjchodypatn.supabase.co/rest/v1/dataset_version?select=data_version&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4bXpldHBicXpqY2hvZHlwYXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwMjMzOTEsImV4cCI6MTk5ODU5OTM5MX0.9iJ44OhfPGJ7zinXM3M7rattWAb5r12oP-XpHlvILeQ" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4bXpldHBicXpqY2hvZHlwYXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwMjMzOTEsImV4cCI6MTk5ODU5OTM5MX0.9iJ44OhfPGJ7zinXM3M7rattWAb5r12oP-XpHlvILeQ")
+
+          echo "HTTP Response Code: $RESPONSE"
+
+          if [ "$RESPONSE" -ge 200 ] && [ "$RESPONSE" -lt 300 ]; then
+            echo "Supabase ping successful!"
+          else
+            echo "Supabase ping failed with response code: $RESPONSE"
+            exit 1
+          fi
