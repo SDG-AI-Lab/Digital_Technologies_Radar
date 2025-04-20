@@ -84,6 +84,14 @@ export const FilterComponent: React.FC<Props> = ({
     setProjectsGroup
   } = useContext(RadarContext);
 
+  const [allBlips, setAllBlips] = useState<BlipType[]>([]);
+
+  useEffect(() => {
+    if (blips.length && !allBlips.length) {
+      setAllBlips(blips);
+    }
+  }, [blips, allBlips]);
+
   const selectedRegions = filteredValues.parameters['Region'];
   const selectedSubregions = filteredValues.parameters['Sub Region'];
 
@@ -121,9 +129,10 @@ export const FilterComponent: React.FC<Props> = ({
       setLabels(updatedLabels);
       setInitialFilteredValues(updatedLabels);
     }
-    const regions = FilterUtils.getRegions(blips, regionKey);
-    const subregions = FilterUtils.getSubregions(blips, subregionKey);
-    const countries = FilterUtils.getCountries(blips, countryKey);
+
+    const regions = FilterUtils.getRegions(allBlips, regionKey);
+    const subregions = FilterUtils.getSubregions(allBlips, subregionKey);
+    const countries = FilterUtils.getCountries(allBlips, countryKey);
     const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
     const useCases = FilterUtils.getUseCases(blips, useCaseKey);
     const implementers = FilterUtils.getImplementers(blips, implementerKey);
@@ -198,7 +207,7 @@ export const FilterComponent: React.FC<Props> = ({
     };
 
     setOptions(options);
-  }, [tech, selectedRegions?.length, selectedSubregions?.length]);
+  }, [tech, allBlips, selectedRegions?.length, selectedSubregions?.length]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {
