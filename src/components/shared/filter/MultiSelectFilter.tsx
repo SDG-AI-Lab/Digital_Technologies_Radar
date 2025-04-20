@@ -21,11 +21,8 @@ export const MultiSelectFilter: React.FC<Props> = ({
   useEffect(() => {
     const value = filteredValues['parameters'][label];
     setSelected(value || []);
-  }, []);
+  }, [filteredValues, label]);
 
-  useEffect(() => {
-    setMultiSelected(selected);
-  }, [selected]);
   return (
     <div>
       <MultiSelect
@@ -33,6 +30,7 @@ export const MultiSelectFilter: React.FC<Props> = ({
         value={selected}
         onChange={(e: any) => {
           setSelected(e);
+          setMultiSelected(e);
           setProjectsGroup('');
         }}
         labelledBy='Select'
