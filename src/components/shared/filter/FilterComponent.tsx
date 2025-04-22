@@ -84,6 +84,17 @@ export const FilterComponent: React.FC<Props> = ({
     setProjectsGroup
   } = useContext(RadarContext);
 
+  const [allBlips, setAllBlips] = useState<BlipType[]>([]);
+
+  useEffect(() => {
+    if (blips.length && !allBlips.length) {
+      setAllBlips(blips);
+    }
+  }, [blips, allBlips]);
+
+  const selectedRegions = filteredValues.parameters['Region'];
+  const selectedSubregions = filteredValues.parameters['Sub Region'];
+
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState<Labels>({
     status: [],
@@ -118,25 +129,58 @@ export const FilterComponent: React.FC<Props> = ({
       setLabels(updatedLabels);
       setInitialFilteredValues(updatedLabels);
     }
-    const regions = FilterUtils.getRegions(blips, regionKey);
-    const subregions = FilterUtils.getSubregions(blips, subregionKey);
-    const countries = FilterUtils.getCountries(blips, countryKey);
+
+    const regions = FilterUtils.getRegions(allBlips, regionKey);
+    const subregions = FilterUtils.getSubregions(allBlips, subregionKey);
+    const countries = FilterUtils.getCountries(allBlips, countryKey);
     const disasterTypes = FilterUtils.getDisasterTypes(blips, disasterKey);
     const useCases = FilterUtils.getUseCases(blips, useCaseKey);
     const implementers = FilterUtils.getImplementers(blips, implementerKey);
     const sdgs = FilterUtils.getSDGs(blips, sdgKey);
     const data = FilterUtils.getData(blips, dataKey);
 
+    const selectedRegionLabels = transformArray(selectedRegions || [], 'label');
+    const selectedSubregionLabels = transformArray(
+      selectedSubregions || [],
+      'label'
+    );
+
     const options = {
       Region: transformArray(regions).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
-      'Sub Region': transformArray(subregions).map((a: string) => ({
+      'Sub Region': transformArray(
+        subregions.filter(
+          (sr) =>
+            selectedRegionLabels.length === 0 ||
+            selectedRegionLabels.includes('Global') ||
+            selectedRegionLabels.some((region) =>
+              sr.raw.Region.includes(region)
+            )
+        )
+      ).map((a: string) => ({
         label: a,
         value: a.toLowerCase()
       })),
-      Country: transformArray(countries).map((a: string) => ({
+      Country: transformArray(
+        countries
+          .filter(
+            (c) =>
+              selectedRegionLabels.length === 0 ||
+              selectedRegionLabels.includes('Global') ||
+              selectedRegionLabels.some((region) =>
+                c.raw.Region.includes(region)
+              )
+          )
+          .filter(
+            (c) =>
+              selectedSubregionLabels.length === 0 ||
+              selectedSubregionLabels.some((subregion) =>
+                c.raw.Subregion.includes(subregion)
+              )
+          )
+      ).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
@@ -163,7 +207,7 @@ export const FilterComponent: React.FC<Props> = ({
     };
 
     setOptions(options);
-  }, [tech]);
+  }, [tech, allBlips, selectedRegions?.length, selectedSubregions?.length]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {
