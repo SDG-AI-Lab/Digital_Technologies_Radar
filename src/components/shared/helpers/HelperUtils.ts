@@ -157,9 +157,9 @@ export const getParameterFilteredProjects = (
   if (!parameters) return [];
 
   let filteredProjects = [...projectsList];
-
+  console.log('parameter filters', parameterFilters);
   // Country (most specific)
-  const countryFilters: any = parameterFilters['Country'].reduce(
+  const countryFilters: any = (parameterFilters?.['Country'] || []).reduce(
     (countryArr: any, country: { label: string; value: string }) => {
       countryArr.push(country.label);
       return countryArr;
@@ -178,7 +178,7 @@ export const getParameterFilteredProjects = (
   }
 
   // Sub Region
-  const subRegionFilters: any = parameterFilters['Sub Region'].reduce(
+  const subRegionFilters: any = (parameterFilters?.['Sub Region'] || []).reduce(
     (subRegionArr: any, subRegion: { label: string; value: string }) => {
       subRegionArr.push(subRegion.label);
       return subRegionArr;
@@ -195,7 +195,7 @@ export const getParameterFilteredProjects = (
   }
 
   // Region (most general)
-  const regionFilters: any = parameterFilters['Region'].reduce(
+  const regionFilters: any = (parameterFilters['Region'] || []).reduce(
     (regionArr: any, region: { label: string; value: string }) => {
       regionArr.push(region.label);
       return regionArr;
@@ -212,7 +212,7 @@ export const getParameterFilteredProjects = (
   }
 
   // Other filters (Data, SDG, UN Host, Disaster Type)
-  const dataFilters: any = parameterFilters['Data'].reduce(
+  const dataFilters: any = (parameterFilters?.['Data'] || []).reduce(
     (dataArr: any, data: { label: string; value: string }) => {
       dataArr.push(data.label);
       return dataArr;
@@ -228,7 +228,7 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const sdgFilters: any = parameterFilters['SDG'].reduce(
+  const sdgFilters: any = (parameterFilters?.['SDG'] || []).reduce(
     (sdgArr: any, sdg: { label: string; value: string }) => {
       sdgArr.push(sdg.label);
       return sdgArr;
@@ -244,7 +244,7 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const unHostFilters: any = parameterFilters['UN Host'].reduce(
+  const unHostFilters: any = (parameterFilters?.['UN Host'] || []).reduce(
     (unHostArr: any, unHost: { label: string; value: string }) => {
       unHostArr.push(unHost.label);
       return unHostArr;
@@ -260,13 +260,12 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const disasterFilters: any = parameterFilters['Disaster Type'].reduce(
-    (disasterArr: any, disaster: { label: string; value: string }) => {
-      disasterArr.push(disaster.label);
-      return disasterArr;
-    },
-    []
-  );
+  const disasterFilters: any = (
+    parameterFilters?.['Disaster Type'] || []
+  ).reduce((disasterArr: any, disaster: { label: string; value: string }) => {
+    disasterArr.push(disaster.label);
+    return disasterArr;
+  }, []);
 
   if (disasterFilters.length > 0) {
     filteredProjects = filteredProjects.filter((project: any) => {
