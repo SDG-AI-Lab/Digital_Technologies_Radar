@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
+import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
 
 import './HomeCard.scss';
 interface Props {
@@ -12,8 +13,6 @@ interface Props {
 
 export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
   const { setCurrentProject } = useContext(RadarContext);
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='homeComponent'>
       <Link
@@ -25,7 +24,7 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
             src={project.img_url || `${project['Image Url']}`}
             onError={(e) => {
               // @ts-expect-error
-              e.target.src = fallBackImage;
+              e.target.src = assignRandomFallbackImage();
             }}
             alt='Default Image'
           />
