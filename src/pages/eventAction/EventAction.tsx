@@ -29,7 +29,8 @@ const initialFormValues = {
   contacts: '',
   solutions: '',
   resources: '',
-  help_needed: 0
+  help_needed: 0,
+  how_to_help: ''
 };
 
 export const EventAction: React.FC<Props> = ({ mode }) => {
@@ -81,8 +82,27 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       payload[item] = `{${payload[item]}}`;
     });
 
-    if (Object.values(payload).includes(''))
-      return alert('Please fill all fields');
+    const alwaysRequiredFields: Array<keyof typeof payload> = [
+      'title',
+      'overview',
+      'img_url',
+      'impact',
+      'source',
+      'summary',
+      'contacts',
+      'solutions',
+      'resources',
+    ];
+
+    const missingRequiredField = alwaysRequiredFields.find(field => !payload[field]);
+    if (missingRequiredField) {
+      return alert(`Please fill the required field: ${missingRequiredField}`);
+    }
+
+    if (Number(payload['help_needed']) === 1 && !payload['how_to_help']) {
+      return alert('Please provide details on how to help when "Help Needed?" is checked.');
+    }
+
     payload['slug'] = toSnakeCase(formValues.title as string);
     let supabaseError = false;
     if (mode.toLocaleLowerCase() === 'add') {
@@ -234,7 +254,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           <FormLabel textAlign={'end'}>Help Needed?</FormLabel>
           <Checkbox
             name='help_needed'
-            isChecked={formValues['help_needed'] === 1}
+            isChecked={Number(formValues['help_needed']) === 1}
             onChange={(e) =>
               setFormValues((prevState) => ({
                 ...prevState,
@@ -243,6 +263,20 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             }
           />
         </FormControl>
+
+        {Number(formValues['help_needed']) === 1 && (
+          <FormControl display={'flex'} gap={3} mb={5}>
+            <FormLabel textAlign={'end'}>How to Help</FormLabel>
+            <Textarea
+              w={'100%'}
+              name='how_to_help'
+              value={formValues['how_to_help'] as string ?? ''}
+              size='sm'
+              onChange={handleChange}
+              data-testid='field-how_to_help'
+            />
+          </FormControl>
+        )}
 
         <div className='submitBtn'>
           <Button

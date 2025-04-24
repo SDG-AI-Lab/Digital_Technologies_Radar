@@ -118,13 +118,16 @@ export const PageDetails: React.FC<Props> = ({
 
       <div className='itemBody'>
         <div className='itemToc'>
-          {sections.map((section: string, idx: number) => (
+          {sections
+            .filter(section =>
+              section.toLowerCase() !== 'how to help' || helpNeeded
+            )
+            .map((section: string, idx: number) => (
             <a
               className={cx({ bolden: selectedSection === section })}
               key={idx}
               onClick={() => {
                 handleScroll(section.replace(/\s+/g, '_'));
-
                 setSelectedSection(section);
               }}
             >
@@ -133,18 +136,25 @@ export const PageDetails: React.FC<Props> = ({
           ))}
         </div>
         <div className='itemContent'>
-          {sections.map((section: string, idx: number) => (
-            <div key={idx}>
-              <section id={section.replace(/\s+/g, '_')}>
-                <span className='itemDetailsTitle'>
-                  {section.toLocaleUpperCase()}
-                </span>
+          {sections.map((section: string, idx: number) => {
+            const lowerCaseSection = section.toLowerCase();
 
-                <p className='itemDetailsContent'>{itemDetails[section]}</p>
-              </section>
-              <hr className='separater' />
-            </div>
-          ))}
+            if (lowerCaseSection === 'how to help' && !helpNeeded) {
+              return null;
+            }
+
+            return (
+              <div key={idx}>
+                <section id={section.replace(/\s+/g, '_')}>
+                  <span className='itemDetailsTitle'>
+                    {section.toLocaleUpperCase()}
+                  </span>
+                  <p className='itemDetailsContent'>{itemDetails[section]}</p>
+                </section>
+                <hr className='separater' />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
