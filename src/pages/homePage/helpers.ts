@@ -1,4 +1,5 @@
 import background from 'assets/landing/background2.jpg';
+import React from 'react';
 
 interface CarouselItem {
   img_url: string;
@@ -28,5 +29,3 @@ export const CAROUSEL_ITEMS: CarouselItem[] = [
     route: '/#/technologies'
   }
 ];
-
-//hello
