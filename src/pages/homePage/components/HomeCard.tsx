@@ -13,7 +13,7 @@ interface Props {
 export const HomeCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+    'https://previews.us-east-1.widencdn.net/preview/51479351/assets/asset-view/e0444aa5-8f39-47d6-afcb-a8bf5a1e211a/thumbnail/eyJ3IjoyNTAsImgiOjI1MCwic2NvcGUiOiJhcHAifQ==?sig.ver=1&sig.keyId=us-east-1.20240821&sig.expires=1745330400&sig=VpoSfjUSaeGeFP2XregCH9OSTfJRGcUNoI5nNuk8XS4';
   return (
     <div className='homeComponent'>
       <Link
