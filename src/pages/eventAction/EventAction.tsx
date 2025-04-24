@@ -63,6 +63,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       setFormValues(currentItem);
     }
     void getLocations();
+
   }, []);
 
   const getLocations = async (): Promise<void> => {

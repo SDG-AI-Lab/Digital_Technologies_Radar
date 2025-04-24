@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from 'helpers/databaseClient';
 import { updateDataVersion } from 'helpers/dataUtils';
 import { isAdmin } from 'components/shared/helpers/auth';
+import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 
 interface Props {
   item: Record<string, string | string[] | number>;
@@ -149,7 +150,7 @@ export const PageDetails: React.FC<Props> = ({
                   <span className='itemDetailsTitle'>
                     {section.toLocaleUpperCase()}
                   </span>
-                  <p className='itemDetailsContent'>{itemDetails[section]}</p>
+                  <p className='itemDetailsContent'>{itemDetails[toSnakeCase(section)]}</p>
                 </section>
                 <hr className='separater' />
               </div>
