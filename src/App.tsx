@@ -19,7 +19,7 @@ export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDataVersion = async () => {
+    const fetchDataVersion = async (): Promise<void> => {
       try {
         await getDataVersion();
       } catch (error) {
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
       }
     };
 
-    fetchDataVersion();
+    void fetchDataVersion();
   }, []);
 
   if (isLoading) {
