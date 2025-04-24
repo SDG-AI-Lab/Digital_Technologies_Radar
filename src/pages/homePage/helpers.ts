@@ -1,5 +1,5 @@
 import background from 'assets/landing/background2.jpg';
-import React from 'react';
+// import background from 'assets/landing/background.jpg';
 
 interface CarouselItem {
   img_url: string;
