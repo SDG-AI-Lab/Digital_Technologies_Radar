@@ -271,15 +271,15 @@ describe('getParameterFilteredProjects', () => {
     );
   });
 
-  it('should combine parameter filters using boolean and', () => {
+  it('should combine parameter filters using boolean or', () => {
     const results = getParameterFilteredProjects(
       {
         ...parameterFilters,
         Region: [{ label: 'Oceania', value: 'oceania' }],
         SDG: [
           {
-            label: 'SDG 13',
-            value: 'sdg 13'
+            label: 'SDG 9',
+            value: 'sdg 9'
           }
         ]
       },
@@ -287,7 +287,7 @@ describe('getParameterFilteredProjects', () => {
       1
     );
 
-    expect(results.length).toBe(1);
+    expect(results.length).toBe(2);
   });
 });
 

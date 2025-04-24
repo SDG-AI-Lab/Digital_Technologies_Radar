@@ -155,47 +155,8 @@ export const getParameterFilteredProjects = (
   parameters: number
 ): any => {
   if (!parameters) return [];
-
-  let filteredProjects = [...projectsList];
-  console.log('parameter filters', parameterFilters);
-  // Country (most specific)
-  const countryFilters: any = (parameterFilters?.['Country'] || []).reduce(
-    (countryArr: any, country: { label: string; value: string }) => {
-      countryArr.push(country.label);
-      return countryArr;
-    },
-    []
-  );
-
-  if (countryFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return countryFilters.some((item: any) =>
-        (project['country'] || project['Country of Implementation']).includes(
-          item
-        )
-      );
-    });
-  }
-
-  // Sub Region
-  const subRegionFilters: any = (parameterFilters?.['Sub Region'] || []).reduce(
-    (subRegionArr: any, subRegion: { label: string; value: string }) => {
-      subRegionArr.push(subRegion.label);
-      return subRegionArr;
-    },
-    []
-  );
-
-  if (subRegionFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return subRegionFilters.some((item: any) =>
-        (project['sub_region'] || project['Subregion']).includes(item)
-      );
-    });
-  }
-
-  // Region (most general)
-  const regionFilters: any = (parameterFilters['Region'] || []).reduce(
+  // Region
+  const regionFilters: any = parameterFilters['Region'].reduce(
     (regionArr: any, region: { label: string; value: string }) => {
       regionArr.push(region.label);
       return regionArr;
@@ -203,16 +164,47 @@ export const getParameterFilteredProjects = (
     []
   );
 
-  if (regionFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return regionFilters.some((item: any) =>
-        (project['region'] || project['Region']).includes(item)
-      );
-    });
-  }
+  let regionFilteredProjects: any = [];
+  regionFilteredProjects = projectsList.filter((project: any) => {
+    return regionFilters.some((item: any) =>
+      (project['region'] || project['Region']).includes(item)
+    );
+  });
 
-  // Other filters (Data, SDG, UN Host, Disaster Type)
-  const dataFilters: any = (parameterFilters?.['Data'] || []).reduce(
+  // Sub Region
+  const subRegionFilters: any = parameterFilters['Sub Region'].reduce(
+    (subRegionArr: any, subRegion: { label: string; value: string }) => {
+      subRegionArr.push(subRegion.label);
+      return subRegionArr;
+    },
+    []
+  );
+
+  const subRegionFilteredProjects = projectsList.filter((project: any) => {
+    return subRegionFilters.some((item: any) =>
+      (project['sub_region'] || project['Subregion']).includes(item)
+    );
+  });
+
+  // Country
+  const countryFilters: any = parameterFilters['Country'].reduce(
+    (countryArr: any, country: { label: string; value: string }) => {
+      countryArr.push(country.label);
+      return countryArr;
+    },
+    []
+  );
+
+  const countryFilteredProjects = projectsList.filter((project: any) => {
+    return countryFilters.some((item: any) =>
+      (project['country'] || project['Country of Implementation']).includes(
+        item
+      )
+    );
+  });
+
+  // Data
+  const dataFilters: any = parameterFilters['Data'].reduce(
     (dataArr: any, data: { label: string; value: string }) => {
       dataArr.push(data.label);
       return dataArr;
@@ -220,15 +212,14 @@ export const getParameterFilteredProjects = (
     []
   );
 
-  if (dataFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return dataFilters.some((item: any) =>
-        (project['data'] || project['Data']).includes(item)
-      );
-    });
-  }
+  const dataFilteredProjects = projectsList.filter((project: any) => {
+    return dataFilters.some((item: any) =>
+      (project['data'] || project['Data']).includes(item)
+    );
+  });
 
-  const sdgFilters: any = (parameterFilters?.['SDG'] || []).reduce(
+  // SDG
+  const sdgFilters: any = parameterFilters['SDG'].reduce(
     (sdgArr: any, sdg: { label: string; value: string }) => {
       sdgArr.push(sdg.label);
       return sdgArr;
@@ -236,15 +227,14 @@ export const getParameterFilteredProjects = (
     []
   );
 
-  if (sdgFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return sdgFilters.some((item: any) =>
-        (project['sdg'] || project['SDG']).includes(item)
-      );
-    });
-  }
+  const sdgFilteredProjects = projectsList.filter((project: any) => {
+    return sdgFilters.some((item: any) =>
+      (project['sdg'] || project['SDG']).includes(item)
+    );
+  });
 
-  const unHostFilters: any = (parameterFilters?.['UN Host'] || []).reduce(
+  // UN Host
+  const unHostFilters: any = parameterFilters['UN Host'].reduce(
     (unHostArr: any, unHost: { label: string; value: string }) => {
       unHostArr.push(unHost.label);
       return unHostArr;
@@ -252,30 +242,27 @@ export const getParameterFilteredProjects = (
     []
   );
 
-  if (unHostFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return unHostFilters.some((item: any) =>
-        (project['un_host'] || project['Un Host Organisation']).includes(item)
-      );
-    });
-  }
+  const unHostFilteredProjects = projectsList.filter((project: any) => {
+    return unHostFilters.some((item: any) =>
+      (project['un_host'] || project['Un Host Organisation']).includes(item)
+    );
+  });
 
-  const disasterFilters: any = (
-    parameterFilters?.['Disaster Type'] || []
-  ).reduce((disasterArr: any, disaster: { label: string; value: string }) => {
-    disasterArr.push(disaster.label);
-    return disasterArr;
-  }, []);
+  // Disaster Type
+  const disasterFilters: any = parameterFilters['Disaster Type'].reduce(
+    (disasterArr: any, disaster: { label: string; value: string }) => {
+      disasterArr.push(disaster.label);
+      return disasterArr;
+    },
+    []
+  );
 
-  if (disasterFilters.length > 0) {
-    filteredProjects = filteredProjects.filter((project: any) => {
-      return disasterFilters.some((item: any) =>
-        (project?.disaster_type || project['Disaster Type']).includes(item)
-      );
-    });
-  }
+  const disasterFilteredProjects = projectsList.filter((project: any) => {
+    return disasterFilters.some((item: any) =>
+      (project?.disaster_type || project['Disaster Type']).includes(item)
+    );
+  });
 
-  // Return false if no filters are applied
   if (
     !disasterFilters.length &&
     !unHostFilters.length &&
@@ -288,7 +275,15 @@ export const getParameterFilteredProjects = (
     return false;
   }
 
-  return filteredProjects;
+  return [
+    ...regionFilteredProjects,
+    ...subRegionFilteredProjects,
+    ...countryFilteredProjects,
+    ...dataFilteredProjects,
+    ...sdgFilteredProjects,
+    ...unHostFilteredProjects,
+    ...disasterFilteredProjects
+  ];
 };
 
 export const sliceForBadge = (projectArray: string[]): string[] => {
