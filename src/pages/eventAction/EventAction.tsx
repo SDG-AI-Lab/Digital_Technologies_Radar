@@ -82,16 +82,14 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       payload[item] = `{${payload[item]}}`;
     });
 
-    const alwaysRequiredFields: Array<keyof typeof payload> = [
+    const alwaysRequiredFields: string[] = [
       'title',
       'overview',
       'img_url',
       'impact',
       'source',
       'summary',
-      'contacts',
-      'solutions',
-      'resources'
+      'location_id'
     ];
 
     const missingRequiredField = alwaysRequiredFields.find(
