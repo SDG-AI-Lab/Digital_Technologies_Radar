@@ -120,21 +120,21 @@ export const PageDetails: React.FC<Props> = ({
       <div className='itemBody'>
         <div className='itemToc'>
           {sections
-            .filter(section =>
-              section.toLowerCase() !== 'how to help' || helpNeeded
+            .filter(
+              (section) => section.toLowerCase() !== 'how to help' || helpNeeded
             )
             .map((section: string, idx: number) => (
-            <a
-              className={cx({ bolden: selectedSection === section })}
-              key={idx}
-              onClick={() => {
-                handleScroll(section.replace(/\s+/g, '_'));
-                setSelectedSection(section);
-              }}
-            >
-              {section.toLocaleUpperCase()}
-            </a>
-          ))}
+              <a
+                className={cx({ bolden: selectedSection === section })}
+                key={idx}
+                onClick={() => {
+                  handleScroll(section.replace(/\s+/g, '_'));
+                  setSelectedSection(section);
+                }}
+              >
+                {section.toLocaleUpperCase()}
+              </a>
+            ))}
         </div>
         <div className='itemContent'>
           {sections.map((section: string, idx: number) => {
@@ -150,7 +150,9 @@ export const PageDetails: React.FC<Props> = ({
                   <span className='itemDetailsTitle'>
                     {section.toLocaleUpperCase()}
                   </span>
-                  <p className='itemDetailsContent'>{itemDetails[toSnakeCase(section)]}</p>
+                  <p className='itemDetailsContent'>
+                    {itemDetails[toSnakeCase(section)]}
+                  </p>
                 </section>
                 <hr className='separater' />
               </div>

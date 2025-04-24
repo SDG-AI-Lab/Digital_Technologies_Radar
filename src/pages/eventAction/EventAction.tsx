@@ -63,7 +63,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       setFormValues(currentItem);
     }
     void getLocations();
-
   }, []);
 
   const getLocations = async (): Promise<void> => {
@@ -92,16 +91,20 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       'summary',
       'contacts',
       'solutions',
-      'resources',
+      'resources'
     ];
 
-    const missingRequiredField = alwaysRequiredFields.find(field => !payload[field]);
+    const missingRequiredField = alwaysRequiredFields.find(
+      (field) => !payload[field]
+    );
     if (missingRequiredField) {
       return alert(`Please fill the required field: ${missingRequiredField}`);
     }
 
     if (Number(payload['help_needed']) === 1 && !payload['how_to_help']) {
-      return alert('Please provide details on how to help when "Help Needed?" is checked.');
+      return alert(
+        'Please provide details on how to help when "Help Needed?" is checked.'
+      );
     }
 
     payload['slug'] = toSnakeCase(formValues.title as string);
@@ -271,7 +274,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
             <Textarea
               w={'100%'}
               name='how_to_help'
-              value={formValues['how_to_help'] as string ?? ''}
+              value={(formValues['how_to_help'] as string) ?? ''}
               size='sm'
               onChange={handleChange}
               data-testid='field-how_to_help'
