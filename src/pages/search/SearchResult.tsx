@@ -75,7 +75,7 @@ export const SearchResult: React.FC<SearchResultProps> = (
                           objectFit='scale-down'
                           h='100%'
                           src={`${value['Image Url']}`}
-                          fallbackSrc={assignRandomFallbackImage()} //'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                          fallbackSrc={assignRandomFallbackImage()}
                           alt='Default Image'
                         />
                       </Stack>
