@@ -36,7 +36,7 @@ const fallbackImages = [
   'fallback/tech.png'
 ];
 
-export const getNextFallbackImage = () => {
+export const getNextFallbackImage = (): string => {
   const image = fallbackImages[fallbackImageIndex % fallbackImages.length];
   fallbackImageIndex++;
   return image;
