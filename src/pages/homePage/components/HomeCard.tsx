@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
-import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
+import { getNextFallbackImage } from '../helpers';
 
 interface Props {
   project: BlipType;
@@ -25,7 +25,7 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
             src={project.img_url || `${project['Image Url']}`}
             onError={(e) => {
               // @ts-expect-error
-              e.target.src = assignRandomFallbackImage();
+              e.target.src = getNextFallbackImage();
             }}
             alt='Default Image'
           />
