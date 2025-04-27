@@ -30,6 +30,7 @@ export const InfoCard: React.FC<Props> = ({
 }) => {
   const infoRoute = useLocation().pathname.split('/')[1];
   const fallBackImage = background;
+  // 'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <Link to={`/${infoRoute}/${slug}`} className='infoCard'>
       <div className='infoImage'>

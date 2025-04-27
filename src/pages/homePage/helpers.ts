@@ -28,16 +28,3 @@ export const CAROUSEL_ITEMS: CarouselItem[] = [
     route: '/#/technologies'
   }
 ];
-
-let fallbackImageIndex = 0;
-const fallbackImages = [
-  'fallback/globe.png',
-  'fallback/world-map.png',
-  'fallback/tech.png'
-];
-
-export const getNextFallbackImage = (): string => {
-  const image = fallbackImages[fallbackImageIndex % fallbackImages.length];
-  fallbackImageIndex++;
-  return image;
-};
