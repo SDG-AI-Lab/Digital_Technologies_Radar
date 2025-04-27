@@ -22,8 +22,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 import { approveProject } from 'helpers/dataUtils';
 
-import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
-
 import './Search.scss';
 
 interface SearchViewProps {
@@ -157,7 +155,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
               <Image
                 objectFit='cover'
                 src={`${techContent['Image Url'] || techContent['img_url']}`}
-                fallbackSrc={assignRandomFallbackImage()}
+                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
                 alt='Default Image'
               />
             </Stack>

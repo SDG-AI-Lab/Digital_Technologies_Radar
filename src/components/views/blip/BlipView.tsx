@@ -12,7 +12,6 @@ import {
   Link
 } from '@chakra-ui/react';
 import { useRadarState } from '@undp_sdg_ai_lab/undp-radar';
-import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
 
 import './BlipView.scss';
 
@@ -34,7 +33,7 @@ export const BlipView: FC = () => {
               width={'75%'}
               paddingLeft={'25%'}
               src={`${selectedItem['Image Url']}`}
-              fallbackSrc={assignRandomFallbackImage()}
+              fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
               alt='Default Image'
             />
           </Stack>

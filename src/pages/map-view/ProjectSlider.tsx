@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Stack, Text, Badge, Flex, Image } from '@chakra-ui/react';
 import SearchView from '../search/SearchView';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar/dist/types';
-import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
 
 interface Props {
   blips: BlipType[];
@@ -50,7 +49,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
               <Image
                 objectFit='cover'
                 src={`${value['Image Url']}`}
-                fallbackSrc={assignRandomFallbackImage()}
+                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
                 alt='Default Image'
               />
             </Stack>

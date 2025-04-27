@@ -5,7 +5,6 @@ import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { ProjectBadge } from 'components/shared/projectBadges/ProjectBadges';
 import { RadarContext } from 'navigation/context';
 import { Link, useLocation } from 'react-router-dom';
-import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
 
 interface Props {
   project: BlipType;
@@ -21,7 +20,8 @@ export const Project: React.FC<Props> = ({
   const { setCurrentProject } = useContext(RadarContext);
 
   const path = useLocation().pathname;
-
+  const fallBackImage =
+    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='projectComponent'>
       <div className='projectImage-large'>
@@ -29,7 +29,7 @@ export const Project: React.FC<Props> = ({
           src={project.img_url || `${project['Image Url']}`}
           onError={(e) => {
             // @ts-expect-error
-            e.target.src = assignRandomFallbackImage();
+            e.target.src = fallBackImage;
           }}
           alt='Default Image'
         />

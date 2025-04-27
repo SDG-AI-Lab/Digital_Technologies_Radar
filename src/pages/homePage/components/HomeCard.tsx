@@ -5,7 +5,6 @@ import React, { useContext } from 'react';
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
-import { getNextFallbackImage } from '../helpers';
 
 interface Props {
   project: BlipType;
@@ -13,6 +12,8 @@ interface Props {
 
 export const HomeCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
+  const fallBackImage =
+    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
   return (
     <div className='homeComponent'>
       <Link
@@ -25,7 +26,7 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
             src={project.img_url || `${project['Image Url']}`}
             onError={(e) => {
               // @ts-expect-error
-              e.target.src = getNextFallbackImage();
+              e.target.src = fallBackImage;
             }}
             alt='Default Image'
           />
