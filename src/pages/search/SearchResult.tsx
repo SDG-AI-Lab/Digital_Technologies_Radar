@@ -16,6 +16,7 @@ import SearchView from './SearchView';
 import usePagination from './Pagination';
 import Pagination from '@mui/material/Pagination';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { assignRandomFallbackImage } from 'helpers/ProjectImgFallback';
 
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
 
@@ -74,7 +75,7 @@ export const SearchResult: React.FC<SearchResultProps> = (
                           objectFit='scale-down'
                           h='100%'
                           src={`${value['Image Url']}`}
-                          fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                          fallbackSrc={assignRandomFallbackImage()}
                           alt='Default Image'
                         />
                       </Stack>
