@@ -22,7 +22,9 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallbackUsed = useRef<string | null>(null);
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement>
+  ): void => {
     if (!fallbackUsed.current && fallbackCounter < fallbackImages.length) {
       fallbackUsed.current = fallbackImages[fallbackCounter];
       fallbackCounter++;
