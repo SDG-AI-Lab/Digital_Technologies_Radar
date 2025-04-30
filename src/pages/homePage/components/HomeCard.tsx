@@ -20,7 +20,6 @@ let fallbackImageIndex = 0;
 
 export const HomeCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
-  const fallbackUsed = useRef<string | null>(null);
 
   const getNextFallbackImage = (): string => {
     const image = fallbackImages[fallbackImageIndex % fallbackImages.length];
