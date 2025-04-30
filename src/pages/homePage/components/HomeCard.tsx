@@ -16,21 +16,16 @@ const fallbackImages = [
   'fallback/globe.png'
 ];
 
-let fallbackCounter = 0;
+let fallbackImageIndex = 0;
 
 export const HomeCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallbackUsed = useRef<string | null>(null);
 
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement>
-  ): void => {
-    if (!fallbackUsed.current && fallbackCounter < fallbackImages.length) {
-      fallbackUsed.current = fallbackImages[fallbackCounter];
-      fallbackCounter++;
-    }
-
-    e.currentTarget.src = fallbackUsed.current || fallbackImages[0];
+  const getNextFallbackImage = (): string => {
+    const image = fallbackImages[fallbackImageIndex % fallbackImages.length];
+    fallbackImageIndex++;
+    return image;
   };
 
   return (
@@ -43,7 +38,10 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
         <div className='homeImage-large'>
           <img
             src={project.img_url || `${project['Image Url']}`}
-            onError={handleImageError}
+            onError={(e) => {
+              // @ts-expect-error
+              e.target.src = getNextFallbackImage();
+            }}
             alt='Default Image'
           />
         </div>
