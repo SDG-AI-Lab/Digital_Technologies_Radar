@@ -5,7 +5,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import {
   getFilteredProjects,
-  projectSearch
+  projectSearch,
+  initialParameterCount
 } from 'components/shared/helpers/HelperUtils';
 import { Filter } from 'components/shared/filter/Filter';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
@@ -26,8 +27,14 @@ export const Projects: React.FC = () => {
   const [currentNumber, setCurrentNumber] = useState<number>(10);
   const [showPagination, setShowPagination] = useState<boolean>(true);
 
-  const { filteredValues, projectsGroup, parameterCount } =
-    useContext(RadarContext);
+  const {
+    filteredValues,
+    projectsGroup,
+    parameterCount,
+    setFilteredValues,
+    setParameterCount,
+    setProjectsGroup
+  } = useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -36,6 +43,28 @@ export const Projects: React.FC = () => {
   };
 
   const navigate = useNavigate();
+
+  // Reset filter context when component mounts
+  useEffect(() => {
+    // Reset the filter values to initial state
+    setFilteredValues({
+      status: {},
+      stages: {},
+      technologies: {},
+      parameters: {}
+    });
+
+    // Reset parameter count
+    setParameterCount(initialParameterCount);
+
+    // Reset projects group if needed
+    if (projectsGroup.length) {
+      setProjectsGroup([]);
+    }
+
+    // Then load projects
+    getProjects();
+  }, []);
 
   useEffect(() => {
     setProjectsToUse(filteredProjects);
@@ -50,18 +79,17 @@ export const Projects: React.FC = () => {
   }, [projectsToUse]);
 
   useEffect(() => {
-    getProjects();
-  }, []);
-
-  useEffect(() => {
-    const result = getFilteredProjects(
-      filteredValues,
-      setFilteredProjects,
-      projectsList,
-      parameterCount
-    );
-    if (result) setFilteredProjects(result);
-  }, [filteredValues]);
+    // Only apply filters if projects are loaded and we have a valid project list
+    if (projectsList.length > 0) {
+      const result = getFilteredProjects(
+        filteredValues,
+        setFilteredProjects,
+        projectsList,
+        parameterCount
+      );
+      if (result) setFilteredProjects(result);
+    }
+  }, [filteredValues, projectsList]);
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(

@@ -64,7 +64,7 @@ export const getFilteredProjects = (
   parameterCount?: any
 ): any => {
   // status filter
-  const statusFilters: any = Object.keys(filteredValues['status']).reduce(
+  const statusFilters: any = Object.keys(filteredValues['status'] || {}).reduce(
     (statusArr: any, status) => {
       if (filteredValues['status'][status])
         statusArr.push(status.toLowerCase());
@@ -74,7 +74,7 @@ export const getFilteredProjects = (
   );
 
   // stages filter
-  const stageFilters = Object.keys(filteredValues['stages']).reduce(
+  const stageFilters = Object.keys(filteredValues['stages'] || {}).reduce(
     (stagesArr: any, stage) => {
       if (filteredValues['stages'][stage]) stagesArr.push(stage.toLowerCase());
       return stagesArr;
@@ -83,7 +83,7 @@ export const getFilteredProjects = (
   );
 
   // technologies filter
-  const techFilters = Object.keys(filteredValues['technologies']).reduce(
+  const techFilters = Object.keys(filteredValues['technologies'] || {}).reduce(
     (techArr: any, tech) => {
       if (filteredValues['technologies'][tech]) techArr.push(tech);
       return techArr;
@@ -95,12 +95,15 @@ export const getFilteredProjects = (
   const parameters = totalParameterCount(parameterCount);
   const parameterFilteredProjects =
     getParameterFilteredProjects(
-      filteredValues.parameters,
+      filteredValues.parameters || {},
       projectsList,
       parameters
     ) || [];
 
-  if (parameters) {
+  // Only use parameter filtered projects if:
+  // 1. There are parameters set
+  // 2. The filtered results actually contain projects
+  if (parameters && parameterFilteredProjects.length > 0) {
     filteredProjects = parameterFilteredProjects;
   }
 
@@ -108,9 +111,9 @@ export const getFilteredProjects = (
     !statusFilters.length &&
     !stageFilters.length &&
     !techFilters.length &&
-    !parameterFilteredProjects.length
+    (!parameters || !parameterFilteredProjects.length)
   ) {
-    return setter(projectsList);
+    return projectsList;
   }
 
   // status filter
@@ -154,12 +157,12 @@ export const getParameterFilteredProjects = (
   projectsList: any,
   parameters: number
 ): any => {
-  if (!parameters) return [];
+  if (!parameters || !parameterFilters) return [];
 
   let filteredProjects = [...projectsList];
-  console.log('parameter filters', parameterFilters);
+
   // Country (most specific)
-  const countryFilters: any = (parameterFilters?.['Country'] || []).reduce(
+  const countryFilters: any = (parameterFilters['Country'] || []).reduce(
     (countryArr: any, country: { label: string; value: string }) => {
       countryArr.push(country.label);
       return countryArr;
@@ -178,7 +181,7 @@ export const getParameterFilteredProjects = (
   }
 
   // Sub Region
-  const subRegionFilters: any = (parameterFilters?.['Sub Region'] || []).reduce(
+  const subRegionFilters: any = (parameterFilters['Sub Region'] || []).reduce(
     (subRegionArr: any, subRegion: { label: string; value: string }) => {
       subRegionArr.push(subRegion.label);
       return subRegionArr;
@@ -212,7 +215,7 @@ export const getParameterFilteredProjects = (
   }
 
   // Other filters (Data, SDG, UN Host, Disaster Type)
-  const dataFilters: any = (parameterFilters?.['Data'] || []).reduce(
+  const dataFilters: any = (parameterFilters['Data'] || []).reduce(
     (dataArr: any, data: { label: string; value: string }) => {
       dataArr.push(data.label);
       return dataArr;
@@ -228,7 +231,7 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const sdgFilters: any = (parameterFilters?.['SDG'] || []).reduce(
+  const sdgFilters: any = (parameterFilters['SDG'] || []).reduce(
     (sdgArr: any, sdg: { label: string; value: string }) => {
       sdgArr.push(sdg.label);
       return sdgArr;
@@ -244,7 +247,7 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const unHostFilters: any = (parameterFilters?.['UN Host'] || []).reduce(
+  const unHostFilters: any = (parameterFilters['UN Host'] || []).reduce(
     (unHostArr: any, unHost: { label: string; value: string }) => {
       unHostArr.push(unHost.label);
       return unHostArr;
@@ -260,12 +263,13 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  const disasterFilters: any = (
-    parameterFilters?.['Disaster Type'] || []
-  ).reduce((disasterArr: any, disaster: { label: string; value: string }) => {
-    disasterArr.push(disaster.label);
-    return disasterArr;
-  }, []);
+  const disasterFilters: any = (parameterFilters['Disaster Type'] || []).reduce(
+    (disasterArr: any, disaster: { label: string; value: string }) => {
+      disasterArr.push(disaster.label);
+      return disasterArr;
+    },
+    []
+  );
 
   if (disasterFilters.length > 0) {
     filteredProjects = filteredProjects.filter((project: any) => {
@@ -275,7 +279,7 @@ export const getParameterFilteredProjects = (
     });
   }
 
-  // Return false if no filters are applied
+  // Return empty array if no filters are applied
   if (
     !disasterFilters.length &&
     !unHostFilters.length &&
@@ -285,7 +289,7 @@ export const getParameterFilteredProjects = (
     !subRegionFilters.length &&
     !regionFilters.length
   ) {
-    return false;
+    return [];
   }
 
   return filteredProjects;
