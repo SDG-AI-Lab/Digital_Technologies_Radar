@@ -1,6 +1,6 @@
 import './HomeCard.scss';
 
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 
 import { BlipType } from '@undp_sdg_ai_lab/undp-radar';
 import { Link } from 'react-router-dom';
