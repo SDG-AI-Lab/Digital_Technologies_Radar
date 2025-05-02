@@ -6,7 +6,7 @@
    fill="none"
    version="1.1"
    id="svg2"
-   sodipodi:docname="ftr4drr_draft.svg"
+   sodipodi:docname="ftr4drr.svg"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,9 +21,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="1.9263889"
-     inkscape:cx="-124.32588"
-     inkscape:cy="78.12545"
+     inkscape:zoom="7.7055556"
+     inkscape:cx="57.555876"
+     inkscape:cy="64.693583"
      inkscape:window-width="2880"
      inkscape:window-height="1514"
      inkscape:window-x="-11"
@@ -39,15 +39,15 @@
        id="path1" />
     <!-- Added bolder "4" centered between paths -->
     <text
-       x="73.025452"
-       y="30.529575"
+       x="72.893822"
+       y="30.322104"
        font-family="Arial"
        font-size="40.4853px"
        font-weight="bold"
        fill="#0062ac"
        id="text1"
-       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:40.4853px;font-family:Arial;-inkscape-font-specification:'Arial, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0062ac;stroke-width:1.68689"
-       transform="scale(1.0388357,0.96261613)">4</text>
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:40.2265px;font-family:Arial;-inkscape-font-specification:'Arial, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0062ac;stroke-width:1.67611"
+       transform="scale(1.0455183,0.95646341)">4</text>
     <path
        d="m 118.93428,29 h -11.802 V 0.985992 h 11.76 c 8.82,0 15.1617,5.291998 15.1617,13.986008 0,8.694 -6.3417,14.028 -15.1197,14.028 z m -4.578,-21.71401 V 22.7 h 4.536 c 4.914,0 7.77,-3.57 7.77,-7.728 0,-4.326 -2.604,-7.68601 -7.728,-7.68601 z M 161.54598,29 h -8.274 l -4.704,-9.492 h -3.696 V 29 h -7.224 V 0.985992 h 14.028 c 6.216,0 9.744,4.115998 9.744,9.324008 0,4.872 -2.982,7.476 -5.586,8.4 z m -7.476,-18.774 c 0,-1.93201 -1.596,-3.15001 -3.486,-3.15001 h -5.712 V 13.376 h 5.712 c 1.89,0 3.486,-1.218 3.486,-3.15 z M 189.31398,29 h -8.274 l -4.704,-9.492 h -3.696 V 29 h -7.224 V 0.985992 h 14.028 c 6.216,0 9.744,4.115998 9.744,9.324008 0,4.872 -2.982,7.476 -5.586,8.4 z m -7.476,-18.774 c 0,-1.93201 -1.596,-3.15001 -3.486,-3.15001 h -5.712 V 13.376 h 5.712 c 1.89,0 3.486,-1.218 3.486,-3.15 z"
        fill="#c1391d"
