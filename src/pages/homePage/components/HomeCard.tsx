@@ -8,12 +8,12 @@ import { RadarContext } from 'navigation/context';
 
 interface Props {
   project: BlipType;
+  fallbackImage: string;
 }
 
-export const HomeCard: React.FC<Props> = ({ project }) => {
+export const HomeCard: React.FC<Props> = ({ project, fallbackImage }) => {
   const { setCurrentProject } = useContext(RadarContext);
-  const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+
   return (
     <div className='homeComponent'>
       <Link
@@ -26,7 +26,7 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
             src={project.img_url || `${project['Image Url']}`}
             onError={(e) => {
               // @ts-expect-error
-              e.target.src = fallBackImage;
+              e.target.src = fallbackImage;
             }}
             alt='Default Image'
           />

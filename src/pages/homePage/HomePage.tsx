@@ -4,7 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { Badge, Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import logo from 'assets/ftrdrr2.svg';
+import logo from 'assets/ftr4drr.svg';
 import { supabase, DATA_VERSION } from 'helpers/databaseClient';
 import { Loader } from 'helpers/Loader';
 import { HomeCard } from './components/HomeCard';
@@ -36,6 +36,13 @@ export const HomePage: React.FC = () => {
     void getRecentDisasters();
     void getDisasterEvents();
   }, []);
+
+  let fallbackIndex = 0;
+  const fallbackImages = [
+    'fallback/map.png',
+    'fallback/tech.png',
+    'fallback/globe.png'
+  ];
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
@@ -300,7 +307,14 @@ export const HomePage: React.FC = () => {
                 <div className='projectSections'>
                   {projectsToUse.map((project: any) => (
                     <div key={project.id} style={{ width: '30%' }}>
-                      <HomeCard project={project} />
+                      <HomeCard
+                        project={project}
+                        fallbackImage={
+                          fallbackImages[
+                            fallbackIndex++ % fallbackImages.length
+                          ]
+                        }
+                      />
                     </div>
                   ))}
                 </div>
