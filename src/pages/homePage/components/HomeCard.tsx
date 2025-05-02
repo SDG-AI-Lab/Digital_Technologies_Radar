@@ -8,24 +8,11 @@ import { RadarContext } from 'navigation/context';
 
 interface Props {
   project: BlipType;
+  fallbackImage: string;
 }
 
-const fallbackImages = [
-  'fallback/map.png',
-  'fallback/tech.png',
-  'fallback/globe.png'
-];
-
-let fallbackImageIndex = 0;
-
-export const HomeCard: React.FC<Props> = ({ project }) => {
+export const HomeCard: React.FC<Props> = ({ project, fallbackImage }) => {
   const { setCurrentProject } = useContext(RadarContext);
-
-  const getNextFallbackImage = (): string => {
-    const image = fallbackImages[fallbackImageIndex % fallbackImages.length];
-    fallbackImageIndex++;
-    return image;
-  };
 
   return (
     <div className='homeComponent'>
@@ -39,7 +26,7 @@ export const HomeCard: React.FC<Props> = ({ project }) => {
             src={project.img_url || `${project['Image Url']}`}
             onError={(e) => {
               // @ts-expect-error
-              e.target.src = getNextFallbackImage();
+              e.target.src = fallbackImage;
             }}
             alt='Default Image'
           />
