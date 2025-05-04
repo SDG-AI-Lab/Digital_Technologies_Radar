@@ -5,8 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import {
   getFilteredProjects,
-  projectSearch,
-  initialParameterCount
+  projectSearch
 } from 'components/shared/helpers/HelperUtils';
 import { Filter } from 'components/shared/filter/Filter';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
@@ -27,14 +26,8 @@ export const Projects: React.FC = () => {
   const [currentNumber, setCurrentNumber] = useState<number>(10);
   const [showPagination, setShowPagination] = useState<boolean>(true);
 
-  const {
-    filteredValues,
-    projectsGroup,
-    parameterCount,
-    setFilteredValues,
-    setParameterCount,
-    setProjectsGroup
-  } = useContext(RadarContext);
+  const { filteredValues, projectsGroup, parameterCount } =
+    useContext(RadarContext);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const results = projectSearch(event.target.value, filteredProjects);
@@ -44,25 +37,8 @@ export const Projects: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // Reset filter context when component mounts
+  // Load projects on mount
   useEffect(() => {
-    // Reset the filter values to initial state
-    setFilteredValues({
-      status: {},
-      stages: {},
-      technologies: {},
-      parameters: {}
-    });
-
-    // Reset parameter count
-    setParameterCount(initialParameterCount);
-
-    // Reset projects group if needed
-    if (projectsGroup.length) {
-      setProjectsGroup([]);
-    }
-
-    // Then load projects
     getProjects();
   }, []);
 
@@ -78,8 +54,9 @@ export const Projects: React.FC = () => {
     }
   }, [projectsToUse]);
 
+  // Apply filters when filteredValues change or when projectsList is loaded
   useEffect(() => {
-    // Only apply filters if projects are loaded and we have a valid project list
+    // Only apply filters if projects are loaded
     if (projectsList.length > 0) {
       const result = getFilteredProjects(
         filteredValues,
@@ -87,7 +64,14 @@ export const Projects: React.FC = () => {
         projectsList,
         parameterCount
       );
-      if (result) setFilteredProjects(result);
+
+      // If filtering returned a result, use it
+      // If result is empty or null, keep showing all projects
+      if (result && Array.isArray(result) && result.length > 0) {
+        setFilteredProjects(result);
+      } else {
+        setFilteredProjects(projectsList);
+      }
     }
   }, [filteredValues, projectsList]);
 

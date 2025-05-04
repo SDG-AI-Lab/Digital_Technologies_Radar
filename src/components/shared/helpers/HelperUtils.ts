@@ -63,6 +63,16 @@ export const getFilteredProjects = (
   projectsList: any[],
   parameterCount?: any
 ): any => {
+  // Guard against null/undefined inputs
+  if (
+    !filteredValues ||
+    !projectsList ||
+    !Array.isArray(projectsList) ||
+    projectsList.length === 0
+  ) {
+    return projectsList || [];
+  }
+
   // status filter
   const statusFilters: any = Object.keys(filteredValues['status'] || {}).reduce(
     (statusArr: any, status) => {
@@ -91,62 +101,84 @@ export const getFilteredProjects = (
     []
   );
 
-  let filteredProjects = projectsList;
-  const parameters = totalParameterCount(parameterCount);
-  const parameterFilteredProjects =
-    getParameterFilteredProjects(
-      filteredValues.parameters || {},
-      projectsList,
-      parameters
-    ) || [];
+  // Check if any filters are active
+  const hasActiveFilters =
+    statusFilters.length > 0 ||
+    stageFilters.length > 0 ||
+    techFilters.length > 0 ||
+    (parameterCount &&
+      Object.values(parameterCount).some((val: any) => val > 0));
 
-  // Only use parameter filtered projects if:
-  // 1. There are parameters set
-  // 2. The filtered results actually contain projects
-  if (parameters && parameterFilteredProjects.length > 0) {
-    filteredProjects = parameterFilteredProjects;
-  }
-
-  if (
-    !statusFilters.length &&
-    !stageFilters.length &&
-    !techFilters.length &&
-    (!parameters || !parameterFilteredProjects.length)
-  ) {
+  // If no filters are active, return all projects
+  if (!hasActiveFilters) {
     return projectsList;
   }
+
+  let filteredProjects = [...projectsList];
 
   // status filter
   if (statusFilters.length) {
     const statusFilteredProjects = filteredProjects.filter((project: any) => {
       return statusFilters.some((item: any) =>
-        (project['disaster_cycles'] || project['Disaster Cycle']).includes(item)
+        (project['disaster_cycles'] || project['Disaster Cycle'])?.includes(
+          item
+        )
       );
     });
 
-    filteredProjects = statusFilteredProjects;
+    if (statusFilteredProjects.length > 0) {
+      filteredProjects = statusFilteredProjects;
+    }
   }
 
   // stages filter
   if (stageFilters.length) {
     const stageFilteredProjects = filteredProjects.filter((project: any) => {
       return stageFilters.includes(
-        (project['status'] || project['Status/Maturity']).trim()
+        (project['status'] || project['Status/Maturity'])?.trim()
       );
     });
 
-    filteredProjects = stageFilteredProjects;
+    if (stageFilteredProjects.length > 0) {
+      filteredProjects = stageFilteredProjects;
+    }
   }
 
   // tech filter
   if (techFilters.length) {
     const techFilteredProjects = filteredProjects.filter((project: any) => {
       return techFilters.some((item: any) =>
-        (project['technology'] || project['Technology']).includes(item)
+        (project['technology'] || project['Technology'])?.includes(item)
       );
     });
 
-    filteredProjects = techFilteredProjects;
+    if (techFilteredProjects.length > 0) {
+      filteredProjects = techFilteredProjects;
+    }
+  }
+
+  // Parameter filters
+  if (
+    parameterCount &&
+    Object.values(parameterCount).some((val: any) => val > 0)
+  ) {
+    const parameterFilteredProjects = getParameterFilteredProjects(
+      filteredValues.parameters || {},
+      filteredProjects,
+      1 // Pass 1 to ensure the filter runs
+    );
+
+    if (
+      Array.isArray(parameterFilteredProjects) &&
+      parameterFilteredProjects.length > 0
+    ) {
+      filteredProjects = parameterFilteredProjects;
+    }
+  }
+
+  // If all filters resulted in an empty list, return all projects
+  if (filteredProjects.length === 0) {
+    return projectsList;
   }
 
   return [...new Set(filteredProjects)];
