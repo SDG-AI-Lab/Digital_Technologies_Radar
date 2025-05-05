@@ -37,6 +37,11 @@ export const Projects: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // Load projects on mount
+  useEffect(() => {
+    getProjects();
+  }, []);
+
   useEffect(() => {
     setProjectsToUse(filteredProjects);
   }, [filteredProjects]);
@@ -49,19 +54,26 @@ export const Projects: React.FC = () => {
     }
   }, [projectsToUse]);
 
+  // Apply filters when filteredValues change or when projectsList is loaded
   useEffect(() => {
-    getProjects();
-  }, []);
+    // Only apply filters if projects are loaded
+    if (projectsList.length > 0) {
+      const result = getFilteredProjects(
+        filteredValues,
+        setFilteredProjects,
+        projectsList,
+        parameterCount
+      );
 
-  useEffect(() => {
-    const result = getFilteredProjects(
-      filteredValues,
-      setFilteredProjects,
-      projectsList,
-      parameterCount
-    );
-    if (result) setFilteredProjects(result);
-  }, [filteredValues]);
+      // If filtering returned a result, use it
+      // If result is empty or null, keep showing all projects
+      if (result && Array.isArray(result) && result.length > 0) {
+        setFilteredProjects(result);
+      } else {
+        setFilteredProjects(projectsList);
+      }
+    }
+  }, [filteredValues, projectsList]);
 
   const getProjects = async (): Promise<any> => {
     const storedProjects = JSON.parse(
