@@ -123,7 +123,7 @@ describe('getFilteredProjects', () => {
     filteredValues = JSON.parse(JSON.stringify(initialFilterState));
   });
 
-  it.only('should filter projects by status', () => {
+  it('should filter projects by status', () => {
     // In the actual code, the status filter is applied to 'Disaster Cycle'
     filteredValues.status.preparedness = true;
 
@@ -175,22 +175,26 @@ describe('getFilteredProjects', () => {
   });
 
   it('should return projects when parameters are set', () => {
-    // Set Region filter
+    // Set Region filter (targeting a test project with Region="Asia")
     filteredValues.parameters.Region.push({ label: 'Asia', value: 'asia' });
 
     const results = getFilteredProjects(
       filteredValues,
       () => {},
       testProjects,
-      initialParameterCount
+      // Need to set parameterCount to make the filter recognize there are filters active
+      { Region: 1 }
     );
 
-    // This test expects that when Region is set but not SDG, we get 0 results
-    expect(results.length).toEqual(0);
+    // Verify the results contain only projects from Asia
+    expect(results.length).toBeGreaterThan(0);
+    results.forEach((project: { Region: string }) => {
+      expect(project.Region).toBe('Asia');
+    });
   });
 
   it('should combine filters using boolean AND logic', () => {
-    // Set Region and SDG filters
+    // Set Region and SDG filters for a specific test project (#3)
     filteredValues.parameters.Region.push({ label: 'Asia', value: 'asia' });
     filteredValues.parameters.SDG.push({ label: 'SDG 9', value: 'sdg 9' });
 
@@ -198,10 +202,12 @@ describe('getFilteredProjects', () => {
       filteredValues,
       () => {},
       testProjects,
-      initialParameterCount
+      // Need to set parameterCount to make the filter recognize there are filters active
+      { Region: 1, SDG: 1 }
     );
 
     // Verify all returned projects match both filters
+    expect(results.length).toBeGreaterThan(0);
     results.forEach((r: { Region: string; SDG: string }) => {
       expect(r.Region).toBe('Asia');
       expect(r.SDG).toContain('SDG 9');
