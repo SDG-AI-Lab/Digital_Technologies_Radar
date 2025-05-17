@@ -224,7 +224,11 @@ export const getParameterFilteredProjects = (
   if (subRegionFilters.length > 0) {
     filteredProjects = filteredProjects.filter((project: any) => {
       return subRegionFilters.some((item: any) =>
-        (project['sub_region'] || project['Subregion']).includes(item)
+        (
+          project['sub_region'] ||
+          project['Subregion'] ||
+          project['subregion']
+        ).includes(item)
       );
     });
   }
