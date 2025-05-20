@@ -18,6 +18,7 @@ import { CAROUSEL_ITEMS } from './helpers';
 
 import './HomePage.scss';
 import { isSignedIn } from 'components/shared/helpers/auth';
+import { RecentDisasterCardMini } from './components/RecentDisasterCardMini';
 
 export const HomePage: React.FC = () => {
   const [projectsToUse, setProjectsToUse] = useState<any>([]);
@@ -276,15 +277,14 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   <div className='recentDisastersCards'>
-                    {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
+                    {disasterEvents.slice(1, 3).map((disasterEvent: any) => (
                       <div
                         key={disasterEvent.id}
                         style={{ width: '40%' }}
                         className={'homeCardWrapper'}
                       >
-                        <HomeCardMini
-                          project={disasterEvent}
-                          type='disaster-events'
+                        <RecentDisasterCardMini
+                          recentDisaster={disasterEvent}
                         />
                       </div>
                     ))}
