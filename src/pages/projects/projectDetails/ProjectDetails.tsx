@@ -86,38 +86,38 @@ export const ProjectDetails: React.FC = () => {
   return project ? (
     <div className='projectDetailsPage'>
       <div className='projectHero'>
-        <div className='projectTitle'>
-          <span>{project?.['title']}</span>
-          <a
-            href={project?.['source']}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='seeProject'
-          >
-            SEE PROJECT SOURCE
-          </a>
-        </div>
         <div
-          className='projectImg'
+          className='heroBackground'
           style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'repeat',
-            backgroundPosition: '50% 50%'
+            backgroundImage: `url(${image})`
           }}
         >
-          <img
-            src={project.img_url}
-            onError={(e) => {
-              // @ts-expect-error
-              e.target.src = fallBackImage;
-              setImage(fallBackImage);
-            }}
-            alt='Default Image'
-            style={{ display: 'none' }}
-          />
+          <div className='heroOverlay'>
+            <div className='heroContent'>
+              <h1 className='projectTitle'>{project?.['title']}</h1>
+              <a
+                href={project?.['source']}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='seeProjectButton'
+              >
+                SEE PROJECT SOURCE
+              </a>
+            </div>
+          </div>
         </div>
+        <img
+          src={project.img_url}
+          onError={(e) => {
+            // @ts-expect-error
+            e.target.src = fallBackImage;
+            setImage(fallBackImage);
+          }}
+          alt='Project fallback'
+          style={{ display: 'none' }}
+        />
       </div>
+
       {isAdmin && (
         <div className='projectActions'>
           <Button
@@ -148,6 +148,7 @@ export const ProjectDetails: React.FC = () => {
           </Button>
         </div>
       )}
+
       <div className='projectBody'>
         <div className='projectToc'>
           <Link
