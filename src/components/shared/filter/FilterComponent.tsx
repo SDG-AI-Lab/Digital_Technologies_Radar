@@ -17,6 +17,12 @@ import {
 import { FilterItems } from './FilterItems';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import { RadarContext } from 'navigation/context';
+import {
+  fetchLocationData,
+  isSubregionInRegions,
+  isCountryInRegions,
+  isCountryInSubregions
+} from 'helpers/locationUtils';
 
 import './FilterComponent.scss';
 import './Filter.scss';
@@ -86,6 +92,11 @@ export const FilterComponent: React.FC<Props> = ({
 
   const [allBlips, setAllBlips] = useState<BlipType[]>([]);
 
+  // Initialize location data cache on component mount
+  useEffect(() => {
+    void fetchLocationData();
+  }, []);
+
   useEffect(() => {
     if (blips.length && !allBlips.length) {
       setAllBlips(blips);
@@ -151,13 +162,8 @@ export const FilterComponent: React.FC<Props> = ({
         value: a?.toLowerCase()
       })),
       'Sub Region': transformArray(
-        subregions.filter(
-          (sr) =>
-            selectedRegionLabels.length === 0 ||
-            selectedRegionLabels.includes('Global') ||
-            selectedRegionLabels.some((region) =>
-              sr.raw.Region.includes(region)
-            )
+        subregions.filter((sr) =>
+          isSubregionInRegions(sr.name, selectedRegionLabels, sr.raw)
         )
       ).map((a: string) => ({
         label: a,
@@ -165,20 +171,11 @@ export const FilterComponent: React.FC<Props> = ({
       })),
       Country: transformArray(
         countries
-          .filter(
-            (c) =>
-              selectedRegionLabels.length === 0 ||
-              selectedRegionLabels.includes('Global') ||
-              selectedRegionLabels.some((region) =>
-                c.raw.Region.includes(region)
-              )
+          .filter((c) =>
+            isCountryInRegions(c.name, selectedRegionLabels, c.raw)
           )
-          .filter(
-            (c) =>
-              selectedSubregionLabels.length === 0 ||
-              selectedSubregionLabels.some((subregion) =>
-                c.raw.Subregion.includes(subregion)
-              )
+          .filter((c) =>
+            isCountryInSubregions(c.name, selectedSubregionLabels, c.raw)
           )
       ).map((a: string) => ({
         label: a,

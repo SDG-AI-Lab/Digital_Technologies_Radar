@@ -25,6 +25,12 @@ import { useDataState, useRadarState } from '@undp_sdg_ai_lab/undp-radar';
 import { FilterUtils } from 'components/drawers/filter/FilterUtilities';
 import { initialParameterCount } from 'components/shared/helpers/HelperUtils';
 import { RadarContext } from 'navigation/context';
+import {
+  fetchLocationData,
+  isSubregionInRegions,
+  isCountryInRegions,
+  isCountryInSubregions
+} from 'helpers/locationUtils';
 
 interface Labels {
   status: string[];
@@ -81,6 +87,11 @@ export const Filter: React.FC = () => {
     parameters: []
   });
 
+  // Initialize location data cache on component mount
+  useEffect(() => {
+    void fetchLocationData();
+  }, []);
+
   useEffect(() => {
     const technologies = tech;
     const labels = {
@@ -96,6 +107,9 @@ export const Filter: React.FC = () => {
       setParameterCount(initialParameterCount);
     }
   }, []);
+
+  const selectedRegions = filteredValues.parameters['Region'];
+  const selectedSubregions = filteredValues.parameters['Sub Region'];
 
   useEffect(() => {
     if (labels.status.length && !labels.technologies.length) {
@@ -115,16 +129,34 @@ export const Filter: React.FC = () => {
     const sdgs = FilterUtils.getSDGs(blips, sdgKey);
     const data = FilterUtils.getData(blips, dataKey);
 
+    const selectedRegionLabels = transformArray(selectedRegions || [], 'label');
+    const selectedSubregionLabels = transformArray(
+      selectedSubregions || [],
+      'label'
+    );
+
     const options = {
       Region: transformArray(regions).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
-      'Sub Region': transformArray(subregions).map((a: string) => ({
+      'Sub Region': transformArray(
+        subregions.filter((sr) =>
+          isSubregionInRegions(sr.name, selectedRegionLabels, sr.raw)
+        )
+      ).map((a: string) => ({
         label: a,
         value: a.toLowerCase()
       })),
-      Country: transformArray(countries).map((a: string) => ({
+      Country: transformArray(
+        countries
+          .filter((c) =>
+            isCountryInRegions(c.name, selectedRegionLabels, c.raw)
+          )
+          .filter((c) =>
+            isCountryInSubregions(c.name, selectedSubregionLabels, c.raw)
+          )
+      ).map((a: string) => ({
         label: a,
         value: a?.toLowerCase()
       })),
@@ -151,7 +183,7 @@ export const Filter: React.FC = () => {
     };
 
     setOptions(options);
-  }, [tech, blips]);
+  }, [tech, blips, selectedRegions?.length, selectedSubregions?.length]);
 
   const setInitialFilteredValues = (currentLabels: any): void => {
     const filterValues: any = {
@@ -211,14 +243,21 @@ export const Filter: React.FC = () => {
 
   return (
     <>
-      <Button
-        leftIcon={<BiFilterAlt />}
-        borderRadius={'0'}
-        onClick={onOpen}
-        className={'filter'}
-      >
-        FILTERS {`${totalFilterCount() > 0 ? `(${totalFilterCount()})` : ''} `}
-      </Button>
+      {(() => {
+        const count = totalFilterCount();
+        const displayText = count > 0 ? ` (${count})` : '';
+
+        return (
+          <Button
+            leftIcon={<BiFilterAlt />}
+            borderRadius='0'
+            onClick={onOpen}
+            className='filter'
+          >
+            {`FILTERS${displayText}`}
+          </Button>
+        );
+      })()}
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
           <DrawerOverlay />
