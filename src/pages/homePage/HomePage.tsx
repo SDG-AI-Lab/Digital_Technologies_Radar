@@ -248,16 +248,16 @@ export const HomePage: React.FC = () => {
         </div>
         <div className='cardsSection'>
           <div className='listSection'>
+            <div className='projectTitle'>
+              <Link className='seeAll' to={'/disaster-events'}>
+                <h3>Recent Disasters</h3>
+              </Link>
+              {isSignedIn && (
+                <Link to='/disaster-events/new'>Add new event</Link>
+              )}
+            </div>
             {recentDisasters.length > 0 ? (
               <>
-                <div className='projectTitle'>
-                  <Link className='seeAll' to={'/disaster-events'}>
-                    <h3>Recent Disasters</h3>
-                  </Link>
-                  {isSignedIn && (
-                    <Link to='/disaster-events/new'>Add new event</Link>
-                  )}
-                </div>
                 <div className='projectSections'>
                   <div className='helpNeeded'>
                     <div className='urgentBadge'>
@@ -277,7 +277,7 @@ export const HomePage: React.FC = () => {
                   </div>
 
                   <div className='recentDisastersCards'>
-                    {disasterEvents.slice(1, 3).map((disasterEvent: any) => (
+                    {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
                       <div
                         key={disasterEvent.id}
                         style={{ width: '40%' }}
@@ -293,7 +293,9 @@ export const HomePage: React.FC = () => {
                 <hr />
               </>
             ) : (
-              <Loader rows={1} />
+              <div style={{ paddingBottom: '20px' }}>
+                <p className='title-large'>No recent disasters</p>
+              </div>
             )}
           </div>
           <div className='listSection'>
