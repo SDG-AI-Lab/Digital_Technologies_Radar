@@ -256,39 +256,42 @@ export const HomePage: React.FC = () => {
                 <Link to='/disaster-events/new'>Add new event</Link>
               )}
             </div>
-            {recentDisasters.length > 0 ? (
+            {recentDisasters.length > 0 || disasterEvents.length > 0 ? (
               <>
                 <div className='projectSections'>
-                  <div className='helpNeeded'>
-                    <div className='urgentBadge'>
-                      <Badge
-                        px={3}
-                        py={1}
-                        borderRadius='lg'
-                        bg='#C1391D'
-                        color='white'
-                        w='fit-content'
-                        h='fit-content'
-                      >
-                        Help Needed
-                      </Badge>
-                    </div>
-                    <RecentDisasters recentDisasters={recentDisasters} />
-                  </div>
-
-                  <div className='recentDisastersCards'>
-                    {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
-                      <div
-                        key={disasterEvent.id}
-                        style={{ width: '40%' }}
-                        className={'homeCardWrapper'}
-                      >
-                        <RecentDisasterCardMini
-                          recentDisaster={disasterEvent}
-                        />
+                  {recentDisasters.length > 0 && (
+                    <div className='helpNeeded'>
+                      <div className='urgentBadge'>
+                        <Badge
+                          px={3}
+                          py={1}
+                          borderRadius='lg'
+                          bg='#C1391D'
+                          color='white'
+                          w='fit-content'
+                          h='fit-content'
+                        >
+                          Help Needed
+                        </Badge>
                       </div>
-                    ))}
-                  </div>
+                      <RecentDisasters recentDisasters={recentDisasters} />
+                    </div>
+                  )}
+                  {disasterEvents.length > 0 && (
+                    <div className='recentDisastersCards'>
+                      {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
+                        <div
+                          key={disasterEvent.id}
+                          style={{ width: '40%' }}
+                          className={'homeCardWrapper'}
+                        >
+                          <RecentDisasterCardMini
+                            recentDisaster={disasterEvent}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <hr />
               </>
