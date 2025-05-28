@@ -1,6 +1,3 @@
-// Updated Projectlist.tsx
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -41,9 +38,14 @@ export const Projects: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // Load projects on mount
+  // Load projects on mount - FIXED: Properly handle the async function
   useEffect(() => {
-    getProjects();
+    const loadProjects = async (): Promise<void> => {
+      await getProjects();
+    };
+
+    void loadProjects(); // Explicitly mark as ignored if you don't want to handle errors here
+    // OR you could use: loadProjects().catch(console.error); // to handle errors
   }, []);
 
   useEffect(() => {
