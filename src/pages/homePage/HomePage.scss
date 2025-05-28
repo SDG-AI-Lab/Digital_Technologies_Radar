@@ -231,3 +231,18 @@
 .carousel .slider-wrapper {
   width: 103% !important;
 }
+
+.title-large {
+  -webkit-box-orient: vertical;
+  color: black;
+  display: -webkit-box;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  overflow-y: hidden;
+  padding: 0 5px;
+  padding-top: 20px;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}

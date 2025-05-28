@@ -24,7 +24,11 @@ export const RecentDisasterCardMini: React.FC<Props> = ({ recentDisaster }) => {
         <div className='homeDetails-large'>
           <div className='title-large'>{recentDisaster?.title}</div>
           {recentDisaster?.summary && (
-            <div className='title-large-summary'>{recentDisaster?.summary}</div>
+            <div className='title-large-summary'>
+              {recentDisaster?.summary.length > 150
+                ? recentDisaster?.summary.substring(0, 150).concat('...')
+                : recentDisaster?.summary}
+            </div>
           )}
         </div>
       </Link>
