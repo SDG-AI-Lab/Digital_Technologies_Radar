@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -12,6 +10,7 @@ import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { Loader } from 'helpers/Loader';
 import { RadarContext } from 'navigation/context';
 import { Project } from './projectComponent/Project';
+import { ProjectOverlay } from './projectOverlay/projectOverlay';
 import { DATA_VERSION, supabase } from 'helpers/databaseClient';
 
 import './Projects.scss';
@@ -25,6 +24,8 @@ export const Projects: React.FC = () => {
   const [projectsList, setProjectsList] = useState<any>([]);
   const [currentNumber, setCurrentNumber] = useState<number>(10);
   const [showPagination, setShowPagination] = useState<boolean>(true);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const { filteredValues, projectsGroup, parameterCount } =
     useContext(RadarContext);
@@ -37,9 +38,14 @@ export const Projects: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // Load projects on mount
+  // Load projects on mount - FIXED: Properly handle the async function
   useEffect(() => {
-    getProjects();
+    const loadProjects = async (): Promise<void> => {
+      await getProjects();
+    };
+
+    void loadProjects(); // Explicitly mark as ignored if you don't want to handle errors here
+    // OR you could use: loadProjects().catch(console.error); // to handle errors
   }, []);
 
   useEffect(() => {
@@ -114,6 +120,16 @@ export const Projects: React.FC = () => {
     }
   };
 
+  const handleProjectSelect = (project: any): void => {
+    setSelectedProject(project);
+    setShowOverlay(true);
+  };
+
+  const handleCloseOverlay = (): void => {
+    setShowOverlay(false);
+    setTimeout(() => setSelectedProject(null), 300); // Delay to allow animation
+  };
+
   return loading ? (
     <div className='technologiesPage'>
       <Loader />
@@ -167,7 +183,10 @@ export const Projects: React.FC = () => {
           <div className='projectContainer'>
             {projectsToUse.slice(0, currentNumber).map((project: any) => (
               <div key={project.id}>
-                <Project project={project} />
+                <Project
+                  project={project}
+                  onProjectSelect={handleProjectSelect}
+                />
                 <hr />
               </div>
             ))}
@@ -196,6 +215,13 @@ export const Projects: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* Project Details Overlay */}
+      <ProjectOverlay
+        project={selectedProject}
+        isOpen={showOverlay}
+        onClose={handleCloseOverlay}
+      />
     </div>
   );
 };
