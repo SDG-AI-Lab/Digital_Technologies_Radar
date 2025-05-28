@@ -20,6 +20,7 @@ import { WaitingForRadar } from 'radar/components';
 import { PopOverView } from 'pages/views/PopOverView';
 import { RadarMapView } from 'pages/map-view/RadarMapView';
 import { Project } from 'pages/projects/projectComponent/Project';
+import { ProjectOverlay } from '../../pages/projects/projectOverlay/projectOverlay';
 import { FilterComponent } from 'components/shared/filter/FilterComponent';
 import { RadarContext } from 'navigation/context';
 import {
@@ -54,8 +55,24 @@ export const ProjectsRadar: React.FC = () => {
   const [showPagination, setShowPagination] = useState<boolean>(true);
   const [totalFilterCount, setTotalFilterCount] = useState<number>(0);
 
+  // Add state for the project overlay
+  const [selectedProject, setSelectedProject] = useState<BlipType | null>(null);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
   const tabsChangeHandler = (ind: number): void => {
     setTabIndex(ind);
+  };
+
+  // Handler for when a project's "MORE" button is clicked
+  const handleProjectSelect = (project: BlipType): void => {
+    setSelectedProject(project);
+    setIsOverlayOpen(true);
+  };
+
+  // Handler to close the overlay
+  const handleCloseOverlay = (): void => {
+    setIsOverlayOpen(false);
+    setSelectedProject(null);
   };
 
   useEffect(() => {
@@ -226,7 +243,10 @@ export const ProjectsRadar: React.FC = () => {
               {(filteredProjects.slice(0, currentNumber) || []).map(
                 (project) => (
                   <div key={project.id}>
-                    <Project project={project} />
+                    <Project
+                      project={project}
+                      onProjectSelect={handleProjectSelect} // Pass the handler
+                    />
                     <hr />
                   </div>
                 )
@@ -250,6 +270,13 @@ export const ProjectsRadar: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Add the Project Overlay */}
+      <ProjectOverlay
+        project={selectedProject}
+        isOpen={isOverlayOpen}
+        onClose={handleCloseOverlay}
+      />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+// Project.tsx
 import React, { useContext } from 'react';
 
 import './ProjectComponent.scss';
@@ -10,18 +11,32 @@ interface Props {
   project: BlipType;
   handler?: Function;
   ctaText?: string;
+  onProjectSelect?: (project: BlipType) => void;
 }
 
 export const Project: React.FC<Props> = ({
   project,
   handler = () => {},
-  ctaText = 'More'
+  ctaText = 'More',
+  onProjectSelect
 }) => {
   const { setCurrentProject } = useContext(RadarContext);
 
   const path = useLocation().pathname;
   const fallBackImage =
     'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+
+  const handleMoreClick = (e: React.MouseEvent): void => {
+    e.preventDefault();
+    if (onProjectSelect) {
+      // Use overlay for project list
+      onProjectSelect(project);
+    } else {
+      // Keep original navigation for other contexts
+      setCurrentProject(project);
+    }
+  };
+
   return (
     <div className='projectComponent'>
       <div className='projectImage-large'>
@@ -48,18 +63,23 @@ export const Project: React.FC<Props> = ({
             </div>
           )}
           {ctaText !== 'Review' ? (
-            <Link
-              className='moreBtn'
-              to={`/projects/${
-                project.uuid || project['Ideas/Concepts/Examples']
-              }?from=${path.split('/')[1]}`}
-              onClick={() => setCurrentProject(project)}
-            >
-              <button>MORE</button>
-            </Link>
+            onProjectSelect ? (
+              <button className='custom-more-btn' onClick={handleMoreClick}>
+                MORE
+              </button>
+            ) : (
+              <Link
+                to={`/projects/${
+                  project.uuid || project['Ideas/Concepts/Examples']
+                }?from=${path.split('/')[1]}`}
+                onClick={() => setCurrentProject(project)}
+              >
+                <button className='custom-more-btn'>MORE</button>
+              </Link>
+            )
           ) : (
-            <Link className='moreBtn' to='' onClick={() => handler(project)}>
-              <button>{ctaText}</button>
+            <Link to='' onClick={() => handler(project)}>
+              <button className='custom-more-btn'>{ctaText}</button>
             </Link>
           )}
         </div>

@@ -1,9 +1,10 @@
+/* Updated SCSS with custom button styles */
+
 .projectComponent {
   display: flex;
   height: 250px;
 
   .projectImage-large {
-    // background-color: #dddddd;
     margin-top: 10px;
     margin-left: 5px;
     flex-basis: 30%;
@@ -68,16 +69,6 @@
         }
       }
 
-      .moreBtn {
-        button {
-          background-color: #0062ac;
-          color: white;
-          font-size: smaller;
-          font-weight: 600;
-          padding: 5px 30px;
-        }
-      }
-
       @media only screen and (max-width: 768px) {
         width: 85vw;
       }
@@ -95,5 +86,42 @@
   @media only screen and (max-width: 768px) {
     background-color: #f7f7f7;
     padding: 10px;
+  }
+}
+
+/* Custom More Button Styles */
+.custom-more-btn {
+  background-color: #0062ac;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 98, 172, 0.2);
+
+  &:hover {
+    background-color: #004c8a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 98, 172, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 98, 172, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 98, 172, 0.3);
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 6px 20px;
+    font-size: 11px;
   }
 }
