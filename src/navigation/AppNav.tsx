@@ -122,14 +122,17 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.PROJECTS} element={<Outlet />}>
               <Route index element={<Projects />} />
               <Route
-                path={`${ROUTES.NEW}`}
+                path={String(ROUTES.NEW)}
                 element={<ProjectAction mode='add' />}
               />
-              <Route path={`${ROUTES.REVIEW}`} element={<ReviewProjects />} />
+              <Route
+                path={String(ROUTES.REVIEW)}
+                element={<ReviewProjects />}
+              />
 
               <Route path=':project_id' element={<ProjectDetails />} />
               <Route
-                path={`:project_id/${ROUTES.EDIT}`}
+                path={`:project_id/${String(ROUTES.EDIT)}`}
                 element={<ProjectAction mode='edit' />}
               />
             </Route>
@@ -137,7 +140,7 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.DISASTERS} element={<Outlet />}>
               <Route index element={<Disasters />} />
               <Route
-                path={`${ROUTES.NEW}`}
+                path={String(ROUTES.NEW)}
                 element={
                   <InfoAction
                     mode='ADD'
@@ -147,7 +150,7 @@ export const NavApp: React.FC = () => {
                 }
               />
               <Route
-                path={`:id`}
+                path={':id'}
                 element={
                   <InfoDetails
                     tableName='disaster_types'
@@ -156,7 +159,7 @@ export const NavApp: React.FC = () => {
                 }
               />
               <Route
-                path={`:id/${ROUTES.EDIT}`}
+                path={`:id/${String(ROUTES.EDIT)}`}
                 element={
                   <InfoAction
                     mode='EDIT'
@@ -170,11 +173,11 @@ export const NavApp: React.FC = () => {
               <Route index element={<DisasterEvents />} />
               <Route path=':eventId' element={<DisasterEvent />} />
               <Route
-                path={`${ROUTES.NEW}`}
+                path={String(ROUTES.NEW)}
                 element={<EventAction mode='Add' />}
               />
               <Route
-                path={`:eventId/${ROUTES.EDIT}`}
+                path={`:eventId/${String(ROUTES.EDIT)}`}
                 element={<EventAction mode='Edit' />}
               />
             </Route>
@@ -182,7 +185,7 @@ export const NavApp: React.FC = () => {
             <Route path={ROUTES.TECHNOLOGIES} element={<Outlet />}>
               <Route index element={<Technologies />} />
               <Route
-                path={`${ROUTES.NEW}`}
+                path={String(ROUTES.NEW)}
                 element={
                   <InfoAction
                     mode='ADD'
@@ -192,7 +195,7 @@ export const NavApp: React.FC = () => {
                 }
               />
               <Route
-                path={`:id`}
+                path={':id'}
                 element={
                   <InfoDetails
                     tableName='technologies'
@@ -201,7 +204,7 @@ export const NavApp: React.FC = () => {
                 }
               />
               <Route
-                path={`:id/${ROUTES.EDIT}`}
+                path={`:id/${String(ROUTES.EDIT)}`}
                 element={
                   <InfoAction
                     mode='EDIT'
