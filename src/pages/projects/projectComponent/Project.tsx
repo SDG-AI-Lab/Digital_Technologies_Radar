@@ -24,7 +24,7 @@ export const Project: React.FC<Props> = ({
 
   const path = useLocation().pathname;
   const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+    'https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png';
 
   const handleMoreClick = (e: React.MouseEvent): void => {
     e.preventDefault();

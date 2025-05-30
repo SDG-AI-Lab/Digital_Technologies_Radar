@@ -13,7 +13,7 @@ interface Props {
 export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+    'https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png';
   return (
     <div className='homeComponent'>
       <Link

@@ -16,7 +16,7 @@ interface Props {
 export const ProjectPreviewCard: React.FC<Props> = ({ project }) => {
   const { setCurrentProject } = useContext(RadarContext);
   const fallBackImage =
-    'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+    'https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png';
 
   return (
     <div className='projectPreviewContainer'>

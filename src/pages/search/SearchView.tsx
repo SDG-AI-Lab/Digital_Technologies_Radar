@@ -155,7 +155,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
               <Image
                 objectFit='cover'
                 src={`${techContent['Image Url'] || techContent['img_url']}`}
-                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
                 alt='Default Image'
               />
             </Stack>
