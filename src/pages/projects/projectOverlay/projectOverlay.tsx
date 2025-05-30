@@ -17,7 +17,7 @@ interface Props {
 }
 
 const fallBackImage =
-  'https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg';
+  'https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png';
 
 export const ProjectOverlay: React.FC<Props> = ({
   project,

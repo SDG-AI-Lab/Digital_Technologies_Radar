@@ -33,7 +33,7 @@ export const BlipView: FC = () => {
               width={'75%'}
               paddingLeft={'25%'}
               src={`${selectedItem['Image Url']}`}
-              fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+              fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
               alt='Default Image'
             />
           </Stack>
