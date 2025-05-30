@@ -1,0 +1,41 @@
+.newProject {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 60px;
+  max-width: 1440px;
+  overflow: scroll;
+  padding: 30px 20px;
+  width: 90vw;
+
+  .createProject {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+    margin-bottom: 50px;
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  h3 {
+    background-color: #f7f7f7;
+    margin-bottom: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 768px) {
+    height: 85vh;
+    margin: 60px 0 30px;
+    overflow: auto;
+  }
+}
+
+.selectMultiple {
+  max-width: 100%;
+}
+.dropdown-content {
+  max-width: 100% !important;
+  top: -50px !important;
+}

@@ -24,6 +24,7 @@ export const ScrollableDiv: React.FC<Props> = ({
     style={{
       maxHeight // maxHeight comes in as a prop so this style will be dynamic
     }}
+    data-testid='scrollable-div'
   >
     {children}
   </div>

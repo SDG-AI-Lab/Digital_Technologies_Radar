@@ -1,0 +1,17 @@
+.filterComponent {
+  background: rgba(217, 217, 217, 0.2);
+  padding: 20px 10px;
+  position: sticky;
+  top: 0;
+  p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  label {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.21em;
+  }
+}

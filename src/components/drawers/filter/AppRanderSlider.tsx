@@ -66,6 +66,7 @@ export const AppRangerSlider: React.FC<Props> = ({
           opacity: 1.0
         }}
         trackStyle={{ backgroundColor: '#3182ce' }}
+        data-testid='rc-slider'
       />
     </>
   );

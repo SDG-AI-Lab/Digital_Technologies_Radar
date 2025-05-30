@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 
-import { AppUiProvider } from './ui/AppUiProvider';
 import { NavApp } from './navigation/AppNav';
 import { AppRadarProvider } from './radar/RadarProvider';
+import { AppUiProvider } from './ui/AppUiProvider';
+import { getDataVersion } from 'helpers/databaseClient';
 
 import './App.css';
 
@@ -13,12 +14,18 @@ import './App.css';
  * When we move to a better solution, bring back the <BrowserRouter />
  * and replace HashRouter
  **/
-export const App: React.FC = () => (
-  <AppUiProvider>
-    <AppRadarProvider>
-      <HashRouter>
-        <NavApp />
-      </HashRouter>
-    </AppRadarProvider>
-  </AppUiProvider>
-);
+export const App: React.FC = () => {
+  useEffect(() => {
+    void getDataVersion();
+  }, []);
+
+  return (
+    <AppUiProvider>
+      <AppRadarProvider>
+        <HashRouter>
+          <NavApp />
+        </HashRouter>
+      </AppRadarProvider>
+    </AppUiProvider>
+  );
+};

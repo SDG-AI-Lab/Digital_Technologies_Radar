@@ -1,7 +1,7 @@
 name: Deploy to staging
 on:
   push:
-    branches: [develop]
+    branches: [staging]
 
 jobs:
   deployment:
@@ -13,22 +13,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '14.20.0'
-
-      - name: Setup yarn
-        run: npm install yarn
+          node-version: '16.20.1'
 
       - name: Install dependencies
         run: yarn install
 
       - name: Test application
-        run: yarn pretest
+        run: yarn test
 
       - name: Build application
         run: yarn build
-
-      - name: Install process manager
-        run: npm install pm2
 
       - name: Restart application
         run: pm2 start app.config.json

@@ -1,0 +1,326 @@
+/* ProjectDetailsOverlay.scss */
+
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.project-details-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60vw;
+  max-width: 800px;
+  min-width: 600px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .overlay-header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+
+    .close-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: white;
+      }
+
+      svg {
+        color: #333;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .overlay-content {
+    height: 100%;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .project-hero-overlay {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+
+    .project-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .project-title-section {
+    padding: 30px 30px 20px;
+    border-bottom: 1px solid #eee;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+      color: #333;
+    }
+  }
+
+  .project-actions-overlay {
+    padding: 20px 30px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .project-nav-overlay {
+    display: flex;
+    padding: 0 30px;
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+
+    button {
+      background: none;
+      border: none;
+      padding: 15px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 3px solid transparent;
+
+      &:hover {
+        color: #2868ac;
+        background: rgba(40, 104, 172, 0.05);
+      }
+
+      &.active {
+        color: #2868ac;
+        border-bottom-color: #2868ac;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .project-content-overlay {
+    padding: 30px;
+    flex: 1;
+
+    section {
+      margin-bottom: 40px;
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #2868ac;
+        display: inline-block;
+      }
+
+      .section-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+        margin: 0;
+        text-align: justify;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tech-tag {
+          background: #2868ac;
+          color: white;
+          padding: 6px 12px;
+          border-radius: 16px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
+
+      .other-details-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .detail-item {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .detail-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px; /* Increased from 14px */
+          }
+
+          .detail-value {
+            color: #666;
+            font-style: italic;
+            font-size: 16px; /* Increased from 14px */
+          }
+        }
+      }
+    }
+  }
+
+  .project-source-section {
+    padding: 20px 30px 30px;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    text-align: center;
+
+    .see-project-source-btn {
+      display: inline-block;
+      background: #c1391d;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s ease;
+      text-transform: uppercase;
+
+      &:hover {
+        background: #a02f18;
+      }
+    }
+  }
+
+  /* Mobile Responsive */
+  @media only screen and (max-width: 768px) {
+    width: 100vw;
+    min-width: unset;
+
+    .project-hero-overlay {
+      height: 250px;
+    }
+
+    .project-title-section {
+      padding: 20px;
+
+      h2 {
+        font-size: 24px;
+      }
+    }
+
+    .project-actions-overlay {
+      padding: 15px 20px;
+    }
+
+    .project-nav-overlay {
+      padding: 0 20px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        height: 0;
+      }
+
+      button {
+        white-space: nowrap;
+        min-width: max-content;
+        padding: 15px;
+        font-size: 13px;
+      }
+    }
+
+    .project-content-overlay {
+      padding: 20px;
+
+      section {
+        margin-bottom: 30px;
+
+        .section-title {
+          font-size: 18px;
+        }
+
+        .section-content {
+          font-size: 15px;
+        }
+
+        .other-details-grid {
+          .detail-item {
+            .detail-label {
+              font-size: 15px; /* Increased from 14px for mobile */
+            }
+
+            .detail-value {
+              font-size: 15px; /* Increased from 14px for mobile */
+            }
+          }
+        }
+      }
+    }
+
+    .project-source-section {
+      padding: 15px 20px 20px;
+
+      .see-project-source-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .project-hero-overlay {
+      height: 200px;
+    }
+
+    .project-title-section {
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@ export const WaitingForRadar: React.FC<Props> = ({ size = '30vw' }) => (
     bg='white'
     alignContent='center'
     justifyContent='center'
+    data-testid='waiting-for-radar'
   >
     <SkeletonCircle size={size} m='auto' />
     <Text display='none' m='auto' className={styles.loadingEllipsis}>

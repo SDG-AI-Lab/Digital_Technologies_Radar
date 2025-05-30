@@ -20,7 +20,11 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/dot-notation": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
-    "@typescript-eslint/triple-slash-reference": "off"
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/complex": "off",
+    "@typescript-eslint/no-implicit-any-index": "off",
+    "@typescript-eslint/restrict-template-expression": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   },
   "settings": {
     "react": {

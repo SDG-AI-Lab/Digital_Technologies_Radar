@@ -1,0 +1,125 @@
+.projectComponent {
+  display: flex;
+  height: 250px;
+
+  .projectImage-large {
+    margin-top: 10px;
+    margin-left: 5px;
+    flex-basis: 30%;
+    min-width: 30%;
+    box-shadow: 0 5px 20px rgba(67, 89, 113, 0.4);
+
+    img {
+      height: 100%;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .projectDetails-large {
+    display: flex;
+    flex-basis: 70%;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    .title-large {
+      -webkit-box-orient: vertical;
+      color: #c1391d;
+      display: -webkit-box;
+      font-size: 16px;
+      font-weight: 700;
+      -webkit-line-clamp: 2;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+    }
+
+    .description-large {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+      font-weight: 500;
+      -webkit-line-clamp: 4;
+      min-height: 60px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+
+      @media only screen and (max-width: 768px) {
+        -webkit-line-clamp: 3;
+      }
+    }
+
+    .projectBadgesContainer {
+      align-items: flex-end;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .projectBadges-large {
+        span {
+          margin: 0;
+          zoom: 0.8;
+        }
+      }
+
+      @media only screen and (max-width: 768px) {
+        width: 85vw;
+      }
+    }
+
+    div.projectBadges {
+      gap: 5px;
+      max-width: 500px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      padding: 0;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    background-color: #f7f7f7;
+    padding: 10px;
+  }
+}
+
+/* Custom More Button Styles */
+.custom-more-btn {
+  background-color: #0062ac;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 98, 172, 0.2);
+
+  &:hover {
+    background-color: #004c8a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 98, 172, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 98, 172, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 98, 172, 0.3);
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 6px 20px;
+    font-size: 11px;
+  }
+}

@@ -11,6 +11,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
   return (
     <Box
       className='slider'
+      data-testid='slider'
       display={'flex'}
       h={700}
       overflow='scroll'
@@ -31,6 +32,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
           flexDirection='column'
           justifyContent='space-between'
           h={'320px'}
+          data-testid='slider-card'
         >
           <Stack>
             <Text
@@ -47,7 +49,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
               <Image
                 objectFit='cover'
                 src={`${value['Image Url']}`}
-                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
                 alt='Default Image'
               />
             </Stack>

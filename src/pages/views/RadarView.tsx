@@ -71,7 +71,7 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
         id='radar-container'
       >
         <Box className='radarComponentsContainer'>
-          <Box className='radarComponents'>
+          <Box className='radarComponents' data-testid='radar-component'>
             {loading && <WaitingForRadar size='620px' />}
             {!loading && <Radar />}
           </Box>
@@ -85,20 +85,26 @@ export const RadarView: React.FC<{ loading: boolean }> = ({ loading }) => {
             onChange={tabsChangeHandler}
           >
             <TabList>
-              <Tab as='h5'>Stages</Tab>
-              <Tab as='h5'>Technologies</Tab>
-              <Tab as='h5'>Project</Tab>
+              <Tab as='h5' data-testid='stages-tab'>
+                Stages
+              </Tab>
+              <Tab as='h5' data-testid='technologies-tab'>
+                Technologies
+              </Tab>
+              <Tab as='h5' data-testid='project-tab'>
+                Project
+              </Tab>
             </TabList>
             <TabPanels overflowY='auto'>
-              <TabPanel overflowY='auto'>
+              <TabPanel overflowY='auto' data-testid='stages-panel'>
                 <ScrollableDiv maxHeight={720}>
                   <BlipListMui />
                 </ScrollableDiv>
               </TabPanel>
-              <TabPanel overflowY='auto'>
+              <TabPanel overflowY='auto' data-testid='technologies-panel'>
                 <TechDescription />
               </TabPanel>
-              <TabPanel overflowY='auto'>
+              <TabPanel overflowY='auto' data-testid='project-panel'>
                 <ScrollableDiv maxHeight={720}>
                   <BlipView />
                 </ScrollableDiv>

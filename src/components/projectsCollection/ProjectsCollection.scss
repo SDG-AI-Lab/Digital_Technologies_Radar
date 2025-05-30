@@ -1,0 +1,21 @@
+.projectsContainer {
+  display: flex;
+  gap: 20px;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  width: 100%;
+  &::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    zoom: 0.8;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 5px 10px;
+  }
+}

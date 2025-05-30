@@ -12,14 +12,15 @@ import {
 const getSubregions = (
   rawBlipData: BlipType[],
   regionKey: string
-): SelectableItem[] => {
-  const newSubregions: Map<string, SelectableItem> = new Map();
+): Array<SelectableItem & { raw: BlipType }> => {
+  const newSubregions: Map<string, SelectableItem & { raw: BlipType }> =
+    new Map();
+
   rawBlipData.forEach((val) => {
     const blipRegions: Set<string> = new Set(val[regionKey]);
     blipRegions.delete('');
 
     blipRegions.forEach((region) => {
-      // @ts-expect-error
       newSubregions.set(region, { uuid: uuidv4(), name: region, raw: val });
     });
   });
@@ -51,14 +52,15 @@ const getRegions = (
 const getCountries = (
   rawBlipData: BlipType[],
   countryKey: string
-): SelectableItem[] => {
-  const newCountries: Map<string, SelectableItem> = new Map();
+): Array<SelectableItem & { raw: BlipType }> => {
+  const newCountries: Map<string, SelectableItem & { raw: BlipType }> =
+    new Map();
   rawBlipData.forEach((val) => {
     const blipCountries: Set<string> = new Set(val[countryKey]);
     blipCountries.delete('');
 
     blipCountries.forEach((country) => {
-      newCountries.set(country, { uuid: uuidv4(), name: country });
+      newCountries.set(country, { uuid: uuidv4(), name: country, raw: val });
     });
   });
 
@@ -154,12 +156,17 @@ const getImplementers = (
 ): SelectableItem[] => {
   const newImplementers: Map<string, SelectableItem> = new Map();
   rawBlipData.forEach((val) => {
-    const blipImplementers: Set<string> = new Set(val[implementerKey]);
-    blipImplementers.delete('');
+    if (
+      val[implementerKey] !== '' &&
+      !newImplementers.has(val[implementerKey])
+    ) {
+      const blipImplementers: Set<string> = new Set(val[implementerKey]);
+      blipImplementers.delete('');
 
-    blipImplementers.forEach((implementer) => {
-      newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
-    });
+      blipImplementers.forEach((implementer) => {
+        newImplementers.set(implementer, { uuid: uuidv4(), name: implementer });
+      });
+    }
   });
 
   const arr = Array.from(newImplementers.values()).sort((a, b) =>
@@ -167,12 +174,12 @@ const getImplementers = (
   );
 
   // Move 'No Information' to the back of the ordered array
-  const index = arr
-    .map(function (e) {
-      return e.name;
-    })
-    .indexOf('No Information');
-  arr.push(arr.splice(index, 1)[0]);
+  // const index = arr
+  //   .map(function (e) {
+  //     return e.name;
+  //   })
+  //   .indexOf('No Information');
+  // arr.push(arr.splice(index, 1)[0]);
 
   return arr;
 };

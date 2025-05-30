@@ -5,7 +5,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 import { ROUTES } from 'navigation/routes';
 
-enum BackTo {
+export enum BackTo {
   RADAR = 'RADAR',
   QUADRANT = 'QUADRANT',
   ABOUT = 'ABOUT'
@@ -25,6 +25,7 @@ export const BackButton: React.FC<Props> = ({ to }) => {
       }): JSX.Element => (
         <IconButton
           aria-label=''
+          data-testid='back-button'
           className='backButton'
           marginLeft={1}
           background='white'

@@ -1,0 +1,19 @@
+.signIn {
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+  width: 450px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: #0062ac;
+    color: white;
+  }
+
+  .submit {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+}

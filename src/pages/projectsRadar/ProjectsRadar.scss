@@ -1,0 +1,186 @@
+.projectRadarContainer {
+  margin: 0 auto 60px;
+  max-width: 1440px;
+  padding: 30px 10px 0;
+  width: 90vw;
+
+  .projectRadar {
+    display: flex;
+    gap: 5px;
+    height: 90vh;
+
+    .tabsSection {
+      flex-basis: 50%;
+      h5 {
+        cursor: pointer;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.21em;
+        line-height: 14px;
+      }
+      * {
+        border: none;
+        box-shadow: none;
+
+        &[aria-selected='true'] {
+          text-decoration: underline;
+        }
+      }
+    }
+    .projectsSection {
+      flex-basis: 50%;
+      overflow-y: scroll;
+      width: 100%;
+
+      .filter-space {
+        background: white;
+        height: 40px;
+        position: sticky;
+        top: 0;
+      }
+
+      .projectContainer {
+        .loadMoreContainer {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-top: 20px;
+          button {
+            background-color: #252e3c;
+            color: white;
+            font-size: smaller;
+            font-weight: 600;
+            padding: 5px 30px;
+          }
+        }
+
+        @media only screen and (max-width: 768px) {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      .accordion {
+        background: white;
+        border-style: none;
+        position: sticky;
+        top: 0;
+
+        *,
+        *::after,
+        *::before {
+          border-style: none;
+        }
+
+        h2 {
+          background-color: #d9d9d933;
+          border-radius: 6px;
+          outline: none;
+          &:focus-visible {
+            outline: none;
+          }
+
+          > button {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .filterComponent {
+          height: 90vh;
+          overflow: scroll;
+        }
+
+        @media only screen and (max-width: 1100px) {
+          top: -21px;
+        }
+      }
+
+      .MuiAccordionDetails-root {
+        height: 600px;
+        overflow: scroll;
+      }
+
+      .projectComponent {
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 0px;
+
+        .projectDetails-large {
+          .title-large {
+            -webkit-line-clamp: 1;
+            @media only screen and (max-width: 1100px) {
+              -webkit-line-clamp: 3;
+            }
+          }
+          .projectBadgesContainer {
+            width: 100%;
+            .projectBadges-large span {
+              zoom: 0.7;
+            }
+          }
+          @media only screen and (max-width: 800px) {
+            justify-content: space-around;
+            .title-large {
+              font-size: 16px;
+              overflow-y: hidden;
+            }
+            .projectBadgesContainer {
+              width: 95%;
+              .projectBadges-large span {
+                zoom: 0.7;
+              }
+            }
+          }
+          @media only screen and (max-width: 768px) {
+            flex-basis: 100%;
+          }
+        }
+      }
+      @media only screen and (max-width: 1100px) {
+        padding: 0 10px;
+        .accordion .filterComponent {
+          height: auto;
+        }
+      }
+    }
+
+    .projectsCount {
+      background: white;
+      display: block;
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 700;
+      padding: 10px;
+      position: sticky;
+      top: 40px;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      align-items: center;
+      flex-direction: column;
+      height: auto;
+
+      .chakra-tabs__tablist {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+  @media only screen and (max-width: 1100px) {
+    overflow: scroll;
+    padding: 20px 0px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin: 100px 0 50px;
+  }
+}
+
+.radarComponents {
+  @media only screen and (max-width: 768px) {
+    zoom: 0.6;
+  }
+}

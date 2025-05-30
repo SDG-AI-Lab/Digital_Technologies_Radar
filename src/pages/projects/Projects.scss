@@ -1,0 +1,141 @@
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 60px;
+  max-width: 1440px;
+  padding: 30px 20px;
+  width: 90vw;
+
+  button {
+    margin: 10px;
+  }
+
+  .searchFilter {
+    background: none !important;
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      display: none;
+    }
+    @media only screen and (max-width: 768px) {
+      align-items: baseline;
+      position: relative;
+      top: 60px;
+      padding-left: 10px;
+      margin-bottom: 40px;
+
+      .searchBar {
+        width: 50vw;
+      }
+      button {
+        display: flex;
+      }
+    }
+  }
+
+  .titleRow {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      align-items: center;
+      display: flex;
+      gap: 5px;
+    }
+
+    &-right {
+      color: #0062ac;
+      cursor: pointer;
+      display: flex;
+      gap: 20px;
+
+      &--item {
+        &:hover {
+          text-decoration: underline;
+          color: blue;
+        }
+      }
+    }
+  }
+
+  .projectsListContainer {
+    display: flex;
+    gap: 20px;
+    height: 88vh;
+    margin-top: 20px;
+
+    .projectContainer {
+      flex-basis: 60%;
+      margin-bottom: 100px;
+      overflow: scroll;
+
+      .loadMoreContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        button {
+          background-color: #252e3c;
+          color: white;
+          font-size: smaller;
+          font-weight: 600;
+          padding: 5px 30px;
+        }
+      }
+
+      .projectImage {
+        height: 200px;
+        object-fit: contain;
+        object-position: center;
+        width: 200px;
+
+        @media only screen and (max-width: 768px) {
+          height: 200px;
+          width: 200px; /* Set a fixed width */
+        }
+      }
+
+      @media only screen and (max-width: 768px) {
+        display: flex;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+
+    .filters {
+      flex-basis: 40%;
+      margin-bottom: 90px;
+      overflow: scroll;
+
+      @media only screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 78vh;
+    }
+  }
+
+  hr {
+    border: 1px solid #cccccc;
+    margin: 15px 0;
+    @media only screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 30px 0 50px;
+    width: 100vw;
+
+    h3 {
+      margin-left: 10px;
+    }
+  }
+}

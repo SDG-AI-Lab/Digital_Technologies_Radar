@@ -74,7 +74,7 @@ export const SearchResult: React.FC<SearchResultProps> = (
                           objectFit='scale-down'
                           h='100%'
                           src={`${value['Image Url']}`}
-                          fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                          fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
                           alt='Default Image'
                         />
                       </Stack>

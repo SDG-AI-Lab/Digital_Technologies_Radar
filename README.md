@@ -21,7 +21,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `yarn pretest`
 
-Checks if all files match the Code style set in `Prettier` and `Eslint` 
+Also runs when you run `yarn test`. It checks if all files match the Code style set in `Prettier` and `Eslint` 
 This will run on the `pre-push` git hook and also on the automated checks in GitHub
 
 
@@ -37,7 +37,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Git workflow
 
-We have a `pre-push` git hook which will run before a `git push --` is executed. The hook runs `yarn pretest` which is described above.
+We have a `pre-push` git hook which will run before a `git push --` is executed. The hook runs `yarn test` which is described above.
 
 To set up the git hook run the command below from the root of the codebase
 ```bash
@@ -54,7 +54,7 @@ Please follow the steps for making changes in the project:
 We use Github actions and runners to do CI/CD.
 The live site is hosted on GitHub pages and is deployed using the `publish.yml` file which is picked up by a GitHub action when there's a successful push to the master branch. The site can be accessed from [here](https://drrtechradar.org/)
 
-For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://142.93.254.247)
+For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch (or branch specified in the deploy.yml file) will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://209.38.248.37)
 
 Pull requests raised to either the master or the develop branch will trigger the `CI Development` workflow as configured in the `develop.yml` file. 
 
@@ -79,24 +79,24 @@ UNVs are actively make contributions to the Digital Technologies Radar project. 
 ### Cohort 1 (1 online volunteer)
 
 <table border="1" width="50%">
-  <tr>
-    <td>
-    <p align="center">
-      <img src="https://user-images.githubusercontent.com/28465079/165523780-f3414b24-7895-4178-a212-72875c92baae.jpg" width="50%" height="50%" />
-    </p>
-    <p align="center">
-      <a href="https://www.linkedin.com/in/nmpribeiro/" rel="nofollow noreferrer">
-        <img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
-      </a> 
-      </br>
-      <a href="https://github.com/nmpribeiro" rel="nofollow noreferrer">
-        <img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
-      </a>
-    </p>
-    <p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
-    <p align="center"><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
-    </td>
-  </tr>
+<tr>
+<td>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/28465079/165523780-f3414b24-7895-4178-a212-72875c92baae.jpg" width="50%" height="50%" />
+</p>
+<p align="center">
+<a href="https://www.linkedin.com/in/matterfermion/" rel="nofollow noreferrer">
+<img src="https://i.stack.imgur.com/gVE0j.png" alt="linkedin"> <b>Nuno Ribeiro</b>
+</a>
+</br>
+<a href="https://github.com/tachyon-ops" rel="nofollow noreferrer">
+<img src="https://i.stack.imgur.com/tskMh.png" alt="github"> Github
+</a>
+</p>
+<p align="center">Completed degree on Audiovisual Communication Technology in 2008 and have been a software developer for +7 years</p>
+<p align="center"><i>"It has been an amazing journey, setting up and working on this project. I hope this project will be valuable for stakeholders aiming at visualizing their data/projects."</i></p>
+</td>
+</tr>
 </table>
 
 ### Cohort 2 (4 online volunteers)

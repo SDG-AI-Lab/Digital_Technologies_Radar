@@ -44,6 +44,7 @@ export const FilterDrawer: React.FC = () => {
           <HowToPopup />
         </Box>
         <Button
+          data-testid='filter'
           m={7}
           px={25}
           colorScheme='blue'
@@ -62,7 +63,7 @@ export const FilterDrawer: React.FC = () => {
       <Box className='responsive-filters'>
         <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
           <DrawerOverlay />
-          <DrawerContent className='filter-modal' backgroundColor='#fffafa'>
+          <DrawerContent backgroundColor='#fffafa'>
             <DrawerCloseButton />
             <div className='filterWrapper'>
               <DrawerHeader mt={10}>Technologies</DrawerHeader>

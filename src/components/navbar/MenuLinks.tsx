@@ -1,12 +1,19 @@
-import React from 'react';
-import { Box, Button, Stack } from '@chakra-ui/react';
-import { FaSearch, FaHome } from 'react-icons/fa';
-import { BsFillInfoSquareFill } from 'react-icons/bs';
-import { FiTarget } from 'react-icons/fi';
-import { SiOpenstreetmap } from 'react-icons/si';
+import { Box, Button, Stack, Text } from '@chakra-ui/react';
+import {
+  FaCubes,
+  FaHome,
+  FaProjectDiagram,
+  FaSignInAlt,
+  FaSignOutAlt
+} from 'react-icons/fa';
 
+import { FiTarget } from 'react-icons/fi';
 import { MenuItem } from './components/MenuItem';
 import { ROUTES } from 'navigation/routes';
+import React from 'react';
+import { RiEarthquakeLine } from 'react-icons/ri';
+
+import { isSignedIn } from 'components/shared/helpers/auth';
 
 interface Props {
   isOpen: boolean;
@@ -22,68 +29,138 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
       <Stack spacing={3}>
         <MenuItem to={ROUTES.HOME}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FaHome size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Home
+            </Text>
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.RADAR}>
+        <MenuItem to={ROUTES.PROJECTS_RADAR}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
             <FiTarget size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Radar
+            </Text>
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.MAP_VIEW}>
+        <MenuItem to={ROUTES.PROJECTS}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
-            <SiOpenstreetmap size={30} />
+            <FaProjectDiagram size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Projects
+            </Text>
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.ABOUT}>
+        <MenuItem to={ROUTES.DISASTERS}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
-            <BsFillInfoSquareFill size={25} color='white' />
+            <RiEarthquakeLine size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Disasters
+            </Text>
           </Button>
         </MenuItem>
 
-        <MenuItem to={ROUTES.SEARCH}>
+        <MenuItem to={ROUTES.TECHNOLOGIES}>
           <Button
-            rounded='md'
-            colorScheme='blue'
-            py={7}
-            px={1}
-            width={'100%'}
-            bg='#0062ac'
+            background='none'
+            flexDirection={'column'}
+            _focus={{
+              outline: 'none'
+            }}
+            borderRadius={'0'}
+            w={'100%'}
+            py={8}
           >
-            <FaSearch size={30} />
+            <FaCubes size={30} />
+            <Text color={'black'} fontSize='10px' mt='5px'>
+              Technologies
+            </Text>
           </Button>
         </MenuItem>
+
+        {isSignedIn ? (
+          <div
+            onClick={() => {
+              localStorage.removeItem('drr-current-user-id');
+              window.location.reload();
+            }}
+          >
+            <Button
+              background='none'
+              flexDirection={'column'}
+              _focus={{
+                outline: 'none'
+              }}
+              borderRadius={'0'}
+              w={'100%'}
+              py={8}
+            >
+              <FaSignOutAlt size={30} />
+              <Text color={'black'} fontSize='10px' mt='5px'>
+                Sign Out
+              </Text>
+            </Button>
+          </div>
+        ) : (
+          false && (
+            <MenuItem to={ROUTES.SIGN_IN}>
+              <Button
+                background='none'
+                flexDirection={'column'}
+                _focus={{
+                  outline: 'none'
+                }}
+                borderRadius={'0'}
+                w={'100%'}
+                py={8}
+              >
+                <FaSignInAlt size={30} />
+                <Text color={'black'} fontSize='10px' mt='5px'>
+                  Sign In
+                </Text>
+              </Button>
+            </MenuItem>
+          )
+        )}
       </Stack>
     </Box>
     <Box />

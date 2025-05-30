@@ -78,7 +78,7 @@ export const HowToPopup: React.FC = () => {
                     <p>
                       Got any further questions or comments?{' '}
                       <a href='mailto:ftr4drr@undp.org'>
-                        Contact out us via e-mail.
+                        Contact us via e-mail.
                       </a>
                     </p>
                   </div>

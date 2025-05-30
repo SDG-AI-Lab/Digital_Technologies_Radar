@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -11,17 +12,22 @@ import {
   Stack,
   Box,
   Badge,
-  Link,
   Button,
-  Image
+  Image,
+  Spinner
 } from '@chakra-ui/react';
 
+import { Link, useLocation } from 'react-router-dom';
+
 import { BaseCSVType } from '@undp_sdg_ai_lab/undp-radar';
+import { approveProject } from 'helpers/dataUtils';
 
 import './Search.scss';
 
 interface SearchViewProps {
   techContent: BaseCSVType;
+  setOpen?: boolean;
+  setClose?: Function;
 }
 
 const tdTitleStyle = {
@@ -45,12 +51,26 @@ const tdContentStyle = {
   paddingTop: '25px'
 };
 
-export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
+export const SearchView: React.FC<SearchViewProps> = ({
+  techContent,
+  setOpen = false,
+  setClose = () => {}
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [loading, setLoading] = useState(false);
+
+  const path = useLocation().pathname;
+  console.log({ path });
 
   const getHostOrg = (hosts: any): string => {
     return hosts.join(', ');
   };
+  useEffect(() => {
+    if (setOpen) {
+      onOpen();
+    }
+  }, []);
+
   return (
     <>
       <Button
@@ -65,6 +85,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
         isOpen={isOpen}
         onClose={() => {
           onClose();
+          setClose();
         }}
         size='xl'
         scrollBehavior='inside'
@@ -81,7 +102,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
           }}
         >
           <ModalHeader pb={0} mr={10} className='searchModalHeader'>
-            {techContent['Ideas/Concepts/Examples']}
+            {techContent['Ideas/Concepts/Examples'] || techContent['title']}
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -93,7 +114,9 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 bg='purple.50'
                 textTransform='capitalize'
               >
-                📍 {techContent['Country of Implementation']}
+                📍{' '}
+                {techContent['Country of Implementation'] ||
+                  techContent['country']}
               </Badge>
               <Badge
                 px={2}
@@ -102,7 +125,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 bg='green.50'
                 textTransform='capitalize'
               >
-                🎯 {' ' + techContent['SDG']}
+                🎯 {' ' + (techContent['SDG'] || techContent['sdg'])}
               </Badge>
               <Badge
                 px={2}
@@ -112,7 +135,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 color='white'
                 textTransform='capitalize'
               >
-                🏠 {techContent['Status/Maturity']}
+                🏠 {techContent['Status/Maturity'] || techContent['status']}
               </Badge>
               <Badge
                 px={2}
@@ -122,14 +145,17 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                 color='#fff'
                 textTransform='capitalize'
               >
-                🌋 {' ' + techContent['Disaster Cycle']}
+                🌋{' '}
+                {' ' +
+                  (techContent['Disaster Cycle'] ||
+                    techContent['disaster_cycles'])}
               </Badge>
             </Stack>
             <Stack>
               <Image
                 objectFit='cover'
-                src={`${techContent['Image Url']}`}
-                fallbackSrc='https://frigiv.palsgaard.com/media/1303/palsgaard-supports-the-un-sustainable-development-goals.jpg'
+                src={`${techContent['Image Url'] || techContent['img_url']}`}
+                fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
                 alt='Default Image'
               />
             </Stack>
@@ -145,7 +171,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     className='searchModalDescription'
                     {...tdContentStyle}
                   >
-                    {techContent['Description']}
+                    {techContent['Description'] || techContent['description']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -153,7 +179,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Technology:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Technology']}
+                    {techContent['Technology'] || techContent['technology']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -161,7 +187,8 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Disaster Type:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Disaster Type']}
+                    {techContent['Disaster Type'] ||
+                      techContent['disaster_type']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -169,7 +196,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Use Case:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Use Case']}
+                    {techContent['Use Case'] || techContent['use_case']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -177,7 +204,10 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>UN Host Organization:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {getHostOrg(techContent['Un Host Organisation'])}
+                    {getHostOrg(
+                      techContent['Un Host Organisation'] ||
+                        techContent['un_host']
+                    )}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -185,7 +215,8 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Partner:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Supporting Partners']}
+                    {techContent['Supporting Partners'] ||
+                      techContent['prtners']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -193,7 +224,7 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Data:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Data']}
+                    {techContent['Data'] || techContent['data']}
                   </Box>
                 </Box>
                 <Box as='tr'>
@@ -201,19 +232,15 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Theme:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Theme']}
+                    {techContent['Theme'] || techContent['theme']}
                   </Box>
                 </Box>
                 <Box as='tr'>
                   <Box as='td' {...tdTitleStyle}>
                     <b>Source:</b>
                   </Box>
-                  <Box as='td' {...tdContentStyle}>
-                    <Link
-                      href={`${techContent['Source']}`}
-                      isExternal
-                      color='blue.600'
-                    >
+                  <Box as='td' {...tdContentStyle} color='blue.600'>
+                    <Link to={`/projects/${techContent['uuid']}?from=${path}`}>
                       Click Here
                     </Link>
                   </Box>
@@ -223,13 +250,32 @@ export const SearchView: React.FC<SearchViewProps> = ({ techContent }) => {
                     <b>Publication Date:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle}>
-                    {techContent['Date of Implementation']}
+                    {techContent['Date of Implementation'] ||
+                      techContent['date_of_implementation']}
                   </Box>
                 </Box>
               </Box>
             </Box>
           </ModalBody>
-          <ModalFooter></ModalFooter>
+          {path === '/projects/review' && (
+            <ModalFooter>
+              {!loading ? (
+                <Button
+                  colorScheme='blue'
+                  borderRadius={'0'}
+                  onClick={() => {
+                    void approveProject(techContent['uuid']);
+                    setLoading(true);
+                  }}
+                  position='static'
+                >
+                  Approve
+                </Button>
+              ) : (
+                <Spinner />
+              )}
+            </ModalFooter>
+          )}
         </ModalContent>
       </Modal>
     </>

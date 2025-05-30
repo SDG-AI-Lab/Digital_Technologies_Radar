@@ -6,6 +6,7 @@ import logo from 'assets/logos/UNDP_logo.png';
 
 export const UNLogo: React.FC<ChakraProps> = (props) => (
   <Logo
+    data-testid='un-logo'
     file={logo}
     maxwidthorheight={55}
     onClick={() => window.open('https://www.undp.org/', '_newtab')}

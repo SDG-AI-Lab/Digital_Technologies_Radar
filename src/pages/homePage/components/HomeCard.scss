@@ -1,0 +1,123 @@
+.homeComponent {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .homeImage-large {
+    flex-basis: 30%;
+    position: relative;
+    width: 100%;
+
+    img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .moreBtn {
+      float: right;
+      font-size: smaller;
+      font-weight: 600;
+      left: 80%;
+      padding: 5px 30px;
+      position: absolute;
+      top: 80%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+  }
+
+  .homeDetails-large {
+    align-items: center;
+    display: flex;
+    flex-basis: 70%;
+    flex-direction: column;
+    justify-content: center;
+
+    .title-large {
+      -webkit-box-orient: vertical;
+      color: black;
+      display: -webkit-box;
+      font-size: 16px;
+      font-weight: 600;
+      -webkit-line-clamp: 2;
+      line-height: 24px;
+      overflow-y: hidden;
+      padding: 0 5px;
+      padding-top: 20px;
+      text-align: center;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+
+      &-summary {
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      @media only screen and (max-width: 768px) {
+        text-align: center;
+      }
+    }
+
+    .description-large {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      font-size: 14px;
+      font-weight: 500;
+      -webkit-line-clamp: 3;
+      min-height: 60px;
+      overflow-y: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .homeBadgesContainer {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+
+      .homeBadges-large {
+        span {
+          margin: 0;
+          zoom: 1;
+        }
+      }
+    }
+
+    div.projectBadges {
+      gap: 5px;
+      max-width: 500px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      align-items: flex-start;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .homeImage-large {
+      .moreBtn {
+        button {
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 90vw;
+    .homeImage-large {
+      .moreBtn {
+        button {
+          padding: 5px 30px;
+        }
+      }
+    }
+  }
+}

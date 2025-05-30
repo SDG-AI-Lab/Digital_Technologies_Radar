@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AddCSV,
   SetData,
@@ -14,11 +14,26 @@ import {
 } from '@undp_sdg_ai_lab/undp-radar';
 import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
-import csvData from '../assets/csv/technology_radar_dataset_updated_v10.csv';
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
+import { supabase } from 'helpers/databaseClient';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
+  const [csvString, setCsvString] = useState('');
+  useEffect(() => {
+    void getBlips();
+  }, []);
+
+  const getBlips = async (): Promise<void> => {
+    const { data, error } = await supabase
+      .from('project_data')
+      .select()
+      .order('id', { ascending: false })
+      .csv();
+    if (!error) {
+      setCsvString(data);
+    }
+  };
   const quadrantsDescription = {
     preparedness:
       'The knowledge and capacities developed by governments, response and recovery organizations, communities, and individuals to effectively anticipate, respond to and recover from the impacts of likely, imminent or current disasters.',
@@ -42,28 +57,39 @@ export const AppRadarProvider: React.FC = ({ children }) => {
 
   const mapping: MappingType<RawBlipType> = (item: Record<string, string>) =>
     ({
-      Region: Utilities.cleanupStringArray(item.Region.split(',')),
-      Subregion: Utilities.cleanupStringArray(item.Subregion.split(',')),
+      Region: Utilities.cleanupStringArray(
+        item.region.replace(/[{}"]/g, '').split(',')
+      ),
+      Subregion: Utilities.cleanupStringArray(
+        item.subregion.replace(/[{}"]/g, '').split(',')
+      ),
       'Country of Implementation': Utilities.cleanupStringArray(
-        item['Country of Implementation'].split(',')
+        item.country.replace(/[{}"]/g, '').split(',')
       ),
-      Data: Utilities.cleanupStringArray(item.Data.split(',')),
-      'Date of Implementation': item['Date of Implementation'],
-      Description: item.Description,
-      'Disaster Cycle': item['Disaster Cycle'],
-      'Ideas/Concepts/Examples': item['Ideas/Concepts/Examples'],
-      Source: item.Source,
-      'Status/Maturity': item['Status/Maturity'],
-      'Supporting Partners': item['Supporting Partners'],
+      Data: Utilities.cleanupStringArray(
+        item.data.replace(/[{}"]/g, '').split(',')
+      ),
+      'Date of Implementation': item.date_of_implementation,
+      Description: item.description,
+      'Disaster Cycle': item.disaster_cycle,
+      'Ideas/Concepts/Examples': item.title,
+      Source: item.source.replace(/[{}"]/g, ''),
+      'Status/Maturity': item.status.replace(/[{}"]/g, ''),
+      'Supporting Partners': item.partner.replace(/[{}"]/g, ''),
       'Un Host Organisation': Utilities.cleanupStringArray(
-        item['Un Host Organisation'].split(',')
+        item.un_host.replace(/[{}"]/g, '').split(',')
       ),
-      'Use Case': item['Use Case'],
-      SDG: Utilities.cleanupStringArray(item.SDG.split(',')),
-      Technology: Utilities.cleanupStringArray(item.Technology.split(',')),
-      'Disaster Type': item['Disaster Type'],
-      Theme: item['Theme'],
-      'Image Url': item['imgurl']
+      'Use Case': item.use_case.replace(/[{}"]/g, ''),
+      SDG: Utilities.cleanupStringArray(
+        item.sdg.replace(/[{}"]/g, '').split(',')
+      ),
+      Technology: Utilities.cleanupStringArray(
+        item.technology.replace(/[{}"]/g, '').split(',')
+      ),
+      'Disaster Type': item.disaster_type.replace(/[{}"]/g, ''),
+      Theme: item.theme.replace(/[{}"]/g, ''),
+      'Image Url': item.img_url,
+      uuid: item.uuid
     } as unknown as RawBlipType);
 
   const keys: KeysObject = {
@@ -107,7 +133,7 @@ export const AppRadarProvider: React.FC = ({ children }) => {
           HorizonsNameComponent={HorizonsNameComp}
         />
         <RadarDataGenerator />
-        <AddCSV csvFile={csvData} mapping={mapping} />
+        <AddCSV csvFile={csvString} mapping={mapping} isCsvString={true} />
         {children}
       </DataProvider>
     </RadarProvider>
