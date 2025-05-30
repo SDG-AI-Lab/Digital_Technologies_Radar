@@ -92,7 +92,7 @@ export const ProjectOverlay: React.FC<Props> = ({
   };
 
   const handleEdit = (): void => {
-    navigate(`/projects/${project.uuid}/edit`);
+    navigate(`/projects/${String(project.uuid)}/edit`);
     onClose();
   };
 
@@ -140,7 +140,7 @@ export const ProjectOverlay: React.FC<Props> = ({
                 src={imageUrl}
                 onLoad={handleImageLoad}
                 onError={handleImageError}
-                alt={`${project?.title || 'Project'} Image`}
+                alt={`${String(project?.title) || 'Project'} Image`}
                 style={{
                   width: '100%',
                   height: '100%',
