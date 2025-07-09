@@ -255,10 +255,10 @@ export const HomePage: React.FC = () => {
           )}
           {disasterEvents.length > 0 && (
             <div className='recentDisastersCards'>
-              {disasterEvents.slice(0, 2).map((disasterEvent: any) => (
+              {disasterEvents.map((disasterEvent: any) => (
                 <div
                   key={disasterEvent.id}
-                  style={{ width: '40%' }}
+                  style={{ minWidth: '30%' }}
                   className='homeCardWrapper'
                 >
                   <RecentDisasterCardMini recentDisaster={disasterEvent} />
