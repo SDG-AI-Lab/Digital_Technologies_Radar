@@ -21,7 +21,7 @@ export const getDataVersion = async (): Promise<void> => {
       // apart from 'drr-current-user-id' so that we can start fresh
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('drr-') && key !== 'drr-current-user-id') {
+        if (key?.startsWith('drr-') && key !== 'drr-current-user-id') {
           localStorage.removeItem(key);
         }
       }
