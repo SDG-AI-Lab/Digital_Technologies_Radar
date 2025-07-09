@@ -17,6 +17,14 @@ export const getDataVersion = async (): Promise<void> => {
   if (!error) {
     const version = localStorage.getItem('drr-data-version') as string;
     if (version !== data?.data_version) {
+      // Remove all entries in localStorage that begin with 'drr-'
+      // apart from 'drr-current-user-id' so that we can start fresh
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('drr-') && key !== 'drr-current-user-id') {
+          localStorage.removeItem(key);
+        }
+      }
       localStorage.setItem('drr-data-version', data?.data_version);
     }
   }
