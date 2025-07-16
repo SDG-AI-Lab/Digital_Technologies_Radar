@@ -16,7 +16,7 @@ import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
 import { isAdmin } from 'components/shared/helpers/auth';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
 
-type FormProps = Record<string, string | number>;
+type FormProps = Record<string, string | number | Array<any>>;
 
 type Props = Record<string, string>;
 
@@ -44,7 +44,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
   const [locations, setLocations] = useState<any>([]);
   const [countries, setCountries] = useState<any>([]);
-  
 
   const handleChange = (
     e:
@@ -67,7 +66,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       if (!currentItem) navigate('/');
       setFormValues(currentItem);
     }
-    
+
     void getLocations();
   }, []);
 
@@ -81,7 +80,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     setLocations(locations.data);
   };
 
- const getSelectedValues = (data: Array<any>): any[] => {
+  const getSelectedValues = (data: Array<any>): any[] => {
     if (path.includes('new')) return [];
 
     const selectedValues = data.reduce(
@@ -100,11 +99,14 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   };
 
   const getOptions = () => {
-    return locations.reduce((a: { [x: string]: any; },c: { country: any; id: any; })=> {
-      a.push({label:c.country, value: c.id})
-      return a}, []
-    ) as any
-  }
+    return locations.reduce(
+      (a: { [x: string]: any }, c: { country: any; id: any }) => {
+        a.push({ label: c.country, value: c.id });
+        return a;
+      },
+      []
+    ) as any;
+  };
 
   const action = async (): Promise<void> => {
     const payload = { ...formValues, countries: countries.countries };
@@ -119,7 +121,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       'img_url',
       'impact',
       'source',
-      'summary',
+      'summary'
     ];
 
     const missingRequiredField = alwaysRequiredFields.find(
@@ -144,7 +146,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         .insert(payload as any)
         .select('uuid')
         .single();
-      console.log({data});
       supabaseError = !!error;
     } else {
       const { error } = await supabase
@@ -164,8 +165,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       alert('There was an error, please try again');
     }
   };
-
-      console.log({formValues})
 
   return (
     <div className='newProject'>
@@ -271,14 +270,14 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
           />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
-          <FormLabel textAlign={'end'}>Country</FormLabel>
-            <SelectMultiple
-              options={getOptions() as any}
-              loading={false}
-              label={'countries'}
-              onChange={setCountries}
-              selectedValues={getSelectedValues(formValues['countries'])}
-            />
+          <FormLabel textAlign={'end'}>Countries</FormLabel>
+          <SelectMultiple
+            options={getOptions() as any}
+            loading={false}
+            label={'countries'}
+            onChange={setCountries}
+            selectedValues={getSelectedValues(formValues['countries'])}
+          />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Help Needed?</FormLabel>

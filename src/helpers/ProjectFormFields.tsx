@@ -26,8 +26,6 @@ export const ProjectFormFields: React.FC<Props> = ({
   const path = useLocation().pathname;
   const fromRadar = useLocation().search.includes('from-radar=true');
 
-  console.log({projectFormValues})
-
   const getSelectedValues = (label: string): any[] => {
     if (path.includes('new')) return [];
 

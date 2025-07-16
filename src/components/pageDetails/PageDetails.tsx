@@ -45,12 +45,12 @@ export const PageDetails: React.FC<Props> = ({
   };
 
   const formatArrayItems = (itemDetals: any[]) => {
-    if(Array.isArray(itemDetals)) {
-      return itemDetals.join(", ")
+    if (Array.isArray(itemDetals)) {
+      return itemDetals.join(', ');
     }
 
-    return itemDetals
-  }
+    return itemDetals;
+  };
 
   const handleEdit = (): void => {
     navigate(`${path}/edit?recent=${helpNeeded as unknown as string}`);

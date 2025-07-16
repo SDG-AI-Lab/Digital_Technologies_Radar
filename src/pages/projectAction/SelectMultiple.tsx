@@ -21,7 +21,6 @@ export const SelectMultiple: React.FC<Props> = ({
   const [selected, setSelected] = useState([]);
 
   useEffect(() => {
-    console.log({selectedValues})
     setSelected(selectedValues || []);
   }, []);
 
@@ -42,6 +41,8 @@ export const SelectMultiple: React.FC<Props> = ({
 
     return ['use_case'].includes(label) ? res.replace(/{/g, '') : res + '}';
   };
+
+  console.log({ selectedValues }, { options });
 
   return (
     <MultiSelect
