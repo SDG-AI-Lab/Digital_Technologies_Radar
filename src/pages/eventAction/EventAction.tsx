@@ -104,7 +104,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     }, []);
 
   const action = async (): Promise<void> => {
-    const payload = { ...formValues, countries: countries.countries };
+    const payload = { ...formValues };
 
     ['resources', 'solutions', 'contacts'].forEach((item) => {
       payload[item] = `{${payload[item]}}`;
@@ -138,7 +138,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     if (mode.toLocaleLowerCase() === 'add') {
       const { data, error } = await supabase
         .from('disaster_events')
-        .insert(payload as any)
+        .insert({ ...payload, countries: countries.countries } as any)
         .select('uuid')
         .single();
       supabaseError = !!error;
@@ -146,7 +146,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     } else {
       const { error } = await supabase
         .from('disaster_events')
-        .update(payload)
+        .update({ ...payload, countries: countries.countries })
         .eq('uuid', uuid)
         .select('uuid');
       supabaseError = !!error;
