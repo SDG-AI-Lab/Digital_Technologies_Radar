@@ -32,7 +32,6 @@ export const DisasterEvent: React.FC = () => {
       .single();
     if (!error) {
       setItem(data);
-      console.log({ data });
       setLoading(false);
     }
   };
