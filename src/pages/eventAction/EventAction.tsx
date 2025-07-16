@@ -14,6 +14,7 @@ import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
 import { isAdmin } from 'components/shared/helpers/auth';
+import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
 
 type FormProps = Record<string, string | number>;
 
@@ -30,16 +31,20 @@ const initialFormValues = {
   solutions: '',
   resources: '',
   help_needed: 0,
-  how_to_help: ''
+  how_to_help: '',
+  countries: []
 };
 
 export const EventAction: React.FC<Props> = ({ mode }) => {
   const isCreateForm = mode.toLocaleLowerCase().includes('add');
   const navigate = useNavigate();
   const uuid = useLocation().pathname.split('/')[2];
+  const path = useLocation().pathname;
   const queryString = useLocation().search;
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
   const [locations, setLocations] = useState<any>([]);
+  const [countries, setCountries] = useState<any>([]);
+  
 
   const handleChange = (
     e:
@@ -62,6 +67,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       if (!currentItem) navigate('/');
       setFormValues(currentItem);
     }
+    
     void getLocations();
   }, []);
 
@@ -75,8 +81,33 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     setLocations(locations.data);
   };
 
+ const getSelectedValues = (data: Array<any>): any[] => {
+    if (path.includes('new')) return [];
+
+    const selectedValues = data.reduce(
+      (acc: Array<{ label: string; value: string }>, curr: string) => {
+        const obj = {
+          label: curr,
+          value: curr
+        };
+        acc.push(obj);
+        return acc;
+      },
+      []
+    );
+
+    return selectedValues;
+  };
+
+  const getOptions = () => {
+    return locations.reduce((a: { [x: string]: any; },c: { country: any; id: any; })=> {
+      a.push({label:c.country, value: c.id})
+      return a}, []
+    ) as any
+  }
+
   const action = async (): Promise<void> => {
-    const payload = { ...formValues };
+    const payload = { ...formValues, countries: countries.countries };
 
     ['resources', 'solutions', 'contacts'].forEach((item) => {
       payload[item] = `{${payload[item]}}`;
@@ -89,7 +120,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       'impact',
       'source',
       'summary',
-      'location_id'
     ];
 
     const missingRequiredField = alwaysRequiredFields.find(
@@ -107,13 +137,14 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
     payload['slug'] = toSnakeCase(formValues.title as string);
     let supabaseError = false;
+
     if (mode.toLocaleLowerCase() === 'add') {
       const { data, error } = await supabase
         .from('disaster_events')
         .insert(payload as any)
         .select('uuid')
         .single();
-      console.log(data);
+      console.log({data});
       supabaseError = !!error;
     } else {
       const { error } = await supabase
@@ -133,6 +164,9 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
       alert('There was an error, please try again');
     }
   };
+
+      console.log({formValues})
+
   return (
     <div className='newProject'>
       <h3>{`${mode} Event`}</h3>
@@ -238,19 +272,13 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Country</FormLabel>
-          <Select
-            placeholder='Select option'
-            w={'25%'}
-            name='location_id'
-            value={formValues['location_id']}
-            onChange={handleChange}
-          >
-            {(locations || []).map((location: any, idx: any) => (
-              <option value={location.id} key={idx} className='option-text'>
-                {location.country}
-              </option>
-            ))}
-          </Select>
+            <SelectMultiple
+              options={getOptions() as any}
+              loading={false}
+              label={'countries'}
+              onChange={setCountries}
+              selectedValues={getSelectedValues(formValues['countries'])}
+            />
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Help Needed?</FormLabel>
