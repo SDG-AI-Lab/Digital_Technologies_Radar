@@ -5,6 +5,7 @@ import { supabase } from 'helpers/databaseClient';
 
 const SECTIONS = [
   'overview',
+  'countries',
   'summary',
   'impact',
   'how to help',

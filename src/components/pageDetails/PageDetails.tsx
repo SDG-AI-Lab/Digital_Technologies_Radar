@@ -44,6 +44,14 @@ export const PageDetails: React.FC<Props> = ({
     }
   };
 
+  const formatArrayItems = (itemDetals: any[]): any => {
+    if (Array.isArray(itemDetals)) {
+      return itemDetals.join(', ');
+    }
+
+    return itemDetals;
+  };
+
   const handleEdit = (): void => {
     navigate(`${path}/edit?recent=${helpNeeded as unknown as string}`);
   };
@@ -151,7 +159,7 @@ export const PageDetails: React.FC<Props> = ({
                     {section.toLocaleUpperCase()}
                   </span>
                   <p className='itemDetailsContent'>
-                    {itemDetails[toSnakeCase(section)]}
+                    {formatArrayItems(itemDetails[toSnakeCase(section)])}
                   </p>
                 </section>
                 <hr className='separater' />
