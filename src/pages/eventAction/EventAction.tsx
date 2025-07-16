@@ -5,7 +5,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select,
   Textarea
 } from '@chakra-ui/react';
 import './EventAction.scss';
@@ -16,7 +15,7 @@ import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
 import { isAdmin } from 'components/shared/helpers/auth';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
 
-type FormProps = Record<string, string | number | Array<any>>;
+type FormProps = Record<string, string | number | any>;
 
 type Props = Record<string, string>;
 
@@ -80,7 +79,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     setLocations(locations.data);
   };
 
-  const getSelectedValues = (data: Array<any>): any[] => {
+  const getSelectedValues = (data: any): any[] => {
     if (path.includes('new')) return [];
 
     const selectedValues = data.reduce(
@@ -98,15 +97,11 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     return selectedValues;
   };
 
-  const getOptions = () => {
-    return locations.reduce(
-      (a: { [x: string]: any }, c: { country: any; id: any }) => {
-        a.push({ label: c.country, value: c.id });
-        return a;
-      },
-      []
-    ) as any;
-  };
+  const getOptions = (): any =>
+    locations.reduce((a: any, c: any) => {
+      a.push({ label: c.country, value: c.id });
+      return a;
+    }, []);
 
   const action = async (): Promise<void> => {
     const payload = { ...formValues, countries: countries.countries };
@@ -147,6 +142,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         .select('uuid')
         .single();
       supabaseError = !!error;
+      console.log(data);
     } else {
       const { error } = await supabase
         .from('disaster_events')
@@ -272,7 +268,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Countries</FormLabel>
           <SelectMultiple
-            options={getOptions() as any}
+            options={getOptions()}
             loading={false}
             label={'countries'}
             onChange={setCountries}

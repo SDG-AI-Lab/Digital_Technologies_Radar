@@ -44,7 +44,7 @@ export const PageDetails: React.FC<Props> = ({
     }
   };
 
-  const formatArrayItems = (itemDetals: any[]) => {
+  const formatArrayItems = (itemDetals: any[]): any => {
     if (Array.isArray(itemDetals)) {
       return itemDetals.join(', ');
     }
