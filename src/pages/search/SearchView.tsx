@@ -60,7 +60,6 @@ export const SearchView: React.FC<SearchViewProps> = ({
   const [loading, setLoading] = useState(false);
 
   const path = useLocation().pathname;
-  console.log({ path });
 
   const getHostOrg = (hosts: any): string => {
     return hosts.join(', ');
