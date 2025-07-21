@@ -14,4 +14,10 @@
   .selectMultiple {
     min-width: 300px;
   }
+  .rmsc .select-item {
+    &.selected,
+    &:hover {
+      width: 100%;
+    }
+  }
 }

@@ -43,6 +43,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
   const [locations, setLocations] = useState<any>([]);
   const [countries, setCountries] = useState<any>([]);
+  const [selectedCountries, setSelectedCountries] = useState<any>([]);
 
   const handleChange = (
     e:
@@ -97,9 +98,13 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     return selectedValues;
   };
 
+  useEffect(() => {
+    setSelectedCountries(getSelectedValues(formValues['countries']));
+  }, [locations]);
+
   const getOptions = (): any =>
     locations.reduce((a: any, c: any) => {
-      a.push({ label: c.country, value: c.id });
+      a.push({ label: c.country, value: c.country });
       return a;
     }, []);
 
@@ -267,13 +272,15 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Countries</FormLabel>
-          <SelectMultiple
-            options={getOptions()}
-            loading={false}
-            label={'countries'}
-            onChange={setCountries}
-            selectedValues={getSelectedValues(formValues['countries'])}
-          />
+          {(isCreateForm || selectedCountries.length > 0) && (
+            <SelectMultiple
+              options={getOptions()}
+              loading={false}
+              label={'countries'}
+              onChange={setCountries}
+              selectedValues={selectedCountries}
+            />
+          )}
         </FormControl>
         <FormControl display={'flex'} gap={3} mb={5}>
           <FormLabel textAlign={'end'}>Help Needed?</FormLabel>
