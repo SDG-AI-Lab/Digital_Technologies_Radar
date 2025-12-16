@@ -28,6 +28,8 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [projects, setProjects] = useState<any>([]);
   const [selectedSection, setSelectedSection] = useState<string>('overview');
+  const [currentNumber, setCurrentNumber] = useState<number>(10);
+  const [showPagination, setShowPagination] = useState<boolean>(true);
   const { id } = useParams();
 
   const path = useLocation().pathname;
@@ -63,6 +65,23 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   useEffect(() => {
     fetchItem();
   }, []);
+
+  useEffect(() => {
+    if (currentNumber + 10 < projects.length) {
+      setShowPagination(true);
+    } else {
+      setShowPagination(false);
+    }
+  }, [projects, currentNumber]);
+
+  const handleLoadMore = (): void => {
+    if (currentNumber + 10 > projects.length) {
+      setCurrentNumber(projects.length);
+      setShowPagination(false);
+    } else {
+      setCurrentNumber((currentNumber) => currentNumber + 10);
+    }
+  };
 
   const handleScroll = (id: string): void => {
     const element = document.getElementById(id);
@@ -189,12 +208,24 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
           <section id='item-projects-section'>
             <span className='itemDetailsTitle'> Projects </span>
             <div className='projectContainer projectsList'>
-              {projects.map((project: any) => (
+              {projects.slice(0, currentNumber).map((project: any) => (
                 <div key={project.id}>
                   <Project project={project} />
                   <hr />
                 </div>
               ))}
+              {showPagination && (
+                <div className='loadMoreContainer'>
+                  <span className='projectCount'>{`Showing ${
+                    currentNumber > projects.length
+                      ? projects.length
+                      : currentNumber
+                  } of ${projects.length} projects`}</span>
+                  <div className='loadMoreBtn'>
+                    <button onClick={handleLoadMore}>Load More Projects</button>
+                  </div>
+                </div>
+              )}
             </div>
           </section>
           <hr className='separater' />
