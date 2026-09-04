@@ -1,8 +1,15 @@
 [build]
+  # This project deploys functions only. The React site remains on GitHub Pages
+  # until its data client has been migrated to the API.
+  command = "node -e \"console.log('API-only deployment')\""
   functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
+
+[dev]
+  # Prevent local API tests from auto-starting the legacy React application.
+  framework = "#static"
 
