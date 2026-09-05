@@ -39,6 +39,41 @@ function configuredClient() {
   });
 }
 
+async function getRole(supabase, userId) {
+  const { data, error } = await supabase
+    .from('user_roles')
+    .select('role')
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (error) throw error;
+  return data?.role || null;
+}
+
+async function requireAdmin(supabase, event, origin) {
+  const authorization = event.headers.authorization || '';
+  const match = authorization.match(/^Bearer\s+(.+)$/i);
+  if (!match) {
+    return { error: response(401, { error: 'Sign in is required' }, origin) };
+  }
+
+  const { data, error } = await supabase.auth.getUser(match[1]);
+  if (error || !data.user) {
+    return {
+      error: response(401, { error: 'Your session is no longer valid' }, origin)
+    };
+  }
+
+  // Use a fresh privileged client for role lookups. A client that has just
+  // called signInWithPassword may hold the signed-in user's token instead.
+  const role = await getRole(configuredClient(), data.user.id);
+  if (role !== 'admin') {
+    return {
+      error: response(403, { error: 'Administrator access is required' }, origin)
+    };
+  }
+  return { user: data.user, role };
+}
+
 async function parseBody(event) {
   if (!event.body) return {};
   if (Buffer.byteLength(event.body, 'utf8') > MAX_BODY_BYTES) {
@@ -103,10 +138,57 @@ exports.handler = async (event) => {
       if (error || !data.session) {
         return response(401, { error: 'Incorrect email or password' }, origin);
       }
+      // signInWithPassword updates this client's session to the new user, so
+      // role access must use a separate server-only client.
+      const role = await getRole(configuredClient(), data.user.id);
+      if (!role) {
+        return response(403, {
+          error: 'This account has not been granted access'
+        }, origin);
+      }
       return response(200, {
         access_token: data.session.access_token,
         expires_at: data.session.expires_at,
-        user: { id: data.user.id, email: data.user.email }
+        user: { id: data.user.id, email: data.user.email, role }
+      }, origin);
+    }
+
+    if (event.httpMethod === 'POST' && path === 'auth/users') {
+      const admin = await requireAdmin(supabase, event, origin);
+      if (admin.error) return admin.error;
+
+      const { email, password, role } = await parseBody(event);
+      if (
+        typeof email !== 'string' ||
+        typeof password !== 'string' ||
+        !['admin', 'user'].includes(role) ||
+        password.length < 12
+      ) {
+        return response(400, {
+          error: 'Provide an email, a 12-character password, and a valid role'
+        }, origin);
+      }
+
+      const { data, error } = await supabase.auth.admin.createUser({
+        email: email.trim().toLowerCase(),
+        password,
+        email_confirm: true
+      });
+      if (error || !data.user) {
+        return response(400, {
+          error: error?.message || 'Could not create the user'
+        }, origin);
+      }
+
+      const { error: roleError } = await configuredClient()
+        .from('user_roles')
+        .insert({ user_id: data.user.id, role });
+      if (roleError) {
+        await supabase.auth.admin.deleteUser(data.user.id);
+        throw roleError;
+      }
+      return response(201, {
+        user: { id: data.user.id, email: data.user.email, role }
       }, origin);
     }
 

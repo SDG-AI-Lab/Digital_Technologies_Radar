@@ -1,14 +1,11 @@
-import bcrypt from 'bcryptjs';
+// These values control the browser UI only. Netlify verifies the access token
+// and role again before every protected API operation.
+export const isSignedIn = !!localStorage.getItem('drr-access-token');
 
-export const comparePasswords = (password: string, hash: string): boolean => {
-  return bcrypt.compareSync(password, hash);
+export const isAdmin =
+  isSignedIn && localStorage.getItem('drr-current-user-id') === 'admin';
+
+export const clearSession = (): void => {
+  localStorage.removeItem('drr-current-user-id');
+  localStorage.removeItem('drr-access-token');
 };
-
-export const hashPassword = (password: string): any => {
-  const hash = bcrypt.hashSync(password, 5);
-  return hash;
-};
-
-export const isAdmin = localStorage.getItem('drr-current-user-id') === 'admin';
-
-export const isSignedIn = !!localStorage.getItem('drr-current-user-id');

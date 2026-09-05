@@ -8,8 +8,8 @@ import {
   Spinner
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { hashPassword, isAdmin } from 'components/shared/helpers/auth';
-import { supabase } from 'helpers/databaseClient';
+import { isAdmin } from 'components/shared/helpers/auth';
+import { apiRequest } from 'helpers/apiClient';
 
 import './Register.scss';
 
@@ -43,19 +43,18 @@ export const Register: React.FC = () => {
 
   const handleRegister = async (): Promise<void> => {
     setLoading(true);
-    const payload = {
-      email,
-      password: hashPassword(password),
-      role
-    };
-    const { error } = await supabase.from('users').insert(payload as any);
-    if (!error) {
+    try {
+      await apiRequest('auth/users', {
+        method: 'POST',
+        body: JSON.stringify({ email, password, role })
+      });
       alert('Successfully registered user');
       navigate('/');
-    } else {
-      alert('There was an error, please try again');
+    } catch (error: any) {
+      alert(error?.message || 'There was an error, please try again');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
