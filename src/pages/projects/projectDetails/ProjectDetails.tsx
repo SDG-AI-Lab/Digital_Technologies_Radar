@@ -4,9 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
-import { supabase } from 'helpers/databaseClient';
 import { apiRequest } from 'helpers/apiClient';
-import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
 
 import './ProjectDetails.scss';
@@ -57,25 +55,17 @@ export const ProjectDetails: React.FC = () => {
 
   const handleDelete = async (): Promise<void> => {
     const redirectRoute = fromRadar ? '/projectsRadar' : '/projects';
-    const tableNames = ['project_data', 'tr_projects'];
-    const deleteErrors = [];
     if (!confirm('Are you sure you want to delete this project?')) return;
-
-    for (const table of tableNames) {
-      const { error } = await supabase
-        .from(table)
-        .delete()
-        .eq('title', project.title);
-      if (error) deleteErrors.push(error);
-    }
-
-    if (deleteErrors.length) {
-      alert('There was an error. Please try again');
-    } else {
-      updateDataVersion();
+    try {
+      await apiRequest(`admin/projects/${encodeURIComponent(project.uuid)}`, {
+        method: 'DELETE'
+      });
       alert('Deleted successfully');
       localStorage.removeItem('drr-projects-list');
       navigate(redirectRoute);
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      alert('There was an error. Please try again');
     }
   };
 

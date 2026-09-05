@@ -7,10 +7,9 @@ import {
   Textarea
 } from '@chakra-ui/react';
 import './InfoAction.scss';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
 import { isAdmin } from 'components/shared/helpers/auth';
 
@@ -30,7 +29,6 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
   const navigate = useNavigate();
   const slug = useLocation().pathname.split('/')[2];
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
-  const [currentItem, setCurrentItem] = useState<any>({});
 
   const { projectsToEdit, setProjectsToEdit } = useContext(RadarContext);
   const isDisastersPage = category === 'DISASTER';
@@ -53,7 +51,6 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
 
       const item = itemList.data.find((x: any) => x.slug === slug);
       setFormValues(item);
-      setCurrentItem(item);
     }
 
     return () => setProjectsToEdit([]);
@@ -64,71 +61,39 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
     if (Object.values(payload).includes(''))
       return alert('Please fill all fields');
     payload['slug'] = toSnakeCase(formValues.name);
-    let supabaseError = false;
-    if (mode === 'ADD') {
-      const { error } = await supabase.from(table).insert(payload as any);
-      supabaseError = !!error;
-    } else {
-      const { error } = await supabase
-        .from(table)
-        .update(payload)
-        .eq('slug', slug);
-      supabaseError = !!error;
-      if (!error && payload.name !== currentItem.name) {
-        if (isDisastersPage) {
-          void updateRelatedDisasterProjects(payload.name);
-        } else {
-          void updateRelatedTechProjects(payload.name);
+    const resource = isDisastersPage ? 'disaster-type' : 'technology';
+    const relatedProjectUpdates = projectsToEdit.map((project: any) => ({
+      uuid: project.uuid,
+      ...(isDisastersPage
+        ? { disaster_type: payload.name }
+        : {
+            technology: project.technology.map((technology: string) =>
+              toSnakeCase(technology) === slug ? payload.name : technology
+            )
+          })
+    }));
+    try {
+      await apiRequest(
+        mode === 'ADD'
+          ? `admin/info/${resource}`
+          : `admin/info/${resource}/${slug}`,
+        {
+          method: mode === 'ADD' ? 'POST' : 'PUT',
+          body: JSON.stringify({ ...payload, relatedProjectUpdates })
         }
-      }
-    }
-
-    if (!supabaseError) {
+      );
       const newSlug = toSnakeCase(payload.name);
       alert('Operation Successfull!');
-      void updateDataVersion();
       localStorage.removeItem(key);
       navigate(
         `${
           isDisastersPage ? `/disasters/${newSlug}` : `/technologies/${newSlug}`
         }`
       );
-    } else {
+    } catch (error) {
+      console.error('Error saving information record:', error);
       alert('There was an error, please try again');
     }
-  };
-
-  const updateRelatedTechProjects = (newTitle: string): void => {
-    projectsToEdit.forEach(async (project: any) => {
-      const prevTechArray = project.technology;
-      const newTechArray = prevTechArray.reduce((acc: any, curr: string) => {
-        if (toSnakeCase(curr) === slug) {
-          acc.push(newTitle);
-        } else {
-          acc.push(curr);
-        }
-
-        return acc;
-      }, []);
-
-      const { error } = await supabase
-        .from('tr_projects')
-        .update({ technology: `{${newTechArray.join(', ') as string}}` })
-        .eq('uuid', project.uuid);
-
-      if (!error) localStorage.removeItem('drr-tech-projects');
-    });
-  };
-
-  const updateRelatedDisasterProjects = (newTitle: string): void => {
-    projectsToEdit.forEach(async (project: any) => {
-      const { error } = await supabase
-        .from('tr_projects')
-        .update({ disaster_type: newTitle })
-        .eq('uuid', project.uuid);
-
-      if (!error) localStorage.removeItem('drr-disaster-projects');
-    });
   };
 
   return (

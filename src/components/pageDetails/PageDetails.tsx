@@ -8,8 +8,7 @@ import { Button } from '@chakra-ui/react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { supabase } from 'helpers/databaseClient';
-import { updateDataVersion } from 'helpers/dataUtils';
+import { apiRequest } from 'helpers/apiClient';
 import { isAdmin } from 'components/shared/helpers/auth';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 
@@ -59,18 +58,17 @@ export const PageDetails: React.FC<Props> = ({
   const handleDelete = async (): Promise<void> => {
     if (!confirm('Are you sure you want to delete this item?')) return;
 
-    const { error } = await supabase
-      .from('disaster_events')
-      .delete()
-      .eq('uuid', item.uuid);
-
-    if (error) {
-      alert('There was an error. Please try again');
-    } else {
-      void updateDataVersion();
+    try {
+      await apiRequest(
+        `admin/disaster-events/${encodeURIComponent(item.uuid as string)}`,
+        { method: 'DELETE' }
+      );
       localStorage.removeItem('drr-recent-disasters');
       alert('Deleted successfully');
       navigate('/');
+    } catch (error) {
+      console.error('Error deleting disaster event:', error);
+      alert('There was an error. Please try again');
     }
   };
 

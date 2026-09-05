@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { Project } from '../projectComponent/Project';
 import { Spinner } from '@chakra-ui/react';
 
@@ -24,15 +24,16 @@ export const ReviewProjects: React.FC = () => {
 
   const fetchProjectsToReview = async (): Promise<void> => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('tr_projects')
-      .select()
-      .eq('approved', false);
-
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'admin/projects/pending'
+      );
       setProjectsToReview(data);
+    } catch (error) {
+      console.error('Error fetching projects to review:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleClick = (project: any): void => {
