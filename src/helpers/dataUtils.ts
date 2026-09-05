@@ -46,7 +46,9 @@ export const getDisasterTypes = async (setter: Function): Promise<any> => {
     return { data };
   } else {
     try {
-      const { data } = await apiRequest<{ data: any[] }>('public/disaster-types');
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/disaster-types'
+      );
       setter(data);
       localStorage.setItem(
         'drr-disaster-types',
