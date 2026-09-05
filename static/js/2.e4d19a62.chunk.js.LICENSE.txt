@@ -15,18 +15,7 @@ object-assign
 	http://jedwatson.github.io/classnames
 */
 
-/*!
- * The buffer module from node.js, for the browser.
- *
- * @author   Feross Aboukhadijeh <http://feross.org>
- * @license  MIT
- */
-
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /**
  * @license React
@@ -36,12 +25,6 @@ object-assign
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
- * @license bcrypt.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
- * Released under the Apache License, Version 2.0
- * see: https://github.com/dcodeIO/bcrypt.js for details
  */
 
 /**
