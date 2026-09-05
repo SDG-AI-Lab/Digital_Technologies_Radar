@@ -39,7 +39,8 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
 
   const fetchItem = async (): Promise<any> => {
     try {
-      const resource = tableName === 'technologies' ? 'technology' : 'disaster-type';
+      const resource =
+        tableName === 'technologies' ? 'technology' : 'disaster-type';
       const { data } = await apiRequest<{ data: any }>(
         `public/details/${resource}/${encodeURIComponent(id || '')}`
       );
@@ -52,7 +53,10 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
 
   const getProjects = async (): Promise<any> => {
     try {
-      const resource = relation === 'tech_projects' ? 'technology-projects' : 'disaster-projects';
+      const resource =
+        relation === 'tech_projects'
+          ? 'technology-projects'
+          : 'disaster-projects';
       const { data } = await apiRequest<{ data: any[] }>(
         `public/details/${resource}/${encodeURIComponent(id || '')}`
       );

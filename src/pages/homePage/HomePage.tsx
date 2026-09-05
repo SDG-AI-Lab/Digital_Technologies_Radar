@@ -51,7 +51,9 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data } = await apiRequest<{ data: any[] }>('public/home-projects');
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-projects'
+      );
       if (data) {
         const filteredData = data.slice(1);
         setProjectsToUse(filteredData);

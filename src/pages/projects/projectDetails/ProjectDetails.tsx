@@ -33,8 +33,8 @@ export const ProjectDetails: React.FC = () => {
       const { data } = await apiRequest<{ data: any }>(
         `public/details/${resource}/${encodeURIComponent(projectId || '')}`
       );
-      setProject(data as any);
-      setImage((data as any).img_url);
+      setProject(data);
+      setImage(data.img_url);
     } catch (error) {
       console.error('Error fetching project details:', error);
     }

@@ -72,7 +72,9 @@ export const Technologies: React.FC = () => {
       setTechList(storedTechList.data);
     } else {
       try {
-        const { data } = await apiRequest<{ data: any[] }>('public/technologies');
+        const { data } = await apiRequest<{ data: any[] }>(
+          'public/technologies'
+        );
         setTechList(data);
         localStorage.setItem(
           'drr-technologies',
