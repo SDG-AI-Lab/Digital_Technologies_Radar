@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { apiRequest } from 'helpers/apiClient';
 
 const supabaseUrl =
   (process.env.REACT_APP_SUPABASE_URL as string) ||
@@ -10,23 +11,28 @@ const supabaseKey =
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const getDataVersion = async (): Promise<void> => {
-  const { data, error } = await supabase
-    .from('dataset_version')
-    .select(`data_version`)
-    .single();
-  if (!error) {
+  try {
+    const { data } = await apiRequest<{ data: { data_version: string } }>(
+      'public/dataset-version'
+    );
     const version = localStorage.getItem('drr-data-version') as string;
     if (version !== data?.data_version) {
       // Remove all entries in localStorage that begin with 'drr-'
-      // apart from 'drr-current-user-id' so that we can start fresh
+      // apart from the active sign-in session so that we can start fresh.
       for (let i = localStorage.length - 1; i >= 0; i--) {
         const key = localStorage.key(i);
-        if (key?.startsWith('drr-') && key !== 'drr-current-user-id') {
+        if (
+          key?.startsWith('drr-') &&
+          key !== 'drr-current-user-id' &&
+          key !== 'drr-access-token'
+        ) {
           localStorage.removeItem(key);
         }
       }
       localStorage.setItem('drr-data-version', data?.data_version);
     }
+  } catch (error) {
+    console.error('Error fetching the data version:', error);
   }
 };
 

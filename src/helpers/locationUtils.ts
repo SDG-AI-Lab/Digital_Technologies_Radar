@@ -1,4 +1,4 @@
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 // Interface for the region-subregion mapping
 export interface LocationData {
@@ -34,15 +34,9 @@ export const fetchLocationData = async (): Promise<{
   }
 
   try {
-    const { data, error } = await supabase
-      .from('locations')
-      .select('country, region, subregion');
-
-    if (error) {
-      console.error('Error fetching location data:', error);
-      // Return empty arrays if there was an error
-      return { locationData: [], regionToSubregionMap: {} };
-    }
+    const { data } = await apiRequest<{ data: LocationData[] }>(
+      'public/locations'
+    );
 
     // Update cache
     cachedLocationData = data || [];

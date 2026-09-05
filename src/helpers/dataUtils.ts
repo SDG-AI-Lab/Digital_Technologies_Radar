@@ -1,5 +1,15 @@
 import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { Option } from 'pages/projectAction/types';
+
+const REFERENCE_RESOURCES: Record<string, string> = {
+  locations: 'locations',
+  themes: 'themes',
+  data_types: 'data-types',
+  use_cases: 'use-cases',
+  partners: 'partners',
+  un_hosts: 'un-hosts'
+};
 
 export const getTechnologies = async (setter: Function): Promise<any> => {
   const storedTechList = JSON.parse(
@@ -9,12 +19,8 @@ export const getTechnologies = async (setter: Function): Promise<any> => {
     const result = formatOptions(storedTechList.data, 'name');
     setter(result);
   } else {
-    const { data, error } = await supabase
-      .from('technologies')
-      .select(`name, description, img_url, slug, source`)
-      .order('name');
-
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: any[] }>('public/technologies');
       const result = formatOptions(data, 'name');
       setter(result);
       localStorage.setItem(
@@ -24,6 +30,8 @@ export const getTechnologies = async (setter: Function): Promise<any> => {
           data
         })
       );
+    } catch (error) {
+      console.error('Error fetching technologies:', error);
     }
   }
 };
@@ -37,12 +45,8 @@ export const getDisasterTypes = async (setter: Function): Promise<any> => {
     setter(data);
     return { data };
   } else {
-    const { data, error } = await supabase
-      .from('disaster_types')
-      .select(`id, name, description, img_url, slug, source`)
-      .order('name');
-
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: any[] }>('public/disaster-types');
       setter(data);
       localStorage.setItem(
         'drr-disaster-types',
@@ -53,6 +57,8 @@ export const getDisasterTypes = async (setter: Function): Promise<any> => {
       );
 
       return { data };
+    } catch (error) {
+      console.error('Error fetching disaster types:', error);
     }
   }
 };
@@ -90,24 +96,15 @@ export const getDataFromDb = async (
     setter(result);
     return { data: storedDataTypes.data };
   } else {
-    let dataResponse, errorResponse;
-    if (columnName === 'all') {
-      const { data, error } = await supabase
-        .from(tableName)
-        .select()
-        .order(sortBy);
-      dataResponse = data;
-      errorResponse = error;
-    } else {
-      const { data, error } = await supabase
-        .from(tableName)
-        .select(columnName)
-        .order(sortBy);
-      dataResponse = data;
-      errorResponse = error;
+    const resource = REFERENCE_RESOURCES[tableName];
+    if (!resource || columnName !== 'all') {
+      throw new Error(`Unsupported public reference resource: ${tableName}`);
     }
 
-    if (!errorResponse) {
+    try {
+      const { data: dataResponse } = await apiRequest<{ data: any[] }>(
+        `public/${resource}`
+      );
       const result = formatOptions(dataResponse, sortBy || columnName);
       setter(result);
 
@@ -120,6 +117,8 @@ export const getDataFromDb = async (
       );
 
       return { data: dataResponse };
+    } catch (error) {
+      console.error(`Error fetching ${tableName}:`, error);
     }
   }
 };

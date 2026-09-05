@@ -4,7 +4,13 @@ const MAX_BODY_BYTES = 16 * 1024;
 const PUBLIC_RESOURCES = {
   technologies: { table: 'technologies', select: 'name, description, img_url, slug, source', order: 'name' },
   'disaster-types': { table: 'disaster_types', select: 'id, name, description, img_url, slug, source', order: 'name' },
-  'dataset-version': { table: 'dataset_version', select: 'data_version', single: true }
+  'dataset-version': { table: 'dataset_version', select: 'data_version', single: true },
+  locations: { table: 'locations', select: '*', order: 'country' },
+  themes: { table: 'themes', select: '*', order: 'theme' },
+  'data-types': { table: 'data_types', select: '*', order: 'name' },
+  'use-cases': { table: 'use_cases', select: '*', order: 'use_case' },
+  partners: { table: 'partners', select: '*', order: 'name' },
+  'un-hosts': { table: 'un_hosts', select: '*', order: 'name' }
 };
 
 function allowedOrigin(origin) {
