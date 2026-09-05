@@ -4,7 +4,8 @@ import { Badge, Button, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import logo from 'assets/ftr4drr.svg';
-import { supabase, DATA_VERSION } from 'helpers/databaseClient';
+import { DATA_VERSION } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { Loader } from 'helpers/Loader';
 import { HomeCard } from './components/HomeCard';
 import { HomeCardMini } from './components/HomeCardMini';
@@ -50,12 +51,10 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('tr_projects')
-        .select()
-        .limit(4);
-
-      if (!error && data) {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-projects'
+      );
+      if (data) {
         const filteredData = data.slice(1);
         setProjectsToUse(filteredData);
         localStorage.setItem(
@@ -80,12 +79,10 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('technologies')
-        .select()
-        .limit(3);
-
-      if (!error && data) {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-technologies'
+      );
+      if (data) {
         setTechnologies(data);
         localStorage.setItem(
           'drr-technologies-homepage',
@@ -109,13 +106,10 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('disaster_types')
-        .select()
-        .order('id')
-        .limit(3);
-
-      if (!error && data) {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-disaster-types'
+      );
+      if (data) {
         setDisasterTypes(data);
         localStorage.setItem(
           'drr-disaster-types-homepage',
@@ -139,13 +133,10 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('disaster_events')
-        .select()
-        .eq('help_needed', 1)
-        .order('id', { ascending: false });
-
-      if (!error && data) {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-help-needed'
+      );
+      if (data) {
         setRecentDisasters(data);
         localStorage.setItem(
           'drr-recent-disasters',
@@ -169,13 +160,10 @@ export const HomePage: React.FC = () => {
         return;
       }
 
-      const { data, error } = await supabase
-        .from('disaster_events')
-        .select()
-        .eq('help_needed', 0)
-        .order('id', { ascending: false });
-
-      if (!error && data) {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/home-recent-events'
+      );
+      if (data) {
         setDisasterEvents(data);
         localStorage.setItem(
           'drr-disaster-events',

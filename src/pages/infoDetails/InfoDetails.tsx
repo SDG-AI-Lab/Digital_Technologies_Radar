@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Image } from 'components/shared/image/Image';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 import './InfoDetails.scss';
 import { LoremIpsum } from 'react-lorem-ipsum';
@@ -37,26 +38,31 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
   const { setProjectsToEdit } = useContext(RadarContext);
 
   const fetchItem = async (): Promise<any> => {
-    const { data, error } = await supabase
-      .from(tableName)
-      .select()
-      .eq('slug', id);
-
-    if (!error) {
-      setItem(data[0]);
+    try {
+      const resource =
+        tableName === 'technologies' ? 'technology' : 'disaster-type';
+      const { data } = await apiRequest<{ data: any }>(
+        `public/details/${resource}/${encodeURIComponent(id || '')}`
+      );
+      setItem(data);
+      await getProjects();
+    } catch (error) {
+      console.error('Error fetching item details:', error);
     }
-
-    getProjects();
   };
 
   const getProjects = async (): Promise<any> => {
-    const { data, error } = await supabase
-      .from(relation)
-      .select()
-      .eq('slug', id);
-
-    if (!error) {
+    try {
+      const resource =
+        relation === 'tech_projects'
+          ? 'technology-projects'
+          : 'disaster-projects';
+      const { data } = await apiRequest<{ data: any[] }>(
+        `public/details/${resource}/${encodeURIComponent(id || '')}`
+      );
       setProjects(data);
+    } catch (error) {
+      console.error('Error fetching related projects:', error);
     }
   };
 

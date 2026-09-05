@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageDetails } from 'components/pageDetails/PageDetails';
 import { useParams } from 'react-router-dom';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 const SECTIONS = [
   'overview',
@@ -25,13 +25,14 @@ export const DisasterEvent: React.FC = () => {
   }, []);
 
   const getDisasterEvent = async (): Promise<any> => {
-    const { data, error } = await supabase
-      .from('disaster_events')
-      .select()
-      .eq('uuid', eventId)
-      .single();
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: any }>(
+        `public/details/disaster-event/${encodeURIComponent(eventId || '')}`
+      );
       setItem(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching disaster event:', error);
       setLoading(false);
     }
   };
