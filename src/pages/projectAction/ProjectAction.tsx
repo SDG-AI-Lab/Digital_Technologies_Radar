@@ -16,7 +16,7 @@ import {
 } from 'helpers/dataUtils';
 import { ProjectFields, ProjectFieldValues, Option } from './types';
 
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
 import { ProjectForm } from 'helpers/ProjectForm';
@@ -217,49 +217,18 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
     const payload = generatePayload();
     if (!payload) return alert('Please fill in all fields');
     setHasFetchedData(false);
-    // Add to tr_projects table
-    const { data: createdRecord, error } = await supabase
-      .from('tr_projects')
-      .insert(payload)
-      .select('id')
-      .single();
-
-    if (error) {
-      console.error({ error });
-    }
-
-    // Add to project_data table
-    let dataError;
-    if (!error) {
-      projectFormValues['disaster_cycles']
-        .replace(/[{}]/g, '')
-        .split(',')
-        .forEach(async (disaster_cycle) => {
-          const dupPayload = { ...payload };
-          dupPayload['disaster_cycle'] = disaster_cycle.trim();
-
-          const { disaster_cycles, ...dataPayload } = dupPayload;
-
-          dataPayload['tr_projects_id'] = createdRecord.id;
-          const { error } = await supabase
-            .from('project_data')
-            .insert(dataPayload);
-
-          dataError = error;
-
-          if (error) {
-            console.error({ error });
-          }
-        });
-    }
-
-    if (!error && !dataError) {
+    try {
+      await apiRequest('admin/projects', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
       void updateDataVersion();
       localStorage.removeItem('drr-projects-list');
       setNeedsReload(true);
       alert('Project added Succesfully');
       navigate('/projects');
-    } else {
+    } catch (error) {
+      console.error('Error adding project:', error);
       alert('Something went wrong!. Please try again');
     }
     setHasFetchedData(true);
@@ -278,52 +247,20 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
       ...dupPayload
     } = payload;
 
-    let supabaseError = false;
     setHasFetchedData(false);
-    if (fromRadar) {
-      const { disaster_cycles, disaster_cycle, ...payload } = dupPayload;
-      const { error: radarError } = await supabase
-        .from('project_data')
-        .update(payload)
-        .eq('tr_projects_id', tr_projects_id);
-
-      if (!radarError) {
-        const { disaster_cycle, disaster_cycles, ...payload } = dupPayload;
-        const { error: projectsError } = await supabase
-          .from('tr_projects')
-          .update(payload)
-          .eq('id', tr_projects_id);
-
-        supabaseError = !!projectsError;
-      } else {
-        supabaseError = true;
-      }
-    } else {
-      const relatedProjects = currentProject.project_data;
-      const { error: projectsError } = await supabase
-        .from('tr_projects')
-        .update(dupPayload)
-        .eq('uuid', uuid);
-
-      supabaseError = !!projectsError;
-      relatedProjects.forEach(async (project: any) => {
-        const { disaster_cycles, ...payload } = dupPayload;
-        const { error: radarError } = await supabase
-          .from('project_data')
-          .update(payload)
-          .eq('uuid', project.uuid);
-        supabaseError = !!radarError;
+    try {
+      const projectUuid = fromRadar ? currentProject.uuid : uuid;
+      await apiRequest(`admin/projects/${encodeURIComponent(projectUuid)}`, {
+        method: 'PUT',
+        body: JSON.stringify(dupPayload)
       });
-    }
-
-    if (supabaseError) {
-      alert('something went wrong, Please try again');
-    } else {
-      void updateDataVersion();
       localStorage.removeItem('drr-projects-list');
       setNeedsReload(true);
       alert('Project Updated Succesfully');
       navigate('/projects');
+    } catch (error) {
+      console.error('Error updating project:', error);
+      alert('something went wrong, Please try again');
     }
     setHasFetchedData(true);
   };

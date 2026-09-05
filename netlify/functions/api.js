@@ -65,6 +65,30 @@ const PUBLIC_DETAIL_RESOURCES = {
   'disaster-event': { table: 'disaster_events', select: '*', column: 'uuid', single: true }
 };
 
+const ADMIN_INFO_RESOURCES = {
+  technology: 'technologies',
+  'disaster-type': 'disaster_types'
+};
+const INFO_FIELDS = ['name', 'img_url', 'description', 'source', 'slug'];
+const EVENT_FIELDS = [
+  'title', 'overview', 'img_url', 'impact', 'source', 'summary', 'contacts',
+  'solutions', 'resources', 'help_needed', 'how_to_help', 'countries', 'slug'
+];
+
+function allowedFields(input, fields) {
+  return Object.fromEntries(
+    Object.entries(input).filter(([key]) => fields.includes(key))
+  );
+}
+
+async function bumpDataVersion(supabase) {
+  const { error } = await supabase
+    .from('dataset_version')
+    .update({ data_version: Date.now() })
+    .eq('id', 1);
+  if (error) throw error;
+}
+
 function allowedOrigin(origin) {
   const allowed = (process.env.ALLOWED_ORIGINS || '')
     .split(',')
@@ -149,7 +173,7 @@ exports.handler = async (event) => {
       headers: origin
         ? {
             'Access-Control-Allow-Origin': origin,
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Authorization, Content-Type',
             'Access-Control-Max-Age': '86400',
             Vary: 'Origin'
@@ -273,6 +297,170 @@ exports.handler = async (event) => {
       return response(201, {
         user: { id: data.user.id, email: data.user.email, role }
       }, origin);
+    }
+
+    if (path.startsWith('admin/')) {
+      const admin = await requireAdmin(supabase, event, origin);
+      if (admin.error) return admin.error;
+
+      if (event.httpMethod === 'GET' && path === 'admin/projects/pending') {
+        const { data, error } = await supabase
+          .from('tr_projects')
+          .select()
+          .eq('approved', false);
+        if (error) throw error;
+        return response(200, { data }, origin);
+      }
+
+      if (event.httpMethod === 'POST' && path === 'admin/projects/approve') {
+        const { uuid } = await parseBody(event);
+        if (typeof uuid !== 'string' || !uuid) {
+          return response(400, { error: 'A project UUID is required' }, origin);
+        }
+        const { error } = await supabase
+          .from('tr_projects')
+          .update({ approved: true })
+          .eq('uuid', uuid);
+        if (error) throw error;
+        await bumpDataVersion(supabase);
+        return response(200, { status: 'ok' }, origin);
+      }
+
+      if (event.httpMethod === 'POST' && path === 'admin/projects') {
+        const payload = await parseBody(event);
+        if (!payload || typeof payload.title !== 'string' || !payload.title) {
+          return response(400, { error: 'A project title is required' }, origin);
+        }
+        const { disaster_cycles, ...projectPayload } = payload;
+        const { data: project, error: projectError } = await supabase
+          .from('tr_projects')
+          .insert(projectPayload)
+          .select('id, uuid')
+          .single();
+        if (projectError) throw projectError;
+        const cycles = String(disaster_cycles || '')
+          .replace(/[{}]/g, '')
+          .split(',')
+          .map((value) => value.trim())
+          .filter(Boolean);
+        const radarRows = cycles.map((disaster_cycle) => ({
+          ...projectPayload,
+          disaster_cycle,
+          tr_projects_id: project.id
+        }));
+        if (radarRows.length) {
+          const { error } = await supabase.from('project_data').insert(radarRows);
+          if (error) throw error;
+        }
+        await bumpDataVersion(supabase);
+        return response(201, { data: project }, origin);
+      }
+
+      const projectMatch = path.match(/^admin\/projects\/([^/]+)$/);
+      if (projectMatch && event.httpMethod === 'PUT') {
+        const uuid = decodeURIComponent(projectMatch[1]);
+        const payload = await parseBody(event);
+        const { disaster_cycles, project_data, id, created_at, updated_at, uuid: ignoredUuid, ...projectPayload } = payload;
+        const { data: project, error: projectError } = await supabase
+          .from('tr_projects')
+          .update(projectPayload)
+          .eq('uuid', uuid)
+          .select('id, uuid')
+          .single();
+        if (projectError) throw projectError;
+        const { error: radarError } = await supabase
+          .from('project_data')
+          .update(projectPayload)
+          .eq('tr_projects_id', project.id);
+        if (radarError) throw radarError;
+        await bumpDataVersion(supabase);
+        return response(200, { data: project }, origin);
+      }
+
+      if (projectMatch && event.httpMethod === 'DELETE') {
+        const uuid = decodeURIComponent(projectMatch[1]);
+        const { data: project, error: lookupError } = await supabase
+          .from('tr_projects')
+          .select('id')
+          .eq('uuid', uuid)
+          .single();
+        if (lookupError) throw lookupError;
+        const { error: radarError } = await supabase
+          .from('project_data')
+          .delete()
+          .eq('tr_projects_id', project.id);
+        if (radarError) throw radarError;
+        const { error } = await supabase.from('tr_projects').delete().eq('uuid', uuid);
+        if (error) throw error;
+        await bumpDataVersion(supabase);
+        return response(200, { status: 'ok' }, origin);
+      }
+
+      const infoMatch = path.match(/^admin\/info\/(technology|disaster-type)(?:\/([^/]+))?$/);
+      if (infoMatch) {
+        const table = ADMIN_INFO_RESOURCES[infoMatch[1]];
+        const slug = infoMatch[2] && decodeURIComponent(infoMatch[2]);
+        if (event.httpMethod === 'POST') {
+          const payload = allowedFields(await parseBody(event), INFO_FIELDS);
+          if (!INFO_FIELDS.every((field) => typeof payload[field] === 'string' && payload[field])) {
+            return response(400, { error: 'All information fields are required' }, origin);
+          }
+          const { data, error } = await supabase.from(table).insert(payload).select().single();
+          if (error) throw error;
+          await bumpDataVersion(supabase);
+          return response(201, { data }, origin);
+        }
+        if (event.httpMethod === 'PUT' && slug) {
+          const body = await parseBody(event);
+          const payload = allowedFields(body, INFO_FIELDS);
+          const { data, error } = await supabase.from(table).update(payload).eq('slug', slug).select().single();
+          if (error) throw error;
+          if (Array.isArray(body.relatedProjectUpdates)) {
+            for (const update of body.relatedProjectUpdates) {
+              if (!update || typeof update.uuid !== 'string') continue;
+              const fields = allowedFields(update, ['technology', 'disaster_type']);
+              if (Object.keys(fields).length) {
+                const { error: updateError } = await supabase
+                  .from('tr_projects')
+                  .update(fields)
+                  .eq('uuid', update.uuid);
+                if (updateError) throw updateError;
+              }
+            }
+          }
+          await bumpDataVersion(supabase);
+          return response(200, { data }, origin);
+        }
+        if (event.httpMethod === 'DELETE' && slug) {
+          const { error } = await supabase.from(table).delete().eq('slug', slug);
+          if (error) throw error;
+          await bumpDataVersion(supabase);
+          return response(200, { status: 'ok' }, origin);
+        }
+      }
+
+      const eventMatch = path.match(/^admin\/disaster-events(?:\/([^/]+))?$/);
+      if (eventMatch) {
+        const uuid = eventMatch[1] && decodeURIComponent(eventMatch[1]);
+        if (event.httpMethod === 'POST' || (event.httpMethod === 'PUT' && uuid)) {
+          const payload = allowedFields(await parseBody(event), EVENT_FIELDS);
+          const query = event.httpMethod === 'POST'
+            ? supabase.from('disaster_events').insert(payload)
+            : supabase.from('disaster_events').update(payload).eq('uuid', uuid);
+          const { data, error } = await query.select().single();
+          if (error) throw error;
+          await bumpDataVersion(supabase);
+          return response(event.httpMethod === 'POST' ? 201 : 200, { data }, origin);
+        }
+        if (event.httpMethod === 'DELETE' && uuid) {
+          const { error } = await supabase.from('disaster_events').delete().eq('uuid', uuid);
+          if (error) throw error;
+          await bumpDataVersion(supabase);
+          return response(200, { status: 'ok' }, origin);
+        }
+      }
+
+      return response(404, { error: 'Not found' }, origin);
     }
 
     return response(404, { error: 'Not found' }, origin);

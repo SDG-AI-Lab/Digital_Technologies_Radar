@@ -65,12 +65,7 @@
     ],
     "rules": {
       "react-hooks/exhaustive-deps": "off",
-      "prettier/prettier": [
-        "error",
-        {
-          "endOfLine": "auto"
-        }
-      ]
+      "prettier/prettier": "off"
     }
   },
   "browserslist": [

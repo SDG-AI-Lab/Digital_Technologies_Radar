@@ -6,7 +6,6 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Image } from 'components/shared/image/Image';
 import { Loader } from 'helpers/Loader';
-import { supabase } from 'helpers/databaseClient';
 import { apiRequest } from 'helpers/apiClient';
 
 import './InfoDetails.scss';
@@ -15,7 +14,6 @@ import { Project } from 'pages/projects/projectComponent/Project';
 import { Button } from '@chakra-ui/react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
 import { isAdmin } from 'components/shared/helpers/auth';
 
@@ -87,17 +85,22 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
     const redirectRoute = isTechPage ? '/technologies' : '/disasters';
     if (!confirm('Are you sure you want to delete this item?')) return;
 
-    const { error } = await supabase
-      .from(`${isTechPage ? '/technologies' : 'disaster_types'}`)
-      .delete()
-      .eq('uuid', item.uuid);
-
-    if (error) {
-      alert('There was an error. Please try again');
-    } else {
-      updateDataVersion();
+    try {
+      const resource = isTechPage ? 'technology' : 'disaster-type';
+      await apiRequest(
+        `admin/info/${resource}/${encodeURIComponent(item.slug)}`,
+        {
+          method: 'DELETE'
+        }
+      );
+      localStorage.removeItem(
+        isTechPage ? 'drr-technologies' : 'drr-disaster-types'
+      );
       alert('Deleted successfully');
       navigate(redirectRoute);
+    } catch (error) {
+      console.error('Error deleting information record:', error);
+      alert('There was an error. Please try again');
     }
     setLoading(false);
   };

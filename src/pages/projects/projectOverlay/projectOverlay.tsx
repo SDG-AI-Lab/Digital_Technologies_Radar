@@ -3,8 +3,7 @@ import { Button } from '@chakra-ui/react';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
-import { supabase } from 'helpers/databaseClient';
-import { updateDataVersion } from 'helpers/dataUtils';
+import { apiRequest } from 'helpers/apiClient';
 import { isAdmin } from 'components/shared/helpers/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -60,27 +59,18 @@ export const ProjectOverlay: React.FC<Props> = ({
   };
 
   const handleDelete = async (): Promise<void> => {
-    const tableNames = ['project_data', 'tr_projects'];
-    const deleteErrors = [];
     if (!confirm('Are you sure you want to delete this project?')) return;
-
-    for (const table of tableNames) {
-      const { error } = await supabase
-        .from(table)
-        .delete()
-        .eq('title', project.title);
-      if (error) deleteErrors.push(error);
-    }
-
-    if (deleteErrors.length) {
-      alert('There was an error. Please try again');
-    } else {
-      await updateDataVersion();
-      alert('Deleted successfully');
+    try {
+      await apiRequest(`admin/projects/${encodeURIComponent(project.uuid)}`, {
+        method: 'DELETE'
+      });
       localStorage.removeItem('drr-projects-list');
+      alert('Deleted successfully');
       onClose();
-      // Refresh the page to update the project list
       window.location.reload();
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      alert('There was an error. Please try again');
     }
   };
 

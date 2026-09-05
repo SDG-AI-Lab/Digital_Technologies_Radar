@@ -1,4 +1,4 @@
-import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+import { DATA_VERSION } from 'helpers/databaseClient';
 import { apiRequest } from 'helpers/apiClient';
 import { Option } from 'pages/projectAction/types';
 
@@ -70,15 +70,11 @@ export const getProject = async (
   fromRadar: boolean,
   projectId: string
 ): Promise<any> => {
-  const { data, error } = await supabase
-    .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
-    .select(`${fromRadar ? '*' : '*, project_data(*)'}`)
-    .eq('uuid', projectId)
-    .single();
-
-  if (!error) {
-    setter(data as any);
-  }
+  const resource = fromRadar ? 'radar-project' : 'project';
+  const { data } = await apiRequest<{ data: any }>(
+    `public/details/${resource}/${encodeURIComponent(projectId)}`
+  );
+  setter(data);
 };
 
 export const getDataFromDb = async (
@@ -135,21 +131,17 @@ export const formatOptions = (options: any, key: string): Option[] =>
     return acc;
   }, []);
 
-export const updateDataVersion = async (): Promise<void> => {
-  await supabase
-    .from('dataset_version')
-    .update({ data_version: Date.now() })
-    .eq('id', 1);
-};
+export const updateDataVersion = async (): Promise<void> => undefined;
 
 export const approveProject = async (uuid: string): Promise<void> => {
-  const { error } = await supabase
-    .from('tr_projects')
-    .update({ approved: true })
-    .eq('uuid', uuid);
-  if (!error) {
+  try {
+    await apiRequest('admin/projects/approve', {
+      method: 'POST',
+      body: JSON.stringify({ uuid })
+    });
     alert('Project approved successfully');
-  } else {
+  } catch (error) {
+    console.error('Error approving project:', error);
     alert('There was an error, please try again');
   }
   window.location.reload();

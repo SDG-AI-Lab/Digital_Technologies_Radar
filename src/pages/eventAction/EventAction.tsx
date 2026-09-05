@@ -8,10 +8,10 @@ import {
   Textarea
 } from '@chakra-ui/react';
 import './EventAction.scss';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { toSnakeCase } from 'components/shared/helpers/HelperUtils';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getDataFromDb, updateDataVersion } from 'helpers/dataUtils';
+import { getDataFromDb } from 'helpers/dataUtils';
 import { isAdmin } from 'components/shared/helpers/auth';
 import { SelectMultiple } from 'pages/projectAction/SelectMultiple';
 
@@ -138,31 +138,21 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
     }
 
     payload['slug'] = toSnakeCase(formValues.title as string);
-    let supabaseError = false;
-
-    if (mode.toLocaleLowerCase() === 'add') {
-      const { data, error } = await supabase
-        .from('disaster_events')
-        .insert({ ...payload, countries: countries.countries } as any)
-        .select('uuid')
-        .single();
-      supabaseError = !!error;
-      console.log(data);
-    } else {
-      const { error } = await supabase
-        .from('disaster_events')
-        .update({ ...payload, countries: countries.countries })
-        .eq('uuid', uuid)
-        .select('uuid');
-      supabaseError = !!error;
-    }
-
-    if (!supabaseError) {
+    try {
+      await apiRequest(
+        isCreateForm
+          ? 'admin/disaster-events'
+          : `admin/disaster-events/${uuid}`,
+        {
+          method: isCreateForm ? 'POST' : 'PUT',
+          body: JSON.stringify({ ...payload, countries: countries.countries })
+        }
+      );
       alert('Operation Successfull!');
-      void updateDataVersion();
       localStorage.removeItem('drr-recent-disasters');
       navigate('/');
-    } else {
+    } catch (error) {
+      console.error('Error saving disaster event:', error);
       alert('There was an error, please try again');
     }
   };
