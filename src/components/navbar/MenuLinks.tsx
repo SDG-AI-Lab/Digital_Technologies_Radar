@@ -13,7 +13,7 @@ import { ROUTES } from 'navigation/routes';
 import React from 'react';
 import { RiEarthquakeLine } from 'react-icons/ri';
 
-import { isSignedIn } from 'components/shared/helpers/auth';
+import { clearSession, isSignedIn } from 'components/shared/helpers/auth';
 
 interface Props {
   isOpen: boolean;
@@ -120,7 +120,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
         {isSignedIn ? (
           <div
             onClick={() => {
-              localStorage.removeItem('drr-current-user-id');
+              clearSession();
               window.location.reload();
             }}
           >

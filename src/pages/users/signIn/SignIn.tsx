@@ -7,8 +7,8 @@ import {
   Spinner
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { comparePasswords, isSignedIn } from 'components/shared/helpers/auth';
-import { supabase } from 'helpers/databaseClient';
+import { isSignedIn } from 'components/shared/helpers/auth';
+import { apiRequest } from 'helpers/apiClient';
 
 import './SignIn.scss';
 
@@ -41,22 +41,23 @@ export const SignIn: React.FC = () => {
 
   const handleSignIn = async (): Promise<void> => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('users')
-      .select()
-      .eq('email', email)
-      .single();
-
-    const { role, password: passwordHash } = data || {};
-
-    if (!error && comparePasswords(password, passwordHash)) {
-      localStorage.setItem('drr-current-user-id', role);
+    try {
+      const data = await apiRequest<{
+        access_token: string;
+        user: { role: 'admin' | 'user' };
+      }>('auth/sign-in', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+      });
+      localStorage.setItem('drr-access-token', data.access_token);
+      localStorage.setItem('drr-current-user-id', data.user.role);
       alert('Successfully Signed In');
       navigate(0);
-    } else {
+    } catch {
       alert('Incorrect credentials, please check and try again');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (

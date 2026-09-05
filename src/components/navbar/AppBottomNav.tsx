@@ -12,7 +12,7 @@ import { MenuItem } from './components/MenuItem';
 import { ROUTES } from 'navigation/routes';
 import React from 'react';
 import { RiEarthquakeLine } from 'react-icons/ri';
-import { isSignedIn } from 'components/shared/helpers/auth';
+import { clearSession, isSignedIn } from 'components/shared/helpers/auth';
 
 export const AppBottomNav: React.FC = () => {
   return (
@@ -129,7 +129,7 @@ export const AppBottomNav: React.FC = () => {
           <Box
             flex={1}
             onClick={() => {
-              localStorage.removeItem('drr-current-user-id');
+              clearSession();
               window.location.reload();
             }}
             w={'15vw'}
