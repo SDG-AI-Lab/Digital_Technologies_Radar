@@ -10,7 +10,26 @@ const PUBLIC_RESOURCES = {
   'data-types': { table: 'data_types', select: '*', order: 'name' },
   'use-cases': { table: 'use_cases', select: '*', order: 'use_case' },
   partners: { table: 'partners', select: '*', order: 'name' },
-  'un-hosts': { table: 'un_hosts', select: '*', order: 'name' }
+  'un-hosts': { table: 'un_hosts', select: '*', order: 'name' },
+  projects: {
+    table: 'tr_projects',
+    select: '*, project_data(*)',
+    order: 'id',
+    ascending: false,
+    excludeFalse: 'approved'
+  },
+  'disaster-projects': { table: 'disaster_types_projects', select: '*' },
+  'disaster-events': {
+    table: 'disaster_events',
+    select: '*, locations(id, country, region)'
+  },
+  'radar-csv': {
+    table: 'project_data',
+    select: '*',
+    order: 'id',
+    ascending: false,
+    csv: true
+  }
 };
 
 function allowedOrigin(origin) {
@@ -128,8 +147,12 @@ exports.handler = async (event) => {
       if (!resource) return response(404, { error: 'Not found' }, origin);
 
       let query = supabase.from(resource.table).select(resource.select);
-      if (resource.order) query = query.order(resource.order);
+      if (resource.excludeFalse) query = query.neq(resource.excludeFalse, false);
+      if (resource.order) {
+        query = query.order(resource.order, { ascending: resource.ascending });
+      }
       if (resource.single) query = query.single();
+      if (resource.csv) query = query.csv();
       const { data, error } = await query;
       if (error) throw error;
       return response(200, { data }, origin, 'public, max-age=300, s-maxage=600, stale-while-revalidate=86400');
