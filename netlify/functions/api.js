@@ -29,7 +29,40 @@ const PUBLIC_RESOURCES = {
     order: 'id',
     ascending: false,
     csv: true
+  },
+  'tech-projects': { table: 'tech_projects', select: '*' },
+  'home-projects': { table: 'tr_projects', select: '*', limit: 4 },
+  'home-technologies': { table: 'technologies', select: '*', limit: 3 },
+  'home-disaster-types': {
+    table: 'disaster_types',
+    select: '*',
+    order: 'id',
+    limit: 3
+  },
+  'home-help-needed': {
+    table: 'disaster_events',
+    select: '*',
+    order: 'id',
+    ascending: false,
+    equals: { help_needed: 1 }
+  },
+  'home-recent-events': {
+    table: 'disaster_events',
+    select: '*',
+    order: 'id',
+    ascending: false,
+    equals: { help_needed: 0 }
   }
+};
+
+const PUBLIC_DETAIL_RESOURCES = {
+  project: { table: 'tr_projects', select: '*, project_data(*)', column: 'uuid', single: true },
+  'radar-project': { table: 'project_data', select: '*', column: 'uuid', single: true },
+  technology: { table: 'technologies', select: '*', column: 'slug', single: true },
+  'technology-projects': { table: 'tech_projects', select: '*', column: 'slug' },
+  'disaster-type': { table: 'disaster_types', select: '*', column: 'slug', single: true },
+  'disaster-projects': { table: 'disaster_types_projects', select: '*', column: 'slug' },
+  'disaster-event': { table: 'disaster_events', select: '*', column: 'uuid', single: true }
 };
 
 function allowedOrigin(origin) {
@@ -143,14 +176,35 @@ exports.handler = async (event) => {
     }
 
     if (event.httpMethod === 'GET' && path.startsWith('public/')) {
+      const detailMatch = path.match(/^public\/details\/([^/]+)\/([^/]+)$/);
+      if (detailMatch) {
+        const resource = PUBLIC_DETAIL_RESOURCES[detailMatch[1]];
+        if (!resource) return response(404, { error: 'Not found' }, origin);
+
+        let query = supabase
+          .from(resource.table)
+          .select(resource.select)
+          .eq(resource.column, decodeURIComponent(detailMatch[2]));
+        if (resource.single) query = query.single();
+        const { data, error } = await query;
+        if (error) throw error;
+        return response(200, { data }, origin, 'public, max-age=300, s-maxage=600, stale-while-revalidate=86400');
+      }
+
       const resource = PUBLIC_RESOURCES[path.slice('public/'.length)];
       if (!resource) return response(404, { error: 'Not found' }, origin);
 
       let query = supabase.from(resource.table).select(resource.select);
       if (resource.excludeFalse) query = query.neq(resource.excludeFalse, false);
+      if (resource.equals) {
+        Object.entries(resource.equals).forEach(([column, value]) => {
+          query = query.eq(column, value);
+        });
+      }
       if (resource.order) {
         query = query.order(resource.order, { ascending: resource.ascending });
       }
+      if (resource.limit) query = query.limit(resource.limit);
       if (resource.single) query = query.single();
       if (resource.csv) query = query.csv();
       const { data, error } = await query;

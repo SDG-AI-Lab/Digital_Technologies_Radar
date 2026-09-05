@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Loader } from 'helpers/Loader';
 import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { updateDataVersion } from 'helpers/dataUtils';
 import { RadarContext } from 'navigation/context';
 
@@ -27,15 +28,15 @@ export const ProjectDetails: React.FC = () => {
   const { setCurrentProject } = useContext(RadarContext);
 
   const fetchProject = async (): Promise<any> => {
-    const { data, error } = await supabase
-      .from(`${fromRadar ? 'project_data' : 'tr_projects'}`)
-      .select(`${fromRadar ? '*' : '*, project_data(*)'}`)
-      .eq('uuid', projectId)
-      .single();
-
-    if (!error) {
+    try {
+      const resource = fromRadar ? 'radar-project' : 'project';
+      const { data } = await apiRequest<{ data: any }>(
+        `public/details/${resource}/${encodeURIComponent(projectId || '')}`
+      );
       setProject(data as any);
       setImage((data as any).img_url);
+    } catch (error) {
+      console.error('Error fetching project details:', error);
     }
   };
 

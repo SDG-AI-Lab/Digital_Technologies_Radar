@@ -12,7 +12,8 @@ import {
 } from 'components/shared/helpers/HelperUtils';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { RadarContext } from 'navigation/context';
-import { supabase, DATA_VERSION } from 'helpers/databaseClient';
+import { DATA_VERSION } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 import { Loader } from 'helpers/Loader';
 import { isSignedIn } from 'components/shared/helpers/auth';
 
@@ -70,12 +71,8 @@ export const Technologies: React.FC = () => {
     if (storedTechList && storedTechList.version === DATA_VERSION) {
       setTechList(storedTechList.data);
     } else {
-      const { data, error } = await supabase
-        .from('technologies')
-        .select(`name, description, img_url, slug, source`)
-        .order('name');
-
-      if (!error) {
+      try {
+        const { data } = await apiRequest<{ data: any[] }>('public/technologies');
         setTechList(data);
         localStorage.setItem(
           'drr-technologies',
@@ -84,6 +81,8 @@ export const Technologies: React.FC = () => {
             data
           })
         );
+      } catch (error) {
+        console.error('Error fetching technologies:', error);
       }
     }
     setLoading(false);
@@ -98,8 +97,10 @@ export const Technologies: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase.from('tech_projects').select();
-      if (!error) {
+      try {
+        const { data } = await apiRequest<{ data: any[] }>(
+          'public/tech-projects'
+        );
         setFilteredProjects(data as any);
         setProjectsList(data);
         localStorage.setItem(
@@ -109,6 +110,8 @@ export const Technologies: React.FC = () => {
             data
           })
         );
+      } catch (error) {
+        console.error('Error fetching technology projects:', error);
       }
     }
   };
