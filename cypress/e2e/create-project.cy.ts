@@ -2,6 +2,7 @@ describe('create project', () => {
   // Set logged in state
   beforeEach(() => {
     window.localStorage.setItem('drr-current-user-id', 'admin');
+    window.localStorage.setItem('drr-access-token', 'cypress-test-token');
 
     // intercept the creation request, stub empty 200 response
     cy.intercept(
