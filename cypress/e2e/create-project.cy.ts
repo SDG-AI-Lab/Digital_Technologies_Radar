@@ -14,7 +14,9 @@ describe('create project', () => {
     'public/data-types': [{ name: 'Test data type' }],
     'public/use-cases': [{ use_case: 'Test use case' }],
     'public/partners': [{ name: 'Test partner' }],
-    'public/un-hosts': [{ name: 'Test UN host' }]
+    'public/un-hosts': [{ name: 'Test UN host' }],
+    'public/radar-csv':
+      'region,subregion,country,data,date_of_implementation,description,disaster_cycle,title,source,status,partner,un_host,use_case,sdg,technology,disaster_type,theme,img_url,uuid\nTest region,Test subregion,Test country,Test data,2026,Description,Response,Test radar item,Source,Idea,Partner,UN host,Use case,SDG,Technology,Climate Change,Theme,https://example.com/image.png,test-id'
   };
 
   // Set logged in state

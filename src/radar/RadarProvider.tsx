@@ -16,7 +16,7 @@ import '@undp_sdg_ai_lab/undp-radar/dist/index.css';
 
 import { HorizonsNameComp } from './components/svg-hover/HorizonsNameComp';
 import { QuadrantNameComp } from './components/svg-hover/QuadrantNameComp';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 export const AppRadarProvider: React.FC = ({ children }) => {
   const [csvString, setCsvString] = useState('');
@@ -25,13 +25,11 @@ export const AppRadarProvider: React.FC = ({ children }) => {
   }, []);
 
   const getBlips = async (): Promise<void> => {
-    const { data, error } = await supabase
-      .from('project_data')
-      .select()
-      .order('id', { ascending: false })
-      .csv();
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: string }>('public/radar-csv');
       setCsvString(data);
+    } catch (error) {
+      console.error('Error fetching radar data:', error);
     }
   };
   const quadrantsDescription = {

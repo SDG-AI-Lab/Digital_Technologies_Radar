@@ -5,7 +5,7 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 
 import { InfoCard } from 'components/infoCard/InfoCard';
 import { Loader } from 'helpers/Loader';
-import { supabase } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 import './Disasters.scss';
 import { isSignedIn } from 'components/shared/helpers/auth';
@@ -16,11 +16,10 @@ export const DisasterEvents: React.FC = () => {
   const [data, setData] = useState<any>({});
 
   const getDisasterData = async (): Promise<any> => {
-    const { data, error } = await supabase
-      .from('disaster_events')
-      .select(`*, locations(id, country, region)`);
-
-    if (!error) {
+    try {
+      const { data } = await apiRequest<{ data: any[] }>(
+        'public/disaster-events'
+      );
       const transformedData = data.reduce((acc: any, curr: any) => {
         if (curr.locations.region in acc) {
           acc[curr.locations.region].push(curr);
@@ -30,6 +29,8 @@ export const DisasterEvents: React.FC = () => {
         return acc;
       }, {});
       setData(transformedData);
+    } catch (error) {
+      console.error('Error fetching disaster events:', error);
     }
 
     setLoading(false);

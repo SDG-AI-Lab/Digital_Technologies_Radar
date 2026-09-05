@@ -11,7 +11,8 @@ import { Loader } from 'helpers/Loader';
 import { RadarContext } from 'navigation/context';
 import { Project } from './projectComponent/Project';
 import { ProjectOverlay } from './projectOverlay/projectOverlay';
-import { DATA_VERSION, supabase } from 'helpers/databaseClient';
+import { DATA_VERSION } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 import './Projects.scss';
 import { isAdmin, isSignedIn } from 'components/shared/helpers/auth';
@@ -91,12 +92,8 @@ export const Projects: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase
-        .from('tr_projects')
-        .select(`*, project_data(*)`)
-        .neq('approved', false)
-        .order('id', { ascending: false });
-      if (!error) {
+      try {
+        const { data } = await apiRequest<{ data: any[] }>('public/projects');
         setFilteredProjects(data);
         setProjectsList(data);
         localStorage.setItem(
@@ -106,6 +103,8 @@ export const Projects: React.FC = () => {
             data
           })
         );
+      } catch (error) {
+        console.error('Error fetching projects:', error);
       }
     }
     setLoading(false);

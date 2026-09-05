@@ -13,7 +13,8 @@ import { InfoCard } from 'components/infoCard/InfoCard';
 import { ProjectsCollection } from 'components/projectsCollection/ProjectsCollection';
 import { RadarContext } from 'navigation/context';
 import { Loader } from 'helpers/Loader';
-import { supabase, DATA_VERSION } from 'helpers/databaseClient';
+import { DATA_VERSION } from 'helpers/databaseClient';
+import { apiRequest } from 'helpers/apiClient';
 
 import './Disasters.scss';
 import { isSignedIn } from 'components/shared/helpers/auth';
@@ -52,12 +53,10 @@ export const Disasters: React.FC = () => {
       const { data } = storedDisasterTypes;
       setDisasterTypes(data);
     } else {
-      const { data, error } = await supabase
-        .from('disaster_types')
-        .select(`name, description, img_url, slug, source`)
-        .order('name');
-
-      if (!error) {
+      try {
+        const { data } = await apiRequest<{ data: any[] }>(
+          'public/disaster-types'
+        );
         setDisasterTypes(data);
         localStorage.setItem(
           'drr-disaster-types',
@@ -66,6 +65,8 @@ export const Disasters: React.FC = () => {
             data
           })
         );
+      } catch (error) {
+        console.error('Error fetching disaster types:', error);
       }
     }
     setLoading(false);
@@ -83,10 +84,10 @@ export const Disasters: React.FC = () => {
       setFilteredProjects(data);
       setProjectsList(data);
     } else {
-      const { data, error } = await supabase
-        .from('disaster_types_projects')
-        .select();
-      if (!error) {
+      try {
+        const { data } = await apiRequest<{ data: any[] }>(
+          'public/disaster-projects'
+        );
         setFilteredProjects(data as any);
         setProjectsList(data);
         localStorage.setItem(
@@ -96,6 +97,8 @@ export const Disasters: React.FC = () => {
             data
           })
         );
+      } catch (error) {
+        console.error('Error fetching disaster projects:', error);
       }
     }
   };
