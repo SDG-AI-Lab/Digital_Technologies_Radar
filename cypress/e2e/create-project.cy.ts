@@ -1,8 +1,36 @@
 describe('create project', () => {
+  const publicResources: Record<string, unknown> = {
+    'public/dataset-version': { data_version: 'cypress' },
+    'public/technologies': [{ name: 'Test technology' }],
+    'public/disaster-types': [{ id: 1, name: 'Climate Change' }],
+    'public/locations': [
+      {
+        country: 'Test country',
+        region: 'Test region',
+        subregion: 'Test subregion'
+      }
+    ],
+    'public/themes': [{ theme: 'Test theme' }],
+    'public/data-types': [{ name: 'Test data type' }],
+    'public/use-cases': [{ use_case: 'Test use case' }],
+    'public/partners': [{ name: 'Test partner' }],
+    'public/un-hosts': [{ name: 'Test UN host' }]
+  };
+
   // Set logged in state
   beforeEach(() => {
     window.localStorage.setItem('drr-current-user-id', 'admin');
     window.localStorage.setItem('drr-access-token', 'cypress-test-token');
+
+    // The form test should not depend on a separately deployed Netlify API.
+    // It only needs stable public reference data in order to exercise the form.
+    cy.intercept('GET', '**/api/public/**', (request) => {
+      const path = request.url.split('/api/')[1];
+      request.reply({
+        statusCode: 200,
+        body: { data: publicResources[path] || [] }
+      });
+    }).as('publicReferenceData');
 
     // intercept the creation request, stub empty 200 response
     cy.intercept(
