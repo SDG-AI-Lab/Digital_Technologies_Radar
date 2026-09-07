@@ -1,0 +1,43 @@
+# Metrics Template
+#
+# Use this schema for `.sdgqalab/memory/audit/metrics.yml`.
+# Each audit run appends one snapshot to the `snapshots` array.
+# The agent reads previous snapshots to compute delta comparisons.
+#
+# Usage:
+#   - On first audit: create the file with one snapshot entry
+#   - On subsequent audits: append a new snapshot entry
+#   - Never overwrite previous snapshots — they form the audit history
+
+snapshots:
+  - date: "YYYY-MM-DDTHH:MM"           # UTC timestamp of audit start
+    overall_score_pct: 0.0              # Weighted overall score (0–100)
+    overall_rating: "Critical"          # Rating band: Critical | Low | Adequate | Solid | Exemplary
+    verdict: "NOT RECOMMENDED"          # NOT RECOMMENDED | CONDITIONAL | RECOMMENDED
+    total_checks: 0                     # Total checks executed (excluding N/A)
+    pass: 0                             # Total passing checks
+    partial: 0                          # Total partial checks
+    fail: 0                             # Total failing checks
+    na: 0                               # Total not-applicable checks
+    blockers: 0                         # P0 blocker count
+    critical_issues: 0                  # Critical-severity failures
+    high_issues: 0                      # High-severity failures
+    medium_issues: 0                    # Medium-severity failures
+    low_issues: 0                       # Low-severity failures
+
+    layers:
+      "{layer_name}":                   # e.g., "backend", "frontend"
+        type: "{type_label}"            # e.g., "python-django"
+        score_pct: 0.0
+        rating: "Critical"
+
+    quality_attributes:
+      "{layer}-{domain_id}":            # e.g., "backend-security"
+        domain_name: "{Domain Name}"    # e.g., "Security"
+        layer: "{layer_name}"           # e.g., "backend" or "project-wide"
+        score_pct: 0.0
+        rating: "Critical"
+        pass: 0
+        partial: 0
+        fail: 0
+        na: 0
