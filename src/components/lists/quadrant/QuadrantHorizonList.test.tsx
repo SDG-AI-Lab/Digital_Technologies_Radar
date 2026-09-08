@@ -44,11 +44,7 @@ describe('QuadrantHorizonList', () => {
     render(
       <ChakraProvider>
         <QuadrantHorizonList
-          blips={
-            [
-              { id: '1', horizon: 'idea', Technology: ['Drones'] }
-            ] as any
-          }
+          blips={[{ id: '1', horizon: 'idea', Technology: ['Drones'] }] as any}
           quadIndex={0}
         />
       </ChakraProvider>
