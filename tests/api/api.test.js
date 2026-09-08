@@ -58,7 +58,7 @@ function loadHandler() {
   jest.doMock('@supabase/supabase-js', () => ({
     createClient: createClient
   }));
-  return require('./api').handler;
+  return require('../../netlify/functions/api').handler;
 }
 
 function makeEvent({

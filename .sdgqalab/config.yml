@@ -89,6 +89,7 @@ layers:
 
     scopes:
       - api
+    # Handler tests live in tests/api/ so Netlify does not deploy *.test.js as functions.
     test_command: >-
       yarn test:api
     coverage_command: >-

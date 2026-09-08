@@ -100,7 +100,7 @@ Handler-level tests against mocked `@supabase/supabase-js`, invoking `exports.ha
 
 | Scope | Test File | Approx. Tests | Boundaries Covered |
 |---------------|-----------|---------------|--------------------|
-| api | `netlify/functions/api.test.js` | ~36 | CORS/origin, health, public list/detail, sign-in, requireAdmin, body size, field allowlist, auth/users, project CRUD/approve, info CRUD, disaster-events CRUD, 404s |
+| api | `tests/api/api.test.js` | ~36 | CORS/origin, health, public list/detail, sign-in, requireAdmin, body size, field allowlist, auth/users, project CRUD/approve, info CRUD, disaster-events CRUD, 404s |
 
 ### Integration Tests Needed
 
@@ -124,11 +124,11 @@ API workflow journeys exercised at the handler boundary (mocked Supabase). Not l
 
 | Test File / Suite | User Journey Covered |
 |-------------------|---------------------|
-| `netlify/functions/api.test.js` (health) | Health check GET `/api/health` |
-| `netlify/functions/api.test.js` (public) | Public list + detail resources |
-| `netlify/functions/api.test.js` (projects) | Admin create / update / delete / approve project |
-| `netlify/functions/api.test.js` (info + events) | Admin technology / disaster-type / disaster-event mutations |
-| `netlify/functions/api.test.js` (CORS + auth) | Rejected origin and unauthorized admin |
+| `tests/api/api.test.js` (health) | Health check GET `/api/health` |
+| `tests/api/api.test.js` (public) | Public list + detail resources |
+| `tests/api/api.test.js` (projects) | Admin create / update / delete / approve project |
+| `tests/api/api.test.js` (info + events) | Admin technology / disaster-type / disaster-event mutations |
+| `tests/api/api.test.js` (CORS + auth) | Rejected origin and unauthorized admin |
 
 ### E2E Tests Needed
 
@@ -144,12 +144,12 @@ None at the handler-contract level. Optional: contract tests against Netlify Dev
 
 | Scope | Test File | What's Tested |
 |---------------|-----------|---------------|
-| api | `netlify/functions/api.test.js` | Disallowed Origin 403; OPTIONS allow/deny |
-| api | `netlify/functions/api.test.js` | Missing Bearer 401; invalid token 401; non-admin 403 |
-| api | `netlify/functions/api.test.js` | Oversized body rejected |
-| api | `netlify/functions/api.test.js` | Unknown write fields stripped (`allowedFields`) |
-| api | `netlify/functions/api.test.js` | Public GET without auth; admin mutations require admin |
-| api | `netlify/functions/api.test.js` | Safe 500 on config/role-insert failures; create-user validation |
+| api | `tests/api/api.test.js` | Disallowed Origin 403; OPTIONS allow/deny |
+| api | `tests/api/api.test.js` | Missing Bearer 401; invalid token 401; non-admin 403 |
+| api | `tests/api/api.test.js` | Oversized body rejected |
+| api | `tests/api/api.test.js` | Unknown write fields stripped (`allowedFields`) |
+| api | `tests/api/api.test.js` | Public GET without auth; admin mutations require admin |
+| api | `tests/api/api.test.js` | Safe 500 on config/role-insert failures; create-user validation |
 
 ### Security Tests Needed
 
@@ -161,8 +161,8 @@ None for the previously identified areas. Optional: more granular DB-error leaka
 
 | Test File | Observation | Impact |
 |-----------|-------------|--------|
-| `netlify/functions/api.test.js` | Heavy mocking of Supabase query builder | High line coverage without proving live DB contracts |
-| `netlify/functions/api.test.js` | Helpers not extracted — unit file coverage stays 0% by methodology | Unit rating remains Critical despite Exemplary line/integration coverage |
+| `tests/api/api.test.js` | Heavy mocking of Supabase query builder | High line coverage without proving live DB contracts |
+| `tests/api/api.test.js` | Helpers not extracted — unit file coverage stays 0% by methodology | Unit rating remains Critical despite Exemplary line/integration coverage |
 
 ---
 
