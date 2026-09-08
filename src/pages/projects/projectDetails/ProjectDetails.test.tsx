@@ -98,7 +98,9 @@ describe('ProjectDetails', () => {
 
     renderDetails();
 
-    expect(await screen.findByText('A project description')).toBeInTheDocument();
+    expect(
+      await screen.findByText('A project description')
+    ).toBeInTheDocument();
     expect(screen.getByText('Drones, AI')).toBeInTheDocument();
     expect(screen.getByText('Early warning')).toBeInTheDocument();
     expect(screen.getByText('UNDP, ITU')).toBeInTheDocument();
@@ -196,10 +198,12 @@ describe('ProjectDetails', () => {
   it('deletes from radar and redirects to projectsRadar', async () => {
     mockedIsAdmin.mockReturnValue(true);
     mockSearch = '?projectsRadar=1';
-    mockedApiRequest.mockImplementation(async (_path: string, options?: any) => {
-      if (options?.method === 'DELETE') return {} as any;
-      return { data: sampleProject } as any;
-    });
+    mockedApiRequest.mockImplementation(
+      async (_path: string, options?: any) => {
+        if (options?.method === 'DELETE') return {} as any;
+        return { data: sampleProject } as any;
+      }
+    );
 
     renderDetails();
     fireEvent.click(await screen.findByRole('button', { name: /delete/i }));
@@ -227,10 +231,12 @@ describe('ProjectDetails', () => {
   it('alerts when delete fails', async () => {
     mockedIsAdmin.mockReturnValue(true);
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    mockedApiRequest.mockImplementation(async (_path: string, options?: any) => {
-      if (options?.method === 'DELETE') throw new Error('network');
-      return { data: sampleProject } as any;
-    });
+    mockedApiRequest.mockImplementation(
+      async (_path: string, options?: any) => {
+        if (options?.method === 'DELETE') throw new Error('network');
+        return { data: sampleProject } as any;
+      }
+    );
 
     renderDetails();
     fireEvent.click(await screen.findByRole('button', { name: /delete/i }));

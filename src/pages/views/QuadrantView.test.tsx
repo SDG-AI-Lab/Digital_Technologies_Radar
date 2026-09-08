@@ -13,7 +13,9 @@ let mockState: any = {
   isFiltered: false,
   filteredBlips: [],
   selectedQuadrant: 'preparedness',
-  radarData: { quadrants: ['preparedness', 'response', 'mitigation', 'recovery'] }
+  radarData: {
+    quadrants: ['preparedness', 'response', 'mitigation', 'recovery']
+  }
 };
 
 jest.mock('@undp_sdg_ai_lab/undp-radar', () => ({
@@ -25,7 +27,11 @@ jest.mock('@undp_sdg_ai_lab/undp-radar', () => ({
 }));
 
 jest.mock('radar/components', () => ({
-  BackButton: () => <button type='button' data-testid='back-button'>Back</button>
+  BackButton: () => (
+    <button type='button' data-testid='back-button'>
+      Back
+    </button>
+  )
 }));
 
 jest.mock('components/lists/quadrant/QuadrantHorizonList', () => ({

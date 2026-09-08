@@ -41,12 +41,15 @@ export const ReviewProjects: React.FC = () => {
   };
 
   return (
-    <div className='reviewProjects'>
+    <div className='reviewProjects' data-testid='review-projects-page'>
       <h3>Review Projects</h3>
       {projectsToReview.length > 0 ? (
         projectsToReview.map((project: any) => {
           return (
-            <div key={project.id}>
+            <div
+              key={project.id}
+              data-testid={`review-project-${project.uuid}`}
+            >
               <Project
                 project={project}
                 handler={handleClick}
@@ -57,9 +60,9 @@ export const ReviewProjects: React.FC = () => {
           );
         })
       ) : loading ? (
-        <Spinner />
+        <Spinner data-testid='review-projects-spinner' />
       ) : (
-        <p>No Projects to review</p>
+        <p data-testid='review-projects-empty'>No Projects to review</p>
       )}
       {project && (
         <SearchView

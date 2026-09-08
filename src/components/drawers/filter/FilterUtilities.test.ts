@@ -100,10 +100,7 @@ describe('FilterUtils', () => {
   });
 
   it('title-cases maturity stages', () => {
-    const stages = FilterUtils.getMaturityStages(
-      sampleBlips,
-      'horizon' as any
-    );
+    const stages = FilterUtils.getMaturityStages(sampleBlips, 'horizon' as any);
     expect(stages.map((s) => s.name)).toEqual(['Production', 'Prototype']);
   });
 
@@ -155,9 +152,9 @@ describe('FilterUtils', () => {
       }
     ] as any[];
 
-    expect(
-      FilterUtils.getDisasterTypes(blips, 'disasterType' as any)
-    ).toEqual([]);
+    expect(FilterUtils.getDisasterTypes(blips, 'disasterType' as any)).toEqual(
+      []
+    );
     expect(FilterUtils.getUseCases(blips, 'useCase' as any)).toEqual([]);
   });
 });

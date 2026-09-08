@@ -77,6 +77,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
         borderRadius={'0'}
         onClick={onOpen}
         position='static'
+        data-testid='search-more'
       >
         More
       </Button>
@@ -239,7 +240,10 @@ export const SearchView: React.FC<SearchViewProps> = ({
                     <b>Source:</b>
                   </Box>
                   <Box as='td' {...tdContentStyle} color='blue.600'>
-                    <Link to={`/projects/${techContent['uuid']}?from=${path}`}>
+                    <Link
+                      to={`/projects/${techContent['uuid']}?from=${path}`}
+                      data-testid='search-project-link'
+                    >
                       Click Here
                     </Link>
                   </Box>
@@ -262,6 +266,7 @@ export const SearchView: React.FC<SearchViewProps> = ({
                 <Button
                   colorScheme='blue'
                   borderRadius={'0'}
+                  data-testid='approve-project'
                   onClick={() => {
                     void approveProject(techContent['uuid']);
                     setLoading(true);

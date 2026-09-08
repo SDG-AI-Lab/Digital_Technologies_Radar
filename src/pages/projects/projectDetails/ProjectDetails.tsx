@@ -75,10 +75,10 @@ export const ProjectDetails: React.FC = () => {
   };
 
   return project ? (
-    <div className='projectDetailsPage'>
+    <div className='projectDetailsPage' data-testid='project-details-page'>
       <div className='projectHero'>
         <div className='projectTitle'>
-          <span>{project?.['title']}</span>
+          <span data-testid='project-details-title'>{project?.['title']}</span>
           <a
             href={project?.['source']}
             target='_blank'

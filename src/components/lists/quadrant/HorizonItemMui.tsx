@@ -176,7 +176,11 @@ const ItemMui: React.FC<{
                 🎯{' ' + blip.SDG}
               </Typography>
             </div>
-            <Button onClick={onSelect} variant='contained'>
+            <Button
+              onClick={onSelect}
+              variant='contained'
+              data-testid='blip-more'
+            >
               More
             </Button>
           </div>

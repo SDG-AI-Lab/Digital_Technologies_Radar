@@ -6,16 +6,20 @@ import { ProjectFormFields } from './ProjectFormFields';
 import { RadarContext } from 'navigation/context';
 
 jest.mock('pages/projectAction/SelectMultiple', () => ({
-  SelectMultiple: ({ label, options, loading, onChange, selectedValues }: any) => (
+  SelectMultiple: ({
+    label,
+    options,
+    loading,
+    onChange,
+    selectedValues
+  }: any) => (
     <div data-testid={`select-multiple-${label}`}>
       <span data-testid='loading'>{String(loading)}</span>
       <span data-testid='selected'>{selectedValues?.length || 0}</span>
       <span data-testid='options'>{options?.length || 0}</span>
       <button
         type='button'
-        onClick={() =>
-          onChange((prev: any) => ({ ...prev, [label]: '{Opt}' }))
-        }
+        onClick={() => onChange((prev: any) => ({ ...prev, [label]: '{Opt}' }))}
       >
         change-{label}
       </button>

@@ -61,23 +61,34 @@ export const SignIn: React.FC = () => {
   };
 
   return (
-    <div className='signIn'>
+    <div className='signIn' data-testid='sign-in-page'>
       <h3>Sign In</h3>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={110}>Email:</FormLabel>
-        <Input type='email' name='email' onChange={handleChange} />
+        <Input
+          type='email'
+          name='email'
+          onChange={handleChange}
+          data-testid='sign-in-email'
+        />
       </FormControl>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={110}>Password:</FormLabel>
-        <Input type='password' name='password' onChange={handleChange} />
+        <Input
+          type='password'
+          name='password'
+          onChange={handleChange}
+          data-testid='sign-in-password'
+        />
       </FormControl>
 
       <div className='submit'>
         {loading ? (
-          <Spinner />
+          <Spinner data-testid='sign-in-spinner' />
         ) : (
           <Button
             p={'10px 30px'}
+            data-testid='sign-in-submit'
             onClick={() => {
               void handleSignIn();
             }}

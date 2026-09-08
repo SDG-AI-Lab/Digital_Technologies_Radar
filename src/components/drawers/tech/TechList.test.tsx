@@ -122,16 +122,22 @@ describe('TechList', () => {
   it('renders tech buttons derived from blips', async () => {
     renderTechList();
 
-    expect(await screen.findByRole('button', { name: 'Drones' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'Drones' })
+    ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'AI' })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /reset/i })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /reset/i })
+    ).not.toBeInTheDocument();
   });
 
   it('does not render tech when there are no blips', () => {
     mockBlips = [];
     renderTechList();
 
-    expect(screen.queryByRole('button', { name: 'Drones' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'Drones' })
+    ).not.toBeInTheDocument();
   });
 
   it('selects a technology and marks filters as active', async () => {
@@ -184,7 +190,9 @@ describe('TechList', () => {
     mockUseCaseFilter = 'Early warning';
     renderTechList();
 
-    expect(await screen.findByRole('button', { name: 'Drones' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'Drones' })
+    ).toBeInTheDocument();
   });
 
   it('still builds the tech list when disaster filter is specific', async () => {
@@ -192,6 +200,8 @@ describe('TechList', () => {
     mockDisasterTypeFilter = 'Assessment';
     renderTechList();
 
-    expect(await screen.findByRole('button', { name: 'AI' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'AI' })
+    ).toBeInTheDocument();
   });
 });

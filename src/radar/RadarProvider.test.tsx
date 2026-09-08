@@ -30,7 +30,8 @@ jest.mock('@undp_sdg_ai_lab/undp-radar', () => ({
     />
   ),
   Utilities: {
-    cleanupStringArray: (arr: string[]) => arr.map((s) => s.trim()).filter(Boolean)
+    cleanupStringArray: (arr: string[]) =>
+      arr.map((s) => s.trim()).filter(Boolean)
   }
 }));
 
@@ -52,7 +53,9 @@ describe('AppRadarProvider', () => {
   });
 
   it('loads radar CSV and renders provider children', async () => {
-    mockedApiRequest.mockResolvedValue({ data: 'title,region\nA,Oceania' } as any);
+    mockedApiRequest.mockResolvedValue({
+      data: 'title,region\nA,Oceania'
+    } as any);
 
     render(
       <AppRadarProvider>

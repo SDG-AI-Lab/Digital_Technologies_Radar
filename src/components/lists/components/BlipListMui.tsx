@@ -92,7 +92,7 @@ export const BlipListMui: React.FC = React.memo(() => {
           TransitionProps={{ unmountOnExit: true }}
           expanded={expanded === quad}
           onChange={handleChange(quad)}
-          datd-testid='qudrant-section'
+          data-testid={`quadrant-section-${quad}`}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

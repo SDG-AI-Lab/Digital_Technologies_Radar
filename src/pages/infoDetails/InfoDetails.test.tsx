@@ -178,10 +178,7 @@ describe('InfoDetails', () => {
 
     const scrollIntoView = jest.fn();
     jest.spyOn(document, 'getElementById').mockImplementation((id: string) => {
-      if (
-        id === 'item-projects-section' ||
-        id === 'item-details-section'
-      ) {
+      if (id === 'item-projects-section' || id === 'item-details-section') {
         return { scrollIntoView } as any;
       }
       return null;

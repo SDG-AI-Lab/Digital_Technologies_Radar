@@ -90,6 +90,7 @@ export const SearchBar: React.FC = () => {
             value={techSearch}
             onChange={handleFilter}
             m={'auto'}
+            data-testid='search-input'
           />
 
           <Text

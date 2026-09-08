@@ -119,10 +119,7 @@ describe('InfoAction', () => {
 
   it('creates a disaster type with related project updates', async () => {
     mockedApiRequest.mockResolvedValue({} as any);
-    renderInfoAction(
-      { mode: 'ADD', category: 'DISASTER' },
-      [{ uuid: 'p1' }]
-    );
+    renderInfoAction({ mode: 'ADD', category: 'DISASTER' }, [{ uuid: 'p1' }]);
 
     fillFields({
       'field-title': 'Flood',
@@ -185,15 +182,12 @@ describe('InfoAction', () => {
       })
     );
 
-    renderInfoAction(
-      { mode: 'EDIT', category: 'TECHNOLOGY' },
-      [
-        {
-          uuid: 'p1',
-          technology: ['Drones', 'AI']
-        }
-      ]
-    );
+    renderInfoAction({ mode: 'EDIT', category: 'TECHNOLOGY' }, [
+      {
+        uuid: 'p1',
+        technology: ['Drones', 'AI']
+      }
+    ]);
 
     expect(await screen.findByDisplayValue('Drones')).toBeInTheDocument();
 

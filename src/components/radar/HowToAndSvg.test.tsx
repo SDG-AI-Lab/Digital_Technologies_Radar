@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { axe } from 'jest-axe';
 import { HowToPopup } from './HowToPopup';
 import { QuadrantNameComp } from 'radar/components/svg-hover/QuadrantNameComp';
 import { HorizonsNameComp } from 'radar/components/svg-hover/HorizonsNameComp';
@@ -35,6 +36,20 @@ describe('HowToPopup', () => {
     expect(
       document.querySelector('a[href="mailto:ftr4drr@undp.org"]')
     ).toBeTruthy();
+  });
+
+  it('has no basic accessibility violations on the trigger', async () => {
+    const { container } = render(
+      <ChakraProvider>
+        <HowToPopup />
+      </ChakraProvider>
+    );
+
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
   });
 });
 

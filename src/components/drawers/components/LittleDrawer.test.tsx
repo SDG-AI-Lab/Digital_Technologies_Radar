@@ -42,7 +42,9 @@ describe('LittleDrawerIconButton', () => {
       </ChakraProvider>
     );
 
-    expect(document.querySelector('.littleDrawerIconButton')).toBeInTheDocument();
+    expect(
+      document.querySelector('.littleDrawerIconButton')
+    ).toBeInTheDocument();
 
     rerender(
       <ChakraProvider>
@@ -55,7 +57,9 @@ describe('LittleDrawerIconButton', () => {
       </ChakraProvider>
     );
 
-    expect(document.querySelector('.littleDrawerIconButton')).toBeInTheDocument();
+    expect(
+      document.querySelector('.littleDrawerIconButton')
+    ).toBeInTheDocument();
   });
 
   it('renders cog icon and toggles on click', () => {

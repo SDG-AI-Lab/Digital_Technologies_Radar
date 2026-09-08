@@ -12,9 +12,7 @@ jest.mock('react-multi-select-component', () => ({
       <button
         type='button'
         onClick={() =>
-          onChange([
-            options?.[0] || { label: 'Oceania', value: 'oceania' }
-          ])
+          onChange([options?.[0] || { label: 'Oceania', value: 'oceania' }])
         }
       >
         select-option

@@ -66,9 +66,7 @@ describe('home page cards', () => {
       summary: 'Aerial mapping'
     } as any;
 
-    renderWithContext(
-      <HomeCardMini project={project} type='technologies' />
-    );
+    renderWithContext(<HomeCardMini project={project} type='technologies' />);
 
     expect(screen.getByText('Drones')).toBeInTheDocument();
     expect(screen.getByText('Aerial mapping')).toBeInTheDocument();

@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { MemoryRouter } from 'react-router-dom';
+import { axe } from 'jest-axe';
 import { FilterDrawer } from './FilterDrawer';
 
 jest.mock('./filter/CustomFilter', () => ({
@@ -81,5 +82,21 @@ describe('FilterDrawer', () => {
     expect(
       container.querySelector('.option-button--mapPage')
     ).toBeInTheDocument();
+  });
+
+  it('has no basic accessibility violations on the closed drawer trigger', async () => {
+    const { container } = render(
+      <ChakraProvider>
+        <MemoryRouter>
+          <FilterDrawer />
+        </MemoryRouter>
+      </ChakraProvider>
+    );
+
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
   });
 });

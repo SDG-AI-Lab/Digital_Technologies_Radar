@@ -64,9 +64,7 @@ describe('BackButton', () => {
     fireEvent.click(screen.getByTestId('back-button'));
 
     expect(mockSetSelectedItem).toHaveBeenCalledWith(null);
-    expect(mockNavigate).toHaveBeenCalledWith(
-      `${ROUTES.QUADRANT}/response`
-    );
+    expect(mockNavigate).toHaveBeenCalledWith(`${ROUTES.QUADRANT}/response`);
   });
 
   it('does not navigate to quadrant when none is selected', () => {

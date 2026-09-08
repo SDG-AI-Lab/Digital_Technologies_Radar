@@ -84,6 +84,28 @@ describe('apiClient', () => {
     );
   });
 
+  it('forwards the request body unchanged to fetch', async () => {
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => ({})
+    });
+
+    const body = JSON.stringify({
+      title: 'x',
+      unexpected_client_field: 'kept-as-is'
+    });
+
+    await apiRequest('admin/projects', {
+      method: 'POST',
+      body
+    });
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.objectContaining({ body })
+    );
+  });
+
   it('returns the parsed JSON body on success', async () => {
     (global.fetch as jest.Mock).mockResolvedValue({
       ok: true,

@@ -36,7 +36,9 @@ describe('ProjectForm', () => {
   it('renders title, labeled fields, and Add submit CTA', () => {
     const { action } = renderForm('Add New Project');
 
-    expect(screen.getByRole('heading', { name: 'Add New Project' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Add New Project' })
+    ).toBeInTheDocument();
     expect(screen.getByText('TITLE:')).toBeInTheDocument();
     expect(screen.getByText('USE CASE:')).toBeInTheDocument();
     expect(screen.getByTestId('mock-field-title')).toHaveTextContent('text');

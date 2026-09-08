@@ -85,7 +85,9 @@ describe('ProjectOverlay', () => {
   it('renders project content when open', () => {
     renderOverlay();
 
-    expect(screen.getByRole('heading', { name: 'Overlay Project' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Overlay Project' })
+    ).toBeInTheDocument();
     expect(screen.getByText('Overlay description')).toBeInTheDocument();
     expect(screen.getByText('Drones')).toBeInTheDocument();
     expect(screen.getByText('Assessment')).toBeInTheDocument();
@@ -131,16 +133,14 @@ describe('ProjectOverlay', () => {
 
     renderOverlay();
 
-    [
-      'Details',
-      'Technology',
-      'Use Case',
-      'Partners',
-      'Other Details'
-    ].forEach((label) => {
-      fireEvent.click(screen.getByRole('button', { name: label }));
-      expect(screen.getByRole('button', { name: label })).toHaveClass('active');
-    });
+    ['Details', 'Technology', 'Use Case', 'Partners', 'Other Details'].forEach(
+      (label) => {
+        fireEvent.click(screen.getByRole('button', { name: label }));
+        expect(screen.getByRole('button', { name: label })).toHaveClass(
+          'active'
+        );
+      }
+    );
     expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
   });
 
@@ -228,7 +228,9 @@ describe('ProjectOverlay', () => {
       }
     });
 
-    expect(screen.getByRole('heading', { name: 'Legacy Title' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Legacy Title' })
+    ).toBeInTheDocument();
     expect(screen.getByText('Legacy description')).toBeInTheDocument();
     expect(screen.getByText('Artificial Intelligence')).toBeInTheDocument();
     expect(screen.getByText('ITU')).toBeInTheDocument();

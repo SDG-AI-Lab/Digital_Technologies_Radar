@@ -5,7 +5,9 @@ import { RadarLayout } from './RadarLayout';
 import { MapViewLayout } from './MapViewLayout';
 
 jest.mock('../components/views/FilterTechNavView', () => ({
-  FilterTechNavView: () => <div data-testid='filter-tech-nav'>FilterTechNav</div>
+  FilterTechNavView: () => (
+    <div data-testid='filter-tech-nav'>FilterTechNav</div>
+  )
 }));
 
 jest.mock('../components/views/ContentView', () => ({
