@@ -22,7 +22,7 @@ export const Register: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (!isAdmin()) {
       navigate('/');
     }
   }, []);

@@ -57,7 +57,7 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
-      if (!isAdmin) return navigate('/');
+      if (!isAdmin()) return navigate('/');
       const key = queryString.includes('recent=true')
         ? 'drr-recent-disasters'
         : 'drr-disaster-events';

@@ -20,7 +20,7 @@ export const SignIn: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSignedIn) {
+    if (isSignedIn()) {
       navigate('/');
     }
   }, []);

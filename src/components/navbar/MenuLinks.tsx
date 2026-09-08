@@ -117,7 +117,7 @@ export const MenuLinks: React.FC<Props> = ({ isOpen }) => (
           </Button>
         </MenuItem>
 
-        {isSignedIn ? (
+        {isSignedIn() ? (
           <div
             onClick={() => {
               clearSession();

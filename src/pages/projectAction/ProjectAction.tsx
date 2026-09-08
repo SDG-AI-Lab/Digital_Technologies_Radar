@@ -70,7 +70,7 @@ export const ProjectAction: React.FC<Props> = ({ mode = 'add' }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
-      if (!isAdmin) return navigate('/projects');
+      if (!isAdmin()) return navigate('/projects');
       if (currentProject && Object.keys(currentProject).length) {
         setProjectFormValues(currentProject);
         setHasFetchedCurrentProject(true);

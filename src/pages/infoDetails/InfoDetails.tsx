@@ -125,7 +125,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
           <Image imgUrl={item.img_url} />
         </div>
       </div>
-      {isAdmin && (
+      {isAdmin() && (
         <div className='infoActions'>
           <Button
             leftIcon={<EditIcon />}

@@ -125,7 +125,7 @@ export const AppBottomNav: React.FC = () => {
           </MenuItem>
         </Box>
 
-        {isSignedIn ? (
+        {isSignedIn() ? (
           <Box
             flex={1}
             onClick={() => {

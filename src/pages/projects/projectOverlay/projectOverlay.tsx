@@ -168,7 +168,7 @@ export const ProjectOverlay: React.FC<Props> = ({
           </div>
 
           {/* Admin Actions */}
-          {isAdmin && (
+          {isAdmin() && (
             <div className='project-actions-overlay'>
               <Button
                 leftIcon={<EditIcon />}

@@ -92,7 +92,7 @@ export const PageDetails: React.FC<Props> = ({
           <Image imgUrl={itemDetails?.img_url as string} />
         </div>
       </div>
-      {isAdmin && (
+      {isAdmin() && (
         <div className='actions'>
           <Button
             leftIcon={<EditIcon />}

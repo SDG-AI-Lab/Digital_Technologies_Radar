@@ -45,7 +45,7 @@ export const InfoAction: React.FC<Props> = ({ mode, category, table }) => {
 
   useEffect(() => {
     if (!isCreateForm) {
-      if (!isAdmin)
+      if (!isAdmin())
         return navigate(`/${isDisastersPage ? 'disasters' : 'technologies'}`);
       const itemList = JSON.parse(localStorage.getItem(key) as string);
 

@@ -109,7 +109,7 @@ export const ProjectDetails: React.FC = () => {
           />
         </div>
       </div>
-      {isAdmin && (
+      {isAdmin() && (
         <div className='projectActions'>
           <Button
             leftIcon={<EditIcon />}
