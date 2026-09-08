@@ -1,0 +1,41 @@
+snapshots:
+  - date: "2026-09-07T15:13"
+    layers:
+      frontend:
+        total_source_files: 120
+        unit_file_coverage_pct: 12.5
+        integration_file_coverage_pct: 4.2
+        line_coverage_pct: 24.41
+        e2e_gaps: 7
+        security_gaps: 7
+        accessibility_gaps: 10
+        test_count: 77
+      api:
+        total_source_files: 1
+        unit_file_coverage_pct: 0
+        integration_file_coverage_pct: 0
+        line_coverage_pct: 18.47
+        e2e_gaps: 5
+        security_gaps: 6
+        accessibility_gaps: 0
+        test_count: 0
+  - date: "2026-09-07T15:39"
+    layers:
+      frontend:
+        total_source_files: 120
+        unit_file_coverage_pct: 12.5
+        integration_file_coverage_pct: 4.2
+        line_coverage_pct: 24.41
+        e2e_gaps: 7
+        security_gaps: 7
+        accessibility_gaps: 10
+        test_count: 77
+      api:
+        total_source_files: 1
+        unit_file_coverage_pct: 0.0
+        integration_file_coverage_pct: 100.0
+        line_coverage_pct: 100.0
+        e2e_gaps: 0
+        security_gaps: 0
+        accessibility_gaps: 0
+        test_count: 36
