@@ -131,7 +131,9 @@ describe('Register', () => {
     localStorage.setItem('drr-access-token', 'tok');
     localStorage.setItem('drr-current-user-id', 'admin');
     mockedApiRequest.mockRejectedValue(
-      Object.assign(new Error('User already registered'), { message: 'User already registered' })
+      Object.assign(new Error('User already registered'), {
+        message: 'User already registered'
+      })
     );
 
     renderRegister();

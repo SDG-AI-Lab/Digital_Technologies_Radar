@@ -139,9 +139,7 @@ const projects = [
 const cache = (data: unknown) =>
   JSON.stringify({ version: 'test-version', data });
 
-const renderTechnologies = (
-  filteredValues: any = baseFilteredValues
-) =>
+const renderTechnologies = (filteredValues: any = baseFilteredValues) =>
   render(
     <MemoryRouter>
       <RadarContext.Provider
@@ -190,7 +188,9 @@ describe('Technologies', () => {
 
     renderTechnologies();
 
-    expect(await screen.findByRole('heading', { name: 'Technologies' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Technologies' })
+    ).toBeInTheDocument();
     expect(screen.getByTestId('info-Drones')).toBeInTheDocument();
     expect(screen.getByTestId('info-AI')).toBeInTheDocument();
     expect(screen.getByText('See All (4)')).toBeInTheDocument();

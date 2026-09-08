@@ -113,9 +113,7 @@ const seedReferenceData = (): void => {
       if (config.tableName === 'locations') {
         setter([{ label: 'Fiji', value: 'Fiji' }]);
         return {
-          data: [
-            { country: 'Fiji', region: 'Oceania', subregion: 'Melanesia' }
-          ]
+          data: [{ country: 'Fiji', region: 'Oceania', subregion: 'Melanesia' }]
         };
       }
       setter([{ label: 'Opt', value: 'Opt' }]);

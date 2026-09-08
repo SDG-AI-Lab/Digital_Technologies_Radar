@@ -46,9 +46,7 @@ describe('BlipListMui', () => {
     render(<BlipListMui />);
 
     // reorderQuadrants moves the last item to the front
-    expect(
-      screen.getByTestId('quadrant-section-recovery')
-    ).toBeInTheDocument();
+    expect(screen.getByTestId('quadrant-section-recovery')).toBeInTheDocument();
     expect(
       screen.getByTestId('quadrant-section-preparedness')
     ).toBeInTheDocument();

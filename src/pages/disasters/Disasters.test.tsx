@@ -264,9 +264,7 @@ describe('Disasters', () => {
     expect(mockSetFilteredValues).toHaveBeenCalledWith(
       expect.objectContaining({
         parameters: expect.objectContaining({
-          'Disaster Type': [
-            { label: 'Flood', value: 'flood' }
-          ]
+          'Disaster Type': [{ label: 'Flood', value: 'flood' }]
         })
       })
     );

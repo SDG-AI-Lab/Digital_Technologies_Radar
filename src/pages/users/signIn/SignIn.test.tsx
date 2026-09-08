@@ -47,8 +47,12 @@ describe('SignIn', () => {
   it('renders the sign-in form when signed out', () => {
     renderSignIn();
 
-    expect(screen.getByRole('heading', { name: /sign in/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /sign in/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /sign in/i })
+    ).toBeInTheDocument();
   });
 
   it('has no basic accessibility violations on the sign-in form', async () => {

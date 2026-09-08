@@ -143,9 +143,9 @@ describe('HomePage', () => {
     expect(await screen.findByTestId('home-card-p1')).toHaveTextContent(
       'Project One'
     );
-    expect(screen.getByTestId('home-card-mini-technologies-t1')).toHaveTextContent(
-      'Drones'
-    );
+    expect(
+      screen.getByTestId('home-card-mini-technologies-t1')
+    ).toHaveTextContent('Drones');
     expect(screen.getByTestId('home-card-mini-disasters-d1')).toHaveTextContent(
       'Flood'
     );
@@ -191,8 +191,12 @@ describe('HomePage', () => {
     expect(await screen.findByTestId('home-card-cached-p')).toHaveTextContent(
       'Cached Project'
     );
-    expect(screen.getByTestId('home-card-mini-technologies-cached-t')).toBeInTheDocument();
-    expect(screen.getByTestId('home-card-mini-disasters-cached-d')).toBeInTheDocument();
+    expect(
+      screen.getByTestId('home-card-mini-technologies-cached-t')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByTestId('home-card-mini-disasters-cached-d')
+    ).toBeInTheDocument();
     expect(screen.getByTestId('recent-disasters')).toHaveTextContent(
       'Cached Help'
     );
@@ -220,9 +224,7 @@ describe('HomePage', () => {
 
     fireEvent.click(await screen.findByText('carousel-next'));
     expect(
-      await screen.findByText(
-        /The Disasters Page has a list of disater types/i
-      )
+      await screen.findByText(/The Disasters Page has a list of disater types/i)
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByText('carousel-click'));

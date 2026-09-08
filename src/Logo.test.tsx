@@ -13,17 +13,15 @@ jest.mock('@chakra-ui/react', () => {
   return {
     ...actual,
     usePrefersReducedMotion: () => mockPrefersReducedMotion(),
-    Image: ReactLib.forwardRef(
-      ({ animation, src, ...rest }: any, ref: any) => (
-        <img
-          ref={ref}
-          alt='logo'
-          src={src}
-          data-animation={animation || ''}
-          {...rest}
-        />
-      )
-    )
+    Image: ReactLib.forwardRef(({ animation, src, ...rest }: any, ref: any) => (
+      <img
+        ref={ref}
+        alt='logo'
+        src={src}
+        data-animation={animation || ''}
+        {...rest}
+      />
+    ))
   };
 });
 

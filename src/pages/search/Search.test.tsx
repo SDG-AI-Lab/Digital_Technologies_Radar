@@ -174,11 +174,7 @@ describe('Search page', () => {
   it('auto-opens SearchView when setOpen is true and closes via setClose', () => {
     const setClose = jest.fn();
     renderWithProviders(
-      <SearchView
-        techContent={sampleBlip as any}
-        setOpen
-        setClose={setClose}
-      />
+      <SearchView techContent={sampleBlip as any} setOpen setClose={setClose} />
     );
 
     expect(screen.getByText('Flood Mapper')).toBeInTheDocument();

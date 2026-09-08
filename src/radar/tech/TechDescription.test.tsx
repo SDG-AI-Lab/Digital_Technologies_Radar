@@ -62,9 +62,7 @@ describe('TechDescription', () => {
     );
 
     expect(screen.getByText('Drones')).toBeInTheDocument();
-    expect(
-      screen.getByText('Drones help with mapping.')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Drones help with mapping.')).toBeInTheDocument();
     expect(
       screen.getByText('They are useful in disasters.')
     ).toBeInTheDocument();

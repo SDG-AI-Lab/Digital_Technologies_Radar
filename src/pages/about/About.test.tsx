@@ -30,7 +30,9 @@ describe('About', () => {
     );
 
     expect(screen.getByText('SDG AI Lab')).toBeInTheDocument();
-    expect(screen.getByText('Connecting Business initiative')).toBeInTheDocument();
+    expect(
+      screen.getByText('Connecting Business initiative')
+    ).toBeInTheDocument();
     expect(
       screen.getByText('FTR4DRR Volunteer Developer Team')
     ).toBeInTheDocument();
@@ -43,7 +45,9 @@ describe('About', () => {
       </ChakraProvider>
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /send us your feedback/i }));
+    fireEvent.click(
+      screen.getByRole('button', { name: /send us your feedback/i })
+    );
 
     expect(window.open).toHaveBeenCalledWith(
       expect.stringContaining('forms.office.com'),

@@ -5,9 +5,7 @@ import { ProjectBadge } from './ProjectBadges';
 
 jest.mock('../helpers/HelperUtils', () => ({
   sliceForBadge: (values: string[]) =>
-    values.length > 2
-      ? [...values.slice(0, 2), '...']
-      : values
+    values.length > 2 ? [...values.slice(0, 2), '...'] : values
 }));
 
 const renderBadge = (project: any) =>

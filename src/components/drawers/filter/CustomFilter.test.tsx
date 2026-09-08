@@ -425,9 +425,9 @@ describe('CustomFilter', () => {
       );
       const [isFiltered, filtered] = lastFiltered();
       expect(isFiltered).toBe(true);
-      expect(
-        filtered.every((b: any) => b[dataKey].includes('Spatial'))
-      ).toBe(true);
+      expect(filtered.every((b: any) => b[dataKey].includes('Spatial'))).toBe(
+        true
+      );
     });
   });
 

@@ -78,10 +78,9 @@ describe('PageDetails', () => {
     renderDetails();
 
     expect(screen.getByText('Cyclone Alert')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'SUPPORT RECOVERY' })).toHaveAttribute(
-      'href',
-      'https://example.com/help'
-    );
+    expect(
+      screen.getByRole('link', { name: 'SUPPORT RECOVERY' })
+    ).toHaveAttribute('href', 'https://example.com/help');
     expect(screen.getByText('Storm overview')).toBeInTheDocument();
     expect(screen.getByText('A, B')).toBeInTheDocument();
     expect(screen.getByText('Donate supplies')).toBeInTheDocument();
@@ -93,7 +92,9 @@ describe('PageDetails', () => {
       item: { ...item, help_needed: 0 }
     });
 
-    expect(screen.queryByRole('link', { name: 'SUPPORT RECOVERY' })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: 'SUPPORT RECOVERY' })
+    ).not.toBeInTheDocument();
     expect(screen.queryByText('Donate supplies')).not.toBeInTheDocument();
   });
 
@@ -133,7 +134,9 @@ describe('PageDetails', () => {
   it('alerts on delete failure', async () => {
     mockedIsAdmin.mockReturnValue(true);
     mockedApiRequest.mockRejectedValue(new Error('fail'));
-    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    const errorSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => undefined);
 
     renderDetails();
     fireEvent.click(screen.getByRole('button', { name: /Delete/i }));

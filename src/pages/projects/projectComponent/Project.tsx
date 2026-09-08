@@ -79,7 +79,10 @@ export const Project: React.FC<Props> = ({
             )
           ) : (
             <Link to='' onClick={() => handler(project)}>
-              <button className='custom-more-btn' data-testid='review-project-cta'>
+              <button
+                className='custom-more-btn'
+                data-testid='review-project-cta'
+              >
                 {ctaText}
               </button>
             </Link>

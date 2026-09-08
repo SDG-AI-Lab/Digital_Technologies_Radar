@@ -93,7 +93,9 @@ describe('ReviewProjects', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
 
     resolveRequest({ data: [] });
-    expect(await screen.findByText('No Projects to review')).toBeInTheDocument();
+    expect(
+      await screen.findByText('No Projects to review')
+    ).toBeInTheDocument();
   });
 
   it('lists pending projects from the API', async () => {
@@ -127,7 +129,9 @@ describe('ReviewProjects', () => {
 
     renderReview();
 
-    expect(await screen.findByText('No Projects to review')).toBeInTheDocument();
+    expect(
+      await screen.findByText('No Projects to review')
+    ).toBeInTheDocument();
   });
 
   it('handles API errors and shows empty state', async () => {
@@ -136,7 +140,9 @@ describe('ReviewProjects', () => {
 
     renderReview();
 
-    expect(await screen.findByText('No Projects to review')).toBeInTheDocument();
+    expect(
+      await screen.findByText('No Projects to review')
+    ).toBeInTheDocument();
     expect(errorSpy).toHaveBeenCalled();
     errorSpy.mockRestore();
   });

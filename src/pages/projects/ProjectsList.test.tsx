@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act
+} from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Projects } from './ProjectsList';
 import { RadarContext } from 'navigation/context';
@@ -96,9 +102,7 @@ const makeProjects = (count: number) =>
 const cache = (data: unknown) =>
   JSON.stringify({ version: 'test-version', data });
 
-const renderProjects = (
-  context: Record<string, unknown> = {}
-) =>
+const renderProjects = (context: Record<string, unknown> = {}) =>
   render(
     <MemoryRouter>
       <RadarContext.Provider
@@ -221,12 +225,16 @@ describe('ProjectsList', () => {
     expect(screen.queryByTestId('project-p11')).not.toBeInTheDocument();
     expect(screen.getByText(/Showing 10 of 25 projects/)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /load more projects/i }));
+    fireEvent.click(
+      screen.getByRole('button', { name: /load more projects/i })
+    );
 
     expect(await screen.findByTestId('project-p11')).toBeInTheDocument();
     expect(screen.getByText(/Showing 20 of 25 projects/)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /load more projects/i }));
+    fireEvent.click(
+      screen.getByRole('button', { name: /load more projects/i })
+    );
 
     expect(await screen.findByTestId('project-p25')).toBeInTheDocument();
     expect(

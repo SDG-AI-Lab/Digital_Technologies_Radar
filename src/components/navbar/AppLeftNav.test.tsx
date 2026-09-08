@@ -93,7 +93,8 @@ describe('MenuLinks', () => {
 
   it('hides the mobile menu when closed', () => {
     const { container } = renderNav(<MenuLinks isOpen={false} />);
-    const menuBox = container.querySelectorAll('.chakra-stack')[0]?.parentElement;
+    const menuBox =
+      container.querySelectorAll('.chakra-stack')[0]?.parentElement;
     expect(menuBox).toBeTruthy();
   });
 });

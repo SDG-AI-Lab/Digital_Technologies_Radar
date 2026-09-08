@@ -95,7 +95,9 @@ describe('EventAction', () => {
   it('renders the create form and loads countries', async () => {
     renderEventAction('ADD');
 
-    expect(screen.getByRole('heading', { name: 'ADD Event' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'ADD Event' })
+    ).toBeInTheDocument();
     expect(await screen.findByTestId('select-countries')).toBeInTheDocument();
     expect(mockedGetDataFromDb).toHaveBeenCalled();
   });

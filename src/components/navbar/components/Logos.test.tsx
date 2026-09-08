@@ -95,7 +95,10 @@ describe('brand logos', () => {
     });
 
     fireEvent.click(container.querySelector('.logo') as HTMLElement);
-    expect(window.open).toHaveBeenCalledWith('https://www.undp.org/', '_newtab');
+    expect(window.open).toHaveBeenCalledWith(
+      'https://www.undp.org/',
+      '_newtab'
+    );
   });
 
   it('renders header logos and opens partner sites', () => {
@@ -117,6 +120,9 @@ describe('brand logos', () => {
     expect(window.open).toHaveBeenCalledWith('https://sdgailab.org', '_newtab');
 
     fireEvent.click(logos[1]);
-    expect(window.open).toHaveBeenCalledWith('https://www.undp.org/', '_newtab');
+    expect(window.open).toHaveBeenCalledWith(
+      'https://www.undp.org/',
+      '_newtab'
+    );
   });
 });

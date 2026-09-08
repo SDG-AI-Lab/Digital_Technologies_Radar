@@ -31,9 +31,7 @@ describe('dataUtils', () => {
 
   describe('formatOptions', () => {
     it('maps rows to label/value options by key', () => {
-      expect(
-        formatOptions([{ name: 'GIS' }, { name: 'AI' }], 'name')
-      ).toEqual([
+      expect(formatOptions([{ name: 'GIS' }, { name: 'AI' }], 'name')).toEqual([
         { label: 'GIS', value: 'GIS' },
         { label: 'AI', value: 'AI' }
       ]);
@@ -69,7 +67,9 @@ describe('dataUtils', () => {
       expect(setter).toHaveBeenCalledWith([
         { label: 'Fresh Tech', value: 'Fresh Tech' }
       ]);
-      expect(JSON.parse(localStorage.getItem('drr-technologies') as string)).toEqual({
+      expect(
+        JSON.parse(localStorage.getItem('drr-technologies') as string)
+      ).toEqual({
         version: 'test-version',
         data: [{ name: 'Fresh Tech' }]
       });
@@ -100,7 +100,9 @@ describe('dataUtils', () => {
 
       await getProject(setter, true, 'p1');
 
-      expect(apiRequest).toHaveBeenCalledWith('public/details/radar-project/p1');
+      expect(apiRequest).toHaveBeenCalledWith(
+        'public/details/radar-project/p1'
+      );
       expect(setter).toHaveBeenCalledWith({ uuid: 'p1', title: 'Radar' });
     });
 

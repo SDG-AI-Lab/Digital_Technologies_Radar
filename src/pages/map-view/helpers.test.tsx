@@ -228,7 +228,9 @@ describe('BlipPopOver', () => {
 
     rerender(
       <ChakraProvider>
-        <RadarContext.Provider value={{ filteredValues: { parameters: {} } } as any}>
+        <RadarContext.Provider
+          value={{ filteredValues: { parameters: {} } } as any}
+        >
           <BlipPopOver
             projects={projects}
             setPopupClosed={jest.fn()}

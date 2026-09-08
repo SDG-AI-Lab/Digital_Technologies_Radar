@@ -24,7 +24,8 @@
     "@typescript-eslint/complex": "off",
     "@typescript-eslint/no-implicit-any-index": "off",
     "@typescript-eslint/restrict-template-expression": "off",
-    "@typescript-eslint/restrict-template-expressions": "off"
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "prettier/prettier": "off"
   },
   "settings": {
     "react": {
