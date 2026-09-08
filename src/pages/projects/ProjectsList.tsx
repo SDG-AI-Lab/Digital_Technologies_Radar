@@ -152,9 +152,9 @@ export const Projects: React.FC = () => {
             <h3>PROJECTS </h3>
             <span>{`(${projectsToUse.length as string} Projects)`}</span>
           </div>
-          {isSignedIn && (
+          {isSignedIn() && (
             <div className='titleRow-right'>
-              {isAdmin && (
+              {isAdmin() && (
                 <span
                   className='titleRow-right--item'
                   onClick={() => navigate('/projects/review')}

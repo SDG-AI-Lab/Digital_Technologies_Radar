@@ -1,9 +1,10 @@
-// These values control the browser UI only. Netlify verifies the access token
+// These helpers control the browser UI only. Netlify verifies the access token
 // and role again before every protected API operation.
-export const isSignedIn = !!localStorage.getItem('drr-access-token');
+export const isSignedIn = (): boolean =>
+  !!localStorage.getItem('drr-access-token');
 
-export const isAdmin =
-  isSignedIn && localStorage.getItem('drr-current-user-id') === 'admin';
+export const isAdmin = (): boolean =>
+  isSignedIn() && localStorage.getItem('drr-current-user-id') === 'admin';
 
 export const clearSession = (): void => {
   localStorage.removeItem('drr-current-user-id');

@@ -415,7 +415,7 @@ export const HomePage: React.FC = () => {
               <Link className='seeAll' to={'/disaster-events'}>
                 <h3>Recent Disasters</h3>
               </Link>
-              {isSignedIn && (
+              {isSignedIn() && (
                 <Link to='/disaster-events/new'>Add new event</Link>
               )}
             </div>

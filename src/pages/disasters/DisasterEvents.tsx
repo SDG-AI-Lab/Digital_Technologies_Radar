@@ -52,7 +52,7 @@ export const DisasterEvents: React.FC = () => {
         <div className='titleRow-left'>
           <h3>Disaster Events</h3>
         </div>
-        {isSignedIn && (
+        {isSignedIn() && (
           <div className='titleRow-right'>
             <span
               className='titleRow-right'

@@ -139,7 +139,7 @@ export const Technologies: React.FC = () => {
         <div className='titleRow-left'>
           <h3>Technologies</h3>
         </div>
-        {isSignedIn && (
+        {isSignedIn() && (
           <div className='titleRow-right'>
             <span
               className='titleRow-right'

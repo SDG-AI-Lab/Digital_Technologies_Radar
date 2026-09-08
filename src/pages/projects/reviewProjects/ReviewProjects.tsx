@@ -16,7 +16,7 @@ export const ReviewProjects: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (!isAdmin()) {
       navigate('/projects ');
     }
     void fetchProjectsToReview();
