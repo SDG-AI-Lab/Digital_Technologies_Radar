@@ -83,6 +83,25 @@ describe('ProjectDetails', () => {
     (window.confirm as jest.Mock).mockRestore?.();
   });
 
+  it('renders description as text so script markup is not executed', async () => {
+    mockedApiRequest.mockResolvedValue({
+      data: {
+        ...sampleProject,
+        description: '<script>window.__xss=1</script>Safe text'
+      }
+    });
+
+    renderDetails();
+
+    expect(
+      await screen.findByText('<script>window.__xss=1</script>Safe text', {
+        exact: true
+      })
+    ).toBeInTheDocument();
+    expect(document.querySelector('script')).toBeNull();
+    expect((window as any).__xss).toBeUndefined();
+  });
+
   it('shows a loader until the project loads', () => {
     mockedApiRequest.mockImplementation(
       () => new Promise(() => undefined) as any

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import { RadarView } from './RadarView';
 import { RadarContext, RadarContextInterface } from 'navigation/context';
 
@@ -80,6 +81,24 @@ test('changes tabs properly when clicking on each tab', () => {
 
   fireEvent.click(projectTab);
   expect(screen.getByTestId('project-panel')).toBeVisible();
+});
+
+test('has no basic accessibility violations on radar tabs', async () => {
+  const { container } = render(
+    <RadarContext.Provider value={radarContext}>
+      <RadarView loading={false} />
+    </RadarContext.Provider>
+  );
+
+  expect(screen.getByTestId('stages-tab')).toBeInTheDocument();
+  expect(screen.getByTestId('technologies-tab')).toBeInTheDocument();
+  expect(screen.getByTestId('project-tab')).toBeInTheDocument();
+
+  expect(
+    await axe(container, {
+      rules: { 'color-contrast': { enabled: false } }
+    })
+  ).toHaveNoViolations();
 });
 
 test('renders correct scrollable div sections ', () => {

@@ -147,6 +147,7 @@ export const InfoDetails: React.FC<Props> = ({ tableName, relation }) => {
             _hover={{ bg: '#D37460' }}
             _active={{}}
             _focus={{}}
+            data-testid='delete-info'
             onClick={() => {
               handleDelete();
             }}
