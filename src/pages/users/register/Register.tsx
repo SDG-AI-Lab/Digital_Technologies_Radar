@@ -58,19 +58,30 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div className='signIn'>
+    <div className='signIn' data-testid='register-page'>
       <h3>Register</h3>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={110}>Email:</FormLabel>
-        <Input type='email' name='email' onChange={handleChange} />
+        <Input
+          type='email'
+          name='email'
+          onChange={handleChange}
+          data-testid='register-email'
+        />
       </FormControl>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={110}>Password:</FormLabel>
-        <Input type='password' name='password' onChange={handleChange} />
+        <Input
+          type='password'
+          name='password'
+          onChange={handleChange}
+          data-testid='register-password'
+        />
       </FormControl>
       <FormControl display={'flex'} gap={3} mb={5}>
         <FormLabel w={85}>Admin:</FormLabel>
         <Checkbox
+          data-testid='register-admin'
           onChange={(e: any) => {
             setRole(`${e.target.checked ? 'admin' : 'user'}`);
           }}
@@ -83,6 +94,7 @@ export const Register: React.FC = () => {
         ) : (
           <Button
             p={'10px 30px'}
+            data-testid='register-submit'
             onClick={() => {
               void handleRegister();
             }}

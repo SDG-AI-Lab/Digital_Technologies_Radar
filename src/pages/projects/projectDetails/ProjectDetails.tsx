@@ -131,6 +131,7 @@ export const ProjectDetails: React.FC = () => {
             _hover={{ bg: '#D37460' }}
             _active={{}}
             _focus={{}}
+            data-testid='delete-project'
             onClick={() => {
               handleDelete();
             }}

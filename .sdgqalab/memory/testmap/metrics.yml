@@ -40,7 +40,6 @@ snapshots:
         accessibility_gaps: 0
         test_count: 36
 
-
   - date: "2026-09-08T16:45"
     layers:
       frontend:
@@ -52,6 +51,27 @@ snapshots:
         security_gaps: 4
         accessibility_gaps: 12
         test_count: 419
+      api:
+        total_source_files: 1
+        unit_file_coverage_pct: 0
+        integration_file_coverage_pct: 100
+        line_coverage_pct: 100
+        e2e_gaps: 0
+        security_gaps: 0
+        accessibility_gaps: 0
+        test_count: 36
+
+  - date: "2026-09-08T20:29"
+    layers:
+      frontend:
+        total_source_files: 120
+        unit_file_coverage_pct: 65.8
+        integration_file_coverage_pct: 35.8
+        line_coverage_pct: 90.13
+        e2e_gaps: 2
+        security_gaps: 2
+        accessibility_gaps: 4
+        test_count: 442
       api:
         total_source_files: 1
         unit_file_coverage_pct: 0
