@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { axe } from 'jest-axe';
 import { Register } from './Register';
 import { apiRequest } from 'helpers/apiClient';
 
@@ -48,6 +49,20 @@ describe('Register', () => {
     renderRegister();
 
     expect(mockNavigate).toHaveBeenCalledWith('/');
+  });
+
+  it('has no basic accessibility violations on the register form', async () => {
+    localStorage.setItem('drr-access-token', 'tok');
+    localStorage.setItem('drr-current-user-id', 'admin');
+
+    const { container } = renderRegister();
+    expect(
+      await axe(container, {
+        rules: {
+          'color-contrast': { enabled: false }
+        }
+      })
+    ).toHaveNoViolations();
   });
 
   it('allows an admin to register a user', async () => {

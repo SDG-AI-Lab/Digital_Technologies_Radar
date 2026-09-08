@@ -44,11 +44,13 @@ export const QuadrantView: React.FC = () => {
   }, [selectedQuadrant]);
 
   return (
-    <div className='quadrantView'>
+    <div className='quadrantView' data-testid='quadrant-view'>
       <BackButton to='RADAR' />
 
       <div className='quadrantRadar'>
-        <h4 className='quadrantTitle'>{selectedQuadrant?.toUpperCase()}</h4>
+        <h4 className='quadrantTitle' data-testid='quadrant-title'>
+          {selectedQuadrant?.toUpperCase()}
+        </h4>
         <QuadrantRadar />
       </div>
       {(quadIndex === 0 ||

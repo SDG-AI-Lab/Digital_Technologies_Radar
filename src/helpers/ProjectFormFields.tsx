@@ -29,25 +29,31 @@ export const ProjectFormFields: React.FC<Props> = ({
   const getSelectedValues = (label: string): any[] => {
     if (path.includes('new')) return [];
 
-    const selectedOptions =
-      label === 'use_case'
-        ? currentProject[label]?.split(',')
-        : fromRadar && label === 'disaster_cycles'
-        ? currentProject['disaster_cycle']?.split(',')
+    const rawValue =
+      fromRadar && label === 'disaster_cycles'
+        ? currentProject['disaster_cycle']
         : currentProject[label];
-    const selectedValues = selectedOptions.reduce(
-      (acc: Array<{ label: string; value: string }>, curr: string) => {
-        const obj = {
-          label: curr,
-          value: curr
-        };
-        acc.push(obj);
-        return acc;
-      },
-      []
-    );
 
-    return selectedValues;
+    const toOptionList = (value: unknown): string[] => {
+      if (Array.isArray(value)) {
+        return value
+          .map((item) => String(item).replace(/[{}]/g, '').trim())
+          .filter(Boolean);
+      }
+      if (typeof value === 'string' && value.trim()) {
+        return value
+          .replace(/[{}]/g, '')
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean);
+      }
+      return [];
+    };
+
+    return toOptionList(rawValue).map((curr) => ({
+      label: curr,
+      value: curr
+    }));
   };
   switch (type) {
     case 'text':

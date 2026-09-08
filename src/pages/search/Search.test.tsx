@@ -8,6 +8,7 @@ import SearchView from './SearchView';
 import usePagination from './Pagination';
 import { approveProject } from 'helpers/dataUtils';
 import { MemoryRouter } from 'react-router-dom';
+import { axe } from 'jest-axe';
 
 jest.mock('helpers/dataUtils', () => ({
   approveProject: jest.fn()
@@ -96,6 +97,15 @@ describe('Search page', () => {
   it('renders Search with a search input', () => {
     renderWithProviders(<Search />);
     expect(screen.getByPlaceholderText('Search ....')).toBeInTheDocument();
+  });
+
+  it('has no basic accessibility violations on the search page', async () => {
+    const { container } = renderWithProviders(<Search />);
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
   });
 
   it('merges blips and filters results in SearchBar', () => {

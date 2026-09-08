@@ -227,7 +227,7 @@ export const FilterComponent: React.FC<Props> = ({
 
   const getFilterCount = (category: string): number => {
     let count = 0;
-    Object.keys((filteredValues as any)[category]).forEach((key) => {
+    Object.keys((filteredValues as any)[category] || {}).forEach((key) => {
       if ((filteredValues as any)[category][key]) count += 1;
     });
 
@@ -241,14 +241,18 @@ export const FilterComponent: React.FC<Props> = ({
       total += getFilterCount(element);
     });
 
-    const params = Object.keys(parameterCount).reduce(
+    const params = Object.keys(parameterCount || {}).reduce(
       (a, key) => a + (parameterCount[key] as number),
       0
     );
 
-    setTotalFiltersCount(total + params);
     return total + params;
   };
+
+  // Keep parent filter count in sync without setState-during-render (which hangs tests/UI).
+  useEffect(() => {
+    setTotalFiltersCount(totalFilterCount());
+  }, [filteredValues, parameterCount]);
 
   const handleFilterReset = (): void => {
     const labels = {

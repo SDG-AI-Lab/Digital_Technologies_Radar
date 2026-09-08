@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { axe } from 'jest-axe';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const mockToggleColorMode = jest.fn();
@@ -30,5 +31,24 @@ describe('ColorModeSwitcher', () => {
       screen.getByRole('button', { name: /Switch to dark mode/i })
     );
     expect(mockToggleColorMode).toHaveBeenCalled();
+  });
+
+  it('exposes an accessible name for the mode switch', async () => {
+    const { container } = render(
+      <ChakraProvider>
+        <ColorModeSwitcher />
+      </ChakraProvider>
+    );
+
+    expect(
+      screen.getByRole('button', { name: /Switch to dark mode/i })
+    ).toBeInTheDocument();
+    expect(
+      await axe(container, {
+        rules: {
+          'color-contrast': { enabled: false }
+        }
+      })
+    ).toHaveNoViolations();
   });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { axe } from 'jest-axe';
 import { SignIn } from './SignIn';
 import { apiRequest } from 'helpers/apiClient';
 
@@ -48,6 +49,18 @@ describe('SignIn', () => {
 
     expect(screen.getByRole('heading', { name: /sign in/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+  });
+
+  it('has no basic accessibility violations on the sign-in form', async () => {
+    const { container } = renderSignIn();
+    expect(
+      await axe(container, {
+        rules: {
+          // Chakra default palette fails contrast checks in jsdom.
+          'color-contrast': { enabled: false }
+        }
+      })
+    ).toHaveNoViolations();
   });
 
   it('stores the session and reloads on successful sign-in', async () => {

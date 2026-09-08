@@ -207,7 +207,7 @@ export const Filter: React.FC = () => {
 
   const getFilterCount = (category: string): number => {
     let count = 0;
-    Object.keys((filteredValues as any)[category]).forEach((key) => {
+    Object.keys((filteredValues as any)[category] || {}).forEach((key) => {
       if ((filteredValues as any)[category][key]) count += 1;
     });
 
@@ -221,7 +221,7 @@ export const Filter: React.FC = () => {
       total += getFilterCount(element);
     });
 
-    const params = Object.keys(parameterCount).reduce(
+    const params = Object.keys(parameterCount || {}).reduce(
       (a, key) => a + (parameterCount[key] as number),
       0
     );
