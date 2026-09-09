@@ -331,7 +331,10 @@ export const getParameterFilteredProjects = (
   return filteredProjects;
 };
 
-export const sliceForBadge = (projectArray: string[]): string[] => {
+export const sliceForBadge = (projectArray?: string[] | null): string[] => {
+  if (!Array.isArray(projectArray)) {
+    return [];
+  }
   if (projectArray.length > 2) {
     const sliced = projectArray.slice(0, 2);
     sliced.push('...');

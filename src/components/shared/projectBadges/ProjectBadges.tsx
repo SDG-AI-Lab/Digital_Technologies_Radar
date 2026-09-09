@@ -11,7 +11,34 @@ interface Props {
   project: BlipType;
 }
 
+/** Normalize API snake_case, radar CSV fields, strings, or arrays into badge lists. */
+const toBadgeList = (value: unknown): string[] => {
+  if (Array.isArray(value)) {
+    return value
+      .map(String)
+      .map((v) => v.trim())
+      .filter(Boolean);
+  }
+  if (typeof value === 'string' && value.trim()) {
+    return value
+      .split(',')
+      .map((v) => v.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
 export const ProjectBadge: React.FC<Props> = ({ project }) => {
+  const disasterCycles = toBadgeList(
+    project['disaster_cycles'] ??
+      project['disaster_cycle'] ??
+      project['Disaster Cycle']
+  );
+  const countries = toBadgeList(
+    project['country'] ?? project['Country of Implementation']
+  );
+  const sdgs = toBadgeList(project['sdg'] ?? project['SDG']);
+
   return (
     <Stack direction='row' mt={3} mb={4} className='projectBadges'>
       <Badge
@@ -25,7 +52,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         🏠 {project['status'] || project['Status/Maturity']}
       </Badge>
 
-      {project['SDG'] && project['SDG'][0] !== 'No Information' && (
+      {sdgs.length > 0 && sdgs[0] !== 'No Information' && (
         <Badge
           px={2}
           py={1}
@@ -33,7 +60,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
           bg='green.50'
           textTransform='capitalize'
         >
-          🎯 {' ' + sliceForBadge(project['sdg'] || project['SDG'])}
+          🎯 {' ' + sliceForBadge(sdgs)}
         </Badge>
       )}
 
@@ -45,11 +72,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         color='#fff'
         textTransform='capitalize'
       >
-        🌋{' '}
-        {' ' +
-          sliceForBadge(
-            project['disaster_cycles'] || project['Disaster Cycle'].split(',')
-          )}
+        🌋 {' ' + sliceForBadge(disasterCycles)}
       </Badge>
       <Badge
         px={2}
@@ -59,10 +82,7 @@ export const ProjectBadge: React.FC<Props> = ({ project }) => {
         textTransform='capitalize'
       >
         📍
-        {'' +
-          sliceForBadge(
-            project['country'] || project['Country of Implementation']
-          )}
+        {'' + sliceForBadge(countries)}
       </Badge>
     </Stack>
   );
