@@ -9,7 +9,16 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
+# Applied if/when the SPA is also served from Netlify (GitHub Pages ignores this).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+
 [dev]
   # Prevent local API tests from auto-starting the legacy React application.
   framework = "#static"
-

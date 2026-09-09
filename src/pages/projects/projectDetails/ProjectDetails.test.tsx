@@ -178,7 +178,7 @@ describe('ProjectDetails', () => {
     renderDetails();
     await screen.findByText('A project description');
 
-    const hiddenImg = screen.getByAltText('Default Image');
+    const hiddenImg = screen.getByAltText('Project image');
     fireEvent.error(hiddenImg);
 
     const hero = document.querySelector('.projectImg') as HTMLElement;

@@ -137,7 +137,7 @@ export const RadarMapView: React.FC = () => {
             minZoom={2}
             attributionControl={false}
           >
-            <TileLayer url='http://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' />
+            <TileLayer url='https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png' />
             {Array.from(mapBlips(displayBlips)).map((blipDetails) => {
               const countryName = blipDetails[0];
               return (

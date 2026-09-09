@@ -27,6 +27,7 @@ const renderSignIn = () =>
 describe('SignIn', () => {
   beforeEach(() => {
     localStorage.clear();
+    sessionStorage.clear();
     mockNavigate.mockReset();
     mockedApiRequest.mockReset();
     jest.spyOn(window, 'alert').mockImplementation(() => {});
@@ -37,7 +38,7 @@ describe('SignIn', () => {
   });
 
   it('redirects home when already signed in', () => {
-    localStorage.setItem('drr-access-token', 'existing-token');
+    sessionStorage.setItem('drr-access-token', 'existing-token');
 
     renderSignIn();
 
@@ -93,8 +94,9 @@ describe('SignIn', () => {
       });
     });
 
-    expect(localStorage.getItem('drr-access-token')).toBe('new-token');
-    expect(localStorage.getItem('drr-current-user-id')).toBe('admin');
+    expect(sessionStorage.getItem('drr-access-token')).toBe('new-token');
+    expect(sessionStorage.getItem('drr-current-user-id')).toBe('admin');
+    expect(localStorage.getItem('drr-access-token')).toBeNull();
     expect(window.alert).toHaveBeenCalledWith('Successfully Signed In');
     expect(mockNavigate).toHaveBeenCalledWith(0);
   });
@@ -118,6 +120,7 @@ describe('SignIn', () => {
       );
     });
 
+    expect(sessionStorage.getItem('drr-access-token')).toBeNull();
     expect(localStorage.getItem('drr-access-token')).toBeNull();
     expect(mockNavigate).not.toHaveBeenCalledWith(0);
   });

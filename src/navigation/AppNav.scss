@@ -3,3 +3,19 @@
   overflow: hidden;
   width: 100vw;
 }
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  padding: 0.75rem 1rem;
+  background: #0062ac;
+  color: #fff;
+  text-decoration: none;
+}
+
+.skipLink:focus {
+  left: 0.75rem;
+  top: 0.75rem;
+}

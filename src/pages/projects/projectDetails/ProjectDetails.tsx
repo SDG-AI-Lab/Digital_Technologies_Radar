@@ -104,7 +104,7 @@ export const ProjectDetails: React.FC = () => {
               e.target.src = fallBackImage;
               setImage(fallBackImage);
             }}
-            alt='Default Image'
+            alt='Project image'
             style={{ display: 'none' }}
           />
         </div>

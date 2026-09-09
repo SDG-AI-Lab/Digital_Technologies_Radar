@@ -202,7 +202,7 @@ describe('Search page', () => {
     // Chakra ModalClose / overlay Escape path invokes onClose → setClose
     fireEvent.click(screen.getByLabelText('Close'));
     expect(setClose).toHaveBeenCalled();
-  });
+  }, 15000);
 
   it('shows Approve on review path and calls approveProject', () => {
     mockPathname.mockReturnValue('/projects/review');

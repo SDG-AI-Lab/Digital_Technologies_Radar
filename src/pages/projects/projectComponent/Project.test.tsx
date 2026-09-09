@@ -92,7 +92,7 @@ describe('Project', () => {
     expect(screen.getByText('Legacy Title')).toBeInTheDocument();
     expect(screen.getByText('Legacy description')).toBeInTheDocument();
 
-    const img = screen.getByAltText('Default Image');
+    const img = screen.getByAltText('Project image');
     fireEvent.error(img);
     expect(img).toHaveAttribute(
       'src',

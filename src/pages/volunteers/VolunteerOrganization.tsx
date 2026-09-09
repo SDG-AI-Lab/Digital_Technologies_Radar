@@ -39,7 +39,7 @@ const VolunteerOrganization: React.FunctionComponent<
                 align={{ base: '50% 30%', sm: '50% 50%' }}
                 src={`${props.volunteerContent.imageSrc}`}
                 fallbackSrc='https://media.giphy.com/avatars/UNVolunteers/YzsbglVnLF0Y.jpg'
-                alt='Default Image'
+                alt='Project image'
               />
             </Stack>
 

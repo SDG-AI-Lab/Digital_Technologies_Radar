@@ -53,7 +53,7 @@ describe('home page cards', () => {
     );
 
     expect(screen.getByText('Legacy Idea')).toBeInTheDocument();
-    const img = screen.getByAltText('Default Image');
+    const img = screen.getByAltText('Project image');
     fireEvent.error(img);
     expect(img).toHaveAttribute('src', 'fallback.png');
   });
@@ -87,7 +87,7 @@ describe('home page cards', () => {
 
     renderWithContext(<HomeCardMini project={project} type='technologies' />);
 
-    const img = screen.getByAltText('Default Image');
+    const img = screen.getByAltText('Project image');
     fireEvent.error(img);
     expect(img).toHaveAttribute(
       'src',

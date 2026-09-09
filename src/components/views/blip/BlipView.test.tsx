@@ -72,6 +72,6 @@ describe('BlipView', () => {
     const link = screen.getByRole('link', { name: 'Click Here' });
     expect(link).toHaveAttribute('href', 'https://example.com/source');
 
-    expect(screen.getByAltText('Default Image')).toBeInTheDocument();
+    expect(screen.getByAltText('Project image')).toBeInTheDocument();
   });
 });

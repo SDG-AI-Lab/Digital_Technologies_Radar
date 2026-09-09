@@ -46,7 +46,7 @@ export const Project: React.FC<Props> = ({
             // @ts-expect-error
             e.target.src = fallBackImage;
           }}
-          alt='Default Image'
+          alt='Project image'
         />
       </div>
       <div className='projectDetails-large'>

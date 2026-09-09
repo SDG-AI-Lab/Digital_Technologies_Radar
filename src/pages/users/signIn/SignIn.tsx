@@ -7,7 +7,7 @@ import {
   Spinner
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { isSignedIn } from 'components/shared/helpers/auth';
+import { isSignedIn, setSession } from 'components/shared/helpers/auth';
 import { apiRequest } from 'helpers/apiClient';
 
 import './SignIn.scss';
@@ -49,8 +49,7 @@ export const SignIn: React.FC = () => {
         method: 'POST',
         body: JSON.stringify({ email, password })
       });
-      localStorage.setItem('drr-access-token', data.access_token);
-      localStorage.setItem('drr-current-user-id', data.user.role);
+      setSession(data.access_token, data.user.role);
       alert('Successfully Signed In');
       navigate(0);
     } catch {

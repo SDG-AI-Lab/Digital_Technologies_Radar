@@ -10,6 +10,7 @@ describe('sign in', () => {
     cy.visit('http://localhost:3456/#/sign-in', {
       onBeforeLoad(win) {
         win.localStorage.clear();
+        win.sessionStorage.clear();
       }
     });
   };
@@ -60,10 +61,12 @@ describe('sign in', () => {
     );
 
     cy.window().then((win) => {
-      expect(win.localStorage.getItem('drr-access-token')).to.eq(
+      expect(win.sessionStorage.getItem('drr-access-token')).to.eq(
         'cypress-access-token'
       );
-      expect(win.localStorage.getItem('drr-current-user-id')).to.eq('admin');
+      expect(win.sessionStorage.getItem('drr-current-user-id')).to.eq('admin');
+      expect(win.localStorage.getItem('drr-access-token')).to.eq(null);
+      expect(win.localStorage.getItem('drr-current-user-id')).to.eq(null);
     });
   });
 
@@ -90,6 +93,8 @@ describe('sign in', () => {
     );
 
     cy.window().then((win) => {
+      expect(win.sessionStorage.getItem('drr-access-token')).to.eq(null);
+      expect(win.sessionStorage.getItem('drr-current-user-id')).to.eq(null);
       expect(win.localStorage.getItem('drr-access-token')).to.eq(null);
       expect(win.localStorage.getItem('drr-current-user-id')).to.eq(null);
     });
@@ -101,8 +106,8 @@ describe('sign in', () => {
   it('redirects away when a session already exists', () => {
     cy.visit('http://localhost:3456/#/sign-in', {
       onBeforeLoad(win) {
-        win.localStorage.setItem('drr-access-token', 'existing-token');
-        win.localStorage.setItem('drr-current-user-id', 'admin');
+        win.sessionStorage.setItem('drr-access-token', 'existing-token');
+        win.sessionStorage.setItem('drr-current-user-id', 'admin');
       }
     });
 
