@@ -2,7 +2,7 @@
 schema: sdgqalab/testmap@3
 layer: "api"
 project: "UNDP Digital Technologies Radar"
-audited_at: "2026-09-09T11:10:00Z"
+audited_at: "2026-09-09T10:54:00Z"
 config_version: 3
 
 coverage:
@@ -40,7 +40,7 @@ by_scope:
     integration_file_coverage_pct: 100.0
 
 delta:
-  previous_audit: "2026-09-09T10:54"
+  previous_audit: "2026-09-09T09:36"
   unit_file_coverage_change: 0
   integration_file_coverage_change: 0
   line_coverage_change: 0
@@ -57,11 +57,13 @@ delta:
 > **Tests**: 36
 > **Audited**: 2026-09-09
 
-Notes: `netlify/functions/api.js` is an HTTP handler — integration is the correct primary taxonomy. Unit file % is Critical by band only; not a practical gap. Accessibility N/A.
+Notes: `netlify/functions/api.js` is an HTTP handler — integration taxonomy is the correct primary coverage. Unit file % is Critical by rating band but not a practical gap (no isolated pure modules in this layer). Accessibility N/A for API.
 
 ---
 
 ## Unit Tests
+
+Tests that verify modules in isolation — no I/O, no external services.
 
 ### Unit Coverage by Scope
 
@@ -70,13 +72,22 @@ Notes: `netlify/functions/api.js` is an HTTP handler — integration is the corr
 | api | 1 | 0 | 0.0% |
 | **Total** | **1** | **0** | **0.0%** |
 
+### Existing Unit Tests
+
+None — handler logic is exercised via integration tests with mocked Supabase.
+
 ### Unit Tests Needed
 
-None required unless pure helpers are extracted from the handler.
+| File | Scope | What to Test |
+|------|-------|--------------|
+| — | api | None required; extract pure helpers first if unit coverage is desired |
 
 ---
 
 ## Integration Tests
+
+Tests that verify components working together across boundaries —
+API endpoints, database operations, service contracts, workflows.
 
 ### Integration Coverage by Scope
 
@@ -89,7 +100,7 @@ None required unless pure helpers are extracted from the handler.
 
 | Scope | Test File | Approx. Tests | Boundaries Covered |
 |-------|-----------|---------------|--------------------|
-| api | `tests/api/api.test.js` | 36 | Public reads, auth, admin CRUD, role gates, errors |
+| api | `tests/api/api.test.js` | 36 | Public reads, auth, admin CRUD, role gates, error paths |
 
 ### Integration Tests Needed
 
@@ -99,9 +110,13 @@ None.
 
 ## End-to-End (E2E) Tests
 
-API workflows are covered by frontend Cypress. No API-only E2E suite required.
+API workflows are covered by frontend Cypress journeys that hit the deployed/functions surface. No separate API-only E2E suite is required for this layer.
 
 > **0** of **0** API-only journeys identified · **0** gaps
+
+### E2E Tests Needed
+
+None.
 
 ---
 
@@ -113,11 +128,11 @@ API workflows are covered by frontend Cypress. No API-only E2E suite required.
 
 | Scope | Test File | What's Tested |
 |-------|-----------|---------------|
-| api | `tests/api/api.test.js` | Admin JWT; non-admin denied; invalid payloads; role rollback |
+| api | `tests/api/api.test.js` | Admin JWT required; non-admin denied; invalid payloads 400; role insert rollback |
 
 ### Security Tests Needed
 
-None.
+None for identified areas.
 
 ---
 
@@ -135,11 +150,11 @@ No issues observed.
 
 ## Recommendations
 
-1. **[P3]** Keep `yarn test:api:coverage` in CI.
-2. **[P3]** Extract pure validators for unit tests only if the handler grows substantially.
+1. **[P3]** Keep `yarn test:api:coverage` in CI; line coverage already Exemplary.
+2. **[P3]** If the handler grows, extract pure validators for dedicated unit tests.
 
 ## Acceptance Criteria
 
-- [x] API endpoints have positive and negative tests
-- [x] Authz paths have security coverage
+- [x] All API endpoints have positive and negative tests (via `tests/api/api.test.js`)
+- [x] Authentication and authorization paths have security tests
 - [x] All tests pass: `yarn test:api` (36 tests)

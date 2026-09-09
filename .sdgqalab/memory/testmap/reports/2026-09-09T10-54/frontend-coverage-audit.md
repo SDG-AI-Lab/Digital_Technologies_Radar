@@ -2,15 +2,15 @@
 schema: sdgqalab/testmap@3
 layer: "frontend"
 project: "UNDP Digital Technologies Radar"
-audited_at: "2026-09-09T11:10:00Z"
+audited_at: "2026-09-09T10:54:00Z"
 config_version: 3
 
 coverage:
   total_source_files: 122
   unit:
-    test_files: 70
-    file_coverage_pct: 86.9
-    file_coverage_rating: "Exemplary"
+    test_files: 66
+    file_coverage_pct: 63.1
+    file_coverage_rating: "Adequate"
   integration:
     test_files: 39
     file_coverage_pct: 97.5
@@ -27,27 +27,27 @@ coverage:
     components_identified: 14
     components_covered: 14
     gaps: 0
-  line_coverage_pct: 94.28
+  line_coverage_pct: 94.24
   line_coverage_rating: "Exemplary"
-  test_count: 503
+  test_count: 488
 
 by_scope:
   "components":
     source_files: 53
     unit_test_files: 46
-    unit_file_coverage_pct: 100
+    unit_file_coverage_pct: 96.2
     integration_test_files: 0
     integration_file_coverage_pct: 100
   "pages":
     source_files: 45
     unit_test_files: 5
-    unit_file_coverage_pct: 66.7
+    unit_file_coverage_pct: 13.3
     integration_test_files: 38
     integration_file_coverage_pct: 97.8
   "helpers":
     source_files: 7
     unit_test_files: 6
-    unit_file_coverage_pct: 100
+    unit_file_coverage_pct: 85.7
     integration_test_files: 0
     integration_file_coverage_pct: 100
   "radar":
@@ -71,21 +71,21 @@ by_scope:
   "navigation":
     source_files: 3
     unit_test_files: 0
-    unit_file_coverage_pct: 100
+    unit_file_coverage_pct: 66.7
     integration_test_files: 1
     integration_file_coverage_pct: 100
   "root":
     source_files: 3
     unit_test_files: 1
-    unit_file_coverage_pct: 66.7
+    unit_file_coverage_pct: 33.3
     integration_test_files: 1
     integration_file_coverage_pct: 33.3
 
 delta:
-  previous_audit: "2026-09-09T10:54"
-  unit_file_coverage_change: 23.8
-  integration_file_coverage_change: 0
-  line_coverage_change: 0.04
+  previous_audit: "2026-09-09T09:36"
+  unit_file_coverage_change: 0
+  integration_file_coverage_change: 58.2
+  line_coverage_change: 1.79
   e2e_gaps_change: 0
   security_gaps_change: 0
   accessibility_gaps_change: 0
@@ -93,13 +93,13 @@ delta:
 
 # Frontend Test Audit
 
-> **Unit File Coverage**: 86.9% (106/122 files) · Exemplary
+> **Unit File Coverage**: 63.1% (77/122 files) · Adequate
 > **Integration File Coverage**: 97.5% (119/122 files) · Exemplary
-> **Line Coverage**: 94.28% · Exemplary
-> **Tests**: 503
+> **Line Coverage**: 94.24% · Exemplary
+> **Tests**: 488
 > **Audited**: 2026-09-09
 
-Notes: unit file coverage rose via dedicated `src/unit/**` suites that exercise page/presentational modules and remaining helpers in isolation (pages colocated tests remain integration-classified). Integration coverage stays Exemplary via `pages/integration` import maps. E2E, security, and accessibility identified areas remain fully covered.
+Notes: integration file coverage jumped after `src/pages/integration/**` suites that **directly import** drawers, lists, filters, radar, helpers, ui, and layouts. Component modules remain correctly **unit**-tested in place; pages stay **integration**-primary. E2E, security, and accessibility identified areas remain fully covered.
 
 ---
 
@@ -111,36 +111,34 @@ Tests that verify modules in isolation — no I/O, no external services.
 
 | Scope | Source Files | Unit Test Files | Unit File Coverage |
 |-------|-------------|-----------------|-------------------|
-| components | 53 | 46 | 100% |
-| pages | 45 | 5* | 66.7% |
-| helpers | 7 | 6 | 100% |
+| components | 53 | 46 | 96.2% |
+| pages | 45 | 5 | 13.3% |
+| helpers | 7 | 6 | 85.7% |
 | radar | 6 | 3 | 100% |
 | ui | 3 | 3 | 100% |
 | layouts | 2 | 1 | 100% |
-| navigation | 3 | 0* | 100% |
-| root | 3 | 1 | 66.7% |
-| **Total** | **122** | **70** | **86.9%** |
-
-\*Additional unit suites live under `src/unit/` (counted in layer total, not always colocated per scope). Navigation/App coverage is via those imports.
+| navigation | 3 | 0 | 66.7% |
+| root | 3 | 1 | 33.3% |
+| **Total** | **122** | **66** | **63.1%** |
 
 ### Existing Unit Tests
 
 | Scope | Test File | Approx. Tests | Modules Covered |
 |-------|-----------|---------------|-----------------|
-| components | `src/components/**/*.test.tsx` | ~210 | Drawers, lists, navbar, filters, shared UI |
-| helpers | `src/helpers/*.test.ts(x)` | ~40 | apiClient, dataUtils, ProjectForm, locationUtils |
+| components | `src/components/**/*.test.tsx` (~46 files) | ~210 | Drawers, lists, navbar, filters, shared UI, badges |
+| helpers | `src/helpers/*.test.ts(x)` + auth | ~40 | apiClient, dataUtils, ProjectForm, locationUtils, Loader |
 | radar / ui / layouts | co-located `*.test.tsx` | ~18 | RadarProvider, SVG hover, AppUiProvider, MainLayout |
-| pages (widgets) | SelectMultiple, ProjectSlider, helpers, PopOverView | ~17 | Form widgets + pure helpers |
-| unit | `src/unit/*.unit.test.tsx` (4 files) | 15 | Page shells, presentational cards, App/Home/Radar, constants |
+| pages (widgets) | SelectMultiple, ProjectSlider, page helpers, PopOverView | ~17 | Form widgets + pure page helpers |
 
 ### Unit Tests Needed
 
 | File | Scope | What to Test |
 |------|-------|--------------|
+| `src/helpers/databaseClient.tsx` | helpers | Supabase client / DATA_VERSION wiring in isolation |
+| `src/components/constants/app.ts` | components | Optional — low-value slug→description map |
+| `src/components/drawers/tech/colors.ts` | components | Optional — color token map |
 | `src/index.tsx` | root | Bootstrap entry — usually excluded from unit focus |
-| `src/pages/search/SearchBar.tsx` | pages | Optional isolation (already integration-covered) |
-| `src/pages/search/SearchResult.tsx` / `SearchView.tsx` | pages | Optional isolation |
-| Remaining CRUD page shells (ProjectAction, DisasterEvent, …) | pages | Optional — strong integration coverage already |
+| `src/App.tsx` | root | Covered via `src/tests/App.test.tsx` (integration) |
 
 ---
 
@@ -162,22 +160,23 @@ Tests that verify components working together across boundaries — pages with m
 | root | 3 | 1 | 33.3% |
 | **Total** | **122** | **39** | **97.5%** |
 
-\*Colocated integration tests are under `pages/` (incl. `pages/integration/`); other scopes are covered by **direct imports**.
+\*Colocated integration test files are under `pages/` (including `pages/integration/`); coverage of other scopes is via **direct imports**.
 
 ### Existing Integration Tests
 
 | Scope | Test File | Approx. Tests | Boundaries Covered |
 |-------|-----------|---------------|--------------------|
-| pages | `src/pages/**/*.test.tsx` + `pages/integration/*` | ~200 | Home, Search, CRUD, radar/map, nav/layout, filters, lists |
-| navigation | `src/navigation/AppNav.test.tsx` | ~5 | Route shell |
+| pages | `src/pages/**/*.test.tsx` + `pages/integration/*.integration.test.tsx` | ~200 | Home, Search, CRUD, radar/map, nav/layout shells, filters, lists, helpers |
+| navigation | `src/navigation/AppNav.test.tsx` | ~5 | Route shell + nav wiring |
 | root | `src/tests/App.test.tsx` | ~2 | App provider stack |
 
 ### Integration Tests Needed
 
 | File | Scope | What to Test |
 |------|-------|--------------|
-| `src/pages/views/PopOverView.tsx` | pages | Optional — has unit-classified widget test |
-| `src/index.tsx` / `src/Logo.tsx` | root | Low-value bootstrap / logo |
+| `src/pages/views/PopOverView.tsx` | pages | Optional — already has unit-classified widget test |
+| `src/index.tsx` | root | Bootstrap — low value for integration |
+| `src/Logo.tsx` | root | Optional — covered indirectly via nav logo atoms |
 
 ---
 
@@ -208,7 +207,7 @@ Tests that verify components working together across boundaries — pages with m
 
 ### E2E Tests Needed
 
-None for identified critical journeys. Optional stretch: About/Volunteers browse.
+None for identified critical journeys. Optional stretch: volunteer/about public browse.
 
 ---
 
@@ -220,9 +219,10 @@ None for identified critical journeys. Optional stretch: About/Volunteers browse
 
 | Scope | Test File | What's Tested |
 |-------|-----------|---------------|
-| helpers | auth helpers + `apiClient.test.ts` | Session flags; Bearer; **401 clears session** |
-| pages | SignIn, Register, ProjectDetails | Auth gates; XSS as text |
-| pages / e2e | Review/edit/register/delete | Non-admin redirect + admin paths |
+| helpers | `auth` helpers + `apiClient.test.ts` | isSignedIn / isAdmin / clearSession; Bearer + **401 clears session** |
+| pages | `SignIn.test.tsx`, `Register.test.tsx` | Auth client + admin-only register gate |
+| pages | `ProjectDetails.test.tsx` | XSS: script markup rendered as text |
+| pages / e2e | Review/edit/register/delete specs | Non-admin redirect + admin success paths |
 
 ### Security Tests Needed
 
@@ -238,10 +238,11 @@ None for identified areas.
 
 | Scope | Test File | What's Tested |
 |-------|-----------|---------------|
-| pages | SignIn, Register, Search, NotFound404, RadarView, RadarMapView | jest-axe |
-| helpers | ProjectForm | Labels + axe |
+| pages | SignIn, Register, Search (+ modal), NotFound404, RadarView | jest-axe |
+| pages | RadarMapView | Marker names + axe |
+| helpers | ProjectForm | Label association + axe |
 | components | Filter, FilterComponent, FilterDrawer, HowToAndSvg, MenuIcon | jest-axe |
-| ui | ColorModeSwitcher | Name + axe |
+| ui | ColorModeSwitcher | Accessible name + axe |
 
 ### Accessibility Tests Needed
 
@@ -251,15 +252,15 @@ None for identified surfaces.
 
 ## Test Health Observations
 
-No issues observed.
+No issues observed. (Prior hang from unstable `blips` mock arrays in integration suites was fixed with stable mock references.)
 
 ---
 
 ## Recommendations
 
-1. **[P2]** Optional CI coverage floor (~90% lines) to lock Exemplary line coverage.
-2. **[P3]** Optional unit isolation for remaining search/CRUD page shells if desired; not required for Exemplary unit file %.
-3. **[P3]** Optional Cypress for public About/Volunteers browse.
+1. **[P2]** Optional CI coverage floor to lock Exemplary line coverage (`yarn test:unit --coverage`, threshold ~90% lines).
+2. **[P3]** Thin unit coverage for `databaseClient.tsx` if helper unit % should reach 100%.
+3. **[P3]** Optional Cypress for public About/Volunteers browse journeys.
 
 ## Acceptance Criteria
 
@@ -267,4 +268,4 @@ No issues observed.
 - [x] Key user journeys have E2E coverage
 - [x] Authentication and authorization paths have security tests
 - [x] Core interactive components have accessibility checks
-- [x] All tests pass: `CI=true yarn test:unit --watchAll=false` (503 tests)
+- [x] All tests pass: `CI=true yarn test:unit --watchAll=false` (488 tests)

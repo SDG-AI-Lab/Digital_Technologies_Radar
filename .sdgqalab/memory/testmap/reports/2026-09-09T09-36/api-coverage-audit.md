@@ -2,7 +2,7 @@
 schema: sdgqalab/testmap@3
 layer: "api"
 project: "UNDP Digital Technologies Radar"
-audited_at: "2026-09-09T11:10:00Z"
+audited_at: "2026-09-09T09:36:00Z"
 config_version: 3
 
 coverage:
@@ -16,8 +16,8 @@ coverage:
     file_coverage_pct: 100.0
     file_coverage_rating: "Exemplary"
   e2e:
-    journeys_identified: 0
-    journeys_covered: 0
+    journeys_identified: 8
+    journeys_covered: 8
     gaps: 0
   security:
     areas_identified: 6
@@ -40,7 +40,7 @@ by_scope:
     integration_file_coverage_pct: 100.0
 
 delta:
-  previous_audit: "2026-09-09T10:54"
+  previous_audit: "2026-09-08T21:53"
   unit_file_coverage_change: 0
   integration_file_coverage_change: 0
   line_coverage_change: 0
@@ -57,7 +57,7 @@ delta:
 > **Tests**: 36
 > **Audited**: 2026-09-09
 
-Notes: `netlify/functions/api.js` is an HTTP handler — integration is the correct primary taxonomy. Unit file % is Critical by band only; not a practical gap. Accessibility N/A.
+The Netlify handler is exercised as an **integration** suite (`tests/api/api.test.js`). Unit file coverage remains 0 by classification (no isolated pure-unit module tests), which is expected for a single handler entrypoint.
 
 ---
 
@@ -70,9 +70,15 @@ Notes: `netlify/functions/api.js` is an HTTP handler — integration is the corr
 | api | 1 | 0 | 0.0% |
 | **Total** | **1** | **0** | **0.0%** |
 
+### Existing Unit Tests
+
+No dedicated unit-only tests for `netlify/functions/api.js` (handler is integration-tested).
+
 ### Unit Tests Needed
 
-None required unless pure helpers are extracted from the handler.
+| File | Scope | What to Test |
+|------|-------|--------------|
+| `netlify/functions/api.js` helpers | api | Optional: extract `allowedOrigin` / `allowedFields` / `parseBody` for pure unit tests (taxonomy only) |
 
 ---
 
@@ -89,19 +95,19 @@ None required unless pure helpers are extracted from the handler.
 
 | Scope | Test File | Approx. Tests | Boundaries Covered |
 |-------|-----------|---------------|--------------------|
-| api | `tests/api/api.test.js` | 36 | Public reads, auth, admin CRUD, role gates, errors |
+| api | `tests/api/api.test.js` | 36 | CORS, auth gatekeeping, public GETs, admin CRUD, body size, field allowlist, sign-in |
 
 ### Integration Tests Needed
 
-None.
+None — handler paths are covered at 100% lines.
 
 ---
 
 ## End-to-End (E2E) Tests
 
-API workflows are covered by frontend Cypress. No API-only E2E suite required.
+> **8** of **8** API workflow journeys covered · **0** gaps
 
-> **0** of **0** API-only journeys identified · **0** gaps
+API journeys are covered via the integration harness calling `exports.handler` (not Cypress). Frontend Cypress also exercises admin/public API contracts with intercepts.
 
 ---
 
@@ -113,7 +119,7 @@ API workflows are covered by frontend Cypress. No API-only E2E suite required.
 
 | Scope | Test File | What's Tested |
 |-------|-----------|---------------|
-| api | `tests/api/api.test.js` | Admin JWT; non-admin denied; invalid payloads; role rollback |
+| api | `tests/api/api.test.js` | Disallowed Origin 403, OPTIONS CORS, admin Bearer required, non-admin 403, oversized body, field allowlist |
 
 ### Security Tests Needed
 
@@ -123,7 +129,7 @@ None.
 
 ## Accessibility Tests
 
-Not applicable for this API layer.
+N/A — API layer has no UI.
 
 ---
 
@@ -135,11 +141,11 @@ No issues observed.
 
 ## Recommendations
 
-1. **[P3]** Keep `yarn test:api:coverage` in CI.
-2. **[P3]** Extract pure validators for unit tests only if the handler grows substantially.
+1. **[P3]** Optional helper extraction if you want the unit-file rating to move off Critical (taxonomy only).
+2. **[P3]** Keep API suite in CI (`yarn test:api`) alongside frontend.
 
 ## Acceptance Criteria
 
-- [x] API endpoints have positive and negative tests
-- [x] Authz paths have security coverage
-- [x] All tests pass: `yarn test:api` (36 tests)
+- [x] All API endpoints have positive and negative tests
+- [x] Authentication and authorization paths have security tests
+- [x] All tests pass: `yarn test:api`
