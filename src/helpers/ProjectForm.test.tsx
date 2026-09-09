@@ -1,32 +1,48 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { MemoryRouter } from 'react-router-dom';
+import { axe } from 'jest-axe';
 import { ProjectForm } from './ProjectForm';
+import { RadarContext } from 'navigation/context';
 
-jest.mock('./ProjectFormFields', () => ({
-  ProjectFormFields: ({ field }: any) => (
-    <div data-testid={`mock-field-${field.label}`}>{field.type}</div>
+jest.mock('pages/projectAction/SelectMultiple', () => ({
+  SelectMultiple: ({ label }: any) => (
+    <div data-testid={`select-multiple-${label}`} />
   )
 }));
 
 const fields = [
   { label: 'title', type: 'text' },
-  { label: 'use_case', type: 'selectArray' }
+  { label: 'description', type: 'textArea' },
+  {
+    label: 'status',
+    type: 'selectText',
+    options: ['Idea', 'Validation']
+  }
 ];
 
 const renderForm = (title = 'Add New Project') => {
   const action = jest.fn();
   const utils = render(
     <ChakraProvider>
-      <ProjectForm
-        data={fields}
-        title={title}
-        action={action}
-        hasFetchedData
-        projectFormValues={{ title: '', use_case: '' }}
-        handleChange={jest.fn()}
-        setProjectFormValues={jest.fn()}
-      />
+      <MemoryRouter initialEntries={['/projects/new']}>
+        <RadarContext.Provider value={{ currentProject: {} } as any}>
+          <ProjectForm
+            data={fields}
+            title={title}
+            action={action}
+            hasFetchedData
+            projectFormValues={{
+              title: 'Demo',
+              description: 'About the project',
+              status: 'Idea'
+            }}
+            handleChange={jest.fn()}
+            setProjectFormValues={jest.fn()}
+          />
+        </RadarContext.Provider>
+      </MemoryRouter>
     </ChakraProvider>
   );
   return { ...utils, action };
@@ -39,12 +55,9 @@ describe('ProjectForm', () => {
     expect(
       screen.getByRole('heading', { name: 'Add New Project' })
     ).toBeInTheDocument();
-    expect(screen.getByText('TITLE:')).toBeInTheDocument();
-    expect(screen.getByText('USE CASE:')).toBeInTheDocument();
-    expect(screen.getByTestId('mock-field-title')).toHaveTextContent('text');
-    expect(screen.getByTestId('mock-field-use_case')).toHaveTextContent(
-      'selectArray'
-    );
+    expect(screen.getByLabelText(/TITLE:/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/DESCRIPTION:/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/STATUS:/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('project-form-submit'));
     expect(screen.getByTestId('project-form-submit')).toHaveTextContent(
@@ -59,5 +72,20 @@ describe('ProjectForm', () => {
     expect(screen.getByTestId('project-form-submit')).toHaveTextContent(
       'Update Project'
     );
+  });
+
+  it('associates labels with fields and has no basic a11y violations', async () => {
+    const { container } = renderForm();
+
+    expect(screen.getByLabelText(/TITLE:/i)).toHaveValue('Demo');
+    expect(screen.getByLabelText(/DESCRIPTION:/i)).toHaveValue(
+      'About the project'
+    );
+
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
   });
 });

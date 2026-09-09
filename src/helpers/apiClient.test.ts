@@ -133,6 +133,23 @@ describe('apiClient', () => {
     );
   });
 
+  it('clears the local session when the API returns 401', async () => {
+    localStorage.setItem('drr-access-token', 'stale-token');
+    localStorage.setItem('drr-current-user-id', 'admin');
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: false,
+      status: 401,
+      json: async () => ({ error: 'Invalid or expired token' })
+    });
+
+    await expect(apiRequest('admin/projects/pending')).rejects.toMatchObject({
+      message: 'Invalid or expired token',
+      status: 401
+    });
+    expect(localStorage.getItem('drr-access-token')).toBeNull();
+    expect(localStorage.getItem('drr-current-user-id')).toBeNull();
+  });
+
   it('throws a generic ApiError when the error body has no message', async () => {
     (global.fetch as jest.Mock).mockResolvedValue({
       ok: false,

@@ -168,7 +168,8 @@ export const BlipPopOver = ({
     <ul>
       {projects.map((project: any) => (
         <li key={project.id}>
-          <span
+          <button
+            type='button'
             className='projectItem'
             onClick={() => {
               setSelectedProject(project);
@@ -178,7 +179,7 @@ export const BlipPopOver = ({
             }}
           >
             {project['Ideas/Concepts/Examples']}
-          </span>
+          </button>
         </li>
       ))}
     </ul>
