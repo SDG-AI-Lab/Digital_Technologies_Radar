@@ -12,16 +12,17 @@ jobs:
   ping_supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Supabase Status
+      - name: Check Supabase Status via Netlify API
         id: ping
         run: |
-          echo "Pinging Supabase database to prevent inactivity pause..."
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-            -X GET "https://sxmzetpbqzjchodypatn.supabase.co/rest/v1/dataset_version?select=data_version&limit=1" \
-            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4bXpldHBicXpqY2hvZHlwYXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwMjMzOTEsImV4cCI6MTk5ODU5OTM5MX0.9iJ44OhfPGJ7zinXM3M7rattWAb5r12oP-XpHlvILeQ" \
-            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4bXpldHBicXpqY2hvZHlwYXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODMwMjMzOTEsImV4cCI6MTk5ODU5OTM5MX0.9iJ44OhfPGJ7zinXM3M7rattWAb5r12oP-XpHlvILeQ")
+          echo "Pinging Netlify /api/health (queries Supabase) to prevent inactivity pause..."
+          # Health endpoint uses SUPABASE_* from Netlify env — no keys in this workflow.
+          RESPONSE=$(curl -s -o /tmp/heartbeat-body.txt -w "%{http_code}" \
+            -X GET "https://undp-drr-radar-api.netlify.app/api/health")
 
           echo "HTTP Response Code: $RESPONSE"
+          cat /tmp/heartbeat-body.txt || true
+          echo
 
           if [ "$RESPONSE" -ge 200 ] && [ "$RESPONSE" -lt 300 ]; then
             echo "Supabase ping successful!"
