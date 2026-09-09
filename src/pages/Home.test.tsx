@@ -26,9 +26,7 @@ describe('Home', () => {
     );
 
     expect(
-      screen.getByText(
-        /FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION/i
-      )
+      screen.getByText(/FRONTIER TECHNOLOGY RADAR FOR DISASTER RISK REDUCTION/i)
     ).toBeInTheDocument();
     expect(screen.getByAltText('UNDP Logo')).toBeInTheDocument();
     expect(screen.getByAltText('UNDP DRT Logo')).toBeInTheDocument();
