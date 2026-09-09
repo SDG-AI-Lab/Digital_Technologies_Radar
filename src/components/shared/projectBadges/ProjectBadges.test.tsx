@@ -58,4 +58,25 @@ describe('ProjectBadge', () => {
     expect(screen.getByText(/Response/)).toBeInTheDocument();
     expect(screen.getByText(/Tonga/)).toBeInTheDocument();
   });
+
+  it('does not crash when disaster cycle and country fields are missing', () => {
+    renderBadge({
+      status: 'Idea',
+      title: 'Sparse API project'
+    });
+
+    expect(screen.getByText(/Idea/)).toBeInTheDocument();
+  });
+
+  it('accepts singular disaster_cycle and comma-separated country strings', () => {
+    renderBadge({
+      status: 'Validation',
+      disaster_cycle: 'Preparedness, Response',
+      country: 'Fiji, Samoa'
+    });
+
+    expect(screen.getByText(/Validation/)).toBeInTheDocument();
+    expect(screen.getByText(/Preparedness,Response/)).toBeInTheDocument();
+    expect(screen.getByText(/Fiji,Samoa/)).toBeInTheDocument();
+  });
 });
