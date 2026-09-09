@@ -1,6 +1,0 @@
-name = "drr-security-headers"
-main = "security-headers-worker.js"
-compatibility_date = "2024-01-01"
-
-# After `wrangler login`, set routes for your custom domain, e.g.:
-# routes = [{ pattern = "drrtechradar.org/*", zone_name = "drrtechradar.org" }]
