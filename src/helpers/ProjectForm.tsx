@@ -20,7 +20,11 @@ export const ProjectForm: React.FC<Props> = ({ data, title, ...props }) => {
       <div className='createProject'>
         {data.map((field: any, idx: number) => (
           <FormControl display={'flex'} gap={3} mb={5} key={idx}>
-            <FormLabel w={150} textAlign={'end'}>
+            <FormLabel
+              htmlFor={`project-field-${String(field.label)}`}
+              w={150}
+              textAlign={'end'}
+            >
               {field.label
                 .replace(
                   /(^|_)(\w)/g,

@@ -7,6 +7,7 @@ import {
   cleanup
 } from '@testing-library/react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { axe } from 'jest-axe';
 import { RadarMapView } from './RadarMapView';
 import { RadarContext } from 'navigation/context';
 
@@ -26,8 +27,12 @@ jest.mock('react-leaflet', () => ({
     <div data-testid='leaflet-map'>{children}</div>
   ),
   TileLayer: () => <div data-testid='tile-layer' />,
-  CircleMarker: ({ children, center }: any) => (
-    <div data-testid='circle-marker' data-center={JSON.stringify(center)}>
+  CircleMarker: ({ children, center, ...rest }: any) => (
+    <div
+      data-testid='circle-marker'
+      data-center={JSON.stringify(center)}
+      aria-label={rest['aria-label']}
+    >
       {children}
     </div>
   ),
@@ -179,6 +184,21 @@ describe('RadarMapView', () => {
     expect(screen.getAllByTestId('blip-popover')[0]).toBeInTheDocument();
 
     fireEvent.click(screen.getAllByText('close-popup')[0]);
+  });
+
+  it('exposes accessible names on map markers and passes axe checks', async () => {
+    const { container } = renderMap();
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('Fiji')).toBeInTheDocument();
+      expect(screen.getByLabelText('Kenya')).toBeInTheDocument();
+    });
+
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
   });
 
   it('clears filters when isFiltered on mount and restores on unmount', () => {

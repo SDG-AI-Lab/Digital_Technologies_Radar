@@ -1,3 +1,5 @@
+import { clearSession } from 'components/shared/helpers/auth';
+
 const API_BASE_URL =
   process.env.REACT_APP_RADAR_API_URL ||
   'https://undp-drr-radar-api.netlify.app/api';
@@ -24,6 +26,11 @@ export const apiRequest = async <T>(
   });
   const body = await response.json().catch(() => ({}));
   if (!response.ok) {
+    // Expired / invalid tokens should drop the local session so the UI
+    // prompts the user to sign in again.
+    if (response.status === 401) {
+      clearSession();
+    }
     throw new ApiError(
       body.error || 'The request could not be completed',
       response.status

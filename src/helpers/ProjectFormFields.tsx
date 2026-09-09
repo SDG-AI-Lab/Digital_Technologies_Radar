@@ -59,35 +59,38 @@ export const ProjectFormFields: React.FC<Props> = ({
     case 'text':
       return (
         <Input
+          id={`project-field-${String(label)}`}
           type='text'
           w={'50%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
-          data-testId={`field-${String(label)}`}
+          data-testid={`field-${String(label)}`}
         />
       );
     case 'textArea':
       return (
         <Textarea
+          id={`project-field-${String(label)}`}
           w={'50%'}
           onChange={handleChange}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           size='sm'
-          data-testId={`field-${String(label)}`}
+          data-testid={`field-${String(label)}`}
         />
       );
 
     case 'selectText':
       return (
         <Select
+          id={`project-field-${String(label)}`}
           placeholder='Select option'
           w={'25%'}
           name={label}
           value={projectFormValues[label as keyof ProjectFieldValues]}
           onChange={handleChange}
-          data-testId={`field-${String(label)}`}
+          data-testid={`field-${String(label)}`}
         >
           {(options || []).map((option: any, idx: any) => (
             <option
@@ -106,7 +109,7 @@ export const ProjectFormFields: React.FC<Props> = ({
       return (
         <div
           style={{ width: '50%', maxWidth: '350px' }}
-          data-testId={`field-${String(label)}`}
+          data-testid={`field-${String(label)}`}
         >
           <SelectMultiple
             options={options as Option[]}

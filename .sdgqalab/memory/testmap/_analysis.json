@@ -1,623 +1,1575 @@
 {
-  "total_sources": 120,
-  "unit_tests": 63,
-  "integ_tests": 28,
-  "unit_covered": 79,
-  "integ_covered": 43,
-  "unit_pct": 65.8,
-  "integ_pct": 35.8,
-  "sourcesByScope": {
-    "root": [
-      "src/App.tsx",
-      "src/index.tsx",
-      "src/Logo.tsx"
+  "audited_at": "2026-09-08T21:53:00Z",
+  "frontend": {
+    "total_source_files": 122,
+    "sources": [
+      "App.tsx",
+      "components/constants/app.ts",
+      "components/drawers/components/LittleDrawer.tsx",
+      "components/drawers/components/LittleDrawerIconButton.tsx",
+      "components/drawers/filter/AppRanderSlider.tsx",
+      "components/drawers/filter/CustomFilter.tsx",
+      "components/drawers/filter/FilterConstants.ts",
+      "components/drawers/filter/FilterUtilities.tsx",
+      "components/drawers/filter/HandleRender.tsx",
+      "components/drawers/FilterDrawer.tsx",
+      "components/drawers/tech/colors.ts",
+      "components/drawers/tech/components/ScrollableDiv.tsx",
+      "components/drawers/tech/components/TechItem.tsx",
+      "components/drawers/tech/TechList.tsx",
+      "components/header/AppMobileHeader.tsx",
+      "components/header/components/UNDPLogo.tsx",
+      "components/header/components/UNLogo.tsx",
+      "components/infoCard/InfoCard.tsx",
+      "components/lists/components/BlipList.tsx",
+      "components/lists/components/BlipListMui.tsx",
+      "components/lists/components/ScrollableDiv.tsx",
+      "components/lists/components/Title.tsx",
+      "components/lists/quadrant/HorizonItem.tsx",
+      "components/lists/quadrant/HorizonItemMui.tsx",
+      "components/lists/quadrant/Item.tsx",
+      "components/lists/quadrant/QuadrantHorizonList.tsx",
+      "components/lists/quadrant/ShowIcon.tsx",
+      "components/navbar/AppBottomNav.tsx",
+      "components/navbar/AppLeftNav.tsx",
+      "components/navbar/components/CloseIcon.tsx",
+      "components/navbar/components/Logo.tsx",
+      "components/navbar/components/MenuIcon.tsx",
+      "components/navbar/components/MenuItem.tsx",
+      "components/navbar/components/UNDPLogo.tsx",
+      "components/navbar/components/UNLogo.tsx",
+      "components/navbar/MenuLinks.tsx",
+      "components/navbar/MenuToggle.tsx",
+      "components/pageDetails/PageDetails.tsx",
+      "components/PopOver.tsx",
+      "components/projectPreview/ProjectPreviewCard.tsx",
+      "components/projectsCollection/ProjectsCollection.tsx",
+      "components/radar/HowToPopup.tsx",
+      "components/shared/filter/Filter.tsx",
+      "components/shared/filter/FilterComponent.tsx",
+      "components/shared/filter/FilterItems.tsx",
+      "components/shared/filter/MultiSelectFilter.tsx",
+      "components/shared/genericButton/GenericButton.tsx",
+      "components/shared/helpers/auth.ts",
+      "components/shared/helpers/HelperUtils.ts",
+      "components/shared/image/Image.tsx",
+      "components/shared/projectBadges/ProjectBadges.tsx",
+      "components/views/blip/BlipView.tsx",
+      "components/views/ContentView.tsx",
+      "components/views/FilterTechNavView.tsx",
+      "helpers/apiClient.ts",
+      "helpers/databaseClient.tsx",
+      "helpers/dataUtils.ts",
+      "helpers/Loader.tsx",
+      "helpers/locationUtils.ts",
+      "helpers/ProjectForm.tsx",
+      "helpers/ProjectFormFields.tsx",
+      "index.tsx",
+      "layouts/MapViewLayout.tsx",
+      "layouts/RadarLayout.tsx",
+      "Logo.tsx",
+      "navigation/AppNav.tsx",
+      "navigation/context.tsx",
+      "navigation/routes.ts",
+      "pages/about/About.tsx",
+      "pages/about/AboutContent.ts",
+      "pages/about/AboutOrganization.tsx",
+      "pages/disasters/DisasterEvent.tsx",
+      "pages/disasters/DisasterEvents.tsx",
+      "pages/disasters/Disasters.tsx",
+      "pages/eventAction/EventAction.tsx",
+      "pages/Home.tsx",
+      "pages/homePage/components/HomeCard.tsx",
+      "pages/homePage/components/HomeCardMini.tsx",
+      "pages/homePage/components/RecentDisasterCardMini.tsx",
+      "pages/homePage/components/RecentDisasters.tsx",
+      "pages/homePage/helpers.ts",
+      "pages/homePage/HomePage.tsx",
+      "pages/infoAction/InfoAction.tsx",
+      "pages/infoDetails/InfoDetails.tsx",
+      "pages/map-view/helpers.tsx",
+      "pages/map-view/ProjectSlider.tsx",
+      "pages/map-view/RadarMapView.tsx",
+      "pages/NotFound404.tsx",
+      "pages/projectAction/helpers.ts",
+      "pages/projectAction/ProjectAction.tsx",
+      "pages/projectAction/SelectMultiple.tsx",
+      "pages/projects/projectComponent/Project.tsx",
+      "pages/projects/projectDetails/ProjectDetails.tsx",
+      "pages/projects/projectOverlay/projectOverlay.tsx",
+      "pages/projects/ProjectsList.tsx",
+      "pages/projects/reviewProjects/ReviewProjects.tsx",
+      "pages/projectsRadar/ProjectsRadar.tsx",
+      "pages/Radar.tsx",
+      "pages/search/Pagination.tsx",
+      "pages/search/Search.tsx",
+      "pages/search/SearchBar.tsx",
+      "pages/search/SearchResult.tsx",
+      "pages/search/SearchView.tsx",
+      "pages/technologies/Technologies.tsx",
+      "pages/users/register/Register.tsx",
+      "pages/users/signIn/SignIn.tsx",
+      "pages/views/OutletContext.ts",
+      "pages/views/PopOverView.tsx",
+      "pages/views/QuadrantView.tsx",
+      "pages/views/RadarView.tsx",
+      "pages/volunteers/VolunteerContent.ts",
+      "pages/volunteers/VolunteerOrganization.tsx",
+      "pages/volunteers/Volunteers.tsx",
+      "radar/components/BackButton.tsx",
+      "radar/components/svg-hover/HorizonsNameComp.tsx",
+      "radar/components/svg-hover/QuadrantNameComp.tsx",
+      "radar/components/WaitingForRadar.tsx",
+      "radar/RadarProvider.tsx",
+      "radar/tech/TechDescription.tsx",
+      "ui/AppUiProvider.tsx",
+      "ui/ColorModeSwitcher.tsx",
+      "ui/MainLayout.tsx"
     ],
-    "components": [
-      "src/components/drawers/components/LittleDrawer.tsx",
-      "src/components/drawers/components/LittleDrawerIconButton.tsx",
-      "src/components/drawers/filter/AppRanderSlider.tsx",
-      "src/components/drawers/filter/CustomFilter.tsx",
-      "src/components/drawers/filter/FilterConstants.ts",
-      "src/components/drawers/filter/FilterUtilities.tsx",
-      "src/components/drawers/filter/HandleRender.tsx",
-      "src/components/drawers/FilterDrawer.tsx",
-      "src/components/drawers/tech/components/ScrollableDiv.tsx",
-      "src/components/drawers/tech/components/TechItem.tsx",
-      "src/components/drawers/tech/TechList.tsx",
-      "src/components/header/AppMobileHeader.tsx",
-      "src/components/header/components/UNDPLogo.tsx",
-      "src/components/header/components/UNLogo.tsx",
-      "src/components/infoCard/InfoCard.tsx",
-      "src/components/lists/components/BlipList.tsx",
-      "src/components/lists/components/BlipListMui.tsx",
-      "src/components/lists/components/ScrollableDiv.tsx",
-      "src/components/lists/components/Title.tsx",
-      "src/components/lists/quadrant/HorizonItem.tsx",
-      "src/components/lists/quadrant/HorizonItemMui.tsx",
-      "src/components/lists/quadrant/Item.tsx",
-      "src/components/lists/quadrant/QuadrantHorizonList.tsx",
-      "src/components/lists/quadrant/ShowIcon.tsx",
-      "src/components/navbar/AppBottomNav.tsx",
-      "src/components/navbar/AppLeftNav.tsx",
-      "src/components/navbar/components/CloseIcon.tsx",
-      "src/components/navbar/components/Logo.tsx",
-      "src/components/navbar/components/MenuIcon.tsx",
-      "src/components/navbar/components/MenuItem.tsx",
-      "src/components/navbar/components/UNDPLogo.tsx",
-      "src/components/navbar/components/UNLogo.tsx",
-      "src/components/navbar/MenuLinks.tsx",
-      "src/components/navbar/MenuToggle.tsx",
-      "src/components/pageDetails/PageDetails.tsx",
-      "src/components/PopOver.tsx",
-      "src/components/projectPreview/ProjectPreviewCard.tsx",
-      "src/components/projectsCollection/ProjectsCollection.tsx",
-      "src/components/radar/HowToPopup.tsx",
-      "src/components/shared/filter/Filter.tsx",
-      "src/components/shared/filter/FilterComponent.tsx",
-      "src/components/shared/filter/FilterItems.tsx",
-      "src/components/shared/filter/MultiSelectFilter.tsx",
-      "src/components/shared/genericButton/GenericButton.tsx",
-      "src/components/shared/helpers/auth.ts",
-      "src/components/shared/helpers/HelperUtils.ts",
-      "src/components/shared/image/Image.tsx",
-      "src/components/shared/projectBadges/ProjectBadges.tsx",
-      "src/components/views/blip/BlipView.tsx",
-      "src/components/views/ContentView.tsx",
-      "src/components/views/FilterTechNavView.tsx"
+    "unit_test_files": 65,
+    "integration_test_files": 27,
+    "unit_covered_files": [
+      "Logo.tsx",
+      "components/PopOver.tsx",
+      "components/drawers/FilterDrawer.tsx",
+      "components/drawers/components/LittleDrawer.tsx",
+      "components/drawers/components/LittleDrawerIconButton.tsx",
+      "components/drawers/filter/AppRanderSlider.tsx",
+      "components/drawers/filter/CustomFilter.tsx",
+      "components/drawers/filter/FilterConstants.ts",
+      "components/drawers/filter/FilterUtilities.tsx",
+      "components/drawers/filter/HandleRender.tsx",
+      "components/drawers/tech/TechList.tsx",
+      "components/drawers/tech/components/ScrollableDiv.tsx",
+      "components/drawers/tech/components/TechItem.tsx",
+      "components/header/AppMobileHeader.tsx",
+      "components/header/components/UNDPLogo.tsx",
+      "components/header/components/UNLogo.tsx",
+      "components/infoCard/InfoCard.tsx",
+      "components/lists/components/BlipList.tsx",
+      "components/lists/components/BlipListMui.tsx",
+      "components/lists/components/ScrollableDiv.tsx",
+      "components/lists/components/Title.tsx",
+      "components/lists/quadrant/HorizonItem.tsx",
+      "components/lists/quadrant/HorizonItemMui.tsx",
+      "components/lists/quadrant/Item.tsx",
+      "components/lists/quadrant/QuadrantHorizonList.tsx",
+      "components/lists/quadrant/ShowIcon.tsx",
+      "components/navbar/AppBottomNav.tsx",
+      "components/navbar/AppLeftNav.tsx",
+      "components/navbar/MenuLinks.tsx",
+      "components/navbar/MenuToggle.tsx",
+      "components/navbar/components/CloseIcon.tsx",
+      "components/navbar/components/Logo.tsx",
+      "components/navbar/components/MenuIcon.tsx",
+      "components/navbar/components/MenuItem.tsx",
+      "components/navbar/components/UNDPLogo.tsx",
+      "components/navbar/components/UNLogo.tsx",
+      "components/pageDetails/PageDetails.tsx",
+      "components/projectPreview/ProjectPreviewCard.tsx",
+      "components/projectsCollection/ProjectsCollection.tsx",
+      "components/radar/HowToPopup.tsx",
+      "components/shared/filter/Filter.tsx",
+      "components/shared/filter/FilterComponent.tsx",
+      "components/shared/filter/FilterItems.tsx",
+      "components/shared/filter/MultiSelectFilter.tsx",
+      "components/shared/genericButton/GenericButton.tsx",
+      "components/shared/helpers/HelperUtils.ts",
+      "components/shared/helpers/auth.ts",
+      "components/shared/image/Image.tsx",
+      "components/shared/projectBadges/ProjectBadges.tsx",
+      "components/views/ContentView.tsx",
+      "components/views/FilterTechNavView.tsx",
+      "components/views/blip/BlipView.tsx",
+      "helpers/Loader.tsx",
+      "helpers/ProjectForm.tsx",
+      "helpers/ProjectFormFields.tsx",
+      "helpers/apiClient.ts",
+      "helpers/dataUtils.ts",
+      "helpers/locationUtils.ts",
+      "layouts/MapViewLayout.tsx",
+      "layouts/RadarLayout.tsx",
+      "navigation/context.tsx",
+      "navigation/routes.ts",
+      "pages/homePage/helpers.ts",
+      "pages/map-view/ProjectSlider.tsx",
+      "pages/map-view/helpers.tsx",
+      "pages/projectAction/SelectMultiple.tsx",
+      "pages/projectAction/helpers.ts",
+      "pages/views/PopOverView.tsx",
+      "radar/RadarProvider.tsx",
+      "radar/components/BackButton.tsx",
+      "radar/components/WaitingForRadar.tsx",
+      "radar/components/svg-hover/HorizonsNameComp.tsx",
+      "radar/components/svg-hover/QuadrantNameComp.tsx",
+      "radar/tech/TechDescription.tsx",
+      "ui/AppUiProvider.tsx",
+      "ui/ColorModeSwitcher.tsx",
+      "ui/MainLayout.tsx"
     ],
-    "helpers": [
-      "src/helpers/apiClient.ts",
-      "src/helpers/databaseClient.tsx",
-      "src/helpers/dataUtils.ts",
-      "src/helpers/Loader.tsx",
-      "src/helpers/locationUtils.ts",
-      "src/helpers/ProjectForm.tsx",
-      "src/helpers/ProjectFormFields.tsx"
+    "integration_covered_files": [
+      "App.tsx",
+      "components/shared/helpers/HelperUtils.ts",
+      "components/shared/helpers/auth.ts",
+      "helpers/apiClient.ts",
+      "helpers/dataUtils.ts",
+      "navigation/AppNav.tsx",
+      "navigation/context.tsx",
+      "navigation/routes.ts",
+      "pages/NotFound404.tsx",
+      "pages/Radar.tsx",
+      "pages/about/About.tsx",
+      "pages/about/AboutContent.ts",
+      "pages/about/AboutOrganization.tsx",
+      "pages/disasters/DisasterEvents.tsx",
+      "pages/disasters/Disasters.tsx",
+      "pages/eventAction/EventAction.tsx",
+      "pages/homePage/HomePage.tsx",
+      "pages/homePage/components/HomeCard.tsx",
+      "pages/homePage/components/HomeCardMini.tsx",
+      "pages/homePage/components/RecentDisasterCardMini.tsx",
+      "pages/homePage/components/RecentDisasters.tsx",
+      "pages/infoAction/InfoAction.tsx",
+      "pages/infoDetails/InfoDetails.tsx",
+      "pages/map-view/RadarMapView.tsx",
+      "pages/projectAction/ProjectAction.tsx",
+      "pages/projectAction/helpers.ts",
+      "pages/projects/ProjectsList.tsx",
+      "pages/projects/projectComponent/Project.tsx",
+      "pages/projects/projectDetails/ProjectDetails.tsx",
+      "pages/projects/projectOverlay/projectOverlay.tsx",
+      "pages/projects/reviewProjects/ReviewProjects.tsx",
+      "pages/search/Pagination.tsx",
+      "pages/search/Search.tsx",
+      "pages/search/SearchBar.tsx",
+      "pages/search/SearchResult.tsx",
+      "pages/search/SearchView.tsx",
+      "pages/technologies/Technologies.tsx",
+      "pages/users/register/Register.tsx",
+      "pages/users/signIn/SignIn.tsx",
+      "pages/views/PopOverView.tsx",
+      "pages/views/QuadrantView.tsx",
+      "pages/views/RadarView.tsx",
+      "pages/volunteers/VolunteerContent.ts",
+      "pages/volunteers/VolunteerOrganization.tsx",
+      "pages/volunteers/Volunteers.tsx"
     ],
-    "layouts": [
-      "src/layouts/MapViewLayout.tsx",
-      "src/layouts/RadarLayout.tsx"
+    "unit_file_coverage_pct": 63.1,
+    "integration_file_coverage_pct": 36.9,
+    "unit_tests": [
+      {
+        "file": "components/drawers/components/LittleDrawer.test.tsx",
+        "kind": "unit",
+        "approx_tests": 5,
+        "covers": [
+          "components/drawers/components/LittleDrawer.tsx",
+          "components/drawers/components/LittleDrawerIconButton.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/filter/AppRanderSlider.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/drawers/filter/AppRanderSlider.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/filter/CustomFilter.test.tsx",
+        "kind": "unit",
+        "approx_tests": 19,
+        "covers": [
+          "components/drawers/filter/CustomFilter.tsx",
+          "navigation/context.tsx",
+          "components/drawers/filter/FilterConstants.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/filter/FilterDrawer.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/drawers/FilterDrawer.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/filter/FilterUtilities.test.ts",
+        "kind": "unit",
+        "approx_tests": 13,
+        "covers": [
+          "components/drawers/filter/FilterUtilities.tsx",
+          "components/drawers/filter/FilterConstants.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/filter/HandleRender.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/drawers/filter/HandleRender.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/FilterDrawer.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/drawers/FilterDrawer.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/tech/components/ScrollableDiv.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/drawers/tech/components/ScrollableDiv.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/tech/components/TechItem.test.tsx",
+        "kind": "unit",
+        "approx_tests": 7,
+        "covers": [
+          "components/drawers/tech/components/TechItem.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/drawers/tech/TechList.test.tsx",
+        "kind": "unit",
+        "approx_tests": 7,
+        "covers": [
+          "components/drawers/tech/TechList.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/header/AppMobileHeader.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/header/AppMobileHeader.tsx",
+          "components/header/components/UNLogo.tsx",
+          "components/header/components/UNDPLogo.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/infoCard/InfoCard.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/infoCard/InfoCard.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/components/BlipList.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/lists/components/BlipList.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/components/BlipListMui.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/lists/components/BlipListMui.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/components/ScrollableDiv.test.tsx",
+        "kind": "unit",
+        "approx_tests": 6,
+        "covers": [
+          "components/lists/components/ScrollableDiv.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/components/Title.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/lists/components/Title.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/quadrant/HorizonItem.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/lists/quadrant/HorizonItem.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/quadrant/HorizonItemMui.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/lists/quadrant/HorizonItemMui.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/quadrant/Item.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/lists/quadrant/Item.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/quadrant/QuadrantHorizonList.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/lists/quadrant/QuadrantHorizonList.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/lists/quadrant/ShowIcon.test.tsx",
+        "kind": "unit",
+        "approx_tests": 7,
+        "covers": [
+          "components/lists/quadrant/ShowIcon.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/AppBottomNav.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/navbar/AppBottomNav.tsx",
+          "components/navbar/components/MenuItem.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/AppLeftNav.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/navbar/AppLeftNav.tsx",
+          "components/navbar/MenuLinks.tsx",
+          "components/shared/helpers/auth.ts",
+          "navigation/routes.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/components/CloseIcon.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/navbar/components/CloseIcon.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/components/Logos.test.tsx",
+        "kind": "unit",
+        "approx_tests": 5,
+        "covers": [
+          "components/navbar/components/Logo.tsx",
+          "components/navbar/components/UNDPLogo.tsx",
+          "components/navbar/components/UNLogo.tsx",
+          "components/header/components/UNDPLogo.tsx",
+          "components/header/components/UNLogo.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/components/MenuIcon.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/navbar/components/MenuIcon.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/components/MenuItem.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/navbar/components/MenuItem.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/navbar/MenuToggle.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/navbar/MenuToggle.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/pageDetails/PageDetails.test.tsx",
+        "kind": "unit",
+        "approx_tests": 6,
+        "covers": [
+          "components/pageDetails/PageDetails.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/PopOver.test.tsx",
+        "kind": "unit",
+        "approx_tests": 5,
+        "covers": [
+          "components/PopOver.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/projectPreview/ProjectPreviewCard.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/projectPreview/ProjectPreviewCard.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/projectsCollection/ProjectsCollection.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/projectsCollection/ProjectsCollection.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/radar/HowToAndSvg.test.tsx",
+        "kind": "unit",
+        "approx_tests": 5,
+        "covers": [
+          "components/radar/HowToPopup.tsx",
+          "radar/components/svg-hover/QuadrantNameComp.tsx",
+          "radar/components/svg-hover/HorizonsNameComp.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/filter/Filter.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/shared/filter/Filter.tsx",
+          "navigation/context.tsx",
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/filter/FilterComponent.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/shared/filter/FilterComponent.tsx",
+          "navigation/context.tsx",
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/filter/FilterItems.test.tsx",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "components/shared/filter/FilterItems.tsx",
+          "components/shared/filter/MultiSelectFilter.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/genericButton/GenericButton.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/shared/genericButton/GenericButton.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/helpers/auth.test.ts",
+        "kind": "unit",
+        "approx_tests": 8,
+        "covers": [
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/helpers/HelperUtils.test.ts",
+        "kind": "unit",
+        "approx_tests": 16,
+        "covers": [
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/helpers/HelperUtils_2.test.ts",
+        "kind": "unit",
+        "approx_tests": 5,
+        "covers": [
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/helpers/HelperUtils_3.test.ts",
+        "kind": "unit",
+        "approx_tests": 10,
+        "covers": [
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/image/Image.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/shared/image/Image.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/shared/projectBadges/ProjectBadges.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "components/shared/projectBadges/ProjectBadges.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/views/blip/BlipView.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "components/views/blip/BlipView.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/views/ContentView.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/views/ContentView.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "components/views/FilterTechNavView.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "components/views/FilterTechNavView.tsx"
+        ],
+        "scope": "components"
+      },
+      {
+        "file": "helpers/apiClient.test.ts",
+        "kind": "unit",
+        "approx_tests": 8,
+        "covers": [
+          "helpers/apiClient.ts"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "helpers/dataUtils.test.ts",
+        "kind": "unit",
+        "approx_tests": 8,
+        "covers": [
+          "helpers/dataUtils.ts"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "helpers/Loader.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "helpers/Loader.tsx"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "helpers/locationUtils.test.ts",
+        "kind": "unit",
+        "approx_tests": 8,
+        "covers": [
+          "helpers/locationUtils.ts"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "helpers/ProjectForm.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "helpers/ProjectForm.tsx"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "helpers/ProjectFormFields.test.tsx",
+        "kind": "unit",
+        "approx_tests": 7,
+        "covers": [
+          "helpers/ProjectFormFields.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "helpers"
+      },
+      {
+        "file": "layouts/Layouts.test.tsx",
+        "kind": "unit",
+        "approx_tests": 3,
+        "covers": [
+          "layouts/RadarLayout.tsx",
+          "layouts/MapViewLayout.tsx"
+        ],
+        "scope": "layouts"
+      },
+      {
+        "file": "Logo.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "Logo.tsx"
+        ],
+        "scope": "root"
+      },
+      {
+        "file": "pages/homePage/helpers.test.ts",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "pages/homePage/helpers.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/map-view/helpers.test.tsx",
+        "kind": "unit",
+        "approx_tests": 8,
+        "covers": [
+          "pages/map-view/helpers.tsx",
+          "navigation/context.tsx",
+          "pages/map-view/ProjectSlider.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/map-view/ProjectSlider.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "pages/map-view/ProjectSlider.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projectAction/helpers.test.ts",
+        "kind": "unit",
+        "approx_tests": 4,
+        "covers": [
+          "pages/projectAction/helpers.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projectAction/SelectMultiple.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "pages/projectAction/SelectMultiple.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "radar/components/RadarShell.test.tsx",
+        "kind": "unit",
+        "approx_tests": 6,
+        "covers": [
+          "radar/components/BackButton.tsx",
+          "radar/components/WaitingForRadar.tsx",
+          "pages/views/PopOverView.tsx",
+          "navigation/routes.ts"
+        ],
+        "scope": "radar"
+      },
+      {
+        "file": "radar/RadarProvider.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "radar/RadarProvider.tsx",
+          "helpers/apiClient.ts"
+        ],
+        "scope": "radar"
+      },
+      {
+        "file": "radar/tech/TechDescription.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "radar/tech/TechDescription.tsx"
+        ],
+        "scope": "radar"
+      },
+      {
+        "file": "ui/AppUiProvider.test.tsx",
+        "kind": "unit",
+        "approx_tests": 1,
+        "covers": [
+          "ui/AppUiProvider.tsx"
+        ],
+        "scope": "ui"
+      },
+      {
+        "file": "ui/ColorModeSwitcher.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "ui/ColorModeSwitcher.tsx"
+        ],
+        "scope": "ui"
+      },
+      {
+        "file": "ui/MainLayout.test.tsx",
+        "kind": "unit",
+        "approx_tests": 2,
+        "covers": [
+          "ui/MainLayout.tsx"
+        ],
+        "scope": "ui"
+      }
     ],
-    "navigation": [
-      "src/navigation/AppNav.tsx",
-      "src/navigation/context.tsx",
-      "src/navigation/routes.ts"
+    "integration_tests": [
+      {
+        "file": "navigation/AppNav.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "navigation/AppNav.tsx",
+          "navigation/routes.ts"
+        ],
+        "scope": "navigation"
+      },
+      {
+        "file": "pages/about/About.test.tsx",
+        "kind": "integration",
+        "approx_tests": 4,
+        "covers": [
+          "pages/about/About.tsx",
+          "pages/about/AboutOrganization.tsx",
+          "pages/about/AboutContent.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/disasters/DisasterEvents.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "pages/disasters/DisasterEvents.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/disasters/Disasters.test.tsx",
+        "kind": "integration",
+        "approx_tests": 9,
+        "covers": [
+          "pages/disasters/Disasters.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts",
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/eventAction/EventAction.test.tsx",
+        "kind": "integration",
+        "approx_tests": 10,
+        "covers": [
+          "pages/eventAction/EventAction.tsx",
+          "helpers/apiClient.ts",
+          "helpers/dataUtils.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/homePage/components/HomeCards.test.tsx",
+        "kind": "integration",
+        "approx_tests": 7,
+        "covers": [
+          "pages/homePage/components/HomeCard.tsx",
+          "pages/homePage/components/HomeCardMini.tsx",
+          "pages/homePage/components/RecentDisasters.tsx",
+          "pages/homePage/components/RecentDisasterCardMini.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/homePage/HomePage.test.tsx",
+        "kind": "integration",
+        "approx_tests": 7,
+        "covers": [
+          "pages/homePage/HomePage.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/infoAction/InfoAction.test.tsx",
+        "kind": "integration",
+        "approx_tests": 10,
+        "covers": [
+          "pages/infoAction/InfoAction.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/infoDetails/InfoDetails.test.tsx",
+        "kind": "integration",
+        "approx_tests": 11,
+        "covers": [
+          "pages/infoDetails/InfoDetails.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/map-view/RadarMapView.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "pages/map-view/RadarMapView.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/NotFound404.test.tsx",
+        "kind": "integration",
+        "approx_tests": 2,
+        "covers": [
+          "pages/NotFound404.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projectAction/ProjectAction.test.tsx",
+        "kind": "integration",
+        "approx_tests": 8,
+        "covers": [
+          "pages/projectAction/ProjectAction.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "helpers/dataUtils.ts",
+          "pages/projectAction/helpers.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projects/projectComponent/Project.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "pages/projects/projectComponent/Project.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projects/projectDetails/ProjectDetails.test.tsx",
+        "kind": "integration",
+        "approx_tests": 11,
+        "covers": [
+          "pages/projects/projectDetails/ProjectDetails.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projects/projectOverlay/projectOverlay.test.tsx",
+        "kind": "integration",
+        "approx_tests": 11,
+        "covers": [
+          "pages/projects/projectOverlay/projectOverlay.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projects/ProjectsList.test.tsx",
+        "kind": "integration",
+        "approx_tests": 12,
+        "covers": [
+          "pages/projects/ProjectsList.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts",
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/projects/reviewProjects/ReviewProjects.test.tsx",
+        "kind": "integration",
+        "approx_tests": 6,
+        "covers": [
+          "pages/projects/reviewProjects/ReviewProjects.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/Radar.test.tsx",
+        "kind": "integration",
+        "approx_tests": 2,
+        "covers": [
+          "pages/Radar.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/search/Search.test.tsx",
+        "kind": "integration",
+        "approx_tests": 8,
+        "covers": [
+          "pages/search/Search.tsx",
+          "pages/search/SearchBar.tsx",
+          "pages/search/SearchResult.tsx",
+          "pages/search/SearchView.tsx",
+          "pages/search/Pagination.tsx",
+          "helpers/dataUtils.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/technologies/Technologies.test.tsx",
+        "kind": "integration",
+        "approx_tests": 9,
+        "covers": [
+          "pages/technologies/Technologies.tsx",
+          "navigation/context.tsx",
+          "helpers/apiClient.ts",
+          "components/shared/helpers/auth.ts",
+          "components/shared/helpers/HelperUtils.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/users/register/Register.test.tsx",
+        "kind": "integration",
+        "approx_tests": 6,
+        "covers": [
+          "pages/users/register/Register.tsx",
+          "helpers/apiClient.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/users/signIn/SignIn.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "pages/users/signIn/SignIn.tsx",
+          "helpers/apiClient.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/views/PopOverView.test.tsx",
+        "kind": "integration",
+        "approx_tests": 1,
+        "covers": [
+          "pages/views/PopOverView.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/views/QuadrantView.test.tsx",
+        "kind": "integration",
+        "approx_tests": 3,
+        "covers": [
+          "pages/views/QuadrantView.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/views/RadarView.test.tsx",
+        "kind": "integration",
+        "approx_tests": 5,
+        "covers": [
+          "pages/views/RadarView.tsx",
+          "navigation/context.tsx"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "pages/volunteers/Volunteers.test.tsx",
+        "kind": "integration",
+        "approx_tests": 2,
+        "covers": [
+          "pages/volunteers/Volunteers.tsx",
+          "pages/volunteers/VolunteerOrganization.tsx",
+          "pages/volunteers/VolunteerContent.ts"
+        ],
+        "scope": "pages"
+      },
+      {
+        "file": "tests/App.test.tsx",
+        "kind": "integration",
+        "approx_tests": 2,
+        "covers": [
+          "App.tsx"
+        ],
+        "scope": "root"
+      }
     ],
-    "pages": [
-      "src/pages/about/About.tsx",
-      "src/pages/about/AboutContent.ts",
-      "src/pages/about/AboutOrganization.tsx",
-      "src/pages/disasters/DisasterEvent.tsx",
-      "src/pages/disasters/DisasterEvents.tsx",
-      "src/pages/disasters/Disasters.tsx",
-      "src/pages/eventAction/EventAction.tsx",
-      "src/pages/Home.tsx",
-      "src/pages/homePage/components/HomeCard.tsx",
-      "src/pages/homePage/components/HomeCardMini.tsx",
-      "src/pages/homePage/components/RecentDisasterCardMini.tsx",
-      "src/pages/homePage/components/RecentDisasters.tsx",
-      "src/pages/homePage/helpers.ts",
-      "src/pages/homePage/HomePage.tsx",
-      "src/pages/infoAction/InfoAction.tsx",
-      "src/pages/infoDetails/InfoDetails.tsx",
-      "src/pages/map-view/helpers.tsx",
-      "src/pages/map-view/ProjectSlider.tsx",
-      "src/pages/map-view/RadarMapView.tsx",
-      "src/pages/NotFound404.tsx",
-      "src/pages/projectAction/helpers.ts",
-      "src/pages/projectAction/ProjectAction.tsx",
-      "src/pages/projectAction/SelectMultiple.tsx",
-      "src/pages/projects/projectComponent/Project.tsx",
-      "src/pages/projects/projectDetails/ProjectDetails.tsx",
-      "src/pages/projects/projectOverlay/projectOverlay.tsx",
-      "src/pages/projects/ProjectsList.tsx",
-      "src/pages/projects/reviewProjects/ReviewProjects.tsx",
-      "src/pages/projectsRadar/ProjectsRadar.tsx",
-      "src/pages/Radar.tsx",
-      "src/pages/search/Pagination.tsx",
-      "src/pages/search/Search.tsx",
-      "src/pages/search/SearchBar.tsx",
-      "src/pages/search/SearchResult.tsx",
-      "src/pages/search/SearchView.tsx",
-      "src/pages/technologies/Technologies.tsx",
-      "src/pages/users/register/Register.tsx",
-      "src/pages/users/signIn/SignIn.tsx",
-      "src/pages/views/OutletContext.ts",
-      "src/pages/views/PopOverView.tsx",
-      "src/pages/views/QuadrantView.tsx",
-      "src/pages/views/RadarView.tsx",
-      "src/pages/volunteers/VolunteerContent.ts",
-      "src/pages/volunteers/VolunteerOrganization.tsx",
-      "src/pages/volunteers/Volunteers.tsx"
-    ],
-    "radar": [
-      "src/radar/components/BackButton.tsx",
-      "src/radar/components/svg-hover/HorizonsNameComp.tsx",
-      "src/radar/components/svg-hover/QuadrantNameComp.tsx",
-      "src/radar/components/WaitingForRadar.tsx",
-      "src/radar/RadarProvider.tsx",
-      "src/radar/tech/TechDescription.tsx"
-    ],
-    "ui": [
-      "src/ui/AppUiProvider.tsx",
-      "src/ui/ColorModeSwitcher.tsx",
-      "src/ui/MainLayout.tsx"
+    "scopes": {
+      "components": {
+        "source_files": 53,
+        "sources": [
+          "components/constants/app.ts",
+          "components/drawers/components/LittleDrawer.tsx",
+          "components/drawers/components/LittleDrawerIconButton.tsx",
+          "components/drawers/filter/AppRanderSlider.tsx",
+          "components/drawers/filter/CustomFilter.tsx",
+          "components/drawers/filter/FilterConstants.ts",
+          "components/drawers/filter/FilterUtilities.tsx",
+          "components/drawers/filter/HandleRender.tsx",
+          "components/drawers/FilterDrawer.tsx",
+          "components/drawers/tech/colors.ts",
+          "components/drawers/tech/components/ScrollableDiv.tsx",
+          "components/drawers/tech/components/TechItem.tsx",
+          "components/drawers/tech/TechList.tsx",
+          "components/header/AppMobileHeader.tsx",
+          "components/header/components/UNDPLogo.tsx",
+          "components/header/components/UNLogo.tsx",
+          "components/infoCard/InfoCard.tsx",
+          "components/lists/components/BlipList.tsx",
+          "components/lists/components/BlipListMui.tsx",
+          "components/lists/components/ScrollableDiv.tsx",
+          "components/lists/components/Title.tsx",
+          "components/lists/quadrant/HorizonItem.tsx",
+          "components/lists/quadrant/HorizonItemMui.tsx",
+          "components/lists/quadrant/Item.tsx",
+          "components/lists/quadrant/QuadrantHorizonList.tsx",
+          "components/lists/quadrant/ShowIcon.tsx",
+          "components/navbar/AppBottomNav.tsx",
+          "components/navbar/AppLeftNav.tsx",
+          "components/navbar/components/CloseIcon.tsx",
+          "components/navbar/components/Logo.tsx",
+          "components/navbar/components/MenuIcon.tsx",
+          "components/navbar/components/MenuItem.tsx",
+          "components/navbar/components/UNDPLogo.tsx",
+          "components/navbar/components/UNLogo.tsx",
+          "components/navbar/MenuLinks.tsx",
+          "components/navbar/MenuToggle.tsx",
+          "components/pageDetails/PageDetails.tsx",
+          "components/PopOver.tsx",
+          "components/projectPreview/ProjectPreviewCard.tsx",
+          "components/projectsCollection/ProjectsCollection.tsx",
+          "components/radar/HowToPopup.tsx",
+          "components/shared/filter/Filter.tsx",
+          "components/shared/filter/FilterComponent.tsx",
+          "components/shared/filter/FilterItems.tsx",
+          "components/shared/filter/MultiSelectFilter.tsx",
+          "components/shared/genericButton/GenericButton.tsx",
+          "components/shared/helpers/auth.ts",
+          "components/shared/helpers/HelperUtils.ts",
+          "components/shared/image/Image.tsx",
+          "components/shared/projectBadges/ProjectBadges.tsx",
+          "components/views/blip/BlipView.tsx",
+          "components/views/ContentView.tsx",
+          "components/views/FilterTechNavView.tsx"
+        ],
+        "unit_test_files": 46,
+        "integration_test_files": 0,
+        "unit_covered": 51,
+        "integration_covered": 2,
+        "unit_file_coverage_pct": 96.2,
+        "integration_file_coverage_pct": 3.8,
+        "unit_uncovered": [
+          "components/constants/app.ts",
+          "components/drawers/tech/colors.ts"
+        ],
+        "integration_uncovered": [
+          "components/constants/app.ts",
+          "components/drawers/components/LittleDrawer.tsx",
+          "components/drawers/components/LittleDrawerIconButton.tsx",
+          "components/drawers/filter/AppRanderSlider.tsx",
+          "components/drawers/filter/CustomFilter.tsx",
+          "components/drawers/filter/FilterConstants.ts",
+          "components/drawers/filter/FilterUtilities.tsx",
+          "components/drawers/filter/HandleRender.tsx",
+          "components/drawers/FilterDrawer.tsx",
+          "components/drawers/tech/colors.ts",
+          "components/drawers/tech/components/ScrollableDiv.tsx",
+          "components/drawers/tech/components/TechItem.tsx",
+          "components/drawers/tech/TechList.tsx",
+          "components/header/AppMobileHeader.tsx",
+          "components/header/components/UNDPLogo.tsx",
+          "components/header/components/UNLogo.tsx",
+          "components/infoCard/InfoCard.tsx",
+          "components/lists/components/BlipList.tsx",
+          "components/lists/components/BlipListMui.tsx",
+          "components/lists/components/ScrollableDiv.tsx",
+          "components/lists/components/Title.tsx",
+          "components/lists/quadrant/HorizonItem.tsx",
+          "components/lists/quadrant/HorizonItemMui.tsx",
+          "components/lists/quadrant/Item.tsx",
+          "components/lists/quadrant/QuadrantHorizonList.tsx",
+          "components/lists/quadrant/ShowIcon.tsx",
+          "components/navbar/AppBottomNav.tsx",
+          "components/navbar/AppLeftNav.tsx",
+          "components/navbar/components/CloseIcon.tsx",
+          "components/navbar/components/Logo.tsx",
+          "components/navbar/components/MenuIcon.tsx",
+          "components/navbar/components/MenuItem.tsx",
+          "components/navbar/components/UNDPLogo.tsx",
+          "components/navbar/components/UNLogo.tsx",
+          "components/navbar/MenuLinks.tsx",
+          "components/navbar/MenuToggle.tsx",
+          "components/pageDetails/PageDetails.tsx",
+          "components/PopOver.tsx",
+          "components/projectPreview/ProjectPreviewCard.tsx",
+          "components/projectsCollection/ProjectsCollection.tsx",
+          "components/radar/HowToPopup.tsx",
+          "components/shared/filter/Filter.tsx",
+          "components/shared/filter/FilterComponent.tsx",
+          "components/shared/filter/FilterItems.tsx",
+          "components/shared/filter/MultiSelectFilter.tsx",
+          "components/shared/genericButton/GenericButton.tsx",
+          "components/shared/image/Image.tsx",
+          "components/shared/projectBadges/ProjectBadges.tsx",
+          "components/views/blip/BlipView.tsx",
+          "components/views/ContentView.tsx",
+          "components/views/FilterTechNavView.tsx"
+        ]
+      },
+      "pages": {
+        "source_files": 45,
+        "sources": [
+          "pages/about/About.tsx",
+          "pages/about/AboutContent.ts",
+          "pages/about/AboutOrganization.tsx",
+          "pages/disasters/DisasterEvent.tsx",
+          "pages/disasters/DisasterEvents.tsx",
+          "pages/disasters/Disasters.tsx",
+          "pages/eventAction/EventAction.tsx",
+          "pages/Home.tsx",
+          "pages/homePage/components/HomeCard.tsx",
+          "pages/homePage/components/HomeCardMini.tsx",
+          "pages/homePage/components/RecentDisasterCardMini.tsx",
+          "pages/homePage/components/RecentDisasters.tsx",
+          "pages/homePage/helpers.ts",
+          "pages/homePage/HomePage.tsx",
+          "pages/infoAction/InfoAction.tsx",
+          "pages/infoDetails/InfoDetails.tsx",
+          "pages/map-view/helpers.tsx",
+          "pages/map-view/ProjectSlider.tsx",
+          "pages/map-view/RadarMapView.tsx",
+          "pages/NotFound404.tsx",
+          "pages/projectAction/helpers.ts",
+          "pages/projectAction/ProjectAction.tsx",
+          "pages/projectAction/SelectMultiple.tsx",
+          "pages/projects/projectComponent/Project.tsx",
+          "pages/projects/projectDetails/ProjectDetails.tsx",
+          "pages/projects/projectOverlay/projectOverlay.tsx",
+          "pages/projects/ProjectsList.tsx",
+          "pages/projects/reviewProjects/ReviewProjects.tsx",
+          "pages/projectsRadar/ProjectsRadar.tsx",
+          "pages/Radar.tsx",
+          "pages/search/Pagination.tsx",
+          "pages/search/Search.tsx",
+          "pages/search/SearchBar.tsx",
+          "pages/search/SearchResult.tsx",
+          "pages/search/SearchView.tsx",
+          "pages/technologies/Technologies.tsx",
+          "pages/users/register/Register.tsx",
+          "pages/users/signIn/SignIn.tsx",
+          "pages/views/OutletContext.ts",
+          "pages/views/PopOverView.tsx",
+          "pages/views/QuadrantView.tsx",
+          "pages/views/RadarView.tsx",
+          "pages/volunteers/VolunteerContent.ts",
+          "pages/volunteers/VolunteerOrganization.tsx",
+          "pages/volunteers/Volunteers.tsx"
+        ],
+        "unit_test_files": 5,
+        "integration_test_files": 25,
+        "unit_covered": 6,
+        "integration_covered": 37,
+        "unit_file_coverage_pct": 13.3,
+        "integration_file_coverage_pct": 82.2,
+        "unit_uncovered": [
+          "pages/about/About.tsx",
+          "pages/about/AboutContent.ts",
+          "pages/about/AboutOrganization.tsx",
+          "pages/disasters/DisasterEvent.tsx",
+          "pages/disasters/DisasterEvents.tsx",
+          "pages/disasters/Disasters.tsx",
+          "pages/eventAction/EventAction.tsx",
+          "pages/Home.tsx",
+          "pages/homePage/components/HomeCard.tsx",
+          "pages/homePage/components/HomeCardMini.tsx",
+          "pages/homePage/components/RecentDisasterCardMini.tsx",
+          "pages/homePage/components/RecentDisasters.tsx",
+          "pages/homePage/HomePage.tsx",
+          "pages/infoAction/InfoAction.tsx",
+          "pages/infoDetails/InfoDetails.tsx",
+          "pages/map-view/RadarMapView.tsx",
+          "pages/NotFound404.tsx",
+          "pages/projectAction/ProjectAction.tsx",
+          "pages/projects/projectComponent/Project.tsx",
+          "pages/projects/projectDetails/ProjectDetails.tsx",
+          "pages/projects/projectOverlay/projectOverlay.tsx",
+          "pages/projects/ProjectsList.tsx",
+          "pages/projects/reviewProjects/ReviewProjects.tsx",
+          "pages/projectsRadar/ProjectsRadar.tsx",
+          "pages/Radar.tsx",
+          "pages/search/Pagination.tsx",
+          "pages/search/Search.tsx",
+          "pages/search/SearchBar.tsx",
+          "pages/search/SearchResult.tsx",
+          "pages/search/SearchView.tsx",
+          "pages/technologies/Technologies.tsx",
+          "pages/users/register/Register.tsx",
+          "pages/users/signIn/SignIn.tsx",
+          "pages/views/OutletContext.ts",
+          "pages/views/QuadrantView.tsx",
+          "pages/views/RadarView.tsx",
+          "pages/volunteers/VolunteerContent.ts",
+          "pages/volunteers/VolunteerOrganization.tsx",
+          "pages/volunteers/Volunteers.tsx"
+        ],
+        "integration_uncovered": [
+          "pages/disasters/DisasterEvent.tsx",
+          "pages/Home.tsx",
+          "pages/homePage/helpers.ts",
+          "pages/map-view/helpers.tsx",
+          "pages/map-view/ProjectSlider.tsx",
+          "pages/projectAction/SelectMultiple.tsx",
+          "pages/projectsRadar/ProjectsRadar.tsx",
+          "pages/views/OutletContext.ts"
+        ]
+      },
+      "helpers": {
+        "source_files": 7,
+        "sources": [
+          "helpers/apiClient.ts",
+          "helpers/databaseClient.tsx",
+          "helpers/dataUtils.ts",
+          "helpers/Loader.tsx",
+          "helpers/locationUtils.ts",
+          "helpers/ProjectForm.tsx",
+          "helpers/ProjectFormFields.tsx"
+        ],
+        "unit_test_files": 6,
+        "integration_test_files": 0,
+        "unit_covered": 6,
+        "integration_covered": 2,
+        "unit_file_coverage_pct": 85.7,
+        "integration_file_coverage_pct": 28.6,
+        "unit_uncovered": [
+          "helpers/databaseClient.tsx"
+        ],
+        "integration_uncovered": [
+          "helpers/databaseClient.tsx",
+          "helpers/Loader.tsx",
+          "helpers/locationUtils.ts",
+          "helpers/ProjectForm.tsx",
+          "helpers/ProjectFormFields.tsx"
+        ]
+      },
+      "radar": {
+        "source_files": 6,
+        "sources": [
+          "radar/components/BackButton.tsx",
+          "radar/components/svg-hover/HorizonsNameComp.tsx",
+          "radar/components/svg-hover/QuadrantNameComp.tsx",
+          "radar/components/WaitingForRadar.tsx",
+          "radar/RadarProvider.tsx",
+          "radar/tech/TechDescription.tsx"
+        ],
+        "unit_test_files": 3,
+        "integration_test_files": 0,
+        "unit_covered": 6,
+        "integration_covered": 0,
+        "unit_file_coverage_pct": 100,
+        "integration_file_coverage_pct": 0,
+        "unit_uncovered": [],
+        "integration_uncovered": [
+          "radar/components/BackButton.tsx",
+          "radar/components/svg-hover/HorizonsNameComp.tsx",
+          "radar/components/svg-hover/QuadrantNameComp.tsx",
+          "radar/components/WaitingForRadar.tsx",
+          "radar/RadarProvider.tsx",
+          "radar/tech/TechDescription.tsx"
+        ]
+      },
+      "ui": {
+        "source_files": 3,
+        "sources": [
+          "ui/AppUiProvider.tsx",
+          "ui/ColorModeSwitcher.tsx",
+          "ui/MainLayout.tsx"
+        ],
+        "unit_test_files": 3,
+        "integration_test_files": 0,
+        "unit_covered": 3,
+        "integration_covered": 0,
+        "unit_file_coverage_pct": 100,
+        "integration_file_coverage_pct": 0,
+        "unit_uncovered": [],
+        "integration_uncovered": [
+          "ui/AppUiProvider.tsx",
+          "ui/ColorModeSwitcher.tsx",
+          "ui/MainLayout.tsx"
+        ]
+      },
+      "layouts": {
+        "source_files": 2,
+        "sources": [
+          "layouts/MapViewLayout.tsx",
+          "layouts/RadarLayout.tsx"
+        ],
+        "unit_test_files": 1,
+        "integration_test_files": 0,
+        "unit_covered": 2,
+        "integration_covered": 0,
+        "unit_file_coverage_pct": 100,
+        "integration_file_coverage_pct": 0,
+        "unit_uncovered": [],
+        "integration_uncovered": [
+          "layouts/MapViewLayout.tsx",
+          "layouts/RadarLayout.tsx"
+        ]
+      },
+      "navigation": {
+        "source_files": 3,
+        "sources": [
+          "navigation/AppNav.tsx",
+          "navigation/context.tsx",
+          "navigation/routes.ts"
+        ],
+        "unit_test_files": 0,
+        "integration_test_files": 1,
+        "unit_covered": 2,
+        "integration_covered": 3,
+        "unit_file_coverage_pct": 66.7,
+        "integration_file_coverage_pct": 100,
+        "unit_uncovered": [
+          "navigation/AppNav.tsx"
+        ],
+        "integration_uncovered": []
+      },
+      "root": {
+        "source_files": 3,
+        "sources": [
+          "App.tsx",
+          "index.tsx",
+          "Logo.tsx"
+        ],
+        "unit_test_files": 1,
+        "integration_test_files": 1,
+        "unit_covered": 1,
+        "integration_covered": 1,
+        "unit_file_coverage_pct": 33.3,
+        "integration_file_coverage_pct": 33.3,
+        "unit_uncovered": [
+          "App.tsx",
+          "index.tsx"
+        ],
+        "integration_uncovered": [
+          "index.tsx",
+          "Logo.tsx"
+        ]
+      }
+    },
+    "health": [],
+    "cypress_specs": [
+      "cypress/e2e/create-disaster-event.cy.ts",
+      "cypress/e2e/create-disaster.cy.ts",
+      "cypress/e2e/create-project.cy.ts",
+      "cypress/e2e/create-technology.cy.ts",
+      "cypress/e2e/delete-flows.cy.ts",
+      "cypress/e2e/edit-disaster-event.cy.ts",
+      "cypress/e2e/edit-disaster.cy.ts",
+      "cypress/e2e/edit-project.cy.ts",
+      "cypress/e2e/edit-technology.cy.ts",
+      "cypress/e2e/home-browse.cy.ts",
+      "cypress/e2e/map-view-browse.cy.ts",
+      "cypress/e2e/radar-navigation.cy.ts",
+      "cypress/e2e/register-user.cy.ts",
+      "cypress/e2e/review-approve-project.cy.ts",
+      "cypress/e2e/search-project-detail.cy.ts",
+      "cypress/e2e/sign-in.cy.ts"
     ]
   },
-  "unitByScope": {
-    "root": {
-      "source": 3,
-      "covered": 0,
-      "tests": 0,
-      "uncovered": [
-        "src/App.tsx",
-        "src/index.tsx",
-        "src/Logo.tsx"
-      ]
-    },
-    "components": {
-      "source": 51,
-      "covered": 51,
-      "tests": 46,
-      "uncovered": []
-    },
-    "helpers": {
-      "source": 7,
-      "covered": 6,
-      "tests": 6,
-      "uncovered": [
-        "src/helpers/databaseClient.tsx"
-      ]
-    },
-    "layouts": {
-      "source": 2,
-      "covered": 2,
-      "tests": 1,
-      "uncovered": []
-    },
-    "navigation": {
-      "source": 3,
-      "covered": 2,
-      "tests": 0,
-      "uncovered": [
-        "src/navigation/AppNav.tsx"
-      ]
-    },
-    "pages": {
-      "source": 45,
-      "covered": 9,
-      "tests": 4,
-      "uncovered": [
-        "src/pages/about/About.tsx",
-        "src/pages/about/AboutContent.ts",
-        "src/pages/about/AboutOrganization.tsx",
-        "src/pages/disasters/DisasterEvent.tsx",
-        "src/pages/disasters/DisasterEvents.tsx",
-        "src/pages/disasters/Disasters.tsx",
-        "src/pages/eventAction/EventAction.tsx",
-        "src/pages/Home.tsx",
-        "src/pages/homePage/HomePage.tsx",
-        "src/pages/infoAction/InfoAction.tsx",
-        "src/pages/infoDetails/InfoDetails.tsx",
-        "src/pages/map-view/RadarMapView.tsx",
-        "src/pages/NotFound404.tsx",
-        "src/pages/projectAction/ProjectAction.tsx",
-        "src/pages/projectAction/SelectMultiple.tsx",
-        "src/pages/projects/projectComponent/Project.tsx",
-        "src/pages/projects/projectDetails/ProjectDetails.tsx",
-        "src/pages/projects/projectOverlay/projectOverlay.tsx",
-        "src/pages/projects/ProjectsList.tsx",
-        "src/pages/projects/reviewProjects/ReviewProjects.tsx",
-        "src/pages/projectsRadar/ProjectsRadar.tsx",
-        "src/pages/Radar.tsx",
-        "src/pages/search/Pagination.tsx",
-        "src/pages/search/Search.tsx",
-        "src/pages/search/SearchBar.tsx",
-        "src/pages/search/SearchResult.tsx",
-        "src/pages/search/SearchView.tsx",
-        "src/pages/technologies/Technologies.tsx",
-        "src/pages/users/register/Register.tsx",
-        "src/pages/users/signIn/SignIn.tsx",
-        "src/pages/views/OutletContext.ts",
-        "src/pages/views/QuadrantView.tsx",
-        "src/pages/views/RadarView.tsx",
-        "src/pages/volunteers/VolunteerContent.ts",
-        "src/pages/volunteers/VolunteerOrganization.tsx",
-        "src/pages/volunteers/Volunteers.tsx"
-      ]
-    },
-    "radar": {
-      "source": 6,
-      "covered": 6,
-      "tests": 3,
-      "uncovered": []
-    },
-    "ui": {
-      "source": 3,
-      "covered": 3,
-      "tests": 3,
-      "uncovered": []
-    }
-  },
-  "integByScope": {
-    "root": {
-      "source": 3,
-      "covered": 1,
-      "tests": 1,
-      "uncovered": [
-        "src/App.tsx",
-        "src/index.tsx"
-      ]
-    },
-    "components": {
-      "source": 51,
-      "covered": 2,
-      "tests": 0,
-      "uncovered": [
-        "src/components/drawers/components/LittleDrawer.tsx",
-        "src/components/drawers/components/LittleDrawerIconButton.tsx",
-        "src/components/drawers/filter/AppRanderSlider.tsx",
-        "src/components/drawers/filter/CustomFilter.tsx",
-        "src/components/drawers/filter/FilterConstants.ts",
-        "src/components/drawers/filter/FilterUtilities.tsx",
-        "src/components/drawers/filter/HandleRender.tsx",
-        "src/components/drawers/FilterDrawer.tsx",
-        "src/components/drawers/tech/components/ScrollableDiv.tsx",
-        "src/components/drawers/tech/components/TechItem.tsx",
-        "src/components/drawers/tech/TechList.tsx",
-        "src/components/header/AppMobileHeader.tsx",
-        "src/components/header/components/UNDPLogo.tsx",
-        "src/components/header/components/UNLogo.tsx",
-        "src/components/infoCard/InfoCard.tsx",
-        "src/components/lists/components/BlipList.tsx",
-        "src/components/lists/components/BlipListMui.tsx",
-        "src/components/lists/components/ScrollableDiv.tsx",
-        "src/components/lists/components/Title.tsx",
-        "src/components/lists/quadrant/HorizonItem.tsx",
-        "src/components/lists/quadrant/HorizonItemMui.tsx",
-        "src/components/lists/quadrant/Item.tsx",
-        "src/components/lists/quadrant/QuadrantHorizonList.tsx",
-        "src/components/lists/quadrant/ShowIcon.tsx",
-        "src/components/navbar/AppBottomNav.tsx",
-        "src/components/navbar/AppLeftNav.tsx",
-        "src/components/navbar/components/CloseIcon.tsx",
-        "src/components/navbar/components/Logo.tsx",
-        "src/components/navbar/components/MenuIcon.tsx",
-        "src/components/navbar/components/MenuItem.tsx",
-        "src/components/navbar/components/UNDPLogo.tsx",
-        "src/components/navbar/components/UNLogo.tsx",
-        "src/components/navbar/MenuLinks.tsx",
-        "src/components/navbar/MenuToggle.tsx",
-        "src/components/pageDetails/PageDetails.tsx",
-        "src/components/PopOver.tsx",
-        "src/components/projectPreview/ProjectPreviewCard.tsx",
-        "src/components/projectsCollection/ProjectsCollection.tsx",
-        "src/components/radar/HowToPopup.tsx",
-        "src/components/shared/filter/Filter.tsx",
-        "src/components/shared/filter/FilterComponent.tsx",
-        "src/components/shared/filter/FilterItems.tsx",
-        "src/components/shared/filter/MultiSelectFilter.tsx",
-        "src/components/shared/genericButton/GenericButton.tsx",
-        "src/components/shared/image/Image.tsx",
-        "src/components/shared/projectBadges/ProjectBadges.tsx",
-        "src/components/views/blip/BlipView.tsx",
-        "src/components/views/ContentView.tsx",
-        "src/components/views/FilterTechNavView.tsx"
-      ]
-    },
-    "helpers": {
-      "source": 7,
-      "covered": 2,
-      "tests": 0,
-      "uncovered": [
-        "src/helpers/databaseClient.tsx",
-        "src/helpers/Loader.tsx",
-        "src/helpers/locationUtils.ts",
-        "src/helpers/ProjectForm.tsx",
-        "src/helpers/ProjectFormFields.tsx"
-      ]
-    },
-    "layouts": {
-      "source": 2,
-      "covered": 0,
-      "tests": 0,
-      "uncovered": [
-        "src/layouts/MapViewLayout.tsx",
-        "src/layouts/RadarLayout.tsx"
-      ]
-    },
-    "navigation": {
-      "source": 3,
-      "covered": 3,
-      "tests": 1,
-      "uncovered": []
-    },
-    "pages": {
-      "source": 45,
-      "covered": 35,
-      "tests": 26,
-      "uncovered": [
-        "src/pages/disasters/DisasterEvent.tsx",
-        "src/pages/Home.tsx",
-        "src/pages/homePage/components/HomeCard.tsx",
-        "src/pages/homePage/components/HomeCardMini.tsx",
-        "src/pages/homePage/components/RecentDisasterCardMini.tsx",
-        "src/pages/homePage/components/RecentDisasters.tsx",
-        "src/pages/homePage/helpers.ts",
-        "src/pages/map-view/helpers.tsx",
-        "src/pages/projectsRadar/ProjectsRadar.tsx",
-        "src/pages/views/OutletContext.ts"
-      ]
-    },
-    "radar": {
-      "source": 6,
-      "covered": 0,
-      "tests": 0,
-      "uncovered": [
-        "src/radar/components/BackButton.tsx",
-        "src/radar/components/svg-hover/HorizonsNameComp.tsx",
-        "src/radar/components/svg-hover/QuadrantNameComp.tsx",
-        "src/radar/components/WaitingForRadar.tsx",
-        "src/radar/RadarProvider.tsx",
-        "src/radar/tech/TechDescription.tsx"
-      ]
-    },
-    "ui": {
-      "source": 3,
-      "covered": 0,
-      "tests": 0,
-      "uncovered": [
-        "src/ui/AppUiProvider.tsx",
-        "src/ui/ColorModeSwitcher.tsx",
-        "src/ui/MainLayout.tsx"
-      ]
-    }
-  },
-  "unitUncovered": [
-    "src/App.tsx",
-    "src/helpers/databaseClient.tsx",
-    "src/index.tsx",
-    "src/Logo.tsx",
-    "src/navigation/AppNav.tsx",
-    "src/pages/about/About.tsx",
-    "src/pages/about/AboutContent.ts",
-    "src/pages/about/AboutOrganization.tsx",
-    "src/pages/disasters/DisasterEvent.tsx",
-    "src/pages/disasters/DisasterEvents.tsx",
-    "src/pages/disasters/Disasters.tsx",
-    "src/pages/eventAction/EventAction.tsx",
-    "src/pages/Home.tsx",
-    "src/pages/homePage/HomePage.tsx",
-    "src/pages/infoAction/InfoAction.tsx",
-    "src/pages/infoDetails/InfoDetails.tsx",
-    "src/pages/map-view/RadarMapView.tsx",
-    "src/pages/NotFound404.tsx",
-    "src/pages/projectAction/ProjectAction.tsx",
-    "src/pages/projectAction/SelectMultiple.tsx",
-    "src/pages/projects/projectComponent/Project.tsx",
-    "src/pages/projects/projectDetails/ProjectDetails.tsx",
-    "src/pages/projects/projectOverlay/projectOverlay.tsx",
-    "src/pages/projects/ProjectsList.tsx",
-    "src/pages/projects/reviewProjects/ReviewProjects.tsx",
-    "src/pages/projectsRadar/ProjectsRadar.tsx",
-    "src/pages/Radar.tsx",
-    "src/pages/search/Pagination.tsx",
-    "src/pages/search/Search.tsx",
-    "src/pages/search/SearchBar.tsx",
-    "src/pages/search/SearchResult.tsx",
-    "src/pages/search/SearchView.tsx",
-    "src/pages/technologies/Technologies.tsx",
-    "src/pages/users/register/Register.tsx",
-    "src/pages/users/signIn/SignIn.tsx",
-    "src/pages/views/OutletContext.ts",
-    "src/pages/views/QuadrantView.tsx",
-    "src/pages/views/RadarView.tsx",
-    "src/pages/volunteers/VolunteerContent.ts",
-    "src/pages/volunteers/VolunteerOrganization.tsx",
-    "src/pages/volunteers/Volunteers.tsx"
-  ],
-  "integUncovered": [
-    "src/App.tsx",
-    "src/components/drawers/components/LittleDrawer.tsx",
-    "src/components/drawers/components/LittleDrawerIconButton.tsx",
-    "src/components/drawers/filter/AppRanderSlider.tsx",
-    "src/components/drawers/filter/CustomFilter.tsx",
-    "src/components/drawers/filter/FilterConstants.ts",
-    "src/components/drawers/filter/FilterUtilities.tsx",
-    "src/components/drawers/filter/HandleRender.tsx",
-    "src/components/drawers/FilterDrawer.tsx",
-    "src/components/drawers/tech/components/ScrollableDiv.tsx",
-    "src/components/drawers/tech/components/TechItem.tsx",
-    "src/components/drawers/tech/TechList.tsx",
-    "src/components/header/AppMobileHeader.tsx",
-    "src/components/header/components/UNDPLogo.tsx",
-    "src/components/header/components/UNLogo.tsx",
-    "src/components/infoCard/InfoCard.tsx",
-    "src/components/lists/components/BlipList.tsx",
-    "src/components/lists/components/BlipListMui.tsx",
-    "src/components/lists/components/ScrollableDiv.tsx",
-    "src/components/lists/components/Title.tsx",
-    "src/components/lists/quadrant/HorizonItem.tsx",
-    "src/components/lists/quadrant/HorizonItemMui.tsx",
-    "src/components/lists/quadrant/Item.tsx",
-    "src/components/lists/quadrant/QuadrantHorizonList.tsx",
-    "src/components/lists/quadrant/ShowIcon.tsx",
-    "src/components/navbar/AppBottomNav.tsx",
-    "src/components/navbar/AppLeftNav.tsx",
-    "src/components/navbar/components/CloseIcon.tsx",
-    "src/components/navbar/components/Logo.tsx",
-    "src/components/navbar/components/MenuIcon.tsx",
-    "src/components/navbar/components/MenuItem.tsx",
-    "src/components/navbar/components/UNDPLogo.tsx",
-    "src/components/navbar/components/UNLogo.tsx",
-    "src/components/navbar/MenuLinks.tsx",
-    "src/components/navbar/MenuToggle.tsx",
-    "src/components/pageDetails/PageDetails.tsx",
-    "src/components/PopOver.tsx",
-    "src/components/projectPreview/ProjectPreviewCard.tsx",
-    "src/components/projectsCollection/ProjectsCollection.tsx",
-    "src/components/radar/HowToPopup.tsx",
-    "src/components/shared/filter/Filter.tsx",
-    "src/components/shared/filter/FilterComponent.tsx",
-    "src/components/shared/filter/FilterItems.tsx",
-    "src/components/shared/filter/MultiSelectFilter.tsx",
-    "src/components/shared/genericButton/GenericButton.tsx",
-    "src/components/shared/image/Image.tsx",
-    "src/components/shared/projectBadges/ProjectBadges.tsx",
-    "src/components/views/blip/BlipView.tsx",
-    "src/components/views/ContentView.tsx",
-    "src/components/views/FilterTechNavView.tsx",
-    "src/helpers/databaseClient.tsx",
-    "src/helpers/Loader.tsx",
-    "src/helpers/locationUtils.ts",
-    "src/helpers/ProjectForm.tsx",
-    "src/helpers/ProjectFormFields.tsx",
-    "src/index.tsx",
-    "src/layouts/MapViewLayout.tsx",
-    "src/layouts/RadarLayout.tsx",
-    "src/pages/disasters/DisasterEvent.tsx",
-    "src/pages/Home.tsx",
-    "src/pages/homePage/components/HomeCard.tsx",
-    "src/pages/homePage/components/HomeCardMini.tsx",
-    "src/pages/homePage/components/RecentDisasterCardMini.tsx",
-    "src/pages/homePage/components/RecentDisasters.tsx",
-    "src/pages/homePage/helpers.ts",
-    "src/pages/map-view/helpers.tsx",
-    "src/pages/projectsRadar/ProjectsRadar.tsx",
-    "src/pages/views/OutletContext.ts",
-    "src/radar/components/BackButton.tsx",
-    "src/radar/components/svg-hover/HorizonsNameComp.tsx",
-    "src/radar/components/svg-hover/QuadrantNameComp.tsx",
-    "src/radar/components/WaitingForRadar.tsx",
-    "src/radar/RadarProvider.tsx",
-    "src/radar/tech/TechDescription.tsx",
-    "src/ui/AppUiProvider.tsx",
-    "src/ui/ColorModeSwitcher.tsx",
-    "src/ui/MainLayout.tsx"
-  ],
-  "unitTests": [
-    "src/components/drawers/components/LittleDrawer.test.tsx",
-    "src/components/drawers/filter/AppRanderSlider.test.tsx",
-    "src/components/drawers/filter/CustomFilter.test.tsx",
-    "src/components/drawers/filter/FilterDrawer.test.tsx",
-    "src/components/drawers/filter/FilterUtilities.test.ts",
-    "src/components/drawers/filter/HandleRender.test.tsx",
-    "src/components/drawers/FilterDrawer.test.tsx",
-    "src/components/drawers/tech/components/ScrollableDiv.test.tsx",
-    "src/components/drawers/tech/components/TechItem.test.tsx",
-    "src/components/drawers/tech/TechList.test.tsx",
-    "src/components/header/AppMobileHeader.test.tsx",
-    "src/components/infoCard/InfoCard.test.tsx",
-    "src/components/lists/components/BlipList.test.tsx",
-    "src/components/lists/components/BlipListMui.test.tsx",
-    "src/components/lists/components/ScrollableDiv.test.tsx",
-    "src/components/lists/components/Title.test.tsx",
-    "src/components/lists/quadrant/HorizonItem.test.tsx",
-    "src/components/lists/quadrant/HorizonItemMui.test.tsx",
-    "src/components/lists/quadrant/Item.test.tsx",
-    "src/components/lists/quadrant/QuadrantHorizonList.test.tsx",
-    "src/components/lists/quadrant/ShowIcon.test.tsx",
-    "src/components/navbar/AppBottomNav.test.tsx",
-    "src/components/navbar/AppLeftNav.test.tsx",
-    "src/components/navbar/components/CloseIcon.test.tsx",
-    "src/components/navbar/components/Logos.test.tsx",
-    "src/components/navbar/components/MenuIcon.test.tsx",
-    "src/components/navbar/components/MenuItem.test.tsx",
-    "src/components/navbar/MenuToggle.test.tsx",
-    "src/components/pageDetails/PageDetails.test.tsx",
-    "src/components/PopOver.test.tsx",
-    "src/components/projectPreview/ProjectPreviewCard.test.tsx",
-    "src/components/projectsCollection/ProjectsCollection.test.tsx",
-    "src/components/radar/HowToAndSvg.test.tsx",
-    "src/components/shared/filter/Filter.test.tsx",
-    "src/components/shared/filter/FilterComponent.test.tsx",
-    "src/components/shared/filter/FilterItems.test.tsx",
-    "src/components/shared/genericButton/GenericButton.test.tsx",
-    "src/components/shared/helpers/auth.test.ts",
-    "src/components/shared/helpers/HelperUtils.test.ts",
-    "src/components/shared/helpers/HelperUtils_2.test.ts",
-    "src/components/shared/helpers/HelperUtils_3.test.ts",
-    "src/components/shared/image/Image.test.tsx",
-    "src/components/shared/projectBadges/ProjectBadges.test.tsx",
-    "src/components/views/blip/BlipView.test.tsx",
-    "src/components/views/ContentView.test.tsx",
-    "src/components/views/FilterTechNavView.test.tsx",
-    "src/helpers/apiClient.test.ts",
-    "src/helpers/dataUtils.test.ts",
-    "src/helpers/Loader.test.tsx",
-    "src/helpers/locationUtils.test.ts",
-    "src/helpers/ProjectForm.test.tsx",
-    "src/helpers/ProjectFormFields.test.tsx",
-    "src/layouts/Layouts.test.tsx",
-    "src/pages/homePage/components/HomeCards.test.tsx",
-    "src/pages/homePage/helpers.test.ts",
-    "src/pages/map-view/helpers.test.tsx",
-    "src/pages/projectAction/helpers.test.ts",
-    "src/radar/components/RadarShell.test.tsx",
-    "src/radar/RadarProvider.test.tsx",
-    "src/radar/tech/TechDescription.test.tsx",
-    "src/ui/AppUiProvider.test.tsx",
-    "src/ui/ColorModeSwitcher.test.tsx",
-    "src/ui/MainLayout.test.tsx"
-  ],
-  "integTests": [
-    "src/Logo.test.tsx",
-    "src/navigation/AppNav.test.tsx",
-    "src/pages/about/About.test.tsx",
-    "src/pages/disasters/DisasterEvents.test.tsx",
-    "src/pages/disasters/Disasters.test.tsx",
-    "src/pages/eventAction/EventAction.test.tsx",
-    "src/pages/homePage/HomePage.test.tsx",
-    "src/pages/infoAction/InfoAction.test.tsx",
-    "src/pages/infoDetails/InfoDetails.test.tsx",
-    "src/pages/map-view/ProjectSlider.test.tsx",
-    "src/pages/map-view/RadarMapView.test.tsx",
-    "src/pages/NotFound404.test.tsx",
-    "src/pages/projectAction/ProjectAction.test.tsx",
-    "src/pages/projectAction/SelectMultiple.test.tsx",
-    "src/pages/projects/projectComponent/Project.test.tsx",
-    "src/pages/projects/projectDetails/ProjectDetails.test.tsx",
-    "src/pages/projects/projectOverlay/projectOverlay.test.tsx",
-    "src/pages/projects/ProjectsList.test.tsx",
-    "src/pages/projects/reviewProjects/ReviewProjects.test.tsx",
-    "src/pages/Radar.test.tsx",
-    "src/pages/search/Search.test.tsx",
-    "src/pages/technologies/Technologies.test.tsx",
-    "src/pages/users/register/Register.test.tsx",
-    "src/pages/users/signIn/SignIn.test.tsx",
-    "src/pages/views/PopOverView.test.tsx",
-    "src/pages/views/QuadrantView.test.tsx",
-    "src/pages/views/RadarView.test.tsx",
-    "src/pages/volunteers/Volunteers.test.tsx"
-  ],
-  "testHealth": [
-    {
-      "file": "src/components/lists/components/Title.test.tsx",
-      "obs": "No it() blocks detected"
-    },
-    {
-      "file": "src/components/lists/quadrant/QuadrantHorizonList.test.tsx",
-      "obs": "No it() blocks detected"
-    },
-    {
-      "file": "src/components/lists/quadrant/ShowIcon.test.tsx",
-      "obs": "No it() blocks detected"
-    },
-    {
-      "file": "src/components/navbar/components/CloseIcon.test.tsx",
-      "obs": "Smoke-only / trivial render checks dominate"
-    },
-    {
-      "file": "src/components/navbar/components/MenuItem.test.tsx",
-      "obs": "No it() blocks detected"
-    },
-    {
-      "file": "src/pages/homePage/helpers.test.ts",
-      "obs": "Smoke-only / trivial render checks dominate"
-    },
-    {
-      "file": "src/pages/views/RadarView.test.tsx",
-      "obs": "No it() blocks detected"
-    }
-  ]
+  "api": {
+    "total_source_files": 1,
+    "sources": [
+      "api.js"
+    ],
+    "test_files": [
+      "tests/api/api.test.js"
+    ],
+    "unit_test_files": 0,
+    "integration_test_files": 1,
+    "unit_file_coverage_pct": 0,
+    "integration_file_coverage_pct": 100
+  }
 }

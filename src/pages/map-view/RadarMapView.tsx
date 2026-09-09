@@ -150,6 +150,11 @@ export const RadarMapView: React.FC = () => {
                   fillColor={'#2B6CB0'}
                   stroke={false}
                   fillOpacity={1}
+                  aria-label={`${countryName}${
+                    blipDetails[1].length > 1
+                      ? `: ${blipDetails[1].length} Projects`
+                      : ''
+                  }`}
                 >
                   <Popup
                     eventHandlers={{

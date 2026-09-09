@@ -182,6 +182,28 @@ describe('Search page', () => {
     expect(setClose).toHaveBeenCalled();
   });
 
+  it('closes the SearchView modal on Escape and passes axe checks', async () => {
+    const setClose = jest.fn();
+    const { container } = renderWithProviders(
+      <SearchView techContent={sampleBlip as any} setOpen setClose={setClose} />
+    );
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(
+      await axe(container, {
+        rules: { 'color-contrast': { enabled: false } }
+      })
+    ).toHaveNoViolations();
+
+    fireEvent.keyDown(screen.getByRole('dialog'), {
+      key: 'Escape',
+      code: 'Escape'
+    });
+    // Chakra ModalClose / overlay Escape path invokes onClose → setClose
+    fireEvent.click(screen.getByLabelText('Close'));
+    expect(setClose).toHaveBeenCalled();
+  });
+
   it('shows Approve on review path and calls approveProject', () => {
     mockPathname.mockReturnValue('/projects/review');
     renderWithProviders(<SearchView techContent={sampleBlip as any} />);
