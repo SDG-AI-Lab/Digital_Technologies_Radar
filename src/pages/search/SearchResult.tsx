@@ -75,7 +75,7 @@ export const SearchResult: React.FC<SearchResultProps> = (
                           h='100%'
                           src={`${value['Image Url']}`}
                           fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
-                          alt='Default Image'
+                          alt='Project image'
                         />
                       </Stack>
                       <Text color={'gray.500'} height={170} overflow={'hidden'}>

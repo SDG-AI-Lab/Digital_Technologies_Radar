@@ -1,8 +1,15 @@
-import { clearSession, isAdmin, isSignedIn } from './auth';
+import {
+  clearSession,
+  getAccessToken,
+  isAdmin,
+  isSignedIn,
+  setSession
+} from './auth';
 
 describe('auth helpers', () => {
   beforeEach(() => {
     localStorage.clear();
+    sessionStorage.clear();
   });
 
   it('reports signed out when no access token is stored', () => {
@@ -11,45 +18,53 @@ describe('auth helpers', () => {
   });
 
   it('reports signed out for an empty token string', () => {
-    localStorage.setItem('drr-access-token', '');
+    sessionStorage.setItem('drr-access-token', '');
     expect(isSignedIn()).toBe(false);
     expect(isAdmin()).toBe(false);
   });
 
   it('reports signed in when an access token is present', () => {
-    localStorage.setItem('drr-access-token', 'tok');
+    setSession('tok', 'user');
     expect(isSignedIn()).toBe(true);
     expect(isAdmin()).toBe(false);
+    expect(getAccessToken()).toBe('tok');
   });
 
-  it('reports admin only when token and admin user id are present', () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'admin');
+  it('reports admin only when token and admin role are present', () => {
+    setSession('tok', 'admin');
     expect(isSignedIn()).toBe(true);
     expect(isAdmin()).toBe(true);
   });
 
-  it('does not treat a non-admin user id as admin', () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'user-123');
+  it('does not treat a non-admin role as admin', () => {
+    setSession('tok', 'user-123');
     expect(isAdmin()).toBe(false);
   });
 
-  it('does not treat admin id alone as admin without a token', () => {
-    localStorage.setItem('drr-current-user-id', 'admin');
+  it('does not treat admin role alone as admin without a token', () => {
+    sessionStorage.setItem('drr-current-user-id', 'admin');
     expect(isSignedIn()).toBe(false);
     expect(isAdmin()).toBe(false);
   });
 
-  it('clears the session keys', () => {
-    localStorage.setItem('drr-access-token', 'tok');
+  it('migrates legacy localStorage tokens into sessionStorage', () => {
+    localStorage.setItem('drr-access-token', 'legacy-tok');
     localStorage.setItem('drr-current-user-id', 'admin');
+
+    expect(isAdmin()).toBe(true);
+    expect(sessionStorage.getItem('drr-access-token')).toBe('legacy-tok');
+    expect(localStorage.getItem('drr-access-token')).toBeNull();
+  });
+
+  it('clears the session keys from both storages', () => {
+    setSession('tok', 'admin');
     localStorage.setItem('drr-technologies', 'keep-me');
 
     clearSession();
 
+    expect(sessionStorage.getItem('drr-access-token')).toBeNull();
+    expect(sessionStorage.getItem('drr-current-user-id')).toBeNull();
     expect(localStorage.getItem('drr-access-token')).toBeNull();
-    expect(localStorage.getItem('drr-current-user-id')).toBeNull();
     expect(localStorage.getItem('drr-technologies')).toBe('keep-me');
     expect(isSignedIn()).toBe(false);
     expect(isAdmin()).toBe(false);

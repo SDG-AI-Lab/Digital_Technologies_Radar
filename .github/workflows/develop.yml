@@ -13,6 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Scan working tree for secrets
+        run: |
+          set -e
+          # Fail if common credential patterns are present in the current tree.
+          # (Does not rewrite history — purge separately if required.)
+          if grep -RInE \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude-dir=coverage \
+            --exclude-dir=build \
+            --exclude='*.lock' \
+            'AKIA[0-9A-Z]{16}|AWSAccessKeyId=|BEGIN (RSA |OPENSSH )?PRIVATE KEY' \
+            . ; then
+            echo "::error::Potential secret material found in the working tree"
+            exit 1
+          fi
+          echo "No matching secret patterns found in working tree"
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -23,6 +41,15 @@ jobs:
       - name: install
         run: |
           yarn install
+
+      - name: lint
+        run: |
+          yarn lint
+
+      - name: dependency audit
+        run: |
+          yarn audit --level high --groups dependencies
+        continue-on-error: true
 
       - name: build
         run: |

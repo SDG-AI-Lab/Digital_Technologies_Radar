@@ -50,7 +50,7 @@ export const ProjectSlider: React.FC<Props> = ({ blips }) => {
                 objectFit='cover'
                 src={`${value['Image Url']}`}
                 fallbackSrc='https://sxmzetpbqzjchodypatn.supabase.co/storage/v1/object/public/project-images//fallback-image.png'
-                alt='Default Image'
+                alt='Project image'
               />
             </Stack>
             <Text color={'gray.500'}>

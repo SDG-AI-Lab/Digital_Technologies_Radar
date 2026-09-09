@@ -118,7 +118,7 @@ describe('integration: drawers and shared chrome', () => {
     );
 
     expect(screen.getByText('Go')).toHaveAttribute('href', '/projects');
-    expect(screen.getByAltText('Default Image')).toBeInTheDocument();
+    expect(screen.getByAltText('Project image')).toBeInTheDocument();
     expect(screen.getByTestId('back-button')).toBeInTheDocument();
     expect(screen.getByTestId('waiting-for-radar')).toBeInTheDocument();
   });

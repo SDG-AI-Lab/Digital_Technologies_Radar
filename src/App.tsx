@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { NavApp } from './navigation/AppNav';
 import { AppRadarProvider } from './radar/RadarProvider';
 import { AppUiProvider } from './ui/AppUiProvider';
@@ -20,12 +21,14 @@ export const App: React.FC = () => {
   }, []);
 
   return (
-    <AppUiProvider>
-      <AppRadarProvider>
-        <HashRouter>
-          <NavApp />
-        </HashRouter>
-      </AppRadarProvider>
-    </AppUiProvider>
+    <ErrorBoundary>
+      <AppUiProvider>
+        <AppRadarProvider>
+          <HashRouter>
+            <NavApp />
+          </HashRouter>
+        </AppRadarProvider>
+      </AppUiProvider>
+    </ErrorBoundary>
   );
 };

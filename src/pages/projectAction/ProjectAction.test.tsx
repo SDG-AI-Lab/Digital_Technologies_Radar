@@ -11,6 +11,7 @@ import {
   updateDataVersion
 } from 'helpers/dataUtils';
 import { validatePayload } from './helpers';
+import { setSession } from 'components/shared/helpers/auth';
 
 jest.mock('helpers/ProjectForm', () => ({
   ProjectForm: ({ title, action }: any) => (
@@ -125,6 +126,7 @@ const seedReferenceData = (): void => {
 describe('ProjectAction', () => {
   beforeEach(() => {
     localStorage.clear();
+    sessionStorage.clear();
     mockNavigate.mockReset();
     mockedApiRequest.mockReset();
     mockedGetProject.mockReset();
@@ -147,8 +149,7 @@ describe('ProjectAction', () => {
   });
 
   it('redirects non-admins away from the edit form', async () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'user');
+    setSession('tok', 'user');
     mockParams = { project_id: 'proj-1' };
 
     renderProjectAction('edit');
@@ -219,8 +220,7 @@ describe('ProjectAction', () => {
   });
 
   it('loads edit form for an admin with currentProject in context', async () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'admin');
+    setSession('tok', 'admin');
     mockParams = { project_id: 'proj-1' };
 
     renderProjectAction('edit', {
@@ -240,8 +240,7 @@ describe('ProjectAction', () => {
   });
 
   it('fetches the project when editing without context data', async () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'admin');
+    setSession('tok', 'admin');
     mockParams = { project_id: 'proj-99' };
     mockedGetProject.mockImplementation(async (setter: Function) => {
       setter({ title: 'Fetched', uuid: 'proj-99', country: '{Fiji}' });
@@ -259,8 +258,7 @@ describe('ProjectAction', () => {
   });
 
   it('updates a project for an admin', async () => {
-    localStorage.setItem('drr-access-token', 'tok');
-    localStorage.setItem('drr-current-user-id', 'admin');
+    setSession('tok', 'admin');
     mockParams = { project_id: 'proj-1' };
     mockedValidatePayload.mockReturnValue(true);
     mockedApiRequest.mockResolvedValue({ data: { id: 1, uuid: 'proj-1' } });

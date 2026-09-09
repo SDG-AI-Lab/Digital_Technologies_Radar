@@ -27,7 +27,7 @@ export const HomeCardMini: React.FC<Props> = ({ project, type = '' }) => {
               // @ts-expect-error
               e.target.src = fallBackImage;
             }}
-            alt='Default Image'
+            alt='Project image'
           />
         </div>
         <div className='homeDetails-large'>

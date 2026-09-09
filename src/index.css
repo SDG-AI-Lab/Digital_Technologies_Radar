@@ -104,3 +104,13 @@ svg text.quadrant-text:hover {
   width: 100%;
   height: 100vh;
 }
+
+/* Keyboard focus: visible ring unless a component provides its own */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #0062ac;
+  outline-offset: 2px;
+}

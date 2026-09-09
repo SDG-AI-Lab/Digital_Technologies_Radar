@@ -15,6 +15,15 @@
     "project": ["tsconfig.json"]
   },
   "plugins": ["react"],
+  "ignorePatterns": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.dtest.tsx",
+    "**/setupTests.ts",
+    "src/unit/**",
+    "src/pages/integration/**",
+    "src/tests/**"
+  ],
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": "off",
     "react/react-in-jsx-scope": "off",

@@ -5,6 +5,7 @@ describe('apiClient', () => {
 
   beforeEach(() => {
     localStorage.clear();
+    sessionStorage.clear();
     global.fetch = jest.fn();
   });
 
@@ -23,6 +24,7 @@ describe('apiClient', () => {
     expect(global.fetch).toHaveBeenCalledWith(
       'https://undp-drr-radar-api.netlify.app/api/public/technologies',
       expect.objectContaining({
+        signal: expect.any(AbortSignal),
         headers: expect.objectContaining({
           Accept: 'application/json'
         })
@@ -40,7 +42,7 @@ describe('apiClient', () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       'https://undp-drr-radar-api.netlify.app/api/health',
-      expect.any(Object)
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
     );
   });
 
@@ -56,6 +58,7 @@ describe('apiClient', () => {
     expect(global.fetch).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
+        signal: expect.any(AbortSignal),
         headers: expect.objectContaining({
           Authorization: 'Bearer secret-token'
         })
@@ -77,6 +80,7 @@ describe('apiClient', () => {
     expect(global.fetch).toHaveBeenCalledWith(
       expect.any(String),
       expect.objectContaining({
+        signal: expect.any(AbortSignal),
         headers: expect.objectContaining({
           'Content-Type': 'application/json'
         })
@@ -102,7 +106,7 @@ describe('apiClient', () => {
 
     expect(global.fetch).toHaveBeenCalledWith(
       expect.any(String),
-      expect.objectContaining({ body })
+      expect.objectContaining({ body, signal: expect.any(AbortSignal) })
     );
   });
 
@@ -148,6 +152,8 @@ describe('apiClient', () => {
     });
     expect(localStorage.getItem('drr-access-token')).toBeNull();
     expect(localStorage.getItem('drr-current-user-id')).toBeNull();
+    expect(sessionStorage.getItem('drr-access-token')).toBeNull();
+    expect(sessionStorage.getItem('drr-current-user-id')).toBeNull();
   });
 
   it('throws a generic ApiError when the error body has no message', async () => {
@@ -163,5 +169,26 @@ describe('apiClient', () => {
       message: 'The request could not be completed',
       status: 500
     });
+  });
+
+  it('throws a timeout ApiError when fetch aborts from the client timeout', async () => {
+    (global.fetch as jest.Mock).mockImplementation(
+      (_url: string, init?: RequestInit) =>
+        new Promise((_resolve, reject) => {
+          init?.signal?.addEventListener('abort', () => {
+            reject(new DOMException('Aborted', 'AbortError'));
+          });
+        })
+    );
+
+    jest.useFakeTimers();
+    const pending = apiRequest('public/technologies');
+    jest.advanceTimersByTime(30_000);
+
+    await expect(pending).rejects.toMatchObject({
+      message: 'The request timed out',
+      status: 408
+    });
+    jest.useRealTimers();
   });
 });

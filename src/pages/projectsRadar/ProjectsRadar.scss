@@ -77,14 +77,17 @@
         h2 {
           background-color: #d9d9d933;
           border-radius: 6px;
-          outline: none;
           &:focus-visible {
-            outline: none;
+            outline: 2px solid #0062ac;
+            outline-offset: 2px;
           }
 
           > button {
             box-shadow: none;
-            outline: none;
+            &:focus-visible {
+              outline: 2px solid #0062ac;
+              outline-offset: 2px;
+            }
           }
         }
 

@@ -42,7 +42,7 @@ describe('ProjectPreviewCard', () => {
     expect(screen.getByText('Learn More')).toBeInTheDocument();
     expect(screen.getByTestId('project-badge')).toBeInTheDocument();
 
-    const img = screen.getByAltText('Default Image');
+    const img = screen.getByAltText('Project image');
     expect(img).toHaveAttribute('src', 'https://example.com/coastal.png');
   });
 
@@ -62,7 +62,7 @@ describe('ProjectPreviewCard', () => {
   it('falls back to default image on error', () => {
     renderCard();
 
-    const img = screen.getByAltText('Default Image') as HTMLImageElement;
+    const img = screen.getByAltText('Project image') as HTMLImageElement;
     fireEvent.error(img);
 
     expect(img.src).toContain('fallback-image.png');

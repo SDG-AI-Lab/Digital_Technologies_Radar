@@ -113,8 +113,9 @@
     box-shadow: 0 2px 4px rgba(0, 98, 172, 0.2);
   }
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
+    outline: 2px solid #0062ac;
+    outline-offset: 2px;
     box-shadow: 0 0 0 2px rgba(0, 98, 172, 0.3);
   }
 

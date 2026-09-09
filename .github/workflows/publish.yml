@@ -24,6 +24,8 @@ jobs:
       - name: build
         run: |
           yarn build
+        env:
+          REACT_APP_GLITCHTIP_DSN: ${{ secrets.REACT_APP_GLITCHTIP_DSN }}
 
       - name: test
         run: |
@@ -31,6 +33,7 @@ jobs:
         env:
           NODE_ENV: production
           CI: true
+          REACT_APP_GLITCHTIP_DSN: ${{ secrets.REACT_APP_GLITCHTIP_DSN }}
 
       - name: Deploy with gh-pages
         run: |

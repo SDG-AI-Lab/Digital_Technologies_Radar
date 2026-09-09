@@ -24,7 +24,7 @@ export const BackButton: React.FC<Props> = ({ to }) => {
         logic: { setSelectedQuadrant, setSelectedItem }
       }): JSX.Element => (
         <IconButton
-          aria-label=''
+          aria-label={`Back to ${to.toLowerCase()}`}
           data-testid='back-button'
           className='backButton'
           marginLeft={1}
