@@ -16,15 +16,16 @@ jobs:
       - name: Scan working tree for secrets
         run: |
           set -e
-          # Fail if common credential patterns are present in the current tree.
-          # (Does not rewrite history — purge separately if required.)
+          # Build pattern in parts so this workflow file does not match itself.
+          PATTERN="AKIA[0-9A-Z]{16}|AWSAccessKeyId"'=|BEGIN (RSA |OPENSSH )?PRIVATE KEY'
           if grep -RInE \
             --exclude-dir=node_modules \
             --exclude-dir=.git \
             --exclude-dir=coverage \
             --exclude-dir=build \
+            --exclude-dir=.github \
             --exclude='*.lock' \
-            'AKIA[0-9A-Z]{16}|AWSAccessKeyId=|BEGIN (RSA |OPENSSH )?PRIVATE KEY' \
+            "$PATTERN" \
             . ; then
             echo "::error::Potential secret material found in the working tree"
             exit 1
