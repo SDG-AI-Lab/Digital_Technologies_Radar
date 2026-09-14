@@ -470,6 +470,51 @@ describe('netlify/functions/api', () => {
       expect(builder.eq).toHaveBeenCalledWith('help_needed', 1);
       expect(JSON.parse(res.body).data).toEqual([{ id: 9, help_needed: 1 }]);
     });
+
+    it('never selects contacts on public disaster-event routes', async () => {
+      const selects = [];
+      mockClient.from.mockImplementation((table) => {
+        if (table === 'disaster_events') {
+          const builder = createThenable({
+            data: [{ uuid: 'evt-1', title: 'Flood' }],
+            error: null
+          });
+          builder.select = jest.fn((cols) => {
+            selects.push(cols);
+            return builder;
+          });
+          return builder;
+        }
+        return createThenable({ data: null, error: null });
+      });
+
+      const listRes = await handler(
+        makeEvent({
+          path: '/api/public/disaster-events',
+          origin: ALLOWED_ORIGIN
+        })
+      );
+      const detailRes = await handler(
+        makeEvent({
+          path: '/api/public/details/disaster-event/evt-1',
+          origin: ALLOWED_ORIGIN
+        })
+      );
+      const homeRes = await handler(
+        makeEvent({
+          path: '/api/public/home-recent-events',
+          origin: ALLOWED_ORIGIN
+        })
+      );
+
+      expect(listRes.statusCode).toBe(200);
+      expect(detailRes.statusCode).toBe(200);
+      expect(homeRes.statusCode).toBe(200);
+      expect(selects.length).toBeGreaterThanOrEqual(3);
+      selects.forEach((cols) => {
+        expect(String(cols)).not.toMatch(/\bcontacts\b/);
+      });
+    });
   });
 
   describe('admin user creation', () => {
@@ -745,6 +790,42 @@ describe('netlify/functions/api', () => {
       expect(JSON.parse(res.body).data).toEqual({ id: 42, uuid: 'new-proj' });
     });
 
+    it('strips unknown fields from project create payloads', async () => {
+      let projectInsert = null;
+      mockAdminFrom({
+        tr_projects: () => {
+          const builder = createThenable({
+            data: { id: 1, uuid: 'p1' },
+            error: null
+          });
+          builder.insert = jest.fn((payload) => {
+            projectInsert = payload;
+            return builder;
+          });
+          return builder;
+        },
+        dataset_version: () => createThenable({ data: null, error: null })
+      });
+
+      const res = await handler(
+        makeEvent({
+          method: 'POST',
+          path: '/api/admin/projects',
+          origin: ALLOWED_ORIGIN,
+          authorization: 'Bearer admin-token',
+          body: {
+            title: 'Safe',
+            secret: 'drop-me',
+            disaster_cycles: '',
+            __proto__: { polluted: true }
+          }
+        })
+      );
+      expect(res.statusCode).toBe(201);
+      expect(projectInsert).toEqual({ title: 'Safe' });
+      expect(projectInsert.secret).toBeUndefined();
+    });
+
     it('updates a project and related radar rows', async () => {
       let projectUpdate = null;
       let radarUpdate = null;
@@ -924,7 +1005,7 @@ describe('netlify/functions/api', () => {
       mockAdminFrom({
         disaster_events: () => {
           const builder = createThenable({
-            data: { uuid: 'evt-1', title: 'Flood' },
+            data: { uuid: 'evt-1', title: 'Flood', contacts: 'a@b.c' },
             error: null
           });
           builder.insert = jest.fn((payload) => {
@@ -978,6 +1059,35 @@ describe('netlify/functions/api', () => {
       );
       expect(deleteRes.statusCode).toBe(200);
       expect(ops[2]).toEqual(['delete']);
+    });
+
+    it('returns contacts on admin disaster-event GET', async () => {
+      let selected = null;
+      mockAdminFrom({
+        disaster_events: () => {
+          const builder = createThenable({
+            data: { uuid: 'evt-1', title: 'Flood', contacts: 'ops@example.com' },
+            error: null
+          });
+          builder.select = jest.fn((cols) => {
+            selected = cols;
+            return builder;
+          });
+          return builder;
+        }
+      });
+
+      const res = await handler(
+        makeEvent({
+          method: 'GET',
+          path: '/api/admin/disaster-events/evt-1',
+          origin: ALLOWED_ORIGIN,
+          authorization: 'Bearer admin-token'
+        })
+      );
+      expect(res.statusCode).toBe(200);
+      expect(String(selected)).toMatch(/\bcontacts\b/);
+      expect(JSON.parse(res.body).data.contacts).toBe('ops@example.com');
     });
 
     it('returns 404 for unknown admin routes', async () => {

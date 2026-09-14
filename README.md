@@ -1,6 +1,42 @@
-# UNDP Radar Application
+# UNDP Digital Technologies Radar (FTR4DRR)
 
-Code base seated on repo [UNDP Radar](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar).
+Frontier Technology Radar for Disaster Risk Reduction — browse and search
+disaster-risk technologies and projects on a radar/map, with admin CRUD.
+
+- **Live site:** https://drrtechradar.org/ (GitHub Pages)
+- **API:** https://undp-drr-radar-api.netlify.app/api (Netlify Functions → Supabase)
+- **Repo:** [SDG-AI-Lab/Digital_Technologies_Radar](https://github.com/SDG-AI-Lab/Digital_Technologies_Radar)
+
+## Architecture
+
+| Piece | Stack | Host |
+|-------|-------|------|
+| SPA | React 17 + TypeScript (CRA), HashRouter, Chakra + MUI | GitHub Pages |
+| API | `netlify/functions/api.js` | Netlify |
+| Data | Supabase Postgres (+ Auth) | Supabase |
+
+Docs: [Authentication](docs/authentication.md) · [OpenAPI](docs/api/openapi.yaml) · [Backup & restore](docs/ops/backup-and-restore.md)
+
+## Prerequisites
+
+- Node.js **16.20.x** (CI uses `16.20.1`)
+- Yarn 1.x
+- Optional: Netlify CLI for local API (`netlify dev`)
+
+## Setup
+
+```bash
+yarn install
+cp .env.example .env.local   # set REACT_APP_RADAR_API_URL if needed
+yarn start                   # SPA on http://localhost:3000
+```
+
+For the API locally: configure Netlify env (`SUPABASE_URL`, `SUPABASE_SECRET_KEY`,
+`ALLOWED_ORIGINS`) and run `netlify dev` (functions on port 8888 by default).
+
+Optional after applying `supabase/migrations/20260914_public_read_rls.sql`:
+set `SUPABASE_ANON_KEY` so public reads use the anon client instead of the
+service role.
 
 ## Available Scripts
 
@@ -54,7 +90,7 @@ Please follow the steps for making changes in the project:
 We use Github actions and runners to do CI/CD.
 The live site is hosted on GitHub pages and is deployed using the `publish.yml` file which is picked up by a GitHub action when there's a successful push to the master branch. The site can be accessed from [here](https://drrtechradar.org/)
 
-For staging we use a GitHub action and a runner to deploy to Digital Ocean. Any pushes to the develop branch (or branch specified in the deploy.yml file) will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://209.38.248.37)
+For staging we use a GitHub action and a self-hosted runner to deploy to Digital Ocean. Any pushes to the **`staging`** branch will trigger this deployment as configured in the `deploy.yml` file. The staging site can be accessed [here](http://209.38.248.37)
 
 Pull requests raised to either the master or the develop branch will trigger the `CI Development` workflow as configured in the `develop.yml` file. 
 

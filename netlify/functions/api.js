@@ -1,6 +1,37 @@
 const { createClient } = require('@supabase/supabase-js');
+const { clientIp, takeToken } = require('./lib/rateLimit');
+const { captureException } = require('./lib/observability');
 
 const MAX_BODY_BYTES = 16 * 1024;
+const AUTH_RATE = { limit: 10, windowMs: 60_000 };
+const ADMIN_RATE = { limit: 60, windowMs: 60_000 };
+
+// Public disaster-event columns — never include contacts (PII).
+const DISASTER_EVENT_PUBLIC_SELECT =
+  'id, uuid, title, overview, img_url, impact, source, summary, solutions, resources, help_needed, how_to_help, countries, slug';
+const DISASTER_EVENT_ADMIN_SELECT = `${DISASTER_EVENT_PUBLIC_SELECT}, contacts`;
+
+const PROJECT_FIELDS = [
+  'title',
+  'description',
+  'source',
+  'img_url',
+  'date_of_implementation',
+  'theme',
+  'sdg',
+  'data',
+  'use_case',
+  'status',
+  'partner',
+  'un_host',
+  'country',
+  'disaster_type',
+  'technology',
+  'region',
+  'subregion',
+  'approved'
+];
+
 const PUBLIC_RESOURCES = {
   technologies: { table: 'technologies', select: 'name, description, img_url, slug, source', order: 'name' },
   'disaster-types': { table: 'disaster_types', select: 'id, name, description, img_url, slug, source', order: 'name' },
@@ -21,7 +52,8 @@ const PUBLIC_RESOURCES = {
   'disaster-projects': { table: 'disaster_types_projects', select: '*' },
   'disaster-events': {
     table: 'disaster_events',
-    select: '*, locations(id, country, region)'
+    // Explicit projection — never expose contacts (PII) on public reads.
+    select: `${DISASTER_EVENT_PUBLIC_SELECT}, locations(id, country, region)`
   },
   'radar-csv': {
     table: 'project_data',
@@ -41,14 +73,14 @@ const PUBLIC_RESOURCES = {
   },
   'home-help-needed': {
     table: 'disaster_events',
-    select: '*',
+    select: DISASTER_EVENT_PUBLIC_SELECT,
     order: 'id',
     ascending: false,
     equals: { help_needed: 1 }
   },
   'home-recent-events': {
     table: 'disaster_events',
-    select: '*',
+    select: DISASTER_EVENT_PUBLIC_SELECT,
     order: 'id',
     ascending: false,
     equals: { help_needed: 0 }
@@ -62,7 +94,12 @@ const PUBLIC_DETAIL_RESOURCES = {
   'technology-projects': { table: 'tech_projects', select: '*', column: 'slug' },
   'disaster-type': { table: 'disaster_types', select: '*', column: 'slug', single: true },
   'disaster-projects': { table: 'disaster_types_projects', select: '*', column: 'slug' },
-  'disaster-event': { table: 'disaster_events', select: '*', column: 'uuid', single: true }
+  'disaster-event': {
+    table: 'disaster_events',
+    select: `${DISASTER_EVENT_PUBLIC_SELECT}, locations(id, country, region)`,
+    column: 'uuid',
+    single: true
+  }
 };
 
 const ADMIN_INFO_RESOURCES = {
@@ -110,7 +147,7 @@ function response(statusCode, body, origin, cacheControl = 'no-store') {
   };
 }
 
-function configuredClient() {
+function serviceClient() {
   const url = process.env.SUPABASE_URL;
   const secret = process.env.SUPABASE_SECRET_KEY;
   if (!url || !secret) {
@@ -119,6 +156,29 @@ function configuredClient() {
   return createClient(url, secret, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
+}
+
+/** Prefer anon key for public reads when set (requires RLS). Falls back to service role. */
+function publicClient() {
+  const url = process.env.SUPABASE_URL;
+  const anon = process.env.SUPABASE_ANON_KEY;
+  if (url && anon) {
+    return createClient(url, anon, {
+      auth: { autoRefreshToken: false, persistSession: false }
+    });
+  }
+  return serviceClient();
+}
+
+// Back-compat alias used by older call sites / tests mental model.
+function configuredClient() {
+  return serviceClient();
+}
+
+function rateLimitResponse(origin, retryAfterSec) {
+  const res = response(429, { error: 'Too many requests. Please try again later.' }, origin);
+  res.headers['Retry-After'] = String(retryAfterSec);
+  return res;
 }
 
 async function getRole(supabase, userId) {
@@ -147,7 +207,7 @@ async function requireAdmin(supabase, event, origin) {
 
   // Use a fresh privileged client for role lookups. A client that has just
   // called signInWithPassword may hold the signed-in user's token instead.
-  const role = await getRole(configuredClient(), data.user.id);
+  const role = await getRole(serviceClient(), data.user.id);
   if (role !== 'admin') {
     return {
       error: response(403, { error: 'Administrator access is required' }, origin)
@@ -166,6 +226,8 @@ async function parseBody(event) {
 
 exports.handler = async (event) => {
   const origin = allowedOrigin(event.headers.origin);
+  const ip = clientIp(event);
+  const path = (event.path || '').replace(/^.*\/api\/?/, '').replace(/^\//, '');
 
   if (event.httpMethod === 'OPTIONS') {
     return {
@@ -190,22 +252,32 @@ exports.handler = async (event) => {
   }
 
   try {
-    const path = (event.path || '').replace(/^.*\/api\/?/, '').replace(/^\//, '');
-    const supabase = configuredClient();
+    if (process.env.NODE_ENV !== 'test') {
+      if (path === 'auth/sign-in' || path === 'auth/users') {
+        const result = takeToken(`auth:${ip}:${path}`, AUTH_RATE);
+        if (!result.allowed) return rateLimitResponse(origin, result.retryAfterSec);
+      } else if (path.startsWith('admin/')) {
+        const result = takeToken(`admin:${ip}`, ADMIN_RATE);
+        if (!result.allowed) return rateLimitResponse(origin, result.retryAfterSec);
+      }
+    }
+
+    const supabase = serviceClient();
 
     if (event.httpMethod === 'GET' && path === 'health') {
-      const { error } = await supabase.from('dataset_version').select('id').limit(1);
+      const { error } = await publicClient().from('dataset_version').select('id').limit(1);
       if (error) throw error;
       return response(200, { status: 'ok' }, origin);
     }
 
     if (event.httpMethod === 'GET' && path.startsWith('public/')) {
+      const reader = publicClient();
       const detailMatch = path.match(/^public\/details\/([^/]+)\/([^/]+)$/);
       if (detailMatch) {
         const resource = PUBLIC_DETAIL_RESOURCES[detailMatch[1]];
         if (!resource) return response(404, { error: 'Not found' }, origin);
 
-        let query = supabase
+        let query = reader
           .from(resource.table)
           .select(resource.select)
           .eq(resource.column, decodeURIComponent(detailMatch[2]));
@@ -218,7 +290,7 @@ exports.handler = async (event) => {
       const resource = PUBLIC_RESOURCES[path.slice('public/'.length)];
       if (!resource) return response(404, { error: 'Not found' }, origin);
 
-      let query = supabase.from(resource.table).select(resource.select);
+      let query = reader.from(resource.table).select(resource.select);
       if (resource.excludeFalse) query = query.neq(resource.excludeFalse, false);
       if (resource.equals) {
         Object.entries(resource.equals).forEach(([column, value]) => {
@@ -247,7 +319,7 @@ exports.handler = async (event) => {
       }
       // signInWithPassword updates this client's session to the new user, so
       // role access must use a separate server-only client.
-      const role = await getRole(configuredClient(), data.user.id);
+      const role = await getRole(serviceClient(), data.user.id);
       if (!role) {
         return response(403, {
           error: 'This account has not been granted access'
@@ -287,7 +359,7 @@ exports.handler = async (event) => {
         }, origin);
       }
 
-      const { error: roleError } = await configuredClient()
+      const { error: roleError } = await serviceClient()
         .from('user_roles')
         .insert({ user_id: data.user.id, role });
       if (roleError) {
@@ -331,7 +403,8 @@ exports.handler = async (event) => {
         if (!payload || typeof payload.title !== 'string' || !payload.title) {
           return response(400, { error: 'A project title is required' }, origin);
         }
-        const { disaster_cycles, ...projectPayload } = payload;
+        const { disaster_cycles } = payload;
+        const projectPayload = allowedFields(payload, PROJECT_FIELDS);
         const { data: project, error: projectError } = await supabase
           .from('tr_projects')
           .insert(projectPayload)
@@ -360,7 +433,7 @@ exports.handler = async (event) => {
       if (projectMatch && event.httpMethod === 'PUT') {
         const uuid = decodeURIComponent(projectMatch[1]);
         const payload = await parseBody(event);
-        const { disaster_cycles, project_data, id, created_at, updated_at, uuid: ignoredUuid, ...projectPayload } = payload;
+        const projectPayload = allowedFields(payload, PROJECT_FIELDS);
         const { data: project, error: projectError } = await supabase
           .from('tr_projects')
           .update(projectPayload)
@@ -442,12 +515,23 @@ exports.handler = async (event) => {
       const eventMatch = path.match(/^admin\/disaster-events(?:\/([^/]+))?$/);
       if (eventMatch) {
         const uuid = eventMatch[1] && decodeURIComponent(eventMatch[1]);
+        // Admin reads may include contacts; public routes never do.
+        if (event.httpMethod === 'GET') {
+          let query = supabase
+            .from('disaster_events')
+            .select(DISASTER_EVENT_ADMIN_SELECT);
+          if (uuid) query = query.eq('uuid', uuid).single();
+          else query = query.order('id', { ascending: false });
+          const { data, error } = await query;
+          if (error) throw error;
+          return response(200, { data }, origin);
+        }
         if (event.httpMethod === 'POST' || (event.httpMethod === 'PUT' && uuid)) {
           const payload = allowedFields(await parseBody(event), EVENT_FIELDS);
           const query = event.httpMethod === 'POST'
             ? supabase.from('disaster_events').insert(payload)
             : supabase.from('disaster_events').update(payload).eq('uuid', uuid);
-          const { data, error } = await query.select().single();
+          const { data, error } = await query.select(DISASTER_EVENT_ADMIN_SELECT).single();
           if (error) throw error;
           await bumpDataVersion(supabase);
           return response(event.httpMethod === 'POST' ? 201 : 200, { data }, origin);
@@ -465,7 +549,7 @@ exports.handler = async (event) => {
 
     return response(404, { error: 'Not found' }, origin);
   } catch (error) {
-    console.error('API request failed', error);
+    await captureException(error, { path, method: event.httpMethod, ip });
     return response(500, { error: 'The request could not be completed' }, origin);
   }
 };

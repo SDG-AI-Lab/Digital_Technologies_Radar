@@ -3,7 +3,10 @@ module.exports = {
   roots: ['<rootDir>/tests/api'],
   testMatch: ['**/*.test.js'],
   clearMocks: true,
-  collectCoverageFrom: ['netlify/functions/api.js'],
+  collectCoverageFrom: [
+    'netlify/functions/api.js',
+    'netlify/functions/lib/**/*.js'
+  ],
   coverageDirectory: 'coverage/api',
   coverageReporters: ['text', 'json-summary', 'lcov']
 };

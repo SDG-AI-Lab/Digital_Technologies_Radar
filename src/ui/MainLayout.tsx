@@ -7,6 +7,8 @@ import { useLocation } from 'react-router-dom';
 export const MainLayout: React.FC = ({ children }) => (
   <Flex
     flex={1}
+    minH={0}
+    overflowY='auto'
     direction={'column'}
     className={cx({
       centerLayout: !(useLocation().pathname === '/')

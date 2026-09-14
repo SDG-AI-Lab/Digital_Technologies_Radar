@@ -189,67 +189,60 @@ describe('EventAction', () => {
 
   it('loads an existing event for edit when admin', async () => {
     mockPathname = '/disaster-events/event-1/edit';
-    localStorage.setItem(
-      'drr-disaster-events',
-      JSON.stringify({
-        version: '1',
-        data: [
-          {
-            uuid: 'event-1',
-            title: 'Existing Event',
-            overview: 'Existing overview',
-            summary: 'Existing summary',
-            img_url: 'img.png',
-            source: 'SRC',
-            impact: 'Impact',
-            resources: '',
-            solutions: '',
-            contacts: '',
-            help_needed: 0,
-            how_to_help: '',
-            countries: ['Kenya']
-          }
-        ]
-      })
-    );
+    mockedApiRequest.mockResolvedValue({
+      data: {
+        uuid: 'event-1',
+        title: 'Existing Event',
+        overview: 'Existing overview',
+        summary: 'Existing summary',
+        img_url: 'img.png',
+        source: 'SRC',
+        impact: 'Impact',
+        resources: '',
+        solutions: '',
+        contacts: 'secret@example.com',
+        help_needed: 0,
+        how_to_help: '',
+        countries: ['Kenya']
+      }
+    } as any);
 
     renderEventAction('EDIT');
 
     expect(
       await screen.findByDisplayValue('Existing Event')
     ).toBeInTheDocument();
+    expect(await screen.findByDisplayValue('secret@example.com')).toBeInTheDocument();
+    expect(mockedApiRequest).toHaveBeenCalledWith('admin/disaster-events/event-1');
     expect(await screen.findByTestId('select-countries')).toBeInTheDocument();
   });
 
-  it('loads from recent disasters cache when recent=true', async () => {
+  it('loads contacts from the admin API even when recent=true was used to navigate', async () => {
     mockPathname = '/disaster-events/recent-1/edit';
     mockSearch = '?recent=true';
-    localStorage.setItem(
-      'drr-recent-disasters',
-      JSON.stringify({
-        version: '1',
-        data: [
-          {
-            uuid: 'recent-1',
-            title: 'Recent Event',
-            overview: 'o',
-            summary: 's',
-            img_url: 'i',
-            source: 'src',
-            impact: 'imp',
-            resources: '',
-            solutions: '',
-            contacts: '',
-            help_needed: 0,
-            countries: []
-          }
-        ]
-      })
-    );
+    mockedApiRequest.mockResolvedValue({
+      data: {
+        uuid: 'recent-1',
+        title: 'Recent Event',
+        overview: 'o',
+        summary: 's',
+        img_url: 'i',
+        source: 'src',
+        impact: 'imp',
+        resources: '',
+        solutions: '',
+        contacts: 'ops@example.com',
+        help_needed: 0,
+        countries: []
+      }
+    } as any);
 
     renderEventAction('EDIT');
 
     expect(await screen.findByDisplayValue('Recent Event')).toBeInTheDocument();
+    expect(mockedApiRequest).toHaveBeenCalledWith(
+      'admin/disaster-events/recent-1'
+    );
   });
 
   it('redirects non-admins away from edit mode', async () => {
@@ -263,47 +256,41 @@ describe('EventAction', () => {
     });
   });
 
-  it('navigates home when the edited event is missing', () => {
+  it('navigates home when the edited event fails to load', async () => {
     mockPathname = '/disaster-events/missing/edit';
-    localStorage.setItem(
-      'drr-disaster-events',
-      JSON.stringify({ version: '1', data: [] })
-    );
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockedApiRequest.mockRejectedValue(new Error('not found'));
 
-    // Component navigates away but still setFormValues(undefined), which crashes on render
-    expect(() => renderEventAction('EDIT')).toThrow();
-    expect(mockNavigate).toHaveBeenCalledWith('/');
+    renderEventAction('EDIT');
+
+    await waitFor(() => {
+      expect(mockNavigate).toHaveBeenCalledWith('/');
+    });
 
     errorSpy.mockRestore();
   });
 
   it('updates an existing event with PUT', async () => {
-    mockedApiRequest.mockResolvedValue({} as any);
     mockPathname = '/disaster-events/event-1/edit';
-    localStorage.setItem(
-      'drr-disaster-events',
-      JSON.stringify({
-        version: '1',
-        data: [
-          {
-            uuid: 'event-1',
-            title: 'Existing Event',
-            overview: 'Existing overview',
-            summary: 'Existing summary',
-            img_url: 'img.png',
-            source: 'SRC',
-            impact: 'Impact',
-            resources: 'r',
-            solutions: 's',
-            contacts: 'c',
-            help_needed: 0,
-            how_to_help: '',
-            countries: ['Kenya']
-          }
-        ]
-      })
-    );
+    mockedApiRequest
+      .mockResolvedValueOnce({
+        data: {
+          uuid: 'event-1',
+          title: 'Existing Event',
+          overview: 'Existing overview',
+          summary: 'Existing summary',
+          img_url: 'img.png',
+          source: 'SRC',
+          impact: 'Impact',
+          resources: 'r',
+          solutions: 's',
+          contacts: 'c',
+          help_needed: 0,
+          how_to_help: '',
+          countries: ['Kenya']
+        }
+      } as any)
+      .mockResolvedValueOnce({} as any);
     localStorage.setItem('drr-recent-disasters', 'stale');
 
     renderEventAction('EDIT');
