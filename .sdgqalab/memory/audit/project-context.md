@@ -34,7 +34,7 @@ Frontier Technology Radar for Disaster Risk Reduction (FTR4DRR) — browse/searc
 - **Default branch:** **`master`** (confirmed 2026-09-09). Cron workflows (heartbeat) use the YAML on `master`. Prod publish is also `master`.
 - **GlitchTip:** `REACT_APP_GLITCHTIP_DSN` is live in production builds (`publish.yml`) — confirmed.
 
-## Quality signals
+## Quality signals (post P0/P1)
 
 - Jest/RTL unit + integration suites; API Jest in `tests/api/`; Cypress E2E.
 - ESLint + Prettier; lint in CI (`develop.yml`).

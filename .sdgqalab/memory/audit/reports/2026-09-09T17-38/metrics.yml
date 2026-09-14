@@ -1,0 +1,187 @@
+# Metrics history — sdgqalab-audit
+# Each audit run appends one snapshot. Never overwrite previous snapshots.
+
+snapshots:
+  - date: "2026-09-09T17:38"
+    overall_score_pct: 40.0
+    overall_rating: "Low"
+    verdict: "NOT PRODUCTION READY"
+    total_checks: 200
+    pass: 41
+    partial: 91
+    fail: 68
+    na: 152
+    blockers: 4
+    critical_issues: 12
+    high_issues: 28
+    medium_issues: 22
+    low_issues: 6
+
+    layers:
+      frontend:
+        type: "react-typescript"
+        score_pct: 53.8
+        rating: "Adequate"
+      api:
+        type: "nodejs-netlify"
+        score_pct: 38.4
+        rating: "Low"
+      project:
+        type: "project-wide"
+        score_pct: 18.8
+        rating: "Critical"
+
+    quality_attributes:
+      frontend-security:
+        domain_name: "Security"
+        layer: "frontend"
+        score_pct: 66.7
+        rating: "Adequate"
+        pass: 5
+        partial: 6
+        fail: 1
+        na: 16
+      frontend-reliability:
+        domain_name: "Reliability"
+        layer: "frontend"
+        score_pct: 37.5
+        rating: "Low"
+        pass: 1
+        partial: 1
+        fail: 2
+        na: 18
+      frontend-maintainability:
+        domain_name: "Maintainability"
+        layer: "frontend"
+        score_pct: 78.1
+        rating: "Solid"
+        pass: 9
+        partial: 7
+        fail: 0
+        na: 6
+      frontend-observability:
+        domain_name: "Observability"
+        layer: "frontend"
+        score_pct: 17.9
+        rating: "Critical"
+        pass: 0
+        partial: 5
+        fail: 9
+        na: 6
+      frontend-performance-efficiency:
+        domain_name: "Performance Efficiency"
+        layer: "frontend"
+        score_pct: 50.0
+        rating: "Adequate"
+        pass: 1
+        partial: 5
+        fail: 1
+        na: 15
+      frontend-interaction-capability:
+        domain_name: "Interaction Capability"
+        layer: "frontend"
+        score_pct: 50.0
+        rating: "Adequate"
+        pass: 2
+        partial: 10
+        fail: 2
+        na: 4
+      frontend-compatibility:
+        domain_name: "Compatibility"
+        layer: "frontend"
+        score_pct: 75.0
+        rating: "Solid"
+        pass: 2
+        partial: 2
+        fail: 0
+        na: 12
+      frontend-flexibility:
+        domain_name: "Flexibility"
+        layer: "frontend"
+        score_pct: 55.0
+        rating: "Adequate"
+        pass: 3
+        partial: 5
+        fail: 2
+        na: 8
+      api-security:
+        domain_name: "Security"
+        layer: "api"
+        score_pct: 53.6
+        rating: "Adequate"
+        pass: 4
+        partial: 7
+        fail: 3
+        na: 14
+      api-data-quality:
+        domain_name: "Data Quality"
+        layer: "api"
+        score_pct: 13.6
+        rating: "Critical"
+        pass: 0
+        partial: 3
+        fail: 8
+        na: 7
+      api-reliability:
+        domain_name: "Reliability"
+        layer: "api"
+        score_pct: 25.0
+        rating: "Critical"
+        pass: 1
+        partial: 4
+        fail: 7
+        na: 10
+      api-observability:
+        domain_name: "Observability"
+        layer: "api"
+        score_pct: 18.8
+        rating: "Critical"
+        pass: 1
+        partial: 4
+        fail: 11
+        na: 4
+      api-performance-efficiency:
+        domain_name: "Performance Efficiency"
+        layer: "api"
+        score_pct: 35.0
+        rating: "Low"
+        pass: 1
+        partial: 5
+        fail: 4
+        na: 12
+      api-maintainability:
+        domain_name: "Maintainability"
+        layer: "api"
+        score_pct: 56.7
+        rating: "Adequate"
+        pass: 5
+        partial: 7
+        fail: 3
+        na: 7
+      api-flexibility:
+        domain_name: "Flexibility"
+        layer: "api"
+        score_pct: 50.0
+        rating: "Adequate"
+        pass: 3
+        partial: 7
+        fail: 3
+        na: 5
+      api-compatibility:
+        domain_name: "Compatibility"
+        layer: "api"
+        score_pct: 54.2
+        rating: "Adequate"
+        pass: 3
+        partial: 7
+        fail: 2
+        na: 4
+      project-documentation:
+        domain_name: "Documentation"
+        layer: "project"
+        score_pct: 18.8
+        rating: "Critical"
+        pass: 0
+        partial: 6
+        fail: 10
+        na: 4
