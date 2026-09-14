@@ -70,7 +70,7 @@ The frontend has solid **client-side security fundamentals**: no `dangerouslySet
 
 | Check ID | Item | Evidence |
 |----------|------|----------|
-| SEC-001 | Secrets in source control | `develop.yml` runs a working-tree `grep -RInE` for `AKIA…`, `AWSAccessKeyId=`, and `BEGIN … PRIVATE KEY`. No tracked `.env` files (`.env.local` is untracked). No API/service keys in `src/`. |
+| SEC-001 | Secrets in source control | `develop.yml` runs a working-tree secret-pattern scan (AWS access-key id forms and PEM private-key headers). No tracked `.env` files (`.env.local` is untracked). No API/service keys in `src/`. |
 | SEC-004 | HTTPS enforcement | GH Pages / Netlify serve TLS; `public/index.html` sets `<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`; all Leaflet / Google Fonts / API assets are `https://` URLs. |
 | SEC-009 | XSS prevention | Zero occurrences of `dangerouslySetInnerHTML` across `src/`. All user input is rendered via React's auto-escaping JSX; no `innerHTML` writes. |
 | SEC-010 | Authentication implementation | `src/pages/users/signIn/SignIn.tsx` calls `POST /auth/sign-in`; `src/components/shared/helpers/auth.ts` stores the JWT in `sessionStorage`; `apiClient` attaches `Authorization: Bearer` and calls `clearSession()` on 401. API enforces JWT server-side (per project-context). |
