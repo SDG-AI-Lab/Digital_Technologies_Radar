@@ -212,8 +212,12 @@ describe('EventAction', () => {
     expect(
       await screen.findByDisplayValue('Existing Event')
     ).toBeInTheDocument();
-    expect(await screen.findByDisplayValue('secret@example.com')).toBeInTheDocument();
-    expect(mockedApiRequest).toHaveBeenCalledWith('admin/disaster-events/event-1');
+    expect(
+      await screen.findByDisplayValue('secret@example.com')
+    ).toBeInTheDocument();
+    expect(mockedApiRequest).toHaveBeenCalledWith(
+      'admin/disaster-events/event-1'
+    );
     expect(await screen.findByTestId('select-countries')).toBeInTheDocument();
   });
 
