@@ -24,6 +24,8 @@ jobs:
             --exclude-dir=coverage \
             --exclude-dir=build \
             --exclude-dir=.github \
+            --exclude-dir=.sdgqalab \
+            --exclude-dir=.agents \
             --exclude='*.lock' \
             "$PATTERN" \
             . ; then

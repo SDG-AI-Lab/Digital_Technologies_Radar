@@ -32,7 +32,7 @@ delta:
 
 project_context:
   source: ".sdgqalab/memory/audit/project-context.md"
-  checkpoint_status: corrected
+  checkpoint_status: pending
 ---
 
 # Reliability Audit — Frontend (React / TypeScript / CRA)

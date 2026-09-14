@@ -4,6 +4,12 @@
   width: 100vw;
 }
 
+#main-content {
+  flex: 1;
+  min-height: 0;
+  outline: none;
+}
+
 .skipLink {
   position: absolute;
   left: -9999px;

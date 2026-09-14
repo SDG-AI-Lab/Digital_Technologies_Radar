@@ -39,7 +39,6 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   const navigate = useNavigate();
   const uuid = useLocation().pathname.split('/')[2];
   const path = useLocation().pathname;
-  const queryString = useLocation().search;
   const [formValues, setFormValues] = useState<FormProps>(initialFormValues);
   const [locations, setLocations] = useState<any>([]);
   const [countries, setCountries] = useState<any>([]);
@@ -58,13 +57,17 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   useEffect(() => {
     if (!isCreateForm) {
       if (!isAdmin()) return navigate('/');
-      const key = queryString.includes('recent=true')
-        ? 'drr-recent-disasters'
-        : 'drr-disaster-events';
-      const itemList = JSON.parse(localStorage.getItem(key) as string);
-      const currentItem = itemList.data.find((x: any) => x.uuid === uuid);
-      if (!currentItem) navigate('/');
-      setFormValues(currentItem);
+      void (async () => {
+        try {
+          const { data } = await apiRequest<{ data: FormProps }>(
+            `admin/disaster-events/${encodeURIComponent(uuid)}`
+          );
+          setFormValues({ ...initialFormValues, ...data });
+        } catch (error) {
+          console.error('Error loading disaster event for edit:', error);
+          navigate('/');
+        }
+      })();
     }
 
     void getLocations();
@@ -99,8 +102,11 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   };
 
   useEffect(() => {
-    setSelectedCountries(getSelectedValues(formValues['countries']));
-  }, [locations]);
+    if (!locations?.length) return;
+    setSelectedCountries(
+      getSelectedValues((formValues['countries'] as string[]) || [])
+    );
+  }, [locations, formValues.countries]);
 
   const getOptions = (): any =>
     locations.reduce((a: any, c: any) => {

@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: UNDP Digital Technologies Radar API
+  version: 1.0.0
+  description: |
+    Netlify Functions API backing https://drrtechradar.org.
+    Base URL: https://undp-drr-radar-api.netlify.app/api
+servers:
+  - url: https://undp-drr-radar-api.netlify.app/api
+  - url: http://localhost:8888/api
+paths:
+  /health:
+    get:
+      summary: Liveness / Supabase ping
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example: { status: ok }
+  /public/{resource}:
+    get:
+      summary: Public catalog list
+      parameters:
+        - in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+            enum:
+              - technologies
+              - disaster-types
+              - projects
+              - disaster-events
+              - dataset-version
+              - locations
+              - home-projects
+              - home-help-needed
+              - home-recent-events
+      responses:
+        '200':
+          description: Envelope { data }
+  /public/details/{resource}/{id}:
+    get:
+      summary: Public detail by slug or uuid
+      parameters:
+        - in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+            enum: [project, technology, disaster-type, disaster-event, radar-project]
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Envelope { data }
+  /auth/sign-in:
+    post:
+      summary: Email/password sign-in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        '200':
+          description: Session
+        '401':
+          description: Invalid credentials
+        '429':
+          description: Rate limited
+  /auth/users:
+    post:
+      summary: Create user (admin)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, role]
+              properties:
+                email: { type: string }
+                password: { type: string, minLength: 12 }
+                role: { type: string, enum: [admin, user] }
+      responses:
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '429':
+          description: Rate limited
+  /admin/projects:
+    post:
+      summary: Create project (admin)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201':
+          description: Created
+  /admin/projects/{uuid}:
+    put:
+      summary: Update project (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete project (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+  /admin/projects/pending:
+    get:
+      summary: List unapproved projects
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Envelope { data }
+  /admin/projects/approve:
+    post:
+      summary: Approve project
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [uuid]
+              properties:
+                uuid: { type: string }
+      responses:
+        '200':
+          description: OK
+  /admin/disaster-events:
+    get:
+      summary: List events including contacts (admin)
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Envelope { data }
+    post:
+      summary: Create disaster event
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201':
+          description: Created
+  /admin/disaster-events/{uuid}:
+    get:
+      summary: Get event including contacts
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Envelope { data }
+    put:
+      summary: Update event
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Updated
+    delete:
+      summary: Delete event
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deleted
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

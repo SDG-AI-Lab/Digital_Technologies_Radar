@@ -10,8 +10,7 @@ const SECTIONS = [
   'impact',
   'how to help',
   'resources',
-  'solutions',
-  'contacts'
+  'solutions'
 ];
 
 export const DisasterEvent: React.FC = () => {
