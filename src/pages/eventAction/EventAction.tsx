@@ -102,8 +102,11 @@ export const EventAction: React.FC<Props> = ({ mode }) => {
   };
 
   useEffect(() => {
-    setSelectedCountries(getSelectedValues(formValues['countries']));
-  }, [locations]);
+    if (!locations?.length) return;
+    setSelectedCountries(
+      getSelectedValues((formValues['countries'] as string[]) || [])
+    );
+  }, [locations, formValues.countries]);
 
   const getOptions = (): any =>
     locations.reduce((a: any, c: any) => {
